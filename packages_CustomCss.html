@@ -1,0 +1,713 @@
+<style>
+  /* ===== LMCT+ Pricing Section ===== */
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+  .pricing-section {
+    font-family:
+      "Inter",
+      "Segoe UI",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    padding: 40px 16px;
+    box-sizing: border-box;
+  }
+
+  .pricing-section *,
+  .pricing-section *::before,
+  .pricing-section *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Container */
+  .pricing-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  /* Tablet: 2 columns */
+  @media (min-width: 640px) {
+    .pricing-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  /* Desktop: 5 columns */
+  @media (min-width: 1200px) {
+    .pricing-container {
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+  }
+
+  /* ===== Card ===== */
+  .pricing-card {
+    position: relative;
+    background: #1a1a2e;
+    border-radius: 16px;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition:
+      transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .pricing-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  /* ===== Popular (Gold) Card ===== */
+  .pricing-card.popular {
+    transform: scale(1.04);
+    background: linear-gradient(165deg, #1a1a2e 0%, #2a2210 50%, #1a1a2e 100%);
+    border: 2px solid #e8b000;
+    box-shadow:
+      0 8px 32px rgba(232, 176, 0, 0.2),
+      0 4px 24px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+  }
+
+  .pricing-card.popular:hover {
+    transform: scale(1.07);
+    box-shadow:
+      0 16px 48px rgba(232, 176, 0, 0.3),
+      0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Most Popular Badge */
+  .badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #e8b000 0%, #ffd54f 50%, #e8b000 100%);
+    color: #1a1a2e;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    padding: 6px 20px;
+    border-radius: 20px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(232, 176, 0, 0.4);
+    z-index: 3;
+  }
+
+  /* ===== Card Header ===== */
+  .card-header {
+    padding: 28px 24px 20px;
+    text-align: center;
+    border-radius: 16px 16px 0 0;
+    position: relative;
+  }
+
+  .pricing-card.popular .card-header {
+    padding-top: 34px;
+  }
+
+  .tier-name {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.95;
+    margin-bottom: 16px;
+  }
+
+  .price {
+    font-size: 48px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .original-entries {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: line-through;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ===== Entries Highlight ===== */
+  .entries-highlight {
+    padding: 20px 24px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .entries-count {
+    font-size: 42px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .entries-type {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.85;
+  }
+
+  /* ===== Bonus Section ===== */
+  .bonus-section {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .bonus-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .bonus-items {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .bonus-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .bonus-item .bonus-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* ===== Features ===== */
+  .feature-list {
+    list-style: none;
+    padding: 20px 24px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .feature-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.5;
+  }
+
+  .feature-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .feature-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  /* ===== Button ===== */
+  .card-footer {
+    padding: 0 24px 24px;
+  }
+
+  .select-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 10px;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    transition:
+      filter 0.25s ease,
+      transform 0.2s ease,
+      box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .select-btn:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .select-btn:active {
+    transform: translateY(0);
+    filter: brightness(0.95);
+  }
+
+  .select-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+  }
+
+  /* ===== Tier-Specific Colors ===== */
+
+  /* Entry */
+  .pricing-card.tier-entry .entries-type {
+    color: #40cbf6;
+  }
+  .pricing-card.tier-entry .feature-list li::before {
+    color: #40cbf6;
+  }
+  .pricing-card.tier-entry .select-btn {
+    background: #40cbf6;
+  }
+  .pricing-card.tier-entry .bonus-item .bonus-icon {
+    color: #40cbf6;
+  }
+
+  /* Bronze */
+  .pricing-card.tier-bronze .entries-type {
+    color: #d16d00;
+  }
+  .pricing-card.tier-bronze .feature-list li::before {
+    color: #d16d00;
+  }
+  .pricing-card.tier-bronze .select-btn {
+    background: #d16d00;
+  }
+  .pricing-card.tier-bronze .bonus-item .bonus-icon {
+    color: #d16d00;
+  }
+
+  /* Silver */
+  .pricing-card.tier-silver .entries-type {
+    color: #a0a8b4;
+  }
+  .pricing-card.tier-silver .feature-list li::before {
+    color: #a0a8b4;
+  }
+  .pricing-card.tier-silver .select-btn {
+    background: #737980;
+  }
+  .pricing-card.tier-silver .bonus-item .bonus-icon {
+    color: #a0a8b4;
+  }
+
+  /* Gold */
+  .pricing-card.tier-gold .entries-type {
+    color: #e8b000;
+  }
+  .pricing-card.tier-gold .feature-list li::before {
+    color: #e8b000;
+  }
+  .pricing-card.tier-gold .select-btn {
+    background: linear-gradient(135deg, #e8b000, #ffd54f, #e8b000);
+    color: #1a1a2e;
+  }
+  .pricing-card.tier-gold .bonus-item .bonus-icon {
+    color: #e8b000;
+  }
+
+  /* Platinum */
+  .pricing-card.tier-platinum .entries-type {
+    color: #e64df7;
+  }
+  .pricing-card.tier-platinum .feature-list li::before {
+    color: #e64df7;
+  }
+  .pricing-card.tier-platinum .select-btn {
+    background: linear-gradient(135deg, #e64df7, #b24bf3);
+  }
+  .pricing-card.tier-platinum .bonus-item .bonus-icon {
+    color: #e64df7;
+  }
+
+  /* ===== Card Header Color Strips ===== */
+  .pricing-card.tier-entry .card-header {
+    background: linear-gradient(135deg, #40cbf6 0%, #2ba8d4 100%);
+  }
+  .pricing-card.tier-bronze .card-header {
+    background: linear-gradient(135deg, #d16d00 0%, #a85600 100%);
+  }
+  .pricing-card.tier-silver .card-header {
+    background: linear-gradient(135deg, #8c939b 0%, #5c6370 100%);
+  }
+  .pricing-card.tier-gold .card-header {
+    background: linear-gradient(135deg, #e8b000 0%, #c99700 100%);
+  }
+  .pricing-card.tier-platinum .card-header {
+    background: linear-gradient(135deg, #e64df7 0%, #b24bf3 100%);
+  }
+
+  /* ===== Responsive Fine-Tuning ===== */
+  @media (max-width: 767px) {
+    .pricing-section {
+      padding: 28px 12px;
+    }
+
+    .pricing-container {
+      gap: 18px;
+    }
+
+    .pricing-card {
+      max-width: 400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .card-header {
+      padding: 24px 18px 16px;
+    }
+
+    .pricing-card.popular .card-header {
+      padding-top: 30px;
+    }
+
+    .price {
+      font-size: 42px;
+    }
+
+    .entries-count {
+      font-size: 34px;
+    }
+
+    .entries-highlight,
+    .bonus-section,
+    .feature-list,
+    .card-footer {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    .feature-list li {
+      font-size: 12.5px;
+    }
+
+    .select-btn {
+      padding: 12px 16px;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+    }
+
+    .pricing-card.popular {
+      transform: scale(1);
+    }
+    .pricing-card.popular:hover {
+      transform: scale(1.03);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .pricing-container {
+      align-items: stretch;
+    }
+
+    /* Gold card spans full width on tablet for emphasis */
+    /* .pricing-card.popular {
+      grid-column: 1 / -1;
+      max-width: 400px;
+      margin: 0 auto;
+      width: 100%;
+      transform: scale(1);
+    }
+    .pricing-card.popular:hover {
+      transform: scale(1.03);
+    } */
+  }
+
+  @media (min-width: 1200px) {
+    .pricing-section {
+      padding: 60px 24px;
+    }
+
+    .pricing-container {
+      align-items: stretch;
+    }
+
+    .card-header {
+      padding: 24px 18px 18px;
+    }
+    .pricing-card.popular .card-header {
+      padding-top: 30px;
+    }
+    .price {
+      font-size: 40px;
+    }
+    .entries-count {
+      font-size: 36px;
+    }
+    .entries-highlight {
+      padding: 16px 18px;
+    }
+    .bonus-section {
+      padding: 14px 18px;
+    }
+    .feature-list {
+      padding: 16px 18px;
+    }
+    .feature-list li {
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .card-footer {
+      padding: 0 18px 20px;
+    }
+    .select-btn {
+      padding: 12px 18px;
+      font-size: 13px;
+    }
+  }
+</style>
+
+<section class="pricing-section" aria-label="Pricing plans">
+  <div class="pricing-container">
+    <!-- ENTRY -->
+    <article
+      class="elButton pricing-card tier-entry"
+      role="group"
+      aria-label="Entry plan - $10"
+      data-title="css-order-basic"
+    >
+      <div class="card-header">
+        <div class="tier-name">Entry</div>
+        <span class="price">$10</span>
+        <del class="original-entries">WAS 1 ENTRY</del>
+      </div>
+      <div class="entries-highlight">
+        <span class="entries-count">5</span>
+        <span class="entries-type">Free Entry</span>
+      </div>
+      <ul class="feature-list" role="list">
+        <li>5 free entries into the giveaway</li>
+        <li>VIP invitation to all events</li>
+        <li>2 Days access to 2,000+ Partner Discounts</li>
+      </ul>
+      <div class="card-footer">
+        <button
+          class="select-btn elIMG ximg"
+          type="button"
+          aria-label="Select Entry plan"
+          data-imagelink="#open-popup"
+        >
+          SELECT
+        </button>
+      </div>
+    </article>
+
+    <!-- BRONZE -->
+    <article
+      class="elButton pricing-card tier-bronze"
+      role="group"
+      aria-label="Bronze plan - $30"
+      data-title="css-order-bronze"
+    >
+      <div class="card-header">
+        <div class="tier-name">Bronze</div>
+        <span class="price">$30</span>
+        <del class="original-entries">WAS 5 ENTRIES</del>
+      </div>
+      <div class="entries-highlight">
+        <span class="entries-count">25</span>
+        <span class="entries-type">Free Entries</span>
+      </div>
+      <div class="bonus-section">
+        <div class="bonus-title">Bonus in-app inclusions:</div>
+        <div class="bonus-items">
+          <span class="bonus-item"
+            ><span class="bonus-icon">⚡</span> +500 XP</span
+          >
+          <span class="bonus-item"
+            ><span class="bonus-icon">🪙</span> +500 Coins</span
+          >
+        </div>
+      </div>
+      <ul class="feature-list" role="list">
+        <li>25 free entries into the giveaway</li>
+        <li>VIP invitation to all events</li>
+        <li>1 Week access to 2,000+ Partner Discounts</li>
+        <li>500 XP in-app and 500 LMCT+ Coins</li>
+      </ul>
+      <div class="card-footer">
+        <button
+          class="select-btn elIMG ximg"
+          type="button"
+          aria-label="Select Bronze plan"
+          data-imagelink="#open-popup"
+        >
+          SELECT
+        </button>
+      </div>
+    </article>
+
+    <!-- SILVER -->
+    <article
+      class="elButton pricing-card tier-silver"
+      role="group"
+      aria-label="Silver plan - $100"
+      data-title="css-order-silver"
+    >
+      <div class="card-header">
+        <div class="tier-name">Silver</div>
+        <span class="price">$100</span>
+        <del class="original-entries">WAS 25 ENTRIES</del>
+      </div>
+      <div class="entries-highlight">
+        <span class="entries-count">125</span>
+        <span class="entries-type">Free Entries</span>
+      </div>
+      <div class="bonus-section">
+        <div class="bonus-title">Bonus in-app inclusions:</div>
+        <div class="bonus-items">
+          <span class="bonus-item"
+            ><span class="bonus-icon">⚡</span> +1,000 XP</span
+          >
+          <span class="bonus-item"
+            ><span class="bonus-icon">🪙</span> +1,000 Coins</span
+          >
+        </div>
+      </div>
+      <ul class="feature-list" role="list">
+        <li>125 free entries into the giveaway</li>
+        <li>VIP invitation to all events</li>
+        <li>1 Month access to 2,000+ Partner Discounts</li>
+        <li>1,000 XP in-app and 1,000 LMCT+ Coins</li>
+      </ul>
+      <div class="card-footer">
+        <button
+          class="select-btn elIMG ximg"
+          type="button"
+          aria-label="Select Silver plan"
+          data-imagelink="#open-popup"
+        >
+          SELECT
+        </button>
+      </div>
+    </article>
+
+    <!-- GOLD (Most Popular) -->
+    <article
+      class="elButton pricing-card tier-gold popular"
+      role="group"
+      aria-label="Gold plan - $200 - Most Popular"
+      data-title="css-order-gold"
+    >
+      <div class="badge" aria-label="Most Popular">★ Most Popular</div>
+      <div class="card-header">
+        <div class="tier-name">Gold</div>
+        <span class="price">$200</span>
+        <del class="original-entries">WAS 100 ENTRIES</del>
+      </div>
+      <div class="entries-highlight">
+        <span class="entries-count">500</span>
+        <span class="entries-type">Free Entries</span>
+      </div>
+      <div class="bonus-section">
+        <div class="bonus-title">Bonus in-app inclusions:</div>
+        <div class="bonus-items">
+          <span class="bonus-item"
+            ><span class="bonus-icon">⚡</span> +2,500 XP</span
+          >
+          <span class="bonus-item"
+            ><span class="bonus-icon">🪙</span> +2,500 Coins</span
+          >
+        </div>
+      </div>
+      <ul class="feature-list" role="list">
+        <li>500 free entries into the giveaway</li>
+        <li>VIP invitation to all events</li>
+        <li>6 Months access to 2,000+ Partner Discounts</li>
+        <li>2,500 XP in-app and 2,500 LMCT+ Coins</li>
+      </ul>
+      <div class="card-footer">
+        <button
+          class="select-btn elIMG ximg"
+          type="button"
+          aria-label="Select Gold plan"
+          data-imagelink="#open-popup"
+        >
+          SELECT
+        </button>
+      </div>
+    </article>
+
+    <!-- PLATINUM -->
+    <article
+      class="elButton pricing-card tier-platinum"
+      role="group"
+      aria-label="Platinum plan - $500"
+      data-title="css-order-platinum"
+    >
+      <div class="card-header">
+        <div class="tier-name">Platinum</div>
+        <span class="price">$500</span>
+        <del class="original-entries">WAS 500 ENTRIES</del>
+      </div>
+      <div class="entries-highlight">
+        <span class="entries-count">2500</span>
+        <span class="entries-type">Free Entries</span>
+      </div>
+      <div class="bonus-section">
+        <div class="bonus-title">Bonus in-app inclusions:</div>
+        <div class="bonus-items">
+          <span class="bonus-item"
+            ><span class="bonus-icon">⚡</span> +5,000 XP</span
+          >
+          <span class="bonus-item"
+            ><span class="bonus-icon">🪙</span> +5,000 Coins</span
+          >
+        </div>
+      </div>
+      <ul class="feature-list" role="list">
+        <li>2,500 free entries into the giveaway</li>
+        <li>VIP invitation to all events</li>
+        <li>12 Months access to 2,000+ Partner Discounts</li>
+        <li>5,000 XP in-app and 5,000 LMCT+ Coins</li>
+      </ul>
+      <div class="card-footer">
+        <button
+          class="select-btn elIMG ximg"
+          type="button"
+          aria-label="Select Platinum plan"
+          data-imagelink="#open-popup"
+        >
+          SELECT
+        </button>
+      </div>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,539 @@
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+  rel="stylesheet"
+/>
+
+<style type="text/tailwindcss">
+  @theme {
+    --font-inter:
+      "Inter", "Segoe UI", "system-ui", "-apple-system", "sans-serif";
+    --color-entry: #40cbf6;
+    --color-bronze: #d16d00;
+    --color-silver: #737980;
+    --color-silver-light: #a0a8b4;
+    --color-gold: #e8b000;
+    --color-gold-light: #ffd54f;
+    --color-platinum: #e64df7;
+    --color-platinum-dark: #b24bf3;
+    --color-card: #1a1a2e;
+  }
+
+  @layer base {
+    :root,
+    html,
+    body {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+
+  @layer utilities {
+    .transition-card {
+      transition:
+        transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        box-shadow 0.3s ease;
+    }
+  }
+</style>
+
+<section
+  id="lmct-pricing"
+  class="font-inter py-10 px-4 xl:py-16 xl:px-6"
+  aria-label="Pricing plans"
+>
+  <div
+    class="max-w-[1320px] mx-auto grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-6 sm:gap-5 xl:gap-4 items-start"
+  >
+    <!-- ENTRY -->
+    <article
+      class="relative bg-card rounded-2xl flex flex-col border border-white/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.25)] transition-card hover:scale-[1.03] hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] max-w-[400px] mx-auto w-full sm:max-w-none sm:mx-0"
+      role="group"
+      aria-label="Entry plan - $10"
+    >
+      <!-- Header -->
+      <div
+        class="px-6 pt-7 pb-5 text-center rounded-t-2xl bg-gradient-to-br from-entry to-[#2BA8D4]"
+      >
+        <div
+          class="text-[13px] font-extrabold tracking-[3px] uppercase text-white opacity-95 mb-4"
+        >
+          Entry
+        </div>
+        <span
+          class="text-5xl xl:text-[40px] font-black text-white leading-none block mb-2.5"
+          >$10</span
+        >
+        <del class="text-xs font-medium text-white/50 uppercase tracking-wider"
+          >WAS 1 ENTRY</del
+        >
+      </div>
+      <!-- Entries -->
+      <div
+        class="px-6 py-5 xl:px-[18px] xl:py-4 text-center border-b border-white/[0.06]"
+      >
+        <span
+          class="text-[42px] xl:text-4xl font-black text-white leading-none block mb-1"
+          >5</span
+        >
+        <span class="text-[13px] font-bold uppercase tracking-[2px] text-entry"
+          >Free Entry</span
+        >
+      </div>
+      <!-- Features -->
+      <ul
+        class="px-6 py-5 xl:px-[18px] xl:py-4 flex-1 list-none space-y-3"
+        role="list"
+      >
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-entry"
+        >
+          5 free entries into the giveaway
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-entry"
+        >
+          VIP invitation to all events
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-entry"
+        >
+          2 Days access to 2,000+ Partner Discounts
+        </li>
+      </ul>
+      <!-- Button -->
+      <div class="px-6 pb-6 xl:px-[18px] xl:pb-5">
+        <button
+          type="button"
+          aria-label="Select Entry plan"
+          class="block w-full py-3.5 xl:py-3 px-6 xl:px-[18px] rounded-[10px] bg-entry text-white text-sm xl:text-[13px] font-extrabold uppercase tracking-[2px] cursor-pointer transition-all duration-200 hover:brightness-[1.15] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)] active:translate-y-0 active:brightness-95 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-[3px] border-none"
+        >
+          SELECT
+        </button>
+      </div>
+    </article>
+
+    <!-- BRONZE -->
+    <article
+      class="relative bg-card rounded-2xl flex flex-col border border-white/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.25)] transition-card hover:scale-[1.03] hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] max-w-[400px] mx-auto w-full sm:max-w-none sm:mx-0"
+      role="group"
+      aria-label="Bronze plan - $30"
+    >
+      <!-- Header -->
+      <div
+        class="px-6 pt-7 pb-5 text-center rounded-t-2xl bg-gradient-to-br from-bronze to-[#A85600]"
+      >
+        <div
+          class="text-[13px] font-extrabold tracking-[3px] uppercase text-white opacity-95 mb-4"
+        >
+          Bronze
+        </div>
+        <span
+          class="text-5xl xl:text-[40px] font-black text-white leading-none block mb-2.5"
+          >$30</span
+        >
+        <del class="text-xs font-medium text-white/50 uppercase tracking-wider"
+          >WAS 5 ENTRIES</del
+        >
+      </div>
+      <!-- Entries -->
+      <div
+        class="px-6 py-5 xl:px-[18px] xl:py-4 text-center border-b border-white/[0.06]"
+      >
+        <span
+          class="text-[42px] xl:text-4xl font-black text-white leading-none block mb-1"
+          >25</span
+        >
+        <span class="text-[13px] font-bold uppercase tracking-[2px] text-bronze"
+          >Free Entries</span
+        >
+      </div>
+      <!-- Bonus -->
+      <div
+        class="px-6 py-4 xl:px-[18px] xl:py-3.5 border-b border-white/[0.06]"
+      >
+        <div
+          class="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-2"
+        >
+          Bonus in-app inclusions:
+        </div>
+        <div class="flex justify-center gap-4">
+          <span
+            class="flex items-center gap-1.5 text-[13px] font-bold text-white"
+          >
+            <span
+              class="w-5 h-5 inline-flex items-center justify-center text-[10px] rounded-full bg-white/10 text-bronze"
+              >⚡</span
+            >
+            +500 XP
+          </span>
+          <span
+            class="flex items-center gap-1.5 text-[13px] font-bold text-white"
+          >
+            <span
+              class="w-5 h-5 inline-flex items-center justify-center text-[10px] rounded-full bg-white/10 text-bronze"
+              >🪙</span
+            >
+            +500 Coins
+          </span>
+        </div>
+      </div>
+      <!-- Features -->
+      <ul
+        class="px-6 py-5 xl:px-[18px] xl:py-4 flex-1 list-none space-y-3"
+        role="list"
+      >
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-bronze"
+        >
+          25 free entries into the giveaway
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-bronze"
+        >
+          VIP invitation to all events
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-bronze"
+        >
+          1 Week access to 2,000+ Partner Discounts
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-bronze"
+        >
+          500 XP in-app and 500 LMCT+ Coins
+        </li>
+      </ul>
+      <!-- Button -->
+      <div class="px-6 pb-6 xl:px-[18px] xl:pb-5">
+        <button
+          type="button"
+          aria-label="Select Bronze plan"
+          class="block w-full py-3.5 xl:py-3 px-6 xl:px-[18px] rounded-[10px] bg-bronze text-white text-sm xl:text-[13px] font-extrabold uppercase tracking-[2px] cursor-pointer transition-all duration-200 hover:brightness-[1.15] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)] active:translate-y-0 active:brightness-95 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-[3px] border-none"
+        >
+          SELECT
+        </button>
+      </div>
+    </article>
+
+    <!-- SILVER -->
+    <article
+      class="relative bg-card rounded-2xl flex flex-col border border-white/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.25)] transition-card hover:scale-[1.03] hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] max-w-[400px] mx-auto w-full sm:max-w-none sm:mx-0"
+      role="group"
+      aria-label="Silver plan - $100"
+    >
+      <!-- Header -->
+      <div
+        class="px-6 pt-7 pb-5 text-center rounded-t-2xl bg-gradient-to-br from-[#8C939B] to-[#5C6370]"
+      >
+        <div
+          class="text-[13px] font-extrabold tracking-[3px] uppercase text-white opacity-95 mb-4"
+        >
+          Silver
+        </div>
+        <span
+          class="text-5xl xl:text-[40px] font-black text-white leading-none block mb-2.5"
+          >$100</span
+        >
+        <del class="text-xs font-medium text-white/50 uppercase tracking-wider"
+          >WAS 25 ENTRIES</del
+        >
+      </div>
+      <!-- Entries -->
+      <div
+        class="px-6 py-5 xl:px-[18px] xl:py-4 text-center border-b border-white/[0.06]"
+      >
+        <span
+          class="text-[42px] xl:text-4xl font-black text-white leading-none block mb-1"
+          >125</span
+        >
+        <span
+          class="text-[13px] font-bold uppercase tracking-[2px] text-silver-light"
+          >Free Entries</span
+        >
+      </div>
+      <!-- Bonus -->
+      <div
+        class="px-6 py-4 xl:px-[18px] xl:py-3.5 border-b border-white/[0.06]"
+      >
+        <div
+          class="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-2"
+        >
+          Bonus in-app inclusions:
+        </div>
+        <div class="flex justify-center gap-4">
+          <span
+            class="flex items-center gap-1.5 text-[13px] font-bold text-white"
+          >
+            <span
+              class="w-5 h-5 inline-flex items-center justify-center text-[10px] rounded-full bg-white/10 text-silver-light"
+              >⚡</span
+            >
+            +1,000 XP
+          </span>
+          <span
+            class="flex items-center gap-1.5 text-[13px] font-bold text-white"
+          >
+            <span
+              class="w-5 h-5 inline-flex items-center justify-center text-[10px] rounded-full bg-white/10 text-silver-light"
+              >🪙</span
+            >
+            +1,000 Coins
+          </span>
+        </div>
+      </div>
+      <!-- Features -->
+      <ul
+        class="px-6 py-5 xl:px-[18px] xl:py-4 flex-1 list-none space-y-3"
+        role="list"
+      >
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-silver-light"
+        >
+          125 free entries into the giveaway
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-silver-light"
+        >
+          VIP invitation to all events
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-silver-light"
+        >
+          1 Month access to 2,000+ Partner Discounts
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-silver-light"
+        >
+          1,000 XP in-app and 1,000 LMCT+ Coins
+        </li>
+      </ul>
+      <!-- Button -->
+      <div class="px-6 pb-6 xl:px-[18px] xl:pb-5">
+        <button
+          type="button"
+          aria-label="Select Silver plan"
+          class="block w-full py-3.5 xl:py-3 px-6 xl:px-[18px] rounded-[10px] bg-silver text-white text-sm xl:text-[13px] font-extrabold uppercase tracking-[2px] cursor-pointer transition-all duration-200 hover:brightness-[1.15] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)] active:translate-y-0 active:brightness-95 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-[3px] border-none"
+        >
+          SELECT
+        </button>
+      </div>
+    </article>
+
+    <!-- GOLD (Most Popular) -->
+    <article
+      class="relative bg-gradient-to-br from-card via-[#2a2210] to-card rounded-2xl flex flex-col border-2 border-gold shadow-[0_8px_32px_rgba(232,176,0,0.2),0_4px_24px_rgba(0,0,0,0.3)] z-[2] transition-card scale-100 sm:scale-100 xl:scale-[1.04] hover:scale-[1.03] sm:hover:scale-[1.03] xl:hover:scale-[1.07] hover:shadow-[0_16px_48px_rgba(232,176,0,0.3),0_8px_32px_rgba(0,0,0,0.4)] max-w-[400px] mx-auto w-full sm:col-span-2 xl:col-span-1 sm:max-w-[400px] xl:max-w-none"
+      role="group"
+      aria-label="Gold plan - $200 - Most Popular"
+    >
+      <!-- Badge -->
+      <div
+        class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold via-gold-light to-gold text-card text-[11px] font-extrabold uppercase tracking-[1.2px] px-5 py-1.5 rounded-full whitespace-nowrap shadow-[0_4px_12px_rgba(232,176,0,0.4)] z-[3]"
+        aria-label="Most Popular"
+      >
+        ★ Most Popular
+      </div>
+      <!-- Header -->
+      <div
+        class="px-6 pt-[34px] xl:pt-[30px] pb-5 text-center rounded-t-2xl bg-gradient-to-br from-gold to-[#C99700]"
+      >
+        <div
+          class="text-[13px] font-extrabold tracking-[3px] uppercase text-white opacity-95 mb-4"
+        >
+          Gold
+        </div>
+        <span
+          class="text-5xl xl:text-[40px] font-black text-white leading-none block mb-2.5"
+          >$200</span
+        >
+        <del class="text-xs font-medium text-white/50 uppercase tracking-wider"
+          >WAS 100 ENTRIES</del
+        >
+      </div>
+      <!-- Entries -->
+      <div
+        class="px-6 py-5 xl:px-[18px] xl:py-4 text-center border-b border-white/[0.06]"
+      >
+        <span
+          class="text-[42px] xl:text-4xl font-black text-white leading-none block mb-1"
+          >500</span
+        >
+        <span class="text-[13px] font-bold uppercase tracking-[2px] text-gold"
+          >Free Entries</span
+        >
+      </div>
+      <!-- Bonus -->
+      <div
+        class="px-6 py-4 xl:px-[18px] xl:py-3.5 border-b border-white/[0.06]"
+      >
+        <div
+          class="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-2"
+        >
+          Bonus in-app inclusions:
+        </div>
+        <div class="flex justify-center gap-4">
+          <span
+            class="flex items-center gap-1.5 text-[13px] font-bold text-white"
+          >
+            <span
+              class="w-5 h-5 inline-flex items-center justify-center text-[10px] rounded-full bg-white/10 text-gold"
+              >⚡</span
+            >
+            +2,500 XP
+          </span>
+          <span
+            class="flex items-center gap-1.5 text-[13px] font-bold text-white"
+          >
+            <span
+              class="w-5 h-5 inline-flex items-center justify-center text-[10px] rounded-full bg-white/10 text-gold"
+              >🪙</span
+            >
+            +2,500 Coins
+          </span>
+        </div>
+      </div>
+      <!-- Features -->
+      <ul
+        class="px-6 py-5 xl:px-[18px] xl:py-4 flex-1 list-none space-y-3"
+        role="list"
+      >
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-gold"
+        >
+          500 free entries into the giveaway
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-gold"
+        >
+          VIP invitation to all events
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-gold"
+        >
+          6 Months access to 2,000+ Partner Discounts
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-gold"
+        >
+          2,500 XP in-app and 2,500 LMCT+ Coins
+        </li>
+      </ul>
+      <!-- Button -->
+      <div class="px-6 pb-6 xl:px-[18px] xl:pb-5">
+        <button
+          type="button"
+          aria-label="Select Gold plan"
+          class="block w-full py-3.5 xl:py-3 px-6 xl:px-[18px] rounded-[10px] bg-gradient-to-r from-gold via-gold-light to-gold text-card text-sm xl:text-[13px] font-extrabold uppercase tracking-[2px] cursor-pointer transition-all duration-200 hover:brightness-[1.15] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)] active:translate-y-0 active:brightness-95 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-[3px] border-none"
+        >
+          SELECT
+        </button>
+      </div>
+    </article>
+
+    <!-- PLATINUM -->
+    <article
+      class="relative bg-card rounded-2xl flex flex-col border border-white/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.25)] transition-card hover:scale-[1.03] hover:shadow-[0_12px_40px_rgba(0,0,0,0.4)] max-w-[400px] mx-auto w-full sm:max-w-none sm:mx-0"
+      role="group"
+      aria-label="Platinum plan - $500"
+    >
+      <!-- Header -->
+      <div
+        class="px-6 pt-7 pb-5 text-center rounded-t-2xl bg-gradient-to-br from-platinum to-platinum-dark"
+      >
+        <div
+          class="text-[13px] font-extrabold tracking-[3px] uppercase text-white opacity-95 mb-4"
+        >
+          Platinum
+        </div>
+        <span
+          class="text-5xl xl:text-[40px] font-black text-white leading-none block mb-2.5"
+          >$500</span
+        >
+        <del class="text-xs font-medium text-white/50 uppercase tracking-wider"
+          >WAS 500 ENTRIES</del
+        >
+      </div>
+      <!-- Entries -->
+      <div
+        class="px-6 py-5 xl:px-[18px] xl:py-4 text-center border-b border-white/[0.06]"
+      >
+        <span
+          class="text-[42px] xl:text-4xl font-black text-white leading-none block mb-1"
+          >2500</span
+        >
+        <span
+          class="text-[13px] font-bold uppercase tracking-[2px] text-platinum"
+          >Free Entries</span
+        >
+      </div>
+      <!-- Bonus -->
+      <div
+        class="px-6 py-4 xl:px-[18px] xl:py-3.5 border-b border-white/[0.06]"
+      >
+        <div
+          class="text-[11px] font-semibold text-white/50 uppercase tracking-wider mb-2"
+        >
+          Bonus in-app inclusions:
+        </div>
+        <div class="flex justify-center gap-4">
+          <span
+            class="flex items-center gap-1.5 text-[13px] font-bold text-white"
+          >
+            <span
+              class="w-5 h-5 inline-flex items-center justify-center text-[10px] rounded-full bg-white/10 text-platinum"
+              >⚡</span
+            >
+            +5,000 XP
+          </span>
+          <span
+            class="flex items-center gap-1.5 text-[13px] font-bold text-white"
+          >
+            <span
+              class="w-5 h-5 inline-flex items-center justify-center text-[10px] rounded-full bg-white/10 text-platinum"
+              >🪙</span
+            >
+            +5,000 Coins
+          </span>
+        </div>
+      </div>
+      <!-- Features -->
+      <ul
+        class="px-6 py-5 xl:px-[18px] xl:py-4 flex-1 list-none space-y-3"
+        role="list"
+      >
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-platinum"
+        >
+          2,500 free entries into the giveaway
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-platinum"
+        >
+          VIP invitation to all events
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-platinum"
+        >
+          12 Months access to 2,000+ Partner Discounts
+        </li>
+        <li
+          class="relative pl-6 text-[13px] xl:text-xs text-white/[0.78] leading-relaxed before:content-['✓'] before:absolute before:left-0 before:top-0 before:font-bold before:text-sm before:text-platinum"
+        >
+          5,000 XP in-app and 5,000 LMCT+ Coins
+        </li>
+      </ul>
+      <!-- Button -->
+      <div class="px-6 pb-6 xl:px-[18px] xl:pb-5">
+        <button
+          type="button"
+          aria-label="Select Platinum plan"
+          class="block w-full py-3.5 xl:py-3 px-6 xl:px-[18px] rounded-[10px] bg-gradient-to-r from-platinum to-platinum-dark text-white text-sm xl:text-[13px] font-extrabold uppercase tracking-[2px] cursor-pointer transition-all duration-200 hover:brightness-[1.15] hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)] active:translate-y-0 active:brightness-95 focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-[3px] border-none"
+        >
+          SELECT
+        </button>
+      </div>
+    </article>
+  </div>
+</section>
