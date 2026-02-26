@@ -1,0 +1,175 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Racing+Sans+One&display=swap");
+
+  .section-title {
+    font-family: "Racing Sans One", sans-serif;
+    text-align: center;
+    padding: 48px 16px 0;
+    box-sizing: border-box;
+  }
+
+  .section-title *,
+  .section-title *::before,
+  .section-title *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* --- Main Heading --- */
+  .section-heading {
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .heading-line-small {
+    display: block;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: #fff;
+    /* -webkit-text-stroke: 0.1px #000; */
+    text-shadow:
+      3px 3px 0 #000,
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000;
+    margin-bottom: 4px;
+  }
+
+  .heading-line-big {
+    display: block;
+    font-size: clamp(52px, 10vw, 110px);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    background: linear-gradient(135deg, #40cbf6 0%, #0071ce 40%, #0086d4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.1px #000;
+    filter: drop-shadow(4px 6px 0 rgba(0, 0, 0, 0.45));
+    position: relative;
+  }
+
+  /* Outline layer behind gradient text */
+  .heading-line-big::before {
+    content: "PACKAGE";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.1px #000;
+    filter: none;
+  }
+
+  /* --- Subtext --- */
+  .section-subtext {
+    font-family: "Open Sans", Helvetica, sans-serif !important;
+    font-size: clamp(20px, 2vw, 18px);
+    color: rgb(255, 255, 255);
+    max-width: 100%;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+  }
+
+  /* --- Urgency Banner --- */
+  .urgency-banner {
+    display: inline-block;
+    background: rgba(10, 10, 20, 0.85);
+    border: 2px solid #e53935;
+    border-radius: 8px;
+    padding: 14px 32px;
+    transform: skewX(-3deg);
+    box-shadow:
+      0 0 20px rgba(229, 57, 53, 0.25),
+      0 4px 16px rgba(0, 0, 0, 0.4);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .urgency-banner:hover {
+    transform: skewX(-3deg) scale(1.04);
+    box-shadow:
+      0 0 30px rgba(229, 57, 53, 0.4),
+      0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  .urgency-text {
+    transform: skewX(3deg);
+    display: block;
+    font-size: clamp(18px, 3.5vw, 32px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .urgency-text .hurry {
+    color: #ff9800;
+    margin-right: 8px;
+    text-shadow: 0 0 12px rgba(255, 152, 0, 0.5);
+  }
+
+  .urgency-text .activated {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 767px) {
+    .section-title {
+      padding: 32px 12px 0;
+    }
+
+    .heading-line-small {
+      letter-spacing: 4px;
+      /* -webkit-text-stroke: 0.1px rgb(0, 0, 0); */
+    }
+
+    .heading-line-big {
+      letter-spacing: 4px;
+      -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+    }
+
+    .heading-line-big::before {
+      -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+    }
+
+    .urgency-banner {
+      padding: 10px 20px;
+    }
+
+    .section-subtext {
+      margin-bottom: 22px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .section-title {
+      padding: 64px 24px 0;
+    }
+  }
+</style>
+
+<section class="section-title" aria-label="Section heading">
+  <h1 class="section-heading">
+    <span class="heading-line-small">Select A</span>
+    <span class="heading-line-big">Package</span>
+  </h1>
+  <p class="section-subtext">
+    By purchasing any LMCT+ package below, your name will instantly go into the
+    Silverado or $120K Giveaway!
+  </p>
+  <div class="urgency-banner">
+    <span class="urgency-text">
+      <span class="hurry">Hurry</span>
+      <span class="activated">5X Entries Activated!</span>
+    </span>
+  </div>
+</section>
