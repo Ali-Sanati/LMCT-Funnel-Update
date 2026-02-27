@@ -1,10 +1,10 @@
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Racing+Sans+One&display=swap");
+  @import url("https://fonts.cdnfonts.com/css/sf-pro-display");
 
   .section-title {
-    font-family: "Racing Sans One", sans-serif;
+    font-family: "SF Pro Display", sans-serif;
     text-align: center;
-    padding: 48px 16px 0;
+    padding: 0px 16px 0px;
     box-sizing: border-box;
   }
 
@@ -20,6 +20,7 @@
   .section-heading {
     line-height: 1;
     margin-bottom: 20px;
+    font-style: italic;
   }
 
   .heading-line-small {
@@ -27,7 +28,7 @@
     font-size: clamp(28px, 5vw, 52px);
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 6px;
+    letter-spacing: 1px;
     color: #fff;
     /* -webkit-text-stroke: 0.1px #000; */
     text-shadow:
@@ -43,12 +44,12 @@
     font-size: clamp(52px, 10vw, 110px);
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 8px;
+    letter-spacing: 1px;
     background: linear-gradient(135deg, #40cbf6 0%, #0071ce 40%, #0086d4 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 0.1px #000;
+    -webkit-text-stroke: 3px #000;
     filter: drop-shadow(4px 6px 0 rgba(0, 0, 0, 0.45));
     position: relative;
   }
@@ -62,7 +63,7 @@
     width: 100%;
     z-index: -1;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 0.1px #000;
+    -webkit-text-stroke: 3px #000;
     filter: none;
   }
 
@@ -74,11 +75,12 @@
     max-width: 100%;
     margin: 0 auto 28px;
     line-height: 1.6;
-    letter-spacing: 0.3px;
+    letter-spacing: 0px;
   }
 
   /* --- Urgency Banner --- */
   .urgency-banner {
+    font-style: italic;
     display: inline-block;
     background: rgba(10, 10, 20, 0.85);
     border: 2px solid #e53935;
@@ -124,21 +126,21 @@
   /* --- Responsive --- */
   @media (max-width: 767px) {
     .section-title {
-      padding: 32px 12px 0;
+      padding: 0 12px 0;
     }
 
     .heading-line-small {
-      letter-spacing: 4px;
-      /* -webkit-text-stroke: 0.1px rgb(0, 0, 0); */
+      letter-spacing: 1px;
+      -webkit-text-stroke: 0.1px rgb(0, 0, 0);
     }
 
     .heading-line-big {
-      letter-spacing: 4px;
-      -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+      letter-spacing: 1px;
+      -webkit-text-stroke: 1px rgb(0, 0, 0);
     }
 
     .heading-line-big::before {
-      -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+      -webkit-text-stroke: 1px rgb(0, 0, 0);
     }
 
     .urgency-banner {
@@ -152,7 +154,7 @@
 
   @media (min-width: 1200px) {
     .section-title {
-      padding: 64px 24px 0;
+      padding: 0 24px 0;
     }
   }
 </style>
