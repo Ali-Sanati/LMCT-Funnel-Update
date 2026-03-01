@@ -30,7 +30,8 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #fff;
-    /* -webkit-text-stroke: 0.1px #000; */
+    -webkit-text-stroke: 10px #000;
+    paint-order: stroke fill;
     text-shadow:
       3px 3px 0 #000,
       -1px -1px 0 #000,
@@ -45,26 +46,11 @@
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 1px;
-    background: linear-gradient(135deg, #40cbf6 0%, #0071ce 40%, #0086d4 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 3px #000;
+    color: #3ba0fb;
+    -webkit-text-stroke: 20px #000;
+    paint-order: stroke fill;
     filter: drop-shadow(4px 6px 0 rgba(0, 0, 0, 0.45));
     position: relative;
-  }
-
-  /* Outline layer behind gradient text */
-  .heading-line-big::before {
-    content: "PACKAGE";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: -1;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 3px #000;
-    filter: none;
   }
 
   /* --- Subtext --- */
@@ -131,16 +117,16 @@
 
     .heading-line-small {
       letter-spacing: 1px;
-      -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+      -webkit-text-stroke: 7px rgb(0, 0, 0);
     }
 
     .heading-line-big {
       letter-spacing: 1px;
-      -webkit-text-stroke: 1px rgb(0, 0, 0);
+      -webkit-text-stroke: 15px rgb(0, 0, 0);
     }
 
     .heading-line-big::before {
-      -webkit-text-stroke: 1px rgb(0, 0, 0);
+      -webkit-text-stroke: 15px rgb(0, 0, 0);
     }
 
     .urgency-banner {

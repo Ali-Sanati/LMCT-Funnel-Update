@@ -1,0 +1,233 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap");
+
+  /* ===== Base ===== */
+  .giveaway-section {
+    font-family:
+      "Inter",
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  .giveaway-section *,
+  .giveaway-section *::before,
+  .giveaway-section *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ===== Grid (Mobile First) ===== */
+  .giveaway-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  /* ===== Card ===== */
+  .giveaway-card {
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+    overflow: visible;
+  }
+
+  /* ===== Badge ===== */
+  .card-badge {
+    display: inline-block;
+    background: #0a1a2f;
+    color: #fff;
+    font-size: clamp(14px, 1.5vw, 18px);
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  .card-badge.red {
+    background: #e53935;
+  }
+
+  /* ===== Text ===== */
+  .card-title {
+    font-size: clamp(18px, 2.8vw, 26px);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #0a1a2f;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .card-subtitle {
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 500;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  /* ===== Image Area ===== */
+  .card-image {
+    position: absolute;
+    left: 24px;
+    right: 12px;
+    bottom: 8px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  .card-image img {
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+  }
+
+  /* Responsive image sizing (no repeated media rules) */
+  .card-image img:first-child {
+    width: clamp(70px, 8vw, 95px);
+    height: clamp(70px, 8vw, 95px);
+  }
+
+  .card-image img:last-child {
+    width: clamp(85px, 10vw, 110px);
+    height: clamp(85px, 10vw, 110px);
+  }
+
+  /* ===== Date Overlay ===== */
+  .date {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(36px, 6vw, 50px);
+    font-weight: 700;
+    color: #0a1a2f;
+    line-height: 1;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .date-wrapper {
+    position: relative;
+  }
+
+  /* ===== Tablet (2 columns) ===== */
+  @media (min-width: 640px) {
+    .giveaway-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .giveaway-card {
+      padding: 20px;
+      min-height: 240px;
+    }
+  }
+
+  /* ===== Desktop (4 columns + hover) ===== */
+  @media (min-width: 900px) {
+    .giveaway-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .giveaway-card {
+      padding: 24px;
+      min-height: 260px;
+    }
+
+    .giveaway-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.18),
+        0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  /* ===== Large Desktop ===== */
+  @media (min-width: 1200px) {
+    .giveaway-card {
+      min-height: 280px;
+    }
+  }
+</style>
+
+<section class="giveaway-section" aria-label="Giveaway details">
+  <div class="giveaway-grid">
+    <div class="giveaway-card">
+      <span class="card-badge">First Prize</span>
+      <div class="card-title">Chevrolet Silverado</div>
+      <div class="card-subtitle">or $120,000 Cash!</div>
+      <div class="card-image">
+        <img
+          src="https://cdn.jumpshare.com/preview/WVXdv_O48Z5B68m6CsvRJP-TnFrrtVxEEdWYK4faD8fXqpbaFAQyz6XSIzMr_KJLCFmSs23RG8FMCj0D4GFSjPD_YT84fC45GS_xi3ONiYw"
+        />
+        <img
+          src="https://cdn.jumpshare.com/preview/V7HP8ahanxq2jRUcLPcyM4yYPI1bcB1V0T_75g9BY27Bk8_qwMWLUTl0qFHVNH_rCFmSs23RG8FMCj0D4GFSjAvGt6vzWBHY_UmXazznvbM"
+        />
+      </div>
+    </div>
+
+    <div class="giveaway-card">
+      <span class="card-badge">Gates Open</span>
+      <div class="card-title">12:00 AM</div>
+      <div class="card-subtitle">Feb 27<sup>th</sup> AEDT*</div>
+      <div class="card-image">
+        <img
+          src="https://cdn.jumpshare.com/preview/zNznO4SI5ehv6_A6OJLYkrE1mvh1gwuJCi97iEE47GIBpt1N1kOll03DCFLrd84lCFmSs23RG8FMCj0D4GFSjNdUgV3KqsaVfssYkCzzXNo"
+        />
+        <img
+          src="https://cdn.jumpshare.com/preview/4AbLPK79vByyKyABrFmsUxwUlNDXsx6xraOk9tPpwgPyg70ejLm834BrYgpRfd5CCFmSs23RG8FMCj0D4GFSjNdUgV3KqsaVfssYkCzzXNo"
+        />
+      </div>
+    </div>
+
+    <div class="giveaway-card">
+      <span class="card-badge">Entries Close</span>
+      <div class="card-title">12:00 AM</div>
+      <div class="card-subtitle">Feb 28<sup>th</sup> AEDT*</div>
+      <div class="card-image">
+        <img
+          src="https://cdn.jumpshare.com/preview/zNznO4SI5ehv6_A6OJLYkrE1mvh1gwuJCi97iEE47GIBpt1N1kOll03DCFLrd84lCFmSs23RG8FMCj0D4GFSjNdUgV3KqsaVfssYkCzzXNo"
+        />
+
+        <img
+          src="https://cdn.jumpshare.com/preview/jDvqJs_04bZPV-jUuzYj2NTiFCWWbNLWVQ03bKt_x0uXmhXf7eih2Z337fzc_FqpCFmSs23RG8FMCj0D4GFSjNOklsPjocx-KlWtRH6UO8Y"
+        />
+      </div>
+    </div>
+
+    <div class="giveaway-card">
+      <span class="card-badge red">Live Draw</span>
+      <div class="card-title">8:30 PM</div>
+      <div class="card-subtitle">Feb 28<sup>th</sup></div>
+      <div class="card-image">
+        <img
+          src="https://cdn.jumpshare.com/preview/DASWHMbC44kxA8jEZrHxzY0BPHUfYVwj8jVnF8WF7SIVeqcsryUL-p9-Nrx3tgJ5CFmSs23RG8FMCj0D4GFSjDYIsvi8vXZl2AIj24ehvyw"
+        />
+        <div class="date-wrapper">
+          <img
+            style="width: 100px; height: 100px"
+            src="https://cdn.jumpshare.com/preview/sNfn9pdUqcaEaRhuS_nKdqjOOej2WRmIu9GNTEX7vs6iiG_d0FTYWBE4qTwZNFHkCFmSs23RG8FMCj0D4GFSjAdSvXKN8xQKdUyfyJVc2rg"
+          />
+          <p class="date">12</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

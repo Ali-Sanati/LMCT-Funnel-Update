@@ -1,210 +1,139 @@
 <style>
   @import url("https://fonts.cdnfonts.com/css/sf-pro-display");
 
-  /* Car Section Title with Image */
+  /* ===== Base ===== */
   .car-hero {
     font-family:
       "SF Pro Display", "Impact", "Arial Black", system-ui, sans-serif;
     position: relative;
     width: 100%;
-    min-height: 520px;
+    min-height: clamp(420px, 60vh, 720px);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* overflow: hidden; */
-    padding: 0px 16px 0;
-    box-sizing: border-box;
+    transform: scale(0.8);
+    isolation: isolate;
   }
 
-  .car-hero *,
-  .car-hero *::before,
-  .car-hero *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  /* ===== Cinematic Lighting ===== */
 
-  /* --- Hero Inner Content --- */
-  .car-hero-inner {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1100px;
-    padding-bottom: 0;
-  }
-
-  /* --- Title Block --- */
-  .hero-heading {
-    line-height: 0.7;
-    margin-top: -18%;
-    margin-bottom: 0;
-    font-style: italic;
-    position: relative;
-    z-index: 4;
-    text-shadow:
-      4px 4px 0 #000,
-      -2px -2px 0 #000,
-      2px -2px 0 #000,
-      -2px 2px 0 #000,
-      0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .hero-line-first {
-    display: inline-block;
-    white-space: nowrap;
-    font-size: clamp(42px, 8vw, 90px);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #fff;
-    -webkit-text-stroke: 2.5px #000;
-    margin-bottom: 4px;
-    position: relative;
-    z-index: 5;
-  }
-
-  .hero-line-car {
-    display: inline-block;
-    white-space: nowrap;
-    font-size: clamp(38px, 6vw, 95px);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -6px;
-    color: #0071ce;
-    /* background: linear-gradient(135deg, #40cbf6 0%, #0071ce 40%, #0086d4 100%); */
-    /* -webkit-background-clip: text; */
-    /* background-clip: text; */
-    /* -webkit-text-fill-color: transparent; */
-    /* filter: drop-shadow(4px 6px 0 rgba(0, 0, 0, 0.45)); */
-    -webkit-text-stroke: 3px #000;
-    position: relative;
-    z-index: 5;
-  }
-
-  /* Outline layer behind gradient text */
-  /* .hero-line-car::before {
-    content: attr(data-text);
+  /* Top spotlight glow */
+  .car-hero::before {
+    content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: -1;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 5px #000;
-    filter: none;
-  } */
-
-  /* --- Car Image --- */
-  .car-hero-image {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 900px;
-    margin-top: -30px;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1200px;
+    height: 600px;
+    /* background: radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.12) 30%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 70%
+    ); */
+    z-index: 0;
     pointer-events: none;
   }
 
-  .car-hero-image img {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.25));
-    border-radius: 18px;
-  }
-
-  /* --- Subtle ground reflection --- */
+  /* Bottom ground fade */
   .car-hero::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 80px;
+    height: 140px;
+    /* background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.15),
+      transparent
+    ); */
     z-index: 1;
     pointer-events: none;
   }
 
+  /* ===== Inner Layout ===== */
+  .car-hero-inner {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ===== Car Image ===== */
+  .car-hero-image {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: clamp(600px, 70vw, 1000px);
+  }
+
+  .car-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* ===== Heading ===== */
+  .hero-heading {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-style: italic;
+    line-height: 0.85;
+    z-index: 4;
+  }
+
+  /* Shared line styles */
   .hero-line-first,
   .hero-line-car {
+    display: block;
+    width: 100vw;
     position: relative;
-    display: inline-block;
-    padding: 0 -10%;
+    white-space: normal;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0;
   }
 
-  /* Slanted black background */
-  .hero-line-first::before,
-  .hero-line-car::after {
-    content: "";
-    position: absolute;
-    background: #000;
-    transform: skew(-12deg);
-    z-index: -1;
-    border-radius: 6px;
-    inset: 0;
+  /* First line */
+  .hero-line-first {
+    font-size: clamp(40px, 7vw, 90px);
+    color: #fff;
+    -webkit-text-stroke: 20px #000;
+    paint-order: stroke fill;
+    text-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
   }
 
-  /* --- Responsive --- */
-  @media (min-width: 900px) {
-    .car-hero {
-      min-height: 600px;
-      padding: 0 24px 0;
-    }
-
-    .car-hero-image {
-      margin-top: -50px;
-    }
+  /* Second line */
+  .hero-line-car {
+    font-size: clamp(38px, 6vw, 95px);
+    letter-spacing: -3px;
+    color: #3ba0fb;
+    -webkit-text-stroke: 20px #000;
+    filter: drop-shadow(4px 6px 0 rgba(0, 0, 0, 0.45));
+    paint-order: stroke fill;
+    /* text-shadow: 0 10px 25px rgba(0, 0, 0, 0.45); */
   }
 
-  @media (min-width: 1200px) {
-    .car-hero {
-      min-height: 680px;
-      padding: 0 32px 0;
-    }
-
-    .car-hero-image {
-      max-width: 1000px;
-      margin-top: -60px;
-    }
-  }
-
-  @media (max-width: 899px) {
-    .car-hero {
-      min-height: 400px;
-      padding: 0 12px 0;
-    }
-
+  /* ===== Responsive Refinements ===== */
+  @media (max-width: 768px) {
     .hero-line-first {
-      -webkit-text-stroke: 1.5px #000;
-      letter-spacing: 1px;
+      -webkit-text-stroke: 10px #000;
     }
 
     .hero-line-car {
-      -webkit-text-stroke: 2px #000;
-      letter-spacing: 0.5px;
-    }
-
-    .hero-line-car::before {
-      -webkit-text-stroke: 3px #000;
-    }
-
-    .car-hero-image {
-      margin-top: -20px;
-      max-width: 100%;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .hero-heading {
-      line-height: 0.1;
-    }
-
-    .car-hero-image {
-      margin-top: -10px;
+      -webkit-text-stroke: 10px #000;
+      letter-spacing: -1px;
     }
   }
 </style>
@@ -212,16 +141,16 @@
 <section class="car-hero" aria-label="First prize car">
   <div class="car-hero-inner">
     <div class="car-hero-image">
-      <!-- Replace src with your transparent PNG car image -->
       <img
-        src="https://p7.hiclipart.com/preview/298/156/934/2018-chevrolet-silverado-1500-2017-chevrolet-silverado-1500-pickup-truck-car-pickup-truck.jpg"
+        src="https://cdn.jumpshare.com/preview/Qm_UA83KoQof7COTJpHMSBlD-NVqYRlZKj8BQBJSnY6UFyY-7uOxPxnjcOXoF88rjGzeHEf3F2yyowKmcuun__avCaXvNB8eD3OrDrgcz7Q"
         alt="Chevrolet Silverado first prize"
         loading="lazy"
       />
     </div>
+
     <h2 class="hero-heading">
       <span class="hero-line-first">First Prize</span>
-      <span class="hero-line-car">Chevrolet Silverado</span>
+      <span class="hero-line-car">Toyota Prado + Patriot Camper</span>
     </h2>
   </div>
 </section>
