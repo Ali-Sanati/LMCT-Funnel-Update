@@ -1,0 +1,638 @@
+<script>
+  $(document).ready(function () {
+    $(document)
+      .find('[data-title="faq-accord-question"] > h1')
+      .css({ cursor: "pointer" });
+    var accordQuest = $(document).find(
+      '[data-title="faq-accord-question"] > h1',
+    );
+    var accordAns = $(document).find('[data-title="faq-accord-answer"]');
+    var fontColorBase = accordQuest.css("color");
+
+    accordQuest.each(function () {
+      $(this).css({ "text-align": "left", padding: "15px" });
+      $(this).after(
+        '<i style="cursor:pointer;color:' +
+          fontColorBase +
+          ';position: absolute;top: 50%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);right: 20px;}" class="fa_prepended fa fa-plus" contenteditable="false"></i>',
+      );
+      $(this).click(function () {
+        if ($(this).parent().find("i").hasClass("fa-minus")) {
+          $(this)
+            .parent()
+            .find("i")
+            .removeClass("fa-minus")
+            .addClass("fa-plus");
+        } else {
+          $(this)
+            .parent()
+            .find("i")
+            .removeClass("fa-plus")
+            .addClass("fa-minus");
+        }
+        $(this)
+          .parent()
+          .nextUntil('[data-title="faq-accord-question"]')
+          .slideToggle();
+      });
+    });
+    var accordBut = $(document).find('[data-title="faq-accord-question"] > i');
+    accordBut.each(function () {
+      $(this).click(function () {
+        if ($(this).hasClass("fa-minus")) {
+          $(this).removeClass("fa-minus").addClass("fa-plus");
+        } else {
+          $(this).removeClass("fa-plus").addClass("fa-minus");
+        }
+        $(this)
+          .parent()
+          .nextUntil('[data-title="faq-accord-question"]')
+          .slideToggle();
+      });
+    });
+    accordAns.each(function () {
+      $(this).css({ "text-align": "left", padding: "15px" });
+    });
+    accordAns.slideUp();
+    // accordBut.eq(0).click()
+  });
+</script>
+
+<script>
+  /** package selection script **/
+  $(function () {
+    $("#tmp_oapap-21334").insertBefore(".elCreditCardForm");
+    var products_set = {
+      bronze: "5048501",
+      silver: "5048511",
+      gold: "5048512",
+      platinum: "5048513",
+      basic: "5048495",
+    };
+
+    console.log($('[data-title*="css-order-"]'));
+    $('[data-title*="css-order-"]').click(function (e) {
+      var $el = $(this);
+
+      $(".elOrderProductOptions .elOrderProductOptinProductName").hide();
+      var package = $el.attr("data-title").split("-").pop();
+
+      localStorage.setItem("gwy_package", package);
+      //var $line = $('[value="'+products_set[package]+'"]');
+      var $line = $(
+        'input[value="' + products_set[package] + '"]:not(#cfAR input)',
+      ).first();
+
+      console.log($line);
+
+      $line.click();
+      rebuildOrderSummary();
+      $line.parents(".elOrderProductOptinProductName").show();
+
+      if (!$(e.target).hasClass(".elButton ")) {
+        $('[data-title*="open-popup"] a').click();
+        console.log($('[data-title*="open-popup"] a').click());
+      }
+    });
+  });
+</script>
+
+<script>
+  /**
+   * Toggles next row to all elements with CSS title " dropdown-next "
+   **/
+  $(function () {
+    $('[data-title*="dropdown-next"]').parents(".row").next().slideUp();
+
+    $('[data-title*="dropdown-next"]').click(function (e) {
+      e.preventDefault();
+      var $but = $(this);
+      $but.parents(".row").next().slideToggle();
+      $but.find("i").toggleClass("fa-caret-up");
+    });
+  });
+</script>
+<!-- Beginning of the Phone Validation Script -->
+<script>
+  var element = document.querySelector('.elInput[name="phone"]');
+  var maskOptions = {
+    mask: "0000 000 0000",
+    lazy: true,
+  };
+  var mask = IMask(element, maskOptions);
+
+  function checkPhone(e, $el) {
+    e.preventDefault();
+    e.stopPropagation();
+    $("#phoneError").remove();
+    var $error_text = $("<div/>", {
+      id: "phoneError",
+      class: "error_phone",
+      text: "Wrong phone length",
+    });
+    $error_text.insertAfter($el);
+    $el.addClass("error_border");
+  }
+
+  $('[href="#submit-form"]').click(function (e) {
+    var $el = $('.elInput[name="phone"]');
+    var length = $el.val().length;
+    if (length !== 12) {
+      checkPhone(e, $el);
+    } else {
+      $el.removeClass("error_border");
+      $("#phoneError").remove();
+    }
+  });
+  $('.elInput[name="phone"]').on("input", function (e) {
+    var $el = $('.elInput[name="phone"]');
+    var length = $el.val().length;
+    if (length > 12) {
+      checkPhone(e, $el);
+    } else {
+      $el.removeClass("error_border");
+      $("#phoneError").remove();
+    }
+  });
+</script>
+<style>
+  div.error_phone {
+    color: red;
+  }
+
+  .error_border {
+    border-color: rgb(185, 21, 23) !important;
+    border-width: 3px;
+  }
+</style>
+<!-- End of the Phone Validation Script -->
+
+<script>
+  //Referals code start
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return "";
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  $(function () {
+    var giveaway_name = "FX0122";
+    var main_url = "https://lmctgiveaway.com/1971-fordxy ";
+
+    var ref_id = getParameterByName("ref_id");
+    localStorage.setItem("ref_id", ref_id);
+    $('input[data-custom-type="aff_id"]').prop("readonly", "readonly");
+    var aff_url = localStorage.getItem("affurl" + giveaway_name);
+    var ref_id = localStorage.getItem("ref_id");
+    var aff_id = localStorage.getItem("aff_id" + giveaway_name);
+
+    if (!aff_url) {
+      var aff_string =
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15);
+
+      aff_url = main_url + "?ref_id=" + aff_string;
+      localStorage.setItem("affurl" + giveaway_name, aff_url);
+      localStorage.setItem("aff_id" + giveaway_name, aff_string);
+      $('input[data-custom-type="aff_id"]').val(aff_string);
+      $('input[data-custom-type="aff_url"]').val(aff_url);
+    }
+    if (aff_id) {
+      aff_url = main_url + "?ref_id=" + aff_id;
+      $('input[data-custom-type="aff_id"]').val(aff_id);
+      $('input[data-custom-type="aff_url"]').val(aff_url);
+      localStorage.setItem("affurl" + giveaway_name, aff_url);
+    }
+    if (ref_id) {
+      $('input[data-custom-type="ref_id"]').val(ref_id);
+    }
+  });
+  //Referals code END
+</script>
+<!-- FAQ scroll script-->
+<script>
+  $(function () {
+    $(".faqAnswer, ").slideUp();
+    $(".faqTitle").click(function () {
+      $(this).siblings(".faqAnswer").slideToggle();
+    });
+  });
+</script>
+<!-- END FAQ scroll script-->
+
+<script>
+  // ** NOTE: THIS SECTION MUST BE INCLUDED, BUT DOES NOT ALWAYS
+  // ** REQUIRE MODIFICATION
+  // OPTIONAL CONFIGURATION //
+  CFPT = {};
+  CFPT.prodPrices = {
+    //modify with your product IDs and prices
+    1234567: 0, // key = product_id; value = true product price float
+    7654321: 7.95,
+  };
+  CFPT.freePriceDisplay = "FREE"; //what to say for subtotal when price is $0.00
+  CFPT.orderTotalLabel = "Order Total:"; //what to say for Order Total at the bottom
+  // END OPTIONAL CONFIGURATION //
+</script>
+
+<script>
+  /**************************
+   * Copyright 2019 CF Pro Tools, All Rights Reserved
+   * Do not share, or distribute this code without author's consent.
+   * This copyright notice must remain in place whenever using
+   * this code - DO NOT REMOVE
+   * Author: Jaime Smith
+   * Website: https://cfprotools.com
+   * Add-on: CF Order Summary
+   * Version: 2.0
+   * Last Updated: 10/28/2019
+   **************************/
+  var $summTemplate = null;
+
+  $(function () {
+    //set default value to kill bug in L&E JS
+    window.cfpe = window.cfpe || {};
+    window.cfpe.orderTotal = window.cfpe.orderTotal || 0;
+
+    window.cfptOrderTotal = null;
+
+    setSummaryTemplate();
+
+    $("#bump-offer").off();
+
+    rebuildOrderSummary();
+    $(document).on(
+      "change",
+      '.qty_select, .o2step_step2 [name="purchase[product_id]"], [data-de-type="orpo"] [name="purchase[product_id]"], #bump-offer',
+      function (ev) {
+        $('#bump-offer, [id*="bump_offer_"]').each(function () {
+          var bumpId = $(this).val();
+
+          if ($(this).is(":checked")) {
+            $(
+              '#cfAR [name="purchase[product_ids][]"][value="' + bumpId + '"]',
+            ).attr("checked", true);
+          } else {
+            $(
+              '#cfAR [name="purchase[product_ids][]"][value="' + bumpId + '"]',
+            ).attr("checked", false);
+          }
+        });
+        rebuildOrderSummary();
+      },
+    );
+    $(document).on("cfpt:cart-updated", function () {
+      rebuildOrderSummary();
+    });
+  });
+
+  function setSummaryTemplate() {
+    $('[data-de-type="ors"], .elOrderProductOptions:not(:has(input,select))')
+      .first()
+      .attr("data-title", "cf-order-summary");
+
+    $summTemplate = $(
+      '[data-title="cf-order-summary"] .elOrderProductOptinProducts',
+    )
+      .first()
+      .clone();
+  }
+
+  function rebuildOrderSummary() {
+    var cfpt = window.CFPT || {};
+    var prodPrices = cfpt.prodPrices || {};
+    var freePriceDisplay = cfpt.freePriceDisplay || null;
+    var orderTotalLabel = cfpt.orderTotalLabel || null;
+    var prodSelParent = '[data-de-type="orpo"]';
+    var appendTo = '[data-title="cf-order-summary"] .elOrderProductOptions';
+
+    var cartMode = $(".qty_select").length ? true : false;
+
+    if ($(".o2step_wrapper").length > 0) {
+      prodSelParent = ".o2step_step2";
+      appendTo = '[data-title="cf-order-summary"]';
+    }
+
+    if (!$summTemplate) {
+      setSummaryTemplate();
+    }
+
+    $('[data-title="cf-order-summary"]').hide();
+    if (
+      $('[data-title="cf-order-summary"] .qty-head').length == 0 &&
+      $(".qty_select").length > 0
+    ) {
+      if ($("table.elOrderProductOptions").length > 0) {
+        //this is the new way
+        $('[data-title="cf-order-summary"] .elOrderProductOptinItem').prepend(
+          '<span class="pull-left qty-head">Qty</span>',
+        );
+        appendTo = '[data-title="cf-order-summary"] tbody';
+      } else {
+        $(
+          '[data-title="cf-order-summary"] .elOrderProductOptinLabel .elOrderProductOptinItem',
+        ).before('<div class="pull-left qty-head">Qty</div>');
+      }
+    }
+
+    var orderTotal = 0.0;
+    var orderCurrency = "AUD"; //default
+
+    $('[data-title="cf-order-summary"] .elOrderProductOptinProducts').remove();
+
+    window.cfptCartProds = {};
+    $('#cfAR [name="purchase[product_ids][]"]:checked').each(function () {
+      var prodId = $(this).val();
+
+      if (window.cfptCartProds.hasOwnProperty(prodId)) {
+        window.cfptCartProds[prodId].qty++;
+      } else {
+        window.cfptCartProds[prodId] = { qty: 1 };
+      }
+    });
+
+    //$('#cfAR [name="purchase[product_ids][]"]:checked').each(function () {
+    $.each(window.cfptCartProds, function (index, value) {
+      var qty = value.qty;
+      var prodId = index;
+
+      var $prodItem = $(prodSelParent + ' [name="' + prodId + '_qty"]');
+      if (!$prodItem.length) {
+        $prodItem = $(
+          prodSelParent +
+            ' [name="purchase[product_id]"][value="' +
+            prodId +
+            '"]',
+        );
+      }
+
+      var prodParent = $prodItem.parents("[data-cf-product-template]").first();
+      var prodDesc = prodParent.find("[data-cf-product-name]").html();
+      var prodPriceStr = prodParent.find("[data-cf-product-price]").html();
+      if (prodPrices.hasOwnProperty(prodId)) {
+        var prodPriceNum = prodPrices[prodId].toFixed(2);
+      } else {
+        var prodPriceNum = parseFloat(
+          prodPriceStr.replace(/[^0-9\.]+/g, ""),
+        ).toFixed(2);
+      }
+      var subTotal = qty * prodPriceNum;
+      var currency = prodParent
+        .find("[data-cf-product-price]")
+        .attr("taxamo-currency");
+      orderCurrency = currency;
+
+      $currTemplate = $summTemplate.clone();
+      $currTemplate.attr("data-product_id", prodId);
+      $currTemplate.attr("data-quantity", qty);
+
+      var prodName = prodDesc;
+      if ($(".qty_select").length > 0) {
+        prodName = '<span class="prodQty">' + qty + "</span>" + prodDesc;
+      }
+      $currTemplate.find(".product-name").html(prodName);
+      if (freePriceDisplay && subTotal == 0) {
+        $currTemplate
+          .find(".product-price")
+          .attr("taxamo-currency", currency)
+          .html(freePriceDisplay);
+        $currTemplate.attr("data-subtotal", freePriceDisplay);
+      } else {
+        var priceDisplay = subTotal.toLocaleString(undefined, {
+          style: "currency",
+          currency: currency,
+        });
+        $currTemplate
+          .find(".product-price")
+          .attr("taxamo-currency", currency)
+          .html(priceDisplay);
+        $currTemplate.attr("data-subtotal", priceDisplay);
+      }
+
+      $currTemplate.appendTo($(appendTo));
+
+      orderTotal += subTotal;
+    });
+
+    if (orderTotal) {
+      $ttlTemplate = $summTemplate.clone();
+
+      $ttlTemplate
+        .addClass("cf-order-total-row")
+        .css({ "border-top": "1px solid #DDD", "margin-top": ".5em" });
+      $ttlTemplate.find(".product-name").html(orderTotalLabel);
+      $ttlTemplate
+        .find(".product-price")
+        .attr("taxamo-currency", orderCurrency)
+        .html(
+          orderTotal.toLocaleString(undefined, {
+            style: "currency",
+            currency: orderCurrency,
+          }),
+        );
+      $ttlTemplate.appendTo($(appendTo));
+
+      $('[data-title="cf-order-summary"]').show();
+      window.cfptOrderTotal = orderTotal;
+    } else {
+      $('[data-title="cf-order-summary"]').hide();
+      window.cfptOrderTotal = null;
+    }
+  }
+</script>
+<style>
+  /* Custom CSS for CF Pro Tools cf-order-summary script
+     * Copyright 2017 CF Pro Tools, All Rights Reserved
+     * Do not share, or distribute this code without author's consent.
+     * Author: Jaime Smith
+     * Website: https://cfprotools.com
+     */
+
+  .cf-order-total-row {
+    border-top: 1px solid #ddd;
+    margin-top: 0.5em;
+  }
+
+  .cf-order-total-row .product-name {
+    font-weight: bold;
+  }
+
+  .cf-order-total-row .product-price {
+    font-weight: bold;
+  }
+
+  [data-title="cf-order-summary"] .qty-head {
+    display: inline-block;
+    font-weight: bold;
+    width: 3em;
+  }
+
+  .prodQty {
+    display: inline-block;
+    width: 3em;
+  }
+</style>
+
+<script>
+  /**************************
+   * Copyright 2018 CF Pro Tools, All Rights Reserved
+   * Do not share, or distribute this code without author's consent.
+   * This copyright notice must remain in place whenever using
+   * this code - DO NOT REMOVE
+   * Author: Jaime Smith
+   * Website: https://cfprotools.com
+   **************************/
+
+  $(function () {
+    window.cfptCurrency = "AUD"; //set to whatever currency you process in
+
+    // set total on button click for OTO pages
+    $('[data-title*="cf-oto-cents-"]').on("click", function () {
+      var titleParts = $(this).attr("data-title").split(" ");
+      var total = null;
+      $.each(titleParts, function (index, value) {
+        if (value.indexOf("cf-oto-cents-") > -1) {
+          total = value.split("-").pop();
+          total = parseInt(total) / 100;
+          return false; //break out of the loop
+        }
+      });
+
+      if (!isNaN(total)) {
+        window.cfptOrderTotal = total;
+        setLastTransLocalStorage();
+      }
+    });
+
+    function setLastTransLocalStorage() {
+      localStorage.setItem("cfptLastTransAmt", window.cfptOrderTotal);
+      localStorage.setItem("cfptLastTransPath", document.location.pathname);
+    }
+
+    // set localStorage vals on cfAR form submit
+    $(
+      '[href="#submit-form"], [href="#submit-form-2step-order"], [href*="#yes-link"]',
+    ).on("click", function () {
+      if (window.cfptOrderTotal) {
+        setLastTransLocalStorage();
+      }
+    });
+
+    $("#cfAR").on("submit", function () {
+      if (window.cfptOrderTotal) {
+        setLastTransLocalStorage();
+      }
+    });
+
+    // handle grabbing totals from last trans and fire events
+    var cfptLastTransAmt = localStorage.getItem("cfptLastTransAmt");
+    var cfptLastTransPath = localStorage.getItem("cfptLastTransPath");
+    var cfptCurrPagePath = document.location.pathname;
+
+    // if the last path and the current path match
+    // this is a page reload, which would be a failure
+    // so remove the items to start fresh
+    if (cfptLastTransPath && cfptLastTransPath == cfptCurrPagePath) {
+      cfptLastTransAmt = null;
+      cfptLastTransPath = null;
+      clearLastTransLocalStorage();
+    }
+
+    // if we have an amount and we can convert that amount to a float
+    // store that float into the last transAmt var
+    if (cfptLastTransAmt) {
+      cfptLastTransAmt = parseFloat(cfptLastTransAmt);
+      if (!isNaN(cfptLastTransAmt)) {
+        firePurchaseEvents(cfptLastTransAmt);
+      }
+    }
+
+    function firePurchaseEvents(amt) {
+      if (typeof fbq != "undefined") {
+        fireFBPurchaseEvent(amt);
+      }
+      clearLastTransLocalStorage();
+    }
+
+    function fireFBPurchaseEvent(amt) {
+      fbq("track", "Purchase", { value: amt, currency: window.cfptCurrency });
+      console.log(amt);
+    }
+
+    function clearLastTransLocalStorage() {
+      localStorage.removeItem("cfptLastTransAmt");
+      localStorage.removeItem("cfptLastTransPath");
+    }
+  });
+</script>
+
+<!-- carousel code -->
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+/>
+<script
+  type="text/javascript"
+  src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+></script>
+<script>
+  $(function () {
+    $("#row-116-179 .col-inner").slick({
+      dots: false,
+      arrows: true,
+      infinite: true,
+      autoplay: true,
+      speed: 300,
+      slidesToShow: 1,
+      fade: true,
+      cssEase: "linear",
+      slide: '[data-title="carousel"]',
+      prevArrow: '<i class=" fas fa-chevron-left"></i>',
+      nextArrow: '<i class=" fas fa-chevron-right"></i>',
+    });
+  });
+</script>
+<style>
+  .slick-arrow {
+    position: absolute;
+    bottom: 0px;
+    font-size: 2em;
+    z-index: 10;
+    padding: 0.5em 0.8em;
+    background: #ffc700;
+    cursor: pointer;
+  }
+
+  .slick-arrow:hover {
+    background: black;
+    color: white;
+  }
+
+  .fas.fa-chevron-right.slick-arrow {
+    right: 10px;
+  }
+</style>
+<!-- carousel code end -->
+<!-- moving tables -->
+<script>
+  $(function () {
+    $('[data-title*="minitable"]').insertBefore('[data-title*="permits"]');
+  });
+</script>
+
+<!-- end moving tables -->
+<script
+  src="https://www.clickfunnels.com/assets/cf_modal.js"
+  type="text/javascript"
+></script>
+
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css"
+  rel="stylesheet"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
