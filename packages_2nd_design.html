@@ -12,15 +12,8 @@
   .pricing-grid {
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 2fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: clamp(12px, 2vw, 14px);
-  }
-
-  /* Small phones → 1 column */
-  @media (min-width: 180px) {
-    .pricing-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 
   /* Desktop → 5 columns */
@@ -30,16 +23,26 @@
     }
   }
 
+  /* Center Platinum on tablet/mobile */
+  @media (max-width: 1099px) {
+    .pricing-card.platinum {
+      grid-column: 1 / -1;
+      margin-left: 25%;
+      margin-right: 25%;
+    }
+  }
+
   .pricing-card {
     border-radius: 22px;
-    padding: clamp(8px, 1px, 15px);
+    padding: clamp(8px, 2vw, 15px);
     text-align: center;
-    color: #fff;
+    color: #fff !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-    min-width: stretch;
+    width: -webkit-fill-available;
+    width: stretch; /* fallback */
     transition:
       transform 0.25s ease,
       box-shadow 0.25s ease;
@@ -84,10 +87,9 @@
   }
 
   .bonus {
-    font-size: clamp(9px, 10vw, 11px);
+    font-size: clamp(9px, 1vw, 11px);
     color: #271400;
     margin-bottom: 8px;
-    opacity: 1;
   }
 
   .bonus-container {
@@ -102,7 +104,7 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    font-size: clamp(10px, 0.5vw, 11px);
+    font-size: 10px;
     padding: 2px 5px;
     border-radius: 999px;
     background: rgba(0, 0, 0, 0.418);

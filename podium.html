@@ -1,0 +1,214 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap");
+
+  .prize-section {
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+
+    text-align: center;
+
+    overflow: hidden;
+  }
+
+  .prize-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    aspect-ratio: 1000 / 650;
+  }
+
+  /* Gold glow behind center */
+  .prize-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55%;
+    height: 45%;
+    background: radial-gradient(
+      circle,
+      rgba(255, 215, 0, 0.35),
+      transparent 70%
+    );
+    filter: blur(60px);
+    z-index: 0;
+  }
+
+  /* Podium */
+  .podium {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    z-index: 1;
+  }
+
+  /* Prize items */
+  .prize-item {
+    position: absolute;
+    z-index: 2;
+    width: 28%;
+  }
+
+  .left {
+    left: 8%;
+    top: 38%;
+  }
+  .center {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10%;
+    width: 36%;
+  }
+  .right {
+    right: 8%;
+    top: 40%;
+  }
+
+  /* Cards */
+  .prize-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
+    padding: 12% 10% 12% 30%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1.5vw 3vw rgba(0, 0, 0, 0.08);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  /* Center emphasis */
+  .center .prize-card {
+    transform: scale(1.08);
+    box-shadow: 0 2vw 5vw rgba(0, 0, 0, 0.18);
+    border: 2px solid rgba(255, 215, 0, 0.25);
+    background: linear-gradient(145deg, #ffffff, #fff8e6);
+  }
+
+  /* Hover micro interaction */
+  .prize-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 2vw 4vw rgba(0, 0, 0, 0.2);
+  }
+
+  .center .prize-card:hover {
+    transform: scale(1.1) translateY(-6px);
+  }
+
+  /* Medal */
+  .medal {
+    position: absolute;
+    left: -12%;
+    width: 30%;
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.2));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Subtle floating animation */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  /* Text */
+  .prize-text p {
+    margin: 0;
+    font-weight: 900;
+    color: #111;
+    letter-spacing: -0.02em;
+  }
+
+  .prize-text .main-amount {
+    font-size: 3.8vw;
+  }
+
+  .prize-text .side-amount {
+    font-size: 2.6vw;
+  }
+
+  .prize-text span {
+    display: block;
+    text-transform: uppercase;
+    font-size: 1vw;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-top: 0.6vw;
+    color: #1a7f2b;
+    opacity: 0.85;
+  }
+
+  /* Prevent oversized scaling on desktop */
+  @media (min-width: 1000px) {
+    .prize-text .main-amount {
+      font-size: 38px;
+    }
+    .prize-text .side-amount {
+      font-size: 26px;
+    }
+    .prize-text span {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<section class="prize-section">
+  <div class="prize-wrapper">
+    <div class="prize-item left">
+      <div class="prize-card">
+        <img
+          src="https://images.clickfunnels.com/9e/2c5218204845ef909855c2a817bc49/lmct-silver.svg"
+          class="medal"
+        />
+        <div class="prize-text">
+          <p class="side-amount">$2500</p>
+          <span>Partner Credit</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prize-item center">
+      <div class="prize-card">
+        <img
+          src="https://images.clickfunnels.com/09/b9dbfc2624437bbe70a4b3807a48cc/lmct-gold.svg"
+          class="medal"
+        />
+        <div class="prize-text">
+          <p class="main-amount">$1,000,000</p>
+          <span>Tax Free Cash</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prize-item right">
+      <div class="prize-card">
+        <img
+          src="https://images.clickfunnels.com/7e/62fe2dfd604f63a4a0a30e8b5c3eec/lmct-bronze.svg"
+          class="medal"
+        />
+        <div class="prize-text">
+          <p class="side-amount">$1000</p>
+          <span>Partner Credit</span>
+        </div>
+      </div>
+    </div>
+
+    <img
+      src="https://images.clickfunnels.com/c1/06c90f3b144948ac89d312a0e805e6/lmct-podium.jpg"
+      class="podium"
+    />
+  </div>
+</section>

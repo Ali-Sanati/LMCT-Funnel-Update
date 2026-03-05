@@ -1,6 +1,16 @@
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap");
 
+  .card-title.first {
+    font-size: clamp(14px, 1.5vw, 18px);
+    font-weight: 800;
+  }
+
+  .card-subtitle.first {
+    font-size: clamp(14px, 1.5vw, 18px);
+    font-weight: bold;
+  }
+
   /* ===== Base ===== */
   .giveaway-section {
     font-family:
@@ -23,7 +33,7 @@
     max-width: 1100px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px;
   }
 
@@ -33,14 +43,21 @@
     background: #fff;
     border-radius: 16px;
     padding: 16px;
-    min-height: 200px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition:
       transform 0.25s ease,
       box-shadow 0.25s ease;
     overflow: visible;
+  }
+
+  .giveaway-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.18),
+      0 6px 16px rgba(0, 0, 0, 0.08);
   }
 
   /* ===== Badge ===== */
@@ -80,11 +97,19 @@
   }
 
   /* ===== Image Area ===== */
+  .car-image-container {
+    /* border: 1px solid #003cff; */
+    position: relative;
+    height: 40px;
+  }
+
   .card-image {
+    /* border: #e53935 2px solid; */
     position: absolute;
-    left: 24px;
-    right: 12px;
-    bottom: -20px;
+    width: 100%;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: space-between;
     gap: 8px;
@@ -115,7 +140,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: clamp(36px, 6vw, 50px);
-    font-weight: 700;
+    font-weight: 900;
     color: #0a1a2f;
     line-height: 1;
     z-index: 3;
@@ -127,41 +152,10 @@
   }
 
   /* ===== Tablet (2 columns) ===== */
-  @media (min-width: 640px) {
+  @media (max-width: 770px) {
     .giveaway-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 18px;
-    }
-
-    .giveaway-card {
-      padding: 20px;
-      min-height: 200px;
-    }
-  }
-
-  /* ===== Desktop (4 columns + hover) ===== */
-  @media (min-width: 900px) {
-    .giveaway-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .giveaway-card {
-      padding: 24px;
-      min-height: 260px;
-    }
-
-    .giveaway-card:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        0 18px 40px rgba(0, 0, 0, 0.18),
-        0 6px 16px rgba(0, 0, 0, 0.08);
-    }
-  }
-
-  /* ===== Large Desktop ===== */
-  @media (min-width: 1200px) {
-    .giveaway-card {
-      min-height: 250px;
     }
   }
 </style>
@@ -170,15 +164,17 @@
   <div class="giveaway-grid">
     <div class="giveaway-card">
       <span class="card-badge">First Prize</span>
-      <div class="card-title">Chevrolet Silverado</div>
-      <div class="card-subtitle">or $120,000 Cash!</div>
-      <div class="card-image">
-        <img
-          src="https://images.clickfunnels.com/79/aa306b82b149adb9ece2bdc8b08a74/lmct.svg"
-        />
-        <img
-          src="https://images.clickfunnels.com/6c/97ee2c576d4e97a29b7e995d3f7fe1/key.svg"
-        />
+      <div class="card-title first">Chevrolet Silverado</div>
+      <div class="card-subtitle first">or $120,000 Cash!</div>
+      <div class="car-image-container">
+        <div class="card-image">
+          <img
+            src="https://images.clickfunnels.com/79/aa306b82b149adb9ece2bdc8b08a74/lmct.svg"
+          />
+          <img
+            src="https://images.clickfunnels.com/6c/97ee2c576d4e97a29b7e995d3f7fe1/key.svg"
+          />
+        </div>
       </div>
     </div>
 
@@ -186,13 +182,16 @@
       <span class="card-badge">Gates Open</span>
       <div class="card-title">12:00 AM</div>
       <div class="card-subtitle">March 10<sup>th</sup></div>
-      <div class="card-image">
-        <img
-          src="https://images.clickfunnels.com/3c/f6aa62120f48a6b6207e6cc242f1ef/timezone.svg"
-        />
-        <img
-          src="https://images.clickfunnels.com/db/4229c2397f4a26ade20d05154c7360/lock.svg"
-        />
+      <div class="car-image-container">
+        <div class="card-image">
+          <img
+            style="width: 30%"
+            src="https://images.clickfunnels.com/3c/f6aa62120f48a6b6207e6cc242f1ef/timezone.svg"
+          />
+          <img
+            src="https://images.clickfunnels.com/db/4229c2397f4a26ade20d05154c7360/lock.svg"
+          />
+        </div>
       </div>
     </div>
 
@@ -200,14 +199,17 @@
       <span class="card-badge">Entries Close</span>
       <div class="card-title">8:30 PM</div>
       <div class="card-subtitle">March 26<sup>th</sup></div>
-      <div class="card-image">
-        <img
-          src="https://images.clickfunnels.com/3c/f6aa62120f48a6b6207e6cc242f1ef/timezone.svg"
-        />
+      <div class="car-image-container">
+        <div class="card-image">
+          <img
+            style="width: 30%"
+            src="https://images.clickfunnels.com/3c/f6aa62120f48a6b6207e6cc242f1ef/timezone.svg"
+          />
 
-        <img
-          src="https://images.clickfunnels.com/5b/e057ce7b584e788404ba6af3fe396a/clock.svg"
-        />
+          <img
+            src="https://images.clickfunnels.com/5b/e057ce7b584e788404ba6af3fe396a/clock.svg"
+          />
+        </div>
       </div>
     </div>
 
@@ -215,16 +217,19 @@
       <span class="card-badge red">Live Draw</span>
       <div class="card-title">8:30 PM</div>
       <div class="card-subtitle">March 26<sup>th</sup> AEDT*</div>
-      <div class="card-image">
-        <img
-          src="https://images.clickfunnels.com/c1/cadb27fc8d49338fbba63cf6138b12/facebook.svg"
-        />
-        <div class="date-wrapper">
+      <div class="car-image-container">
+        <div class="card-image">
           <img
-            style="width: 100px; height: 100px"
-            src="https://images.clickfunnels.com/13/dc1e6309f94ba983221f4aeee2bcde/calendar.png"
+            style="width: 50%"
+            src="https://images.clickfunnels.com/c1/cadb27fc8d49338fbba63cf6138b12/facebook.svg"
           />
-          <p class="date">26</p>
+          <div class="date-wrapper">
+            <img
+              style="width: 100px; height: 100px"
+              src="https://images.clickfunnels.com/13/dc1e6309f94ba983221f4aeee2bcde/calendar.png"
+            />
+            <p class="date">26</p>
+          </div>
         </div>
       </div>
     </div>
