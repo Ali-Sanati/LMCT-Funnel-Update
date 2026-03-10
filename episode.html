@@ -1,0 +1,641 @@
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  .chennel-gallery-wrapper {
+    font-family:
+      "SF pro",
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
+    max-width: 900px;
+    margin: auto !important;
+    text-align: center;
+  }
+
+  .chennel-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 16px;
+  }
+
+  .chennel-image-container {
+    width: 650px;
+    height: 420px;
+    overflow: hidden;
+    border-radius: 20px;
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  .chennel-image-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .chennel-image-loader.active {
+    opacity: 1;
+  }
+
+  .chennel-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .chennel-slide-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .chennel-slide {
+    min-width: 100%;
+    height: 100%;
+  }
+
+  .chennel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #f5f5f5;
+  }
+
+  #sliderImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #f5f5f5;
+  }
+
+  .chennel-episode-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: linear-gradient(135deg, #2aa4f4 0%, #1a7db8 100%);
+    color: white;
+    padding: 10px 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    z-index: 2;
+    font-size: 13px;
+    box-shadow: 0 4px 12px rgba(42, 164, 244, 0.3);
+    letter-spacing: 0.5px;
+  }
+
+  .chennel-nav {
+    background: linear-gradient(135deg, #2aa4f4 0%, #1a7db8 100%);
+    border: none;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    padding: 12px 16px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    min-height: 50px;
+    box-shadow: 0 4px 12px rgba(42, 164, 244, 0.2);
+  }
+
+  .chennel-nav:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(42, 164, 244, 0.3);
+  }
+
+  .chennel-nav:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .chennel-nav:focus-visible {
+    outline: 3px solid rgba(42, 164, 244, 0.5);
+    outline-offset: 2px;
+  }
+
+  .chennel-dots {
+    margin: 25px 0 20px 0 !important;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .chennel-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #2aa4f4;
+    display: inline-block;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .chennel-dot:hover {
+    transform: scale(1.2);
+    border-color: #1a7db8;
+  }
+
+  .chennel-dot.active {
+    background: #2aa4f4;
+    box-shadow: 0 0 8px rgba(42, 164, 244, 0.5);
+  }
+
+  .chennel-dot:focus-visible {
+    outline: 2px solid #1a7db8;
+    outline-offset: 3px;
+  }
+
+  .chennel-episodes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    max-width: 900px;
+    margin: 30px auto 0 auto !important;
+  }
+
+  .chennel-episode-btn {
+    padding: 14px 12px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    background: linear-gradient(135deg, #2aa4f4 0%, #1a7db8 100%);
+    transition: all 0.3s ease;
+    position: relative;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(42, 164, 244, 0.2);
+  }
+
+  .chennel-episode-btn:hover:not(.locked) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(42, 164, 244, 0.4);
+  }
+
+  .chennel-episode-btn:active:not(.locked) {
+    transform: translateY(-1px);
+  }
+
+  .chennel-episode-btn:focus-visible {
+    outline: 2px solid rgba(42, 164, 244, 0.5);
+    outline-offset: 2px;
+  }
+
+  .chennel-episode-btn.active {
+    border: 2px solid white;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 28px rgba(42, 164, 244, 0.4);
+  }
+
+  .chennel-episode-btn.locked {
+    background: linear-gradient(135deg, #e32c2c 0%, #b81f1f 100%);
+    cursor: not-allowed;
+    opacity: 0.85;
+    box-shadow: 0 4px 12px rgba(227, 44, 44, 0.2);
+  }
+
+  .chennel-episode-btn.locked::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    background: #e32c2c;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    background-image: url("https://statics.myclickfunnels.com/workspace/joygEX/image/21180313/file/c7f02ed7aa7f56082c1a8ecd68c1067d.svg");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* unlock animation */
+
+  .chennel-unlock-animation {
+    animation: chennelUnlock 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes chennelUnlock {
+    0% {
+      transform: scale(0.8) rotate(-10deg);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1) rotate(0);
+      opacity: 1;
+    }
+  }
+
+  /* ================= TABLET (768px and below) ================= */
+
+  @media (max-width: 900px) {
+    .chennel-image-container {
+      width: 100%;
+      max-width: 650px;
+      height: 350px;
+    }
+
+    .chennel-episodes {
+      gap: 12px;
+    }
+  }
+
+  /* ================= MOBILE (ClickFunnels breakpoint) ================= */
+
+  @media (max-width: 770px) {
+    .chennel-gallery-wrapper {
+      padding: 15px;
+    }
+
+    .chennel-slider {
+      gap: 12px;
+    }
+
+    .chennel-image-container {
+      width: 100%;
+      height: 240px;
+      border-radius: 16px;
+    }
+
+    .chennel-nav {
+      font-size: 28px;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 8px 12px;
+    }
+
+    .chennel-episode-badge {
+      font-size: 11px;
+      padding: 8px 12px;
+      top: 10px;
+      left: 10px;
+    }
+
+    .chennel-episodes {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 20px !important;
+    }
+
+    .chennel-episode-btn {
+      font-size: 11px;
+      padding: 12px 8px;
+      border-radius: 10px;
+    }
+
+    .chennel-episode-btn.active {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .chennel-episode-btn.locked::after {
+      width: 20px;
+      height: 20px;
+      bottom: -6px;
+      right: -6px;
+      font-size: 10px;
+    }
+
+    .chennel-dot {
+      width: 15px;
+      height: 15px;
+    }
+
+    .chennel-dots {
+      margin: 20px 0 15px 0 !important;
+    }
+  }
+
+  /* ================= SMALL MOBILE (max 480px) ================= */
+
+  @media (max-width: 480px) {
+    .chennel-image-container {
+      height: 200px;
+      border-radius: 14px;
+    }
+
+    .chennel-episodes {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .chennel-episode-btn {
+      padding: 10px 6px;
+      font-size: 10px;
+    }
+
+    .chennel-nav {
+      font-size: 24px;
+    }
+  }
+</style>
+
+<div class="chennel-gallery-wrapper">
+  <div class="chennel-slider">
+    <button
+      class="chennel-nav chennel-prev"
+      aria-label="Previous image"
+      title="Previous (←)"
+    >
+      &#10094;
+    </button>
+
+    <div class="chennel-image-container">
+      <div class="chennel-image-loader" id="imageLoader">
+        <div class="chennel-spinner"></div>
+      </div>
+      <span class="chennel-episode-badge" id="episodeBadge">EPISODE 1</span>
+      <img id="sliderImage" src="" alt="Episode preview" loading="lazy" />
+    </div>
+
+    <button
+      class="chennel-nav chennel-next"
+      aria-label="Next image"
+      title="Next (→)"
+    >
+      &#10095;
+    </button>
+  </div>
+
+  <div
+    class="chennel-dots"
+    id="dots"
+    role="tablist"
+    aria-label="Image navigation"
+  ></div>
+
+  <div
+    class="chennel-episodes"
+    id="episodes"
+    role="tablist"
+    aria-label="Episode selection"
+  ></div>
+</div>
+
+<script>
+  const episodes = [
+    {
+      unlocked: true,
+      images: [
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21180360/file/small-8f59f9a864a5c5e69f30b23d060426aa.webp",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21180362/file/small-9e335badf76921ecf477270a2a16455f.webp",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21180366/file/small-7f86aa2ceb3984180d6717eac50473fb.webp",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21180365/file/small-296bf93315acc3d1def1a4fa84959bdd.webp",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21180364/file/small-e29cbc704ac1c60a609c583e647e5890.webp",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21180361/file/small-42829863fbadcb11c320b48fcfed51f2.webp",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21180363/file/small-d89b99ae9d48371245d95b7f31560f2d.webp",
+      ],
+    },
+    { unlocked: false, images: [] },
+    { unlocked: false, images: [] },
+    { unlocked: false, images: [] },
+    { unlocked: false, images: [] },
+    { unlocked: false, images: [] },
+    { unlocked: false, images: [] },
+    { unlocked: false, images: [] },
+  ];
+
+  let currentEpisode = 0;
+  let currentImage = 0;
+  let isLoadingImage = false;
+
+  const sliderImage = document.getElementById("sliderImage");
+  const imageLoader = document.getElementById("imageLoader");
+  const dotsContainer = document.getElementById("dots");
+  const episodesContainer = document.getElementById("episodes");
+  const badge = document.getElementById("episodeBadge");
+
+  // Show/hide loading indicator
+  function setImageLoading(isLoading) {
+    isLoadingImage = isLoading;
+    imageLoader.classList.toggle("active", isLoading);
+  }
+
+  function renderDots() {
+    dotsContainer.innerHTML = "";
+
+    episodes[currentEpisode].images.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.className = "chennel-dot";
+      dot.setAttribute("aria-label", `Image ${i + 1}`);
+      dot.setAttribute("aria-pressed", i === currentImage);
+      dot.setAttribute("role", "tab");
+
+      if (i === currentImage) {
+        dot.classList.add("active");
+        dot.setAttribute("aria-selected", "true");
+      } else {
+        dot.setAttribute("aria-selected", "false");
+      }
+
+      dot.onclick = () => {
+        currentImage = i;
+        updateSlider();
+      };
+
+      dot.onkeydown = (e) => {
+        if (e.key === "ArrowLeft" && i > 0) {
+          e.preventDefault();
+          currentImage = i - 1;
+          updateSlider();
+          document.querySelectorAll(".chennel-dot")[i - 1]?.focus();
+        } else if (
+          e.key === "ArrowRight" &&
+          i < episodes[currentEpisode].images.length - 1
+        ) {
+          e.preventDefault();
+          currentImage = i + 1;
+          updateSlider();
+          document.querySelectorAll(".chennel-dot")[i + 1]?.focus();
+        }
+      };
+
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  function updateSlider() {
+    setImageLoading(true);
+
+    const imgUrl = episodes[currentEpisode].images[currentImage];
+    sliderImage.src = imgUrl;
+    badge.textContent = "EPISODE " + (currentEpisode + 1);
+
+    renderDots();
+
+    // Handle image loading
+    const img = new Image();
+    img.onload = () => {
+      setImageLoading(false);
+    };
+    img.onerror = () => {
+      setImageLoading(false);
+      console.warn(`Failed to load image: ${imgUrl}`);
+    };
+    img.src = imgUrl;
+  }
+
+  // Previous button
+  document.querySelector(".chennel-prev").addEventListener("click", () => {
+    const images = episodes[currentEpisode].images;
+    currentImage = (currentImage - 1 + images.length) % images.length;
+    updateSlider();
+  });
+
+  document.querySelector(".chennel-prev").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      const images = episodes[currentEpisode].images;
+      currentImage = (currentImage - 1 + images.length) % images.length;
+      updateSlider();
+    }
+  });
+
+  // Next button
+  document.querySelector(".chennel-next").addEventListener("click", () => {
+    const images = episodes[currentEpisode].images;
+    currentImage = (currentImage + 1) % images.length;
+    updateSlider();
+  });
+
+  document.querySelector(".chennel-next").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      const images = episodes[currentEpisode].images;
+      currentImage = (currentImage + 1) % images.length;
+      updateSlider();
+    }
+  });
+
+  // Keyboard navigation: Left/Right arrows for image rotation
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      const images = episodes[currentEpisode].images;
+      currentImage = (currentImage - 1 + images.length) % images.length;
+      updateSlider();
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      const images = episodes[currentEpisode].images;
+      currentImage = (currentImage + 1) % images.length;
+      updateSlider();
+    }
+  });
+
+  function renderEpisodes() {
+    episodes.forEach((ep, index) => {
+      const btn = document.createElement("button");
+
+      btn.innerText = "EPISODE " + (index + 1);
+      btn.classList.add("chennel-episode-btn");
+      btn.setAttribute("role", "tab");
+      btn.setAttribute("aria-label", "Episode " + (index + 1));
+
+      if (ep.unlocked) {
+        if (index === 0) {
+          btn.classList.add("active");
+          btn.setAttribute("aria-selected", "true");
+        } else {
+          btn.setAttribute("aria-selected", "false");
+        }
+
+        btn.addEventListener("click", () => {
+          currentEpisode = index;
+          currentImage = 0;
+
+          document
+            .querySelectorAll(".chennel-episode-btn")
+            .forEach((b) => b.classList.remove("active"));
+
+          btn.classList.add("active");
+          updateSlider();
+          btn.focus();
+        });
+
+        btn.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft" && index > 0) {
+            e.preventDefault();
+            document
+              .querySelectorAll(".chennel-episode-btn")
+              [index - 1]?.click();
+          } else if (e.key === "ArrowRight" && index < episodes.length - 1) {
+            e.preventDefault();
+            document
+              .querySelectorAll(".chennel-episode-btn")
+              [index + 1]?.click();
+          } else if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+      } else {
+        btn.classList.add("locked");
+        btn.disabled = true;
+        btn.setAttribute("aria-selected", "false");
+        btn.setAttribute("aria-disabled", "true");
+        btn.setAttribute("title", "Episode locked");
+      }
+
+      episodesContainer.appendChild(btn);
+    });
+  }
+
+  // Initialize
+  renderEpisodes();
+  updateSlider();
+
+  // Accessibility: Announce mode for screen readers when episode changes
+  const announcer = document.createElement("div");
+  announcer.setAttribute("role", "status");
+  announcer.setAttribute("aria-live", "polite");
+  announcer.setAttribute("aria-atomic", "true");
+  announcer.style.position = "absolute";
+  announcer.style.left = "-10000px";
+  document.body.appendChild(announcer);
+
+  // Update announcer when episode or image changes
+  const originalUpdateSlider = updateSlider;
+  updateSlider = function () {
+    originalUpdateSlider.call(this);
+    announcer.textContent = `Episode ${currentEpisode + 1}, Image ${currentImage + 1} of ${episodes[currentEpisode].images.length}`;
+  };
+</script>
