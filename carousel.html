@@ -1,0 +1,112 @@
+<style>
+  /* Desktop layout */
+
+  .reno-mobile-carousel {
+    width: 100%;
+    background-image: url("https://statics.myclickfunnels.com/workspace/joygEX/image/21245802/file/01b06705fdc8a63274a9e13b7853e339.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .reno-carousel-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  .reno-carousel-track img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  /* hide duplicates on desktop */
+
+  .reno-duplicate {
+    display: none;
+  }
+
+  @media (min-width: 771px) {
+    .reno-carousel-track {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding-left: 20%;
+      padding-right: 20%;
+    }
+    .reno-carousel-track img {
+      width: 100%;
+      border-radius: 8px;
+    }
+  }
+
+  /* MOBILE */
+
+  @media (max-width: 770px) {
+    .reno-mobile-carousel {
+      overflow: hidden;
+    }
+
+    .reno-carousel-track {
+      display: flex;
+      gap: 2px;
+      animation: renoScroll 18s linear infinite;
+    }
+
+    .reno-carousel-track img {
+      width: calc(100% / 3.5);
+      flex-shrink: 0;
+    }
+
+    /* show duplicates for looping */
+
+    .reno-duplicate {
+      display: block;
+    }
+  }
+
+  @keyframes renoScroll {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
+<div class="reno-mobile-carousel">
+  <div class="reno-carousel-track">
+    <img
+      src="https://statics.myclickfunnels.com/workspace/joygEX/image/21245799/file/aea5ef89cabcccde6e6845b2b8cb83dd.png"
+    />
+    <img
+      src="https://statics.myclickfunnels.com/workspace/joygEX/image/21245797/file/9535fe4a052773cf80ba92113ed17c96.png"
+    />
+    <img
+      src="https://statics.myclickfunnels.com/workspace/joygEX/image/21245800/file/4600427d69b19f94fedef901661878da.png"
+    />
+    <img
+      src="https://statics.myclickfunnels.com/workspace/joygEX/image/21245798/file/09aa872cfa6bf583ea01fd331a5875db.png"
+    />
+
+    <!-- duplicate for looping -->
+    <img
+      class="reno-duplicate"
+      src="https://statics.myclickfunnels.com/workspace/joygEX/image/21245799/file/aea5ef89cabcccde6e6845b2b8cb83dd.png"
+    />
+    <img
+      class="reno-duplicate"
+      src="https://statics.myclickfunnels.com/workspace/joygEX/image/21245797/file/9535fe4a052773cf80ba92113ed17c96.png"
+    />
+    <img
+      class="reno-duplicate"
+      src="https://statics.myclickfunnels.com/workspace/joygEX/image/21245800/file/4600427d69b19f94fedef901661878da.png"
+    />
+    <img
+      class="reno-duplicate"
+      src="https://statics.myclickfunnels.com/workspace/joygEX/image/21245798/file/09aa872cfa6bf583ea01fd331a5875db.png"
+    />
+  </div>
+</div>

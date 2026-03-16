@@ -1,0 +1,797 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap");
+
+  /* ===== SHARED BUTTON STYLE ===== */
+  .faq-mega-btn {
+    position: relative;
+    width: 100%;
+    padding: 20px 24px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-family:
+      "Montserrat",
+      -apple-system,
+      "SF Pro Display",
+      sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffffff;
+    background: linear-gradient(180deg, #ff2d2d 0%, #c80010 100%);
+    box-shadow:
+      0 4px 20px rgba(200, 0, 16, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    overflow: hidden;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .faq-mega-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+    );
+    animation: sheen 3s ease-in-out infinite;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  @keyframes sheen {
+    0% {
+      left: -100%;
+    }
+    30% {
+      left: 150%;
+    }
+    100% {
+      left: 150%;
+    }
+  }
+
+  .faq-mega-btn:active {
+    transform: scale(0.98);
+  }
+
+  .faq-mega-btn-text {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .faq-mega-btn-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    font-size: 16px;
+  }
+
+  .faq-wrap.open .faq-mega-btn-arrow {
+    transform: rotate(180deg);
+  }
+
+  .faq-wrap.open .faq-mega-btn {
+    border-radius: 14px 14px 0 0;
+  }
+
+  /* ===== DRAWER ===== */
+  .faq-drawer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #1a1a1a;
+    border-radius: 0 0 14px 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+
+  .faq-wrap.open .faq-drawer {
+    max-height: 5000px;
+  }
+
+  .faq-drawer-inner {
+    padding: 6px 0;
+  }
+
+  /* ===== FAQ ITEMS INSIDE DRAWER ===== */
+  .faq-mob-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .faq-mob-item:last-child {
+    border-bottom: none;
+  }
+
+  .faq-mob-q {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-family:
+      "Montserrat",
+      -apple-system,
+      "SF Pro Display",
+      sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s ease;
+  }
+
+  .faq-mob-q:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .faq-mob-q-icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    transition:
+      transform 0.3s ease,
+      background 0.3s ease;
+  }
+
+  .faq-mob-item.active .faq-mob-q-icon {
+    transform: rotate(45deg);
+    background: rgba(255, 45, 45, 0.3);
+    color: #ff4d4d;
+  }
+
+  .faq-mob-a {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.35s ease,
+      opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .faq-mob-item.active .faq-mob-a {
+    opacity: 1;
+  }
+
+  .faq-mob-a p {
+    margin: 0;
+    padding: 0 20px 16px 20px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    font-family:
+      "Montserrat",
+      -apple-system,
+      "SF Pro Display",
+      sans-serif;
+  }
+
+  /* ===== DESKTOP: TWO COLUMN ===== */
+  .faq-desktop-wrap {
+    font-family:
+      "Montserrat",
+      -apple-system,
+      "SF Pro Display",
+      sans-serif;
+    padding: 0 10px;
+  }
+
+  .faq-desktop-wrap .faq-drawer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .faq-desktop-wrap .faq-drawer-inner .faq-mob-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .faq-desktop-wrap .faq-drawer-inner .faq-mob-item:nth-child(even) {
+    border-right: none;
+  }
+
+  .faq-desktop-wrap .faq-drawer-inner .faq-mob-item:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+  /* Slightly larger text on desktop */
+  .faq-desktop-wrap .faq-mob-q {
+    font-size: 15px;
+    padding: 18px 24px;
+  }
+
+  .faq-desktop-wrap .faq-mob-a p {
+    font-size: 14px;
+    padding: 0 24px 18px 24px;
+  }
+
+  .faq-desktop-wrap .faq-mega-btn {
+    font-size: 24px;
+    padding: 22px 28px;
+    letter-spacing: 3px;
+  }
+
+  /* ===== MOBILE OVERRIDES ===== */
+  .faq-mobile-wrap {
+    display: none;
+    font-family:
+      "Montserrat",
+      -apple-system,
+      "SF Pro Display",
+      sans-serif;
+    padding: 0 10px;
+  }
+
+  @media (max-width: 768px) {
+    .faq-desktop-wrap {
+      display: none;
+    }
+    .faq-mobile-wrap {
+      display: block;
+    }
+    .faq-mobile-wrap .faq-mob-q {
+      font-size: 13px;
+      padding: 14px 18px;
+    }
+    .faq-mobile-wrap .faq-mob-a p {
+      font-size: 12px;
+      padding: 0 18px 14px 18px;
+    }
+    .faq-mobile-wrap .faq-mega-btn {
+      font-size: 20px;
+      padding: 20px 24px;
+    }
+    .faq-mobile-wrap .faq-drawer-inner {
+      display: block;
+    }
+  }
+</style>
+
+<!-- ===== DESKTOP VERSION ===== -->
+<div class="faq-desktop-wrap">
+  <div class="faq-wrap" id="faqDesktopWrap">
+    <button class="faq-mega-btn" id="faqDesktopBtn">
+      <span class="faq-mega-btn-text">
+        FAQ
+        <span class="faq-mega-btn-arrow">▼</span>
+      </span>
+    </button>
+    <div class="faq-drawer" id="faqDesktopDrawer">
+      <div class="faq-drawer-inner" id="faqDesktopInner">
+        <!-- 1 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Is this promotion valid Australia wide?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Yep! My Reno Rules is open to eligible residents across Australia.
+              As always, entries must comply with the official Terms and
+              Conditions and any applicable state regulations. Please refer to
+              the T&C for any questions or queries.
+            </p>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Is this an ongoing payment?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Nope. Entries for this promotion are one-off purchases unless you
+              specifically choose a membership product that renews. If something
+              is recurring, we’ll always make that crystal clear before
+              checkout.
+            </p>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Are members in the draw?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Absolutely. LMCT+ members are always part of the fun. Depending on
+              your membership tier and length a member will be the amount of
+              entries into this absolutely life changing draw.
+            </p>
+          </div>
+        </div>
+        <!-- 4 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>When do my entries get added to the draw?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Pretty quickly! Once your purchase or eligible action is completed
+              and processed, your entries are automatically added to the draw.
+              In most cases they’ll appear in your account shortly after
+              checkout. And if you’re a member, your member allocated entries
+              should be in there already.
+            </p>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>How is the winner selected?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              The winner is chosen through a random electronic draw conducted in
+              accordance with the official Terms and Conditions. Our random draw
+              is independently scrutinised and also checked and signed off by
+              NSF Global.
+            </p>
+          </div>
+        </div>
+        <!-- 6 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>When will the winners be announced?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              The winner will be announced during the live My Reno Rules Final
+              Episode on the 2nd of June commencing at 7pm AEST. Remember that
+              the winner has 3 minutes to answer the call otherwise we’ll be
+              redrawing the winner during the Live TV Show episode until we get
+              a winner! How exciting.
+            </p>
+          </div>
+        </div>
+        <!-- 7 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>How will the winner be contacted?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              If you’re the lucky legend, we’ll reach out using the contact
+              details you provided when entering — usually phone and/or email
+              (if not initially contactable or the mobile doesn't work).
+            </p>
+          </div>
+        </div>
+        <!-- 8 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>What happens if the winner doesn't respond?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              This giveaway is special, you guys always ask for a redraw so in
+              this giveaway once the winner is drawn and we make initial
+              contact, they have 3 minutes to answer and call back. If 3 minutes
+              have passed, we will redraw Live during the show and onto the
+              next. This will repeat until someone answers! So keep that phone
+              close and make sure you are watching My Reno Rules Live.
+            </p>
+          </div>
+        </div>
+        <!-- 9 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Is the draw live and how do we watch it?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              All LMCT+ Major draws are broadcast live (on Facebook), so the
+              community can watch the excitement unfold. For this giveaway it
+              will be streamed live during the My Reno Rules show on Channel 7
+              starting at 7pm AEST.
+            </p>
+          </div>
+        </div>
+        <!-- 10 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Can I choose cash instead of the advertised prize?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Often you can! With this promotion you have the choice of the
+              Prize House or $2,000,000 Tax Free Cash.
+            </p>
+          </div>
+        </div>
+        <!-- 11 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>How long does it take to receive the prize or cash?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Once the winner is verified and paperwork is sorted, we’ll
+              organise delivery of the prize or transfer of the cash as soon as
+              reasonably possible. We know you won’t want to wait too long!
+            </p>
+          </div>
+        </div>
+        <!-- 12 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Are there any costs involved in claiming the prize?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              In most cases, LMCT+ covers the major prize costs. However,
+              depending on the prize, some costs like travel, insurance, or
+              registration transfers may apply, unless stated otherwise. Have a
+              look at the T&C and if there are any further questions you can
+              reach out - support@lmctplus.com
+            </p>
+          </div>
+        </div>
+        <!-- 13 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Is this giveaway legally registered and compliant?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Yes. All LMCT+ promotions operate in accordance with relevant
+              Australian trade promotion regulations, including permits or
+              notifications where required.
+            </p>
+          </div>
+        </div>
+        <!-- 14 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Are purchases refundable or transferable?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Generally no. Once entries or promotional purchases are processed,
+              they are non-refundable and non-transferable, unless required
+              under Australian Consumer Law.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MOBILE VERSION ===== (identical content, separate wrapper) -->
+<div class="faq-mobile-wrap">
+  <div class="faq-wrap" id="faqMobileWrap">
+    <button class="faq-mega-btn" id="faqMobileBtn">
+      <span class="faq-mega-btn-text">
+        FAQ
+        <span class="faq-mega-btn-arrow">▼</span>
+      </span>
+    </button>
+    <div class="faq-drawer" id="faqMobileDrawer">
+      <div class="faq-drawer-inner" id="faqMobileInner">
+        <!-- 1 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Is this promotion valid Australia wide?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Yep! My Reno Rules is open to eligible residents across Australia.
+              As always, entries must comply with the official Terms and
+              Conditions and any applicable state regulations. Please refer to
+              the T&C for any questions or queries.
+            </p>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Is this an ongoing payment?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Nope. Entries for this promotion are one-off purchases unless you
+              specifically choose a membership product that renews. If something
+              is recurring, we’ll always make that crystal clear before
+              checkout.
+            </p>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Are members in the draw?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Absolutely. LMCT+ members are always part of the fun. Depending on
+              your membership tier and length a member will be the amount of
+              entries into this absolutely life changing draw.
+            </p>
+          </div>
+        </div>
+        <!-- 4 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>When do my entries get added to the draw?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Pretty quickly! Once your purchase or eligible action is completed
+              and processed, your entries are automatically added to the draw.
+              In most cases they’ll appear in your account shortly after
+              checkout. And if you’re a member, your member allocated entries
+              should be in there already.
+            </p>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>How is the winner selected?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              The winner is chosen through a random electronic draw conducted in
+              accordance with the official Terms and Conditions. Our random draw
+              is independently scrutinised and also checked and signed off by
+              NSF Global.
+            </p>
+          </div>
+        </div>
+        <!-- 6 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>When will the winners be announced?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              The winner will be announced during the live My Reno Rules Final
+              Episode on the 2nd of June commencing at 7pm AEST. Remember that
+              the winner has 3 minutes to answer the call otherwise we’ll be
+              redrawing the winner during the Live TV Show episode until we get
+              a winner! How exciting.
+            </p>
+          </div>
+        </div>
+        <!-- 7 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>How will the winner be contacted?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              If you’re the lucky legend, we’ll reach out using the contact
+              details you provided when entering — usually phone and/or email
+              (if not initially contactable or the mobile doesn't work).
+            </p>
+          </div>
+        </div>
+        <!-- 8 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>What happens if the winner doesn't respond?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              This giveaway is special, you guys always ask for a redraw so in
+              this giveaway once the winner is drawn and we make initial
+              contact, they have 3 minutes to answer and call back. If 3 minutes
+              have passed, we will redraw Live during the show and onto the
+              next. This will repeat until someone answers! So keep that phone
+              close and make sure you are watching My Reno Rules Live.
+            </p>
+          </div>
+        </div>
+        <!-- 9 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Is the draw live and how do we watch it?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              All LMCT+ Major draws are broadcast live (on Facebook), so the
+              community can watch the excitement unfold. For this giveaway it
+              will be streamed live during the My Reno Rules show on Channel 7
+              starting at 7pm AEST.
+            </p>
+          </div>
+        </div>
+        <!-- 10 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Can I choose cash instead of the advertised prize?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Often you can! With this promotion you have the choice of the
+              Prize House or $2,000,000 Tax Free Cash.
+            </p>
+          </div>
+        </div>
+        <!-- 11 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>How long does it take to receive the prize or cash?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Once the winner is verified and paperwork is sorted, we’ll
+              organise delivery of the prize or transfer of the cash as soon as
+              reasonably possible. We know you won’t want to wait too long!
+            </p>
+          </div>
+        </div>
+        <!-- 12 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Are there any costs involved in claiming the prize?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              In most cases, LMCT+ covers the major prize costs. However,
+              depending on the prize, some costs like travel, insurance, or
+              registration transfers may apply, unless stated otherwise. Have a
+              look at the T&C and if there are any further questions you can
+              reach out - support@lmctplus.com
+            </p>
+          </div>
+        </div>
+        <!-- 13 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Is this giveaway legally registered and compliant?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Yes. All LMCT+ promotions operate in accordance with relevant
+              Australian trade promotion regulations, including permits or
+              notifications where required.
+            </p>
+          </div>
+        </div>
+        <!-- 14 -->
+        <div class="faq-mob-item">
+          <button class="faq-mob-q">
+            <span>Are purchases refundable or transferable?</span>
+            <span class="faq-mob-q-icon">+</span>
+          </button>
+          <div class="faq-mob-a">
+            <p>
+              Generally no. Once entries or promotional purchases are processed,
+              they are non-refundable and non-transferable, unless required
+              under Australian Consumer Law.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    // Generic drawer toggle
+    function setupDrawer(btnId, wrapId, drawerId) {
+      var btn = document.getElementById(btnId);
+      var wrapper = document.getElementById(wrapId);
+      var drawer = document.getElementById(drawerId);
+      if (!btn || !wrapper || !drawer) return;
+
+      btn.addEventListener("click", function () {
+        wrapper.classList.toggle("open");
+        if (wrapper.classList.contains("open")) {
+          drawer.style.maxHeight = drawer.scrollHeight + "px";
+        } else {
+          drawer.style.maxHeight = "0";
+          drawer
+            .querySelectorAll(".faq-mob-item.active")
+            .forEach(function (item) {
+              item.classList.remove("active");
+              var a = item.querySelector(".faq-mob-a");
+              if (a) a.style.maxHeight = "0";
+            });
+        }
+      });
+    }
+
+    // Generic inner accordion
+    function setupAccordion(containerId) {
+      var container = document.getElementById(containerId);
+      if (!container) return;
+      var drawer = container.closest(".faq-drawer");
+
+      container.querySelectorAll(".faq-mob-q").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var item = btn.parentElement;
+          var answer = item.querySelector(".faq-mob-a");
+
+          // Close other open items in same container
+          container
+            .querySelectorAll(".faq-mob-item.active")
+            .forEach(function (openItem) {
+              if (openItem !== item) {
+                openItem.classList.remove("active");
+                var a = openItem.querySelector(".faq-mob-a");
+                if (a) a.style.maxHeight = "0";
+              }
+            });
+
+          item.classList.toggle("active");
+          if (item.classList.contains("active")) {
+            answer.style.maxHeight = answer.scrollHeight + "px";
+          } else {
+            answer.style.maxHeight = "0";
+          }
+
+          // Recalculate drawer height
+          if (drawer) {
+            setTimeout(function () {
+              drawer.style.maxHeight = drawer.scrollHeight + "px";
+            }, 60);
+          }
+        });
+      });
+    }
+
+    // Init desktop
+    setupDrawer("faqDesktopBtn", "faqDesktopWrap", "faqDesktopDrawer");
+    setupAccordion("faqDesktopInner");
+
+    // Init mobile
+    setupDrawer("faqMobileBtn", "faqMobileWrap", "faqMobileDrawer");
+    setupAccordion("faqMobileInner");
+  })();
+</script>
