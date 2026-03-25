@@ -9,7 +9,7 @@
     --white: #fff;
     --font: "Montserrat", -apple-system, system-ui, sans-serif;
   } /* FLOATING BAR */
-  .cf-countdown {
+  .cd-countdown {
     position: fixed;
     top: 0;
     left: 0;
@@ -21,6 +21,7 @@
     font-weight: bold;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     animation: slideDown 0.6s ease;
+    overflow: hidden;
   } /* SLIDE IN */
   @keyframes slideDown {
     from {
@@ -30,21 +31,22 @@
       transform: translateY(0);
     }
   }
-  .cf-inner {
+  .cd-inner {
     max-width: 1200px;
     margin: auto;
-    padding: 10px 16px;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
+    flex-wrap: wrap;
   } /* LEFT TEXT */
-  .cf-text {
+  .cd-text {
     display: flex;
     flex-direction: column;
     line-height: 1.1;
   }
-  .cf-eyebrow {
+  .cd-eyebrow {
     background-color: yellow;
     padding: 5px 0;
     border-radius: 5px;
@@ -63,29 +65,29 @@
       opacity: 0.6;
     }
   }
-  .cf-title {
+  .cd-title {
     font-weight: 800;
     font-size: 32px;
   } /* TIMER */
-  .cf-timer {
+  .cd-timer {
     display: flex;
     gap: 10px;
     align-items: center;
   }
-  .cf-box {
+  .cd-box {
     text-align: center;
     min-width: 50px;
   }
-  .cf-value {
+  .cd-value {
     font-size: 32px;
     font-weight: 800;
   }
-  .cf-label {
+  .cd-label {
     font-size: 14px;
     text-transform: uppercase;
     opacity: 0.8;
   } /* PROGRESS BAR */
-  .cf-progress {
+  .cd-progress {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -93,44 +95,123 @@
     width: 100%;
     background: rgba(255, 255, 255, 0.2);
   }
-  .cf-progress-bar {
+  .cd-progress-bar {
     height: 100%;
     width: 100%;
     background: #fff;
     transform-origin: left;
-  } /* MOBILE */
-  @media (max-width: 768px) {
-    .cf-inner {
-      flex-direction: column;
-      text-align: center;
+  } /* TABLET & MOBILE BREAKPOINTS */
+  /* Tablets: 481px - 770px */
+  @media (max-width: 770px) {
+    .cd-inner {
+      padding: 10px 12px;
+      gap: 12px;
+      /* justify-content: center; */
     }
-    .cf-title {
-      font-size: 14px;
+    .cd-eyebrow {
+      font-size: 18px;
+      padding: 3px 6px;
+      letter-spacing: 0.5px;
+    }
+    .cd-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .cd-timer {
+      gap: 6px;
+    }
+    .cd-box {
+      min-width: 45px;
+    }
+    .cd-value {
+      font-size: 24px;
+    }
+    .cd-label {
+      font-size: 11px;
+    }
+  }
+  /* Small Mobile: 0 - 480px */
+  @media (max-width: 480px) {
+    .cd-inner {
+      padding: 8px 8px;
+      gap: 6px;
+      /* justify-content: center; */
+    }
+    
+    .cd-eyebrow {
+      font-size: 13px;
+      padding: 2px 4px;
+      letter-spacing: 0px;
+    }
+     .cd-title {
+      font-size: 12px;
+      font-weight: 700;
+    } */
+    .cd-timer {
+      gap: 3px;
+    }
+    .cd-box {
+      min-width: 38px;
+    }
+    .cd-value {
+      font-size: 20px;
+    }
+    .cd-label {
+      font-size: 9px;
+    }
+  }
+  /* Extra Small Mobile: 0 - 360px */
+  @media (max-width: 360px) {
+    .cd-inner {
+      padding: 6px 6px;
+      gap: 3px;
+      justify-content: center;
+    }
+    .cd-eyebrow {
+      font-size: 11px;
+      padding: 2px 3px;
+      margin: 0;
+    }
+    /* .cd-title {
+      font-size: 10px;
+    } */
+    .cd-timer {
+      gap: 2px;
+    }
+    .cd-box {
+      min-width: 32px;
+    }
+    .cd-value {
+      font-size: 17px;
+      line-height: 1;
+    }
+    .cd-label {
+      font-size: 8px;
     }
   }
 </style>
-<div class="cf-countdown" data-countdown>
-  <div class="cf-inner">
-    <div class="cf-text">
-      <div class="cf-eyebrow">🚨 HURRY UP</div>
-      <div class="cf-title">GIVEAWAY DRAWN IN:</div>
+<div class="cd-countdown" data-countdown>
+  <div class="cd-inner">
+    <div class="cd-text">
+      <div class="cd-eyebrow">🚨 HURRY UP</div>
+      <div class="cd-title">GIVEAWAY DRAWN IN:</div>
     </div>
-    <div class="cf-timer">
-      <div class="cf-box">
-        <div class="cf-value" data-h>00</div>
-        <div class="cf-label">HRS</div>
+    <div class="cd-timer">
+      <div class="cd-box">
+        <div class="cd-value" data-h>00</div>
+        <div class="cd-label">HRS</div>
       </div>
-      <div class="cf-box">
-        <div class="cf-value" data-m>00</div>
-        <div class="cf-label">MIN</div>
+      <div class="cd-box">
+        <div class="cd-value" data-m>00</div>
+        <div class="cd-label">MIN</div>
       </div>
-      <div class="cf-box">
-        <div class="cf-value" data-s>00</div>
-        <div class="cf-label">SEC</div>
+      <div class="cd-box">
+        <div class="cd-value" data-s>00</div>
+        <div class="cd-label">SEC</div>
       </div>
     </div>
   </div>
-  <div class="cf-progress"><div class="cf-progress-bar"></div></div>
+  <div class="cd-progress"><div class="cd-progress-bar"></div></div>
 </div>
 <script>
   (function () {
@@ -196,10 +277,10 @@
       /* progress */ const total = target - start;
       const passed = now - start;
       const progress = Math.max(0, 1 - passed / total);
-      el.querySelector(".cf-progress-bar").style.transform =
+      el.querySelector(".cd-progress-bar").style.transform =
         "scaleX(" + progress + ")";
       /* urgency switch */ if (h === 0 && m < 10) {
-        el.querySelector(".cf-eyebrow").textContent = "🚨 HURRY UP";
+        el.querySelector(".cd-eyebrow").textContent = "🚨 HURRY UP";
       }
     }
     update();
