@@ -142,6 +142,7 @@
   }
 
   .reno-episode.locked {
+    overflow: visible;
     opacity: 0.5;
     cursor: not-allowed;
   }
@@ -152,6 +153,26 @@
     right: 8px;
     bottom: 8px;
     height: auto;
+  }
+
+  .reno-badge {
+    position: absolute;
+    top: -7px;
+    left: -6px;
+    background: #ff9f00;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  .reno-badge-coming {
+    background: red;
   }
 
   /* MOBILE FIRST - Extra Small Devices */
@@ -223,17 +244,25 @@
 <script>
   const episodes = [
     {
+      title: "Trailer",
+      type: "vimeo",
+      video: "https://player.vimeo.com/video/1173932650",
+      locked: false,
+    },
+
+    {
       title: "Episode 1",
       type: "youtube",
       video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      locked: false,
+      locked: true,
+      badge: "coming",
     },
 
     {
       title: "Episode 2",
       type: "mp4",
       video: "https://www.w3schools.com/html/mov_bbb.mp4",
-      locked: false,
+      locked: true,
     },
 
     {
@@ -249,11 +278,12 @@
       video: "https://www.w3schools.com/html/movie.mp4",
       locked: true,
     },
+
     {
       title: "Episode 5",
       type: "youtube",
       video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      locked: false,
+      locked: true,
     },
 
     {
@@ -290,7 +320,7 @@
     video.pause();
     youtube.src = "";
 
-    if (ep.type === "youtube") {
+    if (ep.type === "youtube" || ep.type === "vimeo") {
       video.style.display = "none";
       youtube.style.display = "block";
 
@@ -323,6 +353,15 @@
     const btn = document.createElement("div");
     btn.className = "reno-episode";
     btn.innerText = ep.title;
+
+    if (ep.badge) {
+      const badge = document.createElement("span");
+      badge.className = "reno-badge reno-badge-" + ep.badge;
+
+      if (ep.badge === "coming") badge.textContent = "Coming Soon";
+
+      btn.appendChild(badge);
+    }
 
     if (ep.locked) {
       btn.classList.add("locked");

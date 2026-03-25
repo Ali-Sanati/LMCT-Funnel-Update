@@ -1,0 +1,208 @@
+<script>
+  window.CF_COUNTDOWN_AEDT = "2026-03-24 20:30";
+</script>
+<style>
+  :root {
+    --red1: #ff2d2d;
+    --red2: #c80010;
+    --bg: #0f0f0f;
+    --white: #fff;
+    --font: "Montserrat", -apple-system, system-ui, sans-serif;
+  } /* FLOATING BAR */
+  .cf-countdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background: linear-gradient(90deg, var(--red1), var(--red2));
+    color: #fff;
+    font-family: var(--font);
+    font-weight: bold;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    animation: slideDown 0.6s ease;
+  } /* SLIDE IN */
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  .cf-inner {
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  } /* LEFT TEXT */
+  .cf-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .cf-eyebrow {
+    background-color: yellow;
+    padding: 5px 0;
+    border-radius: 5px;
+    color: black;
+    font-weight: 900;
+    font-size: 26px;
+    letter-spacing: 1px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+  .cf-title {
+    font-weight: 800;
+    font-size: 32px;
+  } /* TIMER */
+  .cf-timer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .cf-box {
+    text-align: center;
+    min-width: 50px;
+  }
+  .cf-value {
+    font-size: 32px;
+    font-weight: 800;
+  }
+  .cf-label {
+    font-size: 14px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  } /* PROGRESS BAR */
+  .cf-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .cf-progress-bar {
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    transform-origin: left;
+  } /* MOBILE */
+  @media (max-width: 768px) {
+    .cf-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .cf-title {
+      font-size: 14px;
+    }
+  }
+</style>
+<div class="cf-countdown" data-countdown>
+  <div class="cf-inner">
+    <div class="cf-text">
+      <div class="cf-eyebrow">🚨 HURRY UP</div>
+      <div class="cf-title">GIVEAWAY DRAWN IN:</div>
+    </div>
+    <div class="cf-timer">
+      <div class="cf-box">
+        <div class="cf-value" data-h>00</div>
+        <div class="cf-label">HRS</div>
+      </div>
+      <div class="cf-box">
+        <div class="cf-value" data-m>00</div>
+        <div class="cf-label">MIN</div>
+      </div>
+      <div class="cf-box">
+        <div class="cf-value" data-s>00</div>
+        <div class="cf-label">SEC</div>
+      </div>
+    </div>
+  </div>
+  <div class="cf-progress"><div class="cf-progress-bar"></div></div>
+</div>
+<script>
+  (function () {
+    const el = document.querySelector("[data-countdown]");
+    if (!el) return;
+    const timeZone = "Australia/Sydney";
+    const defaultDeadline = window.CF_COUNTDOWN_AEDT;
+    /* ---------- YOUR ORIGINAL SAFE PARSER ---------- */ function pickPartsFromDate(
+      date,
+      zone,
+    ) {
+      return new Intl.DateTimeFormat("en-US", {
+        timeZone: zone,
+        hour12: false,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
+        .formatToParts(date)
+        .reduce((acc, p) => {
+          if (p.type !== "literal") acc[p.type] = p.value;
+          return acc;
+        }, {});
+    }
+    function getOffset(date, zone) {
+      const p = pickPartsFromDate(date, zone);
+      const utc = Date.UTC(
+        p.year,
+        p.month - 1,
+        p.day,
+        p.hour,
+        p.minute,
+        p.second,
+      );
+      return (utc - date.getTime()) / 60000;
+    }
+    function parseSydney(str) {
+      if (!str) return null;
+      const m = str.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})$/);
+      if (!m) return null;
+      const utcGuess = Date.UTC(m[1], m[2] - 1, m[3], m[4], m[5]);
+      const offset1 = getOffset(new Date(utcGuess), timeZone);
+      const adjusted = utcGuess - offset1 * 60000;
+      const offset2 = getOffset(new Date(adjusted), timeZone);
+      return utcGuess - offset2 * 60000;
+    }
+    /* ---------- TARGET TIME ---------- */ const target =
+      parseSydney(defaultDeadline) || Date.now() + 3600000;
+    const start = Date.now();
+    /* ---------- UPDATE ---------- */ function update() {
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+      const t = Math.floor(diff / 1000);
+      const h = Math.floor(t / 3600);
+      const m = Math.floor((t % 3600) / 60);
+      const s = t % 60;
+      el.querySelector("[data-h]").textContent = String(h).padStart(2, "0");
+      el.querySelector("[data-m]").textContent = String(m).padStart(2, "0");
+      el.querySelector("[data-s]").textContent = String(s).padStart(2, "0");
+      /* progress */ const total = target - start;
+      const passed = now - start;
+      const progress = Math.max(0, 1 - passed / total);
+      el.querySelector(".cf-progress-bar").style.transform =
+        "scaleX(" + progress + ")";
+      /* urgency switch */ if (h === 0 && m < 10) {
+        el.querySelector(".cf-eyebrow").textContent = "🚨 HURRY UP";
+      }
+    }
+    update();
+    setInterval(update, 1000);
+  })();
+</script>
