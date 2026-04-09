@@ -1,4 +1,59 @@
-<!-- Hyros Pixel -->
+<!-- Klaviyo Tag -->
+<script
+  async
+  type="text/javascript"
+  src="//static.klaviyo.com/onsite/js/S9SGLM/klaviyo.js"
+></script>
+<!-- End Klaviyo Tag -->
+
+<script>
+  !(function () {
+    if (!window.klaviyo) {
+      window._klOnsite = window._klOnsite || [];
+      try {
+        window.klaviyo = new Proxy(
+          {},
+          {
+            get: function (n, i) {
+              return "push" === i
+                ? function () {
+                    var n;
+                    (n = window._klOnsite).push.apply(n, arguments);
+                  }
+                : function () {
+                    for (
+                      var n = arguments.length, o = new Array(n), w = 0;
+                      w < n;
+                      w++
+                    )
+                      o[w] = arguments[w];
+                    var t =
+                        "function" == typeof o[o.length - 1] ? o.pop() : void 0,
+                      e = new Promise(function (n) {
+                        window._klOnsite.push(
+                          [i].concat(o, [
+                            function (i) {
+                              (t && t(i), n(i));
+                            },
+                          ]),
+                        );
+                      });
+                    return e;
+                  };
+            },
+          },
+        );
+      } catch (n) {
+        ((window.klaviyo = window.klaviyo || []),
+          (window.klaviyo.push = function () {
+            var n;
+            (n = window._klOnsite).push.apply(n, arguments);
+          }));
+      }
+    }
+  })();
+</script>
+
 <script>
   var head = document.head;
   var script = document.createElement("script");
@@ -8,54 +63,132 @@
     encodeURI(document.URL);
   head.appendChild(script);
 </script>
-<!-- End Hyros -->
 
-<!-- Google Tag Manager -->
+<!-- TikTok Pixel Code Start -->
 <script>
-  (function (w, d, s, l, i) {
-    w[l] = w[l] || [];
-    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-    var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s),
-      dl = l != "dataLayer" ? "&l=" + l : "";
-    j.async = true;
-    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-    f.parentNode.insertBefore(j, f);
-  })(window, document, "script", "dataLayer", "GTM-KQJBWKP");
-</script>
-<!-- End Google Tag Manager -->
+  !(function (w, d, t) {
+    w.TiktokAnalyticsObject = t;
+    var ttq = (w[t] = w[t] || []);
+    ((ttq.methods = [
+      "page",
+      "track",
+      "identify",
+      "instances",
+      "debug",
+      "on",
+      "off",
+      "once",
+      "ready",
+      "alias",
+      "group",
+      "enableCookie",
+      "disableCookie",
+      "holdConsent",
+      "revokeConsent",
+      "grantConsent",
+    ]),
+      (ttq.setAndDefer = function (t, e) {
+        t[e] = function () {
+          t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+        };
+      }));
+    for (var i = 0; i < ttq.methods.length; i++)
+      ttq.setAndDefer(ttq, ttq.methods[i]);
+    ((ttq.instance = function (t) {
+      for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)
+        ttq.setAndDefer(e, ttq.methods[n]);
+      return e;
+    }),
+      (ttq.load = function (e, n) {
+        var r = "https://analytics.tiktok.com/i18n/pixel/events.js",
+          o = n && n.partner;
+        ((ttq._i = ttq._i || {}),
+          (ttq._i[e] = []),
+          (ttq._i[e]._u = r),
+          (ttq._t = ttq._t || {}),
+          (ttq._t[e] = +new Date()),
+          (ttq._o = ttq._o || {}),
+          (ttq._o[e] = n || {}));
+        n = document.createElement("script");
+        ((n.type = "text/javascript"),
+          (n.async = !0),
+          (n.src = r + "?sdkid=" + e + "&lib=" + t));
+        e = document.getElementsByTagName("script")[0];
+        e.parentNode.insertBefore(n, e);
+      }));
 
-<!-- Klaviyo Tag -->
-<script
-  async
-  type="text/javascript"
-  src="//static.klaviyo.com/onsite/js/S9SGLM/klaviyo.js"
-></script>
-<script>
-  (function () {
-    function trackPageView() {
-      // Wait until Klaviyo and funnel ID are both ready
-      if (!window.klaviyo || !klaviyo.track || !window.fid) {
-        return setTimeout(trackPageView, 300);
-      }
-      var props = {
-        url: window.location.href,
-        path: window.location.pathname,
-        title: document.title || null,
-        host: window.location.host,
-        funnel_id: window.fid,
-      };
-      klaviyo.track("Viewed Funnel", props);
-      console.log("[Klaviyo] Viewed Funnel");
-    }
-    if (
-      document.readyState === "complete" ||
-      document.readyState === "interactive"
-    ) {
-      trackPageView();
-    } else {
-      document.addEventListener("DOMContentLoaded", trackPageView);
-    }
-  })();
+    ttq.load("D49EAB3C77UEQ4C80LQ0");
+    ttq.page();
+  })(window, document, "ttq");
 </script>
-<!-- End Klaviyo -->
+<!-- TikTok Pixel Code End -->
+
+<!-- Hyros Code -->
+<script>
+  var head = document.head;
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src =
+    "https://t.lmctgiveaway.com/v1/lst/universal-script?ph=fed238b5c221a88566d32723ff533179efd9d6ebe502a1025e5668783dcd092e&tag=!HSV-Public-paid&ref_url=" +
+    encodeURI(document.URL);
+  head.appendChild(script);
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+  !(function (f, b, e, v, n, t, s) {
+    if (f.fbq) return;
+    n = f.fbq = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    if (!f._fbq) f._fbq = n;
+    n.push = n;
+    n.loaded = !0;
+    n.version = "2.0";
+    n.queue = [];
+    t = b.createElement(e);
+    t.async = !0;
+    t.src = v;
+    s = b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t, s);
+  })(
+    window,
+    document,
+    "script",
+    "https://connect.facebook.net/en_US/fbevents.js",
+  );
+  fbq("init", "1450556716026537");
+  fbq("track", "PageView");
+</script>
+<noscript
+  ><img
+    height="1"
+    width="1"
+    style="display: none"
+    src="https://www.facebook.com/tr?id=1450556716026537&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<!-- Snap Pixel Code -->
+<script type="text/javascript">
+  (function (e, t, n) {
+    if (e.snaptr) return;
+    var a = (e.snaptr = function () {
+      a.handleRequest
+        ? a.handleRequest.apply(a, arguments)
+        : a.queue.push(arguments);
+    });
+    a.queue = [];
+    var s = "script";
+    r = t.createElement(s);
+    r.async = !0;
+    r.src = n;
+    var u = t.getElementsByTagName(s)[0];
+    u.parentNode.insertBefore(r, u);
+  })(window, document, "https://sc-static.net/scevent.min.js");
+
+  snaptr("init", "25ead131-2a75-443d-9610-328f3f21c81d", {});
+
+  snaptr("track", "PAGE_VIEW");
+</script>
+<!-- End Snap Pixel Code -->
