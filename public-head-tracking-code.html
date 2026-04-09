@@ -1,0 +1,61 @@
+<!-- Hyros Pixel -->
+<script>
+  var head = document.head;
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src =
+    "https://t.lmctgiveaway.com/v1/lst/universal-script?ph=fed238b5c221a88566d32723ff533179efd9d6ebe502a1025e5668783dcd092e&tag=!clicked&ref_url=" +
+    encodeURI(document.URL);
+  head.appendChild(script);
+</script>
+<!-- End Hyros -->
+
+<!-- Google Tag Manager -->
+<script>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", "GTM-KQJBWKP");
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Klaviyo Tag -->
+<script
+  async
+  type="text/javascript"
+  src="//static.klaviyo.com/onsite/js/S9SGLM/klaviyo.js"
+></script>
+<script>
+  (function () {
+    function trackPageView() {
+      // Wait until Klaviyo and funnel ID are both ready
+      if (!window.klaviyo || !klaviyo.track || !window.fid) {
+        return setTimeout(trackPageView, 300);
+      }
+      var props = {
+        url: window.location.href,
+        path: window.location.pathname,
+        title: document.title || null,
+        host: window.location.host,
+        funnel_id: window.fid,
+      };
+      klaviyo.track("Viewed Funnel", props);
+      console.log("[Klaviyo] Viewed Funnel");
+    }
+    if (
+      document.readyState === "complete" ||
+      document.readyState === "interactive"
+    ) {
+      trackPageView();
+    } else {
+      document.addEventListener("DOMContentLoaded", trackPageView);
+    }
+  })();
+</script>
+<!-- End Klaviyo -->
