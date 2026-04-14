@@ -1,0 +1,1446 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Golden Harvest Bundle Offer Preview</title>
+    <style>
+      :root {
+        --gh-bg: #fcf8f1;
+        --gh-card: #fffaf3;
+        --gh-card-2: #f8efe3;
+        --gh-border: #e7dccb;
+        --gh-heading: #5b3d21;
+        --gh-text: #6f6a63;
+        --gh-green: #8baa36;
+        --gh-green-dark: #6f8f23;
+        --gh-green-soft: #eef6df;
+        --gh-orange: #d89a3c;
+        --gh-orange-dark: #b6781b;
+        --gh-orange-soft: #fff1dc;
+        --gh-red-soft: #fff3ee;
+        --gh-red-border: #f3c9b8;
+        --gh-shadow: 0 8px 22px rgba(91, 61, 33, 0.08);
+        --gh-shadow-soft: 0 4px 14px rgba(91, 61, 33, 0.06);
+        --gh-white: #fff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--gh-bg);
+        font-family: Arial, sans-serif;
+        color: var(--gh-text);
+        line-height: 1.5;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .gh-topbar {
+        background: #2d2d2d;
+        color: #f5f5f5;
+        text-align: center;
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+
+      .gh-header {
+        background: #fff;
+        border-bottom: 1px solid #eee3d4;
+      }
+
+      .gh-header-inner {
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 0;
+      }
+
+      .gh-logo {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--gh-green-dark);
+        line-height: 1;
+      }
+
+      .gh-logo small {
+        display: block;
+        font-size: 11px;
+        color: #9a815e;
+        margin-top: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .gh-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--gh-heading);
+      }
+
+      .gh-nav a:hover {
+        color: var(--gh-green-dark);
+      }
+
+      .gh-container {
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .gh-breadcrumb {
+        padding: 18px 0 12px;
+        font-size: 13px;
+        color: #8e857c;
+      }
+
+      .gh-breadcrumb span {
+        margin: 0 6px;
+      }
+
+      .gh-page {
+        padding-bottom: 70px;
+      }
+
+      .gh-product-wrap {
+        display: grid;
+        grid-template-columns: 1.03fr 0.97fr;
+        gap: 34px;
+        align-items: start;
+      }
+
+      .gh-gallery {
+        position: sticky;
+        top: 16px;
+      }
+
+      .gh-main-image {
+        background: #fff;
+        border: 1px solid var(--gh-border);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: var(--gh-shadow);
+      }
+
+      .gh-main-image img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+      }
+
+      .gh-thumbs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .gh-thumb {
+        background: #fff;
+        border: 1px solid var(--gh-border);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--gh-shadow-soft);
+      }
+
+      .gh-thumb img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+      }
+
+      .gh-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .gh-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 7px 12px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .gh-badge.sale {
+        background: var(--gh-green);
+        color: #fff;
+      }
+      .gh-badge.new {
+        background: var(--gh-orange);
+        color: #fff;
+      }
+      .gh-badge.hot {
+        background: #f5eadb;
+        color: var(--gh-orange-dark);
+        border: 1px solid #ecd2aa;
+      }
+
+      .gh-title {
+        margin: 0 0 10px;
+        color: var(--gh-heading);
+        font-size: 42px;
+        line-height: 1.15;
+        font-weight: 700;
+      }
+
+      .gh-lead {
+        margin: 0 0 16px;
+        color: #7a7168;
+        font-size: 16px;
+        line-height: 1.75;
+      }
+
+      .gh-micro-proof {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin: 0 0 18px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--gh-green-dark);
+      }
+
+      .gh-offer-box {
+        background: linear-gradient(180deg, #fffaf3 0%, #fff6ea 100%);
+        border: 1px solid var(--gh-border);
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: var(--gh-shadow);
+        margin-bottom: 16px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .gh-offer-box:before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 6px;
+        background: linear-gradient(
+          180deg,
+          var(--gh-orange) 0%,
+          var(--gh-green) 100%
+        );
+      }
+
+      .gh-offer-topline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        padding-left: 8px;
+      }
+
+      .gh-offer-tag {
+        display: inline-block;
+        background: var(--gh-orange);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-radius: 999px;
+        padding: 6px 10px;
+      }
+
+      .gh-offer-topline-note {
+        font-size: 12px;
+        color: var(--gh-orange-dark);
+        font-weight: 700;
+      }
+
+      .gh-offer-headline {
+        margin: 0 0 6px;
+        color: var(--gh-heading);
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.35;
+        padding-left: 8px;
+      }
+
+      .gh-offer-sub {
+        margin: 0 0 12px;
+        font-size: 13px;
+        color: #7d7368;
+        line-height: 1.7;
+        padding-left: 8px;
+      }
+
+      .gh-old-price {
+        margin: 0 0 4px;
+        color: #a09587;
+        font-size: 13px;
+        text-decoration: line-through;
+        padding-left: 8px;
+      }
+
+      .gh-price-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: flex-end;
+        margin-bottom: 12px;
+        padding-left: 8px;
+      }
+
+      .gh-main-price {
+        color: var(--gh-green-dark);
+        font-size: 46px;
+        line-height: 1;
+        font-weight: 700;
+      }
+
+      .gh-save {
+        color: var(--gh-green);
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      .gh-value-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 0 0 14px;
+        padding-left: 8px;
+      }
+
+      .gh-value-item {
+        background: #fff;
+        border: 1px solid var(--gh-border);
+        border-radius: 12px;
+        padding: 10px 10px 9px;
+        text-align: center;
+        box-shadow: var(--gh-shadow-soft);
+      }
+
+      .gh-value-item strong {
+        display: block;
+        color: var(--gh-heading);
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+
+      .gh-value-item span {
+        display: block;
+        font-size: 12px;
+        color: #7b7166;
+        font-weight: 700;
+      }
+
+      .gh-reason-box {
+        border-top: 1px dashed var(--gh-border);
+        padding: 14px 0 0 8px;
+        margin-top: 4px;
+      }
+
+      .gh-reason-title {
+        margin: 0 0 7px;
+        color: var(--gh-heading);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .gh-reason-list {
+        display: grid;
+        gap: 7px;
+        font-size: 12px;
+        color: #7b7166;
+        font-weight: 600;
+      }
+
+      .gh-reason-list span {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .gh-urgency-box {
+        margin-top: 14px;
+        background: var(--gh-red-soft);
+        border: 1px solid var(--gh-red-border);
+        border-radius: 14px;
+        padding: 14px;
+      }
+
+      .gh-urgency-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+
+      .gh-urgency-head {
+        margin: 0;
+        color: #b85d31;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .gh-urgency-badge {
+        background: #fff;
+        border: 1px solid #efc4b3;
+        color: #b85d31;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 5px 9px;
+        border-radius: 999px;
+      }
+
+      .gh-timer {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .gh-time-box {
+        min-width: 86px;
+        background: #fff;
+        border: 1px solid #efc4b3;
+        color: #b85d31;
+        border-radius: 12px;
+        padding: 12px 10px;
+        text-align: center;
+      }
+
+      .gh-time-num {
+        display: block;
+        font-size: 28px;
+        line-height: 1;
+        font-weight: 700;
+      }
+
+      .gh-time-label {
+        display: block;
+        margin-top: 6px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+      }
+
+      .gh-urgency-note {
+        margin: 10px 0 0;
+        font-size: 12px;
+        color: #8f6047;
+        font-weight: 600;
+        line-height: 1.6;
+      }
+
+      .gh-after-offer {
+        display: grid;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .gh-social-proof {
+        background: #eef3de;
+        border: 1px solid #dbe8bc;
+        border-radius: 10px;
+        padding: 11px 12px;
+        color: #6f8f23;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .gh-shipping-progress {
+        background: #fff;
+        border: 1px dashed #d8ccb9;
+        border-radius: 12px;
+        padding: 14px;
+      }
+
+      .gh-shipping-progress p {
+        margin: 0 0 10px;
+        font-size: 13px;
+        color: #7a7168;
+        font-weight: 700;
+      }
+
+      .gh-progress {
+        width: 100%;
+        height: 10px;
+        background: #ece5db;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .gh-progress span {
+        display: block;
+        width: 32%;
+        height: 100%;
+        background: linear-gradient(90deg, #8baa36 0%, #c1d56b 100%);
+        border-radius: 999px;
+      }
+
+      .gh-section-title {
+        margin: 0 0 6px;
+        color: var(--gh-heading);
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .gh-section-sub {
+        margin: 0 0 12px;
+        color: #7a7168;
+        font-size: 13px;
+        line-height: 1.65;
+        font-weight: 600;
+      }
+
+      .gh-included-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .gh-item-card {
+        background: #fff;
+        border: 1px solid var(--gh-border);
+        border-radius: 14px;
+        padding: 12px;
+        text-align: center;
+        box-shadow: var(--gh-shadow-soft);
+        position: relative;
+      }
+
+      .gh-item-label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--gh-orange-soft);
+        border: 1px solid #f0d3a7;
+        color: var(--gh-orange-dark);
+        font-size: 10px;
+        font-weight: 700;
+        padding: 4px 7px;
+        border-radius: 999px;
+      }
+
+      .gh-item-card img {
+        width: 100%;
+        max-width: 120px;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+        margin: 12px auto 8px;
+      }
+
+      .gh-item-title {
+        margin: 0 0 4px;
+        color: var(--gh-heading);
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .gh-item-note {
+        margin: 0 0 6px;
+        font-size: 12px;
+        color: #847a70;
+        line-height: 1.5;
+        min-height: 36px;
+      }
+
+      .gh-item-stock {
+        font-size: 12px;
+        color: var(--gh-green-dark);
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+
+      .gh-item-price {
+        font-size: 12px;
+        color: #9f7a34;
+        font-weight: 700;
+      }
+
+      .gh-total-value {
+        background: #fff7eb;
+        border: 1px solid #efd8b3;
+        color: #8a5d26;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .gh-cart-box {
+        background: #fff;
+        border: 1px solid var(--gh-border);
+        border-radius: 16px;
+        padding: 16px;
+        box-shadow: var(--gh-shadow);
+      }
+
+      .gh-stock {
+        color: var(--gh-green-dark);
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .gh-cart-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .gh-qty {
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--gh-border);
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        height: 50px;
+      }
+
+      .gh-qty button {
+        width: 40px;
+        height: 50px;
+        border: none;
+        background: #f7f2ea;
+        color: var(--gh-heading);
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .gh-qty input {
+        width: 48px;
+        border: none;
+        outline: none;
+        text-align: center;
+        color: var(--gh-heading);
+        font-size: 14px;
+        font-weight: 700;
+        background: #fff;
+      }
+
+      .gh-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 50px;
+        padding: 0 18px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.2s ease;
+        border: none;
+      }
+
+      .gh-btn-primary {
+        flex: 1 1 240px;
+        background: var(--gh-green);
+        color: #fff;
+        box-shadow: 0 8px 18px rgba(139, 170, 54, 0.22);
+        letter-spacing: 0.02em;
+      }
+
+      .gh-btn-primary:hover {
+        background: var(--gh-green-dark);
+      }
+
+      .gh-btn-secondary {
+        width: 100%;
+        margin-top: 10px;
+        background: #fff;
+        color: var(--gh-heading);
+        border: 1px solid var(--gh-border);
+      }
+
+      .gh-cart-points {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 12px;
+        font-size: 12px;
+        color: #71675d;
+        font-weight: 700;
+      }
+
+      .gh-risk-box {
+        margin-top: 12px;
+        background: var(--gh-card);
+        border: 1px solid var(--gh-border);
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 12px;
+        color: #756b61;
+        line-height: 1.65;
+        font-weight: 600;
+      }
+
+      .gh-watch-strip {
+        margin-top: 12px;
+        background: #eef3de;
+        border: 1px solid #dbe8bc;
+        color: #6f8f23;
+        border-radius: 8px;
+        padding: 11px 12px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .gh-meta {
+        margin-top: 14px;
+        font-size: 13px;
+        color: #8b8176;
+        line-height: 1.8;
+      }
+
+      .gh-meta strong {
+        color: var(--gh-heading);
+      }
+
+      .gh-panels {
+        margin-top: 42px;
+        display: grid;
+        gap: 24px;
+      }
+
+      .gh-panel {
+        background: #fff;
+        border: 1px solid var(--gh-border);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: var(--gh-shadow-soft);
+      }
+
+      .gh-panel h2 {
+        margin: 0 0 10px;
+        color: var(--gh-heading);
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .gh-panel p {
+        margin: 0;
+        font-size: 15px;
+        color: #756d65;
+        line-height: 1.8;
+      }
+
+      .gh-benefits {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .gh-benefit {
+        background: var(--gh-card);
+        border: 1px solid var(--gh-border);
+        border-radius: 14px;
+        padding: 16px;
+      }
+
+      .gh-benefit h3 {
+        margin: 0 0 7px;
+        color: var(--gh-heading);
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .gh-benefit p {
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .gh-faq {
+        display: grid;
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .gh-faq-item {
+        background: var(--gh-card);
+        border: 1px solid var(--gh-border);
+        border-radius: 12px;
+        padding: 16px;
+      }
+
+      .gh-faq-item h3 {
+        margin: 0 0 6px;
+        color: var(--gh-heading);
+        font-size: 17px;
+        font-weight: 700;
+      }
+
+      .gh-faq-item p {
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .gh-related-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .gh-related {
+        background: #fff;
+        border: 1px solid var(--gh-border);
+        border-radius: 14px;
+        padding: 14px;
+        text-align: center;
+        box-shadow: var(--gh-shadow-soft);
+      }
+
+      .gh-related img {
+        max-width: 140px;
+        margin: 0 auto 12px;
+        aspect-ratio: 1/1;
+        object-fit: contain;
+      }
+
+      .gh-related h3 {
+        margin: 0 0 5px;
+        color: var(--gh-heading);
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .gh-related p {
+        margin: 0;
+        color: #9f7a34;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .gh-footer {
+        margin-top: 60px;
+        background: #efe5d4;
+        border-top: 1px solid #e0d0b5;
+        padding: 40px 0;
+      }
+
+      .gh-footer-grid {
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr 1fr;
+        gap: 24px;
+      }
+
+      .gh-footer h4 {
+        margin: 0 0 12px;
+        color: var(--gh-heading);
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      .gh-footer p,
+      .gh-footer li {
+        margin: 0;
+        color: #756d65;
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .gh-footer ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      @media (max-width: 1024px) {
+        .gh-product-wrap {
+          grid-template-columns: 1fr;
+        }
+        .gh-gallery {
+          position: static;
+        }
+        .gh-value-strip {
+          grid-template-columns: 1fr;
+        }
+        .gh-benefits {
+          grid-template-columns: 1fr 1fr;
+        }
+        .gh-related-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .gh-footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .gh-header-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .gh-title {
+          font-size: 31px;
+        }
+        .gh-main-price {
+          font-size: 36px;
+        }
+        .gh-included-grid,
+        .gh-benefits,
+        .gh-related-grid,
+        .gh-footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .gh-thumbs {
+          gap: 8px;
+        }
+        .gh-time-box {
+          min-width: 74px;
+        }
+        .gh-cart-points {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gh-topbar">
+      Free shipping on orders above ₱3,000 | COD, GCash, and Cards available
+      nationwide
+    </div>
+
+    <header class="gh-header">
+      <div class="gh-header-inner">
+        <div class="gh-logo">
+          Golden Harvest
+          <small>a harvest of flavor.</small>
+        </div>
+
+        <nav class="gh-nav">
+          <a href="#">Home</a>
+          <a href="#">Shop</a>
+          <a href="#">About Us</a>
+          <a href="#">Contact Us</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="gh-page">
+      <div class="gh-container">
+        <div class="gh-breadcrumb">
+          Home <span>/</span> Shop <span>/</span> Pistachios <span>/</span>
+          <strong>Best Seller Bundle</strong>
+        </div>
+
+        <section class="gh-product-wrap">
+          <div class="gh-gallery">
+            <div class="gh-main-image">
+              <img
+                src="https://images.unsplash.com/photo-1606925797303-0e6cb6f8f7f4?auto=format&fit=crop&w=1000&q=80"
+                alt="Best Seller Bundle"
+              />
+            </div>
+
+            <div class="gh-thumbs">
+              <div class="gh-thumb">
+                <img
+                  src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=500&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="gh-thumb">
+                <img
+                  src="https://images.unsplash.com/photo-1606925797303-0e6cb6f8f7f4?auto=format&fit=crop&w=500&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="gh-thumb">
+                <img
+                  src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=500&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="gh-thumb">
+                <img
+                  src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=80"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="gh-summary">
+            <div class="gh-badges">
+              <span class="gh-badge sale">Sale</span>
+              <span class="gh-badge new">New</span>
+              <span class="gh-badge hot">Most Popular Bundle</span>
+            </div>
+
+            <h1 class="gh-title">
+              Private: Best Seller Bundle (Save ₱400 + Free Shipping)
+            </h1>
+
+            <p class="gh-lead">
+              Our most popular ready-to-go bundle for first-time buyers,
+              families, and daily snackers who want better value without
+              building their own mix.
+            </p>
+
+            <div class="gh-micro-proof">
+              <span>✔ Better than buying separately</span>
+              <span>✔ Free shipping included</span>
+              <span>✔ No need to choose products one by one</span>
+            </div>
+
+            <div class="gh-offer-box">
+              <div class="gh-offer-topline">
+                <span class="gh-offer-tag">Best Seller Offer</span>
+                <span class="gh-offer-topline-note"
+                  >Reserved bundle pricing for a limited time</span
+                >
+              </div>
+
+              <h2 class="gh-offer-headline">
+                Get our highest-value bundle today and save more immediately.
+              </h2>
+              <p class="gh-offer-sub">
+                This bundle combines our most in-demand products into one
+                easier, better-value purchase.
+              </p>
+
+              <p class="gh-old-price">If bought separately: ₱3,563</p>
+
+              <div class="gh-price-row">
+                <div class="gh-main-price">₱3,163</div>
+                <div class="gh-save">Save ₱540 total</div>
+              </div>
+
+              <div class="gh-value-strip">
+                <div class="gh-value-item">
+                  <strong>₱400 Off</strong>
+                  <span>Bundle discount</span>
+                </div>
+                <div class="gh-value-item">
+                  <strong>₱140 Saved</strong>
+                  <span>Free shipping value</span>
+                </div>
+                <div class="gh-value-item">
+                  <strong>Best Seller Mix</strong>
+                  <span>Ready to order now</span>
+                </div>
+              </div>
+
+              <div class="gh-reason-box">
+                <p class="gh-reason-title">Why buy this bundle now</p>
+                <div class="gh-reason-list">
+                  <span>✔ You pay less than buying each item individually</span>
+                  <span
+                    >✔ You avoid decision fatigue by getting the strongest
+                    pre-built combination</span
+                  >
+                  <span
+                    >✔ You lock in discount pricing while the offer window is
+                    still active</span
+                  >
+                </div>
+              </div>
+
+              <div class="gh-urgency-box">
+                <div class="gh-urgency-top">
+                  <p class="gh-urgency-head">Offer window ends in</p>
+                  <span class="gh-urgency-badge">Limited-Time Pricing</span>
+                </div>
+
+                <div class="gh-timer">
+                  <div class="gh-time-box">
+                    <span class="gh-time-num" id="gh-hours">12</span>
+                    <span class="gh-time-label">Hours</span>
+                  </div>
+                  <div class="gh-time-box">
+                    <span class="gh-time-num" id="gh-minutes">33</span>
+                    <span class="gh-time-label">Minutes</span>
+                  </div>
+                  <div class="gh-time-box">
+                    <span class="gh-time-num" id="gh-seconds">18</span>
+                    <span class="gh-time-label">Seconds</span>
+                  </div>
+                </div>
+
+                <p class="gh-urgency-note">
+                  This bundle may return to normal pricing when the timer ends.
+                </p>
+              </div>
+            </div>
+
+            <div class="gh-after-offer">
+              <div class="gh-social-proof">
+                🔥 19 people viewed this product today
+              </div>
+
+              <div class="gh-shipping-progress">
+                <p>Add ₱2,620 to cart and get free shipping</p>
+                <div class="gh-progress"><span></span></div>
+              </div>
+            </div>
+
+            <h2 class="gh-section-title">What’s Included</h2>
+            <p class="gh-section-sub">
+              A curated best-seller mix with stronger total value than ordering
+              each product separately.
+            </p>
+
+            <div class="gh-included-grid">
+              <div class="gh-item-card">
+                <span class="gh-item-label">Daily Favorite</span>
+                <img
+                  src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=400&q=80"
+                  alt="Cashews"
+                />
+                <p class="gh-item-title">1 x Roasted Cashews, Unsalted - 1kg</p>
+                <p class="gh-item-note">
+                  Rich, crunchy, and easy to snack on daily.
+                </p>
+                <div class="gh-item-stock">✔ In stock</div>
+                <div class="gh-item-price">₱882 value</div>
+              </div>
+
+              <div class="gh-item-card">
+                <span class="gh-item-label">Healthy Pick</span>
+                <img
+                  src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80"
+                  alt="Walnuts"
+                />
+                <p class="gh-item-title">1 x Raw Walnuts, Unsalted - 1kg</p>
+                <p class="gh-item-note">
+                  Great for breakfast, baking, and better snacking.
+                </p>
+                <div class="gh-item-stock">✔ In stock</div>
+                <div class="gh-item-price">₱1,024 value</div>
+              </div>
+
+              <div class="gh-item-card">
+                <span class="gh-item-label">Best Seller</span>
+                <img
+                  src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=400&q=80"
+                  alt="Pistachios"
+                />
+                <p class="gh-item-title">
+                  1 x Roasted Pistachios, Salted, In Shell - 1kg
+                </p>
+                <p class="gh-item-note">
+                  One of the most loved premium nut choices.
+                </p>
+                <div class="gh-item-stock">✔ In stock</div>
+                <div class="gh-item-price">₱1,657 value</div>
+              </div>
+            </div>
+
+            <div class="gh-total-value">
+              Total individual value: ₱3,563 — bundle offer price: ₱3,163
+            </div>
+
+            <div class="gh-cart-box">
+              <div class="gh-stock">✔ In stock</div>
+
+              <div class="gh-cart-row">
+                <div class="gh-qty">
+                  <button type="button" id="gh-minus">-</button>
+                  <input type="text" id="gh-qty" value="1" readonly />
+                  <button type="button" id="gh-plus">+</button>
+                </div>
+
+                <button class="gh-btn gh-btn-primary">
+                  GET THIS BUNDLE NOW
+                </button>
+              </div>
+
+              <div class="gh-cart-points">
+                <span>✔ Free Shipping Included</span>
+                <span>✔ COD Available</span>
+                <span>✔ Secure Checkout</span>
+                <span>✔ Nationwide Delivery</span>
+              </div>
+
+              <button class="gh-btn gh-btn-secondary">
+                OR BUILD YOUR OWN BUNDLE
+              </button>
+
+              <div class="gh-risk-box">
+                Secure checkout and careful packaging. If there is a serious
+                issue such as damaged, spoiled, or incorrect items, support is
+                available to review and resolve it.
+              </div>
+
+              <div class="gh-watch-strip">
+                👁 19 people watching this product now
+              </div>
+            </div>
+
+            <div class="gh-meta">
+              <p><strong>SKU:</strong> golden-harvest-bundle</p>
+              <p><strong>Categories:</strong> Cashews, Pistachios, Walnuts</p>
+              <p><strong>Payments:</strong> COD, GCash, Credit / Debit Cards</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="gh-panels">
+          <div class="gh-panel">
+            <h2>Description</h2>
+            <p>
+              This bundle is built for customers who want a better-value
+              purchase with less friction. Instead of comparing multiple
+              products one by one, you get a curated combination of premium nuts
+              in a single offer that is easier to order and easier to justify.
+            </p>
+          </div>
+
+          <div class="gh-panel">
+            <h2>Why This Bundle Converts Better</h2>
+
+            <div class="gh-benefits">
+              <div class="gh-benefit">
+                <h3>Save More Immediately</h3>
+                <p>
+                  You get bundle savings plus the shipping value already
+                  included in the total offer.
+                </p>
+              </div>
+
+              <div class="gh-benefit">
+                <h3>Faster Buying Decision</h3>
+                <p>
+                  This removes product comparison fatigue by offering a strong
+                  ready-made combination.
+                </p>
+              </div>
+
+              <div class="gh-benefit">
+                <h3>Most Popular Mix</h3>
+                <p>
+                  The bundle uses high-interest products that are easier to
+                  understand and easier to buy.
+                </p>
+              </div>
+
+              <div class="gh-benefit">
+                <h3>Lower Checkout Resistance</h3>
+                <p>
+                  COD, GCash, cards, and nationwide delivery reduce hesitation
+                  near the point of purchase.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gh-panel">
+            <h2>FAQs</h2>
+
+            <div class="gh-faq">
+              <div class="gh-faq-item">
+                <h3>Is free shipping included in this offer?</h3>
+                <p>
+                  Yes. The offer presentation includes the value of free
+                  shipping as part of the total savings shown above.
+                </p>
+              </div>
+
+              <div class="gh-faq-item">
+                <h3>Can I pay with Cash on Delivery?</h3>
+                <p>
+                  Yes. Customers can pay with Cash on Delivery, GCash, or credit
+                  and debit cards.
+                </p>
+              </div>
+
+              <div class="gh-faq-item">
+                <h3>Why choose the bundle instead of ordering separately?</h3>
+                <p>
+                  You save more, decide faster, and get a curated combination
+                  without building the mix yourself.
+                </p>
+              </div>
+
+              <div class="gh-faq-item">
+                <h3>
+                  What happens if there is a serious issue with the order?
+                </h3>
+                <p>
+                  If an item arrives damaged, spoiled, or incorrect, support is
+                  available to review the issue and help resolve it.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gh-panel">
+            <h2>Related Products</h2>
+
+            <div class="gh-related-grid">
+              <div class="gh-related">
+                <img
+                  src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=400&q=80"
+                  alt=""
+                />
+                <h3>Raw Cashews</h3>
+                <p>₱219 - ₱957</p>
+              </div>
+
+              <div class="gh-related">
+                <img
+                  src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80"
+                  alt=""
+                />
+                <h3>Raw Walnuts, Unsalted</h3>
+                <p>₱235 - ₱1,024</p>
+              </div>
+
+              <div class="gh-related">
+                <img
+                  src="https://images.unsplash.com/photo-1606925797303-0e6cb6f8f7f4?auto=format&fit=crop&w=400&q=80"
+                  alt=""
+                />
+                <h3>Roasted Cashews, Unsalted</h3>
+                <p>₱202 - ₱882</p>
+              </div>
+
+              <div class="gh-related">
+                <img
+                  src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=400&q=80"
+                  alt=""
+                />
+                <h3>Roasted Pistachios, In Shell</h3>
+                <p>₱380 - ₱1,657</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="gh-footer">
+      <div class="gh-footer-grid">
+        <div>
+          <h4>Golden Harvest</h4>
+          <p>
+            Premium nuts, dried fruits, and spices delivered nationwide in the
+            Philippines. Quality, freshness, and convenience in every order.
+          </p>
+        </div>
+
+        <div>
+          <h4>Payments Accepted</h4>
+          <ul>
+            <li>Cash on Delivery (COD)</li>
+            <li>GCash</li>
+            <li>Credit / Debit Cards</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Customer Support</h4>
+          <ul>
+            <li>About Us</li>
+            <li>Contact Us</li>
+            <li>Privacy Policy</li>
+            <li>Refund and Returns Policy</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Shop Categories</h4>
+          <ul>
+            <li>Almonds</li>
+            <li>Pistachios</li>
+            <li>Walnuts</li>
+            <li>Cashews</li>
+            <li>Dried Fruits</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const qtyInput = document.getElementById("gh-qty");
+        const minusBtn = document.getElementById("gh-minus");
+        const plusBtn = document.getElementById("gh-plus");
+
+        minusBtn.addEventListener("click", function () {
+          let value = parseInt(qtyInput.value, 10) || 1;
+          qtyInput.value = Math.max(1, value - 1);
+        });
+
+        plusBtn.addEventListener("click", function () {
+          let value = parseInt(qtyInput.value, 10) || 1;
+          qtyInput.value = value + 1;
+        });
+
+        const storageKey = "gh-conversion-countdown-start";
+        let start = localStorage.getItem(storageKey);
+
+        if (!start) {
+          start = new Date().toISOString();
+          localStorage.setItem(storageKey, start);
+        }
+
+        const duration = 24 * 60 * 60 * 1000;
+        const deadline = new Date(start).getTime() + duration;
+
+        function updateCountdown() {
+          const now = Date.now();
+          let diff = deadline - now;
+
+          if (diff <= 0) {
+            localStorage.setItem(storageKey, new Date().toISOString());
+            location.reload();
+            return;
+          }
+
+          const hours = Math.floor(diff / (1000 * 60 * 60));
+          diff %= 1000 * 60 * 60;
+          const minutes = Math.floor(diff / (1000 * 60));
+          diff %= 1000 * 60;
+          const seconds = Math.floor(diff / 1000);
+
+          document.getElementById("gh-hours").textContent = String(
+            hours,
+          ).padStart(2, "0");
+          document.getElementById("gh-minutes").textContent = String(
+            minutes,
+          ).padStart(2, "0");
+          document.getElementById("gh-seconds").textContent = String(
+            seconds,
+          ).padStart(2, "0");
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      })();
+    </script>
+  </body>
+</html>

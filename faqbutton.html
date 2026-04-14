@@ -1,0 +1,262 @@
+<style>
+  .faq-container {
+    font-family:
+      SF Pro Display,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
+    padding: 20px;
+  }
+
+  .faq-question2 {
+    background: #05162a;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow:
+      0 6px 24px rgba(0, 0, 0, 0.18),
+      0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+
+  .faq-question2:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+  }
+
+  .faq-question2:active {
+    transform: scale(0.98);
+  }
+
+  .faq-icon {
+    transition: transform 0.35s ease;
+  }
+
+  .faq-item2.active .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer-desk {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.45s ease,
+      opacity 0.35s ease;
+    opacity: 0;
+  }
+
+  .faq-item2.active .faq-answer-desk {
+    max-height: 2000px;
+    opacity: 1;
+  }
+
+  .packages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  .package {
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .package:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+  }
+
+  .package h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .package.entry {
+    border-left: 6px solid #40cbf6;
+  }
+  .package.entry h3 {
+    color: #40cbf6;
+  }
+
+  .package.bronze {
+    border-left: 6px solid #cd7f32;
+  }
+  .package.bronze h3 {
+    color: #cd7f32;
+  }
+
+  .package.silver {
+    border-left: 6px solid #6b7280;
+  }
+  .package.silver h3 {
+    color: #6b7280;
+  }
+
+  .package.gold {
+    border-left: 6px solid #fbc02d;
+  }
+  .package.gold h3 {
+    color: #fbc02d;
+  }
+
+  .package.platinum {
+    border-left: 6px solid #c084fc;
+  }
+  .package.platinum h3 {
+    color: #c084fc;
+  }
+
+  .package ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .package li {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .package li::before {
+    content: "✔️";
+    margin-right: 8px;
+  }
+
+  @media (max-width: 767px) {
+    .faq-container {
+      padding: 10px;
+    }
+
+    .faq-question2 {
+      font-size: 16px;
+      padding: 14px;
+      width: 100%;
+    }
+
+    .package {
+      padding: 16px;
+    }
+
+    .package h3 {
+      font-size: 17px;
+    }
+
+    .package li {
+      font-size: 14px;
+    }
+  }
+  @media (min-width: 768px) {
+    .faq-question2 {
+      max-width: 850px;
+    }
+  }
+</style>
+
+<div class="faq-container">
+  <div class="faq-item2">
+    <button class="faq-question2">
+      Click Here To See Full Inclusions
+      <span class="faq-icon">▼</span>
+    </button>
+
+    <div class="faq-answer-desk">
+      <div class="packages">
+        <div class="package entry">
+          <h3>Entry Package — $10</h3>
+          <ul>
+            <li><strong>1 free entry</strong> into the giveaway</li>
+            <li><strong>VIP</strong> invitation to all events</li>
+            <li><strong>2 Days</strong> access to 2,000+ Partner Discounts</li>
+          </ul>
+        </div>
+
+        <div class="package bronze">
+          <h3>Bronze Package — $30</h3>
+          <ul>
+            <li><strong>5 free entries</strong> into the giveaway</li>
+            <li><strong>VIP</strong> invitation to all events</li>
+            <li><strong>1 Week</strong> access to 2,000+ Partner Discounts</li>
+            <li>
+              <strong>500 XP</strong> in-app and
+              <strong>500 LMCT+ Coins</strong>
+            </li>
+          </ul>
+        </div>
+
+        <div class="package silver">
+          <h3>Silver Package — $100</h3>
+          <ul>
+            <li><strong>25 free entries</strong> into the giveaway</li>
+            <li><strong>VIP</strong> invitation to all events</li>
+            <li><strong>1 Month</strong> access to 2,000+ Partner Discounts</li>
+            <li>
+              <strong>1,000 XP</strong> in-app and
+              <strong>1,000 LMCT+ Coins</strong>
+            </li>
+          </ul>
+        </div>
+
+        <div class="package gold">
+          <h3>Gold Package — $200</h3>
+          <ul>
+            <li><strong>100 free entries</strong> into the giveaway</li>
+            <li><strong>VIP</strong> invitation to all events</li>
+            <li>
+              <strong>6 Months</strong> access to 2,000+ Partner Discounts
+            </li>
+            <li>
+              <strong>2,500 XP</strong> in-app and
+              <strong>2,500 LMCT+ Coins</strong>
+            </li>
+          </ul>
+        </div>
+
+        <div class="package platinum">
+          <h3>Platinum Package — $500</h3>
+          <ul>
+            <li><strong>500 free entries</strong> into the giveaway</li>
+            <li><strong>VIP</strong> invitation to all events</li>
+            <li>
+              <strong>12 Months</strong> access to 2,000+ Partner Discounts
+            </li>
+            <li>
+              <strong>5,000 XP</strong> in-app and
+              <strong>5,000 LMCT+ Coins</strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll(".faq-question2").forEach((button) => {
+    button.addEventListener("click", () => {
+      const item = button.parentElement;
+      item.classList.toggle("active");
+    });
+  });
+</script>

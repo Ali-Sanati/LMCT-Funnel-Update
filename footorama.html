@@ -31,6 +31,13 @@
     position: relative;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .main-image.dragging {
+    cursor: grabbing;
   }
 
   .main-image img {
@@ -38,14 +45,13 @@
     height: 100%;
     display: block;
     border-radius: 20px;
-    transition:
-      opacity 0.5s ease,
-      transform 0.5s ease;
+    transition: opacity 0.3s ease;
     object-fit: cover;
+    will-change: opacity;
   }
 
   .main-image img:hover {
-    transform: scale(1.02);
+    opacity: 0.98;
   }
 
   /* THUMBNAILS CONTAINER */
@@ -68,6 +74,8 @@
     overflow-x: auto;
     padding: 8px 0;
     scroll-behavior: smooth;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   /* CUSTOM SCROLLBAR */
@@ -82,6 +90,7 @@
   .thumbs::-webkit-scrollbar-thumb {
     background: #d1d5db;
     border-radius: 3px;
+    transition: background 0.2s ease;
   }
 
   .thumbs::-webkit-scrollbar-thumb:hover {
@@ -96,11 +105,15 @@
     overflow: hidden;
     cursor: pointer;
     opacity: 0.55;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
     border: 3px solid transparent;
     position: relative;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
+    will-change: opacity, box-shadow;
   }
 
   .thumb img {
@@ -108,17 +121,29 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.3s ease;
+    transition: none;
+  }
+
+  /* Lazy loading states */
+  .thumb img[data-src]:not([src]) {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    will-change: background-position;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
   }
 
   .thumb:hover {
     opacity: 0.85;
-    transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .thumb:hover img {
-    transform: scale(1.05);
   }
 
   .thumb.active {
@@ -142,22 +167,22 @@
   /* RESPONSIVE DESIGN */
   @media (max-width: 768px) {
     .car-gallery {
-      padding: 16px;
+      padding: 0;
       border-radius: 20px;
     }
 
     .main-image {
       aspect-ratio: 1 / 1;
-      border-radius: 16px;
+      border-radius: 12px;
     }
 
     .main-image img {
-      border-radius: 16px;
+      border-radius: 12px;
     }
 
     .thumb {
-      flex: 0 0 80px;
-      height: 70px;
+      flex: 0 0 70px;
+      height: 60px;
       border-radius: 12px;
     }
 
@@ -172,39 +197,40 @@
 
   @media (max-width: 480px) {
     body {
-      padding: 12px;
+      padding: 8px;
     }
 
     .car-gallery {
-      padding: 12px;
-      border-radius: 16px;
+      padding: 0;
+      border-radius: 12px;
     }
 
     .main-image {
       aspect-ratio: 1 / 1;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
 
     .main-image img {
-      border-radius: 12px;
+      border-radius: 8px;
     }
 
     .thumb {
-      flex: 0 0 70px;
-      height: 60px;
-      border-radius: 10px;
+      flex: 0 0 60px;
+      height: 50px;
+      border-radius: 8px;
       border-width: 2px;
+      box-shadow: none;
     }
 
     .thumbs {
-      gap: 8px;
-      margin: 0 -8px;
-      padding: 8px 8px;
+      gap: 6px;
+      margin: 0 -4px;
+      padding: 4px 4px;
     }
 
     .thumbs-wrapper {
-      margin-top: 16px;
+      margin-top: 12px;
     }
 
     .thumbs-label {
@@ -217,16 +243,14 @@
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: scale(0.98);
     }
     to {
       opacity: 1;
-      transform: scale(1);
     }
   }
 
   .main-image img {
-    animation: fadeIn 0.5s ease-out;
+    animation: fadeIn 0.3s ease-out;
   }
 </style>
 
@@ -252,7 +276,7 @@
         aria-label="Image 1"
       >
         <img
-          src="https://images.clickfunnels.com/c9/df70a3ae9146d9bb8df6bcfa78daf2/silverado2.png"
+          data-src="https://images.clickfunnels.com/c9/df70a3ae9146d9bb8df6bcfa78daf2/silverado2.png"
           alt="Thumbnail 1"
         />
       </div>
@@ -265,7 +289,7 @@
         aria-label="Image 2"
       >
         <img
-          src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7bHuYFkBBDLq1U69Z4t2idKlTGPYkVzFXSasO"
+          data-src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7bHuYFkBBDLq1U69Z4t2idKlTGPYkVzFXSasO"
           alt="Thumbnail 2"
         />
       </div>
@@ -278,7 +302,7 @@
         aria-label="Image 3"
       >
         <img
-          src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj79A8aSwu51t0iuU96H4OpJqTLvV7mxjWAoIhK"
+          data-src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj79A8aSwu51t0iuU96H4OpJqTLvV7mxjWAoIhK"
           alt="Thumbnail 3"
         />
       </div>
@@ -291,7 +315,7 @@
         aria-label="Image 4"
       >
         <img
-          src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7wo3wEtCD3zOXiEa8l1x2vqShWI9AVHGTbJdm"
+          data-src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7wo3wEtCD3zOXiEa8l1x2vqShWI9AVHGTbJdm"
           alt="Thumbnail 4"
         />
       </div>
@@ -304,7 +328,7 @@
         aria-label="Image 5"
       >
         <img
-          src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7RlOjqL6sCmE9ZBUruDoqVRFA4xXbLlS7snYa"
+          data-src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7RlOjqL6sCmE9ZBUruDoqVRFA4xXbLlS7snYa"
           alt="Thumbnail 5"
         />
       </div>
@@ -317,7 +341,7 @@
         aria-label="Image 6"
       >
         <img
-          src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7BEda1aKWvxSpJHf5zP4QEkwq1eo78cL0bYF2"
+          data-src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7BEda1aKWvxSpJHf5zP4QEkwq1eo78cL0bYF2"
           alt="Thumbnail 6"
         />
       </div>
@@ -330,7 +354,7 @@
         aria-label="Image 7"
       >
         <img
-          src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7JkSRuC7Uzj7stuqE0SdwOQNype5LAg2YIZW6"
+          data-src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7JkSRuC7Uzj7stuqE0SdwOQNype5LAg2YIZW6"
           alt="Thumbnail 7"
         />
       </div>
@@ -343,7 +367,7 @@
         aria-label="Image 8"
       >
         <img
-          src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7oU5jFtyL1FAKxSy2svTGq4rieUwoY83cJNQh"
+          data-src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7oU5jFtyL1FAKxSy2svTGq4rieUwoY83cJNQh"
           alt="Thumbnail 8"
         />
       </div>
@@ -356,7 +380,7 @@
         aria-label="Image 9"
       >
         <img
-          src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7iKZ16FHbOeAoKQG15VrkcySJXhnWH8v3qjF4"
+          data-src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7iKZ16FHbOeAoKQG15VrkcySJXhnWH8v3qjF4"
           alt="Thumbnail 9"
         />
       </div>
@@ -365,51 +389,176 @@
 </div>
 
 <script>
+  // Cache DOM elements for better performance
+  const mainImage = document.getElementById("mainImage");
+  const mainImageContainer = document.querySelector(".main-image");
+  const thumbElements = document.querySelectorAll(".thumb");
+  const thumbsContainer = document.querySelector(".thumbs");
+  let isChanging = false;
+
+  // Drag/Swipe variables
+  let isDragging = false;
+  let startX = 0;
+  let currentX = 0;
+  const DRAG_THRESHOLD = 50; // Minimum drag distance to trigger navigation
+
+  // Lazy loading with Intersection Observer
+  const imageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            // Use requestAnimationFrame for smoother loading
+            requestAnimationFrame(() => {
+              img.src = img.dataset.src;
+              img.removeAttribute("data-src");
+            });
+            observer.unobserve(img);
+          }
+        }
+      });
+    },
+    { rootMargin: "50px" },
+  );
+
+  // Observe all lazy-loadable images
+  thumbElements.forEach((thumb) => {
+    const img = thumb.querySelector("img");
+    imageObserver.observe(img);
+  });
+
   function changeImage(el) {
-    const main = document.getElementById("mainImage");
+    if (isChanging) return; // Prevent overlapping transitions
+    isChanging = true;
+
+    const thumbImg = el.querySelector("img");
+
+    // Load image immediately if it hasn't been loaded yet
+    if (thumbImg.dataset.src && !thumbImg.src) {
+      thumbImg.src = thumbImg.dataset.src;
+      thumbImg.removeAttribute("data-src");
+    }
 
     // fade out
-    main.style.opacity = 0;
+    mainImage.style.opacity = 0;
 
     setTimeout(() => {
-      main.src = el.querySelector("img").src;
-      main.style.opacity = 1;
-    }, 250);
+      mainImage.src = thumbImg.src;
+      mainImage.style.opacity = 1;
+      isChanging = false;
+    }, 150);
 
-    // active state
-    document
-      .querySelectorAll(".thumb")
-      .forEach((t) => t.classList.remove("active"));
+    // Update active state
+    document.querySelectorAll(".thumb").forEach((t) => {
+      t.classList.remove("active");
+    });
     el.classList.add("active");
 
-    // smooth scroll to thumbnail into view
-    el.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "nearest",
+    // Smooth scroll (using passive event listener approach)
+    requestAnimationFrame(() => {
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "nearest",
+      });
     });
   }
 
-  // Keyboard navigation support
-  document.addEventListener("keydown", (e) => {
-    const thumbs = Array.from(document.querySelectorAll(".thumb"));
-    const activeThumb = document.querySelector(".thumb.active");
-    const currentIndex = thumbs.indexOf(activeThumb);
+  // Drag/Swipe handlers
+  function handleDragStart(e) {
+    if (isChanging) return;
+    isDragging = true;
+    startX = e.type.includes("touch") ? e.touches[0].clientX : e.clientX;
+    currentX = startX;
+    mainImageContainer.classList.add("dragging");
+  }
 
-    if (e.key === "ArrowLeft" && currentIndex > 0) {
-      changeImage(thumbs[currentIndex - 1]);
-    } else if (e.key === "ArrowRight" && currentIndex < thumbs.length - 1) {
-      changeImage(thumbs[currentIndex + 1]);
+  function handleDragMove(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    currentX = e.type.includes("touch") ? e.touches[0].clientX : e.clientX;
+  }
+
+  function handleDragEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    mainImageContainer.classList.remove("dragging");
+
+    const dragDistance = startX - currentX;
+    const thumbsArray = Array.from(thumbElements);
+    const activeThumb = document.querySelector(".thumb.active");
+    const currentIndex = thumbsArray.indexOf(activeThumb);
+
+    // Swipe left (drag to left) = next image
+    if (
+      dragDistance > DRAG_THRESHOLD &&
+      currentIndex < thumbsArray.length - 1
+    ) {
+      changeImage(thumbsArray[currentIndex + 1]);
     }
+    // Swipe right (drag to right) = previous image
+    else if (dragDistance < -DRAG_THRESHOLD && currentIndex > 0) {
+      changeImage(thumbsArray[currentIndex - 1]);
+    }
+  }
+
+  // Add drag event listeners to main image
+  mainImageContainer.addEventListener("mousedown", handleDragStart);
+  document.addEventListener("mousemove", handleDragMove);
+  document.addEventListener("mouseup", handleDragEnd);
+
+  // Touch events for mobile
+  mainImageContainer.addEventListener("touchstart", handleDragStart);
+  document.addEventListener("touchmove", handleDragMove, { passive: false });
+  document.addEventListener("touchend", handleDragEnd);
+
+  // Keyboard navigation with debounce
+  let keyboardTimeout;
+  document.addEventListener(
+    "keydown",
+    (e) => {
+      if (isChanging) return;
+
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault();
+        clearTimeout(keyboardTimeout);
+
+        keyboardTimeout = setTimeout(() => {
+          const thumbsArray = Array.from(thumbElements);
+          const activeThumb = document.querySelector(".thumb.active");
+          const currentIndex = thumbsArray.indexOf(activeThumb);
+
+          if (e.key === "ArrowLeft" && currentIndex > 0) {
+            changeImage(thumbsArray[currentIndex - 1]);
+          } else if (
+            e.key === "ArrowRight" &&
+            currentIndex < thumbsArray.length - 1
+          ) {
+            changeImage(thumbsArray[currentIndex + 1]);
+          }
+        }, 0);
+      }
+    },
+    { passive: false },
+  );
+
+  // Enter/Space key support on thumbnails with passive listener
+  thumbElements.forEach((thumb) => {
+    thumb.addEventListener(
+      "keypress",
+      (e) => {
+        if ((e.key === "Enter" || e.key === " ") && !isChanging) {
+          e.preventDefault();
+          changeImage(thumb);
+        }
+      },
+      { passive: false },
+    );
   });
 
-  // Enter key support on thumbnails
-  document.querySelectorAll(".thumb").forEach((thumb) => {
-    thumb.addEventListener("keypress", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        changeImage(thumb);
-      }
-    });
+  // Optimize scroll bounce for smooth experience
+  thumbsContainer.addEventListener("scroll", () => {
+    // Minimal processing during scroll
   });
 </script>

@@ -1,0 +1,294 @@
+<div class="blueprint-container">
+  <div class="section-header">
+    <h2>SELECT A PACKAGE</h2>
+    <p>
+      Purchase any package & instantly go into the 2 Houses or $2,000,000
+      Giveaway
+    </p>
+  </div>
+
+  <div class="package-grid">
+    <div class="card basic">
+      <div class="card-inner">
+        <span class="grommet top-left"></span
+        ><span class="grommet top-right"></span>
+        <div class="tier-name">BASIC</div>
+        <div class="entry-count">2</div>
+        <div class="entry-label">ENTRIES</div>
+        <div class="bonus-box">
+          <span class="bonus">+250 XP</span>
+          <span class="bonus">+250 COINS</span>
+        </div>
+        <div class="price">$1</div>
+        <div class="sub-text">(Single Payment Only)</div>
+        <button class="select-btn">SELECT</button>
+        <span class="grommet bottom-left"></span
+        ><span class="grommet bottom-right"></span>
+      </div>
+    </div>
+
+    <div class="card bronze">
+      <div class="card-inner">
+        <div class="tier-name">BRONZE</div>
+        <div class="entry-count">20</div>
+        <div class="entry-label">ENTRIES</div>
+        <div class="bonus-box">
+          <span class="bonus">+500 XP</span>
+          <span class="bonus">+500 COINS</span>
+        </div>
+        <div class="price">$10</div>
+        <div class="sub-text">(Single Payment Only)</div>
+        <button class="select-btn">SELECT</button>
+      </div>
+    </div>
+
+    <div class="card silver">
+      <div class="card-inner">
+        <div class="tier-name">SILVER</div>
+        <div class="entry-count">75</div>
+        <div class="entry-label">ENTRIES</div>
+        <div class="bonus-box">
+          <span class="bonus">+1,000 XP</span>
+          <span class="bonus">+1,000 COINS</span>
+        </div>
+        <div class="price">$25</div>
+        <div class="sub-text">(Single Payment Only)</div>
+        <button class="select-btn">SELECT</button>
+      </div>
+    </div>
+
+    <div class="card gold popular">
+      <div class="popular-tag">MOST POPULAR</div>
+      <div class="card-inner">
+        <div class="tier-name">GOLD</div>
+        <div class="entry-count">200</div>
+        <div class="entry-label">ENTRIES</div>
+        <div class="bonus-box">
+          <span class="bonus">+2,500 XP</span>
+          <span class="bonus">+2,500 COINS</span>
+        </div>
+        <div class="price">$50</div>
+        <div class="sub-text">(Single Payment Only)</div>
+        <button class="select-btn">SELECT</button>
+      </div>
+    </div>
+
+    <div class="card platinum">
+      <div class="card-inner">
+        <div class="tier-name">PLATINUM</div>
+        <div class="entry-count">500</div>
+        <div class="entry-label">ENTRIES</div>
+        <div class="bonus-box">
+          <span class="bonus">+5,000 XP</span>
+          <span class="bonus">+5,000 COINS</span>
+        </div>
+        <div class="price">$100</div>
+        <div class="sub-text">(Single Payment Only)</div>
+        <button class="select-btn">SELECT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  :root {
+    --blueprint-blue: #0a2540;
+    --hazard-yellow: #ffd700;
+    --text-white: #ffffff;
+  }
+
+  body {
+    background-color: var(--blueprint-blue);
+    font-family: "Inter", sans-serif;
+    padding: 50px 0;
+  }
+
+  .blueprint-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-header h2 {
+    color: var(--hazard-yellow);
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 0px #000;
+  }
+
+  .section-header p {
+    color: #fff;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* Grid Layout */
+  .package-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  /* Base Card Styling */
+  .card {
+    position: relative;
+    border-radius: 12px;
+    padding: 5px;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .card-inner {
+    padding: 30px 15px;
+    border-radius: 8px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Tier Specific Textures */
+  .basic .card-inner {
+    background: linear-gradient(135deg, #0056b3 0%, #002d5d 100%);
+    background-image: radial-gradient(
+      circle at 2px 2px,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 0
+    );
+    background-size: 4px 4px; /* Tarp effect */
+  }
+
+  .bronze .card-inner {
+    background: linear-gradient(135deg, #8b4513 0%, #3e1e0a 100%);
+    border: 1px solid #a0522d;
+  }
+
+  .silver .card-inner {
+    background: linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%);
+  }
+
+  .gold .card-inner {
+    background: linear-gradient(135deg, #f1c40f 0%, #9b7b00 100%);
+  }
+
+  .platinum .card-inner {
+    background: linear-gradient(135deg, #8e44ad 0%, #2c003e 100%);
+  }
+
+  /* Text Styling */
+  .tier-name {
+    color: #fff;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  .entry-count {
+    color: #fff;
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .entry-label {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .bonus-box {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .price {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+  }
+  .sub-text {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.7rem;
+    margin-bottom: 20px;
+  }
+
+  /* The Select Button */
+  .select-btn {
+    background: #eee;
+    color: #333;
+    border: none;
+    padding: 12px 30px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    width: 80%;
+    box-shadow:
+      0 4px 0 #999,
+      inset 0 1px 1px #fff;
+    transition: all 0.1s ease;
+  }
+
+  .select-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #999;
+  }
+
+  /* Most Popular Tag */
+  .popular {
+    border: 3px solid var(--hazard-yellow);
+  }
+  .popular-tag {
+    position: absolute;
+    top: 15px;
+    right: -35px;
+    background: var(--hazard-yellow);
+    color: #000;
+    padding: 5px 40px;
+    font-size: 0.7rem;
+    font-weight: 900;
+    transform: rotate(45deg);
+    z-index: 10;
+  }
+
+  /* Industrial Grommets for Basic card */
+  .grommet {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border-radius: 50%;
+    border: 2px solid #666;
+  }
+  .top-left {
+    top: 10px;
+    left: 10px;
+  }
+  .top-right {
+    top: 10px;
+    right: 10px;
+  }
+  .bottom-left {
+    bottom: 10px;
+    left: 10px;
+  }
+  .bottom-right {
+    bottom: 10px;
+    right: 10px;
+  }
+</style>
