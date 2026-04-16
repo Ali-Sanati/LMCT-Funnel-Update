@@ -1,0 +1,671 @@
+﻿<style>
+  .prize-carousel,
+  .prize-carousel * {
+    box-sizing: border-box;
+  }
+
+  .prize-carousel {
+    --carousel-bg-top: #0d1c31;
+    --carousel-bg-bottom: #040a14;
+    --carousel-panel: rgba(10, 21, 36, 0.78);
+    --carousel-panel-strong: rgba(5, 12, 24, 0.92);
+    --carousel-border: rgba(255, 255, 255, 0.12);
+    --carousel-accent: #43c7ff;
+    --carousel-text: #f4f8fc;
+    --carousel-muted: rgba(222, 232, 242, 0.76);
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: clamp(18px, 3vw, 28px);
+    overflow: hidden;
+    border: 1px solid var(--carousel-border);
+    border-radius: 28px;
+    font-family: "Montserrat", sans-serif;
+    color: var(--carousel-text);
+    background:
+      radial-gradient(circle at top, rgba(67, 199, 255, 0.22), transparent 32%),
+      radial-gradient(
+        circle at 18% 20%,
+        rgba(255, 255, 255, 0.08),
+        transparent 18%
+      ),
+      linear-gradient(
+        180deg,
+        var(--carousel-bg-top) 0%,
+        var(--carousel-bg-bottom) 100%
+      );
+    box-shadow:
+      0 28px 60px rgba(0, 0, 0, 0.28),
+      0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  }
+
+  .prize-carousel::before,
+  .prize-carousel::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .prize-carousel::before {
+    top: -90px;
+    right: -100px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(67, 199, 255, 0.14);
+    filter: blur(12px);
+  }
+
+  .prize-carousel::after {
+    left: -120px;
+    bottom: -140px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    filter: blur(18px);
+  }
+
+  .prize-carousel__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .prize-carousel__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .prize-carousel__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #18afff 0%, #0c7edb 100%);
+    box-shadow:
+      0 12px 24px rgba(12, 126, 219, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .prize-carousel__count {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--carousel-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .prize-carousel__title {
+    max-width: 12ch;
+    margin: 18px 0 0;
+    font-size: clamp(32px, 6vw, 58px);
+    font-weight: 900;
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+
+  .prize-carousel__highlight {
+    color: var(--carousel-accent);
+  }
+
+  .prize-carousel__lede {
+    max-width: 560px;
+    margin: 14px 0 0;
+    color: var(--carousel-muted);
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .prize-carousel__specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .prize-carousel__spec {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #f6fbff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .prize-carousel__stage {
+    margin: 24px 0 0;
+  }
+
+  .prize-carousel__image-shell {
+    position: relative;
+    min-height: clamp(260px, 48vw, 500px);
+    padding: clamp(18px, 3vw, 28px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    background:
+      radial-gradient(
+        circle at 50% 12%,
+        rgba(67, 199, 255, 0.16),
+        transparent 32%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.02)
+      ),
+      var(--carousel-panel);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 18px 40px rgba(0, 0, 0, 0.24);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+  }
+
+  .prize-carousel__image-shell::before {
+    content: "";
+    position: absolute;
+    inset: 18px 14px auto;
+    height: 42%;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent);
+    opacity: 0.38;
+    pointer-events: none;
+  }
+
+  .prize-carousel--dragging .prize-carousel__image-shell {
+    cursor: grabbing;
+  }
+
+  .prize-carousel__image {
+    width: 100%;
+    max-width: 760px;
+    max-height: clamp(220px, 45vw, 430px);
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 24px 42px rgba(0, 0, 0, 0.34));
+    transform: translateZ(0);
+    transition:
+      opacity 0.28s ease,
+      transform 0.28s ease;
+  }
+
+  .prize-carousel__caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 14px;
+    color: var(--carousel-muted);
+  }
+
+  .prize-carousel__view-label {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .prize-carousel__hint {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .prize-carousel__controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .prize-carousel__button-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .prize-carousel__button {
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    background: var(--carousel-panel-strong);
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      transform 0.22s ease,
+      border-color 0.22s ease,
+      background 0.22s ease;
+  }
+
+  .prize-carousel__button:hover {
+    transform: translateY(-1px);
+    border-color: rgba(67, 199, 255, 0.5);
+    background: rgba(67, 199, 255, 0.18);
+  }
+
+  .prize-carousel__button:focus-visible,
+  .prize-carousel__dot:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  .prize-carousel__button svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .prize-carousel__dots {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .prize-carousel__dot {
+    width: 10px;
+    height: 10px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.24);
+    cursor: pointer;
+    transition:
+      width 0.25s ease,
+      background 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .prize-carousel__dot.prize-carousel__dot--active {
+    width: 34px;
+    background: linear-gradient(90deg, #79ddff 0%, #1ba9ff 100%);
+    transform: translateY(-1px);
+  }
+
+  .prize-carousel__status {
+    color: var(--carousel-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px) {
+    .prize-carousel {
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .prize-carousel__header,
+    .prize-carousel__specs,
+    .prize-carousel__caption,
+    .prize-carousel__controls {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .prize-carousel__title,
+    .prize-carousel__lede {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .prize-carousel__button-group {
+      order: 2;
+    }
+
+    .prize-carousel__status {
+      width: 100%;
+      order: 3;
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .prize-carousel *,
+    .prize-carousel::before,
+    .prize-carousel::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+<div
+  class="prize-carousel"
+  id="prizeCarousel"
+  tabindex="0"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Holden LX Torana prize gallery"
+  aria-describedby="prizeCarouselHint"
+>
+  <div class="prize-carousel__content">
+    <div class="prize-carousel__header">
+      <span class="prize-carousel__badge">First Prize</span>
+      <span class="prize-carousel__count" id="prizeCarouselCount">1 / 5</span>
+    </div>
+
+    <h2 class="prize-carousel__title">
+      Holden <span class="prize-carousel__highlight">LX Torana</span>
+    </h2>
+
+    <p class="prize-carousel__lede">
+      Swipe, tap the dots, or use the arrow keys to explore every angle of the
+      build.
+    </p>
+
+    <div class="prize-carousel__specs" aria-label="Prize vehicle specs">
+      <span class="prize-carousel__spec">4.0L V8</span>
+      <span class="prize-carousel__spec">309kW</span>
+      <span class="prize-carousel__spec">6-Speed Manual</span>
+    </div>
+
+    <figure class="prize-carousel__stage">
+      <div class="prize-carousel__image-shell" id="prizeCarouselStage">
+        <img
+          class="prize-carousel__image"
+          id="prizeCarouselImage"
+          alt="Holden LX Torana hero angle"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <figcaption class="prize-carousel__caption">
+        <span class="prize-carousel__view-label" id="prizeCarouselViewLabel">
+          Hero angle
+        </span>
+        <span class="prize-carousel__hint" id="prizeCarouselHint">
+          Drag to browse gallery
+        </span>
+      </figcaption>
+    </figure>
+
+    <div class="prize-carousel__controls">
+      <div class="prize-carousel__button-group">
+        <button
+          class="prize-carousel__button"
+          id="prizeCarouselPrev"
+          type="button"
+          aria-label="Show previous prize image"
+        >
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
+        </button>
+        <button
+          class="prize-carousel__button"
+          id="prizeCarouselNext"
+          type="button"
+          aria-label="Show next prize image"
+        >
+          <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18" /></svg>
+        </button>
+      </div>
+
+      <div
+        class="prize-carousel__dots"
+        id="prizeCarouselDots"
+        aria-label="Prize gallery slide selection"
+      ></div>
+
+      <span class="prize-carousel__status" id="prizeCarouselStatus">
+        Autoplay pauses on hover or focus
+      </span>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var carouselEl = document.getElementById("prizeCarousel");
+    if (!carouselEl) return;
+
+    var slides = [
+        {
+          src: "https://statics.myclickfunnels.com/workspace/joygEX/image/21830107/file/b7754132b96186f75bd6ae79a1494967.png",
+          alt: "Holden LX Torana hero angle",
+          label: "Hero angle",
+        },
+        {
+          src: "https://statics.myclickfunnels.com/workspace/joygEX/image/21830105/file/51593564e056dc29a7aa4c651c035559.png",
+          alt: "Holden LX Torana driver side view",
+          label: "Driver side",
+        },
+        {
+          src: "https://statics.myclickfunnels.com/workspace/joygEX/image/21830104/file/14255c47272dc5a4d354884843601507.png",
+          alt: "Holden LX Torana rear quarter view",
+          label: "Rear quarter",
+        },
+        {
+          src: "https://statics.myclickfunnels.com/workspace/joygEX/image/21830106/file/1b8857ca99374a265bc1ec0831144aab.png",
+          alt: "Holden LX Torana front detail view",
+          label: "Front detail",
+        },
+        {
+          src: "https://statics.myclickfunnels.com/workspace/joygEX/image/21830108/file/e22674331bcdca74a678f7fcd0caf83c.png",
+          alt: "Holden LX Torana rear detail view",
+          label: "Rear detail",
+        },
+      ],
+      slideCount = slides.length,
+      currentIndex = 0,
+      autoAdvanceMs = 4800,
+      reduceMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      autoplayTimer = null,
+      dragStartX = 0,
+      isPointerDown = false,
+      imageEl = document.getElementById("prizeCarouselImage"),
+      stageEl = document.getElementById("prizeCarouselStage"),
+      countEl = document.getElementById("prizeCarouselCount"),
+      labelEl = document.getElementById("prizeCarouselViewLabel"),
+      dotsEl = document.getElementById("prizeCarouselDots"),
+      prevButton = document.getElementById("prizeCarouselPrev"),
+      nextButton = document.getElementById("prizeCarouselNext");
+
+    slides.forEach(function (slide) {
+      var preloadImage = new Image();
+      preloadImage.src = slide.src;
+    });
+
+    function renderDots() {
+      var dotsHtml = "";
+      for (var index = 0; index < slideCount; index++) {
+        dotsHtml +=
+          '<button type="button" class="prize-carousel__dot' +
+          (index === 0 ? " prize-carousel__dot--active" : "") +
+          '" data-index="' +
+          index +
+          '" aria-current="' +
+          (index === 0 ? "true" : "false") +
+          '" aria-label="Show image ' +
+          (index + 1) +
+          " of " +
+          slideCount +
+          '"></button>';
+      }
+      dotsEl.innerHTML = dotsHtml;
+    }
+
+    function syncDots() {
+      var dots = dotsEl.children;
+      for (var dotIndex = 0; dotIndex < slideCount; dotIndex++) {
+        var isActive = dotIndex === currentIndex;
+        dots[dotIndex].classList.toggle(
+          "prize-carousel__dot--active",
+          isActive,
+        );
+        dots[dotIndex].setAttribute(
+          "aria-current",
+          isActive ? "true" : "false",
+        );
+      }
+    }
+
+    function revealImage() {
+      imageEl.style.opacity = "1";
+      imageEl.style.transform = "translateY(0)";
+    }
+
+    function goToSlide(targetIndex) {
+      var slide = null;
+      currentIndex = ((targetIndex % slideCount) + slideCount) % slideCount;
+      slide = slides[currentIndex];
+      imageEl.style.opacity = "0.24";
+      imageEl.style.transform = "translateY(4px)";
+      imageEl.src = slide.src;
+      imageEl.alt = slide.alt;
+      labelEl.textContent = slide.label;
+      countEl.textContent = currentIndex + 1 + " / " + slideCount;
+      syncDots();
+
+      if (imageEl.complete) window.requestAnimationFrame(revealImage);
+    }
+
+    function stopAutoplay() {
+      if (!autoplayTimer) return;
+      window.clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+
+    function startAutoplay() {
+      if (reduceMotion || slideCount < 2 || autoplayTimer) return;
+      autoplayTimer = window.setInterval(function () {
+        goToSlide(currentIndex + 1);
+      }, autoAdvanceMs);
+    }
+
+    function restartAutoplay() {
+      stopAutoplay();
+      startAutoplay();
+    }
+
+    function finishDrag() {
+      isPointerDown = false;
+      carouselEl.classList.remove("prize-carousel--dragging");
+    }
+
+    imageEl.addEventListener("load", function () {
+      window.requestAnimationFrame(revealImage);
+    });
+
+    renderDots();
+    goToSlide(0);
+    startAutoplay();
+
+    prevButton.addEventListener("click", function () {
+      goToSlide(currentIndex - 1);
+      restartAutoplay();
+    });
+
+    nextButton.addEventListener("click", function () {
+      goToSlide(currentIndex + 1);
+      restartAutoplay();
+    });
+
+    dotsEl.addEventListener("click", function (event) {
+      var dotButton = event.target.closest("[data-index]");
+      if (!dotButton) return;
+      goToSlide(Number(dotButton.getAttribute("data-index")));
+      restartAutoplay();
+    });
+
+    carouselEl.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goToSlide(currentIndex - 1);
+        restartAutoplay();
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goToSlide(currentIndex + 1);
+        restartAutoplay();
+      }
+    });
+
+    stageEl.addEventListener("pointerdown", function (event) {
+      dragStartX = event.clientX;
+      isPointerDown = true;
+      carouselEl.classList.add("prize-carousel--dragging");
+      stopAutoplay();
+    });
+
+    window.addEventListener("pointermove", function (event) {
+      var dragDistance = 0;
+      if (!isPointerDown) return;
+      dragDistance = event.clientX - dragStartX;
+      if (Math.abs(dragDistance) < 48) return;
+      goToSlide(dragDistance < 0 ? currentIndex + 1 : currentIndex - 1);
+      dragStartX = event.clientX;
+    });
+
+    window.addEventListener("pointerup", function () {
+      if (!isPointerDown) return;
+      finishDrag();
+      startAutoplay();
+    });
+
+    window.addEventListener("pointercancel", function () {
+      if (!isPointerDown) return;
+      finishDrag();
+      startAutoplay();
+    });
+
+    carouselEl.addEventListener("mouseenter", stopAutoplay);
+    carouselEl.addEventListener("mouseleave", startAutoplay);
+    carouselEl.addEventListener("focusin", stopAutoplay);
+    carouselEl.addEventListener("focusout", function (event) {
+      if (carouselEl.contains(event.relatedTarget)) return;
+      startAutoplay();
+    });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stopAutoplay();
+      else startAutoplay();
+    });
+  })();
+</script>
+<!-- LMCT+ prize carousel - END -->

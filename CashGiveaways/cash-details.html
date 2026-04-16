@@ -1,0 +1,610 @@
+<style>
+  /* ===== LMCT+ Cash Hero Section ===== */
+  .cash-hero {
+    font-family:
+      "Inter",
+      "Segoe UI",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    position: relative;
+    width: 100%;
+    padding: 72px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    box-sizing: border-box;
+    background: linear-gradient(
+      180deg,
+      #0a3d1a 0%,
+      #0d4f22 30%,
+      #0a3d1a 70%,
+      #062a12 100%
+    );
+  }
+
+  .cash-hero *,
+  .cash-hero *::before,
+  .cash-hero *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Light burst overlay */
+  .cash-hero::before {
+    content: "";
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 80%;
+    background: radial-gradient(
+      ellipse 50% 50% at 50% 50%,
+      rgba(120, 255, 120, 0.08) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .cash-hero-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    max-width: 700px;
+    width: 100%;
+  }
+
+  /* --- Top Label --- */
+  .cash-label {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    font-size: clamp(28px, 5vw, 38px);
+    font-weight: 500;
+    font-style: italic;
+    padding: 8px 28px;
+    border-radius: 24px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+  }
+
+  /* --- Main Headline --- */
+  .cash-headline {
+    font-size: clamp(48px, 5vw, 68px);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    margin-bottom: 18px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  /* --- Price Banner Stack --- */
+  .cash-price-stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Stacked card layers behind price */
+  .cash-price-wrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  .cash-price-wrap::before,
+  .cash-price-wrap::after {
+    content: "";
+    position: absolute;
+    border-radius: 12px;
+    background: rgba(10, 60, 20, 0.7);
+    border: 1px solid rgba(80, 200, 80, 0.15);
+  }
+
+  .cash-price-wrap::before {
+    top: 6px;
+    left: -8px;
+    right: -8px;
+    bottom: -6px;
+    transform: rotate(-1.2deg);
+    z-index: 0;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  .cash-price-wrap::after {
+    top: 12px;
+    left: -14px;
+    right: -14px;
+    bottom: -12px;
+    transform: rotate(1.5deg);
+    z-index: -1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .cash-price-banner {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    background: linear-gradient(180deg, #0d5a28 0%, #0a4420 50%, #083618 100%);
+    border: 2px solid rgba(80, 220, 80, 0.25);
+    border-radius: 12px;
+    padding: 16px 48px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(100, 255, 100, 0.1);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    cursor: default;
+  }
+
+  .cash-price-banner:hover {
+    transform: scale(1.04);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(80, 255, 80, 0.15),
+      inset 0 1px 0 rgba(100, 255, 100, 0.15);
+  }
+
+  .cash-price {
+    font-size: clamp(56px, 14vw, 120px);
+    font-weight: 900;
+    color: #00f225;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-shadow:
+      0 0 30px rgba(61, 255, 92, 0.4),
+      0 0 60px rgba(61, 255, 92, 0.15),
+      0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* --- Bottom Banner --- */
+  .cash-bottom-banner {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 12px 40px;
+    border-radius: 8px;
+    margin-top: -4px;
+    position: relative;
+    z-index: 2;
+    box-shadow:
+      0 6px 24px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .cash-bottom-text {
+    font-size: clamp(20px, 4vw, 36px);
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  /* ===== Badges Section ===== */
+  .badges-section {
+    background: linear-gradient(180deg, #0b4d21 0%, #041a0a 100%);
+    border-top: 1px solid black;
+    box-shadow: -10px 0px 40px rgba(0, 0, 0, 0.8);
+    padding: 48px 16px 80px;
+    font-family:
+      "Inter",
+      "Segoe UI",
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  .badges-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Cash Benefit Badge */
+  .cash-benefit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+    cursor: default;
+  }
+
+  .cash-benefit:hover {
+    transform: scale(1.05);
+  }
+
+  @media (min-width: 640px) {
+    .cash-benefit {
+      font-size: 20px;
+    }
+  }
+
+  /* Badge Icon */
+  .badge-icon {
+    width: 84px;
+    height: 84px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      border-color 0.3s ease,
+      transform 0.3s ease;
+    flex-shrink: 0;
+  }
+  .badge-icon-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+  .cash-benefit:hover .badge-icon {
+    border-color: #00ff27;
+  }
+
+  @media (min-width: 640px) {
+    /* .badge-icon {
+      width: 80px;
+      height: 80px;
+    } */
+  }
+
+  /* SVG Icons */
+  .badge-icon img {
+    width: 60px;
+  }
+
+  /* Badge Title */
+  .badge-title {
+    font-weight: bold;
+    color: #00ff27;
+    filter: drop-shadow(0 1px 2px rgba(0, 255, 68, 0.3));
+    margin-top: 12px;
+    font-size: 1em;
+  }
+
+  /* Badge Subtitle */
+  .badge-subtitle {
+    color: white;
+    font-size: 0.9em;
+    margin-top: 4px;
+  }
+
+  @media (min-width: 640px) {
+    .badge-subtitle {
+      font-size: 1em;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .cash-hero {
+      padding: 48px 12px;
+    }
+    .cash-label {
+      padding: 6px 20px;
+      margin-bottom: 16px;
+    }
+    .cash-headline {
+      margin-bottom: 14px;
+    }
+    .cash-price-banner {
+      padding: 12px 28px;
+      border-radius: 10px;
+    }
+    .cash-price-wrap::before {
+      top: 4px;
+      left: -5px;
+      right: -5px;
+      bottom: -4px;
+      border-radius: 10px;
+    }
+    .cash-price-wrap::after {
+      top: 8px;
+      left: -9px;
+      right: -9px;
+      bottom: -8px;
+      border-radius: 10px;
+    }
+    .cash-bottom-banner {
+      padding: 10px 24px;
+      border-radius: 6px;
+    }
+    .cash-bottom-text {
+      letter-spacing: 3px;
+    }
+    .badges-container {
+      gap: 32px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .cash-hero {
+      padding: 80px 24px;
+    }
+    .cash-price-banner {
+      padding: 20px 64px;
+    }
+    .cash-bottom-banner {
+      padding: 14px 52px;
+    }
+    .badges-section {
+      padding: 64px 24px 100px;
+    }
+  }
+  .cash-rain-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cash-rain-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .cash-hero-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Shared particle base */
+  .cash-particle {
+    position: absolute;
+    top: -120px;
+    left: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  /* Dollar bill */
+  .cash-dollar {
+    width: var(--size, 56px);
+    height: calc(var(--size, 56px) * 0.58);
+    opacity: var(--opacity, 0.7);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transform-origin: center;
+    animation: cash-fall var(--duration, 7s) linear infinite;
+    animation-delay: var(--delay, 0s);
+    z-index: 1;
+    background-image: url('data:image/svg+xml,%3Csvg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"%3E%3Cg%3E%3Cg%3E%3Cpath style="fill:%2374D24F;" d="M496,112H16c-8.82,0-16,7.18-16,16v256c0,8.82,7.18,16,16,16h480c8.82,0,16-7.18,16-16V128 C512,119.18,504.82,112,496,112z"/%3E%3C/g%3E%3Cg%3E%3Cpath style="fill:%23FFEFBC;" d="M472,192c-22.055,0-40-17.945-40-40c0-4.422-3.578-8-8-8H88c-4.422,0-8,3.578-8,8 c0,22.055-17.945,40-40,40c-4.422,0-8,3.578-8,8v112c0,4.422,3.578,8,8,8c22.055,0,40,17.945,40,40c0,4.422,3.578,8,8,8h336 c4.422,0,8-3.578,8-8c0-22.055,17.945-40,40-40c4.422,0,8-3.578,8-8V200C480,195.578,476.422,192,472,192z"/%3E%3C/g%3E%3Cg%3E%3Cpath style="fill:%23869B55;" d="M128,256c0,48.221,26.691,90.175,66.081,112h123.839C357.309,346.175,384,304.221,384,256 s-26.691-90.175-66.081-112H194.08C154.691,165.825,128,207.779,128,256z"/%3E%3C/g%3E%3Cg%3E%3Cpath style="fill:%23FFEFBC;" d="M256,244c-16.023,0-28-8.445-28-16c0-7.555,11.977-16,28-16s28,8.445,28,16c0,6.625,5.375,12,12,12 s12-5.375,12-12c0-19.236-16.824-34.862-40-38.932V184c0-6.625-5.375-12-12-12s-12,5.375-12,12v5.068 c-23.176,4.07-40,19.695-40,38.932c0,22.43,22.844,40,52,40c16.023,0,28,8.445,28,16c0,7.555-11.977,16-28,16s-28-8.445-28-16 c0-6.625-5.375-12-12-12s-12,5.375-12,12c0,19.236,16.824,34.862,40,38.932V328c0,6.625,5.375,12,12,12s12-5.375,12-12v-5.068 c23.176-4.07,40-19.695,40-38.932C308,261.57,285.156,244,256,244z"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%2374D24F;" cx="80" cy="256" r="24"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%2374D24F;" cx="432" cy="256" r="24"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%23869B55;" cx="40" cy="152" r="16"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%23869B55;" cx="472" cy="152" r="16"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%23869B55;" cx="40" cy="360" r="16"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%23869B55;" cx="472" cy="360" r="16"/%3E%3C/g%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E%0A');
+  }
+
+  /* Coin */
+  .cash-coin {
+    width: var(--size, 26px);
+    height: var(--size, 26px);
+    border-radius: 50%;
+    opacity: var(--opacity, 0.8);
+    background: radial-gradient(
+      circle at 35% 35%,
+      #fff3a6 0%,
+      #ffd700 38%,
+      #d4a514 72%,
+      #9b7400 100%
+    );
+    box-shadow:
+      inset 0 2px 3px rgba(255, 255, 255, 0.45),
+      inset 0 -2px 3px rgba(0, 0, 0, 0.18),
+      0 4px 10px rgba(0, 0, 0, 0.18);
+    animation: cash-fall-spin var(--duration, 5s) ease-in infinite;
+    animation-delay: var(--delay, 0s);
+    z-index: 2;
+  }
+
+  .cash-coin::before {
+    content: "$";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: calc(var(--size, 26px) * 0.55);
+    font-weight: 900;
+    color: rgba(80, 55, 0, 0.9);
+  }
+
+  /* Confetti */
+  .cash-confetti {
+    width: var(--w, 10px);
+    height: var(--h, 4px);
+    opacity: var(--opacity, 0.9);
+    background: var(--color, #ffffff);
+    transform: rotate(var(--rot, 0deg));
+    animation: confetti-fall var(--duration, 4.8s) ease-out infinite;
+    animation-delay: var(--delay, 0s);
+    z-index: 0;
+  }
+
+  /* Keyframes */
+  @keyframes cash-fall {
+    0% {
+      transform: translate3d(0, -120px, 0) rotate(0deg);
+    }
+    100% {
+      transform: translate3d(var(--drift, 30px), 110vh, 0)
+        rotate(var(--spin, 360deg));
+    }
+  }
+
+  @keyframes cash-fall-spin {
+    0% {
+      transform: translate3d(0, -120px, 0) rotateY(0deg) rotate(0deg);
+    }
+    100% {
+      transform: translate3d(var(--drift, 12px), 110vh, 0) rotateY(720deg)
+        rotate(var(--spin, 300deg));
+    }
+  }
+
+  @keyframes confetti-fall {
+    0% {
+      transform: translate3d(0, -100px, 0) rotate(var(--rot, 0deg));
+    }
+    100% {
+      transform: translate3d(var(--drift, 45px), 110vh, 0)
+        rotate(calc(var(--rot, 0deg) + 360deg));
+    }
+  }
+
+  /* Reduce density on mobile */
+  @media (max-width: 767px) {
+    .cash-dollar {
+      opacity: 0.45;
+    }
+    .cash-confetti {
+      opacity: 0.45;
+    }
+  }
+</style>
+
+<section class="cash-hero" aria-label="Cash prize alternative">
+  <div class="cash-rain-layer" id="cashRainLayer" aria-hidden="true"></div>
+
+  <div class="cash-hero-inner">
+    <span class="cash-label">Don't want the car?</span>
+    <h2 class="cash-headline">How about</h2>
+    <div class="cash-price-stack">
+      <div class="cash-price-wrap">
+        <div class="cash-price-banner">
+          <span class="cash-price">$150,000</span>
+        </div>
+      </div>
+      <div class="cash-bottom-banner">
+        <span class="cash-bottom-text">Tax Free Cash!</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Badges Section -->
+<section class="badges-section">
+  <div class="badges-container">
+    <!-- Badge 1: INSTANT TRANSFER -->
+    <div class="cash-benefit">
+      <div class="badge-icon">
+        <img
+          src="https://images.clickfunnels.com/11/c3774f8eae4414a7bb23ef9714c779/cash-instant-icon.svg"
+        />
+      </div>
+      <div class="badge-title">INSTANT</div>
+      <div class="badge-subtitle">TRANSFER</div>
+    </div>
+
+    <!-- Badge 2: 100% TAX FREE -->
+    <div class="cash-benefit">
+      <div class="badge-icon">
+        <img
+          src="https://images.clickfunnels.com/bb/db416d35864947b81b7afce3cdd5f0/cash-bag-icon.svg"
+        />
+      </div>
+      <div class="badge-title">100%</div>
+      <div class="badge-subtitle">TAX FREE</div>
+    </div>
+
+    <!-- Badge 3: $150M GIVEN AWAY -->
+    <div class="cash-benefit">
+      <div class="badge-icon">
+        <img
+          src="https://images.clickfunnels.com/5f/20ded5c07a477b881b5dae6ec4784b/cash-giving-icon.svg"
+        />
+      </div>
+      <div class="badge-title">$150M</div>
+      <div class="badge-subtitle">GIVEN AWAY</div>
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    var layer = document.getElementById("cashRainLayer");
+    if (!layer) return;
+
+    var dollarNum = 26; // original was 50, reduced for smoother CF performance
+    var coinNum = 14; // original was 30
+    var confettiNum = 90; // original was 400
+
+    var confettiColors = [
+      "#00ff27",
+      "#16a34a",
+      "#22c55e",
+      "#86efac",
+      "#facc15",
+      "#ffffff",
+    ];
+
+    function rand(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function makeParticle(type) {
+      var el = document.createElement("div");
+      el.className = "cash-particle " + type;
+
+      el.style.left = rand(0, 100) + "%";
+      el.style.setProperty("--delay", rand(0, 6).toFixed(2) + "s");
+      el.style.setProperty("--drift", rand(-60, 60).toFixed(0) + "px");
+      el.style.setProperty("--spin", rand(180, 720).toFixed(0) + "deg");
+      el.style.setProperty("--opacity", rand(0.35, 0.9).toFixed(2));
+
+      if (type === "cash-dollar") {
+        el.style.setProperty("--size", rand(42, 74).toFixed(0) + "px");
+        el.style.setProperty("--duration", rand(5.5, 9).toFixed(2) + "s");
+      }
+
+      if (type === "cash-coin") {
+        el.style.setProperty("--size", rand(18, 34).toFixed(0) + "px");
+        el.style.setProperty("--duration", rand(3.5, 6).toFixed(2) + "s");
+      }
+
+      if (type === "cash-confetti") {
+        el.style.setProperty("--w", rand(6, 14).toFixed(0) + "px");
+        el.style.setProperty("--h", rand(3, 6).toFixed(0) + "px");
+        el.style.setProperty("--rot", rand(0, 360).toFixed(0) + "deg");
+        el.style.setProperty("--duration", rand(3.8, 6.2).toFixed(2) + "s");
+        el.style.setProperty(
+          "--color",
+          confettiColors[Math.floor(Math.random() * confettiColors.length)],
+        );
+      }
+
+      return el;
+    }
+
+    for (var i = 0; i < dollarNum; i++) {
+      layer.appendChild(makeParticle("cash-dollar"));
+    }
+
+    for (var j = 0; j < coinNum; j++) {
+      layer.appendChild(makeParticle("cash-coin"));
+    }
+
+    // for (var k = 0; k < confettiNum; k++) {
+    //   layer.appendChild(makeParticle("cash-confetti"));
+    // }
+  })();
+</script>

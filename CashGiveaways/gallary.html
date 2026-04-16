@@ -1,0 +1,231 @@
+<style>
+  .prize-carousel {
+    width: 100%;
+    background: #fff;
+    padding: 40px 0 30px;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+  }
+  .prize-carousel__badge {
+    display: inline-block;
+    background: #0ea1fd;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 9px 26px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+  }
+  .prize-carousel__title {
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #111;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .prize-carousel__highlight {
+    color: #031b2b;
+  }
+  .prize-carousel__specs {
+    font-size: clamp(12px, 2.5vw, 14px);
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+  }
+  .prize-carousel__image {
+    max-width: 580px;
+    margin: 20px auto 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+  .prize-carousel__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .prize-carousel__controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .prize-carousel__button {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    padding: 0;
+    outline: none;
+  }
+  .prize-carousel__button:hover {
+    border-color: #111;
+    background: #111;
+  }
+  .prize-carousel__button:hover svg {
+    stroke: #fff;
+  }
+  .prize-carousel__button svg {
+    width: 17px;
+    height: 17px;
+    stroke: #333;
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s;
+  }
+  .prize-carousel__dots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .prize-carousel__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d4d4d4;
+    transition: all 0.25s;
+  }
+  .prize-carousel__dot.prize-carousel__dot--active {
+    background: #111;
+    width: 20px;
+    border-radius: 4px;
+  }
+</style>
+<div class="prize-carousel">
+  <span class="prize-carousel__badge">First Prize</span>
+  <h2 class="prize-carousel__title">
+    HOLDEN <span class="prize-carousel__highlight">LX TORANA</span>
+  </h2>
+  <div class="prize-carousel__specs">
+    4.0L V8 &middot; 309kW &middot; 6-Speed Manual
+  </div>
+  <div class="prize-carousel__image">
+    <img id="prizeCarouselImage" alt="Holden LX Torana" />
+  </div>
+  <div class="prize-carousel__controls">
+    <button class="prize-carousel__button" id="prizeCarouselPrev">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
+    </button>
+    <div class="prize-carousel__dots" id="prizeCarouselDots"></div>
+    <button class="prize-carousel__button" id="prizeCarouselNext">
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18" /></svg>
+    </button>
+  </div>
+</div>
+<script>
+  (function () {
+    var slides = [
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21830107/file/b7754132b96186f75bd6ae79a1494967.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21830105/file/51593564e056dc29a7aa4c651c035559.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21830104/file/14255c47272dc5a4d354884843601507.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21830106/file/1b8857ca99374a265bc1ec0831144aab.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21830108/file/e22674331bcdca74a678f7fcd0caf83c.png",
+      ],
+      slideCount = slides.length,
+      currentIndex = 0,
+      imageEl = document.getElementById("prizeCarouselImage"),
+      dotsEl = document.getElementById("prizeCarouselDots");
+
+    slides.forEach(function (slideUrl) {
+      var preloadImage = new Image();
+      preloadImage.src = slideUrl;
+    });
+
+    var dotsHtml = "";
+    for (var index = 0; index < slideCount; index++)
+      dotsHtml +=
+        '<div class="prize-carousel__dot' +
+        (index === 0 ? " prize-carousel__dot--active" : "") +
+        '"></div>';
+    dotsEl.innerHTML = dotsHtml;
+
+    function goToSlide(targetIndex) {
+      currentIndex = ((targetIndex % slideCount) + slideCount) % slideCount;
+      imageEl.src = slides[currentIndex];
+      var dots = dotsEl.children;
+      for (var dotIndex = 0; dotIndex < slideCount; dotIndex++)
+        dots[dotIndex].classList.toggle(
+          "prize-carousel__dot--active",
+          dotIndex === currentIndex,
+        );
+    }
+
+    goToSlide(0);
+
+    document.getElementById("prizeCarouselPrev").onclick = function () {
+      goToSlide(currentIndex - 1);
+    };
+
+    document.getElementById("prizeCarouselNext").onclick = function () {
+      goToSlide(currentIndex + 1);
+    };
+
+    var startX = 0,
+      isDragging = false,
+      imageWrapper = imageEl.parentElement;
+
+    imageWrapper.style.cursor = "grab";
+    imageWrapper.style.userSelect = "none";
+    imageWrapper.style.webkitUserSelect = "none";
+
+    imageWrapper.addEventListener("mousedown", function (e) {
+      e.preventDefault();
+      startX = e.clientX;
+      isDragging = true;
+    });
+
+    window.addEventListener("mousemove", function (e) {
+      if (!isDragging) return;
+      var dragDistance = e.clientX - startX;
+      if (Math.abs(dragDistance) > 40) {
+        goToSlide(dragDistance < 0 ? currentIndex + 1 : currentIndex - 1);
+        startX = e.clientX;
+      }
+    });
+
+    window.addEventListener("mouseup", function () {
+      isDragging = false;
+    });
+
+    imageWrapper.addEventListener(
+      "touchstart",
+      function (e) {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+      },
+      { passive: true },
+    );
+
+    imageWrapper.addEventListener(
+      "touchmove",
+      function (e) {
+        if (!isDragging) return;
+        var dragDistance = e.touches[0].clientX - startX;
+        if (Math.abs(dragDistance) > 40) {
+          goToSlide(dragDistance < 0 ? currentIndex + 1 : currentIndex - 1);
+          startX = e.touches[0].clientX;
+        }
+      },
+      { passive: true },
+    );
+
+    imageWrapper.addEventListener("touchend", function () {
+      isDragging = false;
+    });
+  })();
+</script>
+<!-- LMCT+ prize carousel - END -->

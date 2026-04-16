@@ -1,0 +1,220 @@
+<!--
+╔══════════════════════════════════════════════════════════════════╗
+║  LMCT+ URGENCY LOADING BAR                                      ║
+║                                                                  ║
+║  TO EDIT:                                                        ║
+║  1. Bar text → Change LMCT_BAR_TEXT below                        ║
+║  2. Colors  → Edit CSS variables on .lmctBarRoot                 ║
+╚══════════════════════════════════════════════════════════════════╝
+-->
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  .lmctBarRoot,
+  .lmctBarRoot * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .lmctBarRoot {
+    --bar-bg: #1a1a1a;
+    --bar-fill: #ff0000;
+    --bar-glow: rgba(255, 0, 0, 0.45);
+    --text-color: #fff;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    font-family: "Montserrat", sans-serif;
+    padding: 0 12px;
+  }
+  .lmctBarWrap {
+    position: relative;
+    width: 100%;
+    height: clamp(44px, 7vw, 58px);
+    background: var(--bar-bg);
+    border-radius: clamp(8px, 1.5vw, 12px);
+    overflow: hidden;
+    box-shadow:
+      0 0 20px var(--bar-glow),
+      0 0 60px rgba(255, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    border: 2px solid rgba(255, 0, 0, 0.35);
+  }
+  /* Animated fill bar */
+  .lmctBarFill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(
+      90deg,
+      #cc0000 0%,
+      #ff0000 40%,
+      #ff1a1a 70%,
+      #ff0000 100%
+    );
+    border-radius: inherit;
+    animation:
+      lmctFillUp 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+      lmctFillPulse 2s ease-in-out 3s infinite;
+  }
+  @keyframes lmctFillUp {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 85%;
+    }
+  }
+  @keyframes lmctFillPulse {
+    0%,
+    100% {
+      width: 85%;
+    }
+    50% {
+      width: 88%;
+    }
+  }
+  /* Shimmer stripe running across fill */
+  .lmctBarFill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 40%,
+      rgba(255, 255, 255, 0.18) 50%,
+      rgba(255, 255, 255, 0.1) 60%,
+      transparent 100%
+    );
+    animation: lmctBarShimmer 2s ease-in-out 1s infinite;
+  }
+  @keyframes lmctBarShimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 200%;
+    }
+  }
+  /* Animated diagonal stripes */
+  .lmctBarStripes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 8px,
+      rgba(0, 0, 0, 0.12) 8px,
+      rgba(0, 0, 0, 0.12) 16px
+    );
+    background-size: 22.6px 100%;
+    animation: lmctStripeMove 0.8s linear infinite;
+    border-radius: inherit;
+  }
+  @keyframes lmctStripeMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 22.6px 0;
+    }
+  }
+  /* Text overlay */
+  .lmctBarText {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(6px, 1.2vw, 10px);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .lmctBarLabel {
+    font-weight: 900;
+    font-size: clamp(11px, 2.4vw, 18px);
+    color: var(--text-color);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow:
+      0 1px 4px rgba(0, 0, 0, 0.4),
+      0 0 12px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    animation: lmctTextPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes lmctTextPulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.82;
+    }
+  }
+  /* Warning icon flash */
+  .lmctBarIcon {
+    font-size: clamp(13px, 2.6vw, 20px);
+    animation: lmctIconFlash 1s ease-in-out infinite;
+    filter: drop-shadow(0 0 4px rgba(255, 200, 0, 0.5));
+  }
+  @keyframes lmctIconFlash {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.12);
+    }
+  }
+  /* Edge glow on right side of fill */
+  .lmctBarEdge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 12px 2px rgba(255, 255, 255, 0.25);
+    border-radius: 0 4px 4px 0;
+    animation: lmctEdgePulse 1.2s ease-in-out infinite;
+  }
+  @keyframes lmctEdgePulse {
+    0%,
+    100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+</style>
+<div class="lmctBarRoot">
+  <div class="lmctBarWrap">
+    <div class="lmctBarFill">
+      <div class="lmctBarStripes"></div>
+      <div class="lmctBarEdge"></div>
+    </div>
+    <div class="lmctBarText">
+      <!-- ✏️ EDIT BAR TEXT HERE ✏️ -->
+      <span class="lmctBarIcon">⚠️</span>
+      <span class="lmctBarLabel">5X ENTRIES ENDS SOON!</span>
+      <span class="lmctBarIcon">⚠️</span>
+    </div>
+  </div>
+</div>

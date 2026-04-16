@@ -1,0 +1,323 @@
+<!-- LMCT+ FULL PRIZE SPECS - START -->
+<style>
+  .lmctSpec__wrap {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    font-family:
+      "Montserrat",
+      -apple-system,
+      sans-serif;
+  }
+  .lmctSpec__wrap * {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .lmctSpec__toggle {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background: #f5f5f5;
+    border: 1px solid #e4e4e4;
+    color: #111;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .lmctSpec__toggle:hover {
+    background: #ececec;
+  }
+  .lmctSpec__toggle::after {
+    content: " ▾";
+    font-size: 12px;
+  }
+  .lmctSpec__toggle.lmctSpec__open::after {
+    content: " ▴";
+  }
+  .lmctSpec__panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .lmctSpec__panel.lmctSpec__show {
+    max-height: 8000px;
+  }
+  .lmctSpec__inner {
+    padding-top: 24px;
+  }
+  .lmctSpec__title {
+    font-size: clamp(20px, 3.5vw, 28px);
+    font-weight: 900;
+    color: #111;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+  .lmctSpec__kv {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 24px;
+    background: #fafafa;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 22px;
+  }
+  .lmctSpec__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: 1px dashed #e4e4e4;
+    font-size: 13.5px;
+    line-height: 1.4;
+  }
+  .lmctSpec__row:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+  .lmctSpec__k {
+    font-weight: 700;
+    color: #444;
+    flex-shrink: 0;
+  }
+  .lmctSpec__v {
+    color: #111;
+    text-align: right;
+    font-weight: 500;
+  }
+  .lmctSpec__section {
+    border-top: 1px solid #eee;
+    padding: 16px 0;
+  }
+  .lmctSpec__section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+  .lmctSpec__h {
+    font-size: 15px;
+    font-weight: 800;
+    color: #111;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .lmctSpec__sub {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #222;
+    margin: 10px 0 6px;
+  }
+  .lmctSpec__ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .lmctSpec__ul li {
+    position: relative;
+    padding: 4px 0 4px 18px;
+    font-size: 13.5px;
+    color: #333;
+    line-height: 1.5;
+  }
+  .lmctSpec__ul li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 12px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #ff4400;
+  }
+  .lmctSpec__ul ul {
+    list-style: none;
+    padding: 4px 0 4px 10px;
+    margin: 0;
+  }
+  .lmctSpec__ul ul li {
+    font-size: 13px;
+    color: #555;
+    padding-left: 16px;
+  }
+  .lmctSpec__ul ul li::before {
+    background: #aaa;
+    width: 4px;
+    height: 4px;
+    top: 13px;
+  }
+  @media (max-width: 600px) {
+    .lmctSpec__kv {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 12px;
+    }
+    .lmctSpec__row:nth-last-child(-n + 2) {
+      border-bottom: 1px dashed #e4e4e4;
+    }
+    .lmctSpec__row:last-child {
+      border-bottom: none;
+    }
+    .lmctSpec__v {
+      text-align: right;
+    }
+  }
+</style>
+<div class="lmctSpec__wrap">
+  <button class="lmctSpec__toggle" id="lmctSpecBtn">
+    View Full Prize Specs
+  </button>
+  <div class="lmctSpec__panel" id="lmctSpecPanel">
+    <div class="lmctSpec__inner">
+      <h2 class="lmctSpec__title">2023 RAM 1500 TRX</h2>
+      <!-- TOP SPEC GRID: key/value pairs -->
+      <div class="lmctSpec__kv">
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Model</span
+          ><span class="lmctSpec__v">RAM 1500 TRX</span>
+        </div>
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Year</span
+          ><span class="lmctSpec__v">2023</span>
+        </div>
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Engine</span
+          ><span class="lmctSpec__v">6.2L Supercharged V8</span>
+        </div>
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Capacity</span
+          ><span class="lmctSpec__v">6166cc</span>
+        </div>
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Power</span
+          ><span class="lmctSpec__v">523kW</span>
+        </div>
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Torque</span
+          ><span class="lmctSpec__v">882Nm</span>
+        </div>
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Transmission</span
+          ><span class="lmctSpec__v">8-Speed Auto</span>
+        </div>
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Drivetrain</span
+          ><span class="lmctSpec__v">Full-Time 4x4</span>
+        </div>
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Fuel Use</span
+          ><span class="lmctSpec__v">~19.5L/100km</span>
+        </div>
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Body</span
+          ><span class="lmctSpec__v">Performance Pickup</span>
+        </div>
+        <div class="lmctSpec__row">
+          <span class="lmctSpec__k">Doors</span
+          ><span class="lmctSpec__v">4</span>
+        </div>
+      </div>
+      <!-- FEATURE SECTIONS -->
+      <div class="lmctSpec__section">
+        <h3 class="lmctSpec__h">Performance & Drivetrain</h3>
+        <ul class="lmctSpec__ul">
+          <li>6.2L Supercharged Hellcat V8</li>
+          <li>523kW / 882Nm of insane performance</li>
+          <li>Full-time 4x4 system with terrain modes</li>
+          <li>Launch control & performance drive modes</li>
+          <li>High-speed desert-running capability</li>
+          <li>Bilstein Black Hawk e2 adaptive suspension</li>
+          <li>Built to dominate both road and off-road</li>
+        </ul>
+      </div>
+      <div class="lmctSpec__section">
+        <h3 class="lmctSpec__h">Exterior</h3>
+        <ul class="lmctSpec__ul">
+          <li>Aggressive TRX wide-body stance</li>
+          <li>Functional bonnet scoop with engine cooling</li>
+          <li>Signature LED lighting package</li>
+          <li>Factory flared guards and off-road styling</li>
+        </ul>
+      </div>
+      <div class="lmctSpec__section">
+        <h3 class="lmctSpec__h">Wheels & Tyres Upgrade</h3>
+        <div class="lmctSpec__sub">Fuel Fusion Wheels (20x18)</div>
+        <ul class="lmctSpec__ul">
+          <li>Premium off-road wheel design</li>
+          <li>Matte/aggressive finish</li>
+        </ul>
+        <div class="lmctSpec__sub">
+          Yokohama Geolandar G017 Tyres (35x12.50)
+        </div>
+        <ul class="lmctSpec__ul">
+          <li>All-terrain performance</li>
+          <li>Strong sidewall and grip for off-road use</li>
+          <li>Balance of on-road comfort and off-road capability</li>
+        </ul>
+      </div>
+      <div class="lmctSpec__section">
+        <h3 class="lmctSpec__h">VIKOR Upgrade Package</h3>
+        <div class="lmctSpec__sub">VIKOR Diablo Front Bar</div>
+        <ul class="lmctSpec__ul">
+          <li>Heavy-duty off-road front bar</li>
+          <li>Aggressive styling upgrade</li>
+          <li>Added front-end protection</li>
+          <li>Designed for Australian conditions</li>
+        </ul>
+        <div class="lmctSpec__sub">VIKOR Electric Shutter</div>
+        <ul class="lmctSpec__ul">
+          <li>Secure tub roller shutter system</li>
+          <li>Clean, flush-mounted finish</li>
+          <li>Practical storage solution</li>
+        </ul>
+      </div>
+      <div class="lmctSpec__section">
+        <h3 class="lmctSpec__h">Exhaust Upgrade</h3>
+        <div class="lmctSpec__sub">Borla Cat-Back Exhaust System</div>
+        <ul class="lmctSpec__ul">
+          <li>Premium Borla performance exhaust</li>
+          <li>Enhanced supercharged V8 note</li>
+          <li>Deeper, more aggressive sound profile</li>
+          <li>Improved airflow and performance tone</li>
+        </ul>
+      </div>
+      <div class="lmctSpec__section">
+        <h3 class="lmctSpec__h">Interior & Technology</h3>
+        <ul class="lmctSpec__ul">
+          <li>TRX performance interior with premium finishes</li>
+          <li>Heated & ventilated front seats</li>
+          <li>Large touchscreen infotainment</li>
+          <li>Apple CarPlay & Android Auto</li>
+          <li>Premium Harman Kardon sound system</li>
+          <li>Digital driver display with performance pages</li>
+          <li>Off-road performance monitoring systems</li>
+        </ul>
+      </div>
+      <div class="lmctSpec__section">
+        <h3 class="lmctSpec__h">Suspension & Off-Road</h3>
+        <ul class="lmctSpec__ul">
+          <li>Bilstein Black Hawk e2 adaptive shocks</li>
+          <li>Long-travel suspension system</li>
+          <li>Massive wheel articulation</li>
+          <li>Baja mode for high-speed off-road driving</li>
+          <li>Reinforced chassis and underbody protection</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById("lmctSpecBtn"),
+      p = document.getElementById("lmctSpecPanel");
+    b.onclick = function () {
+      b.classList.toggle("lmctSpec__open");
+      p.classList.toggle("lmctSpec__show");
+    };
+  })();
+</script>
+<!-- LMCT+ FULL PRIZE SPECS - END -->

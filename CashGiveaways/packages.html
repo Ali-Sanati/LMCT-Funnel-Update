@@ -1,0 +1,532 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap");
+  .pricing-section {
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+  .pricing-grid {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(12px, 2vw, 14px);
+  } /* Desktop → 5 columns */
+  @media (min-width: 1100px) {
+    .pricing-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  } /* Center Platinum on tablet/mobile */
+  @media (max-width: 1099px) {
+    .pricing-card.platinum {
+      grid-column: 1 / -1;
+      margin-left: 25%;
+      margin-right: 25%;
+    }
+  }
+  .pricing-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    padding: clamp(8px, 2vw, 15px);
+    text-align: center;
+    color: #fff !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    width: -webkit-fill-available;
+    width: stretch; /* fallback */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+    contain: layout paint;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    color: white !important;
+  }
+
+  .pricing-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 70%
+    );
+    transition: left 0.55s ease;
+    pointer-events: none;
+  }
+
+  .pricing-card:hover::after {
+    left: 130%;
+  }
+
+  .pricing-title {
+    font-weight: 800;
+    font-size: clamp(16px, 1.4vw, 22px);
+    letter-spacing: 1px;
+  }
+  .pricing-was {
+    font-size: clamp(11px, 1vw, 13px);
+    margin-top: 6px;
+    font-weight: 800;
+    color: #271400;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: red;
+  }
+  .pricing-number {
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 900;
+    margin: 12px 0 6px;
+    line-height: 1;
+    animation: lmctPkgNumberPulse 2.4s ease-in-out infinite;
+  }
+  .pricing-label {
+    font-weight: 800;
+    font-size: clamp(12px, 1vw, 14px);
+    color: #271400;
+    margin-bottom: 12px;
+  }
+  .bonus {
+    font-size: clamp(9px, 1vw, 11px);
+    color: #271400;
+    margin-bottom: 8px;
+  }
+  .bonus-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 6px;
+  }
+  .bonus-pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    padding: 2px 2px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.418);
+    font-weight: 600;
+    white-space: nowrap;
+    animation: lmctPkgChipBob 3.8s ease-in-out infinite;
+  }
+  .bonus-icon {
+    width: 14px;
+    height: 14px;
+  }
+  .price {
+    font-size: clamp(24px, 2.5vw, 34px);
+    font-weight: 900;
+    border-top: #fff solid 2px;
+    padding-top: 10px;
+    margin: 20px 0 6px;
+  }
+  .payment {
+    font-size: clamp(11px, 1vw, 13px);
+    font-weight: 700;
+    color: #271400;
+    margin-bottom: 18px;
+  }
+  .select-btn {
+    background: rgba(255, 255, 255, 0.95);
+    color: #271400;
+    border: none;
+    padding: 14px;
+    border-radius: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+  }
+  .select-btn:hover {
+    background: #fff;
+    transform: translateY(-2px);
+  } /* Card Colors */
+  .newbie {
+    background: linear-gradient(
+      105deg,
+      rgba(26, 152, 80, 1) 0%,
+      rgba(46, 204, 113, 1) 40%,
+      rgba(26, 152, 80, 1) 75%,
+      rgba(46, 204, 113, 1) 100%
+    );
+  }
+  .entry {
+    background: linear-gradient(
+      105deg,
+      #3bcbff 0%,
+      #207999 40%,
+      #3bcbff 75%,
+      #207999 100%
+    );
+  }
+  .bronze {
+    background: linear-gradient(
+      105deg,
+      #cd8e32 0%,
+      #d97706 40%,
+      #cd8e32 75%,
+      #d97706 100%
+    );
+  }
+  .silver {
+    background: linear-gradient(
+      105deg,
+      #9ca3af 0%,
+      #6c7381 40%,
+      #9ca3af 75%,
+      #6c7381 100%
+    );
+  }
+  .gold {
+    background: linear-gradient(
+      105deg,
+      rgba(232, 154, 6, 1) 0%,
+      rgba(243, 195, 56, 1) 32%,
+      rgba(232, 154, 6, 1) 68%,
+      rgba(243, 195, 56, 1) 100%
+    );
+  }
+  .platinum {
+    background: linear-gradient(
+      105deg,
+      #d946ef 0%,
+      #800080 40%,
+      #d946ef 75%,
+      #800080 100%
+    );
+  }
+
+  .newbie:hover {
+    filter: drop-shadow(0px 0px 6px rgba(46, 204, 113, 0.7));
+  }
+
+  .entry:hover {
+    filter: drop-shadow(0px 0px 6px rgba(59, 203, 255, 0.7));
+  }
+
+  .bronze:hover {
+    filter: drop-shadow(0px 0px 6px #d97706);
+  }
+
+  .silver:hover {
+    filter: drop-shadow(0px 0px 6px rgba(156, 163, 175, 0.8));
+  }
+
+  .gold:hover {
+    filter: drop-shadow(0px 0px 8px rgba(243, 195, 56, 0.9));
+  }
+
+  .platinum:hover {
+    filter: drop-shadow(0px 0px 8px rgba(217, 70, 239, 0.9));
+  }
+
+  @keyframes lmctPkgCardFloat {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes lmctPkgSweep {
+    0%,
+    18% {
+      transform: rotate(18deg) translateX(-160%);
+      opacity: 0;
+    }
+    28% {
+      opacity: 1;
+    }
+    46% {
+      transform: rotate(18deg) translateX(230%);
+      opacity: 0;
+    }
+    100% {
+      transform: rotate(18deg) translateX(230%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes lmctPkgNumberPulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.045);
+    }
+  }
+
+  @keyframes lmctPkgChipBob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  @keyframes lmctPkgBadgePulse {
+    0%,
+    100% {
+      transform: translateY(0);
+      box-shadow:
+        0 10px 18px rgba(106, 60, 0, 0.18),
+        0 0 20px rgba(255, 185, 65, 0.28);
+    }
+    50% {
+      transform: translateY(-3px);
+      box-shadow:
+        0 14px 24px rgba(106, 60, 0, 0.2),
+        0 0 28px rgba(255, 185, 65, 0.38);
+    }
+  }
+
+  @keyframes lmctPkgPulseDot {
+    0%,
+    100% {
+      opacity: 0.9;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+  }
+</style>
+<section class="pricing-section">
+  <div class="pricing-grid">
+    <!-- <div class="elButton pricing-card newbie elIMG ximg" data-title="css-order-newbie" data-imagelink="#open-popup">      <div>        <div class="pricing-title">NEWBIE</div>        <div class="pricing-was">Was 1 Entry</div>         <div class="pricing-number">5</div>        <div class="pricing-label">FREE ENTRY</div>        <div class="bonus">Bonus in-app Inclusions:</div>      </div>      <div>        <div class="price">$10</div>        <div class="payment">(Single Payment Only)</div>        <button class="select-btn">          SELECT        </button>      </div>    </div> -->
+    <div
+      class="elButton pricing-card entry elIMG ximg"
+      data-title="css-order-basic"
+      data-imagelink="#open-popup"
+    >
+      <div>
+        <div class="pricing-title">ENTRY</div>
+        <div class="pricing-was">Was 1 Entry</div>
+        <div class="pricing-number">5</div>
+        <div class="pricing-label">FREE ENTRY</div>
+        <div class="bonus">Bonus in-app Inclusions:</div>
+        <div class="bonus-container">
+          <span class="bonus-pill">
+            <img
+              class="bonus-icon"
+              src="https://images.clickfunnels.com/30/dc38c907454e42925c02834c13fbfa/star.svg"
+            />
+            +0 XP
+          </span>
+          <span class="bonus-pill">
+            <img
+              class="bonus-icon"
+              src="https://images.clickfunnels.com/25/8d4a3f7a7b48899757fc34e38da75f/coin.svg"
+            />
+            +0 Coins</span
+          >
+        </div>
+      </div>
+      <div>
+        <div class="price">$10</div>
+        <div class="payment">(Single Payment Only)</div>
+        <button class="select-btn">SELECT</button>
+      </div>
+    </div>
+    <div
+      class="elButton pricing-card bronze elIMG ximg"
+      data-title="css-order-bronze"
+      data-imagelink="#open-popup"
+    >
+      <div>
+        <div class="pricing-title">BRONZE</div>
+        <div class="pricing-was">Was 5 Entries</div>
+        <div class="pricing-number">25</div>
+        <div class="pricing-label">FREE ENTRIES</div>
+        <div class="bonus">Bonus in-app Inclusions:</div>
+        <div class="bonus-container">
+          <span class="bonus-pill">
+            <img
+              class="bonus-icon"
+              src="https://images.clickfunnels.com/30/dc38c907454e42925c02834c13fbfa/star.svg"
+            />
+            +500 XP
+          </span>
+          <span class="bonus-pill">
+            <img
+              class="bonus-icon"
+              src="https://images.clickfunnels.com/25/8d4a3f7a7b48899757fc34e38da75f/coin.svg"
+            />
+            +500 Coins</span
+          >
+        </div>
+      </div>
+      <div>
+        <div class="price">$30</div>
+        <div class="payment">(Single Payment Only)</div>
+        <button class="select-btn">SELECT</button>
+      </div>
+    </div>
+    <div
+      class="elButton pricing-card silver elIMG ximg"
+      data-title="css-order-silver"
+      data-imagelink="#open-popup"
+    >
+      <div>
+        <div class="pricing-title">SILVER</div>
+        <div class="pricing-was">Was 25 Entries</div>
+        <div class="pricing-number">125</div>
+        <div class="pricing-label">FREE ENTRIES</div>
+        <div class="bonus">Bonus in-app Inclusions:</div>
+        <div class="bonus-container">
+          <span class="bonus-pill">
+            <img
+              class="bonus-icon"
+              src="https://images.clickfunnels.com/30/dc38c907454e42925c02834c13fbfa/star.svg"
+            />
+            +1,000 XP
+          </span>
+          <span class="bonus-pill">
+            <img
+              class="bonus-icon"
+              src="https://images.clickfunnels.com/25/8d4a3f7a7b48899757fc34e38da75f/coin.svg"
+            />
+            +1,000 Coins
+          </span>
+        </div>
+      </div>
+      <div>
+        <div class="price">$100</div>
+        <div class="payment">(Single Payment Only)</div>
+        <button class="select-btn">SELECT</button>
+      </div>
+    </div>
+    <div
+      class="elButton pricing-card gold elIMG ximg"
+      data-title="css-order-gold"
+      data-imagelink="#open-popup"
+    >
+      <div>
+        <div class="pricing-title">GOLD</div>
+        <div class="pricing-was">Was 100 Entries</div>
+        <div class="pricing-number">500</div>
+        <div class="pricing-label">FREE ENTRIES</div>
+        <div class="bonus">Bonus in-app Inclusions:</div>
+        <div class="bonus-container">
+          <span class="bonus-pill">
+            <img
+              class="bonus-icon"
+              src="https://images.clickfunnels.com/30/dc38c907454e42925c02834c13fbfa/star.svg"
+            />
+            +2,500 XP
+          </span>
+          <span class="bonus-pill">
+            <img
+              class="bonus-icon"
+              src="https://images.clickfunnels.com/25/8d4a3f7a7b48899757fc34e38da75f/coin.svg"
+            />
+            +2,500 Coins
+          </span>
+        </div>
+      </div>
+      <div>
+        <div class="price">$250</div>
+        <div class="payment">(Single Payment Only)</div>
+        <button class="select-btn">SELECT</button>
+      </div>
+    </div>
+    <div
+      class="elButton pricing-card platinum elIMG ximg"
+      data-title="css-order-platinum"
+      data-imagelink="#open-popup"
+    >
+      <div>
+        <div class="pricing-title">PLATINUM</div>
+        <div class="pricing-was">Was 500 Entries</div>
+        <div class="pricing-number">2500</div>
+        <div class="pricing-label">FREE ENTRIES</div>
+        <div class="bonus">Bonus in-app Inclusions:</div>
+        <div class="bonus-container">
+          <span class="bonus-pill">
+            <img
+              class="bonus-icon"
+              src="https://images.clickfunnels.com/30/dc38c907454e42925c02834c13fbfa/star.svg"
+            />
+            +5,000 XP
+          </span>
+          <span class="bonus-pill">
+            <img
+              class="bonus-icon"
+              src="https://images.clickfunnels.com/25/8d4a3f7a7b48899757fc34e38da75f/coin.svg"
+            />
+            +5,000 Coins
+          </span>
+        </div>
+      </div>
+      <div>
+        <div class="price">$500</div>
+        <div class="payment">(Single Payment Only)</div>
+        <button class="select-btn">SELECT</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  var cards = gsap.utils.toArray(".pricing-card");
+
+  gsap.set(cards, {
+    autoAlpha: 0,
+    y: 42,
+    scale: 0.985,
+    force3D: true,
+  });
+
+  ScrollTrigger.batch(cards, {
+    start: "top 88%",
+    once: true,
+    onEnter: function (batch) {
+      gsap.to(batch, {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        stagger: {
+          each: 0.08,
+          from: "start",
+        },
+        overwrite: "auto",
+        onStart: function () {
+          gsap.set(batch, { willChange: "transform, opacity" });
+        },
+        onComplete: function () {
+          gsap.set(batch, {
+            clearProps: "transform,opacity,visibility,willChange",
+          });
+        },
+      });
+    },
+  });
+</script> -->

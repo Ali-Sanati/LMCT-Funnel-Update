@@ -22,7 +22,7 @@
 
   /* ===== Grid (MOBILE FIRST) ===== */
   .bento-grid {
-    max-width: 1100px;
+    max-width: 1170px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 cols on mobile */
@@ -39,6 +39,8 @@
 
   /* ===== Card Base ===== */
   .bento-card {
+    --bento-reveal-y: 0px;
+    --bento-hover-scale: 1;
     position: relative;
     border-radius: 10px;
     overflow: hidden;
@@ -48,9 +50,24 @@
     box-shadow:
       0 4px 20px rgba(0, 0, 0, 0.12),
       0 1px 4px rgba(0, 0, 0, 0.08);
+    transform: translate3d(0, var(--bento-reveal-y), 0)
+      scale(var(--bento-hover-scale));
+    opacity: 1;
     transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.45s ease,
+      box-shadow 0.25s ease;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+  .bento-card.is-reveal-pending {
+    --bento-reveal-y: 24px;
+    opacity: 0;
+  }
+
+  .bento-card.is-revealed {
+    --bento-reveal-y: 0px;
+    opacity: 1;
   }
 
   /* Gradient overlay */
@@ -102,12 +119,16 @@
 
     .bento-grid {
       grid-template-columns: repeat(7, 1fr);
-      grid-template-rows: auto auto auto;
+      grid-template-rows: repeat(3, clamp(150px, 30vw, 220px));
       gap: 18px;
     }
 
+    .bento-card {
+      min-height: 0;
+    }
+
     .bento-card:hover {
-      transform: scale(1.02);
+      --bento-hover-scale: 1.02;
       box-shadow:
         0 12px 36px rgba(0, 0, 0, 0.2),
         0 2px 8px rgba(0, 0, 0, 0.1);
@@ -116,7 +137,6 @@
     .bento-card-one {
       grid-column: 1 / 4;
       grid-row: 1 / 3;
-      min-height: 60vh;
     }
 
     .bento-card-two {
@@ -137,7 +157,6 @@
     .bento-card-five {
       grid-column: 1 / 4;
       grid-row: 3 / 4;
-      min-height: 30vh;
     }
 
     .bento-card-six {
@@ -157,80 +176,155 @@
     }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .bento-card {
+      transition: box-shadow 0.3s ease;
+      transform: none;
+    }
+
+    .bento-card.is-reveal-pending,
+    .bento-card.is-revealed,
+    .bento-card:hover {
+      opacity: 1;
+      filter: none;
+      transform: none;
+    }
+  }
+
   /* ===== Background Images ===== */
   .bento-card-one {
-    background-image: url("https://images.clickfunnels.com/de/3c522475114c1a933b17b426e79487/Tire.jpg");
+    background-image: url("https://statics.myclickfunnels.com/workspace/joygEX/image/21831176/file/78972097d6ecf7c6c95d51a81052cf62.jpg");
   }
 
   .bento-card-two {
-    background-image: url("https://images.clickfunnels.com/27/76e2d5ef1f47c6b5d84415aa6452cb/Petrol-Engin.jpg");
+    background-image: url("https://statics.myclickfunnels.com/workspace/joygEX/image/21831173/file/cb70b4a0860ce1f201aee26474efef33.jpg");
   }
 
   .bento-card-three {
-    background-image: url("https://images.clickfunnels.com/db/c913e4e28947c299a4625fd013765b/TwinDiff.jpg");
+    background-image: url("https://statics.myclickfunnels.com/workspace/joygEX/image/21831174/file/f966ef32c2448ccc0e6485e564c48fa8.jpg");
   }
 
   .bento-card-four {
-    background-image: url("https://images.clickfunnels.com/30/77256958a5443cad95ae99ba5aff54/TOW.jpg");
+    background-image: url("https://statics.myclickfunnels.com/workspace/joygEX/image/21831177/file/ce01b0ea7e57ec0042432ffe9d2902cf.jpg");
   }
 
   .bento-card-five {
-    background-image: url("https://images.clickfunnels.com/60/b42095498d48d2b009c1539912ab60/FOX.jpg");
+    background-image: url("https://statics.myclickfunnels.com/workspace/joygEX/image/21831175/file/dd8796c3e98edcd05d9efdbc853cf5ea.jpg");
   }
 
   .bento-card-six {
-    background-image: url("https://images.clickfunnels.com/23/d2b4bde4a842ee80fedb6dca0cd93c/Shutter.jpg");
+    background-image: url("https://statics.myclickfunnels.com/workspace/joygEX/image/21831172/file/17af0a7bba39300e9a27cbc9922b5584.jpg");
   }
 </style>
 
-<section class="bento-section" aria-label="RAM TRX features">
+<section class="bento-section" aria-label="1976 Holden Torana LX SS Hatchback">
   <div class="bento-grid">
     <!-- 1 — Left tall card -->
     <div class="bento-card bento-card-one">
       <div class="bento-card-content">
-        <h3 class="bento-card-title">Black Rhino Wheels</h3>
-        <p class="bento-card-subtitle">37” Maxxis Razr Tyres</p>
+        <h3 class="bento-card-title">15” V51 Simmons Wheels</h3>
+        <p class="bento-card-subtitle">
+          Classic stance, timeless street presence
+        </p>
       </div>
     </div>
 
     <!-- 2 — Top span right -->
     <div class="bento-card bento-card-two">
       <div class="bento-card-content">
-        <h3 class="bento-card-title">6.2L V8 Petrol Engine</h3>
-        <p class="bento-card-subtitle">313kW Power & 624Nm Torque</p>
+        <h3 class="bento-card-title">A9X Flare & Spoiler Kit</h3>
+        <p class="bento-card-subtitle">Aggressive look that turns heads</p>
       </div>
     </div>
 
     <!-- 3 — Center middle -->
     <div class="bento-card bento-card-three">
       <div class="bento-card-content">
-        <h3 class="bento-card-title">Twin Diff Locked</h3>
-        <p class="bento-card-subtitle">For those hard-to-get places</p>
+        <h3 class="bento-card-title">SS Steering Wheel & Dash</h3>
+        <p class="bento-card-subtitle">Driver-focused with a sporty finish</p>
       </div>
     </div>
 
     <!-- 4 — Center right -->
     <div class="bento-card bento-card-four">
       <div class="bento-card-content">
-        <h3 class="bento-card-title">4.2T Tow Capacity</h3>
-        <p class="bento-card-subtitle">Tow anything you want</p>
+        <h3 class="bento-card-title">LX Cloth Interior</h3>
+        <p class="bento-card-subtitle">Clean, comfortable, and true to era</p>
       </div>
     </div>
 
     <!-- 5 — Bottom left -->
     <div class="bento-card bento-card-five">
       <div class="bento-card-content">
-        <h3 class="bento-card-title">6-Inch BDS Suspension w/</h3>
-        <p class="bento-card-subtitle">Fox 2.5 Elite Shocks</p>
+        <h3 class="bento-card-title">Chrome Bumper Bars</h3>
+        <p class="bento-card-subtitle">Iconic shine with vintage attitude</p>
       </div>
     </div>
 
     <!-- 6 — Bottom span right -->
     <div class="bento-card bento-card-six">
       <div class="bento-card-content">
-        <h3 class="bento-card-title">Vikor Roller Shutter &</h3>
-        <p class="bento-card-subtitle">Vikor Electric Steps</p>
+        <h3 class="bento-card-title">308ci V8 Engine</h3>
+        <p class="bento-card-subtitle">Old-school muscle with serious punch</p>
       </div>
     </div>
   </div>
 </section>
+<script>
+  (function () {
+    var section = document.currentScript.previousElementSibling;
+    var cards = null;
+    var revealObserver = null;
+    var reducedMotion = false;
+
+    if (!section || !section.classList.contains("bento-section")) return;
+
+    cards = Array.from(section.querySelectorAll(".bento-card"));
+    if (!cards.length) return;
+
+    reducedMotion =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    cards.forEach(function (card, index) {
+      if (!reducedMotion) {
+        card.classList.add("is-reveal-pending");
+        card.style.transitionDelay = Math.min(index * 45, 180) + "ms";
+      } else {
+        card.classList.add("is-revealed");
+      }
+    });
+
+    if (reducedMotion) return;
+
+    function revealCard(card) {
+      card.classList.remove("is-reveal-pending");
+      card.classList.add("is-revealed");
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      window.requestAnimationFrame(function () {
+        cards.forEach(revealCard);
+      });
+      return;
+    }
+
+    revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          revealCard(entry.target);
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.18,
+        rootMargin: "0px 0px -8% 0px",
+      },
+    );
+
+    cards.forEach(function (card) {
+      revealObserver.observe(card);
+    });
+  })();
+</script>
