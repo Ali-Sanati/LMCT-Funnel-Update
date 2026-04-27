@@ -1,0 +1,328 @@
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  .lmctFaqWrap {
+    font-family: "Montserrat", sans-serif;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 40px 0px;
+  }
+  .lmctFaqHeading {
+    font-family: "Montserrat", sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #0f1e33;
+    text-align: center;
+    margin: 0 0 30px 0;
+  }
+  .lmctFaqList {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .lmctFaqList * {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .lmctFaqCard {
+    background: #f3f3f3;
+    border-radius: 12px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .lmctFaqBtn {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f1e33;
+    text-align: left;
+    line-height: 1.4;
+    gap: 16px;
+    outline: none;
+    transition: background 0.2s ease;
+    box-sizing: border-box;
+  }
+  .lmctFaqBtn:hover {
+    background: #eaeaea;
+  }
+  .lmctFaqChevron {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    transition: transform 0.3s ease;
+  }
+  .lmctFaqCard.lmctFaqOpen .lmctFaqChevron {
+    transform: rotate(180deg);
+  }
+  .lmctFaqBody {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.35s ease,
+      opacity 0.3s ease;
+    opacity: 0;
+    box-sizing: border-box;
+  }
+  .lmctFaqCard.lmctFaqOpen .lmctFaqBody {
+    opacity: 1;
+  }
+  .lmctFaqBodyInner {
+    padding: 0 24px 24px 24px;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .lmctFaqBody p {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #0f1e33;
+    line-height: 1.7;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  .lmctFaqBody a {
+    color: #2563eb;
+    text-decoration: underline;
+    word-break: break-all;
+  }
+  @media (max-width: 767px) {
+    .lmctFaqWrap {
+      padding: 30px 0px;
+    }
+    .lmctFaqHeading {
+      font-size: 28px;
+      margin-bottom: 22px;
+    }
+    .lmctFaqBtn {
+      font-size: 16px;
+      padding: 18px 20px;
+    }
+    .lmctFaqBodyInner {
+      padding: 0 20px 20px 20px;
+    }
+    .lmctFaqBody p {
+      font-size: 14px;
+    }
+  }
+</style>
+<div class="lmctFaqWrap">
+  <h2 class="lmctFaqHeading">Any Questions?</h2>
+  <div class="lmctFaqList">
+    <div class="lmctFaqCard">
+      <button class="lmctFaqBtn" onclick="lmctToggleFaq(this)">
+        <span>Is This Promotion Valid Australia Wide?</span>
+        <svg
+          class="lmctFaqChevron"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#0f1e33"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      <div class="lmctFaqBody">
+        <div class="lmctFaqBodyInner">
+          <p>
+            Yes, We Have LMCT+ Partners Australia Wide In Every State Which Can
+            Be Used By All Of Our Customers. In Regards To Our Giveaways, Please
+            Refer To Your States Laws On Receiving Prizes.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="lmctFaqCard">
+      <button class="lmctFaqBtn" onclick="lmctToggleFaq(this)">
+        <span>Is this an ongoing payment?</span>
+        <svg
+          class="lmctFaqChevron"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#0f1e33"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      <div class="lmctFaqBody">
+        <div class="lmctFaqBodyInner">
+          <p>
+            No, this is a once-off purchase based on the package you've
+            selected. There are no additional charges to be made to you the
+            purchaser unless you specifically purchase our loyalty rewards club
+            membership from the loyalty rewards club page.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="lmctFaqCard">
+      <button class="lmctFaqBtn" onclick="lmctToggleFaq(this)">
+        <span>Do I receive Entries?</span>
+        <svg
+          class="lmctFaqChevron"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#0f1e33"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      <div class="lmctFaqBody">
+        <div class="lmctFaqBodyInner">
+          <p>
+            Yes, once you make a purchase your name goes into the draw x the
+            amount of entries you have. You'll receive an email stating the
+            total entries that you have and you can see that total when you
+            login to your LMCT+ dashboard. Log in here &gt;
+            <a href="https://lmctmembers.com/login" target="_blank"
+              >https://lmctmembers.com/login</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="lmctFaqCard">
+      <button class="lmctFaqBtn" onclick="lmctToggleFaq(this)">
+        <span>How do we receive the Cash?</span>
+        <svg
+          class="lmctFaqChevron"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#0f1e33"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      <div class="lmctFaqBody">
+        <div class="lmctFaqBodyInner">
+          <p>
+            Funds will be transferred into your account within 48 hours. (refer
+            to T&amp;Cs)
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="lmctFaqCard">
+      <button class="lmctFaqBtn" onclick="lmctToggleFaq(this)">
+        <span>Is the cash tax free?</span>
+        <svg
+          class="lmctFaqChevron"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#0f1e33"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      <div class="lmctFaqBody">
+        <div class="lmctFaqBodyInner">
+          <p>It is completely tax free! How good is that!</p>
+        </div>
+      </div>
+    </div>
+    <div class="lmctFaqCard">
+      <button class="lmctFaqBtn" onclick="lmctToggleFaq(this)">
+        <span
+          >Do I need to be watching the live or answer my phone to win?</span
+        >
+        <svg
+          class="lmctFaqChevron"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#0f1e33"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      <div class="lmctFaqBody">
+        <div class="lmctFaqBodyInner">
+          <p>
+            No, as per all our previous events we will contact the winner ASAP
+            through the details they've provided during registration which will
+            be presented to us upon entering the winning combination into our
+            system. If we can not contact the winner on the live feed, we will
+            wait and try again later. As per our permits we can NOT redraw
+            unless the prize remains unclaimed for 3 months.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="lmctFaqCard">
+      <button class="lmctFaqBtn" onclick="lmctToggleFaq(this)">
+        <span>Where can we watch the event?</span>
+        <svg
+          class="lmctFaqChevron"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#0f1e33"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      <div class="lmctFaqBody">
+        <div class="lmctFaqBodyInner">
+          <p>
+            We will be streaming the draw LIVE from the LMCT+ Facebook page. Be
+            sure to follow us and have your notifications on to be notified when
+            we start the stream!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function lmctToggleFaq(btn) {
+    var card = btn.parentElement;
+    var body = card.querySelector(".lmctFaqBody");
+    var isOpen = card.classList.contains("lmctFaqOpen");
+    // Close all others
+    document
+      .querySelectorAll(".lmctFaqCard.lmctFaqOpen")
+      .forEach(function (openCard) {
+        if (openCard !== card) {
+          openCard.classList.remove("lmctFaqOpen");
+          openCard.querySelector(".lmctFaqBody").style.maxHeight = "0";
+        }
+      });
+    if (isOpen) {
+      card.classList.remove("lmctFaqOpen");
+      body.style.maxHeight = "0";
+    } else {
+      card.classList.add("lmctFaqOpen");
+      body.style.maxHeight = body.scrollHeight + "px";
+    }
+  }
+</script>

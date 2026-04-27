@@ -6,6 +6,11 @@
     font-family: "Montserrat", sans-serif;
     text-align: center;
   }
+  .prize-carousel * {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
   .prize-carousel__badge {
     display: inline-block;
     background: #0ea1fd;
@@ -39,15 +44,33 @@
     margin-top: 8px;
   }
   .prize-carousel__image {
-    max-width: 580px;
-    margin: 20px auto 0;
+    position: relative;
+
+    margin: 20px auto 0 !important;
     padding: 0 10px;
     box-sizing: border-box;
   }
   .prize-carousel__image img {
+    position: relative;
+    z-index: 2;
     width: 100%;
     height: auto;
     display: block;
+  }
+
+  .prize-year {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-30%);
+
+    font-size: clamp(80px, 14vw, 160px);
+    font-weight: 900;
+    letter-spacing: 12px;
+
+    color: rgba(0, 0, 0, 0.05);
+    text-transform: uppercase;
+
+    z-index: 0;
   }
   .prize-carousel__controls {
     display: flex;
@@ -108,13 +131,14 @@
 <div class="prize-carousel">
   <span class="prize-carousel__badge">First Prize</span>
   <h2 class="prize-carousel__title">
-    HOLDEN <span class="prize-carousel__highlight">LX TORANA</span>
+    Ford Mustang <span class="prize-carousel__highlight">Fastback GTA</span>
   </h2>
   <div class="prize-carousel__specs">
-    4.0L V8 &middot; 309kW &middot; 6-Speed Manual
+    390ci V8 &middot; muscle &middot; 78,000 miles
   </div>
   <div class="prize-carousel__image">
-    <img id="prizeCarouselImage" alt="Holden LX Torana" />
+    <p class="prize-year">1967</p>
+    <img id="prizeCarouselImage" alt="Ford Mustang Fastback GTA" />
   </div>
   <div class="prize-carousel__controls">
     <button class="prize-carousel__button" id="prizeCarouselPrev">
@@ -129,11 +153,20 @@
 <script>
   (function () {
     var slides = [
-        "https://statics.myclickfunnels.com/workspace/joygEX/image/21830107/file/b7754132b96186f75bd6ae79a1494967.png",
-        "https://statics.myclickfunnels.com/workspace/joygEX/image/21830105/file/51593564e056dc29a7aa4c651c035559.png",
-        "https://statics.myclickfunnels.com/workspace/joygEX/image/21830104/file/14255c47272dc5a4d354884843601507.png",
-        "https://statics.myclickfunnels.com/workspace/joygEX/image/21830106/file/1b8857ca99374a265bc1ec0831144aab.png",
-        "https://statics.myclickfunnels.com/workspace/joygEX/image/21830108/file/e22674331bcdca74a678f7fcd0caf83c.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21852344/file/948a13f30d35697a9fd673992c83ceb3.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21852349/file/1e66f7baa773fd1c93828afd5c418178.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21852345/file/79881137399c53202330cf40d8c93d43.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21852346/file/ff4301e3b49e2e9a10bd1434a0aced9c.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21852347/file/e112137072752b4f6cdbd82ce26a14d4.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21852350/file/e5e199073f5fe55f3b8cf20c9d2c2e80.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21852351/file/aa9c715622aeda9f1dce20cea8789130.png",
+        "https://statics.myclickfunnels.com/workspace/joygEX/image/21852348/file/72ab4b5799dff960acc814bc8a132906.png",
+
+        // "/assets/cars/Front.png",
+        // "/assets/cars/front three quarter.png",
+        // "/assets/cars/Left.png",
+        // "/assets/cars/rear three quarter.png",
+        // "/assets/cars/Rear.png",
       ],
       slideCount = slides.length,
       currentIndex = 0,

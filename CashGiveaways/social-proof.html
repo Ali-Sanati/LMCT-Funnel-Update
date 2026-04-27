@@ -1,0 +1,172 @@
+<!--
+╔══════════════════════════════════════════════════════════════════╗
+║  LMCT+ SOCIAL PROOF SECTION — DESKTOP                          ║
+║                                                                  ║
+║  ✏️ EDIT STATS: change data-target values below                  ║
+╚══════════════════════════════════════════════════════════════════╝
+-->
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  .lmctDRoot,
+  .lmctDRoot * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .lmctDRoot {
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    overflow: hidden;
+  }
+
+  @keyframes lmctDMarquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* ── STATS BAR ── */
+  .lmctDStatsBar {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(10px, 2.4vw, 40px);
+    padding: clamp(14px, 3vw, 24px) clamp(10px, 3vw, 40px);
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .lmctDStatItem {
+    text-align: center;
+    flex: 1 1 0;
+    min-width: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .lmctDStatItem.lmctDVis {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .lmctDStatNum {
+    font-weight: 900;
+    font-size: clamp(20px, 5.2vw, 56px);
+    color: #0c9ffd;
+    line-height: 1;
+    letter-spacing: clamp(-0.05em, -0.12vw, -0.03em);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .lmctDStatLabel {
+    font-weight: 700;
+    font-size: clamp(8px, 1.55vw, 12px);
+    color: #999;
+    letter-spacing: clamp(0.06em, 0.22vw, 0.16em);
+    text-transform: uppercase;
+    margin-top: clamp(4px, 1vw, 8px);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .lmctDStatDivider {
+    width: 1px;
+    height: clamp(28px, 6vw, 48px);
+    background: rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+  }
+</style>
+<div class="lmctDRoot" id="lmctDRoot">
+  <div class="lmctDStatsBar" id="lmctDStatsBar">
+    <!-- ✏️ EDIT: change data-target, data-prefix, data-suffix -->
+    <div class="lmctDStatItem">
+      <div
+        class="lmctDStatNum"
+        data-target="817"
+        data-prefix=""
+        data-suffix="+"
+      >
+        0
+      </div>
+      <div class="lmctDStatLabel">Giveaway Winners</div>
+    </div>
+    <div class="lmctDStatDivider"></div>
+    <div class="lmctDStatItem">
+      <div
+        class="lmctDStatNum"
+        data-target="150"
+        data-prefix="$"
+        data-suffix="M+"
+      >
+        0
+      </div>
+      <div class="lmctDStatLabel">Given Away</div>
+    </div>
+    <div class="lmctDStatDivider"></div>
+    <div class="lmctDStatItem">
+      <div class="lmctDStatNum" data-target="41" data-prefix="" data-suffix="">
+        0
+      </div>
+      <div class="lmctDStatLabel">Millionaires Made</div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var dkDone = false;
+    function dkEaseOut(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+    function dkCountUp(el) {
+      var target = parseInt(el.getAttribute("data-target"), 10);
+      var pre = el.getAttribute("data-prefix") || "";
+      var suf = el.getAttribute("data-suffix") || "";
+      var dur = 1800,
+        st = null;
+      function step(ts) {
+        if (!st) st = ts;
+        var p = Math.min((ts - st) / dur, 1);
+        el.textContent =
+          pre + Math.floor(dkEaseOut(p) * target).toLocaleString() + suf;
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = pre + target.toLocaleString() + suf;
+      }
+      requestAnimationFrame(step);
+    }
+    function dkTrigger() {
+      if (dkDone) return;
+      dkDone = true;
+      var items = document.querySelectorAll(".lmctDStatItem");
+      items.forEach(function (item, i) {
+        setTimeout(function () {
+          item.classList.add("lmctDVis");
+          var n = item.querySelector(".lmctDStatNum");
+          if (n) dkCountUp(n);
+        }, i * 180);
+      });
+    }
+    var dkObs = new IntersectionObserver(
+      function (e) {
+        e.forEach(function (en) {
+          if (en.isIntersecting) dkTrigger();
+        });
+      },
+      { threshold: 0.15 },
+    );
+    var dkEl = document.getElementById("lmctDStatsBar");
+    if (dkEl) dkObs.observe(dkEl);
+    setTimeout(function () {
+      if (!dkDone && dkEl) {
+        var r = dkEl.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) dkTrigger();
+      }
+    }, 600);
+  })();
+</script>

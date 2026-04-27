@@ -1,0 +1,647 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
+
+  .win-shell {
+    --win-gap: clamp(14px, 2vw, 22px);
+    --win-card-width: clamp(280px, 25vw, 330px);
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+  }
+
+  .win-helper {
+    display: none;
+    margin: 0 0 10px;
+    padding-inline: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #475569;
+  }
+
+  .win-body {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-block: 10px 14px;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .win-body::before,
+  .win-body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(44px, 7vw, 88px);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* .win-body::before {
+    left: 0;
+    background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0));
+  }
+
+  .win-body::after {
+    right: 0;
+    background: linear-gradient(-90deg, #ffffff, rgba(255, 255, 255, 0));
+  } */
+
+  .win-track,
+  .win-seq {
+    display: flex;
+    align-items: stretch;
+    gap: var(--win-gap);
+  }
+
+  .win-track {
+    width: max-content;
+    padding: 4px 0 10px;
+    transform: translateX(0);
+    will-change: transform;
+  }
+
+  .win-card {
+    flex: 0 0 var(--win-card-width);
+    width: var(--win-card-width);
+    min-height: 430px;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .win-body[data-mode="desktop"] .win-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .win-card::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 -120%;
+    width: 58%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.12),
+      transparent
+    );
+    animation: cardShine 5.4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .win-card:nth-child(3n + 2)::after {
+    animation-delay: 1.5s;
+  }
+
+  .win-card:nth-child(3n)::after {
+    animation-delay: 3s;
+  }
+
+  @keyframes cardShine {
+    0% {
+      left: -120%;
+    }
+    42%,
+    100% {
+      left: 145%;
+    }
+  }
+
+  .win-card.blue {
+    background: linear-gradient(
+      165deg,
+      rgb(64, 203, 245),
+      #206ff5,
+      rgb(57, 182, 245)
+    );
+  }
+
+  .win-card.green {
+    background: linear-gradient(
+      165deg,
+      rgb(0, 255, 21),
+      #00a724,
+      rgb(57, 245, 88)
+    );
+  }
+
+  .win-card.silver {
+    background: linear-gradient(165deg, #c8cdd4, #98a0aa, #787f89);
+  }
+
+  .win-card.purple {
+    background: linear-gradient(165deg, #c98aef, #9955cc, #7733aa);
+  }
+
+  .win-img {
+    position: relative;
+    flex-shrink: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .win-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .win-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    padding: 18px 18px 20px;
+    position: relative;
+    z-index: 1;
+    text-align: left;
+  }
+
+  .win-prize {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .win-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+  }
+
+  .win-quote {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.65;
+    font-style: italic;
+    text-wrap: pretty;
+    flex: 1;
+  }
+
+  .win-name {
+    margin: 0;
+    padding-top: 4px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  .win-body:focus-visible {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+    border-radius: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .win-helper {
+      display: block;
+    }
+
+    .win-body {
+      overflow: hidden;
+      padding: 6px 12px 14px;
+    }
+
+    .win-body::before,
+    .win-body::after {
+      width: 34px;
+    }
+
+    .win-track {
+      padding: 4px 0 8px;
+    }
+
+    .win-card {
+      --win-card-width: min(84vw, 330px);
+      min-height: 400px;
+      border-radius: 20px;
+    }
+
+    .win-card::after {
+      animation: none;
+    }
+
+    .win-title {
+      font-size: 21px;
+    }
+
+    .win-quote {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .win-body::before {
+      left: 0;
+      background: transparent;
+    }
+
+    .win-body::after {
+      right: 0;
+      background: transparent;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .win-helper {
+      padding-inline: 10px;
+    }
+
+    .win-body {
+      padding-inline: 10px;
+    }
+
+    .win-track,
+    .win-seq {
+      gap: 12px;
+    }
+
+    .win-card {
+      --win-card-width: 88vw;
+      min-height: 390px;
+    }
+
+    .win-content {
+      padding: 16px;
+    }
+
+    .win-title {
+      font-size: 19px;
+    }
+
+    .win-prize {
+      font-size: 10px;
+    }
+  }
+</style>
+
+<div class="win-shell">
+  <!-- <p class="win-helper" aria-hidden="true">Real winner stories</p> -->
+  <div
+    class="win-body js-win-marquee"
+    id="winBody"
+    data-speed="74"
+    data-mode="desktop"
+    tabindex="0"
+    role="region"
+    aria-label="LMCT+ winner testimonials"
+  >
+    <div class="win-track" id="winTrack">
+      <div class="win-seq" id="winSeq"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var SPEED_DEFAULT = 74;
+    var MOBILE_SPEED_FACTOR = 0.7;
+
+    var winners = [
+      {
+        prize: "$1M Cash",
+        title: "Winner",
+        quote:
+          "After winning the $1M draw, I couldn\u2019t sleep. Kept checking my bank in disbelief. Paid off my home loan and invested the rest. Truly grateful to Adrian and the LMCT+ family.",
+        name: "Paul A",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAwz4UDNhtWSiX3jd65FNCeL1wx7KurocIMqTl",
+      },
+      {
+        prize: "XY",
+        title: "Winner",
+        quote:
+          "Didn't grab a win the first time round but it came up for a quick giveaway and I snagged the one I wanted. The team were easy to deal with and even met me out in the sticks for the handover.",
+        name: "Tom W",
+        color: "blue",
+        img: "https://statics.myclickfunnels.com/workspace/joygEX/image/21849451/file/1e409f8b98b23744eb69baf12661de5c.png",
+      },
+      {
+        prize: "$1M",
+        title: "Winner",
+        quote:
+          "I can\u2019t believe I won. The whole experience has been surreal. Winning $1.8 million has completely changed my life. Thank you Adrian and the whole team.",
+        name: "Nige B, QLD",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAaOgTHPd7DCduUXgrbkaPNHS4OhyBLWvjc98Z",
+      },
+      {
+        prize: "VF Maloo",
+        title: "Winner",
+        quote:
+          "I grabbed a package because the car's a weapon, then next minute I get a call and could not believe it. Complete disbelief.",
+        name: "Judd K",
+        color: "blue",
+        img: "https://statics.myclickfunnels.com/workspace/joygEX/image/21849452/file/934be1f7d9b4f98721b0fb95e8171acd.png",
+      },
+      {
+        prize: "$8M Cash",
+        title: "Winner",
+        quote:
+          "I still can\u2019t believe it. Winning $8 million through LMCT+ has completely changed my life. Not long ago I had to sell my car and was struggling to make ends meet. I never thought something like this could happen to me.",
+        name: "Holly W, VIC",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TASTfjhuGdtiPR3x6gw7T2oWCcjqnKBYG98esF",
+      },
+      {
+        prize: "HSV King",
+        title: "Winner",
+        quote:
+          "Still can\u2019t believe we won. Can\u2019t thank Adrian, Troy and the LMCT+ team enough for this.",
+        name: "Liam C, QLD",
+        color: "blue",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAda4iLOxsLgmZyOfMHl8Vo4YiT19urvPJ0FeW",
+      },
+      {
+        prize: "$1M",
+        title: "Winner",
+        quote:
+          "A huge thank you to Adrian and the LMCT+ team. I don\u2019t think I\u2019ve stopped smiling since I received the call. It\u2019s all so surreal and the money has helped my family so much.",
+        name: "Josh R, WA",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAjzukcvIxBA0baz4isnQuMo2FJpOlXDr5NHhy",
+      },
+      {
+        prize: "LC79",
+        title: "Winner",
+        quote:
+          "Big Red. It\u2019s insane to me that I won. Thank you so much LMCT+. I\u2019m still in disbelief from that call from Adrian.",
+        name: "Mitchell R, NSW",
+        color: "blue",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TABWIIboMn7jSfJEgPAYpXTDzU6isrMbVyhGBl",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        quote:
+          "My husband and I were so giddy when we saw the money in our account and the reality set in. It has helped us immensely with our mortgage and let us fast-track our renovation plans by nearly a decade.",
+        name: "Pam T, NSW",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAl8WHsAjm795ZuRhWf3CvTq48PFM6Owyat0ol",
+      },
+      {
+        prize: "Prado & Caravan",
+        title: "Winner",
+        quote:
+          "Adrian and the guys at Lotus were fantastic. The call still goes through my head and I wake up in shock. Cheers guys.",
+        name: "Rob R, VIC",
+        color: "blue",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAKJ40k4ViZT3GjomxyAqtupBbRNdcfFlv4WX5",
+      },
+      {
+        prize: "$250K",
+        title: "Winner",
+        quote:
+          "A massive thank you to LMCT+ and Adrian for giving us the opportunity to participate. Being part of this experience has been nothing short of life-changing.",
+        name: "Sash D, VIC",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAQ4kN6jvd5KzorPjIOlcTxaWMDVfRZbBg6Xh4",
+      },
+      {
+        prize: "G Wagon",
+        title: "Winner",
+        quote:
+          "The team were so great and the call has completely changed my life. I always wanted a luxury car and Adrian made my dream come true.",
+        name: "Bobbi O, QLD",
+        color: "blue",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAmYjyHJB1GOp2TfPZWiELklBcvFR3oIqHyC9a",
+      },
+    ];
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function buildCard(winner) {
+      return (
+        '<article class="win-card ' +
+        escapeHtml(winner.color) +
+        '" aria-label="Winner story from ' +
+        escapeHtml(winner.name) +
+        '">' +
+        '<div class="win-img">' +
+        '<img src="' +
+        escapeHtml(winner.img) +
+        '" alt="' +
+        escapeHtml(winner.name + " winner photo") +
+        '" loading="lazy" decoding="async">' +
+        "</div>" +
+        '<div class="win-content">' +
+        '<span class="win-prize">' +
+        escapeHtml(winner.prize) +
+        "</span>" +
+        '<h3 class="win-title">' +
+        escapeHtml(winner.title) +
+        "</h3>" +
+        '<p class="win-quote">\u201C' +
+        escapeHtml(winner.quote) +
+        "\u201D</p>" +
+        '<p class="win-name">\u2014 ' +
+        escapeHtml(winner.name) +
+        "</p>" +
+        "</div>" +
+        "</article>"
+      );
+    }
+
+    function initMarquee(container) {
+      if (!container || container.dataset.winInit === "true") return;
+
+      container.dataset.winInit = "true";
+
+      var track = container.querySelector(".win-track");
+      var baseSeq = container.querySelector(".win-seq");
+      var speed = Number(container.getAttribute("data-speed")) || SPEED_DEFAULT;
+      var reducedMotion = window.matchMedia
+        ? window.matchMedia("(prefers-reduced-motion: reduce)")
+        : null;
+      var offset = 0;
+      var cycleWidth = 0;
+      var lastTs = null;
+      var raf = 0;
+      var paused = false;
+      var resizeTimer = 0;
+
+      if (!track || !baseSeq) return;
+
+      baseSeq.innerHTML = winners.map(buildCard).join("");
+
+      function gapPx() {
+        var gap = getComputedStyle(track).gap || "0";
+        return parseFloat(gap) || 0;
+      }
+
+      function cleanupClones() {
+        while (track.children.length > 1) {
+          track.removeChild(track.lastChild);
+        }
+      }
+
+      function rebuildTrack() {
+        cleanupClones();
+
+        var baseWidth = baseSeq.getBoundingClientRect().width;
+        var repeatCount = 0;
+        var copiesNeeded = 0;
+
+        if (baseWidth < 1) return false;
+
+        cycleWidth = baseWidth + gapPx();
+        copiesNeeded = Math.max(
+          2,
+          Math.ceil(container.clientWidth / cycleWidth) + 2,
+        );
+
+        for (repeatCount = 1; repeatCount < copiesNeeded; repeatCount += 1) {
+          track.appendChild(baseSeq.cloneNode(true));
+        }
+
+        return true;
+      }
+
+      function stop() {
+        if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+        lastTs = null;
+      }
+
+      function enableStaticMode() {
+        stop();
+        cleanupClones();
+        offset = 0;
+        paused = false;
+        container.dataset.mode = "static";
+        container.scrollLeft = 0;
+        track.style.transform = "translateX(0px)";
+      }
+
+      function tick(ts) {
+        if (paused) {
+          lastTs = ts;
+          raf = requestAnimationFrame(tick);
+          return;
+        }
+
+        if (lastTs == null) lastTs = ts;
+
+        var dt = (ts - lastTs) / 1000;
+        var currentSpeed =
+          window.innerWidth <= 768 ? speed * MOBILE_SPEED_FACTOR : speed;
+
+        lastTs = ts;
+        offset -= currentSpeed * dt;
+
+        while (cycleWidth > 1 && -offset >= cycleWidth) {
+          offset += cycleWidth;
+        }
+
+        track.style.transform = "translateX(" + offset + "px)";
+        raf = requestAnimationFrame(tick);
+      }
+
+      function startMarquee() {
+        if (container.clientWidth < 1) {
+          window.setTimeout(restart, 100);
+          return;
+        }
+
+        stop();
+        if (!rebuildTrack()) {
+          window.setTimeout(restart, 100);
+          return;
+        }
+        offset = 0;
+        paused = false;
+        container.dataset.mode = "desktop";
+        container.scrollLeft = 0;
+        track.style.transform = "translateX(0px)";
+        raf = requestAnimationFrame(tick);
+      }
+
+      function restart() {
+        if (reducedMotion && reducedMotion.matches) {
+          enableStaticMode();
+          return;
+        }
+
+        startMarquee();
+      }
+
+      container.addEventListener("mouseenter", function () {
+        paused = true;
+      });
+
+      container.addEventListener("mouseleave", function () {
+        paused = false;
+      });
+
+      container.addEventListener("focusin", function () {
+        paused = true;
+      });
+
+      container.addEventListener("focusout", function () {
+        paused = false;
+      });
+
+      container.addEventListener("touchstart", function () {
+        paused = true;
+      });
+
+      container.addEventListener("touchend", function () {
+        paused = false;
+      });
+
+      container.addEventListener("touchcancel", function () {
+        paused = false;
+      });
+
+      window.addEventListener("resize", function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(restart, 140);
+      });
+
+      if (reducedMotion) {
+        if (reducedMotion.addEventListener) {
+          reducedMotion.addEventListener("change", restart);
+        } else if (reducedMotion.addListener) {
+          reducedMotion.addListener(restart);
+        }
+      }
+
+      restart();
+    }
+
+    initMarquee(document.getElementById("winBody"));
+  })();
+</script>

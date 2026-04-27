@@ -1,0 +1,271 @@
+<script>
+  // Hiding Card Error Message at Beginning
+  if (
+    document.querySelector(
+      "#cCmodalPopup > div > div.de.elHeadlineWrapper > div",
+    )
+  ) {
+    document.querySelector(
+      "#cCmodalPopup > div > div.de.elHeadlineWrapper > div",
+    ).style.display = "none";
+    if (document.querySelector('[data-title="Credit Card Form"]'))
+      document.querySelector('[data-title="Credit Card Form"]').style.display =
+        "none";
+  }
+  if (document.getElementById("order-declined-message"))
+    document.getElementById("order-declined-message").style.display = "none";
+  window.onload = function () {
+    setTimeout(function () {
+      try {
+        // URL of the Thank You Page
+        var thank_you_page_url = "https://lmctgiveaway.com/250k-cash-thank-you";
+        // Select the Buy button and email input
+        var buyButton = document.querySelector('a[href="#submit-form"]');
+        console.log("buyBotton", buyButton);
+        var emailInput = document.querySelector('input[name="email"]');
+        console.log("emailInput", emailInput);
+        var package_select_buttons = Array.from(
+          document.querySelectorAll("a.elButton[rel='noopener noreferrer']"),
+        ).filter(function (button) {
+          return button.innerText.includes("Select");
+        });
+        console.log("package_select_buttons", package_select_buttons);
+        var oto_buttons = document.querySelectorAll(
+          'a[href*="#yes-link-multi-"]',
+        );
+        console.log("oto_buttons", oto_buttons);
+        var button_normal_text = "";
+        // Function to update the Buy button's innerHTML
+        function updateBuyButton(isActive) {
+          if (isActive) {
+            //buyButton.disabled = true;
+            buyButton.href = thank_you_page_url;
+            // User already exists, change the button text
+            buyButton.innerHTML =
+              '<span class="elButtonMain">LOYALTY MEMBERSHIP ALREADY ACTIVE WITH THIS EMAIL! CLICK TO CONTINUE > </span><span class="elButtonSub"></span>';
+            // Remove data-title attribute from the parent and change background color to gray
+            const parentElement = buyButton.parentElement;
+            parentElement.removeAttribute("data-title");
+            buyButton.style.backgroundColor = "gray";
+            // Hide Apple/Google Pay Button
+            try {
+              var applePayButton = document.querySelector(
+                "#payment-request-button",
+              );
+              if (applePayButton) {
+                applePayButton.style.display = "none";
+              }
+            } catch (error) {}
+            // Hide Link Button
+            try {
+              var linkSaveButton = document.querySelector("#link-save");
+              if (linkSaveButton) {
+                linkSaveButton.style.display = "none";
+              }
+            } catch (error) {}
+            try {
+              var payment_request_button = document.getElementById(
+                "payment-request-button",
+              );
+              if (payment_request_button)
+                payment_request_button.style.display = "none";
+            } catch (error) {}
+          } else {
+            //buyButton.disabled = false;
+            buyButton.href = "#submit-form";
+            // User does not exist, change the button text
+            buyButton.innerHTML = button_normal_text;
+            // Add data-title attribute to the parent and reset the background color
+            const parentElement = buyButton.parentElement;
+            parentElement.setAttribute("data-title", "rainbow-b");
+            buyButton.style.backgroundColor = ""; // Reset background color
+            // Show Apple/Google Pay Button
+            try {
+              var applePayButton = document.querySelector(
+                "#payment-request-button",
+              );
+              if (
+                applePayButton &&
+                applePayButton.innerText.trim() !=
+                  "Apple or Android Pay will Display here when available."
+              ) {
+                applePayButton.style.display = "inline";
+              }
+            } catch (error) {}
+            // Show Link Button
+            try {
+              var linkSaveButton = document.querySelector("#link-save");
+              if (linkSaveButton) {
+                linkSaveButton.style.display = "inline-flex";
+              }
+            } catch (error) {}
+            try {
+              var payment_request_button = document.getElementById(
+                "payment-request-button",
+              );
+              if (payment_request_button)
+                payment_request_button.style.display = "block";
+            } catch (error) {}
+          }
+        }
+        // Function to handle both click and input events
+        function handleEmailEvents(email_value) {
+          var email = emailInput.value;
+          try {
+            if (email_value.includes("@")) email = email_value;
+          } catch (err) {}
+          if (email.includes("@") && email.includes(".") && email.length > 5) {
+            var apiUrl = "https://lmctmembers.com/api/check-user-active";
+            var data = { email: email };
+            fetch(apiUrl, {
+              method: "POST",
+              body: JSON.stringify(data),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then(function (response) {
+                if (response.status === 302) {
+                  var redirectURL = response.headers.get("Location");
+                  console.log("redirectUrl", redirectURL);
+                  return fetch(redirectURL, {
+                    method: "POST",
+                  });
+                } else {
+                  return response
+                    .json()
+                    .then(function (responseData) {
+                      if (responseData.is_active) updateBuyButton(true);
+                      else updateBuyButton(false);
+                    })
+                    .catch(function (error) {
+                      console.error("Error parsing JSON:", error);
+                      updateBuyButton(false);
+                    });
+                }
+              })
+              .catch(function (error) {
+                console.error("Error:", error);
+                updateBuyButton(false);
+              });
+          }
+        }
+        // Function to add click event listener to .email_suggestion a
+        function addClickEventListener() {
+          var emailSuggestionLink = document.querySelector(
+            ".email_suggestion a",
+          );
+          console.log("eta");
+          if (emailSuggestionLink) {
+            emailSuggestionLink.addEventListener("click", function (event) {
+              handleEmailEvents(emailSuggestionLink.innerText);
+            });
+          }
+        }
+        if (buyButton && emailInput) {
+          console.log("bb-ef");
+          button_normal_text = buyButton.innerHTML;
+          // Add an input event listener to the email input
+          emailInput.addEventListener("input", handleEmailEvents);
+          // Use a MutationObserver to monitor the page for changes (For Email Suggestion Link)
+          const observer = new MutationObserver(function (mutationsList) {
+            for (const mutation of mutationsList) {
+              for (const addedNode of mutation.addedNodes) {
+                // Check if the added node contains the .email_suggestion a element
+                if (
+                  addedNode.querySelector &&
+                  addedNode.querySelector(".email_suggestion a")
+                ) {
+                  console.log("mutation");
+                  addClickEventListener();
+                }
+              }
+            }
+          });
+          // Configure the observer to watch for changes to the entire document body
+          const observerConfig = { childList: true, subtree: true };
+          // Start observing the document body
+          observer.observe(document.body, observerConfig);
+          emailInput.dispatchEvent(new Event("input", { bubbles: true }));
+        } else if (
+          localStorage.getItem("garlic:lmctgiveaway.com*>input.email")
+        ) {
+          console.log("ec");
+          buyButton = document.querySelector('a[href="#submit-form"]');
+          if (buyButton) button_normal_text = buyButton.innerHTML;
+          var email = localStorage.getItem(
+            "garlic:lmctgiveaway.com*>input.email",
+          );
+          if (email.includes("@") && email.includes(".") && email.length > 5) {
+            var apiUrl = "https://lmctmembers.com/api/check-user-active";
+            var data = { email: email };
+            fetch(apiUrl, {
+              method: "POST",
+              body: JSON.stringify(data),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then(function (response) {
+                if (response.status === 302) {
+                  var redirectURL = response.headers.get("Location");
+                  console.log("redirectURL", redirectURL);
+                  return fetch(redirectURL, {
+                    method: "POST",
+                  });
+                } else {
+                  return response
+                    .json()
+                    .then(function (responseData) {
+                      if (responseData.is_active) {
+                        for (
+                          var sbindex = 0;
+                          sbindex < package_select_buttons.length;
+                          sbindex++
+                        ) {
+                          let btn_parent =
+                            package_select_buttons[sbindex].parentElement;
+                          btn_parent.removeAttribute("data-title");
+                          package_select_buttons[sbindex].innerHTML =
+                            '<span class="elButtonMain">LOYALTY MEMBERSHIP ALREADY ACTIVE WITH THIS EMAIL! CLICK TO CONTINUE > </span><span class="elButtonSub"></span>';
+                          package_select_buttons[sbindex].href =
+                            thank_you_page_url;
+                          package_select_buttons[
+                            sbindex
+                          ].style.backgroundColor = "gray";
+                          package_select_buttons[sbindex].removeAttribute(
+                            "data-upsell",
+                          );
+                        }
+                        for (
+                          var otobindex = 0;
+                          otobindex < oto_buttons.length;
+                          otobindex++
+                        ) {
+                          let btn_parent = oto_buttons[otobindex].parentElement;
+                          btn_parent.removeAttribute("data-title");
+                          oto_buttons[otobindex].innerHTML =
+                            '<span class="elButtonMain">LOYALTY MEMBERSHIP ALREADY ACTIVE WITH THIS EMAIL! CLICK TO CONTINUE > </span><span class="elButtonSub"></span>';
+                          oto_buttons[otobindex].href = thank_you_page_url;
+                          oto_buttons[otobindex].style.backgroundColor = "gray";
+                        }
+                      }
+                    })
+                    .catch(function (error) {
+                      console.error("Error parsing JSON:", error);
+                      updateBuyButton(false);
+                    });
+                }
+              })
+              .catch(function (error) {
+                console.error("Error:", error);
+                updateBuyButton(false);
+              });
+          }
+        }
+      } catch (err) {
+        console.log("exception");
+      }
+    }, 1000);
+  };
+</script>
