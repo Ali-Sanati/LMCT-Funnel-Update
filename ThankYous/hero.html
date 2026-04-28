@@ -1,0 +1,448 @@
+<!-- ============================================ -->
+<!-- HERO — bigger car, chunky $100,000, new OR    -->
+<!-- ============================================ -->
+<style>
+  .lmct-hero-wrap {
+    position: relative;
+    background: transparent;
+    padding: 32px 16px 40px;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  }
+  .lmct-hero-card {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    background: transparent;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: lmct-gA-card-in 0.7s ease-out 0.05s forwards;
+  }
+  /* banner */
+  .lmct-gA-banner {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #0476c4 0%, #0c9ffd 50%, #3fb8ff 100%);
+    border-radius: 999px;
+    padding: 11px 24px;
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(12, 159, 253, 0.32);
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+    animation: lmct-gA-banner-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.4) 0.25s
+      forwards;
+  }
+  .lmct-gA-banner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    );
+    transform: skewX(-20deg);
+    animation: lmct-gA-sheen 3.4s ease-in-out 1.4s infinite;
+    pointer-events: none;
+  }
+  .lmct-gA-tick {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    animation: lmct-gA-pulse 2.4s ease-out 1.4s infinite;
+  }
+  .lmct-gA-tick svg {
+    width: 12px;
+    height: 12px;
+    color: #0476c4;
+  }
+  .lmct-gA-tick-text {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(12px, 2.6vw, 15px);
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  }
+  /* heading */
+  .lmct-gA-prize {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(38px, 8.5vw, 82px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -2.5px;
+    background: linear-gradient(180deg, #0476c4 0%, #0c9ffd 50%, #3fb8ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    animation: lmct-gA-prize-in 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.3) 0.4s
+      forwards;
+  }
+  /* OR divider — chunky badge style instead of hyphen */
+  .lmct-gA-or {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 18px 0 14px;
+    opacity: 0;
+    animation: lmct-gA-fade 0.5s ease-out 0.65s forwards;
+  }
+  .lmct-gA-or::before,
+  .lmct-gA-or::after {
+    content: "";
+    flex: 1;
+    max-width: 80px;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.12) 100%
+    );
+  }
+  .lmct-gA-or::after {
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.12) 0%,
+      transparent 100%
+    );
+  }
+  .lmct-gA-or span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(13px, 1.8vw, 15px);
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    background: #fff;
+    padding: 7px 18px;
+    border-radius: 999px;
+    border: 2px solid rgba(12, 159, 253, 0.25);
+    box-shadow: 0 4px 12px rgba(12, 159, 253, 0.1);
+  }
+  /* CHUNKY $100,000 — heavy weight + layered shadow drops */
+  .lmct-gA-cash {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(46px, 11vw, 108px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -3.5px;
+    color: #0a0a0a;
+    /* layered drop shadow for that puffy/embossed billboard look */
+    text-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.08),
+      0 2px 0 rgba(0, 0, 0, 0.06),
+      0 4px 0 rgba(0, 0, 0, 0.05),
+      0 8px 16px rgba(0, 0, 0, 0.12),
+      0 12px 28px rgba(0, 0, 0, 0.08);
+    -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.02);
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    animation: lmct-gA-prize-in 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.3) 0.75s
+      forwards;
+  }
+  .lmct-gA-cash .dollar {
+    font-size: 1em;
+    font-weight: 900;
+    color: #0c9ffd;
+    margin-right: -2px;
+    text-shadow:
+      0 1px 0 rgba(4, 118, 196, 0.25),
+      0 2px 0 rgba(4, 118, 196, 0.18),
+      0 4px 0 rgba(4, 118, 196, 0.12),
+      0 8px 16px rgba(12, 159, 253, 0.28);
+  }
+  .lmct-gA-cash-sub {
+    display: block;
+    margin-top: 6px;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(14px, 2.4vw, 18px);
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #0c9ffd;
+    opacity: 0;
+    animation: lmct-gA-fade 0.5s ease-out 0.9s forwards;
+  }
+  /* car */
+  .lmct-gA-specs {
+    margin: 46px 0 0 !important;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(11px, 2.2vw, 13px);
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    opacity: 0;
+    animation: lmct-gA-fade 0.5s ease-out 1s forwards;
+  }
+  .lmct-gA-img-wrap {
+    position: relative;
+    max-width: 1180px;
+    margin: 38px auto 0 !important;
+    padding: 0 10px;
+    user-select: none;
+    box-sizing: border-box;
+    opacity: 0;
+    animation: lmct-gA-fade 0.6s ease-out 1.1s forwards;
+  }
+  .lmct-gA-img-wrap img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none;
+  }
+  .lmct-gA-year {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -18%);
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(120px, 20vw, 260px);
+    font-weight: 900;
+    letter-spacing: 14px;
+    color: rgba(0, 0, 0, 0.05);
+    text-transform: uppercase;
+    z-index: 0;
+    pointer-events: none;
+    margin: 0 !important;
+  }
+  @keyframes lmct-gA-card-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes lmct-gA-banner-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.96);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(2px) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes lmct-gA-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
+    }
+    70% {
+      box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+  }
+  @keyframes lmct-gA-sheen {
+    0% {
+      left: -60%;
+    }
+    60% {
+      left: 120%;
+    }
+    100% {
+      left: 120%;
+    }
+  }
+  @keyframes lmct-gA-fade {
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes lmct-gA-prize-in {
+    0% {
+      opacity: 0;
+      transform: translateY(14px) scale(0.98);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-2px) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmct-hero-card,
+    .lmct-gA-banner,
+    .lmct-gA-banner::after,
+    .lmct-gA-tick,
+    .lmct-gA-prize,
+    .lmct-gA-or,
+    .lmct-gA-cash,
+    .lmct-gA-cash-sub,
+    .lmct-gA-specs,
+    .lmct-gA-img-wrap {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+  @media (max-width: 520px) {
+    .lmct-hero-wrap {
+      padding: 24px 14px 28px;
+    }
+    .lmct-gA-banner {
+      padding: 10px 18px;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .lmct-gA-tick {
+      width: 20px;
+      height: 20px;
+    }
+    .lmct-gA-tick svg {
+      width: 11px;
+      height: 11px;
+    }
+    .lmct-gA-tick-text {
+      letter-spacing: 1px;
+    }
+    .lmct-gA-prize {
+      letter-spacing: -1.4px;
+    }
+    .lmct-gA-cash {
+      letter-spacing: -2px;
+      text-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.08),
+        0 2px 0 rgba(0, 0, 0, 0.05),
+        0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+    .lmct-gA-cash-sub {
+      letter-spacing: 4px;
+    }
+    .lmct-gA-or {
+      margin: 14px 0 10px;
+      gap: 10px;
+    }
+    .lmct-gA-or::before,
+    .lmct-gA-or::after {
+      max-width: 50px;
+    }
+    .lmct-gA-or span {
+      padding: 6px 14px;
+      letter-spacing: 2px;
+    }
+    .lmct-gA-specs {
+      margin: 32px 0 0 !important;
+    }
+    .lmct-gA-img-wrap {
+      margin: 26px auto 0 !important;
+    }
+  }
+</style>
+<div class="lmct-hero-wrap">
+  <div class="lmct-hero-card">
+    <div class="lmct-gA-banner">
+      <span class="lmct-gA-tick">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </span>
+      <p class="lmct-gA-tick-text">You're In The Draw</p>
+    </div>
+    <span class="lmct-gA-prize">Ford Mustang<br />Fastback GTA</span>
+    <div class="lmct-gA-or"><span>or</span></div>
+    <span class="lmct-gA-cash"><span class="dollar">$</span>100,000</span>
+    <span class="lmct-gA-cash-sub">tax-free cash</span>
+    <p class="lmct-gA-specs">390ci V8 &middot; muscle &middot; 78,000 miles</p>
+    <div class="lmct-gA-img-wrap" id="pcMustangFbImgWrap">
+      <p class="lmct-gA-year">1967</p>
+      <img id="pcMustangFbImg" alt="" />
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", function () {
+    var pcMustangFbSlides = [
+      "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TABGr9xiMn7jSfJEgPAYpXTDzU6isrMbVyhGBl",
+      "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAMyNTC9sTry60SFYxfuZiQAn24Dsc1gd9ezHa",
+      "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAYMM3E4CmX9vdIc2JhYlBWyVOwRs807NSH6tz",
+      "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAcYrYAWPtb7HxdFhruUzk2ML1CjeTDSGNBf3J",
+      "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TATal6w6FE01f3domgtVYbsSi8R6xqKOweNU9L",
+      "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAo7OeS8k64uFaPAYVthBX3UgS1xylcEjdCWZT",
+      "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAGEn65QlRFyBJzXh8fnmakLGU0ZQsSjCPrqHc",
+      "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAFcqgzwKW0k9TAn5MZOf7hgiXVDRqexE4IUaN",
+    ];
+    var pcMustangFbAutoMs = 900;
+    var pcMustangFbCount = pcMustangFbSlides.length;
+    var pcMustangFbIndex = 0;
+    var pcMustangFbImgEl = document.getElementById("pcMustangFbImg");
+    var pcMustangFbTimer = null;
+    for (var i = 0; i < pcMustangFbCount; i++) {
+      var pre = new Image();
+      pre.src = pcMustangFbSlides[i];
+    }
+    function pcMustangFbGoTo(target) {
+      pcMustangFbIndex =
+        ((target % pcMustangFbCount) + pcMustangFbCount) % pcMustangFbCount;
+      pcMustangFbImgEl.src = pcMustangFbSlides[pcMustangFbIndex];
+    }
+    function pcMustangFbStart() {
+      pcMustangFbStop();
+      pcMustangFbTimer = setInterval(function () {
+        pcMustangFbGoTo(pcMustangFbIndex + 1);
+      }, pcMustangFbAutoMs);
+    }
+    function pcMustangFbStop() {
+      if (pcMustangFbTimer) {
+        clearInterval(pcMustangFbTimer);
+        pcMustangFbTimer = null;
+      }
+    }
+    pcMustangFbGoTo(0);
+    pcMustangFbStart();
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        pcMustangFbStop();
+      } else {
+        pcMustangFbStart();
+      }
+    });
+  });
+</script>

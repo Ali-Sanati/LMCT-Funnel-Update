@@ -1,0 +1,510 @@
+<!-- ============================================ -->
+<!-- DRAW DETAILS — desktop cards / mobile list   -->
+<!-- ============================================ -->
+<style>
+  .lmct-dd-wrap {
+    position: relative;
+    background: transparent;
+    padding: 28px 16px 32px;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  }
+  .lmct-dd-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .lmct-dd-head {
+    text-align: center;
+    margin: 0 0 20px;
+  }
+  .lmct-dd-head h2 {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(26px, 5.4vw, 48px);
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmct-dd-head h2 .light {
+    color: #0a0a0a;
+  }
+  .lmct-dd-head h2 .accent {
+    background: linear-gradient(180deg, #0476c4 0%, #0c9ffd 50%, #3fb8ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* ===== DESKTOP: 3 cards ===== */
+  .lmct-dd-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .lmct-dd-card {
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px 18px;
+    box-shadow:
+      0 2px 4px rgba(13, 42, 82, 0.04),
+      0 8px 24px rgba(13, 42, 82, 0.06);
+    text-align: left;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      transform 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+      opacity 0.55s ease,
+      box-shadow 0.3s ease;
+  }
+  .lmct-dd-card.is-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .lmct-dd-card:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+  .lmct-dd-card:nth-child(2) {
+    transition-delay: 0.18s;
+  }
+  .lmct-dd-card:nth-child(3) {
+    transition-delay: 0.31s;
+  }
+  .lmct-dd-card:hover {
+    box-shadow:
+      0 4px 8px rgba(13, 42, 82, 0.05),
+      0 14px 32px rgba(12, 159, 253, 0.14);
+  }
+  .lmct-dd-num {
+    position: absolute;
+    top: -12px;
+    right: -2px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 78px;
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(12, 159, 253, 0.1);
+    letter-spacing: -3px;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+  .lmct-dd-row {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .lmct-dd-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0476c4 0%, #0c9ffd 100%);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(12, 159, 253, 0.32);
+  }
+  .lmct-dd-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .lmct-dd-label {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0c9ffd;
+  }
+  .lmct-dd-card .val {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 4px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    color: #0a0a0a;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
+  .lmct-dd-card .desc {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #475569;
+    font-weight: 500;
+  }
+  .lmct-dd-pills {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .lmct-dd-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 4px 9px;
+    border-radius: 999px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .lmct-dd-pill--live {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+  .lmct-dd-pill--event {
+    background: rgba(12, 159, 253, 0.12);
+    color: #0476c4;
+    border: 1px solid rgba(12, 159, 253, 0.25);
+  }
+  .lmct-dd-pill--cert {
+    background: rgba(22, 163, 74, 0.12);
+    color: #15803d;
+    border: 1px solid rgba(22, 163, 74, 0.25);
+  }
+  .lmct-dd-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #dc2626;
+    animation: lmct-dd-pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes lmct-dd-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+  /* ===== MOBILE: single compact list ===== */
+  .lmct-dd-list {
+    display: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmct-dd-card {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    .lmct-dd-dot {
+      animation: none !important;
+    }
+  }
+  @media (max-width: 760px) {
+    .lmct-dd-wrap {
+      padding: 22px 14px 24px;
+    }
+    .lmct-dd-head {
+      margin: 0 0 14px;
+    }
+    .lmct-dd-grid {
+      display: none;
+    }
+    .lmct-dd-list {
+      display: block;
+      background: #fff;
+      border-radius: 14px;
+      padding: 4px 14px;
+      box-shadow:
+        0 2px 4px rgba(13, 42, 82, 0.04),
+        0 8px 24px rgba(13, 42, 82, 0.06);
+      opacity: 0;
+      transform: translateY(14px);
+      transition:
+        transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+        opacity 0.5s ease;
+    }
+    .lmct-dd-list.is-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .lmct-dd-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eef2f7;
+    }
+    .lmct-dd-item:last-child {
+      border-bottom: 0;
+    }
+    .lmct-dd-item-icon {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #0476c4 0%, #0c9ffd 100%);
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(12, 159, 253, 0.28);
+      margin-top: 2px;
+    }
+    .lmct-dd-item-icon svg {
+      width: 15px;
+      height: 15px;
+    }
+    .lmct-dd-item-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .lmct-dd-item-label {
+      margin: 0 0 2px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #0c9ffd;
+    }
+    .lmct-dd-item-val {
+      margin: 0 0 3px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #0a0a0a;
+      line-height: 1.25;
+      letter-spacing: -0.2px;
+    }
+    .lmct-dd-item-desc {
+      margin: 0;
+      font-family: "Montserrat", sans-serif;
+      font-size: 12px;
+      line-height: 1.35;
+      color: #475569;
+      font-weight: 500;
+    }
+    .lmct-dd-item-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
+    }
+  }
+</style>
+<div class="lmct-dd-wrap">
+  <div class="lmct-dd-inner">
+    <div class="lmct-dd-head">
+      <h2>
+        <span class="light">Draw</span> <span class="accent">Details</span>
+      </h2>
+    </div>
+    <!-- DESKTOP: 3 cards -->
+    <div class="lmct-dd-grid" id="lmctDdGrid">
+      <div class="lmct-dd-card">
+        <span class="lmct-dd-num">01</span>
+        <div class="lmct-dd-row">
+          <span class="lmct-dd-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </span>
+          <p class="lmct-dd-label">Draw Date</p>
+        </div>
+        <p class="val">Friday, 25 July 2026</p>
+        <p class="desc">8:00 PM AEST. Drawn live in front of the crowd.</p>
+        <div class="lmct-dd-pills">
+          <span class="lmct-dd-pill lmct-dd-pill--live"
+            ><span class="lmct-dd-dot"></span>Facebook Live</span
+          >
+          <span class="lmct-dd-pill lmct-dd-pill--event">At MotorEx Event</span>
+        </div>
+      </div>
+      <div class="lmct-dd-card">
+        <span class="lmct-dd-num">02</span>
+        <div class="lmct-dd-row">
+          <span class="lmct-dd-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z" />
+              <polyline points="9 12 11 14 15 10" />
+            </svg>
+          </span>
+          <p class="lmct-dd-label">Selection</p>
+        </div>
+        <p class="val">100% fair, automated draw</p>
+        <p class="desc">
+          Winner picked instantly by our digital system. No fluff, no
+          shenanigans.
+        </p>
+        <div class="lmct-dd-pills">
+          <span class="lmct-dd-pill lmct-dd-pill--cert"
+            >NSF Global Certified</span
+          >
+        </div>
+      </div>
+      <div class="lmct-dd-card">
+        <span class="lmct-dd-num">03</span>
+        <div class="lmct-dd-row">
+          <span class="lmct-dd-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              />
+            </svg>
+          </span>
+          <p class="lmct-dd-label">If You Win</p>
+        </div>
+        <p class="val">We'll come find you</p>
+        <p class="desc">
+          Phone, email and socials — within 24 hours of the draw. Keep your
+          phone close.
+        </p>
+      </div>
+    </div>
+    <!-- MOBILE: compact list (one container, divider rows) -->
+    <div class="lmct-dd-list" id="lmctDdList">
+      <div class="lmct-dd-item">
+        <span class="lmct-dd-item-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="4" width="18" height="18" rx="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+        </span>
+        <div class="lmct-dd-item-body">
+          <p class="lmct-dd-item-label">Draw Date</p>
+          <p class="lmct-dd-item-val">Fri 25 July 2026 · 8:00 PM AEST</p>
+          <p class="lmct-dd-item-desc">Drawn live in front of the crowd.</p>
+          <div class="lmct-dd-item-pills">
+            <span class="lmct-dd-pill lmct-dd-pill--live"
+              ><span class="lmct-dd-dot"></span>Facebook Live</span
+            >
+            <span class="lmct-dd-pill lmct-dd-pill--event">At MotorEx</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmct-dd-item">
+        <span class="lmct-dd-item-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z" />
+            <polyline points="9 12 11 14 15 10" />
+          </svg>
+        </span>
+        <div class="lmct-dd-item-body">
+          <p class="lmct-dd-item-label">Selection</p>
+          <p class="lmct-dd-item-val">100% fair, automated draw</p>
+          <p class="lmct-dd-item-desc">
+            Picked instantly by our digital system.
+          </p>
+          <div class="lmct-dd-item-pills">
+            <span class="lmct-dd-pill lmct-dd-pill--cert"
+              >NSF Global Certified</span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="lmct-dd-item">
+        <span class="lmct-dd-item-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+            />
+          </svg>
+        </span>
+        <div class="lmct-dd-item-body">
+          <p class="lmct-dd-item-label">If You Win</p>
+          <p class="lmct-dd-item-val">We'll come find you</p>
+          <p class="lmct-dd-item-desc">
+            Phone, email and socials within 24 hours.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var targets = [].concat(
+      Array.prototype.slice.call(
+        document.querySelectorAll("#lmctDdGrid .lmct-dd-card"),
+      ),
+      [document.getElementById("lmctDdList")].filter(Boolean),
+    );
+    if (!targets.length) return;
+    if (!("IntersectionObserver" in window)) {
+      targets.forEach(function (t) {
+        t.classList.add("is-in");
+      });
+      return;
+    }
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+    targets.forEach(function (t) {
+      io.observe(t);
+    });
+  })();
+</script>

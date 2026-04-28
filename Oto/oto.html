@@ -1,0 +1,904 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap");
+
+  .lmct-oto,
+  .lmct-oto * {
+    box-sizing: border-box;
+  }
+
+  .lmct-oto {
+    position: relative;
+    padding: 24px 16px 36px;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    color: #0a0a0a;
+    background:
+      radial-gradient(
+        circle at top left,
+        rgba(63, 184, 255, 0.12) 0%,
+        transparent 36%
+      ),
+      radial-gradient(
+        circle at bottom right,
+        rgba(4, 118, 196, 0.1) 0%,
+        transparent 34%
+      ),
+      transparent;
+  }
+
+  .lmct-oto__inner {
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+
+  .lmct-oto__card {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 24px;
+    border-radius: 28px;
+    background: linear-gradient(180deg, #ffffff 0%, #f4fbff 100%);
+    border: 1px solid rgba(12, 159, 253, 0.16);
+    box-shadow:
+      0 8px 18px rgba(7, 23, 44, 0.06),
+      0 24px 60px rgba(7, 23, 44, 0.1);
+    overflow: hidden;
+    animation: lmct-oto-card-in 0.7s ease-out 0.05s both;
+  }
+
+  .lmct-oto__card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0476c4 0%, #0c9ffd 50%, #3fb8ff 100%);
+    pointer-events: none;
+  }
+
+  .lmct-oto__copy {
+    flex: 1 1 620px;
+    min-width: 0;
+  }
+
+  .lmct-oto__offer {
+    flex: 0 1 360px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 22px;
+    border-radius: 24px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.96) 0%,
+      #eef8ff 100%
+    );
+    border: 1px solid rgba(12, 159, 253, 0.16);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      0 18px 36px rgba(12, 159, 253, 0.08);
+  }
+
+  .lmct-oto__eyebrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+
+  .lmct-oto__pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .lmct-oto__pill--blue {
+    color: #ffffff;
+    background: linear-gradient(90deg, #0476c4 0%, #0c9ffd 100%);
+    box-shadow: 0 10px 24px rgba(12, 159, 253, 0.24);
+    animation: lmct-oto-pill-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.4) 0.25s both;
+  }
+
+  .lmct-oto__pill--soft {
+    color: #0476c4;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.18);
+    animation: lmct-oto-pill-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.4) 0.36s both;
+  }
+
+  .lmct-oto__pill--blue::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    );
+    transform: skewX(-20deg);
+    animation: lmct-oto-sheen 3.4s ease-in-out 1.25s infinite;
+    pointer-events: none;
+  }
+
+  .lmct-oto__title {
+    margin: 0;
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    animation: lmct-oto-rise-in 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.3) 0.46s
+      both;
+  }
+
+  .lmct-oto__title-accent {
+    display: block;
+    color: #0476c4;
+    background: linear-gradient(180deg, #0476c4 0%, #0c9ffd 55%, #3fb8ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lmct-oto__text {
+    margin: 18px 0 0;
+    max-width: 58ch;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #334155;
+    animation: lmct-oto-fade-in 0.55s ease-out 0.68s both;
+  }
+
+  .lmct-oto__text strong {
+    color: #0a0a0a;
+  }
+
+  .lmct-oto__benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmct-oto__benefit {
+    width: calc(50% - 6px);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 14px 13px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(12, 159, 253, 0.12);
+    box-shadow: 0 12px 24px rgba(13, 42, 82, 0.05);
+    animation: lmct-oto-rise-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  }
+
+  .lmct-oto__benefit:nth-child(1) {
+    animation-delay: 0.82s;
+  }
+
+  .lmct-oto__benefit:nth-child(2) {
+    animation-delay: 0.94s;
+  }
+
+  .lmct-oto__benefit:nth-child(3) {
+    animation-delay: 1.06s;
+  }
+
+  .lmct-oto__benefit:nth-child(4) {
+    animation-delay: 1.18s;
+  }
+
+  .lmct-oto__benefit-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0476c4 0%, #0c9ffd 100%);
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(12, 159, 253, 0.2);
+  }
+
+  .lmct-oto__benefit-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .lmct-oto__benefit-title {
+    margin: 0 0 3px;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #0a0a0a;
+  }
+
+  .lmct-oto__benefit-text {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #475569;
+  }
+
+  .lmct-oto__result {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 22px;
+    padding: 13px 16px;
+    border-radius: 18px;
+    background: rgba(7, 22, 42, 0.04);
+    border: 1px solid rgba(7, 22, 42, 0.08);
+    animation: lmct-oto-fade-in 0.55s ease-out 1.28s both;
+  }
+
+  .lmct-oto__result-label {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #0c9ffd;
+  }
+
+  .lmct-oto__result-value {
+    margin: 2px 0 0;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -0.6px;
+    color: #0a0a0a;
+  }
+
+  .lmct-oto__offer-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+    animation: lmct-oto-fade-in 0.5s ease-out 0.64s both;
+  }
+
+  .lmct-oto__offer-label {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: #0c9ffd;
+  }
+
+  .lmct-oto__offer-meta {
+    margin: 7px 0 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #475569;
+  }
+
+  .lmct-oto__save {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(22, 163, 74, 0.12);
+    border: 1px solid rgba(22, 163, 74, 0.18);
+    color: #15803d;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .lmct-oto__price-block {
+    display: grid;
+    gap: 8px;
+    animation: lmct-oto-rise-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) 0.76s both;
+  }
+
+  .lmct-oto__was {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    color: #64748b;
+    text-decoration: line-through;
+    text-decoration-color: #ef4444;
+  }
+
+  .lmct-oto__price-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .lmct-oto__price-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+    background: #ffffff;
+    color: #0a0a0a;
+    box-shadow: 0 12px 28px rgba(13, 42, 82, 0.08);
+  }
+
+  .lmct-oto__price-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .lmct-oto__price {
+    margin: 0;
+    font-size: 68px;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    color: #0a0a0a;
+  }
+
+  .lmct-oto__caption {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.55;
+    color: #475569;
+  }
+
+  .lmct-oto__cta-group {
+    display: grid;
+    gap: 12px;
+    animation: lmct-oto-fade-in 0.5s ease-out 0.92s both;
+  }
+
+  .lmct-oto__cta,
+  .lmct-oto__decline {
+    width: 100%;
+    text-align: center;
+    text-decoration: none !important;
+    border-radius: 16px;
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      border-color 0.18s ease,
+      background 0.18s ease,
+      color 0.18s ease;
+  }
+
+  .lmct-oto__cta {
+    display: block;
+    padding: 18px 18px 16px;
+    background: linear-gradient(90deg, #0476c4 0%, #0c9ffd 50%, #3fb8ff 100%);
+    color: #ffffff !important;
+    box-shadow:
+      0 8px 0 #035187,
+      0 18px 34px rgba(12, 159, 253, 0.26);
+  }
+
+  .lmct-oto__cta-main {
+    display: block;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .lmct-oto__cta-sub {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    opacity: 0.92;
+  }
+
+  .lmct-oto__decline {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 54px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(239, 68, 68, 0.26);
+    color: #dc2626 !important;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  .lmct-oto__micro {
+    margin: 0;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #64748b;
+    animation: lmct-oto-fade-in 0.5s ease-out 1.04s both;
+  }
+
+  .lmct-oto__offer {
+    animation: lmct-oto-card-in 0.65s ease-out 0.34s both;
+  }
+
+  @keyframes lmct-oto-card-in {
+    0% {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes lmct-oto-pill-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.96);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(2px) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes lmct-oto-rise-in {
+    0% {
+      opacity: 0;
+      transform: translateY(14px) scale(0.98);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-2px) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes lmct-oto-fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes lmct-oto-sheen {
+    0% {
+      left: -60%;
+    }
+    60% {
+      left: 120%;
+    }
+    100% {
+      left: 120%;
+    }
+  }
+
+  @media (hover: hover) {
+    .lmct-oto__cta:hover,
+    .lmct-oto__decline:hover {
+      transform: translateY(-2px);
+    }
+
+    .lmct-oto__cta:hover {
+      box-shadow:
+        0 8px 0 #035187,
+        0 24px 40px rgba(12, 159, 253, 0.3);
+    }
+
+    .lmct-oto__decline:hover {
+      border-color: rgba(239, 68, 68, 0.45);
+      background: #ffffff;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .lmct-oto__title {
+      font-size: 48px;
+    }
+
+    .lmct-oto__price {
+      font-size: 60px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .lmct-oto__offer {
+      min-width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lmct-oto {
+      padding: 20px 12px 28px;
+    }
+
+    .lmct-oto__card {
+      gap: 18px;
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .lmct-oto__title {
+      font-size: 38px;
+      letter-spacing: -1.4px;
+    }
+
+    .lmct-oto__text {
+      margin-top: 14px;
+      font-size: 15px;
+    }
+
+    .lmct-oto__benefit {
+      width: 100%;
+      border-radius: 16px;
+    }
+
+    .lmct-oto__result {
+      width: 100%;
+      padding: 12px 14px;
+    }
+
+    .lmct-oto__price {
+      font-size: 54px;
+    }
+
+    .lmct-oto__cta {
+      padding: 17px 16px 15px;
+    }
+
+    .lmct-oto__cta-main {
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmct-oto__card,
+    .lmct-oto__offer,
+    .lmct-oto__pill,
+    .lmct-oto__pill--blue::after,
+    .lmct-oto__title,
+    .lmct-oto__text,
+    .lmct-oto__benefit,
+    .lmct-oto__result,
+    .lmct-oto__offer-head,
+    .lmct-oto__price-block,
+    .lmct-oto__cta-group,
+    .lmct-oto__micro,
+    .lmct-oto__cta,
+    .lmct-oto__decline {
+      transition: none !important;
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<div class="lmct-oto" id="lmctOtoSection">
+  <div class="lmct-oto__inner">
+    <div class="lmct-oto__card">
+      <div class="lmct-oto__copy">
+        <div class="lmct-oto__eyebrow">
+          <span class="lmct-oto__pill lmct-oto__pill--blue"
+            >One Time Offer</span
+          >
+          <span class="lmct-oto__pill lmct-oto__pill--soft"
+            >Unlock 2X value on this draw</span
+          >
+        </div>
+
+        <h2 class="lmct-oto__title">
+          Double Your
+          <span class="lmct-oto__title-accent">Entries Today</span>
+        </h2>
+
+        <p class="lmct-oto__text">
+          This is your only chance to add the 2X entry upgrade before checkout.
+          Get <strong>5,000 total bonus entries</strong> for this giveaway with
+          a <strong>one-time payment only</strong>. No subscription. No hidden
+          fees.
+        </p>
+
+        <ul class="lmct-oto__benefits">
+          <li class="lmct-oto__benefit">
+            <span class="lmct-oto__benefit-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+                <path d="M8 10h8"></path>
+                <path d="M8 14h5"></path>
+              </svg>
+            </span>
+            <div>
+              <p class="lmct-oto__benefit-title">2X bonus entries</p>
+              <p class="lmct-oto__benefit-text">
+                Instantly boost your entry stack for this giveaway.
+              </p>
+            </div>
+          </li>
+
+          <li class="lmct-oto__benefit">
+            <span class="lmct-oto__benefit-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 2l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 16.7 6.4 19.2l1.1-6.2L3 8.6l6.2-.9L12 2z"
+                ></path>
+              </svg>
+            </span>
+            <div>
+              <p class="lmct-oto__benefit-title">5,000 total bonus entries</p>
+              <p class="lmct-oto__benefit-text">
+                Your upgraded total after adding this offer.
+              </p>
+            </div>
+          </li>
+
+          <li class="lmct-oto__benefit">
+            <span class="lmct-oto__benefit-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 1v22"></path>
+                <path
+                  d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14.5a3.5 3.5 0 0 1 0 7H6"
+                ></path>
+              </svg>
+            </span>
+            <div>
+              <p class="lmct-oto__benefit-title">Save 50% today</p>
+              <p class="lmct-oto__benefit-text">
+                Get the upgrade for half the original price.
+              </p>
+            </div>
+          </li>
+
+          <li class="lmct-oto__benefit">
+            <span class="lmct-oto__benefit-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M9 12l2 2 4-4"></path>
+              </svg>
+            </span>
+            <div>
+              <p class="lmct-oto__benefit-title">No recurring charge</p>
+              <p class="lmct-oto__benefit-text">
+                One-time payment only. No hidden subscription.
+              </p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="lmct-oto__result">
+          <div>
+            <p class="lmct-oto__result-label">Your upgraded total</p>
+            <p class="lmct-oto__result-value">5,000 bonus entries</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lmct-oto__offer" aria-label="Offer summary">
+        <div class="lmct-oto__offer-head">
+          <div>
+            <p class="lmct-oto__offer-label">Today only</p>
+            <p class="lmct-oto__offer-meta">
+              Add this before checkout and lock in the full 2X entry boost.
+            </p>
+          </div>
+          <span class="lmct-oto__save">Save 50%</span>
+        </div>
+
+        <div class="lmct-oto__price-block">
+          <p class="lmct-oto__was">Was $500</p>
+          <div class="lmct-oto__price-row">
+            <span class="lmct-oto__price-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                <path d="M7 12.5l3 3 7-8"></path>
+              </svg>
+            </span>
+            <div>
+              <p class="lmct-oto__price">$250</p>
+              <p class="lmct-oto__caption">
+                One-time payment for the full 2X dashboard and entry upgrade.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lmct-oto__cta-group">
+          <a class="elButton lmct-oto__cta" href="#" data-upsell="true">
+            <span class="elButtonMain lmct-oto__cta-main"
+              >Yes, Upgrade My Entries</span
+            >
+            <span class="elButtonSub lmct-oto__cta-sub"
+              >Instant upgrade | One-time payment</span
+            >
+          </a>
+
+          <a class="lmct-oto__decline" href="#">
+            No thanks, I'll keep fewer entries
+          </a>
+        </div>
+
+        <p class="lmct-oto__micro">
+          Secure checkout. Bonus entries are applied to this giveaway only.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var domain = "https://adrianjportelli.clickfunnels.com/";
+    var path = "ali-testing-oto";
+    var offers = {
+      newbie: {
+        was: "$1",
+        price: "$0.50",
+        total: "Free entries into every giveaway",
+        cents: "50",
+        noProductId: "5059322",
+      },
+      basic: {
+        was: "$10",
+        price: "$5",
+        total: "2 bonus entries",
+        cents: "500",
+        noProductId: "5072366",
+      },
+      bronze: {
+        was: "$30",
+        price: "$15",
+        total: "10 bonus entries",
+        cents: "1500",
+        noProductId: "5072367",
+      },
+      silver: {
+        was: "$100",
+        price: "$50",
+        total: "50 bonus entries",
+        cents: "5000",
+        noProductId: "5072368",
+      },
+      gold: {
+        was: "$250",
+        price: "$125",
+        total: "200 bonus entries",
+        cents: "12500",
+        noProductId: "5072369",
+      },
+      platinum: {
+        was: "$500",
+        price: "$250",
+        total: "1,000 bonus entries",
+        cents: "25000",
+        noProductId: "5072370",
+      },
+    };
+
+    var pkg = localStorage.getItem("gwy_package");
+    var offer = offers[pkg];
+
+    if (!offer) {
+      console.warn("No valid OTO package found in localStorage:", pkg);
+      offer = offers.platinum; // fallback
+    }
+
+    var root = document.getElementById("lmctOtoSection");
+    if (!root) return;
+
+    var wasEl = root.querySelector(".lmct-oto__was");
+    var priceEl = root.querySelector(".lmct-oto__price");
+    var resultEl = root.querySelector(".lmct-oto__result-value");
+    var benefitTotalEl = root.querySelectorAll(".lmct-oto__benefit-text")[1];
+    var yesBtn = root.querySelector(".lmct-oto__cta");
+    var declineBtn = root.querySelector(".lmct-oto__decline");
+
+    if (wasEl) wasEl.textContent = "Was " + offer.was;
+    if (priceEl) priceEl.textContent = offer.price;
+    if (resultEl) resultEl.textContent = offer.total;
+
+    if (benefitTotalEl) {
+      benefitTotalEl.textContent =
+        "Your upgraded total after adding this offer.";
+    }
+
+    if (yesBtn) {
+      yesBtn.setAttribute(
+        "data-title",
+        "claim-offer cf-oto-cents-" + offer.cents,
+      );
+
+      yesBtn.setAttribute(
+        "href",
+        domain +
+          path +
+          "?declined=true&errors=Sorry%20Your%20Cart%20Session%20has%20expired#yes-link-multi",
+      );
+    }
+
+    if (declineBtn) {
+      declineBtn.setAttribute(
+        "href",
+        domain +
+          path +
+          "?upsell=0&purchase[product_id]=" +
+          offer.noProductId +
+          "#no-link",
+      );
+    }
+
+    console.log("OTO package loaded:", pkg, offer);
+  })();
+</script>

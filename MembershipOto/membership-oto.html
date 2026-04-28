@@ -1,0 +1,1676 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap");
+
+  .lmct-mo,
+  .lmct-mo * {
+    box-sizing: border-box;
+  }
+
+  .lmct-mo {
+    --lmct-blue-1: #0476c4;
+    --lmct-blue-2: #0c9ffd;
+    --lmct-blue-3: #3fb8ff;
+    --lmct-ink: #0a0a0a;
+    --lmct-copy: #334155;
+    --lmct-muted: #64748b;
+    --lmct-line: rgba(12, 159, 253, 0.14);
+    --lmct-green: #16c60c;
+    --lmct-red: #ff1d15;
+    position: relative;
+    overflow: hidden;
+    padding: 26px 16px;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    color: var(--lmct-ink);
+    background:
+      radial-gradient(
+        circle at top left,
+        rgba(63, 184, 255, 0.14) 0%,
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at bottom right,
+        rgba(4, 118, 196, 0.1) 0%,
+        transparent 36%
+      ),
+      #f7fbff;
+  }
+
+  .lmct-mo__shell {
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .lmct-mo__hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    gap: 24px;
+    padding: clamp(24px, 4vw, 38px);
+    border-radius: 30px;
+    background:
+      radial-gradient(
+        circle at top right,
+        rgba(255, 255, 255, 0.18) 0%,
+        transparent 30%
+      ),
+      linear-gradient(135deg, #0584d8 0%, #1699f1 50%, #1fafff 100%);
+    box-shadow:
+      0 10px 24px rgba(7, 23, 44, 0.08),
+      0 28px 70px rgba(7, 23, 44, 0.18);
+    overflow: hidden;
+    animation: lmct-mo-card-in 0.7s ease-out 0.05s both;
+  }
+
+  .lmct-mo__hero::before {
+    content: "";
+    position: absolute;
+    inset: auto auto -80px -80px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+  }
+
+  .lmct-mo__hero::after {
+    content: "";
+    position: absolute;
+    top: -120px;
+    right: -90px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.09);
+    pointer-events: none;
+  }
+
+  .lmct-mo__hero-copy {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    color: #ffffff;
+  }
+
+  .lmct-mo__brand {
+    width: clamp(100px, 10vw, 200px);
+    animation: lmct-mo-rise-in 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.3) 0.14s both;
+  }
+
+  .lmct-mo__unlock {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 12px 26px;
+    border-radius: 999px;
+    background: var(--lmct-red);
+    color: #ffffff;
+    font-size: clamp(13px, 1.5vw, 16px);
+    font-weight: 900;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-transform: uppercase;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(255, 29, 21, 0.28);
+    animation: lmct-mo-pill-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.4) 0.24s both;
+  }
+
+  .lmct-mo__unlock::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 100%
+    );
+    transform: skewX(-20deg);
+    animation: lmct-mo-sheen 3.4s ease-in-out 1.3s infinite;
+    pointer-events: none;
+  }
+
+  .lmct-mo__eyebrow {
+    margin: 0 0 10px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2.4px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+    animation: lmct-mo-fade-in 0.45s ease-out 0.34s both;
+  }
+
+  .lmct-mo__headline {
+    margin: 0;
+    font-size: clamp(64px, 13vw, 128px);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -5px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.16),
+      0 10px 26px rgba(0, 0, 0, 0.12);
+    animation: lmct-mo-rise-in 0.66s cubic-bezier(0.2, 0.9, 0.3, 1.28) 0.42s
+      both;
+  }
+
+  .lmct-mo__subhead {
+    margin: 14px 0 0;
+    font-size: clamp(28px, 4vw, 50px);
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: -1.8px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.98);
+    animation: lmct-mo-rise-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.24) 0.58s both;
+  }
+
+  .lmct-mo__lead {
+    max-width: 56ch;
+    margin: 18px 0 0;
+    font-size: clamp(15px, 1.8vw, 18px);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+    animation: lmct-mo-fade-in 0.55s ease-out 0.74s both;
+  }
+
+  .lmct-mo__chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .lmct-mo__chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    animation: lmct-mo-pill-in 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+  }
+
+  .lmct-mo__chip:nth-child(1) {
+    animation-delay: 0.86s;
+  }
+
+  .lmct-mo__chip:nth-child(2) {
+    animation-delay: 0.96s;
+  }
+
+  .lmct-mo__chip:nth-child(3) {
+    animation-delay: 1.06s;
+  }
+
+  .lmct-mo__offer {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    padding: 22px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #ffffff 0%, #eef8ff 100%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      0 18px 40px rgba(7, 23, 44, 0.12);
+    animation: lmct-mo-card-in 0.7s ease-out 0.26s both;
+  }
+
+  .lmct-mo__offer-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    animation: lmct-mo-fade-in 0.5s ease-out 0.42s both;
+  }
+
+  .lmct-mo__offer-label {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: var(--lmct-blue-2);
+  }
+
+  .lmct-mo__save {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 9px 13px;
+    border-radius: 999px;
+    background: rgba(22, 163, 74, 0.12);
+    border: 1px solid rgba(22, 163, 74, 0.18);
+    color: #15803d;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+  }
+
+  .lmct-mo__offer-copy {
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--lmct-copy);
+  }
+
+  .lmct-mo__offer-was {
+    margin: 18px 0 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--lmct-muted);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #ef4444;
+    animation: lmct-mo-fade-in 0.5s ease-out 0.54s both;
+  }
+
+  .lmct-mo__price-row {
+    margin-top: 10px;
+    text-align: center;
+    animation: lmct-mo-rise-in 0.62s cubic-bezier(0.2, 0.9, 0.3, 1.24) 0.66s
+      both;
+  }
+
+  .lmct-mo__price-kicker {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--lmct-ink);
+  }
+
+  .lmct-mo__price {
+    display: block;
+    font-size: clamp(62px, 8vw, 82px);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -3px;
+    color: var(--lmct-green);
+  }
+
+  .lmct-mo__price-sub {
+    display: block;
+    margin-top: 4px;
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: #1f2937;
+  }
+
+  .lmct-mo__offer-micro {
+    margin: 12px 0 0;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--lmct-muted);
+    animation: lmct-mo-fade-in 0.45s ease-out 0.8s both;
+  }
+
+  .lmct-mo__offer-list {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+    animation: lmct-mo-fade-in 0.5s ease-out 0.92s both;
+  }
+
+  .lmct-mo__offer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 12px;
+    border-radius: 16px;
+    background: rgba(12, 159, 253, 0.05);
+    border: 1px solid rgba(12, 159, 253, 0.12);
+  }
+
+  .lmct-mo__offer-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    background: linear-gradient(
+      135deg,
+      var(--lmct-blue-1) 0%,
+      var(--lmct-blue-2) 100%
+    );
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(12, 159, 253, 0.18);
+  }
+
+  .lmct-mo__offer-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .lmct-mo__offer-item p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--lmct-copy);
+  }
+
+  .lmct-mo__cta-group {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+    animation: lmct-mo-fade-in 0.48s ease-out 1.04s both;
+  }
+
+  .lmct-mo__cta,
+  .lmct-mo__cta-ghost,
+  .lmct-mo__final-decline {
+    text-decoration: none !important;
+  }
+
+  .lmct-mo__cta,
+  .lmct-mo__final-cta {
+    display: block;
+    width: 100%;
+    padding: 18px 18px 16px;
+    border: 0;
+    border-radius: 16px;
+    background: linear-gradient(
+      90deg,
+      var(--lmct-blue-1) 0%,
+      var(--lmct-blue-2) 50%,
+      var(--lmct-blue-3) 100%
+    );
+    color: #ffffff !important;
+    text-align: center;
+    box-shadow:
+      0 8px 0 #035187,
+      0 18px 36px rgba(12, 159, 253, 0.26);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .lmct-mo__cta-main {
+    display: block;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .lmct-mo__cta-sub {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.92;
+  }
+
+  .lmct-mo__cta-ghost,
+  .lmct-mo__final-decline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 54px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(239, 68, 68, 0.24);
+    color: #dc2626 !important;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      background 0.18s ease;
+  }
+
+  .lmct-mo__offer-note {
+    margin: 0;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--lmct-muted);
+    animation: lmct-mo-fade-in 0.4s ease-out 1.12s both;
+  }
+
+  .lmct-mo__section {
+    margin-top: 22px;
+    padding: clamp(22px, 3vw, 30px);
+    border-radius: 28px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fcff 100%);
+    border: 1px solid var(--lmct-line);
+    box-shadow:
+      0 4px 10px rgba(13, 42, 82, 0.04),
+      0 18px 36px rgba(13, 42, 82, 0.06);
+    animation: lmct-mo-card-in 0.68s ease-out both;
+  }
+
+  .lmct-mo__shell > .lmct-mo__section:nth-child(2) {
+    animation-delay: 1s;
+  }
+
+  .lmct-mo__shell > .lmct-mo__section:nth-child(3) {
+    animation-delay: 1.56s;
+  }
+
+  .lmct-mo__section-head {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 22px;
+    animation: lmct-mo-fade-in 0.48s ease-out both;
+  }
+
+  .lmct-mo__shell > .lmct-mo__section:nth-child(2) .lmct-mo__section-head {
+    animation-delay: 1.1s;
+  }
+
+  .lmct-mo__shell > .lmct-mo__section:nth-child(3) .lmct-mo__section-head {
+    animation-delay: 1.66s;
+  }
+
+  .lmct-mo__section-kicker {
+    margin: 0 0 10px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--lmct-blue-2);
+  }
+
+  .lmct-mo__section-title {
+    margin: 0;
+    font-size: clamp(30px, 5vw, 50px);
+    font-weight: 900;
+    line-height: 0.96;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    color: var(--lmct-ink);
+  }
+
+  .lmct-mo__section-title .accent {
+    background: linear-gradient(
+      180deg,
+      var(--lmct-blue-1) 0%,
+      var(--lmct-blue-2) 55%,
+      var(--lmct-blue-3) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lmct-mo__section-copy {
+    margin: 14px auto 0;
+    max-width: 68ch;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--lmct-copy);
+  }
+
+  .lmct-mo__proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .lmct-mo__proof-card,
+  .lmct-mo__value-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid rgba(12, 159, 253, 0.12);
+    box-shadow:
+      0 2px 4px rgba(13, 42, 82, 0.04),
+      0 12px 26px rgba(13, 42, 82, 0.06);
+  }
+
+  .lmct-mo__proof-card {
+    animation: lmct-mo-rise-in 0.58s cubic-bezier(0.2, 0.9, 0.3, 1.24) both;
+  }
+
+  .lmct-mo__shell
+    > .lmct-mo__section:nth-child(2)
+    .lmct-mo__proof-card:nth-child(1) {
+    animation-delay: 1.22s;
+  }
+
+  .lmct-mo__shell
+    > .lmct-mo__section:nth-child(2)
+    .lmct-mo__proof-card:nth-child(2) {
+    animation-delay: 1.3s;
+  }
+
+  .lmct-mo__shell
+    > .lmct-mo__section:nth-child(2)
+    .lmct-mo__proof-card:nth-child(3) {
+    animation-delay: 1.38s;
+  }
+
+  .lmct-mo__proof-card::before,
+  .lmct-mo__value-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(
+      90deg,
+      var(--lmct-blue-1) 0%,
+      var(--lmct-blue-2) 100%
+    );
+  }
+
+  .lmct-mo__proof-top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .lmct-mo__proof-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: linear-gradient(
+      135deg,
+      var(--lmct-blue-1) 0%,
+      var(--lmct-blue-2) 100%
+    );
+    color: #ffffff;
+    box-shadow: 0 10px 22px rgba(12, 159, 253, 0.22);
+  }
+
+  .lmct-mo__proof-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .lmct-mo__proof-label {
+    margin: 0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--lmct-blue-2);
+  }
+
+  .lmct-mo__proof-mark {
+    position: absolute;
+    top: -10px;
+    right: 2px;
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -3px;
+    color: rgba(12, 159, 253, 0.08);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .lmct-mo__proof-num {
+    position: relative;
+    z-index: 1;
+    margin: 6px 0 6px;
+    font-size: clamp(34px, 6vw, 58px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -2px;
+    color: var(--lmct-blue-2);
+  }
+
+  .lmct-mo__proof-title {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--lmct-ink);
+  }
+
+  .lmct-mo__proof-copy {
+    position: relative;
+    z-index: 1;
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--lmct-copy);
+  }
+
+  .lmct-mo__member-banner {
+    margin-top: 16px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: rgba(12, 159, 253, 0.06);
+    border: 1px solid rgba(12, 159, 253, 0.12);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--lmct-copy);
+    animation: lmct-mo-fade-in 0.5s ease-out 1.48s both;
+  }
+
+  .lmct-mo__member-banner strong {
+    color: var(--lmct-ink);
+  }
+
+  .lmct-mo__value-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .lmct-mo__value-copy {
+    display: grid;
+    gap: 14px;
+  }
+
+  .lmct-mo__value-callout {
+    padding: 18px;
+    border-radius: 20px;
+    background: linear-gradient(
+      180deg,
+      rgba(12, 159, 253, 0.06) 0%,
+      rgba(63, 184, 255, 0.02) 100%
+    );
+    border: 1px solid rgba(12, 159, 253, 0.12);
+    animation: lmct-mo-card-in 0.6s ease-out 1.76s both;
+  }
+
+  .lmct-mo__value-callout h3 {
+    margin: 0;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: -1.4px;
+    text-transform: uppercase;
+    color: var(--lmct-ink);
+  }
+
+  .lmct-mo__value-callout h3 span {
+    display: block;
+    background: linear-gradient(
+      180deg,
+      var(--lmct-blue-1) 0%,
+      var(--lmct-blue-2) 55%,
+      var(--lmct-blue-3) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lmct-mo__value-callout p {
+    margin: 12px 0 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--lmct-copy);
+  }
+
+  .lmct-mo__checklist {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmct-mo__check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 15px;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid rgba(12, 159, 253, 0.1);
+    box-shadow: 0 10px 24px rgba(13, 42, 82, 0.05);
+    animation: lmct-mo-rise-in 0.56s cubic-bezier(0.2, 0.9, 0.3, 1.24) both;
+  }
+
+  .lmct-mo__check:nth-child(1) {
+    animation-delay: 1.84s;
+  }
+
+  .lmct-mo__check:nth-child(2) {
+    animation-delay: 1.92s;
+  }
+
+  .lmct-mo__check:nth-child(3) {
+    animation-delay: 2s;
+  }
+
+  .lmct-mo__check-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    background: linear-gradient(
+      135deg,
+      var(--lmct-blue-1) 0%,
+      var(--lmct-blue-2) 100%
+    );
+    color: #ffffff;
+  }
+
+  .lmct-mo__check-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .lmct-mo__check p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--lmct-copy);
+  }
+
+  .lmct-mo__value-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .lmct-mo__value-card {
+    padding: 18px 16px 16px;
+    text-align: center;
+    background: linear-gradient(180deg, #edf8ff 0%, #ffffff 100%);
+    animation: lmct-mo-rise-in 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.24) both;
+  }
+
+  .lmct-mo__value-card:nth-child(1) {
+    animation-delay: 1.88s;
+  }
+
+  .lmct-mo__value-card:nth-child(2) {
+    animation-delay: 1.96s;
+  }
+
+  .lmct-mo__value-card:nth-child(3) {
+    animation-delay: 2.04s;
+  }
+
+  .lmct-mo__value-card:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  .lmct-mo__value-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    margin-bottom: 12px;
+    border-radius: 18px;
+    background: linear-gradient(
+      135deg,
+      var(--lmct-blue-1) 0%,
+      var(--lmct-blue-2) 100%
+    );
+    color: #ffffff;
+    box-shadow: 0 10px 24px rgba(12, 159, 253, 0.2);
+  }
+
+  .lmct-mo__value-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .lmct-mo__value-num {
+    margin: 0;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -1.5px;
+    color: var(--lmct-blue-2);
+  }
+
+  .lmct-mo__value-title {
+    margin: 8px 0 0;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--lmct-ink);
+  }
+
+  .lmct-mo__value-text {
+    margin: 6px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--lmct-copy);
+  }
+
+  .lmct-mo__final {
+    margin-top: 22px;
+    padding: clamp(22px, 3vw, 30px);
+    border-radius: 28px;
+    background:
+      radial-gradient(
+        circle at top right,
+        rgba(255, 255, 255, 0.16) 0%,
+        transparent 30%
+      ),
+      linear-gradient(135deg, #0476c4 0%, #0c9ffd 55%, #3fb8ff 100%);
+    box-shadow:
+      0 10px 24px rgba(7, 23, 44, 0.08),
+      0 28px 60px rgba(7, 23, 44, 0.16);
+    color: #ffffff;
+    animation: lmct-mo-card-in 0.7s ease-out 2.12s both;
+  }
+
+  .lmct-mo__final-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+    gap: 20px;
+    align-items: center;
+  }
+
+  .lmct-mo__final-inner > div:first-child {
+    animation: lmct-mo-fade-in 0.5s ease-out 2.24s both;
+  }
+
+  .lmct-mo__final-kicker {
+    margin: 0 0 10px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .lmct-mo__final-title {
+    margin: 0;
+    font-size: clamp(30px, 5vw, 50px);
+    font-weight: 900;
+    line-height: 0.96;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .lmct-mo__final-copy {
+    margin: 14px 0 0;
+    max-width: 60ch;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .lmct-mo__final-actions {
+    display: grid;
+    gap: 12px;
+    animation: lmct-mo-rise-in 0.58s cubic-bezier(0.2, 0.9, 0.3, 1.24) 2.32s
+      both;
+  }
+
+  .lmct-mo__final-cta {
+    padding: 18px 18px 16px;
+    border-radius: 16px;
+    background: #ffffff;
+    color: var(--lmct-blue-1) !important;
+    text-align: center;
+    box-shadow:
+      0 8px 0 rgba(255, 255, 255, 0.32),
+      0 18px 34px rgba(7, 23, 44, 0.16);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .lmct-mo__final-cta .lmct-mo__cta-main {
+    color: var(--lmct-blue-1);
+  }
+
+  .lmct-mo__final-cta .lmct-mo__cta-sub {
+    color: #0c9ffd;
+    opacity: 1;
+  }
+
+  .lmct-mo__final-decline {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.24);
+    color: #ffffff !important;
+  }
+
+  @keyframes lmct-mo-card-in {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes lmct-mo-pill-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.96);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(2px) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes lmct-mo-rise-in {
+    0% {
+      opacity: 0;
+      transform: translateY(14px) scale(0.98);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-2px) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes lmct-mo-fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes lmct-mo-sheen {
+    0% {
+      left: -60%;
+    }
+    60% {
+      left: 120%;
+    }
+    100% {
+      left: 120%;
+    }
+  }
+
+  @media (hover: hover) {
+    .lmct-mo__cta:hover,
+    .lmct-mo__final-cta:hover,
+    .lmct-mo__cta-ghost:hover,
+    .lmct-mo__final-decline:hover {
+      transform: translateY(-2px);
+    }
+
+    .lmct-mo__cta:hover {
+      box-shadow:
+        0 8px 0 #035187,
+        0 24px 42px rgba(12, 159, 253, 0.3);
+    }
+
+    .lmct-mo__final-cta:hover {
+      box-shadow:
+        0 8px 0 rgba(255, 255, 255, 0.32),
+        0 24px 42px rgba(7, 23, 44, 0.22);
+    }
+
+    .lmct-mo__cta-ghost:hover,
+    .lmct-mo__final-decline:hover {
+      background: #ffffff;
+      border-color: rgba(239, 68, 68, 0.42);
+      color: #dc2626 !important;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .lmct-mo__hero,
+    .lmct-mo__value-layout,
+    .lmct-mo__final-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .lmct-mo__hero {
+      gap: 18px;
+    }
+
+    .lmct-mo__offer {
+      max-width: 620px;
+    }
+
+    .lmct-mo__proof-grid,
+    .lmct-mo__value-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lmct-mo {
+      padding: 18px 12px 0;
+    }
+
+    .lmct-mo__hero,
+    .lmct-mo__section,
+    .lmct-mo__final {
+      border-radius: 24px;
+    }
+
+    .lmct-mo__hero {
+      padding: 20px 18px;
+    }
+
+    .lmct-mo__unlock {
+      width: 100%;
+      padding: 12px 18px;
+      text-align: center;
+    }
+
+    .lmct-mo__headline {
+      letter-spacing: -3px;
+    }
+
+    .lmct-mo__subhead {
+      letter-spacing: -1px;
+    }
+
+    .lmct-mo__offer {
+      min-width: 0;
+      padding: 18px;
+      border-radius: 20px;
+    }
+
+    .lmct-mo__offer-top,
+    .lmct-mo__price-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .lmct-mo__offer-was,
+    .lmct-mo__price-row,
+    .lmct-mo__offer-micro {
+      text-align: left;
+    }
+
+    .lmct-mo__price-kicker,
+    .lmct-mo__price,
+    .lmct-mo__price-sub {
+      text-align: left;
+    }
+
+    .lmct-mo__proof-grid,
+    .lmct-mo__value-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .lmct-mo__value-card:nth-child(3) {
+      grid-column: auto;
+    }
+
+    .lmct-mo__section-title,
+    .lmct-mo__final-title {
+      letter-spacing: -1.5px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmct-mo__hero,
+    .lmct-mo__brand,
+    .lmct-mo__unlock,
+    .lmct-mo__unlock::after,
+    .lmct-mo__eyebrow,
+    .lmct-mo__headline,
+    .lmct-mo__subhead,
+    .lmct-mo__lead,
+    .lmct-mo__chip,
+    .lmct-mo__offer,
+    .lmct-mo__offer-top,
+    .lmct-mo__offer-was,
+    .lmct-mo__price-row,
+    .lmct-mo__offer-micro,
+    .lmct-mo__offer-list,
+    .lmct-mo__cta-group,
+    .lmct-mo__offer-note,
+    .lmct-mo__section,
+    .lmct-mo__section-head,
+    .lmct-mo__proof-card,
+    .lmct-mo__member-banner,
+    .lmct-mo__value-callout,
+    .lmct-mo__check,
+    .lmct-mo__value-card,
+    .lmct-mo__final,
+    .lmct-mo__final-inner > div:first-child,
+    .lmct-mo__final-actions {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .lmct-mo__cta,
+    .lmct-mo__final-cta,
+    .lmct-mo__cta-ghost,
+    .lmct-mo__final-decline {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<div class="lmct-mo">
+  <div class="lmct-mo__shell">
+    <div class="lmct-mo__hero">
+      <div class="lmct-mo__hero-copy">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px;
+          "
+        >
+          <img
+            class="lmct-mo__brand"
+            src="https://pub-5daa6c7eb94c4316b99f8fb7c5b941b3.r2.dev/funnels/evergreen/white-blue-logo.svg"
+            alt="LMCT+ Logo"
+          />
+          <div class="lmct-mo__unlock">Secret Offer Unlocked</div>
+        </div>
+        <p class="lmct-mo__eyebrow">Membership One Time Offer</p>
+        <h1 class="lmct-mo__headline">50% OFF</h1>
+        <p class="lmct-mo__subhead">3 Months Membership</p>
+        <p class="lmct-mo__lead">
+          Lock in 3 months of LMCT+ for less than the cost of a coffee. Keep the
+          member pricing, the shopping value, and the reason to stay inside the
+          LMCT+ ecosystem every single week.
+        </p>
+        <div class="lmct-mo__chip-row">
+          <span class="lmct-mo__chip">Just $2.50 per week</span>
+          <span class="lmct-mo__chip">3 month intro access</span>
+          <span class="lmct-mo__chip">Australian-owned savings network</span>
+        </div>
+      </div>
+
+      <div class="lmct-mo__offer" aria-label="Membership offer">
+        <div class="lmct-mo__offer-top">
+          <div>
+            <p class="lmct-mo__offer-label">Limited intro rate</p>
+            <p class="lmct-mo__offer-copy">
+              Secure the member price before you continue and keep the value
+              stack working in your favour.
+            </p>
+          </div>
+          <span class="lmct-mo__save">Save 50%</span>
+        </div>
+
+        <p class="lmct-mo__offer-was">Was $5.00 per week</p>
+
+        <div class="lmct-mo__price-row">
+          <span class="lmct-mo__price-kicker">Just</span>
+          <span class="lmct-mo__price">$2.50</span>
+          <span class="lmct-mo__price-sub">per week</span>
+        </div>
+
+        <p class="lmct-mo__offer-micro">
+          Limited 3 month membership pricing. One simple intro offer before you
+          move on.
+        </p>
+
+        <ul class="lmct-mo__offer-list">
+          <li class="lmct-mo__offer-item">
+            <span class="lmct-mo__offer-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 1v22"></path>
+                <path
+                  d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14.5a3.5 3.5 0 0 1 0 7H6"
+                ></path>
+              </svg>
+            </span>
+            <p>
+              Exclusive member discounts built to save you money beyond draw
+              day.
+            </p>
+          </li>
+          <li class="lmct-mo__offer-item">
+            <span class="lmct-mo__offer-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 7h-9"></path>
+                <path d="M14 17H5"></path>
+                <circle cx="17" cy="17" r="3"></circle>
+                <circle cx="7" cy="7" r="3"></circle>
+              </svg>
+            </span>
+            <p>Private access to the LMCT+ partner network across Australia.</p>
+          </li>
+          <li class="lmct-mo__offer-item">
+            <span class="lmct-mo__offer-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M9 12l2 2 4-4"></path>
+              </svg>
+            </span>
+            <p>
+              Low-friction intro pricing with no clutter and a clear yes or no
+              decision.
+            </p>
+          </li>
+        </ul>
+
+        <div class="lmct-mo__cta-group">
+          <a
+            class="elButton lmct-mo__cta js-membership-oto-btn"
+            data-cents="250"
+            href="#"
+            data-upsell="true"
+          >
+            <span class="lmct-mo__cta-main"
+              >Yes, I Want To Claim This Offer</span
+            >
+            <span class="lmct-mo__cta-sub"
+              >50% off membership intro pricing</span
+            >
+          </a>
+          <a class="lmct-mo__cta-ghost" href="#no-link">
+            No, I don't want this offer
+          </a>
+        </div>
+
+        <p class="lmct-mo__offer-note">
+          Secure checkout. Limited-time intro membership pricing before you
+          continue.
+        </p>
+      </div>
+    </div>
+
+    <div class="lmct-mo__section">
+      <div class="lmct-mo__section-head">
+        <p class="lmct-mo__section-kicker">Member Proof</p>
+        <h2 class="lmct-mo__section-title">
+          Members Keep Showing Up For <span class="accent">A Reason</span>
+        </h2>
+        <p class="lmct-mo__section-copy">
+          LMCT+ gives members more than a single moment. It keeps them closer to
+          the action, closer to the savings, and inside a brand ecosystem that
+          keeps producing value over time.
+        </p>
+      </div>
+
+      <div class="lmct-mo__proof-grid">
+        <div class="lmct-mo__proof-card">
+          <span class="lmct-mo__proof-mark">01</span>
+          <div class="lmct-mo__proof-top">
+            <span class="lmct-mo__proof-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M8 21h8"></path>
+                <path d="M12 17v4"></path>
+                <path d="M7 4h10v5a5 5 0 0 1-10 0z"></path>
+                <path d="M5 6H3a2 2 0 0 0 2 2"></path>
+                <path d="M19 6h2a2 2 0 0 1-2 2"></path>
+              </svg>
+            </span>
+            <p class="lmct-mo__proof-label">Winner history</p>
+          </div>
+          <p class="lmct-mo__proof-num">817+</p>
+          <p class="lmct-mo__proof-title">Giveaway Winners</p>
+          <p class="lmct-mo__proof-copy">
+            A growing LMCT+ community with real people already on the board.
+          </p>
+        </div>
+        <div class="lmct-mo__proof-card">
+          <span class="lmct-mo__proof-mark">02</span>
+          <div class="lmct-mo__proof-top">
+            <span class="lmct-mo__proof-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 1v22"></path>
+                <path
+                  d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14.5a3.5 3.5 0 0 1 0 7H6"
+                ></path>
+              </svg>
+            </span>
+            <p class="lmct-mo__proof-label">Brand scale</p>
+          </div>
+          <p class="lmct-mo__proof-num">$150M+</p>
+          <p class="lmct-mo__proof-title">Given Away</p>
+          <p class="lmct-mo__proof-copy">
+            A proven platform that has already delivered serious value at scale.
+          </p>
+        </div>
+        <div class="lmct-mo__proof-card">
+          <span class="lmct-mo__proof-mark">03</span>
+          <div class="lmct-mo__proof-top">
+            <span class="lmct-mo__proof-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M9 12l2 2 4-4"></path>
+              </svg>
+            </span>
+            <p class="lmct-mo__proof-label">Life-changing moments</p>
+          </div>
+          <p class="lmct-mo__proof-num">41</p>
+          <p class="lmct-mo__proof-title">Millionaires Made</p>
+          <p class="lmct-mo__proof-copy">
+            A track record that helps members trust the bigger LMCT+ story.
+          </p>
+        </div>
+      </div>
+
+      <div class="lmct-mo__member-banner">
+        <strong>Members stay inside the LMCT+ ecosystem for a reason.</strong>
+        This intro offer keeps you connected to discounts, partner access, and
+        the member experience for the next 3 months at the reduced rate.
+      </div>
+    </div>
+
+    <div class="lmct-mo__section">
+      <div class="lmct-mo__section-head">
+        <p class="lmct-mo__section-kicker">Everyday Value</p>
+        <h2 class="lmct-mo__section-title">
+          Australia's Premier <span class="accent">Shopping Tool</span>
+        </h2>
+        <p class="lmct-mo__section-copy">
+          LMCT+ is designed to work outside draw night too. Use your membership
+          for partner offers, regular discounts, and shopping value that keeps
+          paying back in the background.
+        </p>
+      </div>
+
+      <div class="lmct-mo__value-layout">
+        <div class="lmct-mo__value-copy">
+          <div class="lmct-mo__value-callout">
+            <h3>Exclusive LMCT+ <span>Member Discounts</span></h3>
+            <p>
+              Better pricing, broader partner access, and savings you do not
+              unlock without the membership. The more you use it, the more that
+              weekly value starts to compound.
+            </p>
+          </div>
+
+          <ul class="lmct-mo__checklist">
+            <li class="lmct-mo__check">
+              <span class="lmct-mo__check-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 7h-9"></path>
+                  <path d="M14 17H5"></path>
+                  <circle cx="17" cy="17" r="3"></circle>
+                  <circle cx="7" cy="7" r="3"></circle>
+                </svg>
+              </span>
+              <p>
+                Partner offers built to stay useful long after this page is
+                gone.
+              </p>
+            </li>
+            <li class="lmct-mo__check">
+              <span class="lmct-mo__check-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 11l9-8 9 8"></path>
+                  <path d="M5 10v10h14V10"></path>
+                  <path d="M9 20v-6h6v6"></path>
+                </svg>
+              </span>
+              <p>
+                Access across categories that keeps the membership practical
+                between draws.
+              </p>
+            </li>
+            <li class="lmct-mo__check">
+              <span class="lmct-mo__check-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 2l3 7h7l-5.5 4.2 2.1 7L12 16.5 5.4 20.2l2.1-7L2 9h7z"
+                  ></path>
+                </svg>
+              </span>
+              <p>
+                Member-only pricing designed to make the intro rate feel easy to
+                justify.
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="lmct-mo__value-grid">
+          <div class="lmct-mo__value-card">
+            <span class="lmct-mo__value-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M8 12l2.5 2.5L16 9"></path>
+                <path d="M5 4h14v16H5z"></path>
+              </svg>
+            </span>
+            <p class="lmct-mo__value-num">2,000+</p>
+            <p class="lmct-mo__value-title">Australian Partners</p>
+            <p class="lmct-mo__value-text">
+              A wide partner base gives the membership real range.
+            </p>
+          </div>
+
+          <div class="lmct-mo__value-card">
+            <span class="lmct-mo__value-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 1v22"></path>
+                <path
+                  d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14.5a3.5 3.5 0 0 1 0 7H6"
+                ></path>
+              </svg>
+            </span>
+            <p class="lmct-mo__value-num">$1000s</p>
+            <p class="lmct-mo__value-title">In Discount Savings</p>
+            <p class="lmct-mo__value-text">
+              Real savings potential that can keep paying back week after week.
+            </p>
+          </div>
+
+          <div class="lmct-mo__value-card">
+            <span class="lmct-mo__value-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M4 7h16"></path>
+                <path d="M6 7V5h12v2"></path>
+                <path d="M5 7v12h14V7"></path>
+                <path d="M9 11h6"></path>
+                <path d="M9 15h6"></path>
+              </svg>
+            </span>
+            <p class="lmct-mo__value-num">1,700+</p>
+            <p class="lmct-mo__value-title">Stores To Redeem At</p>
+            <p class="lmct-mo__value-text">
+              The network is large enough to feel practical, not theoretical.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lmct-mo__final">
+      <div class="lmct-mo__final-inner">
+        <div>
+          <p class="lmct-mo__final-kicker">Last Chance</p>
+          <h2 class="lmct-mo__final-title">
+            Claim The Limited Membership Offer
+          </h2>
+          <p class="lmct-mo__final-copy">
+            If you want the member rate, the partner access, and the reduced 3
+            month intro pricing, this is the point to lock it in before you move
+            on.
+          </p>
+        </div>
+
+        <div class="lmct-mo__final-actions">
+          <a
+            class="elButton lmct-mo__final-cta js-membership-oto-btn"
+            data-cents="250"
+            href="#"
+            data-upsell="true"
+          >
+            <span class="lmct-mo__cta-main">Yes, I Want The Limited Offer</span>
+            <span class="lmct-mo__cta-sub">3 months membership at 50% off</span>
+          </a>
+          <a class="lmct-mo__final-decline" href="#no-link">
+            No, I don't want this offer
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    function triggerMembershipOTO(e) {
+      e.preventDefault();
+
+      var customBtn = e.target.closest(".js-membership-oto-btn");
+
+      if (!customBtn) {
+        console.error("Custom OTO button not found.");
+        return;
+      }
+
+      var cents = customBtn.getAttribute("data-cents") || "250";
+
+      window.cfptOrderTotal = parseInt(cents, 10) / 100;
+      localStorage.setItem("cfptLastTransAmt", window.cfptOrderTotal);
+      localStorage.setItem("cfptLastTransPath", document.location.pathname);
+
+      var realButton =
+        document.querySelector('[data-title*="real-membership-oto"] a') ||
+        document.querySelector('[data-title*="real-membership-oto"]') ||
+        document.querySelector('[data-title*="cf-oto-cents-' + cents + '"]');
+
+      if (!realButton) {
+        console.error("Real CF membership OTO button not found.");
+        return;
+      }
+
+      realButton.click();
+    }
+
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".js-membership-oto-btn")) return;
+      triggerMembershipOTO(e);
+    });
+  })();
+</script>
