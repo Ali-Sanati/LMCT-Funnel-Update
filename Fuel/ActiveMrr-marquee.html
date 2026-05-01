@@ -1,0 +1,537 @@
+<!-- ============================================
+     BLOCK B - ActiveMrr Marquee
+     Standalone winners marquee extracted from ActiveMrr.html
+     ============================================ -->
+<style>
+  .sus-member-marquee-shell,
+  .sus-member-marquee-shell *,
+  .sus-member-marquee-shell *::before,
+  .sus-member-marquee-shell *::after {
+    box-sizing: border-box;
+  }
+
+  .sus-member-marquee-shell {
+    width: 100%;
+    padding: 32px 24px 44px;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .sus-member-marquee-shell[data-tier="fuel"] {
+    display: none;
+  }
+
+  .sus-member-marquee-shell[data-tier="full"] {
+    display: block;
+  }
+
+  .sus-member-marquee-inner {
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+
+  .sus-member-marquee-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 7px 10px;
+    margin: 0 auto 22px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #0a1d3a;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    text-transform: uppercase;
+    box-shadow: 0 4px 14px rgba(5, 22, 42, 0.15);
+  }
+
+  .sus-member-marquee-pill-icon {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+  }
+
+  .sus-member-marquee-pill-icon svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .sus-member-marquee {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 8px 0;
+    overflow: hidden;
+    background: transparent;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+  }
+
+  .sus-member-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: max-content;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .sus-member-marquee-slide {
+    display: block;
+    flex-shrink: 0;
+    line-height: 0;
+  }
+
+  .sus-member-marquee-slide img {
+    display: block;
+    width: auto;
+    height: 240px;
+    border: 3px solid rgba(255, 255, 255, 0.95);
+    border-radius: 14px;
+    box-shadow:
+      0 8px 22px rgba(5, 22, 42, 0.32),
+      0 2px 6px rgba(5, 22, 42, 0.18);
+  }
+
+  .sus-member-marquee-line {
+    max-width: 540px;
+    margin: 22px auto 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    text-align: center;
+  }
+
+  .sus-member-marquee-line strong {
+    color: #ffffff;
+    font-weight: 800;
+  }
+
+  @media (min-width: 768px) {
+    .sus-member-marquee-shell {
+      padding: 32px 32px 56px;
+    }
+
+    .sus-member-marquee-pill {
+      margin-bottom: 26px;
+      padding: 8px 16px 8px 12px;
+      font-size: 12px;
+    }
+
+    .sus-member-marquee-pill-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .sus-member-marquee-pill-icon svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    .sus-member-marquee-slide img {
+      height: 300px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .sus-member-marquee-slide img {
+      height: 340px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .sus-member-marquee-slide img {
+      height: 200px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sus-member-marquee-track {
+      animation: none !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<section
+  class="sus-member-marquee-shell"
+  id="susMemberMarqueeSection"
+  data-tier="fuel"
+  role="region"
+  aria-label="Real members and winners marquee"
+>
+  <div class="sus-member-marquee-inner">
+    <span class="sus-member-marquee-pill">
+      <span class="sus-member-marquee-pill-icon">
+        <svg
+          viewBox="0 0 24 24"
+          fill="#ffffff"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+          />
+        </svg>
+      </span>
+      Real Members. Real Keys.
+    </span>
+
+    <div class="sus-member-marquee" data-speed="50" id="susMemberMarquee">
+      <div class="sus-member-marquee-track" id="susMemberMarqueeTrack">
+        <span class="sus-member-marquee-slide">
+          <img
+            src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA6kdAgcaIv2k5np4qDKYZRiQ3XA7xtEulsVhU"
+            alt="Holly W. - cash winner"
+            loading="lazy"
+          />
+        </span>
+        <span class="sus-member-marquee-slide">
+          <img
+            src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAYAO9GvmX9vdIc2JhYlBWyVOwRs807NSH6tzM"
+            alt="Paul A. - cash winner"
+            loading="lazy"
+          />
+        </span>
+        <span class="sus-member-marquee-slide">
+          <img
+            src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAjXpEzWIxBA0baz4isnQuMo2FJpOlXDr5NHhy"
+            alt="Nige B."
+            loading="lazy"
+          />
+        </span>
+        <span class="sus-member-marquee-slide">
+          <img
+            src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAbTZrYpeRIeHSTPMi2vhqgmajyJ98YnDBKuZG"
+            alt="Josh R. - WA winner"
+            loading="lazy"
+          />
+        </span>
+      </div>
+    </div>
+
+    <p class="sus-member-marquee-line">
+      Over <strong>$5 million in cars, cash and prizes</strong> given away to
+      members. Yours could be next.
+    </p>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var SPEED_DEFAULT = 50;
+    var VALID_TIERS = { fuel: true, full: true };
+
+    function imgsReady(el, cb) {
+      var imgs = el.querySelectorAll("img");
+      var left = imgs.length;
+
+      if (!left) {
+        cb();
+        return;
+      }
+
+      Array.prototype.forEach.call(imgs, function (img) {
+        if (img.complete && img.naturalWidth > 0) {
+          left -= 1;
+          if (left === 0) cb();
+          return;
+        }
+
+        var done = function () {
+          left -= 1;
+          if (left === 0) cb();
+        };
+
+        img.addEventListener("load", done, { once: true });
+        img.addEventListener("error", done, { once: true });
+      });
+    }
+
+    function initMarquee(container) {
+      var speed = Number(container.getAttribute("data-speed")) || SPEED_DEFAULT;
+      var track = container.querySelector(".sus-member-marquee-track");
+      var originalSlides;
+      var offset = 0;
+      var lastTs = null;
+      var raf = null;
+      var paused = false;
+      var seqWidth = 0;
+
+      if (!track) return;
+
+      originalSlides = Array.prototype.slice.call(track.children);
+      if (!originalSlides.length) return;
+
+      function getGap() {
+        return parseFloat(getComputedStyle(track).gap) || 0;
+      }
+
+      function measureSeqWidth() {
+        var gap = getGap();
+        var width = 0;
+
+        originalSlides.forEach(function (slide, index) {
+          width += slide.getBoundingClientRect().width;
+          if (index < originalSlides.length - 1) width += gap;
+        });
+
+        width += gap;
+        return width;
+      }
+
+      function clearClones() {
+        while (track.children.length > originalSlides.length) {
+          track.removeChild(track.lastChild);
+        }
+      }
+
+      function fillTrack() {
+        var needed;
+        var currentWidth;
+        var safety = 0;
+
+        clearClones();
+        seqWidth = measureSeqWidth();
+        if (seqWidth <= 0) return;
+
+        needed = container.clientWidth + seqWidth + 200;
+        currentWidth = seqWidth;
+
+        while (currentWidth < needed && safety < 20) {
+          originalSlides.forEach(function (slide) {
+            track.appendChild(slide.cloneNode(true));
+          });
+          currentWidth += seqWidth;
+          safety += 1;
+        }
+      }
+
+      function tick(ts) {
+        var dt;
+
+        if (paused) {
+          lastTs = ts;
+          raf = requestAnimationFrame(tick);
+          return;
+        }
+
+        if (lastTs == null) lastTs = ts;
+        dt = (ts - lastTs) / 1000;
+        lastTs = ts;
+
+        if (dt > 0.1) dt = 0.1;
+
+        offset -= speed * dt;
+        if (seqWidth > 0 && -offset >= seqWidth) {
+          offset += seqWidth;
+        }
+
+        track.style.transform = "translate3d(" + offset + "px, 0, 0)";
+        raf = requestAnimationFrame(tick);
+      }
+
+      function start() {
+        if (container.clientWidth < 1) {
+          setTimeout(start, 100);
+          return;
+        }
+
+        fillTrack();
+        cancelAnimationFrame(raf);
+        offset = 0;
+        lastTs = null;
+        track.style.transform = "translate3d(0, 0, 0)";
+        raf = requestAnimationFrame(tick);
+      }
+
+      imgsReady(container, start);
+
+      window.addEventListener("resize", function () {
+        clearTimeout(initMarquee.resizeTimer);
+        initMarquee.resizeTimer = setTimeout(function () {
+          var oldSeq = seqWidth;
+
+          fillTrack();
+          if (oldSeq > 0 && seqWidth > 0) {
+            offset = (offset / oldSeq) * seqWidth;
+          }
+          lastTs = null;
+        }, 150);
+      });
+
+      container.addEventListener("mouseenter", function () {
+        paused = true;
+      });
+
+      container.addEventListener("mouseleave", function () {
+        paused = false;
+      });
+
+      if ("ontouchstart" in window) {
+        container.addEventListener(
+          "touchstart",
+          function () {
+            paused = true;
+          },
+          { passive: true }
+        );
+        container.addEventListener(
+          "touchend",
+          function () {
+            paused = false;
+          },
+          { passive: true }
+        );
+      }
+
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              paused = !entry.isIntersecting;
+            });
+          },
+          { threshold: 0.01 }
+        );
+
+        io.observe(container);
+      }
+
+      document.addEventListener("visibilitychange", function () {
+        paused = document.hidden;
+        lastTs = null;
+      });
+
+      return {
+        setPaused: function (nextPaused) {
+          paused = !!nextPaused;
+          if (!paused) {
+            lastTs = null;
+          }
+        },
+      };
+    }
+
+    function normalizeTier(tier) {
+      return VALID_TIERS[tier] ? tier : "fuel";
+    }
+
+    function readTierFromPage() {
+      var tierSection = document.getElementById("susTier");
+      var params;
+      var urlTier;
+      var savedTier;
+
+      if (tierSection) {
+        return normalizeTier(tierSection.getAttribute("data-tier"));
+      }
+
+      try {
+        params = new URLSearchParams(window.location.search);
+        urlTier = params.get("tier");
+        if (VALID_TIERS[urlTier]) return urlTier;
+      } catch (e) {}
+
+      try {
+        savedTier = sessionStorage.getItem("sus-tier");
+        if (VALID_TIERS[savedTier]) return savedTier;
+      } catch (e) {}
+
+      return "fuel";
+    }
+
+    var marqueeEl = document.getElementById("susMemberMarquee");
+    var marqueeSection = document.getElementById("susMemberMarqueeSection");
+    var tierSection = null;
+    var boundTierSection = null;
+    var marqueeControls = null;
+
+    function syncMarqueeTier(tier) {
+      var nextTier = normalizeTier(tier || readTierFromPage());
+
+      if (!marqueeSection) return;
+
+      marqueeSection.setAttribute("data-tier", nextTier);
+
+      if (nextTier === "full") {
+        if (!marqueeControls && marqueeEl) {
+          marqueeControls = initMarquee(marqueeEl);
+        }
+        if (marqueeControls) {
+          marqueeControls.setPaused(false);
+        }
+      } else if (marqueeControls) {
+        marqueeControls.setPaused(true);
+      }
+    }
+
+    function bindTierSection() {
+      var nextTierSection = document.getElementById("susTier");
+
+      if (!nextTierSection || nextTierSection === boundTierSection) return;
+
+      tierSection = nextTierSection;
+      boundTierSection = nextTierSection;
+
+      tierSection.addEventListener("tierchange", function (event) {
+        syncMarqueeTier(event.detail && event.detail.tier);
+      });
+
+      if ("MutationObserver" in window) {
+        new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (mutation.attributeName === "data-tier") {
+              syncMarqueeTier(tierSection.getAttribute("data-tier"));
+            }
+          });
+        }).observe(tierSection, {
+          attributes: true,
+          attributeFilter: ["data-tier"],
+        });
+      }
+
+      syncMarqueeTier(tierSection.getAttribute("data-tier"));
+    }
+
+    bindTierSection();
+
+    if (!boundTierSection && "MutationObserver" in window) {
+      new MutationObserver(function () {
+        bindTierSection();
+      }).observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    syncMarqueeTier();
+  })();
+</script>

@@ -800,21 +800,15 @@
 
 <script>
   (function () {
-    var domain = "https://adrianjportelli.clickfunnels.com/";
+    var domain = "https://lmctgiveaway.com/";
     var path = "ali-testing-oto";
     var offers = {
-      newbie: {
-        was: "$1",
-        price: "$0.50",
-        total: "Free entries into every giveaway",
-        cents: "50",
-        noProductId: "5059322",
-      },
       basic: {
         was: "$10",
         price: "$5",
         total: "2 bonus entries",
         cents: "500",
+        yesProductId: "5072366",
         noProductId: "5072366",
       },
       bronze: {
@@ -822,6 +816,7 @@
         price: "$15",
         total: "10 bonus entries",
         cents: "1500",
+        yesProductId: "5072367",
         noProductId: "5072367",
       },
       silver: {
@@ -829,6 +824,7 @@
         price: "$50",
         total: "50 bonus entries",
         cents: "5000",
+        yesProductId: "5072368",
         noProductId: "5072368",
       },
       gold: {
@@ -836,6 +832,7 @@
         price: "$125",
         total: "200 bonus entries",
         cents: "12500",
+        yesProductId: "5072369",
         noProductId: "5072369",
       },
       platinum: {
@@ -843,6 +840,7 @@
         price: "$250",
         total: "1,000 bonus entries",
         cents: "25000",
+        yesProductId: "5072370",
         noProductId: "5072370",
       },
     };
@@ -884,7 +882,9 @@
         "href",
         domain +
           path +
-          "?declined=true&errors=Sorry%20Your%20Cart%20Session%20has%20expired#yes-link-multi",
+          "?upsell=1&purchase[product_id]=" +
+          offer.yesProductId +
+          "#yes-link-multi",
       );
     }
 

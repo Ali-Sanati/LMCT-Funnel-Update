@@ -1,0 +1,629 @@
+<!-- ============================================
+     BLOCK A — Toggle + Hero + Entries Hook
+     Outer: 1170px | Inner content rail: 760px
+     ============================================ -->
+<style>
+  .sus *,
+  .sus *::before,
+  .sus *::after {
+    box-sizing: border-box;
+  }
+  .sus {
+    position: relative;
+    width: 100%;
+    padding: 44px 24px 28px 24px;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    background: transparent;
+    color: #ffffff;
+    text-align: center;
+  }
+  .sus-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .sus-toggle-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 26px 0;
+    animation: sus-fade-up 0.6s ease-out both;
+  }
+  .sus-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    padding: 5px;
+    box-shadow:
+      0 4px 16px rgba(5, 22, 42, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  .sus-toggle-slider {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: calc(100% - 10px);
+    width: calc(50% - 5px);
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 999px;
+    box-shadow:
+      0 3px 10px rgba(12, 99, 253, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: transform 0.32s cubic-bezier(0.34, 1.3, 0.5, 1);
+    z-index: 0;
+  }
+  .sus[data-tier="full"] .sus-toggle-slider {
+    transform: translateX(100%);
+  }
+  .sus-toggle-btn {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    border: 0;
+    padding: 11px 22px;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color 0.25s ease;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .sus-toggle-btn:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .sus-toggle-btn[aria-selected="true"] {
+    color: #ffffff;
+  }
+  .sus-toggle-btn:focus-visible {
+    outline: 2px solid #5cc6f7;
+    outline-offset: 3px;
+    border-radius: 999px;
+  }
+  .sus-tier {
+    display: none;
+  }
+  .sus[data-tier="fuel"] .sus-tier--fuel {
+    display: block;
+    animation: sus-tier-in 0.45s ease-out both;
+  }
+  .sus[data-tier="full"] .sus-tier--full {
+    display: block;
+    animation: sus-tier-in 0.45s ease-out both;
+  }
+  @keyframes sus-tier-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .sus-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 7px 10px;
+    background: #ffffff;
+    border-radius: 999px;
+    color: #0a1d3a;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 18px 0;
+    box-shadow: 0 4px 14px rgba(5, 22, 42, 0.15);
+  }
+  .sus-badge-icon {
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .sus-badge-icon svg {
+    width: 10px;
+    height: 10px;
+  }
+  .sus-title {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 auto 10px auto;
+    max-width: 720px;
+    text-shadow: 0 2px 10px rgba(5, 22, 42, 0.2);
+  }
+  .sus-hero-price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    margin: 6px 0 14px 0;
+    line-height: 1;
+  }
+  .sus-hero-price-amount {
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 56px;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    text-shadow: 0 4px 20px rgba(5, 22, 42, 0.3);
+  }
+  .sus-hero-price-slash {
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .sus-hero-price-unit {
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .sus-sub {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 auto 22px auto;
+    max-width: 560px;
+    text-shadow: 0 1px 3px rgba(5, 22, 42, 0.15);
+  }
+  .sus-sub strong {
+    color: #ffffff;
+    font-weight: 800;
+  }
+  .sus-benefits {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    margin-top: 4px;
+  }
+  .sus-benefit {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 14px;
+    background: #ffffff;
+    border-radius: 999px;
+    color: #0a1d3a;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    box-shadow: 0 3px 10px rgba(5, 22, 42, 0.12);
+  }
+  .sus-benefit svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    stroke: #1a7cc4;
+  }
+  .sus-hook {
+    margin: 24px auto 0 auto;
+    max-width: 580px;
+    padding: 22px 24px 22px 24px;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(5, 22, 42, 0.16);
+    position: relative;
+  }
+  .sus-hook-eyebrow {
+    display: inline-block;
+    color: #1a7cc4;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 10px 0;
+  }
+  .sus-hook-title {
+    color: #0a1d3a;
+    font-weight: 800;
+    font-size: 19px;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin: 0 0 14px 0;
+  }
+  .sus-hook-title em {
+    font-style: normal;
+    color: #0c63fd;
+  }
+  .sus-hook-stack {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: #f5f8fb;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 999px;
+    color: rgba(10, 29, 58, 0.75);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+  }
+  .sus-hook-stack-num {
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .sus-hook-stack-eq {
+    color: rgba(10, 29, 58, 0.4);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  @media (min-width: 768px) {
+    .sus {
+      padding: 52px 32px 32px 32px;
+    }
+    .sus-toggle-btn {
+      font-size: 13px;
+      padding: 12px 26px;
+    }
+    .sus-badge {
+      font-size: 12px;
+      padding: 8px 16px 8px 12px;
+    }
+    .sus-badge-icon {
+      width: 20px;
+      height: 20px;
+    }
+    .sus-badge-icon svg {
+      width: 11px;
+      height: 11px;
+    }
+    .sus-title {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+    .sus-hero-price-amount {
+      font-size: 78px;
+    }
+    .sus-hero-price-slash {
+      font-size: 24px;
+    }
+    .sus-hero-price-unit {
+      font-size: 17px;
+    }
+    .sus-sub {
+      font-size: 17px;
+      margin-bottom: 24px;
+    }
+    .sus-benefits {
+      gap: 12px 16px;
+    }
+    .sus-benefit {
+      font-size: 13px;
+      padding: 10px 16px;
+      gap: 8px;
+    }
+    .sus-benefit svg {
+      width: 15px;
+      height: 15px;
+    }
+    .sus-hook {
+      padding: 24px 28px 24px 28px;
+    }
+    .sus-hook-title {
+      font-size: 22px;
+    }
+    .sus-hook-stack {
+      font-size: 14px;
+      padding: 11px 18px;
+    }
+    .sus-hook-stack-num {
+      font-size: 16px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .sus-title {
+      font-size: 46px;
+    }
+    .sus-hero-price-amount {
+      font-size: 86px;
+    }
+  }
+  @keyframes sus-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes sus-price-scale {
+    from {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .sus-tier .sus-badge {
+    animation: sus-fade-up 0.5s ease-out both;
+    animation-delay: 0.1s;
+  }
+  .sus-tier .sus-title {
+    animation: sus-fade-up 0.55s ease-out both;
+    animation-delay: 0.18s;
+  }
+  .sus-tier .sus-hero-price {
+    animation: sus-price-scale 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: 0.26s;
+  }
+  .sus-tier .sus-sub {
+    animation: sus-fade-up 0.55s ease-out both;
+    animation-delay: 0.34s;
+  }
+  .sus-tier .sus-benefits {
+    animation: sus-fade-up 0.55s ease-out both;
+    animation-delay: 0.42s;
+  }
+  .sus-tier .sus-hook {
+    animation: sus-fade-up 0.6s ease-out both;
+    animation-delay: 0.5s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sus-tier *,
+    .sus-toggle-slider,
+    .sus-toggle-wrap {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+<section
+  class="sus"
+  id="susTier"
+  data-tier="fuel"
+  role="region"
+  aria-label="Choose your LMCT+ membership tier"
+>
+  <div class="sus-inner">
+    <div class="sus-toggle-wrap">
+      <div class="sus-toggle" role="tablist" aria-label="Membership tier">
+        <span class="sus-toggle-slider" aria-hidden="true"></span>
+        <button
+          class="sus-toggle-btn"
+          type="button"
+          role="tab"
+          data-tier-target="fuel"
+          aria-selected="true"
+          aria-controls="susPanelFuel"
+        >
+          Save On Fuel
+        </button>
+        <button
+          class="sus-toggle-btn"
+          type="button"
+          role="tab"
+          data-tier-target="full"
+          aria-selected="false"
+          aria-controls="susPanelFull"
+        >
+          Save + Win
+        </button>
+      </div>
+    </div>
+    <div class="sus-tier sus-tier--fuel" id="susPanelFuel" role="tabpanel">
+      <span class="sus-badge">
+        <span class="sus-badge-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </span>
+        Members-Only Wholesale Pricing
+      </span>
+      <h2 class="sus-title">Pay wholesale at the pump — every time.</h2>
+      <div class="sus-hero-price">
+        <span class="sus-hero-price-amount">$99</span>
+        <span class="sus-hero-price-slash">/</span>
+        <span class="sus-hero-price-unit">year</span>
+      </div>
+      <p class="sus-sub">
+        One flat fee. <strong>Unlimited savings</strong> on every fill-up, all
+        year long.
+      </p>
+      <div class="sus-benefits">
+        <span class="sus-benefit"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline points="20 6 9 17 4 12" /></svg
+          >Cancel anytime</span
+        >
+        <span class="sus-benefit"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" /></svg
+          >Instant access</span
+        >
+        <span class="sus-benefit"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg
+          >No hidden fees</span
+        >
+      </div>
+    </div>
+    <div class="sus-tier sus-tier--full" id="susPanelFull" role="tabpanel">
+      <span class="sus-badge">
+        <span class="sus-badge-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="#ffffff"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.27 5.79 22l2.39-8.15L2 9.36h7.61z"
+            />
+          </svg>
+        </span>
+        Save On Fuel + Win Every Giveaway
+      </span>
+      <h2 class="sus-title">Wholesale fuel. Every prize. Every draw.</h2>
+      <div class="sus-hero-price">
+        <span class="sus-hero-price-amount">$199</span>
+        <span class="sus-hero-price-slash">/</span>
+        <span class="sus-hero-price-unit">year</span>
+      </div>
+      <p class="sus-sub">
+        Everything in Fuel Only —
+        <strong>plus your name in every LMCT+ giveaway, automatically.</strong>
+      </p>
+      <div class="sus-benefits">
+        <span class="sus-benefit"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline points="20 6 9 17 4 12" /></svg
+          >Wholesale fuel</span
+        >
+        <span class="sus-benefit"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+            /></svg
+          >Every giveaway entry</span
+        >
+        <span class="sus-benefit"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline points="20 6 9 17 4 12" /></svg
+          >Cancel anytime</span
+        >
+      </div>
+      <div class="sus-hook">
+        <span class="sus-hook-eyebrow">Your Entries Stack Up</span>
+        <h3 class="sus-hook-title">
+          The longer you stay, <em>the more you win.</em>
+        </h3>
+        <span class="sus-hook-stack">
+          <span class="sus-hook-stack-num">6 months</span>
+          <span class="sus-hook-stack-eq">=</span>
+          <span
+            ><span class="sus-hook-stack-num">6 entries</span> in every
+            draw</span
+          >
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    var section = document.getElementById("susTier");
+    if (!section) return;
+    var buttons = section.querySelectorAll(".sus-toggle-btn");
+    function setTier(tier) {
+      section.setAttribute("data-tier", tier);
+      buttons.forEach(function (btn) {
+        var isActive = btn.getAttribute("data-tier-target") === tier;
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+      var blockB = document.getElementById("susProof");
+      if (blockB) blockB.setAttribute("data-tier", tier);
+      var panel = section.querySelector(".sus-tier--" + tier);
+      if (panel) {
+        panel.style.animation = "none";
+        void panel.offsetWidth;
+        panel.style.animation = "";
+      }
+      try {
+        sessionStorage.setItem("sus-tier", tier);
+      } catch (e) {}
+      section.dispatchEvent(
+        new CustomEvent("tierchange", { detail: { tier: tier } }),
+      );
+    }
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setTier(btn.getAttribute("data-tier-target"));
+      });
+    });
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var urlTier = params.get("tier");
+      if (urlTier === "fuel" || urlTier === "full") {
+        setTier(urlTier);
+      } else {
+        var saved = sessionStorage.getItem("sus-tier");
+        if (saved === "fuel" || saved === "full") setTier(saved);
+      }
+    } catch (e) {}
+  })();
+</script>

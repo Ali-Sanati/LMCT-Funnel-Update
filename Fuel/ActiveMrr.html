@@ -1,0 +1,591 @@
+<!-- ============================================
+     BLOCK B — Active Giveaway + Inclusions
+     Width: 1170px
+     ============================================ -->
+<style>
+  .sus-proof *,
+  .sus-proof *::before,
+  .sus-proof *::after {
+    box-sizing: border-box;
+  }
+  .sus-proof {
+    position: relative;
+    width: 100%;
+    padding: 0 24px 44px 24px;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    color: #ffffff;
+    text-align: center;
+  }
+  .sus-proof-inner {
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+  .sus-proof[data-tier="fuel"] {
+    display: none;
+  }
+  .sus-proof[data-tier="full"] {
+    display: block;
+    animation: sus-proof-fade 0.5s ease-out both;
+  }
+  @keyframes sus-proof-fade {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* ===== PILL-STYLE SECTION EYEBROWS ===== */
+  .sus-eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 7px 10px;
+    background: #ffffff;
+    border-radius: 999px;
+    color: #0a1d3a;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 auto 22px auto;
+    box-shadow: 0 4px 14px rgba(5, 22, 42, 0.15);
+  }
+  .sus-eyebrow-pill-icon {
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .sus-eyebrow-pill-icon svg {
+    width: 10px;
+    height: 10px;
+  }
+  /* ===== ACTIVE GIVEAWAY CARD ===== */
+  .sus-prize {
+    display: block;
+    margin: 0 auto 28px auto;
+    max-width: 760px;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 14px 38px rgba(5, 22, 42, 0.32);
+    text-align: left;
+    position: relative;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    text-decoration: none !important;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .sus-prize:hover,
+  .sus-prize:focus,
+  .sus-prize:active,
+  .sus-prize:visited {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 48px rgba(5, 22, 42, 0.42);
+    text-decoration: none !important;
+    color: inherit;
+  }
+  .sus-prize *,
+  .sus-prize:hover *,
+  .sus-prize:focus *,
+  .sus-prize:active *,
+  .sus-prize:visited * {
+    text-decoration: none !important;
+  }
+  .sus-prize-imgwrap {
+    position: relative;
+    width: 100%;
+    background: #0a1d3a;
+    display: block;
+    line-height: 0;
+  }
+  .sus-prize-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
+    object-position: center;
+  }
+  /* Both badges — same size and shape */
+  .sus-prize-flag,
+  .sus-prize-multi {
+    position: absolute;
+    top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+    z-index: 2;
+    height: 30px;
+  }
+  .sus-prize-flag {
+    left: 14px;
+    background: #ff3b3b;
+    box-shadow: 0 4px 12px rgba(255, 59, 59, 0.45);
+  }
+  .sus-prize-flag::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+    border-radius: 50%;
+    animation: sus-prize-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes sus-prize-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.3);
+    }
+  }
+  .sus-prize-multi {
+    right: 14px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    box-shadow: 0 4px 12px rgba(12, 99, 253, 0.45);
+  }
+  .sus-prize-multi-num {
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+  }
+  .sus-prize-body {
+    padding: 22px 24px 22px 24px;
+  }
+  .sus-prize-eyebrow {
+    color: #1a7cc4;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin: 0 0 8px 0;
+    line-height: 1;
+  }
+  .sus-prize-title {
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 26px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 0 0 6px 0;
+  }
+  .sus-prize-title em {
+    font-style: normal;
+    color: #0c63fd;
+  }
+  .sus-prize-orline {
+    color: rgba(10, 29, 58, 0.5);
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 6px 0 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sus-prize-orline::before,
+  .sus-prize-orline::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(10, 29, 58, 0.12);
+    max-width: 30px;
+  }
+  .sus-prize-cash {
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 0 0 14px 0;
+  }
+  .sus-prize-meta {
+    color: rgba(10, 29, 58, 0.7);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.45;
+    margin: 0 0 14px 0;
+    padding-top: 12px;
+    border-top: 1px solid rgba(10, 29, 58, 0.08);
+  }
+  .sus-prize-meta strong {
+    color: #0a1d3a;
+    font-weight: 800;
+  }
+  .sus-prize-permit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    margin-top: 4px;
+  }
+  .sus-prize-permit-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 9px;
+    background: #f5f8fb;
+    border: 1px solid rgba(10, 29, 58, 0.1);
+    border-radius: 6px;
+    color: rgba(10, 29, 58, 0.75);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .sus-prize-permit-tag svg {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    stroke: #1a7cc4;
+  }
+  .sus-prize-permit-tag strong {
+    color: #0a1d3a;
+    font-weight: 900;
+  }
+  /* ===== INCLUSIONS — WHITE CARDS to match prize card ===== */
+  .sus-includes {
+    margin: 0 auto 36px auto;
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: left;
+  }
+  .sus-include {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(5, 22, 42, 0.12);
+  }
+  .sus-include-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(12, 99, 253, 0.3);
+  }
+  .sus-include-icon svg {
+    width: 16px;
+    height: 16px;
+    stroke: #ffffff;
+  }
+  .sus-include-text {
+    color: #0a1d3a;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+  .sus-include-text strong {
+    font-weight: 800;
+    color: #0a1d3a;
+  }
+  /* ===== MARQUEE — full bleed, smooth, fade edges ===== */
+  @media (min-width: 600px) {
+    .sus-includes {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 768px) {
+    .sus-proof {
+      padding: 0 32px 56px 32px;
+    }
+    .sus-eyebrow-pill {
+      font-size: 12px;
+      padding: 8px 16px 8px 12px;
+      margin-bottom: 26px;
+    }
+    .sus-eyebrow-pill-icon {
+      width: 20px;
+      height: 20px;
+    }
+    .sus-eyebrow-pill-icon svg {
+      width: 11px;
+      height: 11px;
+    }
+    .sus-prize-title {
+      font-size: 30px;
+    }
+    .sus-prize-cash {
+      font-size: 26px;
+    }
+    .sus-prize-body {
+      padding: 26px 30px 26px 30px;
+    }
+    .sus-prize-flag,
+    .sus-prize-multi {
+      padding: 9px 14px;
+      font-size: 12px;
+      height: 32px;
+    }
+    .sus-prize-multi-num {
+      font-size: 14px;
+    }
+    .sus-prize-img {
+      max-height: 500px;
+    }
+    .sus-include {
+      padding: 16px 18px;
+    }
+    .sus-include-text {
+      font-size: 15px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sus-proof,
+    .sus-prize {
+      animation: none !important;
+      transition: none !important;
+    }
+    .sus-prize-flag::before {
+      animation: none !important;
+    }
+  }
+</style>
+<section
+  class="sus-proof"
+  id="susProof"
+  data-tier="fuel"
+  role="region"
+  aria-label="Members-only giveaway and proof"
+>
+  <div class="sus-proof-inner">
+    <!-- MyRenoRules section title — pill style -->
+    <span class="sus-eyebrow-pill">
+      <span class="sus-eyebrow-pill-icon">
+        <svg
+          viewBox="0 0 24 24"
+          fill="#ffffff"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.27 5.79 22l2.39-8.15L2 9.36h7.61z"
+          />
+        </svg>
+      </span>
+      Your $199 Gets You In For This
+    </span>
+    <a
+      class="sus-prize"
+      id="susPrize"
+      href="https://lmctgiveaway.com/optin1773629699092"
+      target="_blank"
+      rel="noopener"
+      aria-label="My Reno Rules — win two houses or two million dollars"
+    >
+      <span class="sus-prize-imgwrap">
+        <img
+          class="sus-prize-img"
+          id="susPrizeImage"
+          src="https://lmctgiveaway.com/hosted/images/40/753be672794b8ba3740f499ed5f1f6/mrr_heroswap.jpg"
+          alt="My Reno Rules — 2 houses or $2 million"
+          loading="lazy"
+        />
+        <span class="sus-prize-flag">Live Now</span>
+        <span class="sus-prize-multi">
+          <span class="sus-prize-multi-num">2×</span> Winners
+        </span>
+      </span>
+      <div class="sus-prize-body">
+        <p class="sus-prize-eyebrow" id="susPrizeEyebrow">
+          Members are auto-entered into
+        </p>
+        <h3 class="sus-prize-title" id="susPrizeTitle">
+          Win <em>2 My Reno Rules houses</em>
+        </h3>
+        <p class="sus-prize-orline">— or —</p>
+        <p class="sus-prize-cash" id="susPrizeCash">$2,000,000 cash</p>
+        <p class="sus-prize-meta" id="susPrizeMeta">
+          <strong>Members get auto-entered.</strong> Plus every other LMCT+
+          giveaway running right now — your entries stack across all of them.
+        </p>
+        <div class="sus-prize-permit">
+          <span class="sus-prize-permit-tag">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            NSW <strong>TP/00040</strong>
+          </span>
+          <span class="sus-prize-permit-tag">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            ACT <strong>TP 26/00533</strong>
+          </span>
+        </div>
+      </div>
+    </a>
+    <div class="sus-includes">
+      <div class="sus-include">
+        <span class="sus-include-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M20 12V8H6a2 2 0 00-2 2v12h12v-2" />
+            <circle cx="9" cy="17" r="2" />
+            <path d="M14 12h4l4 4v4h-2" />
+            <circle cx="18" cy="17" r="2" />
+          </svg>
+        </span>
+        <span class="sus-include-text"
+          ><strong>Wholesale fuel</strong> at every LMCT+ Petrol station</span
+        >
+      </div>
+      <div class="sus-include">
+        <span class="sus-include-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+            />
+          </svg>
+        </span>
+        <span class="sus-include-text"
+          ><strong>1 entry per month</strong> — accumulating, in every
+          draw</span
+        >
+      </div>
+      <div class="sus-include">
+        <span class="sus-include-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+        </span>
+        <span class="sus-include-text"
+          ><strong>2,000+ partner discounts</strong> Australia-wide</span
+        >
+      </div>
+      <div class="sus-include">
+        <span class="sus-include-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </span>
+        <span class="sus-include-text"
+          ><strong>Cancel anytime.</strong> No setup fee, no hidden costs.</span
+        >
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    /* ----- Giveaway swap registry ----- */
+    var GIVEAWAYS = {
+      mrr: {
+        image:
+          "https://lmctgiveaway.com/hosted/images/40/753be672794b8ba3740f499ed5f1f6/mrr_heroswap.jpg",
+        eyebrow: "Members are auto-entered into",
+        title: "Win <em>2 My Reno Rules houses</em>",
+        cash: "$2,000,000 cash",
+        showOr: true,
+        meta: "<strong>Members get auto-entered.</strong> Plus every other LMCT+ giveaway running right now — your entries stack across all of them.",
+      },
+    };
+    function setGiveaway(slug) {
+      var g = GIVEAWAYS[slug];
+      if (!g) return;
+      var img = document.getElementById("susPrizeImage");
+      var eyebrow = document.getElementById("susPrizeEyebrow");
+      var title = document.getElementById("susPrizeTitle");
+      var cash = document.getElementById("susPrizeCash");
+      var meta = document.getElementById("susPrizeMeta");
+      var orLine = document.querySelector("#susPrize .sus-prize-orline");
+      if (img && g.image) {
+        img.src = g.image;
+        if (g.alt) img.alt = g.alt;
+      }
+      if (eyebrow && g.eyebrow) eyebrow.textContent = g.eyebrow;
+      if (title && g.title) title.innerHTML = g.title;
+      if (cash) {
+        if (g.cash) {
+          cash.innerHTML = g.cash;
+          cash.style.display = "";
+        } else {
+          cash.style.display = "none";
+        }
+      }
+      if (orLine) orLine.style.display = g.showOr ? "" : "none";
+      if (meta && g.meta) meta.innerHTML = g.meta;
+    }
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var urlGive = params.get("giveaway");
+      if (urlGive) setGiveaway(urlGive);
+    } catch (e) {}
+  })();
+</script>
