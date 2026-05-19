@@ -1,38 +1,235 @@
 <!-- ============================================
-     BLOCK B - ActiveMrr Marquee
-     Standalone winners marquee extracted from ActiveMrr.html
+     BLOCK B - Fuel Testimonials
+     Uses CashGiveaways/testimonial.html content
+     and follows susTier tab visibility.
      ============================================ -->
 <style>
-  .sus-member-marquee-shell,
-  .sus-member-marquee-shell *,
-  .sus-member-marquee-shell *::before,
-  .sus-member-marquee-shell *::after {
+  .fuel-testimonials-shell,
+  .fuel-testimonials-shell *,
+  .fuel-testimonials-shell *::before,
+  .fuel-testimonials-shell *::after {
     box-sizing: border-box;
   }
 
-  .sus-member-marquee-shell {
+  .fuel-testimonials-shell {
     width: 100%;
-    padding: 32px 24px 44px;
-    font-family:
-      "Montserrat",
-      system-ui,
-      -apple-system,
-      sans-serif;
-    color: #ffffff;
-    text-align: center;
+    padding: 24px 0 44px;
+    margin: 0 auto;
+    font-family: "Montserrat", sans-serif;
   }
 
-  .sus-member-marquee-shell[data-tier="fuel"] {
+  .fuel-testimonials-shell[data-tier="fuel"] {
     display: none;
   }
 
-  .sus-member-marquee-shell[data-tier="full"] {
-    display: block;
+  .fuel-testimonials-shell[data-tier="full"] {
+    display: flex;
+    flex-direction: column;
   }
 
-  .sus-member-marquee-inner {
-    max-width: 1170px;
-    margin: 0 auto;
+  .win-shell {
+    width: 100vw !important;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    --win-gap: clamp(14px, 2vw, 22px);
+    --win-card-width: clamp(280px, 25vw, 330px);
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .win-helper {
+    display: none;
+    margin: 0 0 10px;
+    padding-inline: 12px;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .win-body {
+    position: relative;
+    width: 100%;
+    padding-block: 10px 14px;
+    overflow: hidden;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .win-body::before,
+  .win-body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 3;
+    width: clamp(44px, 7vw, 88px);
+    pointer-events: none;
+  }
+
+  .win-track,
+  .win-seq {
+    display: flex;
+    align-items: stretch;
+    gap: var(--win-gap);
+  }
+
+  .win-track {
+    width: max-content;
+    padding: 4px 0 10px;
+    transform: translateX(0);
+    will-change: transform;
+  }
+
+  .win-card {
+    position: relative;
+    display: flex;
+    flex: 0 0 var(--win-card-width);
+    flex-direction: column;
+    width: var(--win-card-width);
+    min-height: 430px;
+    overflow: hidden;
+    border-radius: 22px;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .win-body[data-mode="desktop"] .win-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .win-card::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 -120%;
+    z-index: 2;
+    width: 58%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.12),
+      transparent
+    );
+    animation: fuel-testimonial-shine 5.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .win-card:nth-child(3n + 2)::after {
+    animation-delay: 1.5s;
+  }
+
+  .win-card:nth-child(3n)::after {
+    animation-delay: 3s;
+  }
+
+  @keyframes fuel-testimonial-shine {
+    0% {
+      left: -120%;
+    }
+    42%,
+    100% {
+      left: 145%;
+    }
+  }
+
+  .win-card.blue {
+    background: linear-gradient(165deg, #0c70fd, #206ff5, #1a5de0);
+  }
+
+  .win-card.green {
+    background: linear-gradient(
+      165deg,
+      rgb(0, 255, 21),
+      #00a724,
+      rgb(57, 245, 88)
+    );
+  }
+
+  .win-card.silver {
+    background: linear-gradient(165deg, #c8cdd4, #98a0aa, #787f89);
+  }
+
+  .win-card.purple {
+    background: linear-gradient(165deg, #c98aef, #9955cc, #7733aa);
+  }
+
+  .win-img {
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .win-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .win-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px 18px 20px;
+    text-align: left;
+  }
+
+  .win-prize {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .win-title {
+    margin: 0;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+  }
+
+  .win-quote {
+    flex: 1;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.65;
+    font-style: italic;
+    text-wrap: pretty;
+  }
+
+  .win-name {
+    margin: 0;
+    padding-top: 4px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  .win-body:focus-visible {
+    border-radius: 20px;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
   }
 
   .sus-member-marquee-pill {
@@ -91,32 +288,69 @@
     );
   }
 
-  .sus-member-marquee-track {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    width: max-content;
-    transform: translate3d(0, 0, 0);
-    will-change: transform;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
+  @media (max-width: 768px) {
+    .win-helper {
+      display: block;
+    }
 
-  .sus-member-marquee-slide {
-    display: block;
-    flex-shrink: 0;
-    line-height: 0;
-  }
+    .win-body {
+      overflow: hidden;
+      padding: 6px 12px 14px;
+    }
 
-  .sus-member-marquee-slide img {
-    display: block;
-    width: auto;
-    height: 240px;
-    border: 3px solid rgba(255, 255, 255, 0.95);
-    border-radius: 14px;
-    box-shadow:
-      0 8px 22px rgba(5, 22, 42, 0.32),
-      0 2px 6px rgba(5, 22, 42, 0.18);
+    .win-body::before,
+    .win-body::after {
+      width: 34px;
+    }
+
+    .win-track {
+      padding: 4px 0 8px;
+    }
+
+    .win-card {
+      --win-card-width: min(84vw, 330px);
+      min-height: 400px;
+      border-radius: 20px;
+    }
+
+    .win-card::after {
+      animation: none;
+    }
+
+    .win-title {
+      font-size: 21px;
+    }
+
+    .win-quote {
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .win-body::before {
+      left: 0;
+      background: transparent;
+    }
+
+    .win-body::after {
+      right: 0;
+      background: transparent;
+    }
+
+    .sus-member-marquee-pill {
+      margin-bottom: 26px;
+      padding: 8px 16px 8px 12px;
+      font-size: 12px;
+    }
+
+    .sus-member-marquee-pill-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .sus-member-marquee-pill-icon svg {
+      width: 11px;
+      height: 11px;
+    }
   }
 
   .sus-member-marquee-line {
@@ -135,309 +369,237 @@
     font-weight: 800;
   }
 
-  @media (min-width: 768px) {
-    .sus-member-marquee-shell {
-      padding: 32px 32px 56px;
-    }
-
-    .sus-member-marquee-pill {
-      margin-bottom: 26px;
-      padding: 8px 16px 8px 12px;
-      font-size: 12px;
-    }
-
-    .sus-member-marquee-pill-icon {
-      width: 20px;
-      height: 20px;
-    }
-
-    .sus-member-marquee-pill-icon svg {
-      width: 11px;
-      height: 11px;
-    }
-
-    .sus-member-marquee-slide img {
-      height: 300px;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .sus-member-marquee-slide img {
-      height: 340px;
-    }
-  }
-
   @media (max-width: 480px) {
-    .sus-member-marquee-slide img {
-      height: 200px;
+    .win-helper {
+      padding-inline: 10px;
     }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .sus-member-marquee-track {
-      animation: none !important;
-      transform: none !important;
+    .win-body {
+      padding-inline: 10px;
+    }
+
+    .win-track,
+    .win-seq {
+      gap: 12px;
+    }
+
+    .win-card {
+      --win-card-width: 88vw;
+      min-height: 390px;
+    }
+
+    .win-content {
+      padding: 16px;
+    }
+
+    .win-title {
+      font-size: 19px;
+    }
+
+    .win-prize {
+      font-size: 10px;
     }
   }
 </style>
 
 <section
-  class="sus-member-marquee-shell"
-  id="susMemberMarqueeSection"
+  class="fuel-testimonials-shell"
+  id="fuelTestimonialsSection"
   data-tier="fuel"
   role="region"
-  aria-label="Real members and winners marquee"
+  aria-label="LMCT+ winner testimonials"
 >
-  <div class="sus-member-marquee-inner">
-    <span class="sus-member-marquee-pill">
-      <span class="sus-member-marquee-pill-icon">
-        <svg
-          viewBox="0 0 24 24"
-          fill="#ffffff"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-          />
-        </svg>
-      </span>
-      Real Members. Real Keys.
+  <span class="sus-member-marquee-pill">
+    <span class="sus-member-marquee-pill-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="#ffffff"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+        />
+      </svg>
     </span>
-
-    <div class="sus-member-marquee" data-speed="50" id="susMemberMarquee">
-      <div class="sus-member-marquee-track" id="susMemberMarqueeTrack">
-        <span class="sus-member-marquee-slide">
-          <img
-            src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA6kdAgcaIv2k5np4qDKYZRiQ3XA7xtEulsVhU"
-            alt="Holly W. - cash winner"
-            loading="lazy"
-          />
-        </span>
-        <span class="sus-member-marquee-slide">
-          <img
-            src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAYAO9GvmX9vdIc2JhYlBWyVOwRs807NSH6tzM"
-            alt="Paul A. - cash winner"
-            loading="lazy"
-          />
-        </span>
-        <span class="sus-member-marquee-slide">
-          <img
-            src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAjXpEzWIxBA0baz4isnQuMo2FJpOlXDr5NHhy"
-            alt="Nige B."
-            loading="lazy"
-          />
-        </span>
-        <span class="sus-member-marquee-slide">
-          <img
-            src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAbTZrYpeRIeHSTPMi2vhqgmajyJ98YnDBKuZG"
-            alt="Josh R. - WA winner"
-            loading="lazy"
-          />
-        </span>
+    Real Members. Real Keys.
+  </span>
+  <div class="win-shell">
+    <div
+      class="win-body js-win-marquee"
+      id="winBody"
+      data-speed="74"
+      data-mode="desktop"
+      tabindex="0"
+      role="region"
+      aria-label="LMCT+ winner testimonials"
+    >
+      <div class="win-track" id="winTrack">
+        <div class="win-seq" id="winSeq"></div>
       </div>
     </div>
-
-    <p class="sus-member-marquee-line">
-      Over <strong>$5 million in cars, cash and prizes</strong> given away to
-      members. Yours could be next.
-    </p>
   </div>
+  <p class="sus-member-marquee-line">
+    Over <strong>$5 million in cars, cash and prizes</strong> given away to
+    members. Yours could be next.
+  </p>
 </section>
 
 <script>
   (function () {
-    var SPEED_DEFAULT = 50;
+    var SPEED_DEFAULT = 74;
+    var MOBILE_SPEED_FACTOR = 0.7;
     var VALID_TIERS = { fuel: true, full: true };
 
-    function imgsReady(el, cb) {
-      var imgs = el.querySelectorAll("img");
-      var left = imgs.length;
+    var winners = [
+      {
+        prize: "$1M Cash",
+        title: "Winner",
+        quote:
+          "After winning the $1M draw, I couldn't sleep. Kept checking my bank in disbelief. Paid off my home loan and invested the rest. Truly grateful to Adrian and the LMCT+ family.",
+        name: "Paul A",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAwz4UDNhtWSiX3jd65FNCeL1wx7KurocIMqTl",
+      },
+      {
+        prize: "XY",
+        title: "Winner",
+        quote:
+          "Didn't grab a win the first time round but it came up for a quick giveaway and I snagged the one I wanted. The team were easy to deal with and even met me out in the sticks for the handover.",
+        name: "Tom W",
+        color: "blue",
+        img: "https://statics.myclickfunnels.com/workspace/joygEX/image/21849451/file/1e409f8b98b23744eb69baf12661de5c.png",
+      },
+      {
+        prize: "$1M",
+        title: "Winner",
+        quote:
+          "I can't believe I won. The whole experience has been surreal. Winning $1.8 million has completely changed my life. Thank you Adrian and the whole team.",
+        name: "Nige B, QLD",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAaOgTHPd7DCduUXgrbkaPNHS4OhyBLWvjc98Z",
+      },
+      {
+        prize: "VF Maloo",
+        title: "Winner",
+        quote:
+          "I grabbed a package because the car's a weapon, then next minute I get a call and could not believe it. Complete disbelief.",
+        name: "Judd K",
+        color: "blue",
+        img: "https://statics.myclickfunnels.com/workspace/joygEX/image/21849452/file/934be1f7d9b4f98721b0fb95e8171acd.png",
+      },
+      {
+        prize: "$8M Cash",
+        title: "Winner",
+        quote:
+          "I still can't believe it. Winning $8 million through LMCT+ has completely changed my life. Not long ago I had to sell my car and was struggling to make ends meet. I never thought something like this could happen to me.",
+        name: "Holly W, VIC",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TASTfjhuGdtiPR3x6gw7T2oWCcjqnKBYG98esF",
+      },
+      {
+        prize: "HSV King",
+        title: "Winner",
+        quote:
+          "Still can't believe we won. Can't thank Adrian, Troy and the LMCT+ team enough for this.",
+        name: "Liam C, QLD",
+        color: "blue",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAda4iLOxsLgmZyOfMHl8Vo4YiT19urvPJ0FeW",
+      },
+      {
+        prize: "$1M",
+        title: "Winner",
+        quote:
+          "A huge thank you to Adrian and the LMCT+ team. I don't think I've stopped smiling since I received the call. It's all so surreal and the money has helped my family so much.",
+        name: "Josh R, WA",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAjzukcvIxBA0baz4isnQuMo2FJpOlXDr5NHhy",
+      },
+      {
+        prize: "LC79",
+        title: "Winner",
+        quote:
+          "Big Red. It's insane to me that I won. Thank you so much LMCT+. I'm still in disbelief from that call from Adrian.",
+        name: "Mitchell R, NSW",
+        color: "blue",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TABWIIboMn7jSfJEgPAYpXTDzU6isrMbVyhGBl",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        quote:
+          "My husband and I were so giddy when we saw the money in our account and the reality set in. It has helped us immensely with our mortgage and let us fast-track our renovation plans by nearly a decade.",
+        name: "Pam T, NSW",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAl8WHsAjm795ZuRhWf3CvTq48PFM6Owyat0ol",
+      },
+      {
+        prize: "Prado & Caravan",
+        title: "Winner",
+        quote:
+          "Adrian and the guys at Lotus were fantastic. The call still goes through my head and I wake up in shock. Cheers guys.",
+        name: "Rob R, VIC",
+        color: "blue",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAKJ40k4ViZT3GjomxyAqtupBbRNdcfFlv4WX5",
+      },
+      {
+        prize: "$250K",
+        title: "Winner",
+        quote:
+          "A massive thank you to LMCT+ and Adrian for giving us the opportunity to participate. Being part of this experience has been nothing short of life-changing.",
+        name: "Sash D, VIC",
+        color: "green",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAQ4kN6jvd5KzorPjIOlcTxaWMDVfRZbBg6Xh4",
+      },
+      {
+        prize: "G Wagon",
+        title: "Winner",
+        quote:
+          "The team were so great and the call has completely changed my life. I always wanted a luxury car and Adrian made my dream come true.",
+        name: "Bobbi O, QLD",
+        color: "blue",
+        img: "https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAmYjyHJB1GOp2TfPZWiELklBcvFR3oIqHyC9a",
+      },
+    ];
 
-      if (!left) {
-        cb();
-        return;
-      }
-
-      Array.prototype.forEach.call(imgs, function (img) {
-        if (img.complete && img.naturalWidth > 0) {
-          left -= 1;
-          if (left === 0) cb();
-          return;
-        }
-
-        var done = function () {
-          left -= 1;
-          if (left === 0) cb();
-        };
-
-        img.addEventListener("load", done, { once: true });
-        img.addEventListener("error", done, { once: true });
-      });
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
     }
 
-    function initMarquee(container) {
-      var speed = Number(container.getAttribute("data-speed")) || SPEED_DEFAULT;
-      var track = container.querySelector(".sus-member-marquee-track");
-      var originalSlides;
-      var offset = 0;
-      var lastTs = null;
-      var raf = null;
-      var paused = false;
-      var seqWidth = 0;
-
-      if (!track) return;
-
-      originalSlides = Array.prototype.slice.call(track.children);
-      if (!originalSlides.length) return;
-
-      function getGap() {
-        return parseFloat(getComputedStyle(track).gap) || 0;
-      }
-
-      function measureSeqWidth() {
-        var gap = getGap();
-        var width = 0;
-
-        originalSlides.forEach(function (slide, index) {
-          width += slide.getBoundingClientRect().width;
-          if (index < originalSlides.length - 1) width += gap;
-        });
-
-        width += gap;
-        return width;
-      }
-
-      function clearClones() {
-        while (track.children.length > originalSlides.length) {
-          track.removeChild(track.lastChild);
-        }
-      }
-
-      function fillTrack() {
-        var needed;
-        var currentWidth;
-        var safety = 0;
-
-        clearClones();
-        seqWidth = measureSeqWidth();
-        if (seqWidth <= 0) return;
-
-        needed = container.clientWidth + seqWidth + 200;
-        currentWidth = seqWidth;
-
-        while (currentWidth < needed && safety < 20) {
-          originalSlides.forEach(function (slide) {
-            track.appendChild(slide.cloneNode(true));
-          });
-          currentWidth += seqWidth;
-          safety += 1;
-        }
-      }
-
-      function tick(ts) {
-        var dt;
-
-        if (paused) {
-          lastTs = ts;
-          raf = requestAnimationFrame(tick);
-          return;
-        }
-
-        if (lastTs == null) lastTs = ts;
-        dt = (ts - lastTs) / 1000;
-        lastTs = ts;
-
-        if (dt > 0.1) dt = 0.1;
-
-        offset -= speed * dt;
-        if (seqWidth > 0 && -offset >= seqWidth) {
-          offset += seqWidth;
-        }
-
-        track.style.transform = "translate3d(" + offset + "px, 0, 0)";
-        raf = requestAnimationFrame(tick);
-      }
-
-      function start() {
-        if (container.clientWidth < 1) {
-          setTimeout(start, 100);
-          return;
-        }
-
-        fillTrack();
-        cancelAnimationFrame(raf);
-        offset = 0;
-        lastTs = null;
-        track.style.transform = "translate3d(0, 0, 0)";
-        raf = requestAnimationFrame(tick);
-      }
-
-      imgsReady(container, start);
-
-      window.addEventListener("resize", function () {
-        clearTimeout(initMarquee.resizeTimer);
-        initMarquee.resizeTimer = setTimeout(function () {
-          var oldSeq = seqWidth;
-
-          fillTrack();
-          if (oldSeq > 0 && seqWidth > 0) {
-            offset = (offset / oldSeq) * seqWidth;
-          }
-          lastTs = null;
-        }, 150);
-      });
-
-      container.addEventListener("mouseenter", function () {
-        paused = true;
-      });
-
-      container.addEventListener("mouseleave", function () {
-        paused = false;
-      });
-
-      if ("ontouchstart" in window) {
-        container.addEventListener(
-          "touchstart",
-          function () {
-            paused = true;
-          },
-          { passive: true }
-        );
-        container.addEventListener(
-          "touchend",
-          function () {
-            paused = false;
-          },
-          { passive: true }
-        );
-      }
-
-      if ("IntersectionObserver" in window) {
-        var io = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (entry) {
-              paused = !entry.isIntersecting;
-            });
-          },
-          { threshold: 0.01 }
-        );
-
-        io.observe(container);
-      }
-
-      document.addEventListener("visibilitychange", function () {
-        paused = document.hidden;
-        lastTs = null;
-      });
-
-      return {
-        setPaused: function (nextPaused) {
-          paused = !!nextPaused;
-          if (!paused) {
-            lastTs = null;
-          }
-        },
-      };
+    function buildCard(winner) {
+      return (
+        '<article class="win-card ' +
+        escapeHtml(winner.color) +
+        '" aria-label="Winner story from ' +
+        escapeHtml(winner.name) +
+        '">' +
+        '<div class="win-img">' +
+        '<img src="' +
+        escapeHtml(winner.img) +
+        '" alt="' +
+        escapeHtml(winner.name + " winner photo") +
+        '" loading="lazy" decoding="async">' +
+        "</div>" +
+        '<div class="win-content">' +
+        '<span class="win-prize">' +
+        escapeHtml(winner.prize) +
+        "</span>" +
+        '<h3 class="win-title">' +
+        escapeHtml(winner.title) +
+        "</h3>" +
+        '<p class="win-quote">"' +
+        escapeHtml(winner.quote) +
+        '"</p>' +
+        '<p class="win-name">- ' +
+        escapeHtml(winner.name) +
+        "</p>" +
+        "</div>" +
+        "</article>"
+      );
     }
 
     function normalizeTier(tier) {
@@ -468,18 +630,204 @@
       return "fuel";
     }
 
-    var marqueeEl = document.getElementById("susMemberMarquee");
-    var marqueeSection = document.getElementById("susMemberMarqueeSection");
+    function initMarquee(container) {
+      if (!container || container.dataset.winInit === "true") return null;
+
+      container.dataset.winInit = "true";
+
+      var track = container.querySelector(".win-track");
+      var baseSeq = container.querySelector(".win-seq");
+      var speed = Number(container.getAttribute("data-speed")) || SPEED_DEFAULT;
+      var reducedMotion = window.matchMedia
+        ? window.matchMedia("(prefers-reduced-motion: reduce)")
+        : null;
+      var offset = 0;
+      var cycleWidth = 0;
+      var lastTs = null;
+      var raf = 0;
+      var paused = false;
+      var resizeTimer = 0;
+
+      if (!track || !baseSeq) return null;
+
+      baseSeq.innerHTML = winners.map(buildCard).join("");
+
+      function gapPx() {
+        var gap = getComputedStyle(track).gap || "0";
+        return parseFloat(gap) || 0;
+      }
+
+      function cleanupClones() {
+        while (track.children.length > 1) {
+          track.removeChild(track.lastChild);
+        }
+      }
+
+      function rebuildTrack() {
+        var baseWidth;
+        var repeatCount = 0;
+        var copiesNeeded = 0;
+
+        cleanupClones();
+
+        baseWidth = baseSeq.getBoundingClientRect().width;
+        if (baseWidth < 1) return false;
+
+        cycleWidth = baseWidth + gapPx();
+        copiesNeeded = Math.max(
+          2,
+          Math.ceil(container.clientWidth / cycleWidth) + 2,
+        );
+
+        for (repeatCount = 1; repeatCount < copiesNeeded; repeatCount += 1) {
+          track.appendChild(baseSeq.cloneNode(true));
+        }
+
+        return true;
+      }
+
+      function stop() {
+        if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+        lastTs = null;
+      }
+
+      function enableStaticMode() {
+        stop();
+        cleanupClones();
+        offset = 0;
+        paused = false;
+        container.dataset.mode = "static";
+        container.scrollLeft = 0;
+        track.style.transform = "translateX(0px)";
+      }
+
+      function tick(ts) {
+        var dt;
+        var currentSpeed;
+
+        if (paused) {
+          lastTs = ts;
+          raf = requestAnimationFrame(tick);
+          return;
+        }
+
+        if (lastTs == null) lastTs = ts;
+
+        dt = (ts - lastTs) / 1000;
+        currentSpeed =
+          window.innerWidth <= 768 ? speed * MOBILE_SPEED_FACTOR : speed;
+
+        lastTs = ts;
+        offset -= currentSpeed * dt;
+
+        while (cycleWidth > 1 && -offset >= cycleWidth) {
+          offset += cycleWidth;
+        }
+
+        track.style.transform = "translateX(" + offset + "px)";
+        raf = requestAnimationFrame(tick);
+      }
+
+      function startMarquee() {
+        if (container.clientWidth < 1) {
+          window.setTimeout(restart, 100);
+          return;
+        }
+
+        stop();
+        if (!rebuildTrack()) {
+          window.setTimeout(restart, 100);
+          return;
+        }
+
+        offset = 0;
+        paused = false;
+        container.dataset.mode = "desktop";
+        container.scrollLeft = 0;
+        track.style.transform = "translateX(0px)";
+        raf = requestAnimationFrame(tick);
+      }
+
+      function restart() {
+        if (reducedMotion && reducedMotion.matches) {
+          enableStaticMode();
+          return;
+        }
+
+        startMarquee();
+      }
+
+      container.addEventListener("mouseenter", function () {
+        paused = true;
+      });
+
+      container.addEventListener("mouseleave", function () {
+        paused = false;
+      });
+
+      container.addEventListener("focusin", function () {
+        paused = true;
+      });
+
+      container.addEventListener("focusout", function () {
+        paused = false;
+      });
+
+      container.addEventListener("touchstart", function () {
+        paused = true;
+      });
+
+      container.addEventListener("touchend", function () {
+        paused = false;
+      });
+
+      container.addEventListener("touchcancel", function () {
+        paused = false;
+      });
+
+      window.addEventListener("resize", function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(restart, 140);
+      });
+
+      if (reducedMotion) {
+        if (reducedMotion.addEventListener) {
+          reducedMotion.addEventListener("change", restart);
+        } else if (reducedMotion.addListener) {
+          reducedMotion.addListener(restart);
+        }
+      }
+
+      restart();
+
+      return {
+        setPaused: function (nextPaused) {
+          paused = !!nextPaused;
+          if (!paused) {
+            lastTs = null;
+          }
+        },
+        restart: restart,
+      };
+    }
+
+    var testimonialsSection = document.getElementById(
+      "fuelTestimonialsSection",
+    );
+    var marqueeEl = document.getElementById("winBody");
+    var marqueeControls = null;
     var tierSection = null;
     var boundTierSection = null;
-    var marqueeControls = null;
 
-    function syncMarqueeTier(tier) {
+    function syncTestimonialsTier(tier) {
       var nextTier = normalizeTier(tier || readTierFromPage());
 
-      if (!marqueeSection) return;
+      if (!testimonialsSection) return;
 
-      marqueeSection.setAttribute("data-tier", nextTier);
+      testimonialsSection.setAttribute("data-tier", nextTier);
 
       if (nextTier === "full") {
         if (!marqueeControls && marqueeEl) {
@@ -487,6 +835,7 @@
         }
         if (marqueeControls) {
           marqueeControls.setPaused(false);
+          marqueeControls.restart();
         }
       } else if (marqueeControls) {
         marqueeControls.setPaused(true);
@@ -502,14 +851,14 @@
       boundTierSection = nextTierSection;
 
       tierSection.addEventListener("tierchange", function (event) {
-        syncMarqueeTier(event.detail && event.detail.tier);
+        syncTestimonialsTier(event.detail && event.detail.tier);
       });
 
       if ("MutationObserver" in window) {
         new MutationObserver(function (mutations) {
           mutations.forEach(function (mutation) {
             if (mutation.attributeName === "data-tier") {
-              syncMarqueeTier(tierSection.getAttribute("data-tier"));
+              syncTestimonialsTier(tierSection.getAttribute("data-tier"));
             }
           });
         }).observe(tierSection, {
@@ -518,7 +867,7 @@
         });
       }
 
-      syncMarqueeTier(tierSection.getAttribute("data-tier"));
+      syncTestimonialsTier(tierSection.getAttribute("data-tier"));
     }
 
     bindTierSection();
@@ -532,6 +881,6 @@
       });
     }
 
-    syncMarqueeTier();
+    syncTestimonialsTier();
   })();
 </script>

@@ -1,0 +1,519 @@
+<!-- LMCT+ OTO DIGITAL 1-MINUTE COUNTDOWN TIMER -->
+<link href="https://fonts.cdnfonts.com/css/ds-digital" rel="stylesheet" />
+
+<style>
+  .lmct_digital_oto {
+    width: 100%;
+    margin: 0 auto;
+    font-family: "Montserrat", Arial, sans-serif;
+    box-sizing: border-box;
+  }
+
+  .lmct_digital_oto *,
+  .lmct_digital_oto *::before,
+  .lmct_digital_oto *::after {
+    box-sizing: border-box;
+  }
+
+  .lmct_digital_oto_housing {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: clamp(14px, 2vw, 28px);
+    padding: clamp(18px, 2.4vw, 28px);
+    border-radius: 24px;
+    color: #ffffff;
+    background:
+      radial-gradient(
+        circle at 16% 10%,
+        rgba(28, 168, 255, 0.38),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 86% 90%,
+        rgba(0, 102, 255, 0.26),
+        transparent 30%
+      ),
+      linear-gradient(135deg, #06192f 0%, #062b58 45%, #020914 100%);
+    border: 1px solid rgba(91, 194, 255, 0.38);
+    box-shadow:
+      0 18px 44px rgba(0, 85, 180, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+
+  .lmct_digital_oto_housing::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.035) 0,
+        rgba(255, 255, 255, 0.035) 1px,
+        transparent 1px,
+        transparent 38px
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        transparent 38%,
+        rgba(0, 0, 0, 0.18) 100%
+      );
+    pointer-events: none;
+  }
+
+  .lmct_digital_oto_logo {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+  }
+
+  .lmct_digital_oto_logo img {
+    display: block;
+    width: clamp(92px, 12vw, 150px);
+    height: auto;
+    filter: drop-shadow(0 8px 18px rgba(0, 170, 255, 0.34));
+  }
+
+  .lmct_digital_oto_copy {
+    position: relative;
+    z-index: 2;
+    min-width: 0;
+  }
+
+  .lmct_digital_oto_kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 7px;
+    color: #70d7ff;
+    font-size: clamp(11px, 1.2vw, 13px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .lmct_digital_oto_kicker::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #19ff96;
+    box-shadow:
+      0 0 0 6px rgba(25, 255, 150, 0.12),
+      0 0 18px rgba(25, 255, 150, 0.55);
+  }
+
+  .lmct_digital_oto_title {
+    margin: 0;
+    font-size: clamp(22px, 3vw, 42px);
+    font-weight: 950;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    text-shadow: 0 10px 26px rgba(0, 0, 0, 0.38);
+  }
+
+  .lmct_digital_oto_title span {
+    color: #4cc4ff;
+  }
+
+  .lmct_digital_oto_timer {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #232832 0%, #10141b 55%, #07090d 100%);
+    border: 1px solid rgba(108, 210, 255, 0.36);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.13),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.8),
+      0 14px 30px rgba(0, 0, 0, 0.35),
+      0 0 26px rgba(0, 149, 255, 0.18);
+  }
+
+  .lmct_digital_oto_timer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.025) 0,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    pointer-events: none;
+  }
+
+  .lmct_digital_oto_icon {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    color: #ffffff;
+    background: linear-gradient(180deg, #18a8ff 0%, #005fce 100%);
+    box-shadow: 0 8px 18px rgba(0, 128, 255, 0.38);
+    flex-shrink: 0;
+  }
+
+  .lmct_digital_oto_icon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .lmct_digital_oto_digits {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .lmct_digital_oto_digit {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(35px, 4.2vw, 54px);
+    height: clamp(50px, 5.5vw, 72px);
+    overflow: hidden;
+    border-radius: 8px;
+    background: #05070a;
+    box-shadow:
+      inset 0 0 0 1px rgba(72, 191, 255, 0.16),
+      inset 0 2px 8px rgba(0, 0, 0, 0.9);
+  }
+
+  .lmct_digital_oto_digit::before {
+    content: "8";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "DS-Digital", "Share Tech Mono", monospace;
+    font-weight: 700;
+    font-size: clamp(58px, 7vw, 92px);
+    line-height: 1;
+    color: rgba(78, 199, 255, 0.08);
+    pointer-events: none;
+  }
+
+  .lmct_digital_oto_digit span {
+    position: relative;
+    z-index: 1;
+    font-family: "DS-Digital", "Share Tech Mono", monospace;
+    font-weight: 700;
+    font-size: clamp(58px, 7vw, 92px);
+    line-height: 1;
+    color: #56caff;
+    font-variant-numeric: tabular-nums;
+    text-shadow:
+      0 0 6px rgba(86, 202, 255, 0.95),
+      0 0 18px rgba(0, 157, 255, 0.75),
+      0 0 32px rgba(0, 132, 255, 0.45);
+  }
+
+  .lmct_digital_oto_digit.flip span {
+    animation: lmctDigitalFlip 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes lmctDigitalFlip {
+    0% {
+      transform: translateY(-6px) scale(1.08);
+      opacity: 0.35;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .lmct_digital_oto_sep {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 0 2px;
+  }
+
+  .lmct_digital_oto_sep span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #56caff;
+    box-shadow:
+      0 0 8px rgba(86, 202, 255, 0.95),
+      0 0 18px rgba(0, 157, 255, 0.65);
+    animation: lmctSepPulse 1s ease-in-out infinite;
+  }
+
+  @keyframes lmctSepPulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.28;
+    }
+  }
+
+  .lmct_digital_oto_sub {
+    position: relative;
+    z-index: 2;
+    grid-column: 1 / -1;
+    margin: 2px 0 0;
+    padding: 11px 16px 12px;
+    border-radius: 14px;
+    text-align: center;
+    color: #09294b;
+    background: linear-gradient(180deg, #fff6d9 0%, #ffe8a6 100%);
+    font-size: clamp(13px, 1.45vw, 16px);
+    font-weight: 850;
+    line-height: 1.35;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+
+  .lmct_digital_oto.urgent .lmct_digital_oto_digit span {
+    color: #ff4f4f;
+    text-shadow:
+      0 0 6px rgba(255, 79, 79, 0.95),
+      0 0 18px rgba(255, 0, 0, 0.75),
+      0 0 34px rgba(255, 0, 0, 0.55);
+    animation: lmctUrgentPulse 0.8s ease-in-out infinite;
+  }
+
+  .lmct_digital_oto.urgent .lmct_digital_oto_sep span {
+    background: #ff4f4f;
+    box-shadow:
+      0 0 8px rgba(255, 79, 79, 0.95),
+      0 0 18px rgba(255, 0, 0, 0.75);
+  }
+
+  @keyframes lmctUrgentPulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.045);
+    }
+  }
+
+  @media (max-width: 770px) {
+    .lmct_digital_oto_housing {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      gap: 15px;
+      padding: 18px 13px;
+      border-radius: 18px;
+    }
+
+    .lmct_digital_oto_logo img {
+      width: 128px;
+    }
+
+    .lmct_digital_oto_title {
+      font-size: clamp(25px, 7.5vw, 36px);
+    }
+
+    .lmct_digital_oto_timer {
+      width: 100%;
+      max-width: 330px;
+      justify-content: center;
+      padding: 10px;
+    }
+
+    .lmct_digital_oto_digit {
+      width: clamp(34px, 11vw, 46px);
+      height: clamp(50px, 15vw, 62px);
+    }
+
+    .lmct_digital_oto_digit span,
+    .lmct_digital_oto_digit::before {
+      font-size: clamp(58px, 18vw, 78px);
+    }
+
+    .lmct_digital_oto_icon {
+      width: 34px;
+      height: 34px;
+    }
+
+    .lmct_digital_oto_sub {
+      width: 100%;
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .lmct_digital_oto_timer {
+      gap: 7px;
+    }
+
+    .lmct_digital_oto_digits {
+      gap: 3px;
+    }
+
+    .lmct_digital_oto_sep span {
+      width: 6px;
+      height: 6px;
+    }
+  }
+</style>
+
+<div class="lmct_digital_oto" id="lmctDigitalOto">
+  <div class="lmct_digital_oto_housing">
+    <div class="lmct_digital_oto_logo">
+      <img
+        src="https://pub-5daa6c7eb94c4316b99f8fb7c5b941b3.r2.dev/funnels/evergreen/white-blue-logo.svg"
+        alt="LMCT+"
+      />
+    </div>
+
+    <div class="lmct_digital_oto_copy">
+      <p class="lmct_digital_oto_kicker">Final upgrade window</p>
+      <h3 class="lmct_digital_oto_title">WAIT — <span>ONE TIME OFFER</span></h3>
+    </div>
+
+    <div class="lmct_digital_oto_timer" aria-live="polite">
+      <span class="lmct_digital_oto_icon" aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9,9,0,0,1,12,21Z"
+          />
+          <rect width="2" height="7" x="11" y="6" fill="currentColor" rx="1">
+            <animateTransform
+              attributeName="transform"
+              dur="540s"
+              repeatCount="indefinite"
+              type="rotate"
+              values="0 12 12;360 12 12"
+            />
+          </rect>
+          <rect width="2" height="9" x="11" y="11" fill="currentColor" rx="1">
+            <animateTransform
+              attributeName="transform"
+              dur="45s"
+              repeatCount="indefinite"
+              type="rotate"
+              values="0 12 12;360 12 12"
+            />
+          </rect>
+        </svg>
+      </span>
+
+      <div class="lmct_digital_oto_digits">
+        <div class="lmct_digital_oto_digit">
+          <span id="lmctOtoM1">0</span>
+        </div>
+        <div class="lmct_digital_oto_digit">
+          <span id="lmctOtoM2">1</span>
+        </div>
+
+        <div class="lmct_digital_oto_sep" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="lmct_digital_oto_digit">
+          <span id="lmctOtoS1">0</span>
+        </div>
+        <div class="lmct_digital_oto_digit">
+          <span id="lmctOtoS2">0</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="lmct_digital_oto_sub">
+      This offer disappears when you leave this page. Secure your upgrade before
+      the timer ends.
+    </p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var wrap = document.getElementById("lmctDigitalOto");
+    if (!wrap) return;
+
+    var els = [
+      document.getElementById("lmctOtoM1"),
+      document.getElementById("lmctOtoM2"),
+      document.getElementById("lmctOtoS1"),
+      document.getElementById("lmctOtoS2"),
+    ];
+
+    if (
+      els.some(function (el) {
+        return !el;
+      })
+    )
+      return;
+
+    var prev = ["", "", "", ""];
+    var remaining = 60;
+
+    function pad(n) {
+      return n < 10 ? "0" + n : "" + n;
+    }
+
+    function setDigit(index, value) {
+      if (prev[index] === value) return;
+
+      els[index].textContent = value;
+
+      var cell = els[index].parentElement;
+      cell.classList.remove("flip");
+      void cell.offsetWidth;
+      cell.classList.add("flip");
+
+      prev[index] = value;
+    }
+
+    function tick() {
+      var safeRemaining = Math.max(0, remaining);
+      var minutes = Math.floor(safeRemaining / 60);
+      var seconds = safeRemaining % 60;
+
+      var mm = pad(minutes);
+      var ss = pad(seconds);
+
+      setDigit(0, mm.charAt(0));
+      setDigit(1, mm.charAt(1));
+      setDigit(2, ss.charAt(0));
+      setDigit(3, ss.charAt(1));
+
+      if (safeRemaining <= 15) {
+        wrap.classList.add("urgent");
+      }
+
+      if (remaining <= 0) {
+        clearInterval(timerInterval);
+        return;
+      }
+
+      remaining -= 1;
+    }
+
+    tick();
+
+    var timerInterval = setInterval(tick, 1000);
+  })();
+</script>
