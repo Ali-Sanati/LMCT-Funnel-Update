@@ -1,0 +1,920 @@
+<!-- SILVERADO + LOTUS DYNAMIC TABS / CAROUSEL / BENTO CF1 -->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&family=Montserrat:wght@500;600;700;800;900&display=swap");
+
+  .lmctPrizeShowcase {
+    width: 100%;
+    background: #ffffff;
+    font-family: "Montserrat", "Inter", Arial, sans-serif;
+    color: #111111;
+    box-sizing: border-box;
+    padding: 20px 0 30px;
+  }
+
+  .lmctPrizeShowcase *,
+  .lmctPrizeShowcase *::before,
+  .lmctPrizeShowcase *::after {
+    box-sizing: border-box;
+  }
+
+  /* =========================
+     TABS
+  ========================= */
+  .lmctPrizeTabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    max-width: 780px;
+    margin: 0 auto 22px !important;
+    padding: 6px;
+    border-radius: 999px;
+    background: #f2f7fb;
+    border: 1px solid rgba(14, 161, 253, 0.14);
+  }
+
+  .lmctPrizeTab {
+    appearance: none;
+    border: 0;
+    cursor: pointer;
+    flex: 1;
+    min-height: 46px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    background: transparent;
+    color: #6b7280;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-size: clamp(12px, 2.2vw, 14px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .lmctPrizeTab:hover {
+    color: #111;
+  }
+
+  .lmctPrizeTab.is-active {
+    color: #ffffff;
+    background: linear-gradient(135deg, #0577c8 0%, #0ea1fd 100%);
+    box-shadow: 0 10px 24px rgba(14, 161, 253, 0.24);
+  }
+
+  /* =========================
+     CAROUSEL
+  ========================= */
+  .pcMustangFbWrap {
+    width: 100%;
+    background: #fff;
+    padding: 0 0 34px;
+    text-align: center;
+  }
+
+  .pcMustangFbWrap * {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .pcMustangFbBadge {
+    display: inline-block;
+    background: #0ea1fd;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 9px 26px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+  }
+
+  .pcMustangFbTitle {
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #111;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .pcMustangFbTitleHl {
+    color: #031b2b;
+  }
+
+  .pcMustangFbSpecs {
+    font-size: clamp(12px, 2.5vw, 14px);
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+  }
+
+  .pcMustangFbImgWrap {
+    position: relative;
+    max-width: 1000px;
+    margin: 20px auto 0 !important;
+    padding: 0 10px;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    box-sizing: border-box;
+  }
+
+  .pcMustangFbImgWrap:active {
+    cursor: grabbing;
+  }
+
+  .pcMustangFbImgWrap img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    display: block;
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease;
+  }
+
+  .pcMustangFbImgWrap.is-changing img {
+    transform: scale(0.985);
+  }
+
+  .pcMustangFbYear {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    font-size: clamp(110px, 18vw, 220px);
+    font-weight: 900;
+    letter-spacing: 12px;
+    color: rgba(0, 0, 0, 0.05);
+    text-transform: uppercase;
+    z-index: 0;
+    pointer-events: none;
+    margin: 0 !important;
+  }
+
+  .pcMustangFbControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .pcMustangFbBtn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+    padding: 0;
+    outline: none;
+  }
+
+  .pcMustangFbBtn:hover {
+    border-color: #111;
+    background: #111;
+  }
+
+  .pcMustangFbBtn:hover svg {
+    stroke: #fff;
+  }
+
+  .pcMustangFbBtn svg {
+    width: 17px;
+    height: 17px;
+    stroke: #333;
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s;
+  }
+
+  .pcMustangFbDots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .pcMustangFbDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d4d4d4;
+    transition:
+      background 0.25s,
+      width 0.25s,
+      border-radius 0.25s;
+  }
+
+  .pcMustangFbDotActive {
+    background: #111;
+    width: 20px;
+    border-radius: 4px;
+  }
+
+  /* =========================
+     BENTO
+  ========================= */
+  .cdBentoLmctSection {
+    font-family: "Inter", system-ui, sans-serif;
+    padding: 0 16px 30px;
+    box-sizing: border-box;
+  }
+
+  .cdBentoLmctGrid {
+    max-width: 1170px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .cdBentoLmctCard {
+    --cdBentoLmctY: 24px;
+    --cdBentoLmctScale: 1;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 30vh;
+    box-shadow:
+      0 4px 20px rgba(0, 0, 0, 0.12),
+      0 1px 4px rgba(0, 0, 0, 0.08);
+    transform: translate3d(0, var(--cdBentoLmctY), 0)
+      scale(var(--cdBentoLmctScale));
+    opacity: 0;
+    transition:
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.45s ease,
+      box-shadow 0.25s ease;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+
+  .cdBentoLmctCard.cdBentoLmctRevealed {
+    --cdBentoLmctY: 0px;
+    opacity: 1;
+  }
+
+  .cdBentoLmctCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.3) 40%,
+      transparent 70%
+    );
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .cdBentoLmctContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 18px;
+    z-index: 2;
+  }
+
+  .cdBentoLmctTitle {
+    font-size: clamp(16px, 2.5vw, 22px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.25;
+    margin: 0 0 4px;
+  }
+
+  .cdBentoLmctSub {
+    font-size: clamp(12px, 1.8vw, 15px);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  @media (min-width: 900px) {
+    .cdBentoLmctGrid {
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(3, clamp(150px, 30vw, 220px));
+      gap: 18px;
+    }
+
+    .cdBentoLmctCard {
+      min-height: 0;
+    }
+
+    .cdBentoLmctCard:hover {
+      --cdBentoLmctScale: 1.02;
+      box-shadow:
+        0 12px 36px rgba(0, 0, 0, 0.2),
+        0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .cdBentoLmctCard:nth-child(1) {
+      grid-column: 1/4;
+      grid-row: 1/3;
+    }
+
+    .cdBentoLmctCard:nth-child(2) {
+      grid-column: 4/8;
+      grid-row: 1/2;
+    }
+
+    .cdBentoLmctCard:nth-child(3) {
+      grid-column: 4/6;
+      grid-row: 2/3;
+    }
+
+    .cdBentoLmctCard:nth-child(4) {
+      grid-column: 6/8;
+      grid-row: 2/3;
+    }
+
+    .cdBentoLmctCard:nth-child(5) {
+      grid-column: 1/4;
+      grid-row: 3/4;
+    }
+
+    .cdBentoLmctCard:nth-child(6) {
+      grid-column: 4/8;
+      grid-row: 3/4;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lmctPrizeShowcase {
+      padding-top: 16px;
+    }
+
+    .lmctPrizeTabs {
+      margin: 0 12px 20px !important;
+      flex-direction: column;
+      border-radius: 22px;
+    }
+
+    .lmctPrizeTab {
+      width: 100%;
+      border-radius: 16px;
+    }
+
+    .pcMustangFbWrap {
+      padding: 0 0 28px;
+    }
+
+    .pcMustangFbBadge {
+      font-size: 11px;
+      padding: 8px 18px;
+    }
+
+    .pcMustangFbYear {
+      letter-spacing: 4px;
+    }
+
+    .cdBentoLmctSection {
+      padding: 0 12px 24px;
+    }
+
+    .cdBentoLmctGrid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .cdBentoLmctCard {
+      min-height: 260px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cdBentoLmctCard {
+      transition: box-shadow 0.3s ease;
+      transform: none;
+      opacity: 1;
+    }
+
+    .pcMustangFbImgWrap img {
+      transition: none;
+    }
+  }
+</style>
+
+<div class="lmctPrizeShowcase" id="lmctPrizeShowcase">
+  <!-- TABS -->
+  <div class="lmctPrizeTabs" role="tablist" aria-label="Prize selector">
+    <button
+      class="lmctPrizeTab is-active"
+      type="button"
+      data-prize-tab="silverado"
+      role="tab"
+      aria-selected="true"
+    >
+      Chevrolet Silverado ZR2
+    </button>
+
+    <button
+      class="lmctPrizeTab"
+      type="button"
+      data-prize-tab="lotus"
+      role="tab"
+      aria-selected="false"
+    >
+      Lotus Trooper Caravan
+    </button>
+  </div>
+
+  <!-- CAROUSEL -->
+  <div class="pcMustangFbWrap">
+    <span class="pcMustangFbBadge" id="lmctPrizeBadge">First Prize</span>
+
+    <h2 class="pcMustangFbTitle" id="lmctPrizeTitle">
+      Chevrolet <span class="pcMustangFbTitleHl">Silverado ZR2</span>
+    </h2>
+
+    <div class="pcMustangFbSpecs" id="lmctPrizeSpecs">
+      313kW &middot; V8 &middot; 10-Speed
+    </div>
+
+    <div class="pcMustangFbImgWrap" id="pcMustangFbImgWrap">
+      <p class="pcMustangFbYear" id="lmctPrizeYear">2024</p>
+      <img id="pcMustangFbImg" alt="2024 Chevrolet Silverado ZR2" />
+    </div>
+
+    <div class="pcMustangFbControls">
+      <button
+        class="pcMustangFbBtn"
+        id="pcMustangFbPrev"
+        aria-label="Previous"
+        type="button"
+      >
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="pcMustangFbDots" id="pcMustangFbDots"></div>
+
+      <button
+        class="pcMustangFbBtn"
+        id="pcMustangFbNext"
+        aria-label="Next"
+        type="button"
+      >
+        <svg viewBox="0 0 24 24">
+          <polyline points="9 6 15 12 9 18"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- BENTO -->
+  <section
+    class="cdBentoLmctSection"
+    id="cdBentoLmctRoot"
+    aria-label="Prize features"
+  >
+    <div class="cdBentoLmctGrid" id="cdBentoLmctGrid"></div>
+  </section>
+</div>
+
+<script>
+  window.addEventListener("load", function () {
+    var prizeData = {
+      silverado: {
+        tab: "Chevrolet Silverado ZR2",
+        badge: "First Prize",
+        year: "2024",
+        titleHtml:
+          'Chevrolet <span class="pcMustangFbTitleHl">Silverado ZR2</span>',
+        specs: "313kW · V8 · 10-Speed",
+        alt: "2024 Chevrolet Silverado ZR2",
+        slides: [
+          "https://images.clickfunnels.com/e2/9486c40cc44632b831bdcfe98bef14/1.png",
+          "https://images.clickfunnels.com/c7/dfa809b20f4c069c789b4760598ccf/2.png",
+          "https://images.clickfunnels.com/58/7c20d584744e2fb5c576fb90375615/3.png",
+          "https://images.clickfunnels.com/00/cc515cae644b1cb996b4bce1e0403b/4.png",
+          "https://images.clickfunnels.com/8c/a222dcbaf04f429c39a381c437bc7b/5.png",
+          "https://images.clickfunnels.com/17/10fc63cc4c486eac0f33e7d81dee1f/6.png",
+          "https://images.clickfunnels.com/98/99a5e7cd1c407782dcc893a3098d06/7.png",
+          "https://images.clickfunnels.com/c1/6e8c8b078340f78e8d2ef970c7469a/8.png",
+        ],
+        bento: [
+          {
+            title: "Black Rhino Wheels",
+            sub: '37" Maxxis Razr Tyres',
+            image:
+              "https://images.clickfunnels.com/de/3c522475114c1a933b17b426e79487/Tire.jpg",
+          },
+          {
+            title: "6.2L V8 Petrol Engine",
+            sub: "313kW Power & 624Nm Torque",
+            image:
+              "https://images.clickfunnels.com/27/76e2d5ef1f47c6b5d84415aa6452cb/Petrol-Engin.jpg",
+          },
+          {
+            title: "Twin Diff Locked",
+            sub: "For those hard-to-get places",
+            image:
+              "https://images.clickfunnels.com/db/c913e4e28947c299a4625fd013765b/TwinDiff.jpg",
+          },
+          {
+            title: "4.2T Tow Capacity",
+            sub: "Tow anything you want",
+            image:
+              "https://images.clickfunnels.com/30/77256958a5443cad95ae99ba5aff54/TOW.jpg",
+          },
+          {
+            title: "6-Inch BDS Suspension",
+            sub: "Fox 2.5 Elite Shocks",
+            image:
+              "https://images.clickfunnels.com/60/b42095498d48d2b009c1539912ab60/FOX.jpg",
+          },
+          {
+            title: "Vikor Roller Shutter",
+            sub: "Vikor Electric Steps",
+            image:
+              "https://images.clickfunnels.com/23/d2b4bde4a842ee80fedb6dca0cd93c/Shutter.jpg",
+          },
+        ],
+      },
+
+      lotus: {
+        tab: "Lotus Trooper Caravan",
+        badge: "First Prize",
+        year: "2024",
+        titleHtml:
+          'Lotus <span class="pcMustangFbTitleHl">Trooper Caravan</span>',
+        specs: "23&apos;11&quot; · Off-Road · Luxury Touring",
+        alt: "2024 Lotus Trooper Caravan",
+        slides: [
+          "https://images.clickfunnels.com/08/8d15f303704e7187c467093671ead6/9-1.png",
+          "https://images.clickfunnels.com/a8/4fa1e4709b4dbd8526ca6ba18f4681/9-2.png",
+          "https://images.clickfunnels.com/c5/cf658627574950807abe04d994a7b3/9-3.png",
+        ],
+        bento: [
+          {
+            title: "Premium Touring Interior",
+            sub: "A luxury cabin layout built for comfort on long-range adventures",
+            image:
+              "https://images.clickfunnels.com/8c/79a8b6557842d999c40e2a5cc92d91/Interior.jpg",
+          },
+          {
+            title: "23'11&quot; Luxury Off-Roader",
+            sub: "A serious Lotus Trooper built for adventure, comfort, and long escapes",
+            image:
+              "https://images.clickfunnels.com/f1/04c2ffab664c698d3e285851a09801/Built-For-Long-Trips.jpg",
+          },
+          {
+            title: "Smart TVs Throughout",
+            sub: "24&quot; and 32&quot; Smart TVs plus DVD player for full onboard entertainment",
+            image:
+              "https://images.clickfunnels.com/42/b8d5674d9c44cdb1f1858b07c231a1/Smart-tv.jpg",
+          },
+          {
+            title: "Onboard Laundry Setup",
+            sub: "Camec 2.5kg wall-mounted washing machine for extended touring comfort",
+            image:
+              "https://images.clickfunnels.com/ab/0c991564ac4463b87fe7dff4f14b76/Onboard-Laundry-Setup.jpg",
+          },
+          {
+            title: "Full Induction Kitchen",
+            sub: "NCE 2300W induction cooktop, duplex setup, microwave and Dometic fridge",
+            image:
+              "https://images.clickfunnels.com/fd/3ff8914a61469c897c14a4a5745fed/Full-Induction-Kitchen.jpg",
+          },
+
+          {
+            title: "Redarc Off-Grid Power",
+            sub: "4 x 200Ah lithium batteries, 3000W inverter, BMS & RedVision display",
+            image:
+              "https://images.clickfunnels.com/1d/db65e1830b49079a1f45482a430a81/Redarc-Off-Grid-Power.jpg",
+          },
+        ],
+      },
+    };
+
+    var activePrizeKey = "silverado";
+    var activeSlides = prizeData[activePrizeKey].slides;
+    var currentIndex = 0;
+
+    var autoMs = 900;
+    var resumeMs = 4000;
+    var timer = null;
+    var resumeTimer = null;
+    var startX = 0;
+    var dragging = false;
+
+    var root = document.getElementById("lmctPrizeShowcase");
+    var tabs = root ? root.querySelectorAll("[data-prize-tab]") : [];
+    var badgeEl = document.getElementById("lmctPrizeBadge");
+    var titleEl = document.getElementById("lmctPrizeTitle");
+    var specsEl = document.getElementById("lmctPrizeSpecs");
+    var yearEl = document.getElementById("lmctPrizeYear");
+    var imgEl = document.getElementById("pcMustangFbImg");
+    var imgWrapEl = document.getElementById("pcMustangFbImgWrap");
+    var dotsEl = document.getElementById("pcMustangFbDots");
+    var prevEl = document.getElementById("pcMustangFbPrev");
+    var nextEl = document.getElementById("pcMustangFbNext");
+    var bentoGridEl = document.getElementById("cdBentoLmctGrid");
+
+    if (
+      !root ||
+      !badgeEl ||
+      !titleEl ||
+      !specsEl ||
+      !yearEl ||
+      !imgEl ||
+      !imgWrapEl ||
+      !dotsEl ||
+      !prevEl ||
+      !nextEl ||
+      !bentoGridEl
+    ) {
+      return;
+    }
+
+    function preloadImages(images) {
+      for (var i = 0; i < images.length; i++) {
+        if (!images[i] || images[i].indexOf("PASTE_") === 0) continue;
+        var pre = new Image();
+        pre.src = images[i];
+      }
+    }
+
+    function buildDots() {
+      var html = "";
+
+      for (var i = 0; i < activeSlides.length; i++) {
+        html +=
+          '<div class="pcMustangFbDot' +
+          (i === currentIndex ? " pcMustangFbDotActive" : "") +
+          '"></div>';
+      }
+
+      dotsEl.innerHTML = html;
+    }
+
+    function updateDots() {
+      var dots = dotsEl.children;
+
+      for (var i = 0; i < dots.length; i++) {
+        if (i === currentIndex) {
+          dots[i].classList.add("pcMustangFbDotActive");
+        } else {
+          dots[i].classList.remove("pcMustangFbDotActive");
+        }
+      }
+    }
+
+    function goTo(target) {
+      if (!activeSlides.length) return;
+
+      currentIndex =
+        ((target % activeSlides.length) + activeSlides.length) %
+        activeSlides.length;
+
+      imgWrapEl.classList.add("is-changing");
+
+      window.setTimeout(function () {
+        imgEl.src = activeSlides[currentIndex];
+        updateDots();
+
+        window.setTimeout(function () {
+          imgWrapEl.classList.remove("is-changing");
+        }, 40);
+      }, 120);
+    }
+
+    function startAuto() {
+      stopAuto();
+
+      timer = setInterval(function () {
+        goTo(currentIndex + 1);
+      }, autoMs);
+    }
+
+    function stopAuto() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function pauseThenResume() {
+      stopAuto();
+
+      if (resumeTimer) {
+        clearTimeout(resumeTimer);
+      }
+
+      resumeTimer = setTimeout(startAuto, resumeMs);
+    }
+
+    function renderBento(items) {
+      var html = "";
+
+      for (var i = 0; i < items.length; i++) {
+        html +=
+          '<div class="cdBentoLmctCard" style="background-image:url(\'' +
+          items[i].image +
+          "')\">" +
+          '<div class="cdBentoLmctContent">' +
+          '<h3 class="cdBentoLmctTitle">' +
+          items[i].title +
+          "</h3>" +
+          '<p class="cdBentoLmctSub">' +
+          items[i].sub +
+          "</p>" +
+          "</div>" +
+          "</div>";
+      }
+
+      bentoGridEl.innerHTML = html;
+      revealBentoCards();
+    }
+
+    function revealBentoCards() {
+      var cards = bentoGridEl.querySelectorAll(".cdBentoLmctCard");
+
+      if (!cards.length) return;
+
+      var reduced =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      for (var i = 0; i < cards.length; i++) {
+        cards[i].classList.remove("cdBentoLmctRevealed");
+        cards[i].style.transitionDelay = Math.min(i * 45, 180) + "ms";
+      }
+
+      if (reduced || !("IntersectionObserver" in window)) {
+        requestAnimationFrame(function () {
+          for (var r = 0; r < cards.length; r++) {
+            cards[r].classList.add("cdBentoLmctRevealed");
+          }
+        });
+        return;
+      }
+
+      var obs = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+
+            entry.target.classList.add("cdBentoLmctRevealed");
+            obs.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
+      );
+
+      for (var k = 0; k < cards.length; k++) {
+        obs.observe(cards[k]);
+      }
+    }
+
+    function setActiveTab(key) {
+      for (var i = 0; i < tabs.length; i++) {
+        var isActive = tabs[i].getAttribute("data-prize-tab") === key;
+        tabs[i].classList.toggle("is-active", isActive);
+        tabs[i].setAttribute("aria-selected", isActive ? "true" : "false");
+      }
+    }
+
+    function switchPrize(key) {
+      var data = prizeData[key];
+      if (!data) return;
+
+      activePrizeKey = key;
+      activeSlides = data.slides;
+      currentIndex = 0;
+
+      setActiveTab(key);
+      stopAuto();
+
+      badgeEl.textContent = data.badge;
+      titleEl.innerHTML = data.titleHtml;
+      specsEl.innerHTML = data.specs;
+      yearEl.textContent = data.year;
+      imgEl.alt = data.alt;
+
+      preloadImages(activeSlides);
+      buildDots();
+      goTo(0);
+      renderBento(data.bento);
+      startAuto();
+    }
+
+    for (var t = 0; t < tabs.length; t++) {
+      tabs[t].addEventListener("click", function () {
+        var key = this.getAttribute("data-prize-tab");
+        if (key === activePrizeKey) return;
+
+        switchPrize(key);
+      });
+    }
+
+    prevEl.onclick = function () {
+      goTo(currentIndex - 1);
+      pauseThenResume();
+    };
+
+    nextEl.onclick = function () {
+      goTo(currentIndex + 1);
+      pauseThenResume();
+    };
+
+    imgWrapEl.addEventListener("mouseenter", stopAuto);
+    imgWrapEl.addEventListener("mouseleave", startAuto);
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        stopAuto();
+      } else {
+        startAuto();
+      }
+    });
+
+    imgWrapEl.addEventListener("mousedown", function (e) {
+      e.preventDefault();
+      startX = e.clientX;
+      dragging = true;
+      stopAuto();
+    });
+
+    window.addEventListener("mousemove", function (e) {
+      if (!dragging) return;
+
+      var dist = e.clientX - startX;
+
+      if (Math.abs(dist) > 40) {
+        goTo(dist < 0 ? currentIndex + 1 : currentIndex - 1);
+        startX = e.clientX;
+      }
+    });
+
+    window.addEventListener("mouseup", function () {
+      if (dragging) {
+        dragging = false;
+        pauseThenResume();
+      }
+    });
+
+    imgWrapEl.addEventListener(
+      "touchstart",
+      function (e) {
+        startX = e.touches[0].clientX;
+        dragging = true;
+        stopAuto();
+      },
+      { passive: true },
+    );
+
+    imgWrapEl.addEventListener(
+      "touchmove",
+      function (e) {
+        if (!dragging) return;
+
+        var dist = e.touches[0].clientX - startX;
+
+        if (Math.abs(dist) > 40) {
+          goTo(dist < 0 ? currentIndex + 1 : currentIndex - 1);
+          startX = e.touches[0].clientX;
+        }
+      },
+      { passive: true },
+    );
+
+    imgWrapEl.addEventListener("touchend", function () {
+      if (dragging) {
+        dragging = false;
+        pauseThenResume();
+      }
+    });
+
+    switchPrize("silverado");
+  });
+</script>
+<!-- SILVERADO + LOTUS DYNAMIC TABS / CAROUSEL / BENTO CF1 - END -->

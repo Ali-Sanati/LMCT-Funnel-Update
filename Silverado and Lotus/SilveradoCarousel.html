@@ -1,0 +1,307 @@
+<!-- PRIZE CAROUSEL SILVERADO CF1 -->
+<style>
+  .pcMustangFbWrap {
+    width: 100%;
+    background: #fff;
+    padding:20px 0 20px;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+  }
+  .pcMustangFbWrap * {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .pcMustangFbBadge {
+    display: inline-block;
+    background: #0ea1fd;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 9px 26px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+  }
+  .pcMustangFbTitle {
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #111;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .pcMustangFbTitleHl {
+    color: #031b2b;
+  }
+  .pcMustangFbSpecs {
+    font-size: clamp(12px, 2.5vw, 14px);
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+  }
+  .pcMustangFbImgWrap {
+    position: relative;
+    max-width: 1000px;
+    margin: 20px auto 0 !important;
+    padding: 0 10px;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    box-sizing: border-box;
+  }
+  .pcMustangFbImgWrap img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .pcMustangFbYear {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    font-size: clamp(110px, 18vw, 220px);
+    font-weight: 900;
+    letter-spacing: 12px;
+    color: rgba(0, 0, 0, 0.05);
+    text-transform: uppercase;
+    z-index: 0;
+    pointer-events: none;
+    margin: 0 !important;
+  }
+  .pcMustangFbControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .pcMustangFbBtn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+    padding: 0;
+    outline: none;
+  }
+  .pcMustangFbBtn:hover {
+    border-color: #111;
+    background: #111;
+  }
+  .pcMustangFbBtn:hover svg {
+    stroke: #fff;
+  }
+  .pcMustangFbBtn svg {
+    width: 17px;
+    height: 17px;
+    stroke: #333;
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.2s;
+  }
+  .pcMustangFbDots {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .pcMustangFbDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d4d4d4;
+    transition:
+      background 0.25s,
+      width 0.25s,
+      border-radius 0.25s;
+  }
+  .pcMustangFbDotActive {
+    background: #111;
+    width: 20px;
+    border-radius: 4px;
+  }
+</style>
+<div class="pcMustangFbWrap">
+  <span class="pcMustangFbBadge">First Prize</span>
+  <h2 class="pcMustangFbTitle">
+    Chevrolet <span class="pcMustangFbTitleHl">Silverado ZR2</span>
+  </h2>
+  <div class="pcMustangFbSpecs">313kW &middot; V8 &middot; 10-Speed</div>
+  <div class="pcMustangFbImgWrap" id="pcMustangFbImgWrap">
+    <p class="pcMustangFbYear">2024</p>
+    <img id="pcMustangFbImg" alt="2024 Chevrolet Silverado ZR2" />
+  </div>
+  <div class="pcMustangFbControls">
+    <button class="pcMustangFbBtn" id="pcMustangFbPrev" aria-label="Previous">
+      <svg viewBox="0 0 24 24">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <div class="pcMustangFbDots" id="pcMustangFbDots"></div>
+    <button class="pcMustangFbBtn" id="pcMustangFbNext" aria-label="Next">
+      <svg viewBox="0 0 24 24">
+        <polyline points="9 6 15 12 9 18"></polyline>
+      </svg>
+    </button>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", function () {
+    var pcMustangFbSlides = [
+      "https://images.clickfunnels.com/e2/9486c40cc44632b831bdcfe98bef14/1.png",
+      "https://images.clickfunnels.com/c7/dfa809b20f4c069c789b4760598ccf/2.png",
+      "https://images.clickfunnels.com/58/7c20d584744e2fb5c576fb90375615/3.png",
+      "https://images.clickfunnels.com/00/cc515cae644b1cb996b4bce1e0403b/4.png",
+      "https://images.clickfunnels.com/8c/a222dcbaf04f429c39a381c437bc7b/5.png",
+      "https://images.clickfunnels.com/17/10fc63cc4c486eac0f33e7d81dee1f/6.png",
+      "https://images.clickfunnels.com/98/99a5e7cd1c407782dcc893a3098d06/7.png",
+      "https://images.clickfunnels.com/c1/6e8c8b078340f78e8d2ef970c7469a/8.png",
+    ];
+    /* tweak these two to taste */
+    var pcMustangFbAutoMs = 900; /* frame interval (ms) - lower = faster spin */
+    var pcMustangFbResumeMs = 4000; /* resume auto-play this long after user interaction */
+    var pcMustangFbCount = pcMustangFbSlides.length;
+    var pcMustangFbIndex = 0;
+    var pcMustangFbImgEl = document.getElementById("pcMustangFbImg");
+    var pcMustangFbDotsEl = document.getElementById("pcMustangFbDots");
+    var pcMustangFbWrapEl = document.getElementById("pcMustangFbImgWrap");
+    var pcMustangFbTimer = null;
+    var pcMustangFbResumeTimer = null;
+    /* preload all slides */
+    for (var i = 0; i < pcMustangFbCount; i++) {
+      var pcMustangFbPre = new Image();
+      pcMustangFbPre.src = pcMustangFbSlides[i];
+    }
+    /* build dots */
+    var pcMustangFbDotsHtml = "";
+    for (var j = 0; j < pcMustangFbCount; j++) {
+      pcMustangFbDotsHtml +=
+        '<div class="pcMustangFbDot' +
+        (j === 0 ? " pcMustangFbDotActive" : "") +
+        '"></div>';
+    }
+    pcMustangFbDotsEl.innerHTML = pcMustangFbDotsHtml;
+    function pcMustangFbGoTo(target) {
+      pcMustangFbIndex =
+        ((target % pcMustangFbCount) + pcMustangFbCount) % pcMustangFbCount;
+      pcMustangFbImgEl.src = pcMustangFbSlides[pcMustangFbIndex];
+      var dots = pcMustangFbDotsEl.children;
+      for (var k = 0; k < pcMustangFbCount; k++) {
+        if (k === pcMustangFbIndex) {
+          dots[k].classList.add("pcMustangFbDotActive");
+        } else {
+          dots[k].classList.remove("pcMustangFbDotActive");
+        }
+      }
+    }
+    function pcMustangFbStart() {
+      pcMustangFbStop();
+      pcMustangFbTimer = setInterval(function () {
+        pcMustangFbGoTo(pcMustangFbIndex + 1);
+      }, pcMustangFbAutoMs);
+    }
+    function pcMustangFbStop() {
+      if (pcMustangFbTimer) {
+        clearInterval(pcMustangFbTimer);
+        pcMustangFbTimer = null;
+      }
+    }
+    function pcMustangFbPauseThenResume() {
+      pcMustangFbStop();
+      if (pcMustangFbResumeTimer) {
+        clearTimeout(pcMustangFbResumeTimer);
+      }
+      pcMustangFbResumeTimer = setTimeout(
+        pcMustangFbStart,
+        pcMustangFbResumeMs,
+      );
+    }
+    pcMustangFbGoTo(0);
+    pcMustangFbStart();
+    /* pause on hover (desktop), resume on leave */
+    pcMustangFbWrapEl.addEventListener("mouseenter", pcMustangFbStop);
+    pcMustangFbWrapEl.addEventListener("mouseleave", pcMustangFbStart);
+    /* pause when tab is hidden so we don't burn cycles */
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        pcMustangFbStop();
+      } else {
+        pcMustangFbStart();
+      }
+    });
+    document.getElementById("pcMustangFbPrev").onclick = function () {
+      pcMustangFbGoTo(pcMustangFbIndex - 1);
+      pcMustangFbPauseThenResume();
+    };
+    document.getElementById("pcMustangFbNext").onclick = function () {
+      pcMustangFbGoTo(pcMustangFbIndex + 1);
+      pcMustangFbPauseThenResume();
+    };
+    var pcMustangFbStartX = 0,
+      pcMustangFbDragging = false;
+    pcMustangFbWrapEl.addEventListener("mousedown", function (e) {
+      e.preventDefault();
+      pcMustangFbStartX = e.clientX;
+      pcMustangFbDragging = true;
+      pcMustangFbStop();
+    });
+    window.addEventListener("mousemove", function (e) {
+      if (!pcMustangFbDragging) return;
+      var dist = e.clientX - pcMustangFbStartX;
+      if (Math.abs(dist) > 40) {
+        pcMustangFbGoTo(dist < 0 ? pcMustangFbIndex + 1 : pcMustangFbIndex - 1);
+        pcMustangFbStartX = e.clientX;
+      }
+    });
+    window.addEventListener("mouseup", function () {
+      if (pcMustangFbDragging) {
+        pcMustangFbDragging = false;
+        pcMustangFbPauseThenResume();
+      }
+    });
+    pcMustangFbWrapEl.addEventListener(
+      "touchstart",
+      function (e) {
+        pcMustangFbStartX = e.touches[0].clientX;
+        pcMustangFbDragging = true;
+        pcMustangFbStop();
+      },
+      { passive: true },
+    );
+    pcMustangFbWrapEl.addEventListener(
+      "touchmove",
+      function (e) {
+        if (!pcMustangFbDragging) return;
+        var dist = e.touches[0].clientX - pcMustangFbStartX;
+        if (Math.abs(dist) > 40) {
+          pcMustangFbGoTo(
+            dist < 0 ? pcMustangFbIndex + 1 : pcMustangFbIndex - 1,
+          );
+          pcMustangFbStartX = e.touches[0].clientX;
+        }
+      },
+      { passive: true },
+    );
+    pcMustangFbWrapEl.addEventListener("touchend", function () {
+      if (pcMustangFbDragging) {
+        pcMustangFbDragging = false;
+        pcMustangFbPauseThenResume();
+      }
+    });
+  });
+</script>
+<!-- PRIZE CAROUSEL Silverado - END -->
