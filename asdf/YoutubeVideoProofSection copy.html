@@ -1,0 +1,32 @@
+<style>
+  .lmct-youtube-wrap {
+    width: min(100%, 1138px);
+    aspect-ratio: 16 / 9;
+    margin: 0 auto 30px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #000000;
+  }
+  .lmct-youtube-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  @media (max-width: 770px) {
+    .lmct-youtube-wrap {
+      margin-bottom: 22px;
+      border-radius: 12px;
+    }
+  }
+</style>  
+<div style="padding:12px;">
+  <div class="lmct-youtube-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/Wjy9IEAIvw0?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1"
+      title="LMCT+ Video"
+      frameborder="0"
+      allow="autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>

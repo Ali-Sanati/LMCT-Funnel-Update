@@ -1,0 +1,237 @@
+<style>
+  /* ===== Falling Rainbow Confetti For GIVEAWAY DETAILS Section ===== */
+
+  #section--15345 {
+    position: relative !important;
+    overflow: hidden !important;
+    isolation: isolate;
+  }
+
+  #section--15345 .containerInner {
+    position: relative;
+    z-index: 2;
+  }
+
+  .lmct-confetti-fall-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmct-confetti-fall-canvas {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var sectionSelector = "#section--15345";
+    var confettiScriptUrl =
+      "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js";
+    var confettiScriptAttribute = "data-lmct-canvas-confetti";
+    var confettiColors = [
+      "#ff0080",
+      "#ff8c00",
+      "#ffef00",
+      "#00ff66",
+      "#00cfff",
+      "#6f00ff",
+      "#ff36ff"
+    ];
+
+    function rand(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function prefersReducedMotion() {
+      return !!(
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      );
+    }
+
+    function loadCanvasConfetti(callback, onError) {
+      if (typeof window.confetti === "function") {
+        callback();
+        return;
+      }
+
+      var existingScript = document.querySelector(
+        "script[" + confettiScriptAttribute + '="true"]'
+      );
+
+      if (existingScript) {
+        var started = false;
+        var startWhenReady = function () {
+          if (started) return;
+          if (typeof window.confetti !== "function") return;
+          started = true;
+          callback();
+        };
+
+        existingScript.addEventListener("load", startWhenReady, { once: true });
+        existingScript.addEventListener("error", onError, { once: true });
+        window.setTimeout(startWhenReady, 0);
+        return;
+      }
+
+      var script = document.createElement("script");
+      script.src = confettiScriptUrl;
+      script.async = true;
+      script.setAttribute(confettiScriptAttribute, "true");
+      script.addEventListener("load", callback, { once: true });
+      script.addEventListener("error", onError, { once: true });
+      document.head.appendChild(script);
+    }
+
+    function initConfettiFall() {
+      var section = document.querySelector(sectionSelector);
+      if (!section) return false;
+      if (section.__lmctConfettiFallInitialized) return true;
+      section.__lmctConfettiFallInitialized = true;
+
+      var oldLayer = section.querySelector(".lmct-cash-rain-layer");
+      if (oldLayer && oldLayer.parentNode) {
+        oldLayer.parentNode.removeChild(oldLayer);
+      }
+
+      if (prefersReducedMotion()) return true;
+
+      var canvas = document.createElement("canvas");
+      canvas.className = "lmct-confetti-fall-canvas";
+      canvas.setAttribute("aria-hidden", "true");
+      section.insertBefore(canvas, section.firstChild);
+
+      var isMobile = !!(
+        window.matchMedia && window.matchMedia("(max-width: 767px)").matches
+      );
+      var fallTimer = null;
+      var visibilityObserver = null;
+      var resizeObserver = null;
+      var isVisible = true;
+
+      function cleanup() {
+        if (fallTimer) {
+          window.clearInterval(fallTimer);
+          fallTimer = null;
+        }
+        if (visibilityObserver) {
+          visibilityObserver.disconnect();
+          visibilityObserver = null;
+        }
+        if (resizeObserver) {
+          resizeObserver.disconnect();
+          resizeObserver = null;
+        }
+        if (canvas.parentNode) {
+          canvas.parentNode.removeChild(canvas);
+        }
+      }
+
+      function sizeCanvasToSection() {
+        var rect = section.getBoundingClientRect();
+        canvas.width = Math.max(1, Math.round(rect.width));
+        canvas.height = Math.max(1, Math.round(rect.height));
+      }
+
+      function startConfettiFall() {
+        if (typeof window.confetti !== "function") {
+          cleanup();
+          return;
+        }
+
+        sizeCanvasToSection();
+
+        if ("ResizeObserver" in window) {
+          resizeObserver = new ResizeObserver(sizeCanvasToSection);
+          resizeObserver.observe(section);
+        } else {
+          window.addEventListener("resize", sizeCanvasToSection, {
+            passive: true
+          });
+        }
+
+        if ("IntersectionObserver" in window) {
+          visibilityObserver = new IntersectionObserver(function (entries) {
+            isVisible = !!(entries[0] && entries[0].isIntersecting);
+          });
+          visibilityObserver.observe(section);
+        }
+
+        var sectionConfetti = window.confetti.create(canvas, {
+          resize: false,
+          useWorker: false
+        });
+
+        function emitTopDownConfetti() {
+          if (!isVisible || prefersReducedMotion()) return;
+
+          var burstCount = isMobile ? 1 : 2;
+          var particleCount = isMobile ? 3 : 4;
+
+          for (var i = 0; i < burstCount; i++) {
+            sectionConfetti({
+              angle: 270,
+              colors: confettiColors,
+              decay: rand(0.925, 0.955),
+              drift: rand(-0.7, 0.7),
+              gravity: rand(0.45, 0.75),
+              origin: {
+                x: rand(-0.04, 1.04),
+                y: -0.06
+              },
+              particleCount: particleCount,
+              scalar: rand(isMobile ? 0.58 : 0.68, isMobile ? 0.92 : 1.1),
+              shapes: ["square", "circle"],
+              spread: rand(34, 68),
+              startVelocity: rand(6, 16),
+              ticks: rand(240, 380)
+            });
+          }
+        }
+
+        for (var i = 0; i < (isMobile ? 4 : 6); i++) {
+          window.setTimeout(emitTopDownConfetti, i * 160);
+        }
+
+        fallTimer = window.setInterval(
+          emitTopDownConfetti,
+          isMobile ? 340 : 230
+        );
+      }
+
+      loadCanvasConfetti(startConfettiFall, cleanup);
+      return true;
+    }
+
+    function boot() {
+      if (initConfettiFall()) return;
+      if (!("MutationObserver" in window)) return;
+
+      var observer = new MutationObserver(function () {
+        if (initConfettiFall()) observer.disconnect();
+      });
+
+      observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true
+      });
+
+      window.setTimeout(function () {
+        observer.disconnect();
+      }, 10000);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", boot, { once: true });
+    } else {
+      boot();
+    }
+  })();
+</script>

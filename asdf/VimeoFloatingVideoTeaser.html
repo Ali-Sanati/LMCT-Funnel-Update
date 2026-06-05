@@ -1,0 +1,198 @@
+<style>
+  .lmct-vimeo-teaser {
+    position: fixed;
+    left: 18px;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    z-index: 2147483000;
+    width: min(320px, calc(100vw - 36px));
+    overflow: visible;
+    border-radius: 14px;
+    background: #000000;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.34);
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  .lmct-vimeo-teaser--hidden {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .lmct-vimeo-teaser__link {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.88);
+    border-radius: 14px;
+    background: #000000;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .lmct-vimeo-teaser__link iframe {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .lmct-vimeo-teaser__link::after {
+    position: absolute;
+    inset: auto 0 0;
+    height: 46%;
+    content: "";
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.82), transparent);
+    pointer-events: none;
+  }
+
+  .lmct-vimeo-teaser__cta {
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    left: 12px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmct-vimeo-teaser__play {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .lmct-vimeo-teaser__play svg {
+    width: 12px;
+    height: 12px;
+    margin-left: 2px;
+    fill: currentColor;
+  }
+
+  .lmct-vimeo-teaser__close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    z-index: 2;
+    display: grid;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    place-items: center;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: #111111;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  @media (max-width: 770px) {
+    .lmct-vimeo-teaser {
+      display: none !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmct-vimeo-teaser {
+      transition: none;
+    }
+  }
+</style>
+
+<aside class="lmct-vimeo-teaser" id="lmct-vimeo-teaser" aria-label="Watch the one million dollar reaction video">
+  <a class="lmct-vimeo-teaser__link" href="#lmct-vimeo-proof-video" aria-label="Go to the full reaction video">
+    <iframe
+      src="https://player.vimeo.com/video/1197238773?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;autopause=0&amp;badge=0&amp;title=0&amp;byline=0&amp;portrait=0"
+      title="Muted preview of the one million dollar reaction video"
+      frameborder="0"
+      allow="autoplay; fullscreen; picture-in-picture"
+      referrerpolicy="strict-origin-when-cross-origin"
+      tabindex="-1">
+    </iframe>
+    <span class="lmct-vimeo-teaser__cta">
+      <span class="lmct-vimeo-teaser__play" aria-hidden="true">
+        <svg viewBox="0 0 12 12" aria-hidden="true">
+          <path d="M2 1.1v9.8L10.4 6 2 1.1Z"></path>
+        </svg>
+      </span>
+      Click to watch with sound
+    </span>
+  </a>
+  <button class="lmct-vimeo-teaser__close" type="button" aria-label="Close video preview">&times;</button>
+</aside>
+
+<script>
+  (function () {
+    var teaser = document.getElementById("lmct-vimeo-teaser");
+    if (!teaser) return;
+
+    var targetId = "lmct-vimeo-proof-video";
+    var link = teaser.querySelector(".lmct-vimeo-teaser__link");
+    var closeButton = teaser.querySelector(".lmct-vimeo-teaser__close");
+    var dismissed = false;
+    var observedTarget = null;
+    var observer = null;
+
+    function getTarget() {
+      return document.getElementById(targetId);
+    }
+
+    function updateVisibility(isVideoVisible) {
+      if (!dismissed) {
+        teaser.classList.toggle("lmct-vimeo-teaser--hidden", isVideoVisible);
+      }
+    }
+
+    function connectObserver() {
+      var target = getTarget();
+      if (!target || target === observedTarget || !("IntersectionObserver" in window)) return;
+
+      observedTarget = target;
+      observer = new IntersectionObserver(function (entries) {
+        updateVisibility(entries[0].isIntersecting);
+      }, { threshold: 0.2 });
+      observer.observe(target);
+    }
+
+    closeButton.addEventListener("click", function () {
+      dismissed = true;
+      teaser.classList.add("lmct-vimeo-teaser--hidden");
+    });
+
+    link.addEventListener("click", function (event) {
+      var target = getTarget();
+      if (!target) return;
+
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, "", "#" + targetId);
+      }
+    });
+
+    connectObserver();
+    document.addEventListener("DOMContentLoaded", connectObserver);
+    window.setTimeout(connectObserver, 1000);
+  })();
+</script>
