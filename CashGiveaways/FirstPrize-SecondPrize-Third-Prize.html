@@ -1,0 +1,267 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap");
+  .lmct-prizes {
+    width: 100%;
+    padding: 30px 16px 48px;
+    font-family: "Montserrat", Arial, sans-serif;
+  }
+  .lmct-prizes,
+  .lmct-prizes * {
+    box-sizing: border-box;
+  }
+  .lmct-prizes__grid {
+    width: min(100%, 1138px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 90px 32px;
+  }
+  .lmct-prize {
+    position: relative;
+    overflow: visible;
+    min-width: 0;
+    border: 1px solid;
+    border-radius: 14px;
+    text-align: center;
+  }
+  .lmct-prize__copy {
+    position: relative;
+    z-index: 2;
+  }
+  .lmct-prize__rank,
+  .lmct-prize__amount,
+  .lmct-prize__note {
+    display: block;
+    margin: 0;
+    text-transform: uppercase;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  .lmct-prize__rank {
+    font-size: clamp(24px, 2.35vw, 31px);
+    font-weight: 900;
+  }
+  .lmct-prize__amount {
+    margin-top: 18px;
+    font-size: clamp(35px, 4vw, 49px);
+    font-weight: 900;
+    white-space: nowrap;
+  }
+  .lmct-prize__note {
+    margin-top: 10px;
+    font-size: clamp(15px, 1.55vw, 19px);
+    font-weight: 500;
+  }
+  .lmct-prize__image {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    max-width: none;
+    height: auto;
+    display: block;
+    transform: translateX(-50%);
+    pointer-events: none;
+    user-select: none;
+  }
+  .lmct-prize--first {
+    grid-column: 1 / -1;
+    height: 286px;
+    padding-top: 12px;
+    border-color: #238f28;
+    background:
+      radial-gradient(
+        ellipse 42% 82% at 50% 42%,
+        #c2f8c2 0%,
+        #b4f4b4 45%,
+        rgba(180, 244, 180, 0) 72%
+      ),
+      linear-gradient(
+        90deg,
+        #7ecd82 0%,
+        #aaf0ad 24%,
+        #baf6ba 50%,
+        #a3eca7 76%,
+        #7ecd82 100%
+      );
+  }
+  .lmct-prize--first .lmct-prize__rank {
+    color: #008b00;
+    text-shadow: 0 2px 4px rgba(20, 100, 20, 0.35);
+  }
+  .lmct-prize--first .lmct-prize__amount {
+    color: #218b23;
+    text-shadow: 0 4px 5px rgba(20, 100, 20, 0.28);
+  }
+  .lmct-prize--first .lmct-prize__note {
+    color: #20861f;
+    text-shadow: 0 2px 3px rgba(255, 255, 255, 0.45);
+  }
+  .lmct-prize--first .lmct-prize__image {
+    width: min(72vw, 745px);
+    bottom: -74px;
+  }
+  .lmct-prize--second,
+  .lmct-prize--third {
+    height: 329px;
+    padding-top: 10px;
+    box-shadow: 0 16px 22px rgba(0, 0, 0, 0.18);
+  }
+  .lmct-prize--second {
+    border-color: #000000;
+    background:
+      radial-gradient(
+        ellipse 46% 82% at 50% 47%,
+        #f2f3f4 0%,
+        #d9dcdf 48%,
+        rgba(217, 220, 223, 0) 74%
+      ),
+      linear-gradient(
+        90deg,
+        #aeb4ba 0%,
+        #c5c9ce 24%,
+        #eef0f2 50%,
+        #c2c6ca 76%,
+        #aeb4ba 100%
+      );
+  }
+  .lmct-prize--second .lmct-prize__rank,
+  .lmct-prize--second .lmct-prize__amount {
+    color: #555557;
+    text-shadow: 0 4px 5px rgba(0, 0, 0, 0.22);
+  }
+  .lmct-prize--second .lmct-prize__note {
+    color: #5f5f61;
+    text-shadow: 0 2px 3px rgba(255, 255, 255, 0.55);
+  }
+  .lmct-prize--second .lmct-prize__image {
+    width: min(89%, 500px);
+    bottom: -41px;
+  }
+  .lmct-prize--third {
+    border-color: #a06f34;
+    background:
+      radial-gradient(
+        ellipse 48% 82% at 50% 47%,
+        #ffe9b8 0%,
+        #efcd9f 48%,
+        rgba(239, 205, 159, 0) 74%
+      ),
+      linear-gradient(
+        90deg,
+        #d1a97f 0%,
+        #dcba92 23%,
+        #ffe6b7 50%,
+        #d9b48b 77%,
+        #d1a97f 100%
+      );
+  }
+  .lmct-prize--third .lmct-prize__rank,
+  .lmct-prize--third .lmct-prize__amount {
+    color: #8b6a33;
+    text-shadow: 0 4px 5px rgba(95, 61, 17, 0.25);
+  }
+  .lmct-prize--third .lmct-prize__note {
+    color: #957038;
+    text-shadow: 0 2px 3px rgba(255, 255, 255, 0.45);
+  }
+  .lmct-prize--third .lmct-prize__image {
+    width: min(94%, 520px);
+    bottom: -72px;
+  }
+  @media (max-width: 770px) {
+    .lmct-prizes {
+      padding: 18px 12px 40px;
+    }
+    .lmct-prizes__grid {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+    .lmct-prize {
+      border-radius: 12px;
+    }
+    .lmct-prize__rank {
+      font-size: clamp(22px, 7vw, 28px);
+    }
+    .lmct-prize__amount {
+      margin-top: 13px;
+      font-size: clamp(29px, 9.4vw, 42px);
+    }
+    .lmct-prize__note {
+      margin-top: 8px;
+      font-size: clamp(13px, 4.3vw, 17px);
+    }
+    .lmct-prize--first {
+      height: 254px;
+      padding-top: 15px;
+    }
+    .lmct-prize--first .lmct-prize__image {
+      width: min(104%, 480px);
+      bottom: -38px;
+    }
+    .lmct-prize--second,
+    .lmct-prize--third {
+      height: 292px;
+      padding-top: 14px;
+    }
+    .lmct-prize--second .lmct-prize__image {
+      width: min(95%, 410px);
+      bottom: -26px;
+    }
+    .lmct-prize--third .lmct-prize__image {
+      width: min(101%, 430px);
+      bottom: -45px;
+    }
+  }
+  @media (max-width: 380px) {
+    .lmct-prize--first {
+      height: 236px;
+    }
+    .lmct-prize--second,
+    .lmct-prize--third {
+      height: 272px;
+    }
+  }
+</style>
+<section class="lmct-prizes" aria-label="Cash prize winners">
+  <div class="lmct-prizes__grid">
+    <article class="lmct-prize lmct-prize--first">
+      <div class="lmct-prize__copy">
+        <h2 class="lmct-prize__rank">1ST PRIZE</h2>
+        <p class="lmct-prize__amount">$1,000,000 CASH</p>
+        <p class="lmct-prize__note">TAX-FREE CASH</p>
+      </div>
+      <img
+        class="lmct-prize__image"
+        src="https://images.clickfunnels.com/b8/ca39318e8e484cafe4f0c91af3a37e/1.png"
+        alt=""
+        loading="lazy"
+      />
+    </article>
+    <article class="lmct-prize lmct-prize--second">
+      <div class="lmct-prize__copy">
+        <h2 class="lmct-prize__rank">2ND PRIZE</h2>
+        <p class="lmct-prize__amount">$2,500 CASH</p>
+        <p class="lmct-prize__note">TO SPEND WITH OUR PARTNERS</p>
+      </div>
+      <img
+        class="lmct-prize__image"
+        src="https://images.clickfunnels.com/82/e98df8599b483ebc127d90e4662eac/2.png"
+        alt=""
+        loading="lazy"
+      />
+    </article>
+    <article class="lmct-prize lmct-prize--third">
+      <div class="lmct-prize__copy">
+        <h2 class="lmct-prize__rank">3RD PRIZE</h2>
+        <p class="lmct-prize__amount">$1,000 CASH</p>
+        <p class="lmct-prize__note">TO SPEND WITH OUR PARTNERS</p>
+      </div>
+      <img
+        class="lmct-prize__image"
+        src="https://images.clickfunnels.com/20/c23ae759f64234a62ce078e55694a6/3.png"
+        alt=""
+        loading="lazy"
+      />
+    </article>
+  </div>
+</section>

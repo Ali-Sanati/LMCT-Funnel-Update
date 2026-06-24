@@ -1,0 +1,1094 @@
+<!-- LMCT+ ACTIVE GIVEAWAYS START -->
+<style>
+  .lmctActiveGiveaways {
+    --lmct-ag-bg: #f6f9fc;
+    --lmct-ag-card: #06182b;
+    --lmct-ag-card-2: #081d33;
+    --lmct-ag-card-soft: rgba(8, 29, 51, 0.78);
+    --lmct-ag-blue: #159ff2;
+    --lmct-ag-blue-light: #35b8ff;
+    --lmct-ag-text: #ffffff;
+    --lmct-ag-ink: #071426;
+    --lmct-ag-muted: #8fa3b8;
+    --lmct-ag-border: rgba(21, 159, 242, 0.45);
+    --lmct-ag-border-strong: rgba(53, 184, 255, 0.75);
+    --lmct-ag-shadow: 0 22px 58px rgba(6, 24, 43, 0.16);
+    --lmct-ag-glow: 0 18px 48px rgba(21, 159, 242, 0.22);
+    --lmct-ag-radius-lg: 26px;
+    --lmct-ag-radius-md: 18px;
+    --lmct-ag-radius-sm: 12px;
+    background: var(--lmct-ag-bg);
+    box-sizing: border-box;
+    font-family: "Montserrat", Arial, sans-serif;
+    padding: 76px 18px;
+    width: 100%;
+  }
+
+  .lmctActiveGiveaways * {
+    box-sizing: border-box;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__inner {
+    margin: 0 auto;
+    max-width: 1180px;
+    width: 100%;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__header {
+    margin: 0 auto 36px;
+    max-width: 720px;
+    text-align: center;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__badge {
+    align-items: center;
+    background: rgba(21, 159, 242, 0.1);
+    border: 1px solid rgba(21, 159, 242, 0.42);
+    border-radius: 999px;
+    color: var(--lmct-ag-blue);
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 900;
+    gap: 8px;
+    letter-spacing: 0;
+    line-height: 1;
+    padding: 10px 15px;
+    text-transform: uppercase;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__badgeDot {
+    background: linear-gradient(
+      135deg,
+      var(--lmct-ag-blue-light),
+      var(--lmct-ag-blue)
+    );
+    border-radius: 999px;
+    box-shadow: 0 0 16px rgba(21, 159, 242, 0.5);
+    display: block;
+    height: 8px;
+    width: 8px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__title {
+    color: var(--lmct-ag-ink);
+    font-size: 44px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.4;
+    margin: 18px 0 12px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__subtitle {
+    color: #536579;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    min-height: 560px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__card {
+    background:
+      radial-gradient(
+        circle at 82% 8%,
+        rgba(21, 159, 242, 0.22) 0,
+        rgba(21, 159, 242, 0) 36%
+      ),
+      linear-gradient(
+        145deg,
+        var(--lmct-ag-card) 0%,
+        var(--lmct-ag-card-2) 100%
+      );
+    border: 1px solid var(--lmct-ag-border);
+    border-radius: var(--lmct-ag-radius-lg);
+    box-shadow: var(--lmct-ag-shadow);
+    color: var(--lmct-ag-text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow: hidden;
+    position: relative;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__card:hover {
+    border-color: var(--lmct-ag-border-strong);
+    box-shadow: var(--lmct-ag-shadow), var(--lmct-ag-glow);
+    transform: translateY(-4px);
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__imageWrap {
+    aspect-ratio: 16 / 9;
+    background:
+      radial-gradient(
+        circle at center,
+        rgba(21, 159, 242, 0.22),
+        rgba(21, 159, 242, 0) 58%
+      ),
+      linear-gradient(135deg, #06182b, #0b2846);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__image {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__placeholder {
+    align-items: center;
+    color: rgba(255, 255, 255, 0.72);
+    display: flex;
+    font-size: 14px;
+    font-weight: 800;
+    height: 100%;
+    justify-content: center;
+    letter-spacing: 0;
+    padding: 28px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 16px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__pill {
+    align-items: center;
+    border-radius: 999px;
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    min-height: 32px;
+    padding: 10px 12px;
+    text-transform: uppercase;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__pillValue {
+    background: linear-gradient(
+      135deg,
+      var(--lmct-ag-blue-light),
+      var(--lmct-ag-blue)
+    );
+    color: #ffffff;
+    box-shadow: 0 10px 26px rgba(21, 159, 242, 0.28);
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__pillReward {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(53, 184, 255, 0.34);
+    color: var(--lmct-ag-blue-light);
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__cardTitle {
+    color: var(--lmct-ag-text);
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.3;
+    margin: 0 0 20px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__timer {
+    background: rgba(2, 10, 22, 0.42);
+    border: 1px solid rgba(53, 184, 255, 0.2);
+    border-radius: var(--lmct-ag-radius-md);
+    margin: 0 0 18px;
+    padding: 16px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__timerLabel {
+    color: var(--lmct-ag-muted);
+    display: block;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    text-transform: uppercase;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__timerGrid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__timeBox {
+    background: rgba(8, 29, 51, 0.86);
+    border: 1px solid rgba(21, 159, 242, 0.46);
+    border-radius: 13px;
+    min-width: 0;
+    padding: 12px 8px 10px;
+    text-align: center;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__timeValue {
+    color: var(--lmct-ag-text);
+    display: block;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.3;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__timeUnit {
+    color: var(--lmct-ag-muted);
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin: 8px 0 0;
+    text-transform: uppercase;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__closed {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 13px;
+    color: var(--lmct-ag-text);
+    display: flex;
+    font-size: 22px;
+    font-weight: 900;
+    justify-content: center;
+    letter-spacing: 0;
+    min-height: 72px;
+    text-transform: uppercase;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 0 0 22px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__chip {
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(53, 184, 255, 0.3);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.82);
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1.25;
+    padding: 9px 11px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__cta {
+    align-items: center;
+    background: linear-gradient(
+      135deg,
+      var(--lmct-ag-blue-light) 0%,
+      var(--lmct-ag-blue) 58%,
+      #057be3 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--lmct-ag-radius-sm);
+    box-shadow: 0 18px 34px rgba(21, 159, 242, 0.25);
+    color: #ffffff;
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 900;
+    gap: 10px;
+    justify-content: center;
+    letter-spacing: 0;
+    line-height: 1;
+    margin-top: auto;
+    min-height: 56px;
+    padding: 17px 20px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      box-shadow 180ms ease,
+      transform 180ms ease;
+    width: 100%;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__cta:hover,
+  .lmctActiveGiveaways .lmctActiveGiveaways__cta:focus {
+    box-shadow: 0 24px 44px rgba(21, 159, 242, 0.34);
+    transform: translateY(-1px);
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__cta:focus-visible {
+    outline: 3px solid rgba(53, 184, 255, 0.6);
+    outline-offset: 4px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__ctaIcon {
+    display: block;
+    height: 18px;
+    width: 18px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__ctaDisabled {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: none;
+    color: rgba(255, 255, 255, 0.55);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__state {
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid rgba(6, 24, 43, 0.08);
+    border-radius: var(--lmct-ag-radius-lg);
+    box-shadow: 0 16px 44px rgba(6, 24, 43, 0.06);
+    color: #536579;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 700;
+    gap: 14px;
+    grid-column: 1 / -1;
+    justify-content: center;
+    letter-spacing: 0;
+    line-height: 1.45;
+    min-height: 260px;
+    padding: 34px;
+    text-align: center;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__stateTitle {
+    color: var(--lmct-ag-ink);
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__stateText {
+    color: #536579;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.55;
+    margin: 0;
+    max-width: 520px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__loader {
+    animation: lmctActiveGiveawaysSpin 900ms linear infinite;
+    border: 3px solid rgba(21, 159, 242, 0.16);
+    border-radius: 999px;
+    border-top-color: var(--lmct-ag-blue);
+    display: block;
+    height: 42px;
+    width: 42px;
+  }
+
+  @keyframes lmctActiveGiveawaysSpin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 860px) {
+    .lmctActiveGiveaways {
+      padding: 58px 14px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__grid {
+      grid-template-columns: 1fr;
+      min-height: 520px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__title {
+      font-size: 38px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .lmctActiveGiveaways {
+      padding: 44px 12px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__header {
+      margin-bottom: 28px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__title {
+      font-size: 32px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__subtitle {
+      font-size: 16px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__content {
+      padding: 18px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__cardTitle {
+      font-size: 21px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__timer {
+      padding: 13px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__timerGrid {
+      gap: 7px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__timeBox {
+      border-radius: 11px;
+      padding: 10px 5px 9px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__timeValue {
+      font-size: 19px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__timeUnit {
+      font-size: 9px;
+    }
+  }
+
+  @media (hover: none) {
+    .lmctActiveGiveaways .lmctActiveGiveaways__card:hover {
+      box-shadow: var(--lmct-ag-shadow);
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctActiveGiveaways .lmctActiveGiveaways__card,
+    .lmctActiveGiveaways .lmctActiveGiveaways__cta {
+      transition: none;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__loader {
+      animation: none;
+    }
+  }
+</style>
+
+<section class="lmctActiveGiveaways" aria-label="Active LMCT+ giveaways">
+  <div class="lmctActiveGiveaways__inner">
+    <div class="lmctActiveGiveaways__header">
+      <div class="lmctActiveGiveaways__badge">
+        <span class="lmctActiveGiveaways__badgeDot"></span>
+        LIVE NOW
+      </div>
+      <h2 class="lmctActiveGiveaways__title">Active Giveaways</h2>
+      <p class="lmctActiveGiveaways__subtitle">
+        Missed this one? These giveaways are still open.
+      </p>
+    </div>
+
+    <div class="lmctActiveGiveaways__grid" data-lmct-active-giveaways-grid>
+      <div class="lmctActiveGiveaways__state" role="status" aria-live="polite">
+        <span class="lmctActiveGiveaways__loader"></span>
+        <p class="lmctActiveGiveaways__stateTitle">Loading active giveaways</p>
+        <p class="lmctActiveGiveaways__stateText">
+          Checking LMCT+ for giveaways that are still open.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var lmctActiveGiveawaysEndpoint =
+      "https://api.lmctplus.com/api/v1/giveaways?limit=9&offset=0&status=active";
+    var lmctActiveGiveawaysRoot = document.currentScript
+      ? document.currentScript.previousElementSibling
+      : null;
+
+    if (
+      !lmctActiveGiveawaysRoot ||
+      !lmctActiveGiveawaysRoot.classList ||
+      !lmctActiveGiveawaysRoot.classList.contains("lmctActiveGiveaways")
+    ) {
+      var lmctActiveGiveawaysSections = document.querySelectorAll(
+        ".lmctActiveGiveaways",
+      );
+      lmctActiveGiveawaysRoot =
+        lmctActiveGiveawaysSections[lmctActiveGiveawaysSections.length - 1];
+    }
+
+    if (!lmctActiveGiveawaysRoot) {
+      return;
+    }
+
+    var lmctActiveGiveawaysGrid = lmctActiveGiveawaysRoot.querySelector(
+      "[data-lmct-active-giveaways-grid]",
+    );
+    var lmctActiveGiveawaysCards = [];
+    var lmctActiveGiveawaysTimerId = null;
+
+    function lmctActiveGiveawaysText(value, fallback) {
+      if (value === null || value === undefined) {
+        return fallback || "";
+      }
+
+      var lmctActiveGiveawaysString = String(value).trim();
+      return lmctActiveGiveawaysString || fallback || "";
+    }
+
+    function lmctActiveGiveawaysStripHtml(value) {
+      var lmctActiveGiveawaysString = lmctActiveGiveawaysText(value, "");
+
+      if (!lmctActiveGiveawaysString) {
+        return "";
+      }
+
+      if (window.DOMParser) {
+        var lmctActiveGiveawaysDoc = new DOMParser().parseFromString(
+          lmctActiveGiveawaysString,
+          "text/html",
+        );
+        return lmctActiveGiveawaysText(
+          lmctActiveGiveawaysDoc.body
+            ? lmctActiveGiveawaysDoc.body.textContent
+            : lmctActiveGiveawaysString,
+          "",
+        );
+      }
+
+      return lmctActiveGiveawaysString
+        .replace(/<[^>]*>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function lmctActiveGiveawaysCompactPrice(value) {
+      var lmctActiveGiveawaysNumber = Number(value);
+
+      if (
+        !Number.isFinite(lmctActiveGiveawaysNumber) ||
+        lmctActiveGiveawaysNumber <= 0
+      ) {
+        return "GIVEAWAY VALUE";
+      }
+
+      if (lmctActiveGiveawaysNumber === 1000000) {
+        return "$1M VALUE";
+      }
+
+      if (lmctActiveGiveawaysNumber === 10000) {
+        return "$10K VALUE";
+      }
+
+      if (lmctActiveGiveawaysNumber >= 1000000) {
+        return (
+          "$" +
+          (lmctActiveGiveawaysNumber / 1000000)
+            .toFixed(lmctActiveGiveawaysNumber % 1000000 === 0 ? 0 : 1)
+            .replace(/\.0$/, "") +
+          "M VALUE"
+        );
+      }
+
+      if (lmctActiveGiveawaysNumber >= 1000) {
+        return "$" + Math.round(lmctActiveGiveawaysNumber / 1000) + "K VALUE";
+      }
+
+      return "$" + lmctActiveGiveawaysNumber.toLocaleString("en-AU") + " VALUE";
+    }
+
+    function lmctActiveGiveawaysGetImage(giveaway) {
+      return lmctActiveGiveawaysText(
+        giveaway && (giveaway.previewImage || giveaway.image),
+        "",
+      );
+    }
+
+    function lmctActiveGiveawaysGetUrl(giveaway) {
+      return lmctActiveGiveawaysText(
+        giveaway && (giveaway.publicPromotionLink || giveaway.promotionLink),
+        "",
+      );
+    }
+
+    function lmctActiveGiveawaysGetTime(endDate) {
+      var lmctActiveGiveawaysEnd = new Date(endDate).getTime();
+
+      if (!Number.isFinite(lmctActiveGiveawaysEnd)) {
+        return null;
+      }
+
+      var lmctActiveGiveawaysRemaining = lmctActiveGiveawaysEnd - Date.now();
+
+      if (lmctActiveGiveawaysRemaining <= 0) {
+        return {
+          closed: true,
+          days: "00",
+          hours: "00",
+          minutes: "00",
+          seconds: "00",
+        };
+      }
+
+      var lmctActiveGiveawaysTotalSeconds = Math.floor(
+        lmctActiveGiveawaysRemaining / 1000,
+      );
+      var lmctActiveGiveawaysDays = Math.floor(
+        lmctActiveGiveawaysTotalSeconds / 86400,
+      );
+      var lmctActiveGiveawaysHours = Math.floor(
+        (lmctActiveGiveawaysTotalSeconds % 86400) / 3600,
+      );
+      var lmctActiveGiveawaysMinutes = Math.floor(
+        (lmctActiveGiveawaysTotalSeconds % 3600) / 60,
+      );
+      var lmctActiveGiveawaysSeconds = lmctActiveGiveawaysTotalSeconds % 60;
+
+      return {
+        closed: false,
+        days: String(lmctActiveGiveawaysDays).padStart(2, "0"),
+        hours: String(lmctActiveGiveawaysHours).padStart(2, "0"),
+        minutes: String(lmctActiveGiveawaysMinutes).padStart(2, "0"),
+        seconds: String(lmctActiveGiveawaysSeconds).padStart(2, "0"),
+      };
+    }
+
+    function lmctActiveGiveawaysAppendText(parent, tagName, className, text) {
+      var lmctActiveGiveawaysElement = document.createElement(tagName);
+      lmctActiveGiveawaysElement.className = className;
+      lmctActiveGiveawaysElement.textContent = text;
+      parent.appendChild(lmctActiveGiveawaysElement);
+      return lmctActiveGiveawaysElement;
+    }
+
+    function lmctActiveGiveawaysCreateTimeBox(value, label) {
+      var lmctActiveGiveawaysBox = document.createElement("div");
+      lmctActiveGiveawaysBox.className = "lmctActiveGiveaways__timeBox";
+
+      lmctActiveGiveawaysAppendText(
+        lmctActiveGiveawaysBox,
+        "span",
+        "lmctActiveGiveaways__timeValue",
+        value,
+      );
+      lmctActiveGiveawaysAppendText(
+        lmctActiveGiveawaysBox,
+        "span",
+        "lmctActiveGiveaways__timeUnit",
+        label,
+      );
+
+      return lmctActiveGiveawaysBox;
+    }
+
+    function lmctActiveGiveawaysRenderTimer(cardData) {
+      var lmctActiveGiveawaysTimer = document.createElement("div");
+      lmctActiveGiveawaysTimer.className = "lmctActiveGiveaways__timer";
+
+      lmctActiveGiveawaysAppendText(
+        lmctActiveGiveawaysTimer,
+        "span",
+        "lmctActiveGiveaways__timerLabel",
+        "ENTRIES CLOSE IN",
+      );
+
+      var lmctActiveGiveawaysTime = lmctActiveGiveawaysGetTime(
+        cardData.endDate,
+      );
+
+      if (!lmctActiveGiveawaysTime || lmctActiveGiveawaysTime.closed) {
+        lmctActiveGiveawaysAppendText(
+          lmctActiveGiveawaysTimer,
+          "div",
+          "lmctActiveGiveaways__closed",
+          "CLOSED",
+        );
+        cardData.isClosed = true;
+        return lmctActiveGiveawaysTimer;
+      }
+
+      var lmctActiveGiveawaysTimerGrid = document.createElement("div");
+      lmctActiveGiveawaysTimerGrid.className = "lmctActiveGiveaways__timerGrid";
+      lmctActiveGiveawaysTimerGrid.setAttribute(
+        "data-lmct-active-giveaways-countdown",
+        "",
+      );
+      lmctActiveGiveawaysTimerGrid.appendChild(
+        lmctActiveGiveawaysCreateTimeBox(lmctActiveGiveawaysTime.days, "Days"),
+      );
+      lmctActiveGiveawaysTimerGrid.appendChild(
+        lmctActiveGiveawaysCreateTimeBox(
+          lmctActiveGiveawaysTime.hours,
+          "Hours",
+        ),
+      );
+      lmctActiveGiveawaysTimerGrid.appendChild(
+        lmctActiveGiveawaysCreateTimeBox(
+          lmctActiveGiveawaysTime.minutes,
+          "Mins",
+        ),
+      );
+      lmctActiveGiveawaysTimerGrid.appendChild(
+        lmctActiveGiveawaysCreateTimeBox(
+          lmctActiveGiveawaysTime.seconds,
+          "Secs",
+        ),
+      );
+      lmctActiveGiveawaysTimer.appendChild(lmctActiveGiveawaysTimerGrid);
+
+      cardData.timerGrid = lmctActiveGiveawaysTimerGrid;
+      return lmctActiveGiveawaysTimer;
+    }
+
+    function lmctActiveGiveawaysRenderCta(cardData) {
+      var lmctActiveGiveawaysUrl = lmctActiveGiveawaysGetUrl(cardData.giveaway);
+
+      if (cardData.isClosed || !lmctActiveGiveawaysUrl) {
+        var lmctActiveGiveawaysDisabled = document.createElement("span");
+        lmctActiveGiveawaysDisabled.className =
+          "lmctActiveGiveaways__cta lmctActiveGiveaways__ctaDisabled";
+        lmctActiveGiveawaysDisabled.setAttribute("aria-disabled", "true");
+        lmctActiveGiveawaysDisabled.textContent = cardData.isClosed
+          ? "CLOSED"
+          : "ENTER NOW";
+        return lmctActiveGiveawaysDisabled;
+      }
+
+      var lmctActiveGiveawaysLink = document.createElement("a");
+      lmctActiveGiveawaysLink.className = "lmctActiveGiveaways__cta";
+      lmctActiveGiveawaysLink.href = lmctActiveGiveawaysUrl;
+      lmctActiveGiveawaysLink.setAttribute(
+        "aria-label",
+        "Enter " +
+          lmctActiveGiveawaysText(cardData.giveaway.title, "LMCT+ giveaway"),
+      );
+      lmctActiveGiveawaysLink.appendChild(document.createTextNode("ENTER NOW"));
+
+      var lmctActiveGiveawaysIcon = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg",
+      );
+      lmctActiveGiveawaysIcon.setAttribute(
+        "class",
+        "lmctActiveGiveaways__ctaIcon",
+      );
+      lmctActiveGiveawaysIcon.setAttribute("viewBox", "0 0 24 24");
+      lmctActiveGiveawaysIcon.setAttribute("aria-hidden", "true");
+
+      var lmctActiveGiveawaysPathOne = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path",
+      );
+      lmctActiveGiveawaysPathOne.setAttribute("d", "M5 12h13");
+      lmctActiveGiveawaysPathOne.setAttribute("fill", "none");
+      lmctActiveGiveawaysPathOne.setAttribute("stroke", "currentColor");
+      lmctActiveGiveawaysPathOne.setAttribute("stroke-width", "2.4");
+      lmctActiveGiveawaysPathOne.setAttribute("stroke-linecap", "round");
+
+      var lmctActiveGiveawaysPathTwo = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path",
+      );
+      lmctActiveGiveawaysPathTwo.setAttribute("d", "m13 6 6 6-6 6");
+      lmctActiveGiveawaysPathTwo.setAttribute("fill", "none");
+      lmctActiveGiveawaysPathTwo.setAttribute("stroke", "currentColor");
+      lmctActiveGiveawaysPathTwo.setAttribute("stroke-width", "2.4");
+      lmctActiveGiveawaysPathTwo.setAttribute("stroke-linecap", "round");
+      lmctActiveGiveawaysPathTwo.setAttribute("stroke-linejoin", "round");
+
+      lmctActiveGiveawaysIcon.appendChild(lmctActiveGiveawaysPathOne);
+      lmctActiveGiveawaysIcon.appendChild(lmctActiveGiveawaysPathTwo);
+      lmctActiveGiveawaysLink.appendChild(lmctActiveGiveawaysIcon);
+
+      return lmctActiveGiveawaysLink;
+    }
+
+    function lmctActiveGiveawaysCreateCard(giveaway) {
+      var lmctActiveGiveawaysCardData = {
+        giveaway: giveaway || {},
+        endDate: giveaway && giveaway.endDate,
+        isClosed: false,
+        timerGrid: null,
+      };
+
+      var lmctActiveGiveawaysCard = document.createElement("article");
+      lmctActiveGiveawaysCard.className = "lmctActiveGiveaways__card";
+
+      var lmctActiveGiveawaysImageWrap = document.createElement("div");
+      lmctActiveGiveawaysImageWrap.className = "lmctActiveGiveaways__imageWrap";
+
+      var lmctActiveGiveawaysImageUrl = lmctActiveGiveawaysGetImage(giveaway);
+      var lmctActiveGiveawaysTitle = lmctActiveGiveawaysText(
+        giveaway && giveaway.title,
+        "LMCT+ Giveaway",
+      );
+
+      if (lmctActiveGiveawaysImageUrl) {
+        var lmctActiveGiveawaysImage = document.createElement("img");
+        lmctActiveGiveawaysImage.className = "lmctActiveGiveaways__image";
+        lmctActiveGiveawaysImage.src = lmctActiveGiveawaysImageUrl;
+        lmctActiveGiveawaysImage.alt =
+          lmctActiveGiveawaysTitle + " giveaway image";
+        lmctActiveGiveawaysImage.loading = "lazy";
+        lmctActiveGiveawaysImageWrap.appendChild(lmctActiveGiveawaysImage);
+      } else {
+        lmctActiveGiveawaysAppendText(
+          lmctActiveGiveawaysImageWrap,
+          "div",
+          "lmctActiveGiveaways__placeholder",
+          "LMCT+ Giveaway",
+        );
+      }
+
+      lmctActiveGiveawaysCard.appendChild(lmctActiveGiveawaysImageWrap);
+
+      var lmctActiveGiveawaysContent = document.createElement("div");
+      lmctActiveGiveawaysContent.className = "lmctActiveGiveaways__content";
+
+      var lmctActiveGiveawaysMeta = document.createElement("div");
+      lmctActiveGiveawaysMeta.className = "lmctActiveGiveaways__meta";
+      lmctActiveGiveawaysAppendText(
+        lmctActiveGiveawaysMeta,
+        "span",
+        "lmctActiveGiveaways__pill lmctActiveGiveaways__pillValue",
+        lmctActiveGiveawaysCompactPrice(giveaway && giveaway.price),
+      );
+
+      var lmctActiveGiveawaysReward = lmctActiveGiveawaysText(
+        giveaway && giveaway.reward,
+        "",
+      );
+
+      if (lmctActiveGiveawaysReward) {
+        lmctActiveGiveawaysAppendText(
+          lmctActiveGiveawaysMeta,
+          "span",
+          "lmctActiveGiveaways__pill lmctActiveGiveaways__pillReward",
+          lmctActiveGiveawaysReward,
+        );
+      }
+
+      lmctActiveGiveawaysContent.appendChild(lmctActiveGiveawaysMeta);
+      lmctActiveGiveawaysAppendText(
+        lmctActiveGiveawaysContent,
+        "h3",
+        "lmctActiveGiveaways__cardTitle",
+        lmctActiveGiveawaysTitle,
+      );
+      lmctActiveGiveawaysContent.appendChild(
+        lmctActiveGiveawaysRenderTimer(lmctActiveGiveawaysCardData),
+      );
+
+      var lmctActiveGiveawaysChips = document.createElement("div");
+      lmctActiveGiveawaysChips.className = "lmctActiveGiveaways__chips";
+
+      var lmctActiveGiveawaysPrizes = Array.isArray(giveaway && giveaway.prizes)
+        ? giveaway.prizes.slice(0, 3)
+        : [];
+      lmctActiveGiveawaysPrizes.forEach(function (prize) {
+        var lmctActiveGiveawaysPrizeTitle = lmctActiveGiveawaysStripHtml(
+          prize && prize.title,
+        );
+
+        if (lmctActiveGiveawaysPrizeTitle) {
+          lmctActiveGiveawaysAppendText(
+            lmctActiveGiveawaysChips,
+            "span",
+            "lmctActiveGiveaways__chip",
+            lmctActiveGiveawaysPrizeTitle,
+          );
+        }
+      });
+
+      if (lmctActiveGiveawaysChips.children.length) {
+        lmctActiveGiveawaysContent.appendChild(lmctActiveGiveawaysChips);
+      }
+
+      lmctActiveGiveawaysContent.appendChild(
+        lmctActiveGiveawaysRenderCta(lmctActiveGiveawaysCardData),
+      );
+      lmctActiveGiveawaysCard.appendChild(lmctActiveGiveawaysContent);
+      lmctActiveGiveawaysCards.push(lmctActiveGiveawaysCardData);
+
+      return lmctActiveGiveawaysCard;
+    }
+
+    function lmctActiveGiveawaysRenderState(type, title, text) {
+      if (!lmctActiveGiveawaysGrid) {
+        return;
+      }
+
+      lmctActiveGiveawaysGrid.innerHTML = "";
+
+      var lmctActiveGiveawaysState = document.createElement("div");
+      lmctActiveGiveawaysState.className = "lmctActiveGiveaways__state";
+      lmctActiveGiveawaysState.setAttribute(
+        "role",
+        type === "error" ? "alert" : "status",
+      );
+
+      lmctActiveGiveawaysAppendText(
+        lmctActiveGiveawaysState,
+        "p",
+        "lmctActiveGiveaways__stateTitle",
+        title,
+      );
+      lmctActiveGiveawaysAppendText(
+        lmctActiveGiveawaysState,
+        "p",
+        "lmctActiveGiveaways__stateText",
+        text,
+      );
+      lmctActiveGiveawaysGrid.appendChild(lmctActiveGiveawaysState);
+    }
+
+    function lmctActiveGiveawaysRenderCards(giveaways) {
+      if (!lmctActiveGiveawaysGrid) {
+        return;
+      }
+
+      lmctActiveGiveawaysCards = [];
+      lmctActiveGiveawaysGrid.innerHTML = "";
+
+      giveaways.forEach(function (giveaway) {
+        lmctActiveGiveawaysGrid.appendChild(
+          lmctActiveGiveawaysCreateCard(giveaway),
+        );
+      });
+
+      lmctActiveGiveawaysStartTimers();
+    }
+
+    function lmctActiveGiveawaysUpdateTimers() {
+      lmctActiveGiveawaysCards.forEach(function (cardData) {
+        if (!cardData.timerGrid || cardData.isClosed) {
+          return;
+        }
+
+        var lmctActiveGiveawaysTime = lmctActiveGiveawaysGetTime(
+          cardData.endDate,
+        );
+
+        if (!lmctActiveGiveawaysTime || lmctActiveGiveawaysTime.closed) {
+          var lmctActiveGiveawaysTimer = cardData.timerGrid.parentElement;
+          cardData.timerGrid.remove();
+          cardData.timerGrid = null;
+          cardData.isClosed = true;
+          lmctActiveGiveawaysAppendText(
+            lmctActiveGiveawaysTimer,
+            "div",
+            "lmctActiveGiveaways__closed",
+            "CLOSED",
+          );
+          return;
+        }
+
+        var lmctActiveGiveawaysValues = cardData.timerGrid.querySelectorAll(
+          ".lmctActiveGiveaways__timeValue",
+        );
+        var lmctActiveGiveawaysNextValues = [
+          lmctActiveGiveawaysTime.days,
+          lmctActiveGiveawaysTime.hours,
+          lmctActiveGiveawaysTime.minutes,
+          lmctActiveGiveawaysTime.seconds,
+        ];
+
+        lmctActiveGiveawaysValues.forEach(function (valueElement, index) {
+          valueElement.textContent = lmctActiveGiveawaysNextValues[index];
+        });
+      });
+    }
+
+    function lmctActiveGiveawaysStartTimers() {
+      if (lmctActiveGiveawaysTimerId) {
+        window.clearInterval(lmctActiveGiveawaysTimerId);
+      }
+
+      lmctActiveGiveawaysUpdateTimers();
+      lmctActiveGiveawaysTimerId = window.setInterval(
+        lmctActiveGiveawaysUpdateTimers,
+        1000,
+      );
+    }
+
+    function lmctActiveGiveawaysLoad() {
+      if (!window.fetch) {
+        lmctActiveGiveawaysRenderState(
+          "error",
+          "Giveaways could not load",
+          "Your browser does not support live giveaway loading. Please visit LMCT+ to view current giveaways.",
+        );
+        return;
+      }
+
+      fetch(lmctActiveGiveawaysEndpoint, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error("API response was not successful");
+          }
+
+          return response.json();
+        })
+        .then(function (payload) {
+          var lmctActiveGiveawaysData =
+            payload && Array.isArray(payload.data) ? payload.data : [];
+          var lmctActiveGiveawaysActive = lmctActiveGiveawaysData.filter(
+            function (giveaway) {
+              return giveaway && giveaway.status === "active";
+            },
+          );
+
+          if (!lmctActiveGiveawaysActive.length) {
+            lmctActiveGiveawaysRenderState(
+              "empty",
+              "No active giveaways right now",
+              "Check back soon for the next LMCT+ giveaway.",
+            );
+            return;
+          }
+
+          lmctActiveGiveawaysRenderCards(lmctActiveGiveawaysActive);
+        })
+        .catch(function () {
+          lmctActiveGiveawaysRenderState(
+            "error",
+            "Giveaways could not load",
+            "Please refresh the page or visit LMCT+ to view current active giveaways.",
+          );
+        });
+    }
+
+    lmctActiveGiveawaysLoad();
+  })();
+</script>
+<!-- LMCT+ ACTIVE GIVEAWAYS END -->

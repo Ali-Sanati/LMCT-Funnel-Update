@@ -1,0 +1,727 @@
+<!-- LMCT+ CLOSED HERO START -->
+<style>
+  .lmctClosedHero {
+    --lmct-navy-950: #020814;
+    --lmct-navy-900: #061225;
+    --lmct-navy-850: #071a33;
+    --lmct-navy-800: #092342;
+    --lmct-blue-500: #009dff;
+    --lmct-blue-400: #21b6ff;
+    --lmct-blue-300: #67d4ff;
+    --lmct-white: #ffffff;
+    --lmct-soft: rgba(255, 255, 255, 0.82);
+    --lmct-muted: rgba(255, 255, 255, 0.64);
+    --lmct-line: rgba(103, 212, 255, 0.24);
+    --lmct-panel-line: rgba(255, 255, 255, 0.12);
+    --lmct-shadow: 0 26px 80px rgba(2, 8, 20, 0.2);
+    --lmct-blue-shadow: 0 18px 42px rgba(0, 157, 255, 0.28);
+    --lmct-radius-lg: 34px;
+    --lmct-radius-md: 18px;
+    --lmct-radius-sm: 12px;
+    background: #eef1f5;
+    box-sizing: border-box;
+    font-family: "Montserrat", Arial, sans-serif;
+    padding: 38px 18px;
+    width: 100%;
+  }
+
+  .lmctClosedHero * {
+    box-sizing: border-box;
+  }
+
+  .lmctClosedHero .lmctClosedHero__panel {
+    background:
+      radial-gradient(
+        circle at 76% 52%,
+        rgba(0, 157, 255, 0.36) 0,
+        rgba(0, 157, 255, 0.12) 26%,
+        rgba(0, 157, 255, 0) 49%
+      ),
+      linear-gradient(
+        132deg,
+        var(--lmct-navy-950) 0%,
+        var(--lmct-navy-900) 45%,
+        var(--lmct-navy-800) 100%
+      );
+    border: 1px solid var(--lmct-panel-line);
+    border-radius: var(--lmct-radius-lg);
+    box-shadow: var(--lmct-shadow);
+    color: var(--lmct-white);
+    margin: 0 auto;
+    max-width: 1180px;
+    overflow: hidden;
+    padding: 58px;
+    position: relative;
+  }
+
+  .lmctClosedHero .lmctClosedHero__panel::before {
+    background:
+      linear-gradient(90deg, rgba(33, 182, 255, 0.13), rgba(33, 182, 255, 0)),
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.05) 0 1px,
+        transparent 1px 76px
+      );
+    content: "";
+    inset: 0;
+    opacity: 0.48;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .lmctClosedHero .lmctClosedHero__grid {
+    align-items: center;
+    display: grid;
+    gap: 44px;
+    grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.78fr);
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmctClosedHero .lmctClosedHero__content {
+    max-width: 640px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__badge {
+    align-items: center;
+    border: 1px solid rgba(33, 182, 255, 0.86);
+    border-radius: 999px;
+    color: var(--lmct-white);
+    display: inline-flex;
+    font-size: 13px;
+    font-weight: 800;
+    gap: 9px;
+    letter-spacing: 0;
+    line-height: 1;
+    padding: 12px 18px;
+    text-transform: uppercase;
+  }
+
+  .lmctClosedHero .lmctClosedHero__badgeIcon {
+    color: var(--lmct-blue-400);
+    display: block;
+    height: 17px;
+    width: 17px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__headline {
+    color: var(--lmct-white);
+    font-size: clamp(28px, 4vw, 50px);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.06;
+    margin: 30px 0 22px;
+    max-width: 700px;
+    text-transform: uppercase;
+  }
+
+  .lmctClosedHero .lmctClosedHero__headlineAccent {
+    color: var(--lmct-blue-400);
+    display: block;
+    text-shadow: 0 0 30px rgba(0, 157, 255, 0.32);
+  }
+
+  .lmctClosedHero .lmctClosedHero__subheadline {
+    color: var(--lmct-soft);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.55;
+    margin: 0;
+    max-width: 650px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__drawNote {
+    align-items: center;
+    color: var(--lmct-soft);
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    gap: 14px;
+    letter-spacing: 0;
+    line-height: 1.55;
+    margin: 28px 0 0;
+  }
+
+  .lmctClosedHero .lmctClosedHero__drawNote::before {
+    background: var(--lmct-blue-400);
+    border-radius: 999px;
+    content: "";
+    flex: 0 0 auto;
+    height: 34px;
+    width: 3px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__drawTime {
+    color: var(--lmct-blue-300);
+    font-weight: 800;
+  }
+
+  .lmctClosedHero .lmctClosedHero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 28px 0 0;
+  }
+
+  .lmctClosedHero .lmctClosedHero__button {
+    align-items: center;
+    border-radius: var(--lmct-radius-sm);
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 900;
+    gap: 12px;
+    justify-content: center;
+    letter-spacing: 0;
+    line-height: 1.1;
+    min-height: 58px;
+    padding: 18px 24px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease,
+      background 180ms ease;
+  }
+
+  .lmctClosedHero .lmctClosedHero__buttonIcon {
+    display: block;
+    flex: 0 0 auto;
+    height: 18px;
+    width: 18px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__buttonPrimary {
+    background: linear-gradient(135deg, var(--lmct-blue-400) 0%, #0078ff 100%);
+    border: 1px solid rgba(103, 212, 255, 0.6);
+    box-shadow: var(--lmct-blue-shadow);
+    color: var(--lmct-white);
+    min-width: 292px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__buttonSecondary {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(33, 182, 255, 0.78);
+    color: var(--lmct-white);
+    min-width: 236px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__button:hover,
+  .lmctClosedHero .lmctClosedHero__button:focus {
+    transform: translateY(-2px);
+  }
+
+  .lmctClosedHero .lmctClosedHero__buttonPrimary:hover,
+  .lmctClosedHero .lmctClosedHero__buttonPrimary:focus {
+    box-shadow: 0 24px 54px rgba(0, 157, 255, 0.38);
+  }
+
+  .lmctClosedHero .lmctClosedHero__buttonSecondary:hover,
+  .lmctClosedHero .lmctClosedHero__buttonSecondary:focus {
+    background: rgba(33, 182, 255, 0.11);
+    border-color: var(--lmct-blue-300);
+    box-shadow: 0 18px 42px rgba(0, 157, 255, 0.14);
+  }
+
+  .lmctClosedHero .lmctClosedHero__button:focus-visible,
+  .lmctClosedHero .lmctClosedHero__facebookLink:focus-visible {
+    outline: 3px solid rgba(103, 212, 255, 0.7);
+    outline-offset: 4px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__facebookLink {
+    align-items: center;
+    color: var(--lmct-blue-400);
+    display: inline-flex;
+    font-size: 15px;
+    font-weight: 700;
+    gap: 10px;
+    letter-spacing: 0;
+    line-height: 1.35;
+    margin: 22px 0 0;
+    text-decoration: none;
+    transition:
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .lmctClosedHero .lmctClosedHero__facebookLink:hover,
+  .lmctClosedHero .lmctClosedHero__facebookLink:focus {
+    color: var(--lmct-blue-300);
+    transform: translateX(2px);
+  }
+
+  .lmctClosedHero .lmctClosedHero__facebookArrow {
+    display: block;
+    flex: 0 0 auto;
+    height: 15px;
+    width: 15px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__infoStrip {
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid var(--lmct-line);
+    border-radius: var(--lmct-radius-md);
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 32px 0 0;
+    max-width: 660px;
+    overflow: hidden;
+  }
+
+  .lmctClosedHero .lmctClosedHero__infoItem {
+    align-items: center;
+    color: var(--lmct-soft);
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    gap: 12px;
+    letter-spacing: 0;
+    line-height: 1.35;
+    min-height: 84px;
+    padding: 18px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__infoItem + .lmctClosedHero__infoItem {
+    border-left: 1px solid rgba(103, 212, 255, 0.17);
+  }
+
+  .lmctClosedHero .lmctClosedHero__checkIcon {
+    border: 2px solid var(--lmct-blue-400);
+    border-radius: 999px;
+    color: var(--lmct-blue-400);
+    display: block;
+    flex: 0 0 auto;
+    height: 34px;
+    padding: 7px;
+    width: 34px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__visual {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 470px;
+    position: relative;
+  }
+
+  .lmctClosedHero .lmctClosedHero__visualGlow {
+    background: radial-gradient(
+      circle,
+      rgba(0, 157, 255, 0.76) 0%,
+      rgba(0, 157, 255, 0.32) 31%,
+      rgba(0, 157, 255, 0.08) 58%,
+      rgba(0, 157, 255, 0) 72%
+    );
+    filter: blur(2px);
+    height: 420px;
+    left: 50%;
+    opacity: 0.9;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+  }
+
+  .lmctClosedHero .lmctClosedHero__phoneFrame {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    max-width: 330px;
+    position: relative;
+    transform: rotate(4deg);
+    width: 100%;
+    z-index: 1;
+  }
+
+  .lmctClosedHero .lmctClosedHero__phoneFrame::after {
+    background: rgba(0, 0, 0, 0.34);
+    border-radius: 50%;
+    bottom: -18px;
+    content: "";
+    filter: blur(18px);
+    height: 36px;
+    left: 12%;
+    position: absolute;
+    right: 2%;
+    transform: rotate(-4deg);
+  }
+
+  .lmctClosedHero .lmctClosedHero__appImage {
+    display: block;
+    filter: drop-shadow(0 30px 34px rgba(0, 0, 0, 0.42));
+    height: auto;
+    max-height: 515px;
+    max-width: 100%;
+    position: relative;
+    width: auto;
+    z-index: 1;
+  }
+  /*icons*/
+  .mdi--stopwatch-tick-outline {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2321b6ff' d='M11 8h2v6h-2zm4-7H9v2h6zm-3 19c-3.87 0-7-3.13-7-7s3.13-7 7-7s7 3.13 7 7c.7 0 1.36.13 2 .35V13c0-2.12-.74-4.07-1.97-5.61l1.42-1.42c-.45-.51-.9-.97-1.41-1.41L17.62 6c-1.55-1.26-3.5-2-5.62-2a9 9 0 0 0 0 18c.59 0 1.16-.06 1.71-.17c-.31-.58-.53-1.23-.63-1.92c-.36.05-.71.09-1.08.09m9.34-4.16l-3.59 3.59l-1.59-1.59L15 19l2.75 3l4.75-4.75z'/%3E%3C/svg%3E");
+  }
+
+  .svg-spinners--clock {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2321b6ff' d='M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9,9,0,0,1,12,21Z'/%3E%3Crect width='2' height='7' x='11' y='6' fill='%2321b6ff' rx='1'%3E%3CanimateTransform attributeName='transform' dur='9s' repeatCount='indefinite' type='rotate' values='0 12 12;360 12 12'/%3E%3C/rect%3E%3Crect width='2' height='9' x='11' y='11' fill='%2321b6ff' rx='1'%3E%3CanimateTransform attributeName='transform' dur='0.75s' repeatCount='indefinite' type='rotate' values='0 12 12;360 12 12'/%3E%3C/rect%3E%3C/svg%3E");
+  }
+  .lucide--gift {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='%2321b6ff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M12 7v14m8-10v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8m3.5-4a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5a1 1 0 0 1 0 5'/%3E%3Crect width='18' height='4' x='3' y='7' rx='1'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .logos--facebook {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%231877f2' d='M256 128C256 57.308 198.692 0 128 0S0 57.308 0 128c0 63.888 46.808 116.843 108 126.445V165H75.5v-37H108V99.8c0-32.08 19.11-49.8 48.348-49.8C170.352 50 185 52.5 185 52.5V84h-16.14C152.959 84 148 93.867 148 103.99V128h35.5l-5.675 37H148v89.445c61.192-9.602 108-62.556 108-126.445'/%3E%3Cpath fill='%23fff' d='m177.825 165l5.675-37H148v-24.01C148 93.866 152.959 84 168.86 84H185V52.5S170.352 50 156.347 50C127.11 50 108 67.72 108 99.8V128H75.5v37H108v89.445A129 129 0 0 0 128 256a129 129 0 0 0 20-1.555V165z'/%3E%3C/svg%3E");
+  }
+
+  @media (max-width: 980px) {
+    .lmctClosedHero {
+      padding: 26px 14px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__panel {
+      padding: 44px 32px 38px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__grid {
+      gap: 34px;
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .lmctClosedHero .lmctClosedHero__content {
+      margin: 0 auto;
+      max-width: 720px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__headline {
+      font-size: 48px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .lmctClosedHero .lmctClosedHero__subheadline {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .lmctClosedHero .lmctClosedHero__drawNote {
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .lmctClosedHero .lmctClosedHero__actions {
+      justify-content: center;
+    }
+
+    .lmctClosedHero .lmctClosedHero__infoStrip {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .lmctClosedHero .lmctClosedHero__visual {
+      min-height: 390px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__phoneFrame {
+      max-width: 280px;
+      transform: rotate(2deg);
+    }
+
+    .lmctClosedHero .lmctClosedHero__appImage {
+      max-height: 400px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .lmctClosedHero {
+      padding: 18px 10px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__panel {
+      border-radius: 24px;
+      padding: 34px 18px 28px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__badge {
+      font-size: 12px;
+      padding: 11px 15px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__headline {
+      font-size: 36px;
+      margin-top: 24px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__subheadline {
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .lmctClosedHero .lmctClosedHero__drawNote {
+      font-size: 14px;
+      margin-top: 22px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__actions {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    .lmctClosedHero .lmctClosedHero__button {
+      min-height: 56px;
+      min-width: 0;
+      padding: 17px 18px;
+      width: 100%;
+    }
+
+    .lmctClosedHero .lmctClosedHero__facebookLink {
+      justify-content: center;
+      width: 100%;
+    }
+
+    .lmctClosedHero .lmctClosedHero__infoStrip {
+      grid-template-columns: 1fr;
+      text-align: left;
+    }
+
+    .lmctClosedHero .lmctClosedHero__infoItem {
+      min-height: 0;
+      padding: 16px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__infoItem + .lmctClosedHero__infoItem {
+      border-left: 0;
+      border-top: 1px solid rgba(103, 212, 255, 0.17);
+    }
+
+    .lmctClosedHero .lmctClosedHero__visual {
+      min-height: 330px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__visualGlow {
+      height: 310px;
+      width: 310px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__phoneFrame {
+      max-width: 225px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__appImage {
+      max-height: 320px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .lmctClosedHero .lmctClosedHero__headline {
+      font-size: 31px;
+    }
+
+    .lmctClosedHero .lmctClosedHero__button {
+      font-size: 13px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctClosedHero .lmctClosedHero__button,
+    .lmctClosedHero .lmctClosedHero__facebookLink {
+      transition: none;
+    }
+  }
+</style>
+
+<section class="lmctClosedHero" aria-label="LMCT+ giveaway closed">
+  <div class="lmctClosedHero__panel">
+    <div class="lmctClosedHero__grid">
+      <div class="lmctClosedHero__content">
+        <div class="lmctClosedHero__badge">
+          <svg
+            class="lmctClosedHero__badgeIcon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M7 10V8a5 5 0 0 1 10 0v2"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M6 10h12a1.5 1.5 0 0 1 1.5 1.5v7A1.5 1.5 0 0 1 18 20H6a1.5 1.5 0 0 1-1.5-1.5v-7A1.5 1.5 0 0 1 6 10Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+          </svg>
+          ENTRIES CLOSED
+        </div>
+
+        <h1 class="lmctClosedHero__headline">
+          THIS GIVEAWAY IS
+          <span class="lmctClosedHero__headlineAccent">NOW CLOSED</span>
+        </h1>
+
+        <p class="lmctClosedHero__subheadline">
+          Entries for this giveaway have now closed, but there are still live
+          LMCT+ giveaways, member rewards, app perks, and fuel savings
+          available.
+        </p>
+
+        <p class="lmctClosedHero__drawNote">
+          <span
+            >All LMCT+ giveaways are drawn live on Facebook at
+            <span class="lmctClosedHero__drawTime">8:30 PM.</span></span
+          >
+        </p>
+
+        <div class="lmctClosedHero__actions">
+          <a
+            class="lmctClosedHero__button lmctClosedHero__buttonPrimary"
+            href="ACTIVE_GIVEAWAYS_URL"
+            aria-label="View active LMCT+ giveaways"
+          >
+            VIEW ACTIVE GIVEAWAYS
+            <svg
+              class="lmctClosedHero__buttonIcon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 12h13"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+              />
+              <path
+                d="m13 6 6 6-6 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+
+          <a
+            class="lmctClosedHero__button lmctClosedHero__buttonSecondary"
+            href="APP_DOWNLOAD_URL"
+            aria-label="Download the LMCT+ app"
+          >
+            DOWNLOAD THE APP
+            <svg
+              class="lmctClosedHero__buttonIcon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 4v10"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              />
+              <path
+                d="m7 10 5 5 5-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M5 19h14"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </a>
+        </div>
+
+        <a
+          class="lmctClosedHero__facebookLink"
+          href="FACEBOOK_DRAW_URL"
+          aria-label="Watch the LMCT+ draw live on Facebook"
+        >
+          <span class="logos--facebook"></span>
+          Watch the draw live on Facebook
+          <svg
+            class="lmctClosedHero__facebookArrow"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="m9 5 7 7-7 7"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+
+        <div
+          class="lmctClosedHero__infoStrip"
+          aria-label="LMCT+ giveaway and rewards information"
+        >
+          <div class="lmctClosedHero__infoItem">
+            <span class="mdi--stopwatch-tick-outline"></span>
+            <span>Active giveaways still open</span>
+          </div>
+
+          <div class="lmctClosedHero__infoItem">
+            <span class="lucide--gift"></span>
+            <span>App rewards available</span>
+          </div>
+
+          <div class="lmctClosedHero__infoItem">
+            <span class="svg-spinners--clock"></span>
+
+            <span>Draws live at 8:30 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lmctClosedHero__visual">
+        <div class="lmctClosedHero__visualGlow"></div>
+        <div class="lmctClosedHero__phoneFrame">
+          <img
+            class="lmctClosedHero__appImage"
+            src="https://images.clickfunnels.com/ab/9bb48150e24e368cbb3841f8fc9d29/Untitled-design-3-.png"
+            alt="LMCT+ App phone mockup showing member rewards"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- LMCT+ CLOSED HERO END -->

@@ -1,0 +1,660 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
+
+  .win-shell {
+    --win-gap: clamp(14px, 2vw, 18px);
+    --win-card-width: clamp(280px, 25vw, 330px);
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+  }
+
+  .win-helper {
+    display: none;
+    margin: 0 0 10px;
+    /* padding-inline: 12px; */
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #475569;
+  }
+
+  .win-body {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* padding-block: 10px 14px; */
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .win-body::before,
+  .win-body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(44px, 7vw, 88px);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* .win-body::before {
+    left: 0;
+    background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0));
+  }
+
+  .win-body::after {
+    right: 0;
+    background: linear-gradient(-90deg, #ffffff, rgba(255, 255, 255, 0));
+  } */
+
+  .win-track,
+  .win-seq {
+    display: flex;
+    align-items: stretch;
+    gap: var(--win-gap);
+  }
+
+  .win-track {
+    width: max-content;
+    /* padding: 4px 0 10px; */
+    transform: translateX(0);
+    will-change: transform;
+  }
+
+  .win-card {
+    flex: 0 0 var(--win-card-width);
+    width: var(--win-card-width);
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .win-body[data-mode="desktop"] .win-card:hover {
+    transform: translateY(-4px);
+  }
+
+  /* .win-card::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 -120%;
+    width: 58%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.12),
+      transparent
+    );
+    animation: cardShine 5.4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 2;
+  } */
+
+  .win-card:nth-child(3n + 2)::after {
+    animation-delay: 1.5s;
+  }
+
+  .win-card:nth-child(3n)::after {
+    animation-delay: 3s;
+  }
+
+  @keyframes cardShine {
+    0% {
+      left: -120%;
+    }
+    42%,
+    100% {
+      left: 145%;
+    }
+  }
+
+  .win-card.blue {
+    background: linear-gradient(
+      165deg,
+      rgb(64, 203, 245),
+      #206ff5,
+      rgb(57, 182, 245)
+    );
+  }
+
+  .win-card.green {
+    background: linear-gradient(
+      165deg,
+      rgb(0, 255, 21),
+      #00a724,
+      rgb(57, 245, 88)
+    );
+  }
+
+  .win-card.silver {
+    background: linear-gradient(165deg, #c8cdd4, #98a0aa, #787f89);
+  }
+
+  .win-card.purple {
+    background: linear-gradient(165deg, #c98aef, #9955cc, #7733aa);
+  }
+
+  .win-img {
+    position: relative;
+    flex-shrink: 0;
+    width: 100%;
+    aspect-ratio: 16 / 12;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .win-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .win-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    padding: 18px 18px 20px;
+    position: relative;
+    z-index: 1;
+    text-align: left;
+  }
+
+  .win-prize {
+    display: inline-flex;
+    /* align-self: flex-start; */
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 28px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .win-prize-icon {
+    width: 30px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .win-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+  }
+
+  .win-name {
+    margin: 0;
+    padding-top: 4px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  .win-body:focus-visible {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+    border-radius: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .win-helper {
+      display: block;
+    }
+
+    .win-body {
+      overflow: hidden;
+      /* padding: 6px 10px 14px; */
+    }
+
+    .win-body::before,
+    .win-body::after {
+      width: 34px;
+    }
+
+    .win-track {
+      padding: 4px 0 8px;
+    }
+
+    .win-track,
+    .win-seq {
+      gap: 10px;
+    }
+
+    .win-card {
+      --win-card-width: calc((100vw - 40px) / 2);
+      /* min-height: 280px; */
+      border-radius: 14px;
+    }
+
+    .win-card::after {
+      animation: none;
+    }
+
+    .win-img {
+      aspect-ratio: 16 / 12;
+    }
+
+    .win-content {
+      gap: 7px;
+      padding: 11px;
+    }
+
+    .win-prize {
+      min-height: 22px;
+      padding: 4px 8px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+
+    .win-title {
+      font-size: 18px;
+    }
+
+    .win-quote {
+      font-size: 9px;
+      line-height: 1.45;
+    }
+
+    .win-name {
+      font-size: 10px;
+    }
+
+    .win-body::before {
+      left: 0;
+      background: transparent;
+    }
+
+    .win-body::after {
+      right: 0;
+      background: transparent;
+    }
+
+    .win-prize {
+      gap: 4px;
+    }
+
+    .win-prize-icon {
+      width: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .win-helper {
+      padding-inline: 10px;
+    }
+
+    /* .win-body {
+      padding-inline: 8px;
+    } */
+
+    .win-track,
+    .win-seq {
+      gap: 8px;
+    }
+
+    .win-card {
+      /* --win-card-width: calc((100vw - 32px) / 2.5); */
+      /* min-height: 220px; */
+      border-radius: 12px;
+    }
+
+    .win-content {
+      gap: 6px;
+      padding: 10px;
+    }
+
+    .win-title {
+      font-size: 14px;
+    }
+
+    .win-quote {
+      font-size: 8.5px;
+      line-height: 1.4;
+    }
+
+    .win-prize {
+      font-size: 10px;
+      padding: 4px 7px;
+    }
+
+    .win-name {
+      font-size: 10px;
+    }
+  }
+</style>
+
+<div class="win-shell">
+  <!-- <p class="win-helper" aria-hidden="true">Real winner stories</p> -->
+  <div
+    class="win-body js-win-marquee"
+    id="winBody"
+    data-speed="74"
+    data-mode="desktop"
+    tabindex="0"
+    role="region"
+    aria-label="LMCT+ winner testimonials"
+  >
+    <div class="win-track" id="winTrack">
+      <div class="win-seq" id="winSeq"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var SPEED_DEFAULT = 74;
+    var MOBILE_SPEED_FACTOR = 0.7;
+
+    var winners = [
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "Lawrence L",
+        color: "green",
+        img: "https://images.clickfunnels.com/c7/05254a97bb41a199b6b354ed782eed/Lawrence-L-100k.jpg",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "Benjamin Green",
+        color: "green",
+        img: "https://images.clickfunnels.com/88/9c257d431b40a5ab97ddc248f6a509/Benjamin-Green-100k-.jpg",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "Penny G",
+        color: "green",
+        img: "https://images.clickfunnels.com/db/9f7a7c13214ce8a9866323d24ce963/Penny-G-100k.jpg",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "Gwenda C",
+        color: "green",
+        img: "https://images.clickfunnels.com/15/5933e240ae4bf49642a33a8b5503a2/gwenda-C-100k.jpg",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "Matt B",
+        color: "green",
+        img: "https://images.clickfunnels.com/1c/4332db76634ee6822084cab93238d5/matt-b-100k.jpg",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "Michael M",
+        color: "green",
+        img: "https://images.clickfunnels.com/2f/fa5931f97e4bbcb62fc6ebb64338a5/michael-m-100k.jpg",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "Dwayne",
+        color: "green",
+        img: "https://images.clickfunnels.com/16/550866a0c24c0b9a87a24aa7422460/Dwayne-100K.jpg",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "Alex B",
+        color: "green",
+        img: "https://images.clickfunnels.com/de/b022df5cc043319de6e444cb3705d7/Alex-B-100k.jpg",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "William",
+        color: "green",
+        img: "https://images.clickfunnels.com/3d/d70c137e9743618d509f8b4b6d21e3/William-100k.jpg",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "Shane H",
+        color: "green",
+        img: "https://images.clickfunnels.com/37/c0104923c3401ebd9c2dde8df40c4a/Shane-h-100K.jpg",
+      },
+      {
+        prize: "$100K",
+        title: "Winner",
+        name: "Caden C",
+        color: "green",
+        img: "https://images.clickfunnels.com/4b/b712d13ef14cb4a4d4de66350f7035/Caden-C-100k.jpg",
+      },
+    ];
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function buildCard(winner) {
+      return (
+        '<article class="win-card ' +
+        escapeHtml(winner.color) +
+        '" aria-label="Winner story from ' +
+        escapeHtml(winner.name) +
+        '">' +
+        '<div class="win-img">' +
+        '<img src="' +
+        escapeHtml(winner.img) +
+        '" alt="' +
+        escapeHtml(winner.name + " winner photo") +
+        '" loading="lazy" decoding="async">' +
+        "</div>" +
+        '<div class="win-content">' +
+        '<span class="win-prize">' +
+        '<img class="win-prize-icon" src="https://images.clickfunnels.com/ef/58b3e64a704b2bada4c0179afe5770/lmct_cash_band_2.png" alt="" loading="lazy" decoding="async">' +
+        escapeHtml(winner.prize) +
+        "</span>" +
+        '<h3 class="win-title">' +
+        escapeHtml(winner.title) +
+        "</h3>" +
+        '<p class="win-name">\u2014 ' +
+        escapeHtml(winner.name) +
+        "</p>" +
+        "</div>" +
+        "</article>"
+      );
+    }
+
+    function initMarquee(container) {
+      if (!container || container.dataset.winInit === "true") return;
+
+      container.dataset.winInit = "true";
+
+      var track = container.querySelector(".win-track");
+      var baseSeq = container.querySelector(".win-seq");
+      var speed = Number(container.getAttribute("data-speed")) || SPEED_DEFAULT;
+      var reducedMotion = window.matchMedia
+        ? window.matchMedia("(prefers-reduced-motion: reduce)")
+        : null;
+      var offset = 0;
+      var cycleWidth = 0;
+      var lastTs = null;
+      var raf = 0;
+      var paused = false;
+      var resizeTimer = 0;
+
+      if (!track || !baseSeq) return;
+
+      baseSeq.innerHTML = winners.map(buildCard).join("");
+
+      function gapPx() {
+        var gap = getComputedStyle(track).gap || "0";
+        return parseFloat(gap) || 0;
+      }
+
+      function cleanupClones() {
+        while (track.children.length > 1) {
+          track.removeChild(track.lastChild);
+        }
+      }
+
+      function rebuildTrack() {
+        cleanupClones();
+
+        var baseWidth = baseSeq.getBoundingClientRect().width;
+        var repeatCount = 0;
+        var copiesNeeded = 0;
+
+        if (baseWidth < 1) return false;
+
+        cycleWidth = baseWidth + gapPx();
+        copiesNeeded = Math.max(
+          2,
+          Math.ceil(container.clientWidth / cycleWidth) + 2,
+        );
+
+        for (repeatCount = 1; repeatCount < copiesNeeded; repeatCount += 1) {
+          track.appendChild(baseSeq.cloneNode(true));
+        }
+
+        return true;
+      }
+
+      function stop() {
+        if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+        lastTs = null;
+      }
+
+      function enableStaticMode() {
+        stop();
+        cleanupClones();
+        offset = 0;
+        paused = false;
+        container.dataset.mode = "static";
+        container.scrollLeft = 0;
+        track.style.transform = "translateX(0px)";
+      }
+
+      function tick(ts) {
+        if (paused) {
+          lastTs = ts;
+          raf = requestAnimationFrame(tick);
+          return;
+        }
+
+        if (lastTs == null) lastTs = ts;
+
+        var dt = (ts - lastTs) / 1000;
+        var currentSpeed =
+          window.innerWidth <= 768 ? speed * MOBILE_SPEED_FACTOR : speed;
+
+        lastTs = ts;
+        offset -= currentSpeed * dt;
+
+        while (cycleWidth > 1 && -offset >= cycleWidth) {
+          offset += cycleWidth;
+        }
+
+        track.style.transform = "translateX(" + offset + "px)";
+        raf = requestAnimationFrame(tick);
+      }
+
+      function startMarquee() {
+        if (container.clientWidth < 1) {
+          window.setTimeout(restart, 100);
+          return;
+        }
+
+        stop();
+        if (!rebuildTrack()) {
+          window.setTimeout(restart, 100);
+          return;
+        }
+        offset = 0;
+        paused = false;
+        container.dataset.mode = "desktop";
+        container.scrollLeft = 0;
+        track.style.transform = "translateX(0px)";
+        raf = requestAnimationFrame(tick);
+      }
+
+      function restart() {
+        if (reducedMotion && reducedMotion.matches) {
+          enableStaticMode();
+          return;
+        }
+
+        startMarquee();
+      }
+
+      container.addEventListener("mouseenter", function () {
+        paused = true;
+      });
+
+      container.addEventListener("mouseleave", function () {
+        paused = false;
+      });
+
+      container.addEventListener("focusin", function () {
+        paused = true;
+      });
+
+      container.addEventListener("focusout", function () {
+        paused = false;
+      });
+
+      container.addEventListener("touchstart", function () {
+        paused = true;
+      });
+
+      container.addEventListener("touchend", function () {
+        paused = false;
+      });
+
+      container.addEventListener("touchcancel", function () {
+        paused = false;
+      });
+
+      window.addEventListener("resize", function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(restart, 140);
+      });
+
+      if (reducedMotion) {
+        if (reducedMotion.addEventListener) {
+          reducedMotion.addEventListener("change", restart);
+        } else if (reducedMotion.addListener) {
+          reducedMotion.addListener(restart);
+        }
+      }
+
+      restart();
+    }
+
+    initMarquee(document.getElementById("winBody"));
+  })();
+</script>

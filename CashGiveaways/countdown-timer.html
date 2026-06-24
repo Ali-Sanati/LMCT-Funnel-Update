@@ -12,6 +12,14 @@
   }
 
   .lmctCountdown {
+    --lmct-ink: #0b1526;
+    --lmct-muted: #5f6f86;
+    --lmct-brand-1: #0476c4;
+    --lmct-brand-2: #0c9ffd;
+    --lmct-brand-3: #3fb8ff;
+    --lmct-danger: #eb5757;
+    --lmct-hot: #ff7a00;
+    --lmct-warning: #ffd166;
     width: 100%;
     font-family: "Montserrat", sans-serif;
     color: #ffffff;
@@ -20,63 +28,124 @@
 
   .lmctCountdownTop {
     position: relative;
+    isolation: isolate;
+    overflow: visible;
+    padding: clamp(15px, 2.2vw, 24px) clamp(14px, 2vw, 24px)
+      clamp(18px, 2.8vw, 28px);
     background:
-      radial-gradient(
-        circle at 50% -30%,
-        rgba(255, 255, 255, 0.16),
-        transparent 48%
-      ),
-      linear-gradient(180deg, #d50000 0%, #b20303 42%, #7d0000 100%);
-    padding: clamp(4px, 0.8vw, 8px) clamp(14px, 2vw, 24px)
-      clamp(14px, 2vw, 18px);
+      linear-gradient(90deg, rgba(235, 87, 87, 0.95), #ff7a00 42%, rgba(12, 159, 253, 0)) top / 100% 5px no-repeat,
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.075) 0 1px, transparent 1px 12px),
+      linear-gradient(135deg, #06182d 0%, #074472 47%, #0c9ffd 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow:
-      inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-      0 8px 24px rgba(48, 0, 0, 0.24);
+      inset 0 -1px 0 rgba(255, 255, 255, 0.12),
+      0 16px 34px rgba(8, 25, 54, 0.16);
+  }
+
+  .lmctCountdownTop::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: clamp(18px, 3vw, 28px);
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(5, 17, 34, 0), rgba(5, 17, 34, 0.26));
+    pointer-events: none;
+  }
+
+  .lmctCountdownHeader {
+    display: grid;
+    gap: clamp(7px, 1vw, 10px);
+    max-width: 1170px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .lmctCountdownKicker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    background: rgba(235, 87, 87, 0.2);
+    box-shadow: 0 10px 24px rgba(235, 87, 87, 0.18);
+    color: #fff7ed;
+    font-size: clamp(10px, 1.5vw, 12px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .lmctCountdownKicker::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: var(--lmct-warning);
+    box-shadow:
+      0 0 0 7px rgba(255, 209, 102, 0.14),
+      0 0 18px rgba(255, 209, 102, 0.62);
+    animation: lmctCountdownDotPulse 1.2s ease-in-out infinite;
   }
 
   .lmctCountdownTitle {
     text-align: center;
-    font-size: clamp(20px, 3vw, 31px);
-    line-height: 1;
+    font-size: clamp(23px, 4vw, 44px);
+    line-height: 0.95;
     font-weight: 900;
-    letter-spacing: 0.015em;
+    letter-spacing: 0;
     text-transform: uppercase;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+    text-shadow:
+      0 4px 14px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(12, 159, 253, 0.18);
+  }
+
+  .lmctCountdownSubline {
+    color: rgba(255, 255, 255, 0.86);
+    font-size: clamp(11px, 1.7vw, 14px);
+    font-weight: 800;
+    line-height: 1.35;
+    text-transform: uppercase;
   }
 
   .lmctCountdownProgress {
-    /* width: min(48vw, 440px); */
     max-width: 1170px;
     height: clamp(16px, 2vw, 22px);
-    margin: clamp(7px, 1vw, 10px) auto 0;
+    margin: clamp(13px, 1.7vw, 18px) auto 0;
     padding: 2px;
     overflow: hidden;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.86);
-    background: rgba(98, 0, 0, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 999px;
+    background: rgba(4, 18, 34, 0.46);
     box-shadow:
-      inset 0 0 0 1px rgba(255, 255, 255, 0.14),
-      0 3px 8px rgba(0, 0, 0, 0.22);
+      inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 5px 13px rgba(0, 0, 0, 0.24);
   }
 
   .lmctCountdownProgressFill {
     position: relative;
     height: 100%;
     width: 0%;
-    border-radius: 4px;
     overflow: hidden;
+    border-radius: inherit;
     transform-origin: left center;
     will-change: width, transform;
-    background: linear-gradient(90deg, #ff4600 0%, #ff7b00 52%, #ffb100 100%);
+    background: linear-gradient(90deg, #eb5757 0%, #ff7a00 52%, #ffd166 100%);
     transition:
       width 1.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       filter 0.35s ease,
       box-shadow 0.35s ease;
     animation: lmctCountdownFillPulse 2s ease-in-out infinite;
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.34),
-      0 0 14px rgba(255, 143, 0, 0.28),
-      0 0 30px rgba(255, 98, 0, 0.18);
+      inset 0 1px 0 rgba(255, 255, 255, 0.42),
+      0 0 18px rgba(255, 122, 0, 0.34),
+      0 0 34px rgba(235, 87, 87, 0.22);
   }
 
   .lmctCountdownProgressFill.is-live {
@@ -96,9 +165,9 @@
     background: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0) 0%,
-      rgba(255, 245, 214, 0.1) 40%,
-      rgba(255, 245, 214, 0.2) 50%,
-      rgba(255, 245, 214, 0.1) 60%,
+      rgba(255, 255, 255, 0.1) 40%,
+      rgba(255, 255, 255, 0.28) 50%,
+      rgba(255, 255, 255, 0.1) 60%,
       rgba(255, 255, 255, 0) 100%
     );
     animation: lmctCountdownBarShimmer 2s ease-in-out 1s infinite;
@@ -108,13 +177,13 @@
   .lmctCountdownProgressStripes {
     position: absolute;
     inset: 0;
+    border-radius: inherit;
     background-image: repeating-linear-gradient(
       -45deg,
       transparent 0 8px,
       rgba(0, 0, 0, 0.12) 8px 16px
     );
     background-size: 22.6px 100%;
-    border-radius: inherit;
     animation: lmctCountdownStripeMove 0.8s linear infinite;
     pointer-events: none;
   }
@@ -125,22 +194,22 @@
     right: 0;
     width: clamp(4px, 0.8vw, 6px);
     height: 100%;
-    background: rgba(255, 245, 214, 0.42);
+    border-radius: 0 999px 999px 0;
+    background: rgba(255, 255, 255, 0.7);
     box-shadow:
-      0 0 10px rgba(255, 245, 214, 0.35),
-      0 0 18px rgba(255, 98, 0, 0.42);
-    border-radius: 0 4px 4px 0;
+      0 0 12px rgba(255, 255, 255, 0.55),
+      0 0 20px rgba(255, 122, 0, 0.58);
     animation: lmctCountdownBarEdgePulse 1.2s ease-in-out infinite;
     pointer-events: none;
   }
 
   .lmctCountdownProgressFill.is-ending {
-    filter: saturate(1.12) brightness(1.04);
+    filter: saturate(1.14) brightness(1.05);
     animation-duration: 1.25s;
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.38),
-      0 0 18px rgba(255, 143, 0, 0.34),
-      0 0 32px rgba(255, 98, 0, 0.24);
+      inset 0 1px 0 rgba(255, 255, 255, 0.42),
+      0 0 20px rgba(235, 87, 87, 0.44),
+      0 0 36px rgba(255, 122, 0, 0.28);
   }
 
   .lmctCountdownProgressFill.is-ending::before {
@@ -155,12 +224,24 @@
     animation-duration: 0.78s;
   }
 
+  @keyframes lmctCountdownDotPulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.22);
+      opacity: 0.72;
+    }
+  }
+
   @keyframes lmctCountdownFillPulse {
     0% {
       transform: scaleX(1);
     }
     50% {
-      transform: scaleX(1.018);
+      transform: scaleX(1.012);
     }
     100% {
       transform: scaleX(1);
@@ -196,65 +277,48 @@
   }
 
   .lmctCountdownClockWrap {
-    position: absolute;
-    left: 50%;
-    bottom: -100%;
-    transform: translate(-50%, -50%);
-    width: min(calc(100% - 28px), 260px);
-    z-index: 2;
+    position: relative;
+    z-index: 1;
+    width: min(calc(100% - 28px), 430px);
+    margin: clamp(18px, 2.2vw, 24px) auto 0;
   }
-
-  .lmctCountdownClockWrap::before,
-  .lmctCountdownClockWrap::after {
-    content: "";
-    position: absolute;
-    top: 11px;
-    width: 46px;
-    height: 30px;
-    background: linear-gradient(180deg, #ffd84b 0%, #ffbf17 100%);
-    box-shadow: 0 6px 12px rgba(93, 54, 0, 0.25);
-    z-index: -1;
-  }
-
-  /* .lmctCountdownClockWrap::before {
-    left: -24px;
-    clip-path: polygon(0 0, 100% 0, 78% 100%, 0 100%);
-  }
-
-  .lmctCountdownClockWrap::after {
-    right: -24px;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 22% 100%);
-  } */
 
   .lmctCountdownClock {
     display: flex;
-    justify-content: center;
     align-items: flex-start;
-    gap: clamp(6px, 1vw, 10px);
-    padding: 5px 14px 7px;
-    border-radius: 0 0 18px 18px;
-    background: linear-gradient(180deg, #861212 0%, #970000 44%, #780000 100%);
-    /* border: 1px solid rgba(103, 0, 0, 0.84); */
+    justify-content: center;
+    gap: clamp(7px, 1vw, 12px);
+    padding: clamp(10px, 1.5vw, 14px) clamp(12px, 2vw, 20px);
+    border: 1px solid rgba(235, 87, 87, 0.24);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.96);
+    color: var(--lmct-ink);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 10px 18px rgba(62, 0, 0, 0.26);
+      0 18px 36px rgba(8, 25, 54, 0.22),
+      0 0 0 6px rgba(255, 255, 255, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
   }
 
   .lmctCountdownUnit {
-    min-width: clamp(48px, 8vw, 58px);
+    min-width: clamp(54px, 8vw, 82px);
     text-align: center;
   }
 
   .lmctCountdownValue {
     display: block;
-    font-size: clamp(22px, 4vw, 36px);
-    line-height: 0.95;
+    color: var(--lmct-ink);
+    font-size: clamp(30px, 5vw, 48px);
+    line-height: 0.92;
     font-weight: 900;
-    letter-spacing: 0.02em;
+    letter-spacing: 0;
     font-variant-numeric: tabular-nums;
     transform-origin: 50% 15%;
     backface-visibility: hidden;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  .lmctCountdownUnit:last-child .lmctCountdownValue {
+    color: var(--lmct-danger);
+    text-shadow: 0 0 18px rgba(235, 87, 87, 0.18);
   }
 
   .lmctDigitFlip {
@@ -277,48 +341,64 @@
 
   .lmctCountdownLabel {
     display: block;
-    margin-top: 1px;
-    font-size: clamp(10px, 1.4vw, 14px);
+    margin-top: 4px;
+    color: var(--lmct-muted);
+    font-size: clamp(10px, 1.4vw, 13px);
     line-height: 1;
-    font-weight: 700;
-    text-transform: lowercase;
-    letter-spacing: 0.02em;
-    color: rgba(255, 255, 255, 0.94);
+    font-weight: 800;
+    text-transform: uppercase;
   }
 
   .lmctCountdownDivider {
     display: block;
-    padding-top: clamp(4px, 0.7vw, 6px);
-    font-size: clamp(20px, 3.2vw, 32px);
+    padding-top: clamp(4px, 0.7vw, 7px);
+    color: var(--lmct-brand-2);
+    font-size: clamp(24px, 3.4vw, 38px);
     line-height: 1;
     font-weight: 900;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.24);
   }
 
   .lmctCountdownCaution {
-    height: clamp(22px, 3.7vw, 38px);
+    position: relative;
+    overflow: hidden;
+    height: clamp(14px, 2vw, 20px);
     background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.15), transparent 28%),
-      repeating-linear-gradient(
-        -72deg,
-        #000000 0 17px,
-        #000000 17px 31px,
-        #ffd760 31px 52px
-      );
+      repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.16) 0 10px, rgba(255, 255, 255, 0) 10px 21px),
+      linear-gradient(90deg, #eb5757 0%, #ff7a00 50%, #0476c4 100%);
     box-shadow:
-      inset 0 2px 0 rgba(255, 255, 255, 0.1),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.22);
+      inset 0 2px 0 rgba(255, 255, 255, 0.14),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.18);
   }
 
-  .lmctCountdown.lmctUrgent .lmctCountdownTitle {
-    animation: lmctUrgentFlash 0.88s ease-in-out infinite;
+  .lmctCountdownCaution::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+    transform: translateX(-100%);
+    animation: lmctCountdownRailSweep 2.6s ease-in-out infinite;
   }
 
+  @keyframes lmctCountdownRailSweep {
+    0% {
+      transform: translateX(-100%);
+    }
+    60%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .lmctCountdown.lmctUrgent .lmctCountdownTop {
+    background:
+      linear-gradient(90deg, #eb5757, #ff7a00 45%, rgba(12, 159, 253, 0)) top / 100% 5px no-repeat,
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.075) 0 1px, transparent 1px 12px),
+      linear-gradient(135deg, #160b12 0%, #8b1725 54%, #ff7a00 100%);
+  }
+
+  .lmctCountdown.lmctUrgent .lmctCountdownKicker,
   .lmctCountdown.lmctUrgent .lmctCountdownClock {
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      0 10px 18px rgba(62, 0, 0, 0.26),
-      0 0 22px rgba(255, 103, 36, 0.32);
+    animation: lmctUrgentFlash 0.88s ease-in-out infinite;
   }
 
   .lmctCountdown.lmctUrgent .lmctCountdownProgressFill {
@@ -340,45 +420,82 @@
   @keyframes lmctUrgentFlash {
     0%,
     100% {
-      opacity: 1;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+      filter: brightness(1);
     }
     50% {
-      opacity: 0.82;
-      text-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.28),
-        0 0 14px rgba(255, 193, 120, 0.4);
+      filter: brightness(1.08) saturate(1.12);
     }
   }
 
   @media (max-width: 770px) {
     .lmctCountdownTop {
-      padding-left: 12px;
       padding-right: 12px;
+      padding-left: 12px;
+    }
+
+    .lmctCountdownKicker {
+      padding: 7px 12px;
+      letter-spacing: 0.08em;
     }
 
     .lmctCountdownProgress {
-      width: min(70vw, 360px);
+      width: 100%;
     }
 
     .lmctCountdownClockWrap {
-      width: min(calc(100% - 22px), 228px);
+      width: min(calc(100% - 22px), 380px);
     }
 
-    .lmctCountdownClockWrap::before,
-    .lmctCountdownClockWrap::after {
-      width: 34px;
-      height: 24px;
-      bottom: 10px;
+    .lmctCountdownClock {
+      border-radius: 16px;
     }
 
-    /* .lmctCountdownClockWrap::before {
-      left: -16px;
+    .lmctCountdownUnit {
+      min-width: clamp(46px, 18vw, 68px);
+    }
+  }
+
+  @media (max-width: 430px) {
+    .lmctCountdownTop {
+      padding-bottom: 18px;
     }
 
-    .lmctCountdownClockWrap::after {
-      right: -16px;
-    } */
+    .lmctCountdownSubline {
+      width: min(100%, 28ch);
+      margin: 0 auto;
+      font-size: 10px;
+    }
+
+    .lmctCountdownClock {
+      gap: 5px;
+      padding: 10px;
+    }
+
+    .lmctCountdownUnit {
+      min-width: 44px;
+    }
+
+    .lmctCountdownValue {
+      font-size: clamp(27px, 10vw, 34px);
+    }
+
+    .lmctCountdownLabel {
+      font-size: 9px;
+    }
+
+    .lmctCountdownDivider {
+      font-size: 24px;
+      padding-top: 5px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctCountdown *,
+    .lmctCountdown *::before,
+    .lmctCountdown *::after {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 </style>
 
@@ -389,9 +506,16 @@
   data-initial="13:52:39"
   data-duration-hours="24"
   data-progress="89"
+  role="timer"
+  aria-label="Offer countdown"
 >
   <div class="lmctCountdownTop">
-    <div class="lmctCountdownTitle">LESS THAN 24 HOURS!</div>
+    <div class="lmctCountdownHeader">
+      <div class="lmctCountdownKicker">Final entry window</div>
+      <div class="lmctCountdownTitle">Less than 24 hours!</div>
+      <div class="lmctCountdownSubline">Secure your entries before the draw closes.</div>
+    </div>
+
     <div class="lmctCountdownProgress" aria-hidden="true">
       <div class="lmctCountdownProgressFill">
         <div class="lmctCountdownProgressStripes"></div>
@@ -436,9 +560,7 @@
 
 <script>
   var LMCT_TARGET_DATE =
-    typeof window.LMCT_TARGET_DATE === "string"
-      ? window.LMCT_TARGET_DATE
-      : "2026-04-15 00:00:00";
+    typeof window.LMCT_TARGET_DATE === "string" ? window.LMCT_TARGET_DATE : "";
   var LMCT_TIMEZONE =
     typeof window.LMCT_TIMEZONE === "string" ? window.LMCT_TIMEZONE : "AEST";
 
@@ -527,10 +649,10 @@
     var ruleTargetMs = parseTimezoneTarget(LMCT_TARGET_DATE, LMCT_TIMEZONE);
     var initialMs = parseInitialTime(root.dataset.initial);
     var configuredProgress = parseFloat(root.dataset.progress);
-    var targetMs = Number.isFinite(ruleTargetMs)
-      ? ruleTargetMs
-      : Number.isFinite(inlineTargetMs)
-        ? inlineTargetMs
+    var targetMs = Number.isFinite(inlineTargetMs)
+      ? inlineTargetMs
+      : Number.isFinite(ruleTargetMs)
+        ? ruleTargetMs
         : Date.now() + (initialMs !== null ? initialMs : fallbackDurationMs);
     var initialRemainingMs = Math.max(1000, targetMs - Date.now());
     var initialProgress = Number.isFinite(configuredProgress)
@@ -600,6 +722,16 @@
         flip(secondsEl);
         previousSeconds = secondsString;
       }
+
+      root.setAttribute(
+        "aria-label",
+        hoursString +
+          " hours, " +
+          minutesString +
+          " minutes, and " +
+          secondsString +
+          " seconds remaining"
+      );
 
       renderProgress(remainingMs, !hasAnimatedIn);
 

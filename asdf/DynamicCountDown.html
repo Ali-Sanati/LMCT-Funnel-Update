@@ -1,0 +1,355 @@
+<!--
+╔══════════════════════════════════════════════════════════════════╗
+║  LMCT+ COUNTDOWN BANNER                                          ║
+║                                                                  ║
+║  TO EDIT:                                                        ║
+║  1. Banner text  → Change "HURRY!" and "GIVEAWAY DAY IN:" below  ║
+║  2. Target date  → Edit LMCT_FUNNEL_TARGET_DATE in the script    ║
+║  3. Timezone     → Set LMCT_TIMEZONE to "AEST" or "AEDT"         ║
+╚══════════════════════════════════════════════════════════════════╝
+-->
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  .lmctBannerRoot,
+  .lmctBannerRoot * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .lmctBannerRoot {
+    width: 100%;
+    background: #ff0000 !important;
+    font-family: "Montserrat", sans-serif;
+    overflow: hidden;
+    position: relative;
+    animation: lmctBgPulse 3s ease-in-out infinite;
+  }
+  .lmctBannerInner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px clamp(10px, 5vw, 60px);
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: nowrap;
+    gap: clamp(10px, 4vw, 48px);
+  }
+  @keyframes lmctBgPulse {
+    0%,
+    100% {
+      background: transparent;
+    }
+    50% {
+      background: rgba(150, 0, 0, 0.12);
+    }
+  }
+  .lmctBannerRoot::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 40%,
+      rgba(255, 255, 255, 0.09) 50%,
+      rgba(255, 255, 255, 0.05) 60%,
+      transparent 100%
+    );
+    animation: lmctShimmer 4.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes lmctShimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 200%;
+    }
+  }
+  .lmctLogoWrap {
+    flex: 0 0 auto;
+    width: clamp(28px, 6vw, 64px);
+    display: flex;
+    align-items: center;
+    animation: lmctLogoGlow 2.5s ease-in-out infinite;
+  }
+  .lmctLogoWrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.18));
+  }
+  @keyframes lmctLogoGlow {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.12));
+    }
+    50% {
+      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+    }
+  }
+  .lmctTextBlock {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .lmctTextLine1,
+  .lmctTextLine2 {
+    font-weight: 800;
+    font-size: clamp(8px, 2.4vw, 20px);
+    color: #fff;
+    letter-spacing: 0.04em;
+    line-height: 1.25;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+  @media (max-width: 520px) {
+    .lmctTextLine1,
+    .lmctTextLine2 {
+      font-size: clamp(11px, 3.6vw, 18px);
+    }
+  }
+  .lmctCountdownWrap {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 1.4vw, 16px);
+    flex: 0 0 auto;
+  }
+  .lmctDigitGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .lmctDigitValue {
+    font-weight: 900;
+    font-size: clamp(20px, 5.8vw, 48px);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  }
+  .lmctDigitLabel {
+    font-weight: 700;
+    font-size: clamp(5px, 1.1vw, 9px);
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .lmctSeparator {
+    font-weight: 900;
+    font-size: clamp(14px, 4.2vw, 36px);
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1;
+    margin-top: clamp(-3px, -0.8vw, -8px);
+    animation: lmctColonBlink 1s ease-in-out infinite;
+  }
+  @keyframes lmctColonBlink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+  .lmctDigitFlip {
+    animation: lmctFlipIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes lmctFlipIn {
+    0% {
+      transform: translateY(-6px) scale(1.06);
+      opacity: 0.35;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+  .lmctBannerRoot.lmctUrgent .lmctDigitValue {
+    animation: lmctUrgentPulse 0.8s ease-in-out infinite;
+  }
+  @keyframes lmctUrgentPulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.04);
+    }
+  }
+</style>
+<div class="lmctBannerRoot" id="lmctBannerRoot">
+  <div class="lmctBannerInner">
+    <div class="lmctLogoWrap">
+      <img
+        src="https://images.clickfunnels.com/f3/d203e346f34f56bbdd34d64d37f2cc/White-plus-1-.png"
+        alt="LMCT+"
+      />
+    </div>
+    <!-- ✏️ EDIT BANNER TEXT HERE ✏️ -->
+    <div class="lmctTextBlock">
+      <div class="lmctTextLine1" id="lmctTextLine1">HURRY!</div>
+      <div class="lmctTextLine2" id="lmctTextLine2">GIVEAWAY ENDS IN:</div>
+    </div>
+    <div class="lmctCountdownWrap">
+      <div class="lmctDigitGroup">
+        <div class="lmctDigitValue" id="lmctHours">00</div>
+        <div class="lmctDigitLabel">Hours</div>
+      </div>
+      <div class="lmctSeparator">:</div>
+      <div class="lmctDigitGroup">
+        <div class="lmctDigitValue" id="lmctMins">00</div>
+        <div class="lmctDigitLabel">Mins</div>
+      </div>
+      <div class="lmctSeparator">:</div>
+      <div class="lmctDigitGroup">
+        <div class="lmctDigitValue" id="lmctSecs">00</div>
+        <div class="lmctDigitLabel">Secs</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Default banner used when no scheduled stage is active.
+  var LMCT_DEFAULT_TEXT_LINE_1 = "HURRY!";
+  var LMCT_DEFAULT_TEXT_LINE_2 = "GIVEAWAY ENDS IN:";
+  var LMCT_FUNNEL_TARGET_DATE = "2026-06-18 00:00:00";
+  var LMCT_TIMEZONE = "AEST";
+
+  // Each stage is active from startDate until endDate. targetDate controls the countdown.
+  var LMCT_SCHEDULED_STAGES = [
+    //From startDate until endDate, show ENDS TOMORROW: and count down to June 10, 2026 at 12:00 AM.
+    {
+      startDate: "2026-06-09 00:00:00",
+      endDate: "2026-06-10 00:00:00",
+      targetDate: "2026-06-10 00:00:00",
+      line1: "10X MULTIPLIER",
+      line2: "ENDS TOMORROW:",
+    },
+    {
+      startDate: "2026-06-10 00:00:00",
+      endDate: "2026-06-11 00:00:00",
+      targetDate: "2026-06-11 00:00:00",
+      line1: "10X MULTIPLIER",
+      line2: "ENDS TONIGHT:",
+    },
+  ];
+
+  (function () {
+    var tz = { AEST: 10, AEDT: 11 };
+    function parseLmctDate(value) {
+      var p = String(value || "").match(
+        /(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})/,
+      );
+      return p
+        ? Date.UTC(
+            +p[1],
+            p[2] - 1,
+            +p[3],
+            p[4] - (tz[LMCT_TIMEZONE] || 10),
+            +p[5],
+            +p[6],
+          )
+        : null;
+    }
+
+    var defaultTarget = parseLmctDate(LMCT_FUNNEL_TARGET_DATE) || Date.now();
+    var eL1 = document.getElementById("lmctTextLine1"),
+      eL2 = document.getElementById("lmctTextLine2"),
+      eH = document.getElementById("lmctHours"),
+      eM = document.getElementById("lmctMins"),
+      eS = document.getElementById("lmctSecs"),
+      eR = document.getElementById("lmctBannerRoot");
+    var pH = "",
+      pM = "",
+      pS = "",
+      pL1 = "",
+      pL2 = "";
+    function pad(n) {
+      return n < 10 ? "0" + n : "" + n;
+    }
+    function flip(el) {
+      el.classList.remove("lmctDigitFlip");
+      void el.offsetWidth;
+      el.classList.add("lmctDigitFlip");
+    }
+    function getActiveStage(now) {
+      for (var i = 0; i < LMCT_SCHEDULED_STAGES.length; i += 1) {
+        var stage = LMCT_SCHEDULED_STAGES[i];
+        var start = parseLmctDate(stage.startDate);
+        var end = parseLmctDate(stage.endDate);
+        if (start !== null && end !== null && now >= start && now < end) {
+          return stage;
+        }
+      }
+      return null;
+    }
+    function setText(el, value) {
+      if (!el || el.textContent === value) {
+        return;
+      }
+      el.textContent = value;
+      el.style.display = value ? "" : "none";
+    }
+    function tick() {
+      var now = Date.now();
+      var stage = getActiveStage(now);
+      var line1 =
+        stage && stage.line1 != null ? stage.line1 : LMCT_DEFAULT_TEXT_LINE_1;
+      var line2 =
+        stage && stage.line2 != null ? stage.line2 : LMCT_DEFAULT_TEXT_LINE_2;
+      var target = stage
+        ? parseLmctDate(stage.targetDate) || defaultTarget
+        : defaultTarget;
+
+      if (line1 !== pL1) {
+        setText(eL1, line1);
+        pL1 = line1;
+      }
+      if (line2 !== pL2) {
+        setText(eL2, line2);
+        pL2 = line2;
+      }
+
+      var d = Math.max(0, Math.floor((target - now) / 1000));
+      var h = Math.floor(d / 3600);
+      d %= 3600;
+      var m = Math.floor(d / 60);
+      var s = d % 60;
+      var hs = pad(h),
+        ms = pad(m),
+        ss = pad(s);
+      if (hs !== pH) {
+        eH.textContent = hs;
+        flip(eH);
+        pH = hs;
+      }
+      if (ms !== pM) {
+        eM.textContent = ms;
+        flip(eM);
+        pM = ms;
+      }
+      if (ss !== pS) {
+        eS.textContent = ss;
+        flip(eS);
+        pS = ss;
+      }
+      if (h === 0 && (m > 0 || s > 0)) {
+        eR.classList.add("lmctUrgent");
+      } else {
+        eR.classList.remove("lmctUrgent");
+      }
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
