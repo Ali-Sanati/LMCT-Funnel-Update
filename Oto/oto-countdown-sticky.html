@@ -4,6 +4,7 @@
 <style>
   .lmct_oto_sticky_light {
     --lmct-progress: 0%;
+    --lmct-top-correction: 0px;
     --lmct-blue: #088fd3;
     --lmct-blue-bright: #25b7ff;
     --lmct-red: #ef2347;
@@ -14,12 +15,16 @@
     --lmct-soft-blue: rgba(8, 143, 211, 0.1);
     --lmct-soft-orange: rgba(255, 138, 0, 0.13);
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: fixed !important;
+    top: calc(0px - var(--lmct-top-correction)) !important;
+    left: 50% !important;
+    right: auto !important;
     z-index: 2147483000;
-    width: 100%;
+    width: 100vw !important;
+    max-width: none !important;
+    min-width: 0;
+    margin: 0 0 0 -50vw !important;
+    padding: 0 !important;
     font-family: "Montserrat", Arial, sans-serif;
     color: var(--lmct-ink);
     box-sizing: border-box;
@@ -33,17 +38,27 @@
     box-sizing: border-box;
   }
 
+  .lmct_oto_sticky_light :where(div, span) {
+    margin: 0;
+  }
+
   .lmct_oto_sticky_light_bar {
     position: relative;
     overflow: hidden;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(254px, auto);
-    align-items: center;
-    gap: 22px;
+    display: block;
+    width: 100% !important;
+    max-width: none !important;
     min-height: 68px;
-    padding: 7px 42px 8px;
+    margin: 0 !important;
+    padding: 7px 16px 8px !important;
     background:
-      linear-gradient(90deg, rgba(8, 143, 211, 0.12), rgba(255, 255, 255, 0.96) 31%, rgba(255, 255, 255, 0.96) 67%, rgba(255, 138, 0, 0.13)),
+      linear-gradient(
+        90deg,
+        rgba(8, 143, 211, 0.12),
+        rgba(255, 255, 255, 0.96) 31%,
+        rgba(255, 255, 255, 0.96) 67%,
+        rgba(255, 138, 0, 0.13)
+      ),
       #ffffff;
     border-bottom: 1px solid var(--lmct-line);
     box-shadow:
@@ -60,7 +75,27 @@
     right: 0;
     height: 3px;
     pointer-events: none;
-    background: linear-gradient(90deg, var(--lmct-blue), var(--lmct-blue-bright), var(--lmct-orange));
+    background: linear-gradient(
+      90deg,
+      var(--lmct-blue),
+      var(--lmct-blue-bright),
+      var(--lmct-orange)
+    );
+  }
+
+  .lmct_oto_sticky_light_inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+    gap: 22px;
+    width: 100%;
+    max-width: 1170px;
+    min-height: 66px;
+    margin: 0 auto !important;
+    padding: 0 !important;
   }
 
   .lmct_oto_sticky_light_content {
@@ -69,7 +104,9 @@
     min-width: 0;
     display: flex;
     align-items: center;
+    flex: 1 1 auto;
     gap: 13px;
+    margin: 0 !important;
   }
 
   .lmct_oto_sticky_light_badge {
@@ -137,17 +174,20 @@
   .lmct_oto_sticky_light_timer_stack {
     position: relative;
     z-index: 2;
-    display: grid;
+    display: flex;
+    flex: 0 0 min(328px, 100%);
+    flex-direction: column;
     gap: 6px;
     width: 100%;
     min-width: 254px;
     max-width: 328px;
+    margin: 0 !important;
   }
 
   .lmct_oto_sticky_light_timer {
-    display: grid;
-    grid-template-columns: auto 1fr;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 11px;
     min-height: 48px;
     padding: 7px 8px;
@@ -187,10 +227,12 @@
 
   .lmct_oto_sticky_light_digit {
     position: relative;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 32px;
     height: 38px;
+    min-width: 25px;
     overflow: hidden;
     border-radius: 6px;
     background:
@@ -218,7 +260,7 @@
     font-family: "DS-Digital", "Share Tech Mono", monospace;
     font-size: 51px;
     font-weight: 700;
-    line-height: 1;
+    line-height: 0;
     color: var(--lmct-blue-bright);
     font-variant-numeric: tabular-nums;
     text-shadow:
@@ -231,7 +273,10 @@
   }
 
   .lmct_oto_sticky_light_sep {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 6px;
     padding: 0 1px;
   }
@@ -248,7 +293,7 @@
   .lmct_oto_sticky_light_progress {
     position: relative;
     overflow: hidden;
-    height: 5px;
+    height: 10px;
     border-radius: 999px;
     background: rgba(6, 17, 31, 0.08);
     border: 1px solid rgba(8, 143, 211, 0.14);
@@ -260,7 +305,12 @@
     width: var(--lmct-progress);
     max-width: calc(100% - 2px);
     border-radius: inherit;
-    background: linear-gradient(90deg, var(--lmct-blue), var(--lmct-blue-bright), var(--lmct-orange));
+    background: linear-gradient(
+      90deg,
+      var(--lmct-blue),
+      var(--lmct-blue-bright),
+      var(--lmct-orange)
+    );
     box-shadow: 0 0 12px rgba(8, 143, 211, 0.38);
     transition: width 0.78s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -308,7 +358,8 @@
   }
 
   @keyframes lmctLightPulse {
-    0%, 100% {
+    0%,
+    100% {
       transform: scale(1);
       opacity: 1;
     }
@@ -332,7 +383,8 @@
   }
 
   @keyframes lmctLightSepPulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
 
@@ -342,7 +394,8 @@
   }
 
   @keyframes lmctLightUrgentPulse {
-    0%, 100% {
+    0%,
+    100% {
       transform: scale(1);
     }
 
@@ -353,8 +406,8 @@
 
   @media (max-width: 1100px) {
     .lmct_oto_sticky_light_bar {
-      padding-right: 22px;
-      padding-left: 22px;
+      padding-right: 14px !important;
+      padding-left: 14px !important;
     }
 
     .lmct_oto_sticky_light_title {
@@ -363,10 +416,13 @@
   }
 
   @media (max-width: 900px) {
-    .lmct_oto_sticky_light_bar {
+    .lmct_oto_sticky_light_inner {
       gap: 15px;
       min-height: 70px;
-      padding: 9px 16px 10px;
+    }
+
+    .lmct_oto_sticky_light_bar {
+      padding: 9px 16px 10px !important;
     }
 
     .lmct_oto_sticky_light_title {
@@ -398,18 +454,18 @@
   }
 
   @media (max-width: 780px) {
-    .lmct_oto_sticky_light_bar {
-      grid-template-columns: 1fr;
-      gap: 8px;
+    .lmct_oto_sticky_light_inner {
       min-height: 104px;
-      padding: 10px 12px 11px;
+    }
+
+    .lmct_oto_sticky_light_bar {
+      padding: 10px 12px 11px !important;
       text-align: left;
     }
 
     .lmct_oto_sticky_light_content {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      justify-content: start;
+      flex-direction: column;
+      align-items: flex-start;
       gap: 9px;
       width: 100%;
     }
@@ -431,7 +487,6 @@
 
     .lmct_oto_sticky_light_timer_stack {
       width: 100%;
-      max-width: 340px;
       min-width: 0;
     }
 
@@ -458,11 +513,11 @@
     }
   }
 
-  @media (max-width: 420px) {
+  @media (max-width: 580px) {
     .lmct_oto_sticky_light_bar {
       min-height: 108px;
-      padding-right: 10px;
-      padding-left: 10px;
+      padding-right: 10px !important;
+      padding-left: 10px !important;
     }
 
     .lmct_oto_sticky_light_content {
@@ -475,12 +530,14 @@
       font-size: 9px;
     }
 
+    .lmct_oto_sticky_light_timer_stack {
+      max-width: 250px;
+    }
     .lmct_oto_sticky_light_title {
       font-size: 15px;
     }
 
     .lmct_oto_sticky_light_timer {
-      grid-template-columns: auto 1fr;
       gap: 6px;
     }
 
@@ -499,30 +556,18 @@
     }
   }
 
-  @media (max-width: 340px) {
-    .lmct_oto_sticky_light_badge {
-      min-width: 27px;
-      width: 27px;
-      padding: 0;
-      overflow: hidden;
-      color: transparent;
+  @media (max-width: 415px) {
+    .lmct_oto_sticky_light_inner {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
     }
-
-    .lmct_oto_sticky_light_badge::before {
-      flex: 0 0 auto;
-      margin: 0 auto;
+    .lmct_oto_sticky_light_content {
+      align-items: center;
+      text-align: center;
     }
-
     .lmct_oto_sticky_light_title {
       font-size: 14px;
-    }
-
-    .lmct_oto_sticky_light_label {
-      display: none;
-    }
-
-    .lmct_oto_sticky_light_digits {
-      justify-content: center;
     }
   }
 
@@ -547,63 +592,65 @@
   data-push-page="true"
 >
   <div class="lmct_oto_sticky_light_bar">
-    <div class="lmct_oto_sticky_light_content">
-      <span class="lmct_oto_sticky_light_badge" id="lmctOtoStickyStatus">
-        One time offer
-      </span>
-
-      <div class="lmct_oto_sticky_light_text">
-        <h3 class="lmct_oto_sticky_light_title">
-          Last chance &mdash; <strong>double your entries</strong>
-        </h3>
-        <p class="lmct_oto_sticky_light_sub" id="lmctOtoStickySub">
-          Add the 2X boost before final checkout. One-time payment only.
-        </p>
-      </div>
-    </div>
-
-    <div class="lmct_oto_sticky_light_timer_stack">
-      <div
-        class="lmct_oto_sticky_light_timer"
-        role="timer"
-        aria-label="One-time offer countdown"
-      >
-        <span class="lmct_oto_sticky_light_label" id="lmctOtoStickyLabel">
-          Offer closes in
+    <div class="lmct_oto_sticky_light_inner">
+      <div class="lmct_oto_sticky_light_content">
+        <span class="lmct_oto_sticky_light_badge" id="lmctOtoStickyStatus">
+          One time offer
         </span>
 
-        <div class="lmct_oto_sticky_light_digits" aria-hidden="true">
-          <div class="lmct_oto_sticky_light_digit">
-            <span id="lmctLightM1">0</span>
-          </div>
-          <div class="lmct_oto_sticky_light_digit">
-            <span id="lmctLightM2">1</span>
-          </div>
-
-          <div class="lmct_oto_sticky_light_sep" aria-hidden="true">
-            <span></span>
-            <span></span>
-          </div>
-
-          <div class="lmct_oto_sticky_light_digit">
-            <span id="lmctLightS1">0</span>
-          </div>
-          <div class="lmct_oto_sticky_light_digit">
-            <span id="lmctLightS2">0</span>
-          </div>
+        <div class="lmct_oto_sticky_light_text">
+          <h3 class="lmct_oto_sticky_light_title">
+            Last chance &mdash; <strong>double your entries</strong>
+          </h3>
+          <p class="lmct_oto_sticky_light_sub" id="lmctOtoStickySub">
+            Add the 2X boost before final checkout. One-time payment only.
+          </p>
         </div>
       </div>
 
-      <div class="lmct_oto_sticky_light_progress" aria-hidden="true">
-        <span class="lmct_oto_sticky_light_progress_fill"></span>
-      </div>
-    </div>
+      <div class="lmct_oto_sticky_light_timer_stack">
+        <div
+          class="lmct_oto_sticky_light_timer"
+          role="timer"
+          aria-label="One-time offer countdown"
+        >
+          <span class="lmct_oto_sticky_light_label" id="lmctOtoStickyLabel">
+            Offer closes in
+          </span>
 
-    <span
-      class="lmct_oto_sticky_light_sr"
-      id="lmctOtoStickyA11y"
-      aria-live="polite"
-    ></span>
+          <div class="lmct_oto_sticky_light_digits" aria-hidden="true">
+            <div class="lmct_oto_sticky_light_digit">
+              <span id="lmctLightM1">0</span>
+            </div>
+            <div class="lmct_oto_sticky_light_digit">
+              <span id="lmctLightM2">1</span>
+            </div>
+
+            <div class="lmct_oto_sticky_light_sep" aria-hidden="true">
+              <span></span>
+              <span></span>
+            </div>
+
+            <div class="lmct_oto_sticky_light_digit">
+              <span id="lmctLightS1">0</span>
+            </div>
+            <div class="lmct_oto_sticky_light_digit">
+              <span id="lmctLightS2">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lmct_oto_sticky_light_progress" aria-hidden="true">
+          <span class="lmct_oto_sticky_light_progress_fill"></span>
+        </div>
+      </div>
+
+      <span
+        class="lmct_oto_sticky_light_sr"
+        id="lmctOtoStickyA11y"
+        aria-live="polite"
+      ></span>
+    </div>
   </div>
 </div>
 
@@ -616,10 +663,15 @@
       document.getElementById("lmctLightM1"),
       document.getElementById("lmctLightM2"),
       document.getElementById("lmctLightS1"),
-      document.getElementById("lmctLightS2")
+      document.getElementById("lmctLightS2"),
     ];
 
-    if (digits.some(function (el) { return !el; })) return;
+    if (
+      digits.some(function (el) {
+        return !el;
+      })
+    )
+      return;
 
     var statusEl = document.getElementById("lmctOtoStickyStatus");
     var labelEl = document.getElementById("lmctOtoStickyLabel");
@@ -641,7 +693,10 @@
 
     try {
       if (sessionLock && window.sessionStorage) {
-        var storedDeadline = parseInt(window.sessionStorage.getItem(storageKey), 10);
+        var storedDeadline = parseInt(
+          window.sessionStorage.getItem(storageKey),
+          10,
+        );
 
         if (storedDeadline && storedDeadline > Date.now()) {
           deadline = storedDeadline;
@@ -675,8 +730,19 @@
     function updatePageOffset() {
       if (!pushPage || !document.body) return;
 
+      wrap.style.setProperty("--lmct-top-correction", "0px");
+
       var height = Math.ceil(wrap.getBoundingClientRect().height);
-      document.body.style.setProperty("padding-top", height + "px", "important");
+      document.body.style.setProperty(
+        "padding-top",
+        height + "px",
+        "important",
+      );
+
+      var topOffset = Math.round(wrap.getBoundingClientRect().top);
+      if (Math.abs(topOffset) > 1) {
+        wrap.style.setProperty("--lmct-top-correction", topOffset + "px");
+      }
     }
 
     function setMode(remaining) {
@@ -699,7 +765,10 @@
 
       setText(statusEl, "One time offer");
       setText(labelEl, "Offer closes in");
-      setText(subEl, "Add the 2X boost before final checkout. One-time payment only.");
+      setText(
+        subEl,
+        "Add the 2X boost before final checkout. One-time payment only.",
+      );
     }
 
     function render() {
@@ -721,7 +790,8 @@
       setMode(remaining);
 
       if (a11yEl && (remaining <= 10 || remaining % 10 === 0)) {
-        var message = remaining + " seconds remaining for the one-time entry upgrade.";
+        var message =
+          remaining + " seconds remaining for the one-time entry upgrade.";
         if (remaining <= 0) {
           message = "The one-time entry upgrade countdown has ended.";
         }

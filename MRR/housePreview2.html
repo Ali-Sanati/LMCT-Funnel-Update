@@ -1,0 +1,1031 @@
+<!-- ============================================ -->
+<!-- MRR HOUSE CARDS SECTION -->
+<!-- ============================================ -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap');
+  .mrr_hc_wrapper {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 20px 0;
+    font-family: 'Mona Sans', sans-serif;
+    box-sizing: border-box;
+  }
+  .mrr_hc_wrapper * {
+    box-sizing: border-box;
+  }
+  .mrr_hc_card {
+    display: flex;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  .mrr_hc_card:last-child {
+    margin-bottom: 0;
+  }
+  /* IMAGE SIDE - CAROUSEL */
+  .mrr_hc_image_wrap {
+    position: relative;
+    width: 50%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #1a1a1a;
+  }
+  .mrr_hc_slides {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .mrr_hc_slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+    pointer-events: none;
+  }
+  .mrr_hc_slide.mrr_hc_active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .mrr_hc_slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mrr_hc_badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #0C9FFD;
+    color: #ffffff;
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(12, 159, 253, 0.3);
+  }
+  /* ARROWS */
+  .mrr_hc_arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    border: none;
+    cursor: pointer;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+    padding: 0;
+  }
+  .mrr_hc_arrow:hover {
+    background: #ffffff;
+    transform: translateY(-50%) scale(1.06);
+  }
+  .mrr_hc_arrow_prev {
+    left: 14px;
+  }
+  .mrr_hc_arrow_next {
+    right: 14px;
+  }
+  .mrr_hc_arrow svg {
+    width: 18px;
+    height: 18px;
+    stroke: #000000;
+    stroke-width: 2.5;
+    fill: none;
+  }
+  /* COUNTER */
+  .mrr_hc_counter {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 13px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    z-index: 3;
+    letter-spacing: 0.3px;
+  }
+  /* CONTENT SIDE */
+  .mrr_hc_content {
+    width: 50%;
+    padding: 32px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  /* SPECS ROW */
+  .mrr_hc_specs {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 20px;
+  }
+  .mrr_hc_spec_item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 22px;
+    position: relative;
+  }
+  .mrr_hc_spec_item:first-child {
+    padding-left: 0;
+  }
+  .mrr_hc_spec_item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 32px;
+    background: #d4d4d4;
+  }
+  .mrr_hc_spec_icon {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    display: block;
+  }
+  .mrr_hc_spec_num {
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 28px;
+    color: #000000;
+    line-height: 1;
+  }
+  /* HOUSE COPY */
+  .mrr_hc_copy {
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 19px;
+    line-height: 1.45;
+    color: #000000;
+    margin: 0 0 24px 0;
+    flex-grow: 1;
+  }
+  /* GALLERY THUMBNAILS */
+  .mrr_hc_gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+  .mrr_hc_thumb {
+    aspect-ratio: 1 / 1;
+    background: #e8e8e8;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+  }
+  .mrr_hc_thumb:hover {
+    opacity: 0.85;
+    transform: scale(1.03);
+  }
+  .mrr_hc_thumb.mrr_hc_thumb_active {
+    box-shadow: 0 0 0 3px #0C9FFD;
+    opacity: 1;
+  }
+  .mrr_hc_thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+  /* ACTION BUTTONS */
+  .mrr_hc_btn_group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-top: 14px;
+  }
+  .mrr_hc_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 44px;
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .mrr_hc_btn_primary {
+    background: #0C9FFD;
+    color: #ffffff;
+    border: 0;
+    box-shadow: 0 3px 10px rgba(12, 159, 253, 0.32);
+  }
+  .mrr_hc_btn_primary:hover {
+    background: #0A8FE8;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(12, 159, 253, 0.45);
+  }
+  .mrr_hc_btn_secondary {
+    background: #ffffff;
+    color: #0C9FFD;
+    border: 1.5px solid #0C9FFD;
+  }
+  .mrr_hc_btn_secondary:hover {
+    background: #f0f9ff;
+    transform: translateY(-1px);
+  }
+  .mrr_hc_btn svg {
+    width: 12px;
+    height: 12px;
+    stroke-width: 3;
+    fill: none;
+    flex-shrink: 0;
+  }
+  .mrr_hc_btn_primary svg {
+    stroke: #ffffff;
+  }
+  .mrr_hc_btn_secondary svg {
+    stroke: #0C9FFD;
+  }
+  .mrr_hc_modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .mrr_hc_modal.mrr_hc_modal_open {
+    display: flex;
+    opacity: 1;
+  }
+  .mrr_hc_modal_inner {
+    position: relative;
+    width: auto;
+    height: 90vh;
+    max-height: 90vh;
+    aspect-ratio: 9 / 16;
+    background: #000000;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  }
+  .mrr_hc_video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    background: #000000;
+  }
+  .mrr_hc_close,
+  .mrr_hc_lb_close {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: 0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .mrr_hc_close:hover,
+  .mrr_hc_lb_close:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .mrr_hc_close {
+    top: -48px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+  }
+  .mrr_hc_close::before,
+  .mrr_hc_close::after,
+  .mrr_hc_lb_close::before,
+  .mrr_hc_lb_close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #ffffff;
+  }
+  .mrr_hc_close::before,
+  .mrr_hc_close::after {
+    width: 20px;
+    height: 2px;
+  }
+  .mrr_hc_close::before,
+  .mrr_hc_lb_close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  .mrr_hc_close::after,
+  .mrr_hc_lb_close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  .mrr_hc_lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99998;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .mrr_hc_lightbox.mrr_hc_lb_open {
+    display: flex;
+    opacity: 1;
+  }
+  .mrr_hc_lb_inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+  }
+  .mrr_hc_lb_img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+  .mrr_hc_lb_close {
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    z-index: 2;
+  }
+  .mrr_hc_lb_close::before,
+  .mrr_hc_lb_close::after {
+    width: 22px;
+    height: 2px;
+  }
+  .mrr_hc_lb_arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: 0;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+  .mrr_hc_lb_arrow:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .mrr_hc_lb_arrow_prev {
+    left: 16px;
+  }
+  .mrr_hc_lb_arrow_next {
+    right: 16px;
+  }
+  .mrr_hc_lb_arrow svg {
+    width: 22px;
+    height: 22px;
+    stroke: #ffffff;
+    stroke-width: 2.5;
+    fill: none;
+  }
+  .mrr_hc_lb_counter {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+  /* ============ MOBILE ============ */
+  @media (max-width: 768px) {
+    .mrr_hc_wrapper {
+      padding: 12px 16px;
+    }
+    .mrr_hc_card {
+      flex-direction: column;
+      margin-bottom: 20px;
+      border-radius: 16px;
+    }
+    .mrr_hc_image_wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      height: auto;
+    }
+    .mrr_hc_badge {
+      top: 14px;
+      left: 14px;
+      font-size: 15px;
+      padding: 6px 14px;
+      border-radius: 7px;
+    }
+    .mrr_hc_arrow {
+      width: 36px;
+      height: 36px;
+    }
+    .mrr_hc_arrow_prev {
+      left: 10px;
+    }
+    .mrr_hc_arrow_next {
+      right: 10px;
+    }
+    .mrr_hc_arrow svg {
+      width: 15px;
+      height: 15px;
+    }
+    .mrr_hc_counter {
+      bottom: 10px;
+      right: 10px;
+      font-size: 12px;
+      padding: 4px 10px;
+    }
+    .mrr_hc_content {
+      width: 100%;
+      padding: 20px 18px;
+    }
+    .mrr_hc_specs {
+      margin-bottom: 16px;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .mrr_hc_spec_item {
+      padding: 0 12px;
+      gap: 8px;
+      flex: 1;
+      justify-content: center;
+    }
+    .mrr_hc_spec_item:first-child {
+      padding-left: 0;
+      justify-content: flex-start;
+    }
+    .mrr_hc_spec_item:last-child {
+      padding-right: 0;
+      justify-content: flex-end;
+    }
+    .mrr_hc_spec_item:not(:last-child)::after {
+      height: 28px;
+    }
+    .mrr_hc_spec_icon {
+      width: 30px;
+      height: 30px;
+    }
+    .mrr_hc_spec_num {
+      font-size: 22px;
+    }
+    .mrr_hc_copy {
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+    .mrr_hc_gallery {
+      gap: 6px;
+    }
+    .mrr_hc_thumb {
+      border-radius: 6px;
+    }
+    .mrr_hc_btn_group {
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .mrr_hc_btn {
+      min-height: 42px;
+      font-size: 12px;
+      padding: 10px 14px;
+      border-radius: 7px;
+    }
+    .mrr_hc_modal {
+      padding: 16px;
+    }
+    .mrr_hc_modal_inner {
+      height: auto;
+      width: 100%;
+      max-width: calc(56.25vh);
+    }
+    .mrr_hc_close {
+      top: -44px;
+      right: 4px;
+    }
+    .mrr_hc_lb_inner {
+      padding: 70px 12px;
+    }
+    .mrr_hc_lb_arrow {
+      width: 40px;
+      height: 40px;
+    }
+    .mrr_hc_lb_arrow_prev {
+      left: 8px;
+    }
+    .mrr_hc_lb_arrow_next {
+      right: 8px;
+    }
+    .mrr_hc_lb_arrow svg {
+      width: 18px;
+      height: 18px;
+    }
+    .mrr_hc_lb_close {
+      top: 12px;
+      right: 12px;
+    }
+  }
+  @media (max-width: 380px) {
+    .mrr_hc_spec_item {
+      padding: 0 8px;
+      gap: 6px;
+    }
+    .mrr_hc_spec_icon {
+      width: 26px;
+      height: 26px;
+    }
+    .mrr_hc_spec_num {
+      font-size: 20px;
+    }
+  }
+</style>
+<div class="mrr_hc_wrapper">
+  <!-- ============ HOUSE 1 ============ -->
+  <div class="mrr_hc_card" data-mrr-hc-card="house1">
+    <div class="mrr_hc_image_wrap" data-mrr-hc-carousel="house1">
+      <div class="mrr_hc_badge">HOUSE 1</div>
+      <div class="mrr_hc_slides">
+        <div class="mrr_hc_slide mrr_hc_active"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAoug8WR64uFaPAYVthBX3UgS1xylcEjdCWZTN" alt="House 1 - 1"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAAToQLD5DQ2g8iSPXmspOkJt90jwzBFIfV63R" alt="House 1 - 2"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA7LQfd0EbSfDl5MPcmoQBN12ArnsK90JCj6de" alt="House 1 - 3"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAG3WZVhlRFyBJzXh8fnmakLGU0ZQsSjCPrqHc" alt="House 1 - 4"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA9B2bSJZJHLWDYQg2vynGZ0bmewtUjOsIxlBC" alt="House 1 - 5"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAf48IokQBgt9eQXNDpoYuSznaV5ORjZlUm6yh" alt="House 1 - 6"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TArbUmqgdam3X5gt6MLfRh7NkYlc1FBAJxQiTb" alt="House 1 - 7"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAKEBTwwViZT3GjomxyAqtupBbRNdcfFlv4WX5" alt="House 1 - 8"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TATEcPBCFE01f3domgtVYbsSi8R6xqKOweNU9L" alt="House 1 - 9"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAFJz5fVW0k9TAn5MZOf7hgiXVDRqexE4IUaNJ" alt="House 1 - 10"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAyfWlCIkqRusBJdiS2KPQmkYTOFevWaVDgCIb" alt="House 1 - 11"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAhd2UfytPRvXhKzeFflSWs3GYiMNZdBjpEcmH" alt="House 1 - 12"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAlURkrrjm795ZuRhWf3CvTq48PFM6Owyat0ol" alt="House 1 - 13"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAXxeGI9c6WbxZRT4DKVBp9nlvCUtIz58Ocr3M" alt="House 1 - 14"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA8Ls9uS0UwOErHMWZVeIxksptfGuqF7vcbi0l" alt="House 1 - 15"></div>
+      </div>
+      <button class="mrr_hc_arrow mrr_hc_arrow_prev" type="button" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="mrr_hc_arrow mrr_hc_arrow_next" type="button" aria-label="Next">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <div class="mrr_hc_counter"><span class="mrr_hc_counter_current">1</span> / <span class="mrr_hc_counter_total">15</span></div>
+    </div>
+    <div class="mrr_hc_content">
+      <div class="mrr_hc_specs">
+        <div class="mrr_hc_spec_item">
+          <img class="mrr_hc_spec_icon" src="https://images.clickfunnels.com/5d/137e29f4ff4fe69e001c3cb205428f/Bed.png" alt="Bedrooms">
+          <span class="mrr_hc_spec_num">3</span>
+        </div>
+        <div class="mrr_hc_spec_item">
+          <img class="mrr_hc_spec_icon" src="https://images.clickfunnels.com/b1/4affa0c8b243dcb02320e4d4f929fa/Bath.png" alt="Bathrooms">
+          <span class="mrr_hc_spec_num">3</span>
+        </div>
+        <div class="mrr_hc_spec_item">
+          <img class="mrr_hc_spec_icon" src="https://images.clickfunnels.com/e7/add6d1772542e6bed7f1b28a659bec/ion_car-sport-outline.png" alt="Car Spaces">
+          <span class="mrr_hc_spec_num">2</span>
+        </div>
+      </div>
+      <p class="mrr_hc_copy">Built by Emma & Michelle, Nathan & Julia delivers the ultimate modern family dream home with warm finishes, bright open spaces, natural textures and luxury comfort throughout. Every room feels inviting, premium and ready to move straight into.</p>
+      <div class="mrr_hc_gallery">
+        <div class="mrr_hc_thumb"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAoug8WR64uFaPAYVthBX3UgS1xylcEjdCWZTN" alt=""></div>
+        <div class="mrr_hc_thumb"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAAToQLD5DQ2g8iSPXmspOkJt90jwzBFIfV63R" alt=""></div>
+        <div class="mrr_hc_thumb"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA7LQfd0EbSfDl5MPcmoQBN12ArnsK90JCj6de" alt=""></div>
+        <div class="mrr_hc_thumb"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAG3WZVhlRFyBJzXh8fnmakLGU0ZQsSjCPrqHc" alt=""></div>
+        <div class="mrr_hc_thumb"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA9B2bSJZJHLWDYQg2vynGZ0bmewtUjOsIxlBC" alt=""></div>
+      </div>
+      <div class="mrr_hc_btn_group">
+        <button class="mrr_hc_btn mrr_hc_btn_primary" type="button" data-mrr-hc-gallery="house1">
+          VIEW HOUSE
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+        <button class="mrr_hc_btn mrr_hc_btn_secondary" type="button" data-mrr-hc-video="house1">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          PLAY REVEAL
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- ============ HOUSE 2 ============ -->
+  <div class="mrr_hc_card" data-mrr-hc-card="house2">
+    <div class="mrr_hc_image_wrap" data-mrr-hc-carousel="house2">
+      <div class="mrr_hc_badge">HOUSE 2</div>
+      <div class="mrr_hc_slides">
+        <div class="mrr_hc_slide mrr_hc_active"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAFVSpVpW0k9TAn5MZOf7hgiXVDRqexE4IUaNJ" alt="House 2 - 1"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAIc47dmYyNWvUcrQm04lkDiaspXg29CLSwOFY" alt="House 2 - 2"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA51stZfL3i4dM3arhR6WDyJA7ncIUzsVEHteB" alt="House 2 - 3"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAWPnqhusXdl7BstIkrUwSR9EjH0ZxaKYNobi4" alt="House 2 - 4"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA5WZh2l3i4dM3arhR6WDyJA7ncIUzsVEHteBo" alt="House 2 - 5"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TArp7rnC6dam3X5gt6MLfRh7NkYlc1FBAJxQiT" alt="House 2 - 6"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAo7g2PS564uFaPAYVthBX3UgS1xylcEjdCWZT" alt="House 2 - 7"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAas3mXc7DCduUXgrbkaPNHS4OhyBLWvjc98ZI" alt="House 2 - 8"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TABljj8fMn7jSfJEgPAYpXTDzU6isrMbVyhGBl" alt="House 2 - 9"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAMucIvWCsTry60SFYxfuZiQAn24Dsc1gd9ezH" alt="House 2 - 10"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAyZwjZBLkqRusBJdiS2KPQmkYTOFevWaVDgCI" alt="House 2 - 11"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TABN9KNoMn7jSfJEgPAYpXTDzU6isrMbVyhGBl" alt="House 2 - 12"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAFnTq8mW0k9TAn5MZOf7hgiXVDRqexE4IUaNJ" alt="House 2 - 13"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAf6vz31QBgt9eQXNDpoYuSznaV5ORjZlUm6yh" alt="House 2 - 14"></div>
+        <div class="mrr_hc_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAWd4EtaXdl7BstIkrUwSR9EjH0ZxaKYNobi4J" alt="House 2 - 15"></div>
+      </div>
+      <button class="mrr_hc_arrow mrr_hc_arrow_prev" type="button" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="mrr_hc_arrow mrr_hc_arrow_next" type="button" aria-label="Next">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <div class="mrr_hc_counter"><span class="mrr_hc_counter_current">1</span> / <span class="mrr_hc_counter_total">15</span></div>
+    </div>
+    <div class="mrr_hc_content">
+      <div class="mrr_hc_specs">
+        <div class="mrr_hc_spec_item">
+          <img class="mrr_hc_spec_icon" src="https://images.clickfunnels.com/5d/137e29f4ff4fe69e001c3cb205428f/Bed.png" alt="Bedrooms">
+          <span class="mrr_hc_spec_num">4</span>
+        </div>
+        <div class="mrr_hc_spec_item">
+          <img class="mrr_hc_spec_icon" src="https://images.clickfunnels.com/b1/4affa0c8b243dcb02320e4d4f929fa/Bath.png" alt="Bathrooms">
+          <span class="mrr_hc_spec_num">2</span>
+        </div>
+        <div class="mrr_hc_spec_item">
+          <img class="mrr_hc_spec_icon" src="https://images.clickfunnels.com/e7/add6d1772542e6bed7f1b28a659bec/ion_car-sport-outline.png" alt="Car Spaces">
+          <span class="mrr_hc_spec_num">2</span>
+        </div>
+      </div>
+      <p class="mrr_hc_copy">Buit by Franky & Isaac, Mitch & Shaz takes things to another level with a bold luxury-resort vibe featuring darker tones, designer finishes, statement lighting and high-end entertaining spaces that feel like a private retreat.</p>
+      <div class="mrr_hc_gallery">
+        <div class="mrr_hc_thumb"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAFVSpVpW0k9TAn5MZOf7hgiXVDRqexE4IUaNJ" alt=""></div>
+        <div class="mrr_hc_thumb"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAIc47dmYyNWvUcrQm04lkDiaspXg29CLSwOFY" alt=""></div>
+        <div class="mrr_hc_thumb"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA51stZfL3i4dM3arhR6WDyJA7ncIUzsVEHteB" alt=""></div>
+        <div class="mrr_hc_thumb"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAWPnqhusXdl7BstIkrUwSR9EjH0ZxaKYNobi4" alt=""></div>
+        <div class="mrr_hc_thumb"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA5WZh2l3i4dM3arhR6WDyJA7ncIUzsVEHteBo" alt=""></div>
+      </div>
+      <div class="mrr_hc_btn_group">
+        <button class="mrr_hc_btn mrr_hc_btn_primary" type="button" data-mrr-hc-gallery="house2">
+          VIEW HOUSE
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+        <button class="mrr_hc_btn mrr_hc_btn_secondary" type="button" data-mrr-hc-video="house2">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          PLAY REVEAL
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============ SHARED VIDEO MODAL ============ -->
+<div class="mrr_hc_modal" id="mrrHcModal" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="mrr_hc_modal_inner">
+    <button class="mrr_hc_close" id="mrrHcClose" aria-label="Close video"></button>
+    <video class="mrr_hc_video" id="mrrHcVideo" playsinline controls preload="metadata">
+      <source src="" type="video/mp4">
+    </video>
+  </div>
+</div>
+<!-- ============ SHARED IMAGE LIGHTBOX ============ -->
+<div class="mrr_hc_lightbox" id="mrrHcLightbox" role="dialog" aria-modal="true" aria-label="House gallery">
+  <div class="mrr_hc_lb_inner">
+    <button class="mrr_hc_lb_close" id="mrrHcLbClose" aria-label="Close gallery"></button>
+    <button class="mrr_hc_lb_arrow mrr_hc_lb_arrow_prev" id="mrrHcLbPrev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <img class="mrr_hc_lb_img" id="mrrHcLbImg" src="" alt="">
+    <button class="mrr_hc_lb_arrow mrr_hc_lb_arrow_next" id="mrrHcLbNext" aria-label="Next image">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <div class="mrr_hc_lb_counter"><span id="mrrHcLbCur">1</span> / <span id="mrrHcLbTot">1</span></div>
+  </div>
+</div>
+<script>
+  window.addEventListener('load', function() {
+    var galleryData = {};
+    var cards = document.querySelectorAll('[data-mrr-hc-card]');
+    cards.forEach(function(card) {
+      var key = card.getAttribute('data-mrr-hc-card');
+      var carousel = card.querySelector('[data-mrr-hc-carousel]');
+      if (!carousel) return;
+      var slides = carousel.querySelectorAll('.mrr_hc_slide');
+      var prevBtn = carousel.querySelector('.mrr_hc_arrow_prev');
+      var nextBtn = carousel.querySelector('.mrr_hc_arrow_next');
+      var counterCurrent = carousel.querySelector('.mrr_hc_counter_current');
+      var counterTotal = carousel.querySelector('.mrr_hc_counter_total');
+      var thumbs = card.querySelectorAll('.mrr_hc_thumb');
+      var total = slides.length;
+      var thumbCount = thumbs.length;
+      var current = 0;
+      var autoTimer = null;
+      var autoDelay = 4000;
+      var srcs = [];
+      slides.forEach(function(slide) {
+        var img = slide.querySelector('img');
+        if (img) srcs.push(img.src);
+      });
+      galleryData[key] = srcs;
+      /* Build a windowed range of thumb indices. Window pages forward
+         when current passes the last visible thumb, and backward when
+         current falls before the first visible thumb. Otherwise stays put. */
+      var windowStart = 0;
+      function getThumbWindow(centerIndex) {
+        var windowSize = Math.min(thumbCount, total);
+        /* If current falls outside the visible window, slide it */
+        if (centerIndex < windowStart) {
+          windowStart = centerIndex;
+        } else if (centerIndex >= windowStart + windowSize) {
+          windowStart = centerIndex - windowSize + 1;
+        }
+        /* Clamp to valid range */
+        if (windowStart < 0) windowStart = 0;
+        if (windowStart + windowSize > total) windowStart = total - windowSize;
+        if (windowStart < 0) windowStart = 0;
+        var indices = [];
+        for (var i = 0; i < windowSize; i++) {
+          indices.push(windowStart + i);
+        }
+        return indices;
+      }
+      /* Update thumbnail images + highlight based on current slide */
+      function updateThumbs(currentIndex) {
+        var indices = getThumbWindow(currentIndex);
+        thumbs.forEach(function(thumb, i) {
+          var slideIdx = indices[i];
+          if (slideIdx === undefined || slideIdx >= total) {
+            thumb.style.display = 'none';
+            return;
+          }
+          thumb.style.display = '';
+          var slideImg = slides[slideIdx].querySelector('img');
+          var thumbImg = thumb.querySelector('img');
+          if (slideImg && thumbImg && thumbImg.src !== slideImg.src) {
+            thumbImg.src = slideImg.src;
+          }
+          /* Store which slide this thumb points to */
+          thumb.setAttribute('data-mrr-hc-slide-idx', slideIdx);
+          /* Highlight active */
+          if (slideIdx === currentIndex) {
+            thumb.classList.add('mrr_hc_thumb_active');
+          } else {
+            thumb.classList.remove('mrr_hc_thumb_active');
+          }
+        });
+      }
+      /* Update counter total to reflect actual slide count */
+      if (counterTotal) counterTotal.textContent = total;
+      if (total <= 1) {
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+        return;
+      }
+      function showSlide(index) {
+        slides.forEach(function(slide, i) {
+          if (i === index) {
+            slide.classList.add('mrr_hc_active');
+          } else {
+            slide.classList.remove('mrr_hc_active');
+          }
+        });
+        if (counterCurrent) counterCurrent.textContent = (index + 1);
+        updateThumbs(index);
+        current = index;
+      }
+      function next() {
+        showSlide((current + 1) % total);
+      }
+      function prev() {
+        showSlide((current - 1 + total) % total);
+      }
+      function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(next, autoDelay);
+      }
+      function stopAuto() {
+        if (autoTimer) {
+          clearInterval(autoTimer);
+          autoTimer = null;
+        }
+      }
+      function resetAuto() {
+        stopAuto();
+        startAuto();
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+          next();
+          resetAuto();
+        });
+      }
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+          prev();
+          resetAuto();
+        });
+      }
+      /* Click thumbnail to jump to that slide */
+      thumbs.forEach(function(thumb) {
+        thumb.addEventListener('click', function() {
+          var idx = parseInt(thumb.getAttribute('data-mrr-hc-slide-idx'), 10);
+          if (!isNaN(idx) && idx >= 0 && idx < total) {
+            showSlide(idx);
+            resetAuto();
+          }
+        });
+      });
+      carousel.addEventListener('mouseenter', stopAuto);
+      carousel.addEventListener('mouseleave', startAuto);
+      var touchStartX = 0;
+      var touchEndX = 0;
+      carousel.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAuto();
+      }, { passive: true });
+      carousel.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) {
+            next();
+          } else {
+            prev();
+          }
+        }
+        startAuto();
+      }, { passive: true });
+      /* Initialize thumbs and highlight */
+      updateThumbs(0);
+      startAuto();
+    });
+    /* ============ VIDEO MODAL LOGIC ============ */
+    var videoSources = {
+      house1: 'https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAFrQQwPW0k9TAn5MZOf7hgiXVDRqexE4IUaNJ',
+      house2: 'https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAsLfD5Tc4zicOELYeXxC7daRNDjv5oZATVG9m'
+    };
+    var modal = document.getElementById('mrrHcModal');
+    var closeBtn = document.getElementById('mrrHcClose');
+    var video = document.getElementById('mrrHcVideo');
+    var source = video ? video.querySelector('source') : null;
+    var videoTriggers = document.querySelectorAll('[data-mrr-hc-video]');
+    function openVideoModal(key) {
+      var src = videoSources[key];
+      if (!src || !modal || !video || !source) return;
+      source.setAttribute('src', src);
+      video.load();
+      modal.classList.add('mrr_hc_modal_open');
+      document.body.style.overflow = 'hidden';
+      try {
+        video.currentTime = 0;
+        var playAttempt = video.play();
+        if (playAttempt && playAttempt.catch) playAttempt.catch(function() {});
+      } catch (e) {}
+    }
+    function closeVideoModal() {
+      if (!modal || !video) return;
+      modal.classList.remove('mrr_hc_modal_open');
+      document.body.style.overflow = '';
+      try { video.pause(); } catch (e) {}
+    }
+    videoTriggers.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        openVideoModal(btn.getAttribute('data-mrr-hc-video'));
+      });
+    });
+    if (closeBtn) closeBtn.addEventListener('click', closeVideoModal);
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeVideoModal();
+      });
+    }
+    /* ============ IMAGE LIGHTBOX LOGIC ============ */
+    var lightbox = document.getElementById('mrrHcLightbox');
+    var lbImg = document.getElementById('mrrHcLbImg');
+    var lbClose = document.getElementById('mrrHcLbClose');
+    var lbPrev = document.getElementById('mrrHcLbPrev');
+    var lbNext = document.getElementById('mrrHcLbNext');
+    var lbCur = document.getElementById('mrrHcLbCur');
+    var lbTot = document.getElementById('mrrHcLbTot');
+    var lbSources = [];
+    var lbIndex = 0;
+    function openLightbox(sources, startIdx) {
+      if (!sources || !sources.length || !lightbox || !lbImg || !lbCur || !lbTot) return;
+      lbSources = sources;
+      lbIndex = startIdx || 0;
+      lbTot.textContent = lbSources.length;
+      updateLightboxImg();
+      lightbox.classList.add('mrr_hc_lb_open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.classList.remove('mrr_hc_lb_open');
+      document.body.style.overflow = '';
+    }
+    function updateLightboxImg() {
+      if (!lbSources.length || !lbImg || !lbCur) return;
+      lbImg.src = lbSources[lbIndex];
+      lbCur.textContent = lbIndex + 1;
+    }
+    function lbNextImg() {
+      if (!lbSources.length) return;
+      lbIndex = (lbIndex + 1) % lbSources.length;
+      updateLightboxImg();
+    }
+    function lbPrevImg() {
+      if (!lbSources.length) return;
+      lbIndex = (lbIndex - 1 + lbSources.length) % lbSources.length;
+      updateLightboxImg();
+    }
+    var galleryTriggers = document.querySelectorAll('[data-mrr-hc-gallery]');
+    galleryTriggers.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var galleryKey = btn.getAttribute('data-mrr-hc-gallery');
+        if (galleryData[galleryKey]) openLightbox(galleryData[galleryKey], 0);
+      });
+    });
+    if (lbClose) lbClose.addEventListener('click', closeLightbox);
+    if (lbNext) {
+      lbNext.addEventListener('click', function(e) {
+        e.stopPropagation();
+        lbNextImg();
+      });
+    }
+    if (lbPrev) {
+      lbPrev.addEventListener('click', function(e) {
+        e.stopPropagation();
+        lbPrevImg();
+      });
+    }
+    if (lightbox) {
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox || e.target.classList.contains('mrr_hc_lb_inner')) closeLightbox();
+      });
+    }
+    var lbTouchStartX = 0;
+    if (lightbox) {
+      lightbox.addEventListener('touchstart', function(e) {
+        lbTouchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      lightbox.addEventListener('touchend', function(e) {
+        var diff = lbTouchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) lbNextImg();
+          else lbPrevImg();
+        }
+      }, { passive: true });
+    }
+    document.addEventListener('keydown', function(e) {
+      if (modal && modal.classList.contains('mrr_hc_modal_open')) {
+        if (e.key === 'Escape') closeVideoModal();
+        return;
+      }
+      if (lightbox && lightbox.classList.contains('mrr_hc_lb_open')) {
+        if (e.key === 'Escape') closeLightbox();
+        else if (e.key === 'ArrowRight') lbNextImg();
+        else if (e.key === 'ArrowLeft') lbPrevImg();
+      }
+    });
+  });
+</script>

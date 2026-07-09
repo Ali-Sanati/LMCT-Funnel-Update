@@ -222,25 +222,25 @@
   // Default banner used when no scheduled stage is active.
   var LMCT_DEFAULT_TEXT_LINE_1 = "HURRY!";
   var LMCT_DEFAULT_TEXT_LINE_2 = "GIVEAWAY ENDS IN:";
-  var LMCT_FUNNEL_TARGET_DATE = "2026-06-18 00:00:00";
+  var LMCT_FUNNEL_TARGET_DATE = "2026-06-10 00:00:00";
   var LMCT_TIMEZONE = "AEST";
 
   // Each stage is active from startDate until endDate. targetDate controls the countdown.
   var LMCT_SCHEDULED_STAGES = [
-    //From startDate until endDate, show ENDS TOMORROW: and count down to June 10, 2026 at 12:00 AM.
+    //From startDate until endDate, show lin1 and line 2: and count down to targetDate.
+    {
+      startDate: "2026-06-08 00:00:00",
+      endDate: "2026-06-09 00:00:00",
+      targetDate: "2026-06-09 00:00:00",
+      line1: "HURRY!",
+      line2: "GIVEAWAY DAY IN:",
+    },
     {
       startDate: "2026-06-09 00:00:00",
       endDate: "2026-06-10 00:00:00",
       targetDate: "2026-06-10 00:00:00",
-      line1: "10X MULTIPLIER",
-      line2: "ENDS TOMORROW:",
-    },
-    {
-      startDate: "2026-06-10 00:00:00",
-      endDate: "2026-06-11 00:00:00",
-      targetDate: "2026-06-11 00:00:00",
-      line1: "10X MULTIPLIER",
-      line2: "ENDS TONIGHT:",
+      line1: "HURRY!",
+      line2: "GIVEAWAY ENDS IN:",
     },
   ];
 

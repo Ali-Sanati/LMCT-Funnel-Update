@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Become an LMCT+ partner and put your business in front of millions of Aussies through member offers, giveaways and partner promotions."
+    />
+    <title>Become a Partner | LMCT+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #05162a;
+        --ink: #06152a;
+        --muted: #1d2b3d;
+        --blue: #0c9ffd;
+        --blue-dark: #0879d8;
+        --blue-soft: #c4e9ff;
+        --green: #00c928;
+        --line: #dfe8f1;
+        --white: #ffffff;
+        --shadow-blue: 0 12px 28px rgba(12, 159, 253, 0.38);
+        --shadow-soft: 0 18px 42px rgba(5, 22, 42, 0.12);
+        --radius: 20px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #fff;
+        font-family: "Montserrat", Arial, sans-serif;
+        letter-spacing: 0;
+        overflow-x: hidden;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .bp-page {
+        width: 100%;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .bp-container {
+        width: min(1110px, calc(100% - 56px));
+        margin: 0 auto;
+      }
+
+      .bp-header {
+        background: #06172b;
+        color: #fff;
+      }
+
+      .bp-nav {
+        min-height: 88px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .bp-logo {
+        width: clamp(132px, 18vw, 204px);
+        height: auto;
+      }
+
+      .bp-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 24px;
+        border: 0;
+        border-radius: 8px;
+        color: #fff;
+        background: linear-gradient(100deg, #23c7f4 0%, #0a8df4 100%);
+        box-shadow: var(--shadow-blue);
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+      }
+
+      .bp-btn:hover,
+      .bp-btn:focus-visible {
+        transform: translateY(-2px);
+        filter: brightness(1.06);
+        box-shadow: 0 16px 34px rgba(12, 159, 253, 0.48);
+      }
+
+      .bp-btn--wide {
+        width: min(100%, 570px);
+        min-height: 50px;
+        text-transform: uppercase;
+        font-size: 16px;
+        letter-spacing: 0;
+      }
+
+      .bp-hero {
+        padding: 36px 0 48px;
+      }
+
+      .bp-hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.82fr);
+        gap: 54px;
+        align-items: center;
+      }
+
+      .bp-hero-copy {
+        min-width: 0;
+      }
+
+      .bp-h1,
+      .bp-section-title,
+      .bp-numbers-title,
+      .bp-final-title {
+        margin: 0;
+        color: var(--ink);
+        font-weight: 900;
+        letter-spacing: 0;
+      }
+
+      .bp-h1 {
+        max-width: 590px;
+        font-size: clamp(42px, 5.8vw, 72px);
+        line-height: 1.12;
+      }
+
+      .bp-accent {
+        color: var(--blue);
+        font-style: italic;
+      }
+
+      .bp-hero-text {
+        max-width: 555px;
+        margin: 24px 0 28px;
+        color: #06152a;
+        font-size: 15.5px;
+        font-weight: 500;
+        line-height: 1.55;
+      }
+
+      .bp-hero-card {
+        position: relative;
+        min-height: 410px;
+        border-radius: 28px;
+        background:
+          radial-gradient(circle at 22% 16%, rgba(255, 255, 255, 0.9), transparent 30%),
+          linear-gradient(145deg, #d7efff 0%, #b8e0fb 100%);
+        overflow: hidden;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
+
+      .bp-hero-card::before {
+        content: "";
+        position: absolute;
+        inset: 28px;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.75);
+      }
+
+      .bp-hero-phone {
+        position: absolute;
+        width: min(54%, 250px);
+        left: 12%;
+        bottom: -42px;
+        filter: drop-shadow(0 28px 36px rgba(5, 22, 42, 0.28));
+      }
+
+      .bp-hero-offer {
+        position: absolute;
+        right: 36px;
+        top: 54px;
+        width: min(54%, 238px);
+        padding: 22px 20px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 18px 40px rgba(5, 22, 42, 0.14);
+      }
+
+      .bp-hero-offer strong {
+        display: block;
+        color: var(--blue);
+        font-size: 40px;
+        line-height: 0.95;
+        font-weight: 900;
+      }
+
+      .bp-hero-offer span {
+        display: block;
+        margin-top: 10px;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 800;
+        line-height: 1.35;
+        text-transform: uppercase;
+      }
+
+      .bp-hero-line {
+        position: absolute;
+        right: 40px;
+        bottom: 56px;
+        width: 210px;
+        height: 14px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #a37c34 0 36%, #f4f900 36% 68%, #ffffff 68%);
+        opacity: 0.95;
+      }
+
+      .bp-card-section {
+        position: relative;
+        padding: 54px 0 18px;
+      }
+
+      .bp-blue-card {
+        position: relative;
+        min-height: 430px;
+        display: grid;
+        grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1fr);
+        gap: 42px;
+        align-items: center;
+        padding: 70px 38px 60px;
+        border-radius: 28px;
+        background: linear-gradient(180deg, #18a9f4 0%, #0a9beb 100%);
+        color: #fff;
+        overflow: hidden;
+      }
+
+      .bp-cert {
+        position: absolute;
+        z-index: 4;
+        top: 0;
+        left: clamp(90px, 18vw, 210px);
+        width: 110px;
+        height: 110px;
+        display: grid;
+        place-items: center;
+        border: 5px solid #fff;
+        border-radius: 50%;
+        background: #0e7b40;
+        box-shadow: 0 8px 20px rgba(5, 22, 42, 0.2);
+        transform: translateY(-16px);
+        color: #fff;
+        text-align: center;
+      }
+
+      .bp-cert::before {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border: 2px solid #f7d64a;
+        border-radius: 50%;
+      }
+
+      .bp-cert strong {
+        position: relative;
+        display: block;
+        font-size: 8.8px;
+        font-weight: 900;
+        line-height: 1.05;
+        text-transform: uppercase;
+      }
+
+      .bp-cert span {
+        position: relative;
+        display: block;
+        margin-top: 5px;
+        color: #ffed70;
+        font-size: 23px;
+        line-height: 1;
+      }
+
+      .bp-cert small {
+        position: relative;
+        display: block;
+        margin-top: 5px;
+        color: #fff;
+        font-size: 8px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .bp-video-slot {
+        position: relative;
+        z-index: 2;
+        min-height: 280px;
+        border-radius: 22px;
+        background: #fff;
+        box-shadow: inset 0 0 0 1px rgba(5, 22, 42, 0.06);
+        overflow: hidden;
+      }
+
+      .bp-video-slot img {
+        position: absolute;
+        left: 50%;
+        bottom: -54px;
+        width: min(72%, 250px);
+        transform: translateX(-50%);
+        filter: drop-shadow(0 22px 30px rgba(5, 22, 42, 0.18));
+      }
+
+      .bp-intro-copy {
+        position: relative;
+        z-index: 3;
+        align-self: start;
+        padding-top: 20px;
+        text-align: center;
+      }
+
+      .bp-card-title {
+        margin: 0 0 34px;
+        color: #fff;
+        font-size: clamp(34px, 5vw, 56px);
+        font-weight: 900;
+        line-height: 1.05;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .bp-card-title em {
+        font-style: italic;
+      }
+
+      .bp-intro-copy p {
+        max-width: 500px;
+        margin: 0 auto 18px;
+        color: #fff;
+        font-size: 14.5px;
+        font-weight: 500;
+        line-height: 1.58;
+      }
+
+      .bp-intro-copy strong {
+        font-style: italic;
+        font-weight: 900;
+      }
+
+      .bp-blue-car {
+        position: absolute;
+        z-index: 2;
+        right: 22px;
+        bottom: -74px;
+        width: min(35%, 370px);
+        pointer-events: none;
+        filter: drop-shadow(0 18px 18px rgba(5, 22, 42, 0.18));
+      }
+
+      .bp-numbers {
+        padding: 28px 0 52px;
+        text-align: center;
+      }
+
+      .bp-numbers-head {
+        display: inline-grid;
+        grid-template-columns: 52px auto 52px;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .bp-laurel {
+        width: 52px;
+        height: 66px;
+        color: #12a4f4;
+      }
+
+      .bp-laurel--right {
+        transform: scaleX(-1);
+      }
+
+      .bp-numbers-title {
+        font-size: clamp(24px, 4.2vw, 45px);
+        line-height: 0.96;
+        text-transform: uppercase;
+      }
+
+      .bp-numbers-title span {
+        display: block;
+        margin-top: 2px;
+        color: #06152a;
+        font-size: clamp(9px, 1.3vw, 15px);
+        font-weight: 800;
+        letter-spacing: 0.12em;
+      }
+
+      .bp-stats {
+        width: min(650px, 100%);
+        margin: 0 auto 34px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 26px;
+      }
+
+      .bp-stat strong {
+        display: block;
+        color: var(--blue);
+        font-size: clamp(28px, 4.2vw, 42px);
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .bp-stat span {
+        display: block;
+        margin-top: 8px;
+        color: #06152a;
+        font-size: 10.5px;
+        font-weight: 900;
+        line-height: 1.15;
+        text-transform: uppercase;
+      }
+
+      .bp-magic {
+        padding: 18px 0 0;
+      }
+
+      .bp-dark-logo {
+        width: min(330px, 54vw);
+        margin: 0 auto 34px;
+        filter: brightness(0) saturate(100%) invert(8%) sepia(49%) saturate(1787%) hue-rotate(178deg) brightness(94%) contrast(96%);
+      }
+
+      .bp-magic-title {
+        max-width: 1110px;
+        margin: 0 auto 38px;
+        color: var(--ink);
+        font-size: clamp(38px, 4.5vw, 58px);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: 0;
+      }
+
+      .bp-magic-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.92fr);
+        gap: 46px;
+        align-items: start;
+      }
+
+      .bp-magic-copy {
+        grid-column: 1;
+        grid-row: 1;
+        min-width: 0;
+      }
+
+      .bp-magic-copy p {
+        max-width: 620px;
+        margin: 0 0 28px;
+        color: #06152a;
+        font-size: 14.5px;
+        font-weight: 500;
+        line-height: 1.55;
+      }
+
+      .bp-phone-figure {
+        position: relative;
+        grid-column: 1;
+        grid-row: 2;
+        min-height: 420px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      .bp-phone-figure::before {
+        content: "";
+        position: absolute;
+        right: 11%;
+        bottom: 0;
+        width: 230px;
+        height: 310px;
+        border-radius: 116px 116px 22px 22px;
+        background:
+          linear-gradient(180deg, #111c2d 0 32%, #fff 32% 45%, #0d223c 45% 100%);
+        box-shadow: 0 18px 36px rgba(5, 22, 42, 0.13);
+      }
+
+      .bp-phone-figure::after {
+        content: "LMCT+";
+        position: absolute;
+        right: calc(11% + 56px);
+        bottom: 102px;
+        color: #fff;
+        font-size: 25px;
+        font-style: italic;
+        font-weight: 900;
+        transform: rotate(4deg);
+      }
+
+      .bp-phone-large {
+        position: relative;
+        z-index: 2;
+        width: min(250px, 48%);
+        margin-right: 160px;
+        margin-bottom: 22px;
+        transform: rotate(-8deg);
+        filter: drop-shadow(0 24px 30px rgba(5, 22, 42, 0.24));
+      }
+
+      .bp-features {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        display: grid;
+        gap: 28px;
+        padding-top: 14px;
+      }
+
+      .bp-feature {
+        display: grid;
+        grid-template-columns: 70px minmax(0, 1fr);
+        gap: 22px;
+        align-items: start;
+      }
+
+      .bp-check {
+        width: 60px;
+        height: 60px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #29c2f4 0%, #0b8ff3 100%);
+        box-shadow: 0 10px 22px rgba(12, 159, 253, 0.24);
+      }
+
+      .bp-check svg {
+        width: 40px;
+        height: 40px;
+        color: #fff;
+      }
+
+      .bp-feature h3 {
+        margin: 0 0 8px;
+        color: var(--ink);
+        font-size: 21px;
+        font-weight: 900;
+        line-height: 1.15;
+      }
+
+      .bp-feature p {
+        margin: 0;
+        color: #06152a;
+        font-size: 13.5px;
+        font-weight: 500;
+        line-height: 1.55;
+      }
+
+      .bp-winners-strip {
+        width: 100%;
+        margin-top: 8px;
+        padding: 16px 0;
+        overflow: hidden;
+        background: #11c82d;
+      }
+
+      .bp-winner-track {
+        display: flex;
+        width: max-content;
+        gap: 16px;
+        animation: bp-scroll 42s linear infinite;
+      }
+
+      .bp-winners-strip:hover .bp-winner-track {
+        animation-play-state: paused;
+      }
+
+      .bp-winner-card {
+        flex: 0 0 256px;
+        width: 256px;
+        overflow: hidden;
+        border-radius: 8px;
+        background: linear-gradient(165deg, #02f022 0%, #00ac26 52%, #35ef5a 100%);
+        color: #fff;
+        box-shadow: 0 14px 24px rgba(0, 0, 0, 0.18);
+      }
+
+      .bp-winner-img {
+        width: 100%;
+        aspect-ratio: 1.32 / 1;
+        overflow: hidden;
+        background: #0b7cc9;
+      }
+
+      .bp-winner-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .bp-winner-body {
+        padding: 12px 14px 14px;
+      }
+
+      .bp-winner-prize {
+        display: block;
+        font-size: 18px;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .bp-winner-title {
+        margin-top: 2px;
+        display: block;
+        font-size: 24px;
+        font-weight: 900;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .bp-winner-card p {
+        margin: 8px 0 10px;
+        font-size: 9.8px;
+        font-weight: 600;
+        line-height: 1.35;
+      }
+
+      .bp-winner-name {
+        display: block;
+        text-align: right;
+        font-size: 10px;
+        font-weight: 800;
+      }
+
+      @keyframes bp-scroll {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(calc(-50% - 8px));
+        }
+      }
+
+      .bp-famous {
+        padding: 46px 0 36px;
+      }
+
+      .bp-famous-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 260px;
+        gap: 48px;
+        align-items: end;
+      }
+
+      .bp-section-title {
+        margin-bottom: 22px;
+        font-size: clamp(38px, 5vw, 58px);
+        line-height: 1.08;
+      }
+
+      .bp-famous p {
+        max-width: 720px;
+        margin: 0;
+        color: #06152a;
+        font-size: 14.5px;
+        font-weight: 500;
+        line-height: 1.6;
+      }
+
+      .bp-bars {
+        display: grid;
+        grid-template-columns: 0.45fr 0.45fr 0.55fr;
+        align-items: end;
+        height: 54px;
+      }
+
+      .bp-bars span {
+        display: block;
+      }
+
+      .bp-bars span:nth-child(1) {
+        height: 18px;
+        background: #a47c34;
+      }
+
+      .bp-bars span:nth-child(2) {
+        height: 32px;
+        background: #f2ff00;
+      }
+
+      .bp-bars span:nth-child(3) {
+        height: 8px;
+        background: #d8d8d8;
+      }
+
+      .bp-retailer-card {
+        position: relative;
+        width: min(760px, 100%);
+        min-height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        margin: 32px auto 40px;
+        padding: 22px 32px;
+        border: 3px solid #06152a;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .bp-retailer-copy strong,
+      .bp-retailer-copy span {
+        display: block;
+        text-transform: uppercase;
+      }
+
+      .bp-retailer-copy strong {
+        color: #06152a;
+        font-size: clamp(38px, 5vw, 52px);
+        font-weight: 900;
+        line-height: 0.95;
+      }
+
+      .bp-retailer-copy span {
+        margin-top: 8px;
+        color: var(--blue);
+        font-size: clamp(20px, 3vw, 30px);
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .bp-coin {
+        position: relative;
+        flex: 0 0 138px;
+        width: 138px;
+        height: 138px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.95), transparent 20%),
+          linear-gradient(145deg, #7ed6ff 0%, #0b8ef2 62%, #006cca 100%);
+        box-shadow:
+          inset 0 0 0 8px rgba(255, 255, 255, 0.34),
+          inset 0 0 0 14px rgba(5, 22, 42, 0.08),
+          0 16px 28px rgba(12, 159, 253, 0.24);
+      }
+
+      .bp-coin::before,
+      .bp-coin::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #0a91f2;
+        transform: rotate(45deg);
+      }
+
+      .bp-coin::before {
+        left: -34px;
+        top: 22px;
+      }
+
+      .bp-coin::after {
+        right: -24px;
+        bottom: 22px;
+      }
+
+      .bp-coin span {
+        color: #fff;
+        font-size: 36px;
+        font-style: italic;
+        font-weight: 900;
+        text-shadow: 0 2px 0 rgba(5, 22, 42, 0.22);
+      }
+
+      .bp-logo-row {
+        width: 100%;
+        overflow: hidden;
+        padding: 8px 0 18px;
+      }
+
+      .bp-logo-track {
+        width: min(1100px, calc(100% + 70px));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 34px;
+      }
+
+      .bp-partner-logo {
+        min-width: 104px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #161616;
+        font-size: 24px;
+        font-weight: 900;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .bp-partner-logo img {
+        max-width: 144px;
+        max-height: 48px;
+        object-fit: contain;
+        filter: brightness(0) saturate(100%);
+        opacity: 0.86;
+      }
+
+      .bp-partner-logo--script {
+        font-size: 32px;
+        font-style: italic;
+        letter-spacing: -0.06em;
+      }
+
+      .bp-partner-logo--small {
+        font-size: 18px;
+        letter-spacing: 0.2em;
+      }
+
+      .bp-final {
+        padding: 48px 0 54px;
+        text-align: center;
+      }
+
+      .bp-final-title {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 42px;
+        font-size: clamp(38px, 5vw, 58px);
+        line-height: 1.15;
+      }
+
+      .bp-final-title::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -18px;
+        width: min(240px, 62%);
+        height: 8px;
+        border-radius: 999px;
+        background: #18a9f4;
+        transform: translateX(-50%) rotate(-3deg);
+      }
+
+      .bp-handshake {
+        width: min(270px, 54vw);
+        margin: 52px auto 0;
+      }
+
+      .bp-handshake svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        filter: drop-shadow(0 16px 18px rgba(5, 22, 42, 0.14));
+      }
+
+      @media (max-width: 900px) {
+        .bp-container {
+          width: min(100% - 48px, 760px);
+        }
+
+        .bp-nav {
+          min-height: 56px;
+        }
+
+        .bp-logo {
+          width: 118px;
+        }
+
+        .bp-nav .bp-btn {
+          min-height: 34px;
+          padding: 0 13px;
+          font-size: 12px;
+        }
+
+        .bp-hero {
+          padding: 26px 0 28px;
+        }
+
+        .bp-hero-grid,
+        .bp-blue-card,
+        .bp-magic-grid,
+        .bp-famous-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .bp-hero-card {
+          display: none;
+        }
+
+        .bp-h1 {
+          max-width: 520px;
+          font-size: clamp(34px, 9.8vw, 54px);
+          line-height: 1.14;
+        }
+
+        .bp-hero-text {
+          margin: 18px 0 22px;
+          font-size: 13px;
+          line-height: 1.45;
+        }
+
+        .bp-btn--wide {
+          min-height: 42px;
+          font-size: 13px;
+        }
+
+        .bp-card-section {
+          padding: 42px 0 12px;
+        }
+
+        .bp-blue-card {
+          min-height: 0;
+          gap: 0;
+          padding: 54px 20px 18px;
+          border-radius: 20px;
+          text-align: center;
+        }
+
+        .bp-cert {
+          left: 50%;
+          width: 92px;
+          height: 92px;
+          transform: translate(-50%, -16px);
+        }
+
+        .bp-cert strong {
+          font-size: 7px;
+        }
+
+        .bp-cert span {
+          font-size: 18px;
+        }
+
+        .bp-cert small {
+          font-size: 6.8px;
+        }
+
+        .bp-video-slot {
+          display: none;
+        }
+
+        .bp-card-title {
+          margin-bottom: 26px;
+          font-size: clamp(28px, 9.2vw, 43px);
+        }
+
+        .bp-intro-copy {
+          padding-top: 0;
+        }
+
+        .bp-intro-copy p {
+          font-size: 11.5px;
+          line-height: 1.5;
+        }
+
+        .bp-blue-car {
+          position: relative;
+          right: auto;
+          bottom: auto;
+          width: 112%;
+          max-width: none;
+          margin: 8px 0 -20px -6%;
+        }
+
+        .bp-numbers {
+          padding: 18px 0 42px;
+        }
+
+        .bp-numbers-head {
+          grid-template-columns: 34px auto 34px;
+          gap: 6px;
+        }
+
+        .bp-laurel {
+          width: 34px;
+          height: 50px;
+        }
+
+        .bp-stats {
+          gap: 12px;
+          margin-bottom: 26px;
+        }
+
+        .bp-stat strong {
+          font-size: clamp(23px, 8vw, 34px);
+        }
+
+        .bp-stat span {
+          font-size: 8px;
+        }
+
+        .bp-dark-logo {
+          width: min(220px, 56vw);
+          margin-bottom: 24px;
+        }
+
+        .bp-magic-title {
+          margin-bottom: 24px;
+          font-size: clamp(30px, 8.8vw, 45px);
+        }
+
+        .bp-magic-copy p {
+          margin-bottom: 22px;
+          font-size: 12px;
+          line-height: 1.5;
+        }
+
+        .bp-features {
+          order: 2;
+          grid-column: auto;
+          grid-row: auto;
+          gap: 18px;
+          padding-top: 0;
+        }
+
+        .bp-magic-copy {
+          order: 1;
+          grid-column: auto;
+          grid-row: auto;
+        }
+
+        .bp-feature {
+          grid-template-columns: 52px minmax(0, 1fr);
+          gap: 16px;
+        }
+
+        .bp-check {
+          width: 44px;
+          height: 44px;
+        }
+
+        .bp-check svg {
+          width: 30px;
+          height: 30px;
+        }
+
+        .bp-feature h3 {
+          font-size: 16px;
+          margin-bottom: 5px;
+        }
+
+        .bp-feature p {
+          font-size: 11.5px;
+          line-height: 1.45;
+        }
+
+        .bp-phone-figure {
+          order: 3;
+          grid-column: auto;
+          grid-row: auto;
+          min-height: 310px;
+        }
+
+        .bp-phone-figure::before {
+          right: 8%;
+          width: 150px;
+          height: 220px;
+        }
+
+        .bp-phone-figure::after {
+          right: calc(8% + 32px);
+          bottom: 74px;
+          font-size: 17px;
+        }
+
+        .bp-phone-large {
+          width: min(200px, 47%);
+          margin-right: 94px;
+          margin-bottom: 18px;
+        }
+
+        .bp-winners-strip {
+          margin-top: 0;
+          padding: 8px 0;
+        }
+
+        .bp-winner-track {
+          gap: 10px;
+          animation-duration: 36s;
+        }
+
+        .bp-winner-card {
+          flex-basis: 184px;
+          width: 184px;
+          border-radius: 6px;
+        }
+
+        .bp-winner-body {
+          padding: 9px 10px 10px;
+        }
+
+        .bp-winner-prize {
+          font-size: 13px;
+        }
+
+        .bp-winner-title {
+          font-size: 17px;
+        }
+
+        .bp-winner-card p {
+          font-size: 7.4px;
+        }
+
+        .bp-famous {
+          padding: 30px 0 28px;
+        }
+
+        .bp-section-title,
+        .bp-final-title {
+          font-size: clamp(30px, 9vw, 45px);
+        }
+
+        .bp-famous p {
+          font-size: 11.5px;
+          line-height: 1.55;
+        }
+
+        .bp-bars {
+          display: none;
+        }
+
+        .bp-retailer-card {
+          min-height: 112px;
+          padding: 14px 12px 14px 18px;
+          border-width: 2px;
+          gap: 10px;
+        }
+
+        .bp-retailer-copy strong {
+          font-size: clamp(26px, 8.5vw, 37px);
+        }
+
+        .bp-retailer-copy span {
+          font-size: clamp(14px, 4.5vw, 21px);
+          line-height: 1.08;
+        }
+
+        .bp-coin {
+          flex-basis: 82px;
+          width: 82px;
+          height: 82px;
+        }
+
+        .bp-coin span {
+          font-size: 22px;
+        }
+
+        .bp-coin::before,
+        .bp-coin::after {
+          width: 12px;
+          height: 12px;
+        }
+
+        .bp-coin::before {
+          left: -15px;
+        }
+
+        .bp-coin::after {
+          right: -11px;
+        }
+
+        .bp-logo-track {
+          width: max-content;
+          gap: 32px;
+          animation: bp-logo-scroll 28s linear infinite;
+        }
+
+        .bp-partner-logo img {
+          max-width: 112px;
+          max-height: 38px;
+        }
+
+        .bp-final {
+          padding: 34px 0 42px;
+        }
+
+        .bp-final-title {
+          margin-bottom: 34px;
+        }
+
+        .bp-handshake {
+          margin-top: 42px;
+        }
+      }
+
+      @media (max-width: 430px) {
+        .bp-container {
+          width: min(100% - 48px, 390px);
+        }
+
+        .bp-h1 {
+          font-size: 32px;
+        }
+
+        .bp-hero-text {
+          font-size: 10.8px;
+        }
+
+        .bp-card-title {
+          font-size: 30px;
+        }
+
+        .bp-numbers-title {
+          font-size: 22px;
+        }
+
+        .bp-numbers-title span {
+          font-size: 7.8px;
+        }
+
+        .bp-stats {
+          gap: 8px;
+        }
+
+        .bp-stat strong {
+          font-size: 20px;
+        }
+
+        .bp-stat span {
+          font-size: 6.6px;
+        }
+      }
+
+      @keyframes bp-logo-scroll {
+        from {
+          transform: translateX(0);
+        }
+
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bp-page">
+      <header class="bp-header">
+        <div class="bp-container bp-nav">
+          <a href="#top" aria-label="LMCT+">
+            <img class="bp-logo" src="../assets/lmct-logo.png" alt="LMCT+" />
+          </a>
+          <a class="bp-btn" href="#partner-application">Become a partner</a>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="bp-hero" aria-labelledby="bp-hero-title">
+          <div class="bp-container bp-hero-grid">
+            <div class="bp-hero-copy">
+              <h1 class="bp-h1" id="bp-hero-title">
+                Get your business in front of <span class="bp-accent">millions</span> of
+                Aussies.
+              </h1>
+              <p class="bp-hero-text">
+                Partner with LMCT+ to gain high-impact exposure, drive new customers
+                and become part of Australia's biggest rewards community. At no cost.
+              </p>
+              <a class="bp-btn bp-btn--wide" href="#partner-application">Apply Here</a>
+            </div>
+
+            <div class="bp-hero-card" aria-hidden="true">
+              <img
+                class="bp-hero-phone"
+                src="../assets/membership-oto/lmct-app-phone.png"
+                alt=""
+              />
+              <div class="bp-hero-offer">
+                <strong>2M+</strong>
+                <span>Monthly member and social reach</span>
+              </div>
+              <span class="bp-hero-line"></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="bp-card-section" aria-labelledby="bp-about-title">
+          <div class="bp-container">
+            <div class="bp-cert" aria-label="Australian owned and operated certified">
+              <strong>Australian owned</strong>
+              <span>&#9733;</span>
+              <small>Certified</small>
+            </div>
+
+            <div class="bp-blue-card">
+              <div class="bp-video-slot" aria-hidden="true">
+                <img src="../assets/membership-oto/lmct-app-phone.png" alt="" />
+              </div>
+              <div class="bp-intro-copy">
+                <h2 class="bp-card-title" id="bp-about-title">
+                  What is <em>LMCT+?</em>
+                </h2>
+                <p>
+                  <strong>LMCT+</strong> is Australia's biggest rewards club. We
+                  provide Aussies with discounts from all our partners like you by
+                  featuring your business in our exclusive <strong>LMCT+ members area.</strong>
+                </p>
+                <p>
+                  Our customers get to save hundreds from shopping with our partners
+                  and those businesses get extra exposure to our customers.
+                </p>
+              </div>
+              <img
+                class="bp-blue-car"
+                src="../assets/silverado/Silverado.png"
+                alt="LMCT+ prize vehicle"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section class="bp-numbers" aria-labelledby="bp-numbers-title">
+          <div class="bp-container">
+            <div class="bp-numbers-head">
+              <svg class="bp-laurel" viewBox="0 0 52 66" fill="none" aria-hidden="true">
+                <path d="M37 4C18 16 11 35 16 61" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                <path d="M30 13c-8 0-12 4-15 11 8 1 13-2 15-11Zm-8 12c-8 1-12 6-13 13 8 0 12-5 13-13Zm-3 15c-7 3-10 8-9 15 7-2 10-8 9-15Zm14-16c-2 7 0 13 6 18 4-7 2-13-6-18Zm-9 15c-1 8 2 13 8 17 3-7 0-13-8-17Z" fill="currentColor" />
+              </svg>
+              <h2 class="bp-numbers-title" id="bp-numbers-title">
+                The numbers don't lie
+                <span>Thousands of winners Australia wide</span>
+              </h2>
+              <svg class="bp-laurel bp-laurel--right" viewBox="0 0 52 66" fill="none" aria-hidden="true">
+                <path d="M37 4C18 16 11 35 16 61" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                <path d="M30 13c-8 0-12 4-15 11 8 1 13-2 15-11Zm-8 12c-8 1-12 6-13 13 8 0 12-5 13-13Zm-3 15c-7 3-10 8-9 15 7-2 10-8 9-15Zm14-16c-2 7 0 13 6 18 4-7 2-13-6-18Zm-9 15c-1 8 2 13 8 17 3-7 0-13-8-17Z" fill="currentColor" />
+              </svg>
+            </div>
+
+            <div class="bp-stats" aria-label="LMCT+ partner statistics">
+              <div class="bp-stat">
+                <strong>XXX</strong>
+                <span>$$$ generated<br />for our partner</span>
+              </div>
+              <div class="bp-stat">
+                <strong>$150M+</strong>
+                <span>Given away</span>
+              </div>
+              <div class="bp-stat">
+                <strong>2,000+</strong>
+                <span>Exclusive LMCT+<br />partners</span>
+              </div>
+            </div>
+
+            <a class="bp-btn bp-btn--wide" href="#partner-application">
+              Click to become a partner
+            </a>
+          </div>
+        </section>
+
+        <section class="bp-magic" aria-labelledby="bp-magic-title">
+          <div class="bp-container">
+            <img class="bp-dark-logo" src="../assets/lmct-logo.png" alt="LMCT+" />
+            <h2 class="bp-magic-title" id="bp-magic-title">
+              This is where the <span class="bp-accent">magic</span> happens.
+            </h2>
+
+            <div class="bp-magic-grid">
+              <div class="bp-magic-copy">
+                <p>
+                  Millions of people access the LMCT+ platform each week to explore
+                  partner offers and enter Australia's biggest giveaways.
+                </p>
+              </div>
+
+              <div class="bp-features">
+                <article class="bp-feature">
+                  <span class="bp-check" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M4.5 12.5 9.4 17.4 19.8 6.8" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3>Your Exclusive Offer</h3>
+                    <p>
+                      Present your business inside the member platform with a clear
+                      offer designed to drive action.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="bp-feature">
+                  <span class="bp-check" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M4.5 12.5 9.4 17.4 19.8 6.8" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3>Weekly Engagement</h3>
+                    <p>
+                      Ongoing promotions keep the platform active year-round,
+                      creating repeat visibility for partners.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="bp-feature">
+                  <span class="bp-check" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M4.5 12.5 9.4 17.4 19.8 6.8" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3>Prize-driven Spending</h3>
+                    <p>
+                      Supplementary prize money can only be spent with partner
+                      businesses, supporting sales.
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="bp-phone-figure" aria-hidden="true">
+                <img
+                  class="bp-phone-large"
+                  src="../assets/membership-oto/lmct-app-phone.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="bp-winners-strip" aria-label="Famous LMCT+ giveaway winners">
+          <div class="bp-winner-track">
+            <article class="bp-winner-card">
+              <div class="bp-winner-img">
+                <img src="../assets/car.png" alt="Black LMCT+ prize vehicle" />
+              </div>
+              <div class="bp-winner-body">
+                <span class="bp-winner-prize">$1.8M</span>
+                <span class="bp-winner-title">Winner</span>
+                <p>Cash supplementary prizes can only be spent with partner businesses like yours.</p>
+                <span class="bp-winner-name">- Lawrence L</span>
+              </div>
+            </article>
+            <article class="bp-winner-card">
+              <div class="bp-winner-img">
+                <img src="../assets/carousel/finish-2%201.png" alt="LMCT+ major prize campaign" />
+              </div>
+              <div class="bp-winner-body">
+                <span class="bp-winner-prize">$8M</span>
+                <span class="bp-winner-title">Winner</span>
+                <p>Winner campaigns create real attention that keeps customers talking and spending.</p>
+                <span class="bp-winner-name">- Benjamin G</span>
+              </div>
+            </article>
+            <article class="bp-winner-card">
+              <div class="bp-winner-img">
+                <img src="../assets/lmct-podium.jpg" alt="LMCT+ prize podium" />
+              </div>
+              <div class="bp-winner-body">
+                <span class="bp-winner-prize">$250K</span>
+                <span class="bp-winner-title">Winner</span>
+                <p>Every giveaway gives members another reason to open the app and discover offers.</p>
+                <span class="bp-winner-name">- Penny G</span>
+              </div>
+            </article>
+            <article class="bp-winner-card">
+              <div class="bp-winner-img">
+                <img src="../assets/silverado/silverado2.png" alt="LMCT+ Silverado giveaway vehicle" />
+              </div>
+              <div class="bp-winner-body">
+                <span class="bp-winner-prize">$8M</span>
+                <span class="bp-winner-title">Winner</span>
+                <p>Promotions turn prize excitement into visits, redemptions and partner sales.</p>
+                <span class="bp-winner-name">- Gwenda C</span>
+              </div>
+            </article>
+            <article class="bp-winner-card">
+              <div class="bp-winner-img">
+                <img src="../assets/carousel/buildd%201.png" alt="LMCT+ campaign build preview" />
+              </div>
+              <div class="bp-winner-body">
+                <span class="bp-winner-prize">$1.8M</span>
+                <span class="bp-winner-title">Winner</span>
+                <p>Partner campaigns help businesses get seen by a highly engaged Aussie audience.</p>
+                <span class="bp-winner-name">- Matt B</span>
+              </div>
+            </article>
+
+            <article class="bp-winner-card" aria-hidden="true">
+              <div class="bp-winner-img">
+                <img src="../assets/car.png" alt="" />
+              </div>
+              <div class="bp-winner-body">
+                <span class="bp-winner-prize">$1.8M</span>
+                <span class="bp-winner-title">Winner</span>
+                <p>Cash supplementary prizes can only be spent with partner businesses like yours.</p>
+                <span class="bp-winner-name">- Lawrence L</span>
+              </div>
+            </article>
+            <article class="bp-winner-card" aria-hidden="true">
+              <div class="bp-winner-img">
+                <img src="../assets/carousel/finish-2%201.png" alt="" />
+              </div>
+              <div class="bp-winner-body">
+                <span class="bp-winner-prize">$8M</span>
+                <span class="bp-winner-title">Winner</span>
+                <p>Winner campaigns create real attention that keeps customers talking and spending.</p>
+                <span class="bp-winner-name">- Benjamin G</span>
+              </div>
+            </article>
+            <article class="bp-winner-card" aria-hidden="true">
+              <div class="bp-winner-img">
+                <img src="../assets/lmct-podium.jpg" alt="" />
+              </div>
+              <div class="bp-winner-body">
+                <span class="bp-winner-prize">$250K</span>
+                <span class="bp-winner-title">Winner</span>
+                <p>Every giveaway gives members another reason to open the app and discover offers.</p>
+                <span class="bp-winner-name">- Penny G</span>
+              </div>
+            </article>
+            <article class="bp-winner-card" aria-hidden="true">
+              <div class="bp-winner-img">
+                <img src="../assets/silverado/silverado2.png" alt="" />
+              </div>
+              <div class="bp-winner-body">
+                <span class="bp-winner-prize">$8M</span>
+                <span class="bp-winner-title">Winner</span>
+                <p>Promotions turn prize excitement into visits, redemptions and partner sales.</p>
+                <span class="bp-winner-name">- Gwenda C</span>
+              </div>
+            </article>
+            <article class="bp-winner-card" aria-hidden="true">
+              <div class="bp-winner-img">
+                <img src="../assets/carousel/buildd%201.png" alt="" />
+              </div>
+              <div class="bp-winner-body">
+                <span class="bp-winner-prize">$1.8M</span>
+                <span class="bp-winner-title">Winner</span>
+                <p>Partner campaigns help businesses get seen by a highly engaged Aussie audience.</p>
+                <span class="bp-winner-name">- Matt B</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="bp-famous" aria-labelledby="bp-famous-title">
+          <div class="bp-container">
+            <div class="bp-famous-grid">
+              <div>
+                <h2 class="bp-section-title" id="bp-famous-title">
+                  Famous giveaway <span class="bp-accent">winners!</span>
+                </h2>
+                <p>
+                  Each and every giveaway has cash supplementary prizes that can
+                  <strong>ONLY</strong> be spent with our partners. We've run over
+                  150 promotions so far with over 300 winners spending their prize
+                  money <strong>EXCLUSIVELY</strong> with businesses like you.
+                </p>
+              </div>
+              <div class="bp-bars" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <div class="bp-retailer-card">
+              <div class="bp-retailer-copy">
+                <strong>2,000+<br />Retailers</strong>
+                <span>That trust us to promote them!</span>
+              </div>
+              <div class="bp-coin" aria-hidden="true">
+                <span>+</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bp-logo-row" aria-label="Example partner brands">
+            <div class="bp-logo-track">
+              <span class="bp-partner-logo bp-partner-logo--script">Keepup</span>
+              <span class="bp-partner-logo">
+                <img src="../assets/membership-oto/partner-brand-7.png" alt="Interior Secrets" />
+              </span>
+              <span class="bp-partner-logo">
+                <img src="../assets/membership-oto/partner-flipside.png" alt="Flip Side" />
+              </span>
+              <span class="bp-partner-logo">
+                <img src="../assets/membership-oto/partner-betta.png" alt="Betta" />
+              </span>
+              <span class="bp-partner-logo">
+                <img src="../assets/membership-oto/partner-adore.png" alt="Adore Beauty" />
+              </span>
+              <span class="bp-partner-logo bp-partner-logo--small">HARROP</span>
+              <span class="bp-partner-logo bp-partner-logo--script" aria-hidden="true">Keepup</span>
+              <span class="bp-partner-logo" aria-hidden="true">
+                <img src="../assets/membership-oto/partner-brand-7.png" alt="" />
+              </span>
+              <span class="bp-partner-logo" aria-hidden="true">
+                <img src="../assets/membership-oto/partner-flipside.png" alt="" />
+              </span>
+              <span class="bp-partner-logo" aria-hidden="true">
+                <img src="../assets/membership-oto/partner-betta.png" alt="" />
+              </span>
+              <span class="bp-partner-logo" aria-hidden="true">
+                <img src="../assets/membership-oto/partner-adore.png" alt="" />
+              </span>
+              <span class="bp-partner-logo bp-partner-logo--small" aria-hidden="true">HARROP</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="bp-final" id="partner-application" aria-labelledby="bp-final-title">
+          <div class="bp-container">
+            <h2 class="bp-final-title" id="bp-final-title">
+              Become a Partner Today!
+            </h2>
+            <a class="bp-btn bp-btn--wide" href="#partner-application">
+              Click to become a partner
+            </a>
+
+            <div class="bp-handshake" aria-hidden="true">
+              <svg viewBox="0 0 320 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M34 76c24-34 57-42 94-18l24 16 24-16c37-24 70-16 94 18l-34 44-32-18-44 52-44-52-32 18-34-44Z" fill="#f4c39c" />
+                <path d="m92 102 36 47c9 12 26 14 38 4l56-47" stroke="#c98255" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M119 84h63c11 0 18 13 12 22-10 16-30 21-47 12l-11-6-25 23" fill="#ffd6b5" />
+                <path d="M119 84h63c11 0 18 13 12 22-10 16-30 21-47 12l-11-6-25 23" stroke="#c98255" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="m66 48 54 28-36 70-54-28 36-70Z" fill="#17aef4" />
+                <path d="m254 48-54 28 36 70 54-28-36-70Z" fill="#17aef4" />
+                <path d="m83 63 23 12-34 67-23-12 34-67Zm154 0-23 12 34 67 23-12-34-67Z" fill="#0b82d9" opacity=".95" />
+                <path d="m118 148 18 16m15-5 16 14m14-27 16 14" stroke="#c98255" stroke-width="8" stroke-linecap="round" />
+              </svg>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

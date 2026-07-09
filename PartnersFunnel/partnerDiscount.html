@@ -1,0 +1,303 @@
+<!-- ============================================ -->
+<!-- PARTNER DISCOUNTS / MATES RATES
+<!-- ============================================ -->
+<style>
+  .lmctDS__wrap {
+    background: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 56px 0;
+  }
+  .lmctDS__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .lmctDS__head {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .lmctDS__kick {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.25);
+    color: #0476c4;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .lmctDS__title {
+    margin: 0 0 12px;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -1.4px;
+    color: #05162a;
+    text-transform: uppercase;
+  }
+  .lmctDS__title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #0476c4, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctDS__lead {
+    margin: 0 auto;
+    max-width: 600px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.55;
+  }
+  .lmctDS__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 26px;
+  }
+  .lmctDS__stat {
+    background: #f7fafc;
+    border: 1px solid #e8eef4;
+    border-radius: 16px;
+    padding: 22px 12px;
+    text-align: center;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .lmctDS__stat:hover {
+    transform: translateY(-3px);
+    border-color: rgba(12, 159, 253, 0.35);
+  }
+  .lmctDS__statNum {
+    font-size: clamp(26px, 4.4vw, 40px);
+    font-weight: 900;
+    letter-spacing: -1.4px;
+    color: #0c9ffd;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .lmctDS__statLbl {
+    font-size: 11px;
+    font-weight: 800;
+    color: #64748b;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+  /* marquee */
+  .lmctDS__marqueeWrap {
+    position: relative;
+    overflow: hidden;
+    padding: 8px 0;
+  }
+  .lmctDS__marqueeWrap::before,
+  .lmctDS__marqueeWrap::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .lmctDS__marqueeWrap::before {
+    left: 0;
+    background: linear-gradient(90deg, #fff, transparent);
+  }
+  .lmctDS__marqueeWrap::after {
+    right: 0;
+    background: linear-gradient(270deg, #fff, transparent);
+  }
+  .lmctDS__marquee {
+    display: flex;
+    width: max-content;
+    animation: lmctDS__scroll 38s linear infinite;
+    will-change: transform;
+  }
+  .lmctDS__marquee:hover {
+    animation-play-state: paused;
+  }
+  .lmctDS__half {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+  .lmctDS__tile {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 158px;
+    height: 74px;
+    margin: 0 8px;
+    background: #fff;
+    border: 1px solid #e8eef4;
+    border-radius: 14px;
+    padding: 0 18px;
+    overflow: hidden;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+  }
+  .lmctDS__tile:hover {
+    border-color: rgba(12, 159, 253, 0.4);
+    box-shadow: 0 12px 26px rgba(12, 159, 253, 0.1);
+    transform: translateY(-2px);
+  }
+  .lmctDS__tile img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  @keyframes lmctDS__scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (max-width: 560px) {
+    .lmctDS__wrap {
+      padding: 42px 0;
+    }
+    .lmctDS__stats {
+      gap: 8px;
+    }
+    .lmctDS__stat {
+      padding: 16px 8px;
+    }
+  }
+</style>
+<div class="lmctDS__wrap">
+  <div class="lmctDS__inner">
+    <div class="lmctDS__head">
+      <span class="lmctDS__kick">The Discounts</span>
+      <h2 class="lmctDS__title">
+        Mates Rates At <em>2,000+ Aussie Brands</em>
+      </h2>
+      <p class="lmctDS__lead">
+        Your membership unlocks member-only pricing at thousands of Australian
+        businesses — in store and online. Most members save more than their
+        membership costs.
+      </p>
+    </div>
+    <div class="lmctDS__stats">
+      <div class="lmctDS__stat">
+        <div class="lmctDS__statNum">2,000+</div>
+        <div class="lmctDS__statLbl">Partner Brands</div>
+      </div>
+      <div class="lmctDS__stat">
+        <div class="lmctDS__statNum">1,700+</div>
+        <div class="lmctDS__statLbl">Stores To Redeem</div>
+      </div>
+      <div class="lmctDS__stat">
+        <div class="lmctDS__statNum">$1,000s</div>
+        <div class="lmctDS__statLbl">Saved Each Year</div>
+      </div>
+    </div>
+  </div>
+  <div class="lmctDS__marqueeWrap">
+    <div class="lmctDS__marquee">
+      <div class="lmctDS__half">
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/4b/92a806912a47b79e4ade4a9b561e3b/Untitled-3_0001_UT.png"
+            alt="UltraTune"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/33/8ce54dd43245b0a20f430e633f2ebb/Untitled-3_0005_lotus.png"
+            alt="Lotus Caravans"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/36/8f3a79fbf14bb3a29946b9797d5c3c/Untitled-3_0003_adore.png"
+            alt="Adore Beauty"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/e0/dcf01335c54787b0a344d1e2ca3750/Untitled-3_0006_betta.png"
+            alt="Betta"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/7a/19042013274caeb76f74573b18ce93/Untitled-3_0004_flippy.png"
+            alt="Flipside"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/6a/7a0d3371d34f1ba7fffdba9be9de7a/Untitled-3_0000_Layer-7-copy.png"
+            alt="Partner Brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/a5/58fc73105b46d1be16ab0450c124d8/Untitled-3_0002_Layer-6.png"
+            alt="Partner Brand"
+          />
+        </div>
+      </div>
+      <div class="lmctDS__half" aria-hidden="true">
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/4b/92a806912a47b79e4ade4a9b561e3b/Untitled-3_0001_UT.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/33/8ce54dd43245b0a20f430e633f2ebb/Untitled-3_0005_lotus.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/36/8f3a79fbf14bb3a29946b9797d5c3c/Untitled-3_0003_adore.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/e0/dcf01335c54787b0a344d1e2ca3750/Untitled-3_0006_betta.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/7a/19042013274caeb76f74573b18ce93/Untitled-3_0004_flippy.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/6a/7a0d3371d34f1ba7fffdba9be9de7a/Untitled-3_0000_Layer-7-copy.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/a5/58fc73105b46d1be16ab0450c124d8/Untitled-3_0002_Layer-6.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

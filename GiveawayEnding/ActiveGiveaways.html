@@ -17,7 +17,7 @@
     --lmct-ag-radius-lg: 26px;
     --lmct-ag-radius-md: 18px;
     --lmct-ag-radius-sm: 12px;
-    background: var(--lmct-ag-bg);
+    /* background: var(--lmct-ag-bg); */
     box-sizing: border-box;
     font-family: "Montserrat", Arial, sans-serif;
     padding: 76px 18px;
@@ -87,11 +87,24 @@
     margin: 0;
   }
 
+  .lmctActiveGiveaways .lmctActiveGiveaways__carousel {
+    position: relative;
+    padding: 0 64px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__viewport {
+    overflow: hidden;
+    padding: 8px 2px 20px;
+    margin: -8px -2px -20px;
+  }
+
   .lmctActiveGiveaways .lmctActiveGiveaways__grid {
-    display: grid;
+    align-items: stretch;
+    display: flex;
     gap: 24px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     min-height: 560px;
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
   }
 
   .lmctActiveGiveaways .lmctActiveGiveaways__card {
@@ -108,10 +121,12 @@
       );
     border: 1px solid var(--lmct-ag-border);
     border-radius: var(--lmct-ag-radius-lg);
-    box-shadow: var(--lmct-ag-shadow);
+    /* box-shadow: var(--lmct-ag-shadow); */
     color: var(--lmct-ag-text);
     display: flex;
+    flex: 0 0 calc((100% - 24px) / 2);
     flex-direction: column;
+    max-width: calc((100% - 24px) / 2);
     min-height: 100%;
     overflow: hidden;
     position: relative;
@@ -119,6 +134,78 @@
       border-color 180ms ease,
       box-shadow 180ms ease,
       transform 180ms ease;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__nav {
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid rgba(21, 159, 242, 0.32);
+    border-radius: 999px;
+    box-shadow: 0 14px 34px rgba(6, 24, 43, 0.14);
+    color: var(--lmct-ag-blue);
+    cursor: pointer;
+    display: inline-flex;
+    height: 52px;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      color 180ms ease,
+      opacity 180ms ease,
+      transform 180ms ease;
+    width: 52px;
+    z-index: 3;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__nav:hover,
+  .lmctActiveGiveaways .lmctActiveGiveaways__nav:focus {
+    border-color: var(--lmct-ag-border-strong);
+    box-shadow: 0 18px 42px rgba(21, 159, 242, 0.2);
+    color: #057be3;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__nav:focus-visible {
+    outline: 3px solid rgba(53, 184, 255, 0.56);
+    outline-offset: 4px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__nav:disabled {
+    cursor: not-allowed;
+    opacity: 0.38;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__nav[hidden] {
+    display: none;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__navPrev {
+    left: 0;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__navNext {
+    right: 0;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__navIcon {
+    display: block;
+    height: 24px;
+    width: 24px;
+  }
+
+  .lmctActiveGiveaways .lmctActiveGiveaways__srStatus {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 
   .lmctActiveGiveaways .lmctActiveGiveaways__card:hover {
@@ -368,15 +455,16 @@
     box-shadow: 0 16px 44px rgba(6, 24, 43, 0.06);
     color: #536579;
     display: flex;
+    flex: 0 0 100%;
     flex-direction: column;
     font-size: 16px;
     font-weight: 700;
     gap: 14px;
-    grid-column: 1 / -1;
     justify-content: center;
     letter-spacing: 0;
     line-height: 1.45;
     min-height: 260px;
+    max-width: 100%;
     padding: 34px;
     text-align: center;
   }
@@ -421,9 +509,17 @@
       padding: 58px 14px;
     }
 
+    .lmctActiveGiveaways .lmctActiveGiveaways__carousel {
+      padding: 0 58px;
+    }
+
     .lmctActiveGiveaways .lmctActiveGiveaways__grid {
-      grid-template-columns: 1fr;
       min-height: 520px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__card {
+      flex-basis: 100%;
+      max-width: 100%;
     }
 
     .lmctActiveGiveaways .lmctActiveGiveaways__title {
@@ -438,6 +534,37 @@
 
     .lmctActiveGiveaways .lmctActiveGiveaways__header {
       margin-bottom: 28px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__carousel {
+      padding: 0;
+    }
+
+    .lmctActiveGiveaways.lmctActiveGiveaways--scrollable
+      .lmctActiveGiveaways__carousel {
+      padding-bottom: 62px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__nav {
+      background: rgba(255, 255, 255, 0.94);
+      bottom: 0;
+      height: 44px;
+      top: auto;
+      transform: none;
+      width: 44px;
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__navPrev {
+      left: calc(50% - 52px);
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__navNext {
+      right: calc(50% - 52px);
+    }
+
+    .lmctActiveGiveaways .lmctActiveGiveaways__navIcon {
+      height: 21px;
+      width: 21px;
     }
 
     .lmctActiveGiveaways .lmctActiveGiveaways__title {
@@ -487,6 +614,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .lmctActiveGiveaways .lmctActiveGiveaways__card,
+    .lmctActiveGiveaways .lmctActiveGiveaways__grid,
+    .lmctActiveGiveaways .lmctActiveGiveaways__nav,
     .lmctActiveGiveaways .lmctActiveGiveaways__cta {
       transition: none;
     }
@@ -497,7 +626,7 @@
   }
 </style>
 
-<section class="lmctActiveGiveaways" aria-label="Active LMCT+ giveaways">
+<section id="ActiveGiveawaySection" class="lmctActiveGiveaways" aria-label="Active LMCT+ giveaways">
   <div class="lmctActiveGiveaways__inner">
     <div class="lmctActiveGiveaways__header">
       <div class="lmctActiveGiveaways__badge">
@@ -510,14 +639,83 @@
       </p>
     </div>
 
-    <div class="lmctActiveGiveaways__grid" data-lmct-active-giveaways-grid>
-      <div class="lmctActiveGiveaways__state" role="status" aria-live="polite">
-        <span class="lmctActiveGiveaways__loader"></span>
-        <p class="lmctActiveGiveaways__stateTitle">Loading active giveaways</p>
-        <p class="lmctActiveGiveaways__stateText">
-          Checking LMCT+ for giveaways that are still open.
-        </p>
+    <div
+      class="lmctActiveGiveaways__carousel"
+      aria-roledescription="carousel"
+      data-lmct-active-giveaways-carousel
+    >
+      <button
+        class="lmctActiveGiveaways__nav lmctActiveGiveaways__navPrev"
+        type="button"
+        aria-label="Previous giveaway"
+        data-lmct-active-giveaways-prev
+        hidden
+      >
+        <svg
+          class="lmctActiveGiveaways__navIcon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="m15 18-6-6 6-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.6"
+          />
+        </svg>
+      </button>
+
+      <div
+        class="lmctActiveGiveaways__viewport"
+        data-lmct-active-giveaways-viewport
+      >
+        <div class="lmctActiveGiveaways__grid" data-lmct-active-giveaways-grid>
+          <div
+            class="lmctActiveGiveaways__state"
+            role="status"
+            aria-live="polite"
+          >
+            <span class="lmctActiveGiveaways__loader"></span>
+            <p class="lmctActiveGiveaways__stateTitle">
+              Loading active giveaways
+            </p>
+            <p class="lmctActiveGiveaways__stateText">
+              Checking LMCT+ for giveaways that are still open.
+            </p>
+          </div>
+        </div>
       </div>
+
+      <button
+        class="lmctActiveGiveaways__nav lmctActiveGiveaways__navNext"
+        type="button"
+        aria-label="Next giveaway"
+        data-lmct-active-giveaways-next
+        hidden
+      >
+        <svg
+          class="lmctActiveGiveaways__navIcon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="m9 6 6 6-6 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.6"
+          />
+        </svg>
+      </button>
+
+      <p
+        class="lmctActiveGiveaways__srStatus"
+        aria-live="polite"
+        data-lmct-active-giveaways-status
+      ></p>
     </div>
   </div>
 </section>
@@ -549,7 +747,18 @@
     var lmctActiveGiveawaysGrid = lmctActiveGiveawaysRoot.querySelector(
       "[data-lmct-active-giveaways-grid]",
     );
+    var lmctActiveGiveawaysPrevButton = lmctActiveGiveawaysRoot.querySelector(
+      "[data-lmct-active-giveaways-prev]",
+    );
+    var lmctActiveGiveawaysNextButton = lmctActiveGiveawaysRoot.querySelector(
+      "[data-lmct-active-giveaways-next]",
+    );
+    var lmctActiveGiveawaysStatus = lmctActiveGiveawaysRoot.querySelector(
+      "[data-lmct-active-giveaways-status]",
+    );
     var lmctActiveGiveawaysCards = [];
+    var lmctActiveGiveawaysCarouselIndex = 0;
+    var lmctActiveGiveawaysResizeFrame = null;
     var lmctActiveGiveawaysTimerId = null;
 
     function lmctActiveGiveawaysText(value, fallback) {
@@ -684,6 +893,143 @@
       lmctActiveGiveawaysElement.textContent = text;
       parent.appendChild(lmctActiveGiveawaysElement);
       return lmctActiveGiveawaysElement;
+    }
+
+    function lmctActiveGiveawaysGetVisibleCount() {
+      if (
+        window.matchMedia &&
+        window.matchMedia("(max-width: 860px)").matches
+      ) {
+        return 1;
+      }
+
+      return 2;
+    }
+
+    function lmctActiveGiveawaysGetCardElements() {
+      if (!lmctActiveGiveawaysGrid) {
+        return [];
+      }
+
+      return Array.prototype.slice.call(
+        lmctActiveGiveawaysGrid.querySelectorAll(".lmctActiveGiveaways__card"),
+      );
+    }
+
+    function lmctActiveGiveawaysSetNavHidden(isHidden) {
+      [lmctActiveGiveawaysPrevButton, lmctActiveGiveawaysNextButton].forEach(
+        function (button) {
+          if (!button) {
+            return;
+          }
+
+          button.hidden = isHidden;
+          button.disabled = isHidden;
+        },
+      );
+    }
+
+    function lmctActiveGiveawaysUpdateCarousel() {
+      if (!lmctActiveGiveawaysGrid) {
+        return;
+      }
+
+      var lmctActiveGiveawaysCardElements =
+        lmctActiveGiveawaysGetCardElements();
+      var lmctActiveGiveawaysTotal = lmctActiveGiveawaysCardElements.length;
+
+      if (!lmctActiveGiveawaysTotal) {
+        lmctActiveGiveawaysCarouselIndex = 0;
+        lmctActiveGiveawaysGrid.style.transform = "translate3d(0, 0, 0)";
+        lmctActiveGiveawaysSetNavHidden(true);
+        lmctActiveGiveawaysRoot.classList.remove(
+          "lmctActiveGiveaways--scrollable",
+        );
+
+        if (lmctActiveGiveawaysStatus) {
+          lmctActiveGiveawaysStatus.textContent = "";
+        }
+
+        return;
+      }
+
+      var lmctActiveGiveawaysVisible = Math.min(
+        lmctActiveGiveawaysGetVisibleCount(),
+        lmctActiveGiveawaysTotal,
+      );
+      var lmctActiveGiveawaysMaxIndex = Math.max(
+        lmctActiveGiveawaysTotal - lmctActiveGiveawaysVisible,
+        0,
+      );
+
+      lmctActiveGiveawaysCarouselIndex = Math.min(
+        Math.max(lmctActiveGiveawaysCarouselIndex, 0),
+        lmctActiveGiveawaysMaxIndex,
+      );
+
+      var lmctActiveGiveawaysTarget =
+        lmctActiveGiveawaysCardElements[lmctActiveGiveawaysCarouselIndex];
+      var lmctActiveGiveawaysOffset = lmctActiveGiveawaysTarget
+        ? lmctActiveGiveawaysTarget.offsetLeft
+        : 0;
+
+      lmctActiveGiveawaysGrid.style.transform =
+        "translate3d(" + -lmctActiveGiveawaysOffset + "px, 0, 0)";
+
+      var lmctActiveGiveawaysHasOverflow =
+        lmctActiveGiveawaysTotal > lmctActiveGiveawaysVisible;
+
+      lmctActiveGiveawaysRoot.classList.toggle(
+        "lmctActiveGiveaways--scrollable",
+        lmctActiveGiveawaysHasOverflow,
+      );
+      lmctActiveGiveawaysSetNavHidden(!lmctActiveGiveawaysHasOverflow);
+
+      if (lmctActiveGiveawaysPrevButton) {
+        lmctActiveGiveawaysPrevButton.disabled =
+          !lmctActiveGiveawaysHasOverflow ||
+          lmctActiveGiveawaysCarouselIndex <= 0;
+      }
+
+      if (lmctActiveGiveawaysNextButton) {
+        lmctActiveGiveawaysNextButton.disabled =
+          !lmctActiveGiveawaysHasOverflow ||
+          lmctActiveGiveawaysCarouselIndex >= lmctActiveGiveawaysMaxIndex;
+      }
+
+      if (lmctActiveGiveawaysStatus) {
+        lmctActiveGiveawaysStatus.textContent = lmctActiveGiveawaysHasOverflow
+          ? "Showing giveaways " +
+            (lmctActiveGiveawaysCarouselIndex + 1) +
+            " to " +
+            (lmctActiveGiveawaysCarouselIndex + lmctActiveGiveawaysVisible) +
+            " of " +
+            lmctActiveGiveawaysTotal
+          : "";
+      }
+    }
+
+    function lmctActiveGiveawaysSetCarouselIndex(nextIndex) {
+      lmctActiveGiveawaysCarouselIndex = nextIndex;
+      lmctActiveGiveawaysUpdateCarousel();
+    }
+
+    function lmctActiveGiveawaysScheduleCarouselUpdate() {
+      if (!window.requestAnimationFrame) {
+        lmctActiveGiveawaysUpdateCarousel();
+        return;
+      }
+
+      if (lmctActiveGiveawaysResizeFrame) {
+        window.cancelAnimationFrame(lmctActiveGiveawaysResizeFrame);
+      }
+
+      lmctActiveGiveawaysResizeFrame = window.requestAnimationFrame(
+        function () {
+          lmctActiveGiveawaysResizeFrame = null;
+          lmctActiveGiveawaysUpdateCarousel();
+        },
+      );
     }
 
     function lmctActiveGiveawaysCreateTimeBox(value, label) {
@@ -944,6 +1290,8 @@
       }
 
       lmctActiveGiveawaysGrid.innerHTML = "";
+      lmctActiveGiveawaysCarouselIndex = 0;
+      lmctActiveGiveawaysUpdateCarousel();
 
       var lmctActiveGiveawaysState = document.createElement("div");
       lmctActiveGiveawaysState.className = "lmctActiveGiveaways__state";
@@ -965,6 +1313,7 @@
         text,
       );
       lmctActiveGiveawaysGrid.appendChild(lmctActiveGiveawaysState);
+      lmctActiveGiveawaysUpdateCarousel();
     }
 
     function lmctActiveGiveawaysRenderCards(giveaways) {
@@ -974,6 +1323,7 @@
 
       lmctActiveGiveawaysCards = [];
       lmctActiveGiveawaysGrid.innerHTML = "";
+      lmctActiveGiveawaysCarouselIndex = 0;
 
       giveaways.forEach(function (giveaway) {
         lmctActiveGiveawaysGrid.appendChild(
@@ -982,6 +1332,7 @@
       });
 
       lmctActiveGiveawaysStartTimers();
+      lmctActiveGiveawaysUpdateCarousel();
     }
 
     function lmctActiveGiveawaysUpdateTimers() {
@@ -1087,6 +1438,27 @@
           );
         });
     }
+
+    if (lmctActiveGiveawaysPrevButton) {
+      lmctActiveGiveawaysPrevButton.addEventListener("click", function () {
+        lmctActiveGiveawaysSetCarouselIndex(
+          lmctActiveGiveawaysCarouselIndex - 1,
+        );
+      });
+    }
+
+    if (lmctActiveGiveawaysNextButton) {
+      lmctActiveGiveawaysNextButton.addEventListener("click", function () {
+        lmctActiveGiveawaysSetCarouselIndex(
+          lmctActiveGiveawaysCarouselIndex + 1,
+        );
+      });
+    }
+
+    window.addEventListener(
+      "resize",
+      lmctActiveGiveawaysScheduleCarouselUpdate,
+    );
 
     lmctActiveGiveawaysLoad();
   })();

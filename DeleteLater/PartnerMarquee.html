@@ -1,0 +1,184 @@
+<style>
+  .lmctPartnersMarquee,
+  .lmctPartnersMarquee * {
+    box-sizing: border-box;
+  }
+
+  .lmctPartnersMarquee {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: "Montserrat", Helvetica, sans-serif;
+    position: relative;
+    padding: 26px 0;
+  }
+
+  /* Soft fade on left/right edges */
+  .lmctPartnersMarquee::before,
+  .lmctPartnersMarquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 90px;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .lmctPartnersMarquee::before {
+    left: 0;
+    background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .lmctPartnersMarquee::after {
+    right: 0;
+    background: linear-gradient(
+      270deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .lmctPartnersTrack {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: lmctPartnersScroll 28s linear infinite;
+    will-change: transform;
+  }
+
+  .lmctPartnersMarquee:hover .lmctPartnersTrack {
+    animation-play-state: paused;
+  }
+
+  .lmctPartnerItem {
+    flex: 0 0 auto;
+    width: 190px;
+    height: 86px;
+    margin: 0 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lmctPartnerItem img {
+    max-width: 100%;
+    max-height: 68px;
+    display: block;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.85;
+    transition:
+      opacity 0.25s ease,
+      filter 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .lmctPartnerItem:hover img {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.04);
+  }
+
+  @keyframes lmctPartnersScroll {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .lmctPartnersMarquee {
+      padding: 20px 0;
+    }
+
+    .lmctPartnersMarquee::before,
+    .lmctPartnersMarquee::after {
+      width: 50px;
+    }
+
+    .lmctPartnersTrack {
+      animation-duration: 22s;
+    }
+
+    .lmctPartnerItem {
+      width: 145px;
+      height: 70px;
+      margin: 0 18px;
+    }
+
+    .lmctPartnerItem img {
+      max-height: 52px;
+    }
+  }
+</style>
+
+<div class="lmctPartnersMarquee" id="lmctPartnersMarquee">
+  <div class="lmctPartnersTrack" id="lmctPartnersTrack">
+    <div class="lmctPartnerItem">
+      <img
+        src="https://images.clickfunnels.com/4e/fe2dab767c49c684f55badf6c00316/geeup-1.png"
+        alt="Gee Up"
+      />
+    </div>
+
+    <div class="lmctPartnerItem">
+      <img
+        src="https://images.clickfunnels.com/82/461a5bfa2d47fc931fc365e3115989/Interior-secrets.png"
+        alt="Interior Secrets"
+      />
+    </div>
+
+    <div class="lmctPartnerItem">
+      <img
+        src="https://images.clickfunnels.com/bf/0bdcbfc8b34367945d622eef3ab1f1/FlipSide.png"
+        alt="Flip Side"
+      />
+    </div>
+
+    <div class="lmctPartnerItem">
+      <img
+        src="https://images.clickfunnels.com/10/a20508c53d45c49de7b2959e330c61/export.png"
+        alt="Betta"
+      />
+    </div>
+
+    <div class="lmctPartnerItem">
+      <img
+        src="https://images.clickfunnels.com/f1/d61eeca6ad49ee9acee7955871921a/Adorebeauty.png"
+        alt="Adore Beauty"
+      />
+    </div>
+
+    <div class="lmctPartnerItem">
+      <img
+        src="https://images.clickfunnels.com/05/a31d8f140e484ab3f78f3fbc6c4a33/Harrop.png"
+        alt="Harrop"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var track = document.getElementById("lmctPartnersTrack");
+
+    if (!track || track.getAttribute("data-cloned") === "true") return;
+
+    var originalItems = Array.prototype.slice.call(track.children);
+
+    originalItems.forEach(function (item) {
+      var clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      track.appendChild(clone);
+    });
+
+    track.setAttribute("data-cloned", "true");
+  })();
+</script>

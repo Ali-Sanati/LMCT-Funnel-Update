@@ -1,0 +1,1323 @@
+<!--
+Use Luxury Minimal as the chosen style and ask the AI to conceive an innovative business/service concept for one cohesive single-page landing page. The arrival should feel private, composed, and commercially magnetic, like a high-trust invitation rather than a loud pitch; visitors should sense restraint, clarity, and quiet momentum from the first viewport. Let the visual hierarchy move through generous space, precise contrast, refined imagery, and selectively colorful accents that intensify emotional impact while keeping the scroll calm, premium, and unified.
+
+Design from the feeling of confidence earned through restraint: typography should feel authoritative, elegant, and sharply edited, with headings that command without shouting and body copy that feels welcoming enough to continue. Interactions and animations should create smooth, deliberate sensations, with subtle reveals, polished hover states, and transitions that feel liquid but controlled. The one-page journey should progress from immediate assurance, to curiosity, to proof, to belonging, then into a final call-to-action that feels like a natural acceptance of the page's promise.
+
+Use abstract references such as private members' lounges, modern gallery foyers, precision automotive studios, black-tie hospitality, and the quiet craft of bespoke objects. Let the emotional quality come from immaculate spacing, refined material contrast, disciplined composition, and details that feel intentional when noticed but never demand attention. These references should shape a landing page that feels sophisticated, premium, and deeply considered while remaining open enough for creative interpretation.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Partner with LMCT+ and put your business in front of a national rewards audience through giveaways, offers, and platform promotion."
+    />
+    <meta name="x-design-style" content="Luxury Minimal" />
+    <title>Partner with LMCT+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #ffffff;
+        --paper-soft: #f6f8fb;
+        --ink: #080a0f;
+        --coal: #05070b;
+        --coal-2: #0c1018;
+        --muted: #636a76;
+        --muted-light: #aab2bf;
+        --line: #dce1e8;
+        --line-dark: rgba(255, 255, 255, 0.15);
+        --blue: #0c9ffd;
+        --blue-deep: #044f96;
+        --gold: #b98b3d;
+        --silver: #eef2f6;
+        --radius: 8px;
+        --shadow: 0 24px 70px rgba(5, 7, 11, 0.16);
+        --fast: 180ms ease;
+        --slow: 620ms cubic-bezier(0.21, 0.81, 0.32, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        letter-spacing: 0;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+        letter-spacing: 0;
+      }
+
+      .page {
+        background: var(--paper);
+      }
+
+      .site-header {
+        position: absolute;
+        z-index: 20;
+        top: 0;
+        left: 0;
+        width: 100%;
+        color: #ffffff;
+      }
+
+      .nav {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 22px 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .brand img {
+        width: 156px;
+        height: auto;
+      }
+
+      .brand span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding-left: 14px;
+        border-left: 1px solid var(--line-dark);
+        color: var(--muted-light);
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .nav-links a {
+        transition: color var(--fast);
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        color: #ffffff;
+      }
+
+      .hero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        color: #ffffff;
+        background:
+          linear-gradient(90deg, rgba(12, 159, 253, 0.12), transparent 34%),
+          linear-gradient(180deg, var(--coal) 0%, #090d14 100%);
+        padding: 112px 0 58px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: 0.45;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.82), transparent 82%);
+      }
+
+      .hero-grid {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+        gap: 46px;
+        align-items: end;
+      }
+
+      .hero-copy {
+        padding-bottom: 8px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1,
+      h2 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        max-width: 720px;
+        margin-bottom: 22px;
+        font-size: 78px;
+        line-height: 0.92;
+        font-weight: 700;
+      }
+
+      .hero-copy p {
+        max-width: 620px;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+        margin-top: 30px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 52px;
+        border: 1px solid transparent;
+        border-radius: var(--radius);
+        padding: 0 22px;
+        background: var(--blue);
+        color: #00101e;
+        font-size: 14px;
+        font-weight: 800;
+        text-align: center;
+        transition:
+          transform var(--fast),
+          border-color var(--fast),
+          background-color var(--fast),
+          color var(--fast);
+      }
+
+      .button:hover,
+      .button:focus-visible {
+        transform: translateY(-2px);
+        background: #ffffff;
+        color: var(--ink);
+      }
+
+      .button svg {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: #ffffff;
+        border-color: var(--line-dark);
+      }
+
+      .button.secondary:hover,
+      .button.secondary:focus-visible {
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.34);
+      }
+
+      .hero-meta {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 48px;
+        border: 1px solid var(--line-dark);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: var(--line-dark);
+      }
+
+      .metric {
+        min-width: 0;
+        padding: 22px 18px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+
+      .metric strong {
+        display: block;
+        color: #ffffff;
+        font-size: 25px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted-light);
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.35;
+      }
+
+      .hero-media {
+        position: relative;
+        min-width: 0;
+      }
+
+      .image-frame {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--line-dark);
+        border-radius: var(--radius);
+        background: #121720;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-media .image-frame {
+        aspect-ratio: 1.26 / 1;
+      }
+
+      .hero-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(0.94) contrast(1.05);
+      }
+
+      .media-note {
+        position: absolute;
+        right: 22px;
+        bottom: 22px;
+        width: min(240px, calc(100% - 44px));
+        padding: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: var(--radius);
+        color: #ffffff;
+        background: rgba(5, 7, 11, 0.72);
+        backdrop-filter: blur(14px);
+      }
+
+      .media-note b {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--blue);
+        font-size: 24px;
+        line-height: 1;
+      }
+
+      .media-note span {
+        display: block;
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .scroll-cue {
+        width: min(1180px, calc(100% - 40px));
+        margin: 34px auto 0;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: rgba(255, 255, 255, 0.56);
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .scroll-cue::before {
+        content: "";
+        width: 74px;
+        height: 1px;
+        background: var(--line-dark);
+      }
+
+      .section {
+        padding: 98px 0;
+      }
+
+      .section.tight {
+        padding: 68px 0;
+      }
+
+      .section.dark {
+        color: #ffffff;
+        background: var(--coal-2);
+      }
+
+      .section.soft {
+        background: var(--paper-soft);
+      }
+
+      .inner {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .section-heading {
+        max-width: 780px;
+      }
+
+      .section-heading.center {
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .section-heading h2 {
+        margin-bottom: 18px;
+        font-size: 56px;
+        line-height: 0.98;
+        font-weight: 700;
+      }
+
+      .section-heading p {
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      .dark .section-heading p {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 58px;
+        align-items: start;
+      }
+
+      .rule-list {
+        display: grid;
+        border-top: 1px solid var(--line);
+      }
+
+      .rule-item {
+        display: grid;
+        grid-template-columns: 92px minmax(0, 1fr);
+        gap: 24px;
+        padding: 24px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .rule-item b {
+        color: var(--blue-deep);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .rule-item h3 {
+        margin-bottom: 8px;
+        font-size: 20px;
+        line-height: 1.25;
+      }
+
+      .rule-item p {
+        margin-bottom: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .proof-band {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 50px;
+        align-items: center;
+      }
+
+      .proof-number {
+        display: grid;
+        gap: 24px;
+      }
+
+      .proof-number strong {
+        display: block;
+        max-width: 700px;
+        color: #ffffff;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 72px;
+        font-weight: 700;
+        line-height: 0.95;
+      }
+
+      .proof-number strong span {
+        color: var(--blue);
+      }
+
+      .proof-number p {
+        max-width: 610px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      .proof-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid var(--line-dark);
+        border-radius: var(--radius);
+        background: var(--line-dark);
+      }
+
+      .proof-tile {
+        min-height: 150px;
+        padding: 22px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .proof-tile b {
+        display: block;
+        color: var(--blue);
+        font-size: 30px;
+        line-height: 1;
+      }
+
+      .proof-tile span {
+        display: block;
+        margin-top: 9px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .platform {
+        display: grid;
+        grid-template-columns: minmax(310px, 0.78fr) minmax(0, 1fr);
+        gap: 58px;
+        align-items: center;
+      }
+
+      .phone-stage {
+        position: relative;
+        display: grid;
+        place-items: center;
+        min-height: 620px;
+        border-radius: var(--radius);
+        background:
+          linear-gradient(145deg, rgba(5, 7, 11, 0.96), rgba(20, 28, 42, 0.98)),
+          var(--coal);
+        overflow: hidden;
+      }
+
+      .phone-stage::before,
+      .phone-stage::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.16);
+      }
+
+      .phone-stage::before {
+        top: 72px;
+      }
+
+      .phone-stage::after {
+        bottom: 72px;
+      }
+
+      .phone-stage img {
+        position: relative;
+        z-index: 2;
+        width: min(300px, 80%);
+        filter: drop-shadow(0 34px 55px rgba(0, 0, 0, 0.45));
+      }
+
+      .benefits {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 34px;
+      }
+
+      .benefit {
+        min-height: 170px;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #ffffff;
+      }
+
+      .benefit svg {
+        width: 26px;
+        height: 26px;
+        color: var(--blue-deep);
+      }
+
+      .benefit h3 {
+        margin: 18px 0 8px;
+        font-size: 18px;
+      }
+
+      .benefit p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr 0.8fr;
+        grid-auto-rows: 180px;
+        gap: 12px;
+        margin-top: 42px;
+      }
+
+      .gallery figure {
+        position: relative;
+        min-width: 0;
+        margin: 0;
+        overflow: hidden;
+        border-radius: var(--radius);
+        background: #111720;
+      }
+
+      .gallery figure:first-child {
+        grid-row: span 2;
+      }
+
+      .gallery img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(0.92) contrast(1.05);
+        transition: transform var(--slow), filter var(--slow);
+      }
+
+      .gallery figure:hover img {
+        transform: scale(1.035);
+        filter: saturate(1.02) contrast(1.06);
+      }
+
+      .gallery figcaption {
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .logo-wall {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 44px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: var(--line);
+      }
+
+      .logo-cell {
+        display: grid;
+        place-items: center;
+        min-height: 126px;
+        padding: 22px;
+        background: #ffffff;
+      }
+
+      .logo-cell.dark-logo {
+        background: var(--coal-2);
+      }
+
+      .logo-cell img {
+        width: min(136px, 90%);
+        max-height: 58px;
+        object-fit: contain;
+      }
+
+      .closing {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.78fr);
+        gap: 54px;
+        align-items: start;
+      }
+
+      .closing h2 {
+        margin-bottom: 22px;
+        color: #ffffff;
+        font-size: 64px;
+        line-height: 0.96;
+      }
+
+      .closing p {
+        max-width: 640px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      .closing-note {
+        margin-top: 34px;
+        padding-top: 28px;
+        border-top: 1px solid var(--line-dark);
+        color: rgba(255, 255, 255, 0.64);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .partner-form {
+        display: grid;
+        gap: 14px;
+        padding: 24px;
+        border: 1px solid var(--line-dark);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.045);
+      }
+
+      .partner-form label {
+        display: grid;
+        gap: 8px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .partner-form input,
+      .partner-form textarea {
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: var(--radius);
+        outline: none;
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
+        padding: 14px 15px;
+        transition: border-color var(--fast), background-color var(--fast);
+      }
+
+      .partner-form textarea {
+        min-height: 106px;
+        resize: vertical;
+      }
+
+      .partner-form input:focus,
+      .partner-form textarea:focus {
+        border-color: rgba(12, 159, 253, 0.9);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .partner-form input::placeholder,
+      .partner-form textarea::placeholder {
+        color: rgba(255, 255, 255, 0.38);
+      }
+
+      .form-note {
+        min-height: 22px;
+        margin: 0;
+        color: var(--blue);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .footer {
+        color: rgba(255, 255, 255, 0.72);
+        background: var(--coal);
+        border-top: 1px solid var(--line-dark);
+        padding: 28px 0;
+      }
+
+      .footer-inner {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        font-size: 13px;
+      }
+
+      .footer img {
+        width: 132px;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: filter var(--slow);
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1040px) {
+        .hero-grid,
+        .split,
+        .proof-band,
+        .platform,
+        .closing {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-grid {
+          gap: 34px;
+        }
+
+        h1 {
+          font-size: 64px;
+        }
+
+        .section-heading h2,
+        .proof-number strong,
+        .closing h2 {
+          font-size: 52px;
+        }
+
+        .phone-stage {
+          min-height: 560px;
+        }
+
+        .logo-wall {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .nav {
+          width: min(100% - 28px, 1180px);
+          gap: 18px;
+          padding: 18px 0;
+        }
+
+        .brand img {
+          width: 132px;
+        }
+
+        .brand span,
+        .nav-links a:not(:last-child) {
+          display: none;
+        }
+
+        .hero {
+          padding: 82px 0 30px;
+        }
+
+        .hero-grid,
+        .inner,
+        .scroll-cue,
+        .footer-inner {
+          width: min(100% - 28px, 1180px);
+        }
+
+        h1 {
+          margin-bottom: 18px;
+          font-size: 46px;
+          line-height: 0.98;
+        }
+
+        .hero-copy p,
+        .section-heading p,
+        .proof-number p,
+        .closing p {
+          font-size: 16px;
+          line-height: 1.65;
+        }
+
+        .cta-row {
+          align-items: stretch;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        .hero .button.secondary,
+        .hero-meta {
+          display: none;
+        }
+
+        .benefits,
+        .proof-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .metric,
+        .proof-tile {
+          min-height: auto;
+          padding: 18px;
+        }
+
+        .media-note {
+          position: static;
+          width: 100%;
+          border-radius: 0;
+          border-right: 0;
+          border-bottom: 0;
+          border-left: 0;
+        }
+
+        .section,
+        .section.tight {
+          padding: 64px 0;
+        }
+
+        .section-heading h2,
+        .proof-number strong,
+        .closing h2 {
+          font-size: 40px;
+          line-height: 1;
+        }
+
+        .rule-item {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .phone-stage {
+          min-height: 500px;
+        }
+
+        .phone-stage img {
+          width: min(250px, 78%);
+        }
+
+        .gallery {
+          grid-template-columns: 1fr;
+          grid-auto-rows: 220px;
+        }
+
+        .gallery figure:first-child {
+          grid-row: span 1;
+        }
+
+        .logo-wall {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .closing {
+          gap: 28px;
+        }
+
+        .footer-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      @media (max-width: 430px) {
+        h1 {
+          font-size: 40px;
+        }
+
+        .section-heading h2,
+        .proof-number strong,
+        .closing h2 {
+          font-size: 34px;
+        }
+
+        .hero-copy p {
+          font-size: 15px;
+        }
+
+        .gallery {
+          grid-auto-rows: 188px;
+        }
+
+        .logo-cell {
+          min-height: 104px;
+          padding: 18px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header" aria-label="Primary">
+        <nav class="nav">
+          <a class="brand" href="#top" aria-label="LMCT+ home">
+            <img src="../assets/lmct-logo.png" alt="LMCT+" />
+            <span>Australian owned and operated</span>
+          </a>
+          <div class="nav-links" aria-label="Page sections">
+            <a href="#platform">Platform</a>
+            <a href="#proof">Proof</a>
+            <a href="#partners">Partners</a>
+            <a href="#partner-enquiry">Become a partner</a>
+          </div>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-grid">
+            <div class="hero-copy reveal">
+              <h1 id="hero-title">Partner with LMCT+</h1>
+              <p>
+                Get promoted to 2 million Aussies every month for no cost, while
+                LMCT+ members discover your business through exclusive offers,
+                giveaways, and a rewards platform built for repeat attention.
+              </p>
+              <div class="cta-row" aria-label="Primary actions">
+                <a class="button" href="#partner-enquiry">
+                  Click to become a partner
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </a>
+                <a class="button secondary" href="#platform">See the platform</a>
+              </div>
+              <div class="hero-meta" aria-label="LMCT+ partner proof points">
+                <div class="metric">
+                  <strong data-count="2">2M+</strong>
+                  <span>Aussies reached each month</span>
+                </div>
+                <div class="metric">
+                  <strong data-count="30">$30M+</strong>
+                  <span>Prizes given away</span>
+                </div>
+                <div class="metric">
+                  <strong>0 cost</strong>
+                  <span>Partner exposure pathway</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-media reveal">
+              <div class="image-frame">
+                <img src="../assets/car.png" alt="Black prize vehicle photographed for LMCT+ giveaways" />
+              </div>
+              <div class="media-note">
+                <b>National attention</b>
+                <span>Turn LMCT+ giveaway excitement into a reason for customers to visit, save, and buy with you.</span>
+              </div>
+            </div>
+          </div>
+          <div class="scroll-cue">A single partner journey, from reach to extra sales</div>
+        </section>
+
+        <section class="section" aria-labelledby="about-title">
+          <div class="inner split">
+            <div class="section-heading reveal">
+              <h2 id="about-title">Australia's rewards club, refined for partner growth.</h2>
+              <p>
+                LMCT+ gives members access to giveaways, savings, and partner offers,
+                then channels that attention back toward the businesses that help make
+                the member experience valuable.
+              </p>
+            </div>
+            <div class="rule-list reveal">
+              <article class="rule-item">
+                <b>01</b>
+                <div>
+                  <h3>Exposure with a reason to act</h3>
+                  <p>
+                    Your offer sits inside a rewards ecosystem where members are already
+                    looking for value, making discovery feel useful instead of intrusive.
+                  </p>
+                </div>
+              </article>
+              <article class="rule-item">
+                <b>02</b>
+                <div>
+                  <h3>Promotions that feel native</h3>
+                  <p>
+                    Partners can be surfaced through app placements, member offers,
+                    giveaway moments, and social proof without needing to build a campaign
+                    from scratch.
+                  </p>
+                </div>
+              </article>
+              <article class="rule-item">
+                <b>03</b>
+                <div>
+                  <h3>Sales momentum beyond one post</h3>
+                  <p>
+                    LMCT+ has helped local Aussie businesses unlock more traffic,
+                    stronger engagement, and hundreds of thousands in extra sales.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section dark tight" aria-labelledby="proof-title">
+          <div class="inner proof-band">
+            <div class="proof-number reveal">
+              <strong id="proof-title">Over <span>$30 million</span> in prizes and thousands of partner-driven sales.</strong>
+              <p>
+                Every giveaway adds new attention to the LMCT+ ecosystem. That attention
+                can become visits, redemptions, referrals, and a steady stream of people
+                discovering businesses like yours.
+              </p>
+            </div>
+            <div class="proof-grid reveal" aria-label="LMCT+ scale">
+              <div class="proof-tile">
+                <b>$750K+</b>
+                <span>Given back to local Aussie businesses through promotional activity.</span>
+              </div>
+              <div class="proof-tile">
+                <b>150+</b>
+                <span>Promotions run with businesses seeking qualified attention.</span>
+              </div>
+              <div class="proof-tile">
+                <b>2M+</b>
+                <span>Monthly audience reach available to selected partner offers.</span>
+              </div>
+              <div class="proof-tile">
+                <b>1 page</b>
+                <span>A clean path from curiosity to becoming a partner today.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section soft" id="platform" aria-labelledby="platform-title">
+          <div class="inner platform">
+            <div class="phone-stage reveal" aria-label="LMCT+ app preview">
+              <img src="../assets/membership-oto/lmct-app-phone.png" alt="LMCT+ app on a phone showing member offers and giveaways" />
+            </div>
+            <div class="reveal">
+              <div class="section-heading">
+                <h2 id="platform-title">The platform is where the magic happens.</h2>
+                <p>
+                  Millions of people get access to exclusive offers from businesses like
+                  yours. You get access to Australia's original and best giveaways, plus
+                  an audience already trained to look for value.
+                </p>
+              </div>
+              <div class="benefits" aria-label="Platform benefits">
+                <article class="benefit">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M4 5h16v14H4V5Zm4 4h8M8 13h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <h3>Offer placement</h3>
+                  <p>Feature savings, incentives, and specials where LMCT+ members already browse.</p>
+                </article>
+                <article class="benefit">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 3v18M5 8h14M7 16h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <h3>Giveaway energy</h3>
+                  <p>Attach your business to moments that already generate attention and conversation.</p>
+                </article>
+                <article class="benefit">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 12h14M12 5v14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                  <h3>More traffic</h3>
+                  <p>Create a clearer reason for members to visit your store, site, or service.</p>
+                </article>
+                <article class="benefit">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <h3>Simple start</h3>
+                  <p>Bring the offer. LMCT+ brings the platform, audience, and promotional context.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="proof" aria-labelledby="gallery-title">
+          <div class="inner">
+            <div class="section-heading center reveal">
+              <h2 id="gallery-title">Giveaway proof that people can see.</h2>
+              <p>
+                The strongest partner campaigns are attached to tangible excitement:
+                cars, cash, homes, travel, and real winners sharing the moment.
+              </p>
+            </div>
+            <div class="gallery reveal" aria-label="LMCT+ giveaway imagery">
+              <figure>
+                <img src="../assets/silverado/Silverado.png" alt="Blue LMCT+ giveaway vehicle" />
+                <figcaption>Prize vehicles that create instant attention</figcaption>
+              </figure>
+              <figure>
+                <img src="../assets/carousel/finish-2%201.png" alt="Finished project giveaway image" />
+                <figcaption>Major prize campaigns</figcaption>
+              </figure>
+              <figure>
+                <img src="../assets/lmct-podium.jpg" alt="Gold silver and bronze prize podium" />
+                <figcaption>Member-first rewards</figcaption>
+              </figure>
+              <figure>
+                <img src="../assets/carousel/buildd%201.png" alt="Giveaway build progress image" />
+                <figcaption>Behind-the-scenes momentum</figcaption>
+              </figure>
+              <figure>
+                <img src="../assets/silverado/silverado2.png" alt="Silverado giveaway vehicle side profile" />
+                <figcaption>Assets made for sharing</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="section soft" id="partners" aria-labelledby="partners-title">
+          <div class="inner">
+            <div class="section-heading center reveal">
+              <h2 id="partners-title">Partner with a platform businesses already trust.</h2>
+              <p>
+                LMCT+ continues to work with brands across automotive, lifestyle,
+                trades, retail, home, and services. The common thread is simple:
+                value for members and measurable attention for partners.
+              </p>
+            </div>
+            <div class="logo-wall reveal" aria-label="Partner logos">
+              <div class="logo-cell dark-logo">
+                <img src="../assets/membership-oto/partner-ultratune.png" alt="Ultra Tune" />
+              </div>
+              <div class="logo-cell dark-logo">
+                <img src="../assets/membership-oto/partner-lotus.png" alt="Lotus" />
+              </div>
+              <div class="logo-cell dark-logo">
+                <img src="../assets/membership-oto/partner-betta.png" alt="Betta" />
+              </div>
+              <div class="logo-cell dark-logo">
+                <img src="../assets/membership-oto/partner-flipside.png" alt="Flip Side" />
+              </div>
+              <div class="logo-cell dark-logo">
+                <img src="../assets/membership-oto/partner-adore.png" alt="Adore Beauty" />
+              </div>
+              <div class="logo-cell dark-logo">
+                <img src="../assets/membership-oto/partner-sxhibition.png" alt="SXhibition" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section dark" id="partner-enquiry" aria-labelledby="enquiry-title">
+          <div class="inner closing">
+            <div class="reveal">
+              <h2 id="enquiry-title">Become a partner today.</h2>
+              <p>
+                If you are ready to be part of a platform that turns member excitement
+                into business exposure, tell us where you want the attention to go.
+                LMCT+ will help shape the offer into something members want to use.
+              </p>
+              <div class="closing-note">
+                Best suited to businesses with a clear customer offer, a product or
+                service people can redeem, and the capacity to handle extra traffic when
+                the promotion starts moving.
+              </div>
+            </div>
+
+            <form class="partner-form reveal" id="partnerForm">
+              <label>
+                Business name
+                <input type="text" name="business" placeholder="Your business" required />
+              </label>
+              <label>
+                Contact email
+                <input type="email" name="email" placeholder="you@example.com" required />
+              </label>
+              <label>
+                What would you like to promote?
+                <textarea name="offer" placeholder="Tell us about your offer, audience, or ideal promotion." required></textarea>
+              </label>
+              <button class="button" type="submit">
+                Click to become a partner
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+              <p class="form-note" id="formNote" aria-live="polite"></p>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <img src="../assets/lmct-logo.png" alt="LMCT+" />
+          <span>&copy; <span id="year"></span> LMCT+. All rights reserved.</span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const revealItems = document.querySelectorAll(".reveal");
+      const year = document.getElementById("year");
+      const form = document.getElementById("partnerForm");
+      const formNote = document.getElementById("formNote");
+
+      year.textContent = new Date().getFullYear();
+
+      if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.18 }
+        );
+
+        revealItems.forEach((item) => revealObserver.observe(item));
+      } else {
+        revealItems.forEach((item) => item.classList.add("is-visible"));
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        formNote.textContent = "Thanks. Your partner enquiry is ready for the LMCT+ team.";
+        form.reset();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,530 @@
+<!-- ============================================ -->
+<!-- AUTOMATIC + ACCUMULATING ENTRIES
+<!-- ============================================ -->
+<style>
+  .lmctEN__wrap {
+    background: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 56px 16px;
+  }
+  .lmctEN__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .lmctEN__head {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .lmctEN__kick {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.25);
+    color: #0476c4;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .lmctEN__title {
+    margin: 0 0 12px;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -1.4px;
+    color: #05162a;
+    text-transform: uppercase;
+  }
+  .lmctEN__title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #0476c4, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctEN__lead {
+    margin: 0 auto;
+    max-width: 620px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.55;
+  }
+  /* two value pills above chart */
+  .lmctEN__points {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .lmctEN__point {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f7fafc;
+    border: 1px solid #e8eef4;
+    border-radius: 16px;
+    padding: 18px 20px;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctEN__point:hover {
+    transform: translateY(-2px);
+    border-color: rgba(12, 159, 253, 0.35);
+    box-shadow: 0 12px 28px rgba(12, 159, 253, 0.1);
+  }
+  .lmctEN__pIco {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #0476c4, #0c9ffd);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 18px rgba(12, 159, 253, 0.32);
+  }
+  .lmctEN__pIco svg {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+  }
+  .lmctEN__pTxt h4 {
+    margin: 0 0 3px;
+    font-size: 15px;
+    font-weight: 900;
+    color: #05162a;
+    text-transform: uppercase;
+    letter-spacing: -0.2px;
+  }
+  .lmctEN__pTxt p {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #64748b;
+    line-height: 1.45;
+  }
+  /* chart card */
+  .lmctEN__chartCard {
+    background: #ffffff;
+    border: 1px solid #e8eef4;
+    border-radius: 22px;
+    padding: 28px 26px 24px;
+    box-shadow: 0 24px 60px rgba(5, 22, 42, 0.06);
+  }
+  .lmctEN__toggleWrap {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .lmctEN__toggle {
+    display: inline-flex;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+    padding: 5px;
+    gap: 4px;
+  }
+  .lmctEN__tBtn {
+    appearance: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12.5px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #64748b;
+    padding: 9px 18px;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition:
+      background 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .lmctEN__tDot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+  .lmctEN__tBtn[data-tier="entry"] .lmctEN__tDot {
+    background: #1fa851;
+  }
+  .lmctEN__tBtn[data-tier="premium"] .lmctEN__tDot {
+    background: #0c9ffd;
+  }
+  .lmctEN__tBtn[data-tier="elite"] .lmctEN__tDot {
+    background: #f5b721;
+  }
+  .lmctEN__tBtn.is-active[data-tier="entry"] {
+    background: linear-gradient(180deg, #1fa851, #0e7a3a);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(31, 168, 81, 0.35);
+  }
+  .lmctEN__tBtn.is-active[data-tier="premium"] {
+    background: linear-gradient(180deg, #0c9ffd, #0476c4);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(12, 159, 253, 0.35);
+  }
+  .lmctEN__tBtn.is-active[data-tier="elite"] {
+    background: linear-gradient(180deg, #f5b721, #d4941a);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(245, 183, 33, 0.35);
+  }
+  .lmctEN__chart {
+    background: #f7fafc;
+    border: 1px solid #eef2f6;
+    border-radius: 16px;
+    padding: 22px 20px 16px;
+  }
+  .lmctEN__legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .lmctEN__legend .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .lmctEN__grid {
+    position: relative;
+    height: 260px;
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    gap: 10px;
+    padding-bottom: 34px;
+  }
+  .lmctEN__yAxis {
+    position: relative;
+    height: 100%;
+  }
+  .lmctEN__yLabel {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translateY(50%);
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #94a3b8;
+    text-align: right;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  .lmctEN__yLabel strong {
+    display: block;
+    font-size: 12.5px;
+    color: #475569;
+    font-weight: 900;
+    margin-bottom: 1px;
+  }
+  .lmctEN__bars {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    border-left: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0 8px;
+    height: 100%;
+  }
+  .lmctEN__gl {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #eef2f6;
+    pointer-events: none;
+  }
+  .lmctEN__bar {
+    flex: 1;
+    margin: 0 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    position: relative;
+  }
+  .lmctEN__fill {
+    width: 100%;
+    max-width: 56px;
+    border-radius: 8px 8px 0 0;
+    transition: height 0.9s cubic-bezier(0.2, 0.85, 0.3, 1);
+    min-height: 4px;
+    position: relative;
+  }
+  .lmctEN__fill[data-tier="entry"] {
+    background: linear-gradient(180deg, #1fa851, #0e7a3a);
+  }
+  .lmctEN__fill[data-tier="premium"] {
+    background: linear-gradient(180deg, #3fb8ff, #0476c4);
+  }
+  .lmctEN__fill[data-tier="elite"] {
+    background: linear-gradient(180deg, #f5b721, #d4941a);
+  }
+  .lmctEN__val {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12.5px;
+    font-weight: 900;
+    color: #05162a;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.6s;
+  }
+  .lmctEN__fill.is-shown .lmctEN__val {
+    opacity: 1;
+  }
+  .lmctEN__bLabel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .lmctEN__bLabel strong {
+    display: block;
+    font-size: 12.5px;
+    color: #475569;
+    font-weight: 900;
+    margin-bottom: 2px;
+  }
+  .lmctEN__foot {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #05162a;
+    line-height: 1.5;
+    padding: 14px 18px;
+    background: rgba(12, 159, 253, 0.06);
+    border: 1px solid rgba(12, 159, 253, 0.22);
+    border-radius: 12px;
+  }
+  .lmctEN__foot strong {
+    background: linear-gradient(180deg, #0476c4, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+  @media (min-width: 760px) {
+    .lmctEN__points {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .lmctEN__wrap {
+      padding: 42px 14px;
+    }
+    .lmctEN__chartCard {
+      padding: 20px 16px 18px;
+    }
+  }
+</style>
+<div class="lmctEN__wrap">
+  <div class="lmctEN__inner">
+    <div class="lmctEN__head">
+      <span class="lmctEN__kick">The Giveaways</span>
+      <h2 class="lmctEN__title">
+        You're In Every Draw. <em>Automatically.</em>
+      </h2>
+      <p class="lmctEN__lead">
+        The moment you join, your name is locked into every single LMCT+
+        giveaway — cars, cash, the lot. No re-entering. No missing out.
+      </p>
+    </div>
+    <div class="lmctEN__points">
+      <div class="lmctEN__point">
+        <span class="lmctEN__pIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12.5L10 17.5L19 7.5" /></svg
+        ></span>
+        <div class="lmctEN__pTxt">
+          <h4>Entered Automatically</h4>
+          <p>
+            One membership puts you in every giveaway we ever run — no forms, no
+            fine print.
+          </p>
+        </div>
+      </div>
+      <div class="lmctEN__point">
+        <span class="lmctEN__pIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 19l5-9 4 5 7-12" />
+            <path d="M4 21h16" /></svg
+        ></span>
+        <div class="lmctEN__pTxt">
+          <h4>Entries Accumulate</h4>
+          <p>
+            The longer you stay, the bigger your stack gets. Every entry rolls
+            into the next draw.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="lmctEN__chartCard">
+      <div class="lmctEN__toggleWrap">
+        <div class="lmctEN__toggle" role="tablist" aria-label="Membership tier">
+          <button class="lmctEN__tBtn" data-tier="entry" type="button">
+            <span class="lmctEN__tDot"></span>Entry
+          </button>
+          <button
+            class="lmctEN__tBtn is-active"
+            data-tier="premium"
+            type="button"
+            aria-selected="true"
+          >
+            <span class="lmctEN__tDot"></span>Premium
+          </button>
+          <button class="lmctEN__tBtn" data-tier="elite" type="button">
+            <span class="lmctEN__tDot"></span>Elite
+          </button>
+        </div>
+      </div>
+      <div class="lmctEN__chart">
+        <div class="lmctEN__legend">
+          <span class="dot" id="lmctEN__legendDot"></span
+          ><span id="lmctEN__legendTxt">Premium · 5 entries / month</span>
+        </div>
+        <div class="lmctEN__grid">
+          <div class="lmctEN__yAxis" id="lmctEN__yAxis"></div>
+          <div class="lmctEN__bars" id="lmctEN__bars"></div>
+        </div>
+      </div>
+      <div class="lmctEN__foot">
+        Every entry <strong>stays with you</strong>, draw after draw.
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", function () {
+    var TIERS = {
+      entry: {
+        rate: 1,
+        label: "Entry",
+        color: "#1FA851",
+        desc: "1 entry / month",
+      },
+      premium: {
+        rate: 5,
+        label: "Premium",
+        color: "#0C9FFD",
+        desc: "5 entries / month",
+      },
+      elite: {
+        rate: 10,
+        label: "Elite",
+        color: "#F5B721",
+        desc: "10 entries / month",
+      },
+    };
+    var MONTHS = [3, 6, 9, 12, 15];
+    var Y_STEPS = 5;
+    var bars = document.getElementById("lmctEN__bars");
+    var yAxis = document.getElementById("lmctEN__yAxis");
+    var legendDot = document.getElementById("lmctEN__legendDot");
+    var legendTxt = document.getElementById("lmctEN__legendTxt");
+    var buttons = document.querySelectorAll(".lmctEN__tBtn");
+    function render(tierKey) {
+      var tier = TIERS[tierKey];
+      var values = MONTHS.map(function (m) {
+        return m * tier.rate;
+      });
+      var maxVal = values[values.length - 1];
+      yAxis.innerHTML = "";
+      for (var i = Y_STEPS; i >= 1; i--) {
+        var v = Math.round((maxVal * i) / Y_STEPS);
+        var lbl = document.createElement("div");
+        lbl.className = "lmctEN__yLabel";
+        lbl.style.bottom = (i / Y_STEPS) * 100 + "%";
+        lbl.innerHTML = "<strong>" + v + "</strong>Entries";
+        yAxis.appendChild(lbl);
+      }
+      bars.innerHTML = "";
+      for (var g = 1; g <= Y_STEPS; g++) {
+        var gl = document.createElement("div");
+        gl.className = "lmctEN__gl";
+        gl.style.bottom = (g / Y_STEPS) * 100 + "%";
+        bars.appendChild(gl);
+      }
+      values.forEach(function (val, idx) {
+        var pct = (val / maxVal) * 92;
+        var bar = document.createElement("div");
+        bar.className = "lmctEN__bar";
+        bar.innerHTML =
+          '<div class="lmctEN__fill" data-tier="' +
+          tierKey +
+          '" style="height:0%"><span class="lmctEN__val">' +
+          val +
+          '</span></div><div class="lmctEN__bLabel"><strong>' +
+          MONTHS[idx] +
+          "</strong>M</div>";
+        bars.appendChild(bar);
+        requestAnimationFrame(function () {
+          setTimeout(function () {
+            var fill = bar.querySelector(".lmctEN__fill");
+            fill.style.height = pct + "%";
+            fill.classList.add("is-shown");
+          }, idx * 80);
+        });
+      });
+      legendDot.style.background = tier.color;
+      legendTxt.textContent = tier.label + " · " + tier.desc;
+    }
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        buttons.forEach(function (b) {
+          b.classList.remove("is-active");
+          b.removeAttribute("aria-selected");
+        });
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-selected", "true");
+        render(btn.dataset.tier);
+      });
+    });
+    render("premium");
+  });
+</script>

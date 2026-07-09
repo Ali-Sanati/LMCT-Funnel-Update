@@ -18,7 +18,7 @@
     --lmct-radius-lg: 34px;
     --lmct-radius-md: 18px;
     --lmct-radius-sm: 12px;
-    background: #eef1f5;
+    /* background: #eef1f5; */
     box-sizing: border-box;
     font-family: "Montserrat", Arial, sans-serif;
     padding: 38px 18px;
@@ -335,6 +335,7 @@
     transform: rotate(4deg);
     width: 100%;
     z-index: 1;
+    animation: lmctAP__float 6s ease-in-out infinite;
   }
 
   .lmctClosedHero .lmctClosedHero__phoneFrame::after {
@@ -442,7 +443,8 @@
     }
 
     .lmctClosedHero .lmctClosedHero__visual {
-      min-height: 390px;
+      /* min-height: 390px; */
+      display: none;
     }
 
     .lmctClosedHero .lmctClosedHero__phoneFrame {
@@ -552,6 +554,16 @@
       transition: none;
     }
   }
+
+  @keyframes lmctAP__float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
 </style>
 
 <section class="lmctClosedHero" aria-label="LMCT+ giveaway closed">
@@ -602,7 +614,7 @@
         <div class="lmctClosedHero__actions">
           <a
             class="lmctClosedHero__button lmctClosedHero__buttonPrimary"
-            href="ACTIVE_GIVEAWAYS_URL"
+            href="#ActiveGiveawaySection"
             aria-label="View active LMCT+ giveaways"
           >
             VIEW ACTIVE GIVEAWAYS
@@ -631,7 +643,8 @@
 
           <a
             class="lmctClosedHero__button lmctClosedHero__buttonSecondary"
-            href="APP_DOWNLOAD_URL"
+            href="#"
+            data-lmct-app-modal-open
             aria-label="Download the LMCT+ app"
           >
             DOWNLOAD THE APP
@@ -668,7 +681,7 @@
 
         <a
           class="lmctClosedHero__facebookLink"
-          href="FACEBOOK_DRAW_URL"
+          href="https://www.facebook.com/LMCTPlus/"
           aria-label="Watch the LMCT+ draw live on Facebook"
         >
           <span class="logos--facebook"></span>

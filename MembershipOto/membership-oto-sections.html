@@ -4,23 +4,24 @@
   .lmct-mo,
   .lmct-mo * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
   }
 
   .lmct-mo {
-    --mo-navy: #05162a;
     --mo-ink: #07172c;
     --mo-blue: #0476c4;
     --mo-sky: #0c9ffd;
     --mo-ice: #3fb8ff;
     --mo-gold: #f5b721;
-    --mo-green: #16a34a;
-    --mo-red: #ff1d15;
     --mo-muted: #587089;
     --mo-line: rgba(12, 159, 253, 0.18);
     --mo-shadow: 0 18px 42px rgba(7, 23, 44, 0.11);
     position: relative;
     overflow: hidden;
-    padding: 28px 16px 34px;
+    padding: 18px 16px 28px;
     font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
     color: var(--mo-ink);
     background:
@@ -29,444 +30,15 @@
       linear-gradient(180deg, #f5fbff 0%, #ffffff 46%, #f4f9ff 100%);
   }
 
-  .lmct-mo a,
-  .lmct-mo a:hover,
-  .lmct-mo a:focus,
-  .lmct-mo a:visited {
-    text-decoration: none !important;
-  }
-
   .lmct-mo__shell {
     width: min(1160px, 100%);
     margin: 0 auto;
-  }
-
-  .lmct-mo__hero {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.92fr);
-    gap: 22px;
-    align-items: stretch;
-    overflow: hidden;
-    border-radius: 22px;
-    background:
-      linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 38%),
-      linear-gradient(135deg, #05162a 0%, #07325a 48%, #0476c4 100%);
-    box-shadow:
-      0 9px 0 rgba(5, 22, 42, 0.08),
-      0 28px 70px rgba(5, 22, 42, 0.2);
-    isolation: isolate;
-  }
-
-  .lmct-mo__hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 34px 34px;
-    mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.92), transparent 82%);
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .lmct-mo__heroCopy {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    padding: 34px;
-    color: #ffffff;
-  }
-
-  .lmct-mo__topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    margin-bottom: 30px;
-  }
-
-  .lmct-mo__brand {
-    width: 162px;
-    max-width: 42vw;
-    height: auto;
-    display: block;
-  }
-
-  .lmct-mo__unlock {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    min-height: 40px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: var(--mo-red);
-    color: #ffffff;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 1.2px;
-    line-height: 1;
-    text-transform: uppercase;
-    box-shadow: 0 14px 30px rgba(255, 29, 21, 0.26);
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .lmct-mo__unlock::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -60%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.32) 50%,
-      transparent 100%
-    );
-    transform: skewX(-20deg);
-    animation: lmct-mo-sheen 3.6s ease-in-out 1s infinite;
-  }
-
-  .lmct-mo__unlock svg {
-    position: relative;
-    z-index: 1;
-    width: 15px;
-    height: 15px;
-  }
-
-  .lmct-mo__unlock span {
-    position: relative;
-    z-index: 1;
-  }
-
-  .lmct-mo__heroTitle {
-    max-width: 620px;
-    margin: auto 0 0;
-    font-size: 74px;
-    font-weight: 900;
-    line-height: 0.95;
-    letter-spacing: 0;
-    text-transform: uppercase;
-  }
-
-  .lmct-mo__heroTitle strong {
-    display: block;
-    color: #ffffff;
-  }
-
-  .lmct-mo__heroTitle span {
-    display: block;
-    color: var(--mo-gold);
-  }
-
-  .lmct-mo__heroLead {
-    max-width: 56ch;
-    margin: 18px 0 0;
-    color: rgba(255, 255, 255, 0.86);
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 1.6;
-  }
-
-  .lmct-mo__heroStats {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    margin-top: 26px;
-  }
-
-  .lmct-mo__miniStat {
-    min-width: 0;
-    padding: 15px 14px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(8px);
-  }
-
-  .lmct-mo__miniStat b {
-    display: block;
-    color: #ffffff;
-    font-size: 22px;
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: 0;
-  }
-
-  .lmct-mo__miniStat span {
-    display: block;
-    margin-top: 6px;
-    color: rgba(255, 255, 255, 0.72);
-    font-size: 10px;
-    font-weight: 800;
-    line-height: 1.3;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
-  .lmct-mo__deal {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-width: 0;
-    margin: 18px 18px 18px 0;
-    padding: 22px;
-    border-radius: 18px;
-    background: linear-gradient(180deg, #ffffff 0%, #eef8ff 100%);
-    border: 1px solid rgba(255, 255, 255, 0.72);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.9),
-      0 24px 56px rgba(0, 0, 0, 0.2);
-  }
-
-  .lmct-mo__dealHead {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .lmct-mo__dealLabel {
-    margin: 0;
-    color: var(--mo-blue);
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 1.8px;
-    line-height: 1.3;
-    text-transform: uppercase;
-  }
-
-  .lmct-mo__dealCopy {
-    margin: 6px 0 0;
-    color: #40566f;
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.45;
-  }
-
-  .lmct-mo__saveBadge {
-    flex: 0 0 auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 36px;
-    padding: 8px 12px;
-    border-radius: 999px;
-    background: rgba(22, 163, 74, 0.1);
-    border: 1px solid rgba(22, 163, 74, 0.22);
-    color: #15803d;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .lmct-mo__pricePlate {
-    position: relative;
-    overflow: hidden;
-    display: grid;
-    gap: 8px;
-    padding: 18px;
-    border-radius: 16px;
-    background:
-      linear-gradient(90deg, rgba(12, 159, 253, 0.14), transparent), #ffffff;
-    border: 1px solid rgba(12, 159, 253, 0.16);
-  }
-
-  .lmct-mo__was {
-    margin: 0;
-    color: #7890a8;
-    font-size: 15px;
-    font-weight: 800;
-    line-height: 1;
-    text-decoration: line-through;
-    text-decoration-color: var(--mo-red);
-    text-decoration-thickness: 2px;
-  }
-
-  .lmct-mo__priceLine {
-    display: flex;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 7px 9px;
-  }
-
-  .lmct-mo__price {
-    display: block;
-    color: var(--mo-green);
-    font-size: 76px;
-    font-weight: 900;
-    line-height: 0.9;
-    letter-spacing: 0;
-  }
-
-  .lmct-mo__perWeek {
-    display: block;
-    padding-bottom: 9px;
-    color: var(--mo-ink);
-    font-size: 20px;
-    font-weight: 900;
-    line-height: 1;
-    text-transform: uppercase;
-  }
-
-  .lmct-mo__priceNote {
-    margin: 0;
-    color: #60758c;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1.45;
-  }
-
-  .lmct-mo__quickList {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .lmct-mo__quickList li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-width: 0;
-    padding: 11px 10px;
-    border-radius: 14px;
-    background: rgba(12, 159, 253, 0.07);
-    border: 1px solid rgba(12, 159, 253, 0.12);
-    color: var(--mo-ink);
-    font-size: 11px;
-    font-weight: 800;
-    line-height: 1.25;
-    text-transform: uppercase;
-  }
-
-  .lmct-mo__quickList svg {
-    flex: 0 0 auto;
-    width: 17px;
-    height: 17px;
-    color: var(--mo-sky);
-  }
-
-  .lmct-mo__ctaGroup {
-    display: grid;
-    gap: 11px;
-  }
-
-  .lmct-mo__cta,
-  .lmct-mo__finalCta {
-    position: relative;
-    display: flex;
-    width: 100%;
-    min-height: 64px;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 6px;
-    overflow: hidden;
-    border: 0;
-    border-radius: 14px;
-    background: linear-gradient(
-      90deg,
-      var(--mo-blue) 0%,
-      var(--mo-sky) 58%,
-      var(--mo-ice) 100%
-    );
-    color: #ffffff !important;
-    text-align: center;
-    box-shadow:
-      0 7px 0 #035187,
-      0 18px 34px rgba(12, 159, 253, 0.28);
-    transition:
-      transform 0.18s ease,
-      box-shadow 0.18s ease;
-  }
-
-  .lmct-mo__cta::before,
-  .lmct-mo__finalCta::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.18),
-      transparent 52%
-    );
-    pointer-events: none;
-  }
-
-  .lmct-mo__ctaMain,
-  .lmct-mo__ctaSub {
-    position: relative;
-    z-index: 1;
-    display: block;
-  }
-
-  .lmct-mo__ctaMain {
-    color: inherit;
-    font-size: 15px;
-    font-weight: 900;
-    letter-spacing: 0.7px;
-    line-height: 1.1;
-    text-transform: uppercase;
-  }
-
-  .lmct-mo__ctaSub {
-    color: inherit;
-    opacity: 0.9;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    line-height: 1;
-    text-transform: uppercase;
-  }
-
-  .lmct-mo__decline,
-  .lmct-mo__finalDecline {
-    display: inline-flex;
-    width: 100%;
-    min-height: 48px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 14px;
-    background: #ffffff;
-    border: 1px solid rgba(239, 68, 68, 0.24);
-    color: #dc2626 !important;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.4px;
-    line-height: 1.25;
-    text-align: center;
-    text-transform: uppercase;
-    transition:
-      transform 0.18s ease,
-      border-color 0.18s ease,
-      background 0.18s ease;
-  }
-
-  .lmct-mo__micro {
-    margin: 0;
-    color: #71869d;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.45;
-    text-align: center;
   }
 
   .lmct-mo__timeline {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
-    margin-top: 18px;
   }
 
   .lmct-mo__step {
@@ -477,6 +49,15 @@
     background: #ffffff;
     border: 1px solid var(--mo-line);
     box-shadow: 0 12px 28px rgba(7, 23, 44, 0.06);
+    animation: lmct-mo-rise-in 0.58s cubic-bezier(0.2, 0.9, 0.3, 1.24) both;
+  }
+
+  .lmct-mo__step:nth-child(2) {
+    animation-delay: 0.08s;
+  }
+
+  .lmct-mo__step:nth-child(3) {
+    animation-delay: 0.16s;
   }
 
   .lmct-mo__stepNum {
@@ -520,6 +101,7 @@
       #05162a;
     box-shadow: var(--mo-shadow);
     color: #ffffff;
+    animation: lmct-mo-card-in 0.68s ease-out 0.1s both;
   }
 
   .lmct-mo__proofHead {
@@ -577,16 +159,35 @@
     border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  .lmct-mo__proofItem b {
+  .lmct-mo__stat-animate {
+    opacity: 1;
+    transform: none;
+  }
+
+  .lmct-mo--stats-ready .lmct-mo__stat-animate {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  .lmct-mo--stats-ready .lmct-mo__stat-animate.lmct-mo__stat-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .lmct-mo__proofNumber {
     display: block;
     color: #ffffff;
     font-size: 42px;
     font-weight: 900;
+    font-variant-numeric: tabular-nums;
     line-height: 0.95;
     letter-spacing: 0;
   }
 
-  .lmct-mo__proofItem span {
+  .lmct-mo__proofItem span:not(.lmct-mo__proofNumber) {
     display: block;
     margin-top: 8px;
     color: var(--mo-ice);
@@ -612,6 +213,7 @@
     background: #ffffff;
     border: 1px solid var(--mo-line);
     box-shadow: var(--mo-shadow);
+    animation: lmct-mo-card-in 0.68s ease-out 0.18s both;
   }
 
   .lmct-mo__valueGrid {
@@ -782,13 +384,18 @@
     min-width: 0;
   }
 
-  .lmct-mo__benefitText span {
+  .lmct-mo__benefitText span:not(.lmct-mo__inlineCount) {
     display: block;
     margin-top: 4px;
     color: var(--mo-muted);
     font-size: 12px;
     font-weight: 600;
     line-height: 1.45;
+    text-transform: none;
+  }
+
+  .lmct-mo__inlineCount {
+    font-variant-numeric: tabular-nums;
   }
 
   .lmct-mo__partnerBar {
@@ -868,78 +475,29 @@
     opacity: 0.9;
   }
 
-  .lmct-mo__final {
-    margin-top: 22px;
-    overflow: hidden;
-    border-radius: 22px;
-    background:
-      linear-gradient(120deg, rgba(255, 255, 255, 0.12), transparent 42%),
-      linear-gradient(135deg, var(--mo-blue), var(--mo-sky) 58%, var(--mo-ice));
-    color: #ffffff;
-    box-shadow:
-      0 8px 0 rgba(4, 118, 196, 0.15),
-      0 28px 60px rgba(4, 118, 196, 0.24);
-  }
-
-  .lmct-mo__finalInner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
-    gap: 22px;
-    align-items: center;
-    padding: 26px;
-  }
-
-  .lmct-mo__final .lmct-mo__sectionLabel {
-    color: rgba(255, 255, 255, 0.84);
-  }
-
-  .lmct-mo__final .lmct-mo__sectionTitle {
-    max-width: 620px;
-    color: #ffffff;
-  }
-
-  .lmct-mo__finalCopy {
-    max-width: 62ch;
-    margin: 12px 0 0;
-    color: rgba(255, 255, 255, 0.86);
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.6;
-  }
-
-  .lmct-mo__finalActions {
-    display: grid;
-    gap: 11px;
-  }
-
-  .lmct-mo__finalCta {
-    background: #ffffff;
-    color: var(--mo-blue) !important;
-    box-shadow:
-      0 7px 0 rgba(255, 255, 255, 0.32),
-      0 18px 34px rgba(7, 23, 44, 0.16);
-  }
-
-  .lmct-mo__finalCta .lmct-mo__ctaSub {
-    color: var(--mo-sky);
-    opacity: 1;
-  }
-
-  .lmct-mo__finalDecline {
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.24);
-    color: #ffffff !important;
-  }
-
-  @keyframes lmct-mo-sheen {
+  @keyframes lmct-mo-card-in {
     0% {
-      left: -60%;
-    }
-    60% {
-      left: 120%;
+      opacity: 0;
+      transform: translateY(16px);
     }
     100% {
-      left: 120%;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes lmct-mo-rise-in {
+    0% {
+      opacity: 0;
+      transform: translateY(14px) scale(0.98);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-2px) scale(1.01);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 
@@ -962,43 +520,9 @@
     }
   }
 
-  @media (hover: hover) {
-    .lmct-mo__cta:hover,
-    .lmct-mo__finalCta:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 7px 0 #035187,
-        0 24px 42px rgba(12, 159, 253, 0.34);
-    }
-
-    .lmct-mo__finalCta:hover {
-      box-shadow:
-        0 7px 0 rgba(255, 255, 255, 0.32),
-        0 24px 42px rgba(7, 23, 44, 0.22);
-    }
-
-    .lmct-mo__decline:hover,
-    .lmct-mo__finalDecline:hover {
-      transform: translateY(-2px);
-      background: #ffffff;
-      border-color: rgba(239, 68, 68, 0.42);
-      color: #dc2626 !important;
-    }
-  }
-
   @media (max-width: 1040px) {
-    .lmct-mo__hero,
-    .lmct-mo__valueGrid,
-    .lmct-mo__finalInner {
+    .lmct-mo__valueGrid {
       grid-template-columns: 1fr;
-    }
-
-    .lmct-mo__deal {
-      margin: 0 18px 18px;
-    }
-
-    .lmct-mo__heroTitle {
-      font-size: 62px;
     }
 
     .lmct-mo__proofHead {
@@ -1015,70 +539,19 @@
       padding: 18px 12px 26px;
     }
 
-    .lmct-mo__hero,
-    .lmct-mo__proofBand,
-    .lmct-mo__valueStage,
-    .lmct-mo__final {
-      border-radius: 18px;
-    }
-
-    .lmct-mo__heroCopy,
-    .lmct-mo__valueStage {
-      padding: 18px;
-    }
-
-    .lmct-mo__topbar {
-      align-items: flex-start;
-      flex-direction: column;
-      margin-bottom: 24px;
-    }
-
-    .lmct-mo__brand {
-      width: 138px;
-    }
-
-    .lmct-mo__unlock {
-      width: 100%;
-      white-space: normal;
-      text-align: center;
-    }
-
-    .lmct-mo__heroTitle {
-      font-size: 42px;
-      line-height: 1;
-    }
-
-    .lmct-mo__heroLead,
-    .lmct-mo__valueLead,
-    .lmct-mo__finalCopy {
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .lmct-mo__heroStats,
     .lmct-mo__timeline,
     .lmct-mo__proofGrid,
     .lmct-mo__benefits {
       grid-template-columns: 1fr;
     }
 
-    .lmct-mo__deal {
-      margin: 0 12px 12px;
-      padding: 16px;
+    .lmct-mo__proofBand,
+    .lmct-mo__valueStage {
+      border-radius: 18px;
     }
 
-    .lmct-mo__dealHead,
-    .lmct-mo__partnerHead {
-      align-items: flex-start;
-      flex-direction: column;
-    }
-
-    .lmct-mo__price {
-      font-size: 58px;
-    }
-
-    .lmct-mo__quickList {
-      grid-template-columns: 1fr;
+    .lmct-mo__valueStage {
+      padding: 18px;
     }
 
     .lmct-mo__sectionTitle {
@@ -1090,7 +563,7 @@
       padding: 18px;
     }
 
-    .lmct-mo__proofItem b {
+    .lmct-mo__proofNumber {
       font-size: 36px;
     }
 
@@ -1106,31 +579,15 @@
       display: none;
     }
 
-    .lmct-mo__finalInner {
-      padding: 20px;
+    .lmct-mo__partnerHead {
+      align-items: flex-start;
+      flex-direction: column;
     }
   }
 
   @media (max-width: 420px) {
-    .lmct-mo__heroTitle {
-      font-size: 36px;
-    }
-
-    .lmct-mo__miniStat b {
-      font-size: 20px;
-    }
-
-    .lmct-mo__price {
-      font-size: 50px;
-    }
-
-    .lmct-mo__perWeek {
-      font-size: 16px;
-      padding-bottom: 7px;
-    }
-
-    .lmct-mo__ctaMain {
-      font-size: 13px;
+    .lmct-mo__sectionTitle {
+      font-size: 25px;
     }
   }
 
@@ -1139,156 +596,18 @@
     .lmct-mo *::before,
     .lmct-mo *::after {
       animation: none !important;
-      scroll-behavior: auto !important;
       transition: none !important;
+    }
+
+    .lmct-mo__stat-animate {
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 </style>
 
-<div class="lmct-mo">
+<div class="lmct-mo" id="lmct-mo-sections">
   <div class="lmct-mo__shell">
-    <section class="lmct-mo__hero" aria-label="LMCT+ membership one time offer">
-      <div class="lmct-mo__heroCopy">
-        <div class="lmct-mo__topbar">
-          <img
-            class="lmct-mo__brand"
-            src="https://pub-5daa6c7eb94c4316b99f8fb7c5b941b3.r2.dev/funnels/evergreen/white-blue-logo.svg"
-            alt="LMCT+ Logo"
-          />
-          <div class="lmct-mo__unlock">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M20 6 9 17l-5-5"></path>
-            </svg>
-            <span>Secret offer unlocked</span>
-          </div>
-        </div>
-
-        <h1 class="lmct-mo__heroTitle">
-          <strong>50% off</strong>
-          <span>membership</span>
-        </h1>
-        <p class="lmct-mo__heroLead">
-          Keep your LMCT+ access active for the next 3 months at the reduced
-          intro rate. The offer is simple: more member value, less weekly spend.
-        </p>
-
-        <div class="lmct-mo__heroStats" aria-label="Offer highlights">
-          <div class="lmct-mo__miniStat">
-            <b>$2.50</b>
-            <span>Per week</span>
-          </div>
-          <div class="lmct-mo__miniStat">
-            <b>3 mo</b>
-            <span>Intro access</span>
-          </div>
-          <div class="lmct-mo__miniStat">
-            <b>50%</b>
-            <span>Saved today</span>
-          </div>
-        </div>
-      </div>
-
-      <aside class="lmct-mo__deal" aria-label="Membership offer price">
-        <div class="lmct-mo__dealHead">
-          <div>
-            <p class="lmct-mo__dealLabel">Limited intro rate</p>
-            <p class="lmct-mo__dealCopy">
-              The reduced member price is available before you continue.
-            </p>
-          </div>
-          <span class="lmct-mo__saveBadge">Save 50%</span>
-        </div>
-
-        <div class="lmct-mo__pricePlate">
-          <p class="lmct-mo__was">Was $5.00 per week</p>
-          <div class="lmct-mo__priceLine">
-            <span class="lmct-mo__price">$2.50</span>
-            <span class="lmct-mo__perWeek">per week</span>
-          </div>
-          <p class="lmct-mo__priceNote">
-            3 months of LMCT+ membership at the one-time intro price.
-          </p>
-        </div>
-
-        <ul class="lmct-mo__quickList" aria-label="Included value">
-          <li>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M20 6 9 17l-5-5"></path>
-            </svg>
-            Member discounts
-          </li>
-          <li>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M12 2 15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-6z"></path>
-            </svg>
-            Giveaway access
-          </li>
-          <li>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path
-                d="M20.59 13.41 12 22l-9-9V4a1 1 0 0 1 1-1h9l8.59 8.59a2 2 0 0 1 0 2.82z"
-              ></path>
-              <circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"></circle>
-            </svg>
-            Partner deals
-          </li>
-        </ul>
-
-        <div class="lmct-mo__ctaGroup">
-          <a
-            class="elButton lmct-mo__cta js-membership-oto-btn"
-            data-cents="250"
-            href="#"
-            data-upsell="true"
-          >
-            <span class="lmct-mo__ctaMain">Yes, claim my 50% offer</span>
-            <span class="lmct-mo__ctaSub"
-              >3 months membership intro pricing</span
-            >
-          </a>
-          <a class="lmct-mo__decline" href="#no-link">
-            No, I don't want this offer
-          </a>
-        </div>
-
-        <p class="lmct-mo__micro">
-          Secure checkout. Your one-time offer is available before you continue.
-        </p>
-      </aside>
-    </section>
-
     <section class="lmct-mo__timeline" aria-label="How the offer works">
       <article class="lmct-mo__step">
         <span class="lmct-mo__stepNum">01</span>
@@ -1324,18 +643,39 @@
       </div>
 
       <div class="lmct-mo__proofGrid">
-        <article class="lmct-mo__proofItem">
-          <b>817+</b>
+        <article class="lmct-mo__proofItem lmct-mo__stat-animate">
+          <span
+            class="lmct-mo__proofNumber"
+            data-target="817"
+            data-prefix=""
+            data-suffix="+"
+            data-final="817+"
+            >817+</span
+          >
           <span>Giveaway winners</span>
           <p>Members already on the winner board across LMCT+ campaigns.</p>
         </article>
-        <article class="lmct-mo__proofItem">
-          <b>$150M+</b>
+        <article class="lmct-mo__proofItem lmct-mo__stat-animate">
+          <span
+            class="lmct-mo__proofNumber"
+            data-target="150"
+            data-prefix="$"
+            data-suffix="M+"
+            data-final="$150M+"
+            >$150M+</span
+          >
           <span>Given away</span>
           <p>A proven platform that has delivered serious value at scale.</p>
         </article>
-        <article class="lmct-mo__proofItem">
-          <b>41</b>
+        <article class="lmct-mo__proofItem lmct-mo__stat-animate">
+          <span
+            class="lmct-mo__proofNumber"
+            data-target="41"
+            data-prefix=""
+            data-suffix=""
+            data-final="41"
+            >41</span
+          >
           <span>Millionaires made</span>
           <p>Life-changing outcomes that keep the bigger story credible.</p>
         </article>
@@ -1399,7 +739,7 @@
           </p>
 
           <ul class="lmct-mo__benefits">
-            <li class="lmct-mo__benefit">
+            <li class="lmct-mo__benefit lmct-mo__stat-animate">
               <span class="lmct-mo__benefitIcon">
                 <svg
                   viewBox="0 0 24 24"
@@ -1422,11 +762,21 @@
                 </svg>
               </span>
               <span class="lmct-mo__benefitText">
-                <b>2,000+ Australian partners</b>
+                <b>
+                  <span
+                    class="lmct-mo__inlineCount"
+                    data-target="2000"
+                    data-prefix=""
+                    data-suffix="+"
+                    data-final="2,000+"
+                    >2,000+</span
+                  >
+                  Australian partners
+                </b>
                 <span>Member deals across a broad local partner network.</span>
               </span>
             </li>
-            <li class="lmct-mo__benefit">
+            <li class="lmct-mo__benefit lmct-mo__stat-animate">
               <span class="lmct-mo__benefitIcon lmct-mo__benefitIcon--gold">
                 <svg
                   viewBox="0 0 24 24"
@@ -1444,13 +794,24 @@
                 </svg>
               </span>
               <span class="lmct-mo__benefitText">
-                <b>$1000s in savings</b>
+                <b>
+                  <span
+                    class="lmct-mo__inlineCount"
+                    data-target="1000"
+                    data-prefix="$"
+                    data-suffix="s"
+                    data-final="$1000s"
+                    data-grouping="false"
+                    >$1000s</span
+                  >
+                  in savings
+                </b>
                 <span
                   >Potential savings that can keep paying back each week.</span
                 >
               </span>
             </li>
-            <li class="lmct-mo__benefit">
+            <li class="lmct-mo__benefit lmct-mo__stat-animate">
               <span class="lmct-mo__benefitIcon">
                 <svg
                   viewBox="0 0 24 24"
@@ -1469,7 +830,17 @@
                 </svg>
               </span>
               <span class="lmct-mo__benefitText">
-                <b>1,700+ stores</b>
+                <b>
+                  <span
+                    class="lmct-mo__inlineCount"
+                    data-target="1700"
+                    data-prefix=""
+                    data-suffix="+"
+                    data-final="1,700+"
+                    >1,700+</span
+                  >
+                  stores
+                </b>
                 <span
                   >Enough redemption locations to feel practical, not
                   theoretical.</span
@@ -1540,7 +911,7 @@
                 <div class="lmct-mo__logoTile">
                   <img
                     src="../assets/membership-oto/partner-sxhibition.png"
-                    alt="Partner brand"
+                    alt="SXhibition"
                   />
                 </div>
                 <div class="lmct-mo__logoTile">
@@ -1599,73 +970,126 @@
         </div>
       </div>
     </section>
-
-    <section class="lmct-mo__final" aria-label="Claim LMCT+ offer">
-      <div class="lmct-mo__finalInner">
-        <div>
-          <p class="lmct-mo__sectionLabel">Last chance</p>
-          <h2 class="lmct-mo__sectionTitle">
-            Claim the reduced member rate before you move on
-          </h2>
-          <p class="lmct-mo__finalCopy">
-            If the member discounts, partner network, and app access make sense
-            for you, this is the point to lock in the 3-month intro offer.
-          </p>
-        </div>
-
-        <div class="lmct-mo__finalActions">
-          <a
-            class="elButton lmct-mo__finalCta js-membership-oto-btn"
-            data-cents="250"
-            href="#"
-            data-upsell="true"
-          >
-            <span class="lmct-mo__ctaMain">Yes, I want the limited offer</span>
-            <span class="lmct-mo__ctaSub">3 months membership at 50% off</span>
-          </a>
-          <a class="lmct-mo__finalDecline" href="#no-link">
-            No, I don't want this offer
-          </a>
-        </div>
-      </div>
-    </section>
   </div>
 </div>
 
 <script>
   (function () {
-    function triggerMembershipOTO(e) {
-      e.preventDefault();
+    var root = document.getElementById("lmct-mo-sections");
+    if (!root) return;
 
-      var customBtn = e.target.closest(".js-membership-oto-btn");
+    var prefersReducedMotion = window.matchMedia
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : false;
 
-      if (!customBtn) {
-        console.error("Custom OTO button not found.");
-        return;
-      }
-
-      var cents = customBtn.getAttribute("data-cents") || "250";
-
-      window.cfptOrderTotal = parseInt(cents, 10) / 100;
-      localStorage.setItem("cfptLastTransAmt", window.cfptOrderTotal);
-      localStorage.setItem("cfptLastTransPath", document.location.pathname);
-
-      var realButton =
-        document.querySelector('[data-title*="real-membership-oto"] a') ||
-        document.querySelector('[data-title*="real-membership-oto"]') ||
-        document.querySelector('[data-title*="cf-oto-cents-' + cents + '"]');
-
-      if (!realButton) {
-        console.error("Real CF membership OTO button not found.");
-        return;
-      }
-
-      realButton.click();
+    function formatStatValue(el, value) {
+      var useGrouping = el.getAttribute("data-grouping") !== "false";
+      return useGrouping ? value.toLocaleString() : String(value);
     }
 
-    document.addEventListener("click", function (e) {
-      if (!e.target.closest(".js-membership-oto-btn")) return;
-      triggerMembershipOTO(e);
+    function getFinalStatText(el) {
+      var finalText = el.getAttribute("data-final");
+      var target = parseInt(el.getAttribute("data-target"), 10) || 0;
+      var prefix = el.getAttribute("data-prefix") || "";
+      var suffix = el.getAttribute("data-suffix") || "";
+
+      return finalText || prefix + formatStatValue(el, target) + suffix;
+    }
+
+    function countUpStat(el) {
+      if (el.getAttribute("data-animated") === "true") return;
+      el.setAttribute("data-animated", "true");
+
+      if (prefersReducedMotion) {
+        el.textContent = getFinalStatText(el);
+        return;
+      }
+
+      var target = parseInt(el.getAttribute("data-target"), 10) || 0;
+      var prefix = el.getAttribute("data-prefix") || "";
+      var suffix = el.getAttribute("data-suffix") || "";
+      var duration = 1800;
+      var startTime = null;
+
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+
+        var progress = Math.min((timestamp - startTime) / duration, 1);
+        var currentValue = Math.floor(easeOutQuart(progress) * target);
+
+        el.textContent = prefix + formatStatValue(el, currentValue) + suffix;
+
+        if (progress < 1) {
+          requestAnimationFrame(step);
+          return;
+        }
+
+        el.textContent = getFinalStatText(el);
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    function triggerStatGroup(group) {
+      if (!group || group.getAttribute("data-stats-triggered") === "true") {
+        return;
+      }
+
+      group.setAttribute("data-stats-triggered", "true");
+
+      var items = group.querySelectorAll(".lmct-mo__stat-animate");
+      items.forEach(function (item, index) {
+        setTimeout(function () {
+          item.classList.add("lmct-mo__stat-visible");
+
+          var number = item.querySelector("[data-target]");
+          if (number) countUpStat(number);
+        }, index * 180);
+      });
+    }
+
+    root.classList.add("lmct-mo--stats-ready");
+
+    var groups = root.querySelectorAll(
+      ".lmct-mo__proofGrid, .lmct-mo__benefits",
+    );
+
+    if (!groups.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      groups.forEach(triggerStatGroup);
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+
+          triggerStatGroup(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.15 },
+    );
+
+    groups.forEach(function (group) {
+      observer.observe(group);
     });
+
+    setTimeout(function () {
+      groups.forEach(function (group) {
+        if (group.getAttribute("data-stats-triggered") === "true") return;
+
+        var rect = group.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          triggerStatGroup(group);
+        }
+      });
+    }, 600);
   })();
 </script>

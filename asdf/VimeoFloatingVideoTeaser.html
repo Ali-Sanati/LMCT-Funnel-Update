@@ -11,7 +11,9 @@
     box-shadow: 0 14px 36px rgba(0, 0, 0, 0.34);
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 180ms ease, transform 180ms ease;
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
   }
 
   .lmct-vimeo-teaser--hidden {
@@ -119,15 +121,24 @@
   }
 </style>
 
-<aside class="lmct-vimeo-teaser" id="lmct-vimeo-teaser" aria-label="Watch the one million dollar reaction video">
-  <a class="lmct-vimeo-teaser__link" href="#lmct-vimeo-proof-video" aria-label="Go to the full reaction video">
+<aside
+  class="lmct-vimeo-teaser"
+  id="lmct-vimeo-teaser"
+  aria-label="Watch the one million dollar reaction video"
+>
+  <a
+    class="lmct-vimeo-teaser__link"
+    href="#lmct-vimeo-proof-video"
+    aria-label="Go to the full reaction video"
+  >
     <iframe
-      src="https://player.vimeo.com/video/1197238773?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;autopause=0&amp;badge=0&amp;title=0&amp;byline=0&amp;portrait=0"
-      title="Muted preview of the one million dollar reaction video"
+      src="https://player.vimeo.com/video/1199591917?background=1&amp;autoplay=1&amp;muted=1&amp;loop=1&amp;autopause=0&amp;badge=0&amp;title=0&amp;byline=0&amp;portrait=0"
+      title="Muted preview of the $100K reaction video"
       frameborder="0"
       allow="autoplay; fullscreen; picture-in-picture"
       referrerpolicy="strict-origin-when-cross-origin"
-      tabindex="-1">
+      tabindex="-1"
+    >
     </iframe>
     <span class="lmct-vimeo-teaser__cta">
       <span class="lmct-vimeo-teaser__play" aria-hidden="true">
@@ -138,7 +149,13 @@
       Click to watch with sound
     </span>
   </a>
-  <button class="lmct-vimeo-teaser__close" type="button" aria-label="Close video preview">&times;</button>
+  <button
+    class="lmct-vimeo-teaser__close"
+    type="button"
+    aria-label="Close video preview"
+  >
+    &times;
+  </button>
 </aside>
 
 <script>
@@ -165,12 +182,20 @@
 
     function connectObserver() {
       var target = getTarget();
-      if (!target || target === observedTarget || !("IntersectionObserver" in window)) return;
+      if (
+        !target ||
+        target === observedTarget ||
+        !("IntersectionObserver" in window)
+      )
+        return;
 
       observedTarget = target;
-      observer = new IntersectionObserver(function (entries) {
-        updateVisibility(entries[0].isIntersecting);
-      }, { threshold: 0.2 });
+      observer = new IntersectionObserver(
+        function (entries) {
+          updateVisibility(entries[0].isIntersecting);
+        },
+        { threshold: 0.2 },
+      );
       observer.observe(target);
     }
 

@@ -1,0 +1,652 @@
+<!-- ============================================ -->
+<!-- CARD 1 — ENTRIES ONLY                        -->
+<!-- ============================================ -->
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
+
+  .lmctV4__stage {
+    position: relative;
+    width: 100%;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(12, 159, 253, 0.14), transparent 36%),
+      linear-gradient(180deg, #ffffff 0%, #f4f8fc 100%);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .lmctV4__stage *,
+  .lmctV4__stage *::before,
+  .lmctV4__stage *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctV4__stage::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(12, 159, 253, 0.1) 18%,
+      #0c9ffd 50%,
+      rgba(12, 159, 253, 0.1) 82%,
+      transparent 100%
+    );
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .lmctV4__inner {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 16px 80px;
+    z-index: 2;
+  }
+
+  .lmctV4__sectionHead {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .lmctV4__sectionTitle {
+    margin: 0;
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: #05162a;
+  }
+
+  .lmctV4__sectionTitle span {
+    background: linear-gradient(180deg, #3fb8ff 0%, #0c9ffd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lmctV4__card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid rgba(12, 45, 78, 0.1);
+    border-radius: 18px;
+    overflow: hidden;
+    color: #05162a;
+    padding: 36px 32px 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 22px 60px rgba(5, 22, 42, 0.12);
+  }
+
+  .lmctV4__cardHead {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .lmctV4__cardTitle {
+    margin: 0 0 10px;
+    font-size: clamp(26px, 4.4vw, 40px);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: #05162a;
+  }
+
+  .lmctV4__cardTitle em {
+    font-style: normal;
+    background: linear-gradient(180deg, #3fb8ff 0%, #0c9ffd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lmctV4__cardSubtitle {
+    margin: 0 auto;
+    max-width: 620px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #52616f;
+    line-height: 1.55;
+    text-wrap: balance;
+  }
+
+  /* ============================================ */
+  /* ENTRIES TOGGLE                               */
+  /* ============================================ */
+
+  .lmctV4__toggleWrap {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .lmctV4__toggle {
+    display: inline-flex;
+    background: #eef5fb;
+    border: 1px solid rgba(12, 45, 78, 0.1);
+    border-radius: 14px;
+    padding: 5px;
+    gap: 4px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  }
+
+  .lmctV4__toggleBtn {
+    appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: #587083;
+    padding: 9px 18px;
+    border-radius: 10px;
+    transition: background 0.25s ease, color 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .lmctV4__toggleBtn:hover {
+    color: #05162a;
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  .lmctV4__toggleDot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .lmctV4__toggleBtn[data-tier="entry"] .lmctV4__toggleDot {
+    background: #1fa851;
+  }
+
+  .lmctV4__toggleBtn[data-tier="premium"] .lmctV4__toggleDot {
+    background: #0c9ffd;
+  }
+
+  .lmctV4__toggleBtn[data-tier="elite"] .lmctV4__toggleDot {
+    background: #f5b721;
+  }
+
+  .lmctV4__toggleBtn.is-active[data-tier="entry"] {
+    background: linear-gradient(180deg, #1fa851 0%, #0e7a3a 100%);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(31, 168, 81, 0.4);
+  }
+
+  .lmctV4__toggleBtn.is-active[data-tier="premium"] {
+    background: linear-gradient(180deg, #0c9ffd 0%, #0476c4 100%);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(12, 159, 253, 0.4);
+  }
+
+  .lmctV4__toggleBtn.is-active[data-tier="elite"] {
+    background: linear-gradient(180deg, #f5b721 0%, #d4941a 100%);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(245, 183, 33, 0.4);
+  }
+
+  /* ============================================ */
+  /* ENTRIES CHART                                */
+  /* ============================================ */
+
+  .lmctV4__chart {
+    background: linear-gradient(
+      180deg,
+      rgba(244, 250, 255, 0.96) 0%,
+      rgba(255, 255, 255, 0.98) 100%
+    );
+    border: 1px solid rgba(12, 45, 78, 0.1);
+    border-radius: 16px;
+    padding: 22px 22px 18px;
+    margin-bottom: 22px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .lmctV4__chartLegend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #52616f;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    white-space: nowrap;
+  }
+
+  .lmctV4__chartLegend .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+
+  .lmctV4__chartGrid {
+    position: relative;
+    height: 280px;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 10px;
+    padding-bottom: 36px;
+  }
+
+  .lmctV4__yAxis {
+    position: relative;
+    height: 100%;
+  }
+
+  .lmctV4__yLabel {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translateY(50%);
+    font-size: 11px;
+    font-weight: 800;
+    color: #6c7d8b;
+    text-align: right;
+    line-height: 1.1;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .lmctV4__yLabel strong {
+    display: block;
+    font-size: 13px;
+    color: #05162a;
+    font-weight: 900;
+    margin-bottom: 1px;
+  }
+
+  .lmctV4__barsArea {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    border-left: 1px solid rgba(5, 22, 42, 0.12);
+    border-bottom: 1px solid rgba(5, 22, 42, 0.12);
+    padding: 0 8px;
+    height: 100%;
+  }
+
+  .lmctV4__gridLine {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(5, 22, 42, 0.07);
+    pointer-events: none;
+  }
+
+  .lmctV4__bar {
+    flex: 1;
+    margin: 0 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    position: relative;
+  }
+
+  .lmctV4__barFill {
+    width: 100%;
+    max-width: 60px;
+    border-radius: 8px 8px 0 0;
+    transition:
+      height 0.9s cubic-bezier(0.2, 0.85, 0.3, 1),
+      background 0.35s ease,
+      box-shadow 0.35s ease;
+    min-height: 4px;
+    position: relative;
+  }
+
+  .lmctV4__barFill[data-tier="entry"] {
+    background: linear-gradient(180deg, #1fa851 0%, #0e7a3a 100%);
+    box-shadow: 0 0 24px rgba(31, 168, 81, 0.3);
+  }
+
+  .lmctV4__barFill[data-tier="premium"] {
+    background: linear-gradient(180deg, #3fb8ff 0%, #0476c4 100%);
+    box-shadow: 0 0 24px rgba(12, 159, 253, 0.35);
+  }
+
+  .lmctV4__barFill[data-tier="elite"] {
+    background: linear-gradient(180deg, #f5b721 0%, #d4941a 100%);
+    box-shadow: 0 0 24px rgba(245, 183, 33, 0.35);
+  }
+
+  .lmctV4__barValue {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 13px;
+    font-weight: 900;
+    color: #05162a;
+    letter-spacing: 0;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.6s;
+  }
+
+  .lmctV4__barFill.is-shown .lmctV4__barValue {
+    opacity: 1;
+  }
+
+  .lmctV4__barLabel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #6c7d8b;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .lmctV4__barLabel strong {
+    display: block;
+    font-size: 13px;
+    color: #05162a;
+    font-weight: 900;
+    margin-bottom: 2px;
+    letter-spacing: 0;
+  }
+
+  .lmctV4__footnote {
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #05162a;
+    line-height: 1.5;
+    padding: 14px 18px;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.2);
+    border-radius: 12px;
+  }
+
+  .lmctV4__footnote strong {
+    background: linear-gradient(180deg, #3fb8ff 0%, #0c9ffd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+
+  @media (max-width: 640px) {
+    .lmctV4__inner {
+      padding: 44px 12px 56px;
+    }
+
+    .lmctV4__card {
+      padding: 28px 16px 22px;
+      border-radius: 18px;
+    }
+
+    .lmctV4__toggle {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .lmctV4__toggleBtn {
+      flex: 1;
+      justify-content: center;
+      padding: 9px 8px;
+      font-size: 11px;
+      gap: 6px;
+    }
+
+    .lmctV4__chart {
+      padding: 18px 12px 16px;
+    }
+
+    .lmctV4__chartLegend {
+      justify-content: center;
+      font-size: 10px;
+      gap: 6px;
+      white-space: normal;
+      text-align: center;
+    }
+
+    .lmctV4__chartLegend .dot {
+      width: 9px;
+      height: 9px;
+      flex: 0 0 auto;
+    }
+
+    .lmctV4__chartGrid {
+      grid-template-columns: 38px minmax(0, 1fr);
+      height: 240px;
+      gap: 6px;
+    }
+
+    .lmctV4__bar {
+      margin: 0 2px;
+    }
+
+    .lmctV4__barFill {
+      max-width: 42px;
+    }
+
+    .lmctV4__barValue {
+      font-size: 11px;
+      top: -22px;
+    }
+
+    .lmctV4__barLabel {
+      font-size: 10px;
+    }
+
+    .lmctV4__barLabel strong {
+      font-size: 11px;
+    }
+
+    .lmctV4__yLabel {
+      font-size: 9px;
+    }
+
+    .lmctV4__yLabel strong {
+      font-size: 11px;
+    }
+
+    .lmctV4__footnote {
+      font-size: 13px;
+      padding: 12px 14px;
+    }
+  }
+</style>
+
+<div class="lmctV4__stage">
+  <div class="lmctV4__inner">
+    <div class="lmctV4__sectionHead">
+      <h2 class="lmctV4__sectionTitle">What You <span>Just Unlocked</span></h2>
+    </div>
+
+    <!-- CARD 1 — ENTRIES -->
+    <div class="lmctV4__card">
+      <div class="lmctV4__cardHead">
+        <h3 class="lmctV4__cardTitle">Entries That <em>Accumulate</em></h3>
+        <p class="lmctV4__cardSubtitle">
+          Your name is locked into every LMCT+ giveaway, automatically. The
+          longer you stay, the more entries you stack up.
+        </p>
+      </div>
+
+      <div class="lmctV4__toggleWrap">
+        <div class="lmctV4__toggle" role="tablist" aria-label="Membership tier">
+          <button class="lmctV4__toggleBtn" data-tier="entry" type="button">
+            <span class="lmctV4__toggleDot"></span>
+            Entry
+          </button>
+
+          <button
+            class="lmctV4__toggleBtn is-active"
+            data-tier="premium"
+            type="button"
+            aria-selected="true"
+          >
+            <span class="lmctV4__toggleDot"></span>
+            Premium
+          </button>
+
+          <button class="lmctV4__toggleBtn" data-tier="elite" type="button">
+            <span class="lmctV4__toggleDot"></span>
+            Elite
+          </button>
+        </div>
+      </div>
+
+      <div class="lmctV4__chart">
+        <div class="lmctV4__chartLegend">
+          <span class="dot" id="lmctV4__legendDot"></span>
+          <span id="lmctV4__legendTxt">Premium · 5 entries / month</span>
+        </div>
+
+        <div class="lmctV4__chartGrid">
+          <div class="lmctV4__yAxis" id="lmctV4__yAxis"></div>
+          <div class="lmctV4__barsArea" id="lmctV4__barsArea"></div>
+        </div>
+      </div>
+
+      <div class="lmctV4__footnote">
+        Every entry <strong>stays with you</strong>, draw after draw.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.addEventListener("load", function () {
+    var TIERS = {
+      entry: {
+        rate: 1,
+        label: "Entry",
+        color: "#1FA851",
+        desc: "1 entry / month",
+      },
+      premium: {
+        rate: 5,
+        label: "Premium",
+        color: "#0C9FFD",
+        desc: "5 entries / month",
+      },
+      elite: {
+        rate: 10,
+        label: "Elite",
+        color: "#F5B721",
+        desc: "10 entries / month",
+      },
+    };
+
+    var MONTHS = [3, 6, 9, 12, 15];
+    var Y_STEPS = 5;
+
+    var barsArea = document.getElementById("lmctV4__barsArea");
+    var yAxis = document.getElementById("lmctV4__yAxis");
+    var legendDot = document.getElementById("lmctV4__legendDot");
+    var legendTxt = document.getElementById("lmctV4__legendTxt");
+    var buttons = document.querySelectorAll(".lmctV4__toggleBtn");
+
+    function render(tierKey) {
+      var tier = TIERS[tierKey];
+      var values = MONTHS.map(function (month) {
+        return month * tier.rate;
+      });
+
+      var maxVal = values[values.length - 1];
+
+      yAxis.innerHTML = "";
+
+      for (var i = Y_STEPS; i >= 1; i--) {
+        var value = Math.round((maxVal * i) / Y_STEPS);
+        var label = document.createElement("div");
+
+        label.className = "lmctV4__yLabel";
+        label.style.bottom = (i / Y_STEPS) * 100 + "%";
+        label.innerHTML = "<strong>" + value + "</strong>Entries";
+
+        yAxis.appendChild(label);
+      }
+
+      barsArea.innerHTML = "";
+
+      for (var gridIndex = 1; gridIndex <= Y_STEPS; gridIndex++) {
+        var gridLine = document.createElement("div");
+
+        gridLine.className = "lmctV4__gridLine";
+        gridLine.style.bottom = (gridIndex / Y_STEPS) * 100 + "%";
+
+        barsArea.appendChild(gridLine);
+      }
+
+      values.forEach(function (value, index) {
+        var percent = (value / maxVal) * 92;
+        var bar = document.createElement("div");
+
+        bar.className = "lmctV4__bar";
+        bar.innerHTML =
+          '<div class="lmctV4__barFill" data-tier="' +
+          tierKey +
+          '" style="height:0%">' +
+          '<span class="lmctV4__barValue">' +
+          value +
+          "</span>" +
+          "</div>" +
+          '<div class="lmctV4__barLabel">' +
+          "<strong>" +
+          MONTHS[index] +
+          "</strong>M" +
+          "</div>";
+
+        barsArea.appendChild(bar);
+
+        requestAnimationFrame(function () {
+          setTimeout(function () {
+            var fill = bar.querySelector(".lmctV4__barFill");
+            fill.style.height = percent + "%";
+            fill.classList.add("is-shown");
+          }, index * 80);
+        });
+      });
+
+      legendDot.style.background = tier.color;
+      legendDot.style.boxShadow = "0 0 8px " + tier.color;
+      legendTxt.textContent = tier.label + " · " + tier.desc;
+    }
+
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        buttons.forEach(function (item) {
+          item.classList.remove("is-active");
+          item.removeAttribute("aria-selected");
+        });
+
+        button.classList.add("is-active");
+        button.setAttribute("aria-selected", "true");
+
+        render(button.dataset.tier);
+      });
+    });
+
+    render("premium");
+  });
+</script>

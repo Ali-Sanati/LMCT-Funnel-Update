@@ -1,0 +1,363 @@
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap"
+  rel="stylesheet"
+/><style>
+  .epsBannerRoot,
+  .epsBannerRoot * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .epsBannerRoot {
+    --eps-bg: #1a1a1a;
+    --eps-fill-start: #cc0000;
+    --eps-fill-mid: #ff0000;
+    --eps-fill-end: #ff1a1a;
+    --eps-fill: 90%;
+    --eps-glow: rgba(255, 0, 0, 0.45);
+    --eps-text: #fff;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    position: relative;
+  }
+  .epsBannerWrap {
+    position: relative;
+    width: 100%;
+    background: var(--eps-bg);
+    overflow: hidden;
+    box-shadow:
+      0 0 20px var(--eps-glow),
+      0 0 60px rgba(255, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  .epsBannerFill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(
+      90deg,
+      var(--eps-fill-start) 0%,
+      var(--eps-fill-mid) 40%,
+      var(--eps-fill-end) 70%,
+      var(--eps-fill-mid) 100%
+    );
+    animation:
+      epsFillUp 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+      epsFillPulse 2.4s ease-in-out 3s infinite;
+  }
+  @keyframes epsFillUp {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: var(--eps-fill);
+    }
+  }
+  @keyframes epsFillPulse {
+    0%,
+    100% {
+      width: var(--eps-fill);
+    }
+    50% {
+      width: calc(var(--eps-fill) + 3%);
+    }
+  }
+  .epsBannerFill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 40%,
+      rgba(255, 255, 255, 0.18) 50%,
+      rgba(255, 255, 255, 0.1) 60%,
+      transparent 100%
+    );
+    animation: epsBarShimmer 2.5s ease-in-out 1s infinite;
+  }
+  @keyframes epsBarShimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 200%;
+    }
+  }
+  .epsBannerStripes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 8px,
+      rgba(0, 0, 0, 0.12) 8px,
+      rgba(0, 0, 0, 0.12) 16px
+    );
+    background-size: 22.6px 100%;
+    animation: epsStripeMove 0.8s linear infinite;
+  }
+  @keyframes epsStripeMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 22.6px 0;
+    }
+  }
+  .epsBannerEdge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 12px 2px rgba(255, 255, 255, 0.25);
+    animation: epsEdgePulse 1.2s ease-in-out infinite;
+  }
+  @keyframes epsEdgePulse {
+    0%,
+    100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  .epsBannerInner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 24px;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    gap: 14px;
+    pointer-events: none;
+  }
+  .epsIcon {
+    flex: 0 0 auto;
+    font-size: 28px;
+    line-height: 1;
+    display: inline-block;
+    animation: epsIconShake 0.55s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes epsIconShake {
+    0%,
+    100% {
+      transform: rotate(-8deg) scale(1);
+    }
+    25% {
+      transform: rotate(6deg) scale(1.06);
+    }
+    50% {
+      transform: rotate(-4deg) scale(1);
+    }
+    75% {
+      transform: rotate(8deg) scale(1.06);
+    }
+  }
+  .epsTextMain {
+    flex: 0 1 auto;
+    min-width: 0;
+    font-weight: 900;
+    font-size: 34px;
+    color: var(--eps-text);
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+    text-transform: uppercase;
+    display: inline-block;
+    transform-origin: center center;
+    will-change: transform, opacity, filter;
+    animation: epsTextGlow 1.4s ease-in-out infinite;
+  }
+  .epsTextMain.epsSmashIn {
+    animation:
+      epsSmashIn 0.42s cubic-bezier(0.18, 1.35, 0.35, 1) both,
+      epsTextGlow 1.4s ease-in-out 0.42s infinite;
+  }
+  @keyframes epsSmashIn {
+    0% {
+      opacity: 0;
+      transform: scale(2.4) translateY(-18px);
+      filter: blur(4px);
+      text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+    45% {
+      opacity: 1;
+      transform: scale(0.86) translateY(2px);
+      filter: blur(0);
+      text-shadow:
+        0 0 18px rgba(255, 255, 255, 0.95),
+        0 0 34px rgba(255, 0, 0, 0.85);
+    }
+    68% {
+      transform: scale(1.12) translateY(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      filter: blur(0);
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.45),
+        0 0 22px rgba(255, 0, 0, 0.5);
+    }
+  }
+  @keyframes epsTextGlow {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  } /* ============ MOBILE ============ */
+  @media (max-width: 768px) {
+    .epsBannerInner {
+      padding: 16px 16px;
+      gap: 12px;
+    }
+    .epsIcon {
+      font-size: 24px;
+    }
+    .epsTextMain {
+      font-size: 26px;
+      letter-spacing: 0.04em;
+    }
+  }
+  @media (max-width: 520px) {
+    .epsBannerInner {
+      padding: 14px 12px;
+      gap: 10px;
+    }
+    .epsIcon {
+      font-size: 20px;
+    }
+    .epsTextMain {
+      font-size: 20px;
+      letter-spacing: 0.03em;
+    }
+  }
+  @media (max-width: 400px) {
+    .epsBannerInner {
+      padding: 12px 10px;
+      gap: 8px;
+    }
+    .epsIcon {
+      font-size: 17px;
+    }
+    .epsTextMain {
+      font-size: 16px;
+      letter-spacing: 0.02em;
+    }
+  }
+</style>
+<div class="epsBannerRoot" id="epsBannerRoot">
+  <div class="epsBannerWrap">
+    <div class="epsBannerFill">
+      <div class="epsBannerStripes"></div>
+      <div class="epsBannerEdge"></div>
+    </div>
+    <div class="epsBannerInner">
+      <span class="epsIcon">⚠️</span>
+      <span class="epsTextMain">FINAL DAYS LEFT</span>
+      <span class="epsIcon">⚠️</span>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    const sectionMessages = [
+      { match: "UrgencyBar", text: "FINAL DAYS LEFT", fill: "68%" },
+      { match: "Hero", text: "HURRY! ENDING SOON", fill: "72%" },
+      { match: "Packages", text: "GATES CLOSING SOON!", fill: "80%" },
+      { match: "GiveawayDetails", text: "ENTER BEFORE IT ENDS", fill: "84%" },
+      { match: "CarDetails", text: "WIN THE DREAM", fill: "88%" },
+      { match: "CashDetails", text: "LAST CHANCE TO ENTER", fill: "92%" },
+      { match: "Proof", text: "REAL WINNERS", fill: "96%" },
+      { match: "Footer", text: "FINAL CALL", fill: "98%" },
+    ];
+    function normalize(str) {
+      return String(str || "")
+        .toLowerCase()
+        .replace(/\s+/g, "")
+        .replace(/-/g, "");
+    }
+    function initDynamicUrgencyBar() {
+      const bannerRoot = document.querySelector(".epsBannerRoot");
+      const bannerText = document.querySelector(".epsTextMain");
+      if (!bannerRoot || !bannerText) return false;
+      const allSections = Array.from(
+        document.querySelectorAll(".container.fullContainer[data-title]"),
+      );
+      const activeSections = sectionMessages
+        .map((item) => {
+          const target = normalize(item.match);
+          const section = allSections.find((el) => {
+            const title = normalize(el.getAttribute("data-title"));
+            return title.includes(target);
+          });
+          return { ...item, element: section };
+        })
+        .filter((item) => item.element);
+      console.log(
+        "LMCT urgency sections found:",
+        activeSections.map((item) => item.element.getAttribute("data-title")),
+      );
+      if (!activeSections.length) return false;
+      function setBanner(item) {
+        if (!item || bannerText.textContent.trim() === item.text) return;
+        bannerText.classList.remove("epsSmashIn");
+        setTimeout(() => {
+          bannerText.textContent = item.text;
+          bannerRoot.style.setProperty("--eps-fill", item.fill);
+          void bannerText.offsetWidth;
+          bannerText.classList.add("epsSmashIn");
+        }, 40);
+      }
+      function getActiveSection() {
+        const triggerY = window.innerHeight * 0.42;
+        let current = activeSections[0];
+        activeSections.forEach((item) => {
+          const rect = item.element.getBoundingClientRect();
+          if (rect.top <= triggerY) {
+            current = item;
+          }
+        });
+        return current;
+      }
+      let ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          setBanner(getActiveSection());
+          ticking = false;
+        });
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      onScroll();
+      return true;
+    }
+    let tries = 0;
+    const timer = setInterval(() => {
+      tries++;
+      if (initDynamicUrgencyBar() || tries >= 40) {
+        clearInterval(timer);
+      }
+    }, 250);
+  })();
+</script>

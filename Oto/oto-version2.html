@@ -1,0 +1,454 @@
+<!--
+╔══════════════════════════════════════════════════════════════════╗
+║  LMCT+ OTO PAGE  ·  RED URGENCY HEADER + 3 IMAGES               ║
+║                                                                  ║
+║  TO EDIT:                                                        ║
+║  1. Banner text  → .epsTextMain below                           ║
+║  2. Fill %       → --eps-fill on .epsBannerRoot                 ║
+║  3. Accent green → --oto-green on .otoRoot                      ║
+╚══════════════════════════════════════════════════════════════════╝
+-->
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  .otoRoot,
+  .otoRoot * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .otoRoot {
+    --oto-green: #85e63c;
+    --oto-card-top: #141414;
+    --oto-card-bot: #050505;
+    width: 100%;
+    padding: 16px;
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+  /* ── card ─────────────────────────────────────────────── */
+  @property --otoAngle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+  .otoCard {
+    position: relative;
+    width: 100%;
+    max-width: 620px;
+    border-radius: 22px;
+    padding: 0; /* banner is flush to the top edge */
+    background:
+      radial-gradient(
+        120% 80% at 50% 30%,
+        rgba(133, 230, 60, 0.14) 0%,
+        rgba(133, 230, 60, 0) 55%
+      ),
+      linear-gradient(180deg, var(--oto-card-top) 0%, var(--oto-card-bot) 100%);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.35),
+      inset 0 0 0 2px rgba(255, 26, 26, 0.45); /* red edge fallback */
+    overflow: hidden; /* clips the banner to the rounded top corners */
+  }
+  /* flowing red border that circulates around the whole card */
+  .otoCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 3px;
+    background: conic-gradient(
+      from var(--otoAngle),
+      #4d0000 0deg,
+      #ff1a1a 55deg,
+      #ff7a7a 90deg,
+      #ff1a1a 125deg,
+      #4d0000 210deg,
+      #4d0000 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: otoBorderFlow 4s linear infinite;
+    pointer-events: none;
+    z-index: 3;
+  }
+  @keyframes otoBorderFlow {
+    to {
+      --otoAngle: 360deg;
+    }
+  }
+  .otoInner {
+    padding: 24px 24px 30px;
+  }
+  /* ── images ───────────────────────────────────────────── */
+  .otoHeading,
+  .otoBody {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+  .otoHeading {
+    max-width: 100%;
+  }
+  .otoBody {
+    max-width: 92%;
+    margin-top: 14px;
+  }
+  .otoImageFrame {
+    position: relative;
+    margin: 22px auto 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  .otoImageFrame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  /* ── entrance ─────────────────────────────────────────── */
+  .otoAnim {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: otoRise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+  .otoD1 {
+    animation-delay: 0.04s;
+  }
+  .otoD2 {
+    animation-delay: 0.18s;
+  }
+  .otoD3 {
+    animation-delay: 0.31s;
+  }
+  .otoD4 {
+    animation-delay: 0.44s;
+  }
+  @keyframes otoRise {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (max-width: 520px) {
+    .otoCard {
+      border-radius: 18px;
+    }
+    .otoInner {
+      padding: 18px 16px 24px;
+    }
+    .otoBody {
+      max-width: 100%;
+    }
+  }
+  /* ═══════════ RED URGENCY BANNER (header) ═══════════ */
+  .epsBannerRoot,
+  .epsBannerRoot * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .epsBannerRoot {
+    --eps-bg: #141414;
+    --eps-fill-start: #cc0000;
+    --eps-fill-mid: #ff0000;
+    --eps-fill-end: #ff1a1a;
+    --eps-fill: 90%;
+    --eps-text: #fff;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    position: relative;
+  }
+  .epsBannerWrap {
+    position: relative;
+    width: 100%;
+    background: var(--eps-bg);
+    overflow: hidden;
+    border-radius: 0; /* card clips the corners */
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  .epsBannerFill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(
+      90deg,
+      var(--eps-fill-start) 0%,
+      var(--eps-fill-mid) 40%,
+      var(--eps-fill-end) 70%,
+      var(--eps-fill-mid) 100%
+    );
+    animation:
+      epsFillUp 2.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards,
+      epsFillPulse 2.4s ease-in-out 3s infinite;
+  }
+  @keyframes epsFillUp {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: var(--eps-fill);
+    }
+  }
+  @keyframes epsFillPulse {
+    0%,
+    100% {
+      width: var(--eps-fill);
+    }
+    50% {
+      width: calc(var(--eps-fill) + 3%);
+    }
+  }
+  .epsBannerFill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 40%,
+      rgba(255, 255, 255, 0.18) 50%,
+      rgba(255, 255, 255, 0.1) 60%,
+      transparent 100%
+    );
+    animation: epsBarShimmer 2.5s ease-in-out 1s infinite;
+  }
+  @keyframes epsBarShimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 200%;
+    }
+  }
+  .epsBannerStripes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 8px,
+      rgba(0, 0, 0, 0.12) 8px,
+      rgba(0, 0, 0, 0.12) 16px
+    );
+    background-size: 22.6px 100%;
+    animation: epsStripeMove 0.8s linear infinite;
+  }
+  @keyframes epsStripeMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 22.6px 0;
+    }
+  }
+  .epsBannerEdge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 12px 2px rgba(255, 255, 255, 0.25);
+    animation: epsEdgePulse 1.2s ease-in-out infinite;
+  }
+  @keyframes epsEdgePulse {
+    0%,
+    100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  .epsBannerInner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 24px;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    gap: 14px;
+    pointer-events: none;
+  }
+  .epsIcon {
+    flex: 0 0 auto;
+    font-size: 26px;
+    line-height: 1;
+    display: inline-block;
+    animation: epsIconShake 0.55s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes epsIconShake {
+    0%,
+    100% {
+      transform: rotate(-8deg) scale(1);
+    }
+    25% {
+      transform: rotate(6deg) scale(1.06);
+    }
+    50% {
+      transform: rotate(-4deg) scale(1);
+    }
+    75% {
+      transform: rotate(8deg) scale(1.06);
+    }
+  }
+  .epsTextMain {
+    flex: 0 1 auto;
+    min-width: 0;
+    font-weight: 900;
+    font-size: 30px;
+    color: var(--eps-text);
+    letter-spacing: 0.06em;
+    line-height: 1;
+    white-space: nowrap;
+    text-transform: uppercase;
+    display: inline-block;
+    animation:
+      epsTextShake 0.18s ease-in-out infinite,
+      epsTextGlow 1.4s ease-in-out infinite;
+  }
+  @keyframes epsTextShake {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(-0.6px, 0.4px);
+    }
+    50% {
+      transform: translate(0.5px, -0.5px);
+    }
+    75% {
+      transform: translate(-0.4px, -0.3px);
+    }
+  }
+  @keyframes epsTextGlow {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.88;
+    }
+  }
+  @media (max-width: 520px) {
+    .epsBannerInner {
+      padding: 14px 14px;
+      gap: 10px;
+    }
+    .epsIcon {
+      font-size: 20px;
+    }
+    .epsTextMain {
+      font-size: 19px;
+      letter-spacing: 0.03em;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .otoAnim {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    .otoCard::before {
+      animation: none;
+    }
+    .epsBannerFill,
+    .epsBannerFill::after,
+    .epsBannerStripes,
+    .epsBannerEdge,
+    .epsIcon,
+    .epsTextMain {
+      animation: none;
+    }
+    .epsBannerFill {
+      width: var(--eps-fill);
+    }
+  }
+</style>
+<div class="otoRoot">
+  <div class="otoCard">
+    <!-- red urgency header -->
+    <div class="epsBannerRoot otoAnim otoD1" id="epsBannerRoot">
+      <div class="epsBannerWrap">
+        <div class="epsBannerFill">
+          <div class="epsBannerStripes"></div>
+          <div class="epsBannerEdge"></div>
+        </div>
+        <div class="epsBannerInner">
+          <span class="epsIcon">&#9888;&#65039;</span>
+          <span class="epsTextMain" id="epsCountText">OFFER EXPIRING: 60</span>
+          <span class="epsIcon">&#9888;&#65039;</span>
+        </div>
+      </div>
+    </div>
+    <div class="otoInner">
+      <img
+        class="otoHeading otoAnim otoD2"
+        src="https://images.clickfunnels.com/e1/d09fc305c444fca5fd937d2902942a/Heading2.2.png"
+        alt="Exclusive offer unlocked"
+      />
+      <img
+        class="otoBody otoAnim otoD3"
+        src="https://images.clickfunnels.com/67/a0bd2d8cd14fc9939207c96deacf2b/body_text3.png"
+        alt="Double your entries with a 50% off package"
+      />
+      <div class="otoImageFrame otoAnim otoD4">
+        <img
+          src="https://pub-5daa6c7eb94c4316b99f8fb7c5b941b3.r2.dev/funnels/100k/ty-image.webp"
+          alt="Stacks of cash on the table"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  /* ============== EDIT THIS ============== */
+  var EPS_SECONDS = 60; /* countdown start in seconds */
+  /* ======================================= */
+  window.addEventListener("load", function () {
+    var el = document.getElementById("epsCountText");
+    if (!el) return;
+    var remaining = EPS_SECONDS;
+    function render() {
+      if (remaining > 0) {
+        var s = remaining < 10 ? "0" + remaining : "" + remaining;
+        el.textContent = "OFFER EXPIRING: " + s;
+      } else {
+        el.textContent = "OFFER EXPIRED";
+      }
+    }
+    render();
+    var iv = setInterval(function () {
+      remaining -= 1;
+      render();
+      if (remaining <= 0) {
+        clearInterval(iv);
+      }
+    }, 1000);
+  });
+</script>

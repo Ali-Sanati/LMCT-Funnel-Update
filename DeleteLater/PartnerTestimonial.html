@@ -1,0 +1,413 @@
+<style>
+  .lmctTestimonialsRoot,
+  .lmctTestimonialsRoot * {
+    box-sizing: border-box;
+  }
+
+  .lmctTestimonialsRoot {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    font-family: "Montserrat", sans-serif;
+    overflow: hidden;
+  }
+
+  .lmctTestimonialsStage {
+    position: relative;
+    width: 100%;
+    max-width: 1170px;
+    height: 270px;
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  .lmctTestimonialCard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 450px;
+    min-height: 205px;
+    border-radius: 12px;
+    padding: 34px 38px;
+    transform: translate(-50%, -50%) scale(0.72);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.45s ease,
+      z-index 0.45s ease;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+  }
+
+  .lmctTestimonialCard.is-active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    z-index: 5;
+    pointer-events: auto;
+  }
+
+  /* Adjusted for 1170px ClickFunnels container */
+  .lmctTestimonialCard.is-prev {
+    transform: translate(calc(-50% - 380px), -50%) scale(0.82);
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .lmctTestimonialCard.is-next {
+    transform: translate(calc(-50% + 380px), -50%) scale(0.82);
+    opacity: 1;
+    z-index: 2;
+  }
+
+  .lmctTestimonialCard.is-far-prev {
+    transform: translate(calc(-50% - 680px), -50%) scale(0.65);
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .lmctTestimonialCard.is-far-next {
+    transform: translate(calc(-50% + 680px), -50%) scale(0.65);
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .lmctTestimonialCard.card-white {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .lmctTestimonialCard.card-black {
+    background: #000000;
+    color: #ffffff;
+  }
+
+  .lmctTestimonialCard.card-brown {
+    background: #40382b;
+    color: #ffffff;
+  }
+
+  .lmctCardInner {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 26px;
+    align-items: center;
+  }
+
+  .lmctLogoGeeup {
+    width: 100%;
+  }
+
+  .lmctLogoOutback {
+    width: 100%;
+  }
+
+  .lmctLogoTwd {
+    width: 100%;
+  }
+
+  .lmctQuoteText {
+    font-size: 15px;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+
+  .lmctQuoteText strong {
+    font-weight: 900;
+    font-style: italic;
+  }
+
+  .lmctPerson {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.05;
+    font-weight: 800;
+  }
+
+  .lmctPerson span {
+    display: block;
+    font-weight: 700;
+  }
+
+  .lmctQuoteMark {
+    font-family: montse;
+    position: absolute;
+    right: 28px;
+    bottom: 18px;
+    font-size: 92px;
+    line-height: 0.6;
+    font-weight: 900;
+    color: currentColor;
+  }
+
+  .lmctTestimonialsDots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .lmctTestimonialsDot {
+    width: 8px;
+    height: 8px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(97, 97, 97, 0.3);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .lmctTestimonialsDot.is-active {
+    width: 24px;
+    border-radius: 999px;
+    background: #149ff4;
+  }
+
+  @media (max-width: 767px) {
+    .lmctTestimonialsRoot {
+      padding: 28px 0;
+    }
+
+    .lmctTestimonialsStage {
+      height: 450px;
+      max-width: 100%;
+    }
+
+    .lmctTestimonialCard {
+      width: min(430px, 78vw);
+      min-height: 380px;
+      border-radius: 26px;
+      padding: 34px 38px;
+    }
+
+    .lmctTestimonialCard.is-active {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .lmctTestimonialCard.is-prev {
+      transform: translate(calc(-50% - 290px), -50%) scale(0.86);
+    }
+
+    .lmctTestimonialCard.is-next {
+      transform: translate(calc(-50% + 290px), -50%) scale(0.86);
+    }
+
+    .lmctCardInner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 26px;
+    }
+
+    .lmctQuoteText {
+      font-size: 24px;
+      line-height: 1.32;
+    }
+
+    .lmctPerson {
+      margin-top: 26px;
+      font-size: 22px;
+    }
+
+    .lmctQuoteMark {
+      right: 28px;
+      bottom: 30px;
+      font-size: 120px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .lmctTestimonialsStage {
+      height: 430px;
+    }
+
+    .lmctTestimonialCard {
+      width: 78vw;
+      min-height: 360px;
+      padding: 28px 30px;
+    }
+
+    .lmctTestimonialCard.is-prev {
+      transform: translate(calc(-50% - 245px), -50%) scale(0.86);
+    }
+
+    .lmctTestimonialCard.is-next {
+      transform: translate(calc(-50% + 245px), -50%) scale(0.86);
+    }
+
+    .lmctQuoteText {
+      font-size: 21px;
+    }
+
+    .lmctPerson {
+      font-size: 19px;
+    }
+
+    .lmctQuoteMark {
+      font-size: 100px;
+    }
+  }
+</style>
+
+<div class="lmctTestimonialsRoot" id="lmctTestimonialsRoot">
+  <div class="lmctTestimonialsStage" id="lmctTestimonialsStage">
+    <div class="lmctTestimonialCard card-black">
+      <div class="lmctCardInner">
+        <img
+          src="https://images.clickfunnels.com/77/c2d3682fe04526b8d156e2765356f1/twd4x4.png"
+          class="lmctLogoTwd"
+        />
+        <div>
+          <div class="lmctQuoteText">
+            Over <strong>200+</strong> transactions processed through the LMCT+
+            partnership. The ROI paid for itself ten times over.
+          </div>
+          <div class="lmctPerson">
+            Zachariah Falzon
+            <span>TWD 4x4 Melbourne</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmctQuoteMark">”</div>
+    </div>
+
+    <div class="lmctTestimonialCard card-white">
+      <div class="lmctCardInner">
+        <img
+          src="https://images.clickfunnels.com/3c/c7148badd84ab091c125cfe07443a7/Geeup.png"
+          class="lmctLogoGeeup"
+        />
+        <div>
+          <div class="lmctQuoteText">
+            Since joining LMCT+, Gee Up recorded hundreds of new customers and
+            attributed <strong>$104,000+</strong> in total sales described as
+            their best return on spend to date.
+          </div>
+          <div class="lmctPerson">
+            Tom Burton
+            <span>Operations Manager</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmctQuoteMark">”</div>
+    </div>
+
+    <div class="lmctTestimonialCard card-brown">
+      <div class="lmctCardInner">
+        <img
+          src="https://images.clickfunnels.com/42/c7246681694084b1538c09c73330fa/OutBack.png"
+          class="lmctLogoOutback"
+        />
+
+        <div>
+          <div class="lmctQuoteText">
+            Partnership running since February 2020. 31 orders placed through
+            the partnership, generating over $26,000 in incremental revenue.
+          </div>
+          <div class="lmctPerson">
+            Nicole Newman
+            <span>Head of Marketing</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmctQuoteMark">”</div>
+    </div>
+  </div>
+
+  <div class="lmctTestimonialsDots" id="lmctTestimonialsDots"></div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById("lmctTestimonialsRoot");
+    var stage = document.getElementById("lmctTestimonialsStage");
+    var dotsWrap = document.getElementById("lmctTestimonialsDots");
+
+    if (!root || !stage || !dotsWrap) return;
+
+    var cards = Array.prototype.slice.call(
+      stage.querySelectorAll(".lmctTestimonialCard"),
+    );
+
+    var activeIndex = 1;
+    var timer = null;
+    var delay = 3200;
+
+    cards.forEach(function (_, index) {
+      var dot = document.createElement("button");
+      dot.className = "lmctTestimonialsDot";
+      dot.type = "button";
+      dot.setAttribute("aria-label", "Go to testimonial " + (index + 1));
+
+      dot.addEventListener("click", function () {
+        activeIndex = index;
+        updateCards();
+        restartAuto();
+      });
+
+      dotsWrap.appendChild(dot);
+    });
+
+    var dots = Array.prototype.slice.call(
+      dotsWrap.querySelectorAll(".lmctTestimonialsDot"),
+    );
+
+    function getPosition(index) {
+      var total = cards.length;
+      var diff = (index - activeIndex + total) % total;
+
+      if (diff === 0) return "is-active";
+      if (diff === 1) return "is-next";
+      if (diff === total - 1) return "is-prev";
+      if (diff === 2) return "is-far-next";
+
+      return "is-far-prev";
+    }
+
+    function updateCards() {
+      cards.forEach(function (card, index) {
+        card.classList.remove(
+          "is-active",
+          "is-prev",
+          "is-next",
+          "is-far-prev",
+          "is-far-next",
+        );
+
+        card.classList.add(getPosition(index));
+      });
+
+      dots.forEach(function (dot, index) {
+        dot.classList.toggle("is-active", index === activeIndex);
+      });
+    }
+
+    function nextSlide() {
+      activeIndex = (activeIndex + 1) % cards.length;
+      updateCards();
+    }
+
+    function startAuto() {
+      timer = setInterval(nextSlide, delay);
+    }
+
+    function stopAuto() {
+      if (timer) clearInterval(timer);
+    }
+
+    function restartAuto() {
+      stopAuto();
+      startAuto();
+    }
+
+    root.addEventListener("mouseenter", stopAuto);
+    root.addEventListener("mouseleave", startAuto);
+
+    root.addEventListener("touchstart", stopAuto, { passive: true });
+    root.addEventListener("touchend", restartAuto, { passive: true });
+
+    updateCards();
+    startAuto();
+  })();
+</script>

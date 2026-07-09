@@ -1,0 +1,425 @@
+<style>
+  /* ── LMCT Package Inclusions v2 ── */
+  .lmct-pkg-incl-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: transparent;
+  }
+  /* Toggle Button — clean neutral, not purple */
+  .lmct-pkg-incl-toggle-btn {
+    background: #f0f0f0;
+    color: #1a1a1a;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: 100%;
+    padding: 22px 36px;
+    border: 0.5px solid rgb(199 199 199);
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 10px;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+  .lmct-pkg-incl-toggle-btn:hover {
+    background: #e4e4e4;
+    transform: translateY(-1px);
+  }
+  .lmct-pkg-incl-toggle-btn:active {
+    transform: translateY(0);
+  }
+  /* Chevron */
+  .lmct-pkg-incl-toggle-btn .lmct-chevron {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 14px;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .lmct-pkg-incl-toggle-btn.lmct-open .lmct-chevron {
+    transform: rotate(180deg);
+  }
+  /* Drawer */
+  .lmct-pkg-incl-drawer {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition:
+      max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.4s ease;
+  }
+  .lmct-pkg-incl-drawer.lmct-drawer-open {
+    max-height: 3000px;
+    opacity: 1;
+  }
+  /* ── Card Grid: 2-col on desktop, 1-col on mobile ── */
+  .lmct-pkg-incl-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding-top: 12px;
+  }
+  /* Platinum spans full width */
+  .lmct-pkg-incl-list .lmct-pkg-incl-platinum {
+    grid-column: 1 / -1;
+  }
+  /* ── Card Base ── */
+  .lmct-pkg-incl-card {
+    width: 100%;
+    position: relative;
+    padding: 22px 24px 24px;
+    border-radius: 16px;
+    color: #fff;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease,
+      box-shadow 0.3s ease;
+  }
+  .lmct-pkg-incl-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  }
+  .lmct-pkg-incl-drawer.lmct-drawer-open .lmct-pkg-incl-card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Staggered delays */
+  .lmct-pkg-incl-drawer.lmct-drawer-open .lmct-pkg-incl-card:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+  .lmct-pkg-incl-drawer.lmct-drawer-open .lmct-pkg-incl-card:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+  .lmct-pkg-incl-drawer.lmct-drawer-open .lmct-pkg-incl-card:nth-child(3) {
+    transition-delay: 0.18s;
+  }
+  .lmct-pkg-incl-drawer.lmct-drawer-open .lmct-pkg-incl-card:nth-child(4) {
+    transition-delay: 0.25s;
+  }
+  .lmct-pkg-incl-drawer.lmct-drawer-open .lmct-pkg-incl-card:nth-child(5) {
+    transition-delay: 0.32s;
+  }
+  .lmct-pkg-incl-drawer:not(.lmct-drawer-open) .lmct-pkg-incl-card {
+    transition-delay: 0s !important;
+  }
+  /* Hover shine */
+  .lmct-pkg-incl-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transition: left 0.55s ease;
+    pointer-events: none;
+  }
+  .lmct-pkg-incl-card:hover::after {
+    left: 130%;
+  }
+  /* ══════════════════════════════════════
+     TIER GRADIENTS — closely matched to
+     the actual package card images
+     ══════════════════════════════════════ */
+  /* Entry: soft sky blue → muted lavender (cool, light, pastel) */
+  .lmct-pkg-incl-entry {
+    background: linear-gradient(
+      140deg,
+      #3bcbff 0%,
+      #207999 40%,
+      #3bcbff 75%,
+      #207999 100%
+    );
+  }
+  /* Bronze: warm sandy tan → deep earthy copper-brown (distinctly brown, NOT gold) */
+  .lmct-pkg-incl-bronze {
+    background: linear-gradient(
+      140deg,
+      #cd8e32 0%,
+      #d97706 40%,
+      #cd8e32 75%,
+      #d97706 100%
+    );
+  }
+  /* Silver: cool neutral grey with slight warm stone undertone */
+  .lmct-pkg-incl-silver {
+    background: linear-gradient(
+      140deg,
+      #9ca3af 0%,
+      #6c7381 40%,
+      #9ca3af 75%,
+      #6c7381 100%
+    );
+  }
+  /* Gold: bright warm yellow-amber → rich golden (distinctly YELLOW, not brown) */
+  .lmct-pkg-incl-gold {
+    background: linear-gradient(
+      140deg,
+      rgba(232, 154, 6, 1) 0%,
+      rgba(243, 195, 56, 1) 32%,
+      rgba(232, 154, 6, 1) 68%,
+      rgba(243, 195, 56, 1) 100%
+    );
+  }
+  /* Platinum: hot magenta/pink → vivid violet → deep purple (saturated, bold) */
+  .lmct-pkg-incl-platinum {
+    background: linear-gradient(
+      140deg,
+      #d946ef 0%,
+      #800080 40%,
+      #d946ef 75%,
+      #800080 100%
+    );
+  }
+  /* ── Card Header Row ── */
+  .lmct-pkg-incl-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  /* Tier name pill — matches the pill at top-left of package images */
+  .lmct-pkg-incl-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #fff;
+  }
+  /* Price pill — separate from name, no hyphen */
+  .lmct-pkg-incl-price {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #fff;
+  }
+  /* ── List Items ── */
+  .lmct-pkg-incl-card ul {
+    list-style: none;
+    display: block;
+    box-sizing: border-box;
+    background-color: #00000038;
+    padding: 12px 13px;
+    border-radius: 12px;
+    margin: 0;
+    align-self: stretch;
+  }
+  .lmct-pkg-incl-card li {
+    margin-bottom: 8px;
+    font-size: 14.5px;
+    font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+  .lmct-pkg-incl-card li::before {
+    content: "✓";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 800;
+    color: #fff;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .lmct-pkg-incl-card li:last-child {
+    margin-bottom: 0;
+  }
+  .lmct-pkg-incl-card strong {
+    font-weight: 700;
+    color: #fff;
+  }
+  /* ── Platinum: 2-col list on desktop since it spans full width ── */
+  .lmct-pkg-incl-platinum ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 28px;
+  }
+  /* ── Mobile ── */
+  @media (max-width: 767px) {
+    .lmct-pkg-incl-toggle-btn {
+      font-size: 14px;
+      padding: 20px 20px;
+    }
+    .lmct-pkg-incl-list {
+      grid-template-columns: 1fr;
+    }
+    .lmct-pkg-incl-card {
+      padding: 18px 18px 20px;
+    }
+    .lmct-pkg-incl-card li {
+      font-size: 13.5px;
+    }
+    .lmct-pkg-incl-badge {
+      font-size: 12px;
+      padding: 4px 13px;
+    }
+    .lmct-pkg-incl-price {
+      font-size: 12px;
+      padding: 4px 13px;
+    }
+    .lmct-pkg-incl-platinum ul {
+      grid-template-columns: 1fr;
+    }
+  }
+  .lmct-pkg-incl-container,
+  .lmct-pkg-incl-container * {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .lmct-pkg-incl-card ul {
+    margin: 0 !important;
+    width: 100%;
+  }
+  .lmct-pkg-incl-list {
+    margin: 0 !important;
+    justify-content: flex-start !important;
+  }
+</style>
+<div class="lmct-pkg-incl-container">
+  <div class="lmct-pkg-incl-section">
+    <div class="lmct-pkg-incl-item">
+      <button class="lmct-pkg-incl-toggle-btn" id="lmctPkgToggle">
+        Click To View Full Inclusions <span class="lmct-chevron">▼</span>
+      </button>
+      <div class="lmct-pkg-incl-drawer" id="lmctPkgDrawer">
+        <div class="lmct-pkg-incl-list">
+          <div class="lmct-pkg-incl-card lmct-pkg-incl-entry">
+            <div class="lmct-pkg-incl-header">
+              <span class="lmct-pkg-incl-badge">Entry</span>
+              <span class="lmct-pkg-incl-price">$10</span>
+            </div>
+            <ul class="lmct-ul-background">
+              <li><strong>1 free entry</strong> into the giveaway</li>
+              <li><strong>VIP</strong> invitation to all events</li>
+              <li>
+                <strong>2 Days</strong> access to 2,000+ Partner Discounts
+              </li>
+            </ul>
+          </div>
+          <div class="lmct-pkg-incl-card lmct-pkg-incl-bronze">
+            <div class="lmct-pkg-incl-header">
+              <span class="lmct-pkg-incl-badge">Bronze</span>
+              <span class="lmct-pkg-incl-price">$30</span>
+            </div>
+            <ul class="lmct-ul-background">
+              <li><strong>5 free entries</strong> into the giveaway</li>
+              <li><strong>VIP</strong> invitation to all events</li>
+              <li>
+                <strong>1 Week</strong> access to 2,000+ Partner Discounts
+              </li>
+              <li>
+                <strong>500 XP</strong> in-app and
+                <strong>500 LMCT+ Coins</strong>
+              </li>
+            </ul>
+          </div>
+          <div class="lmct-pkg-incl-card lmct-pkg-incl-silver">
+            <div class="lmct-pkg-incl-header">
+              <span class="lmct-pkg-incl-badge">Silver</span>
+              <span class="lmct-pkg-incl-price">$100</span>
+            </div>
+            <ul class="lmct-ul-background">
+              <li><strong>25 free entries</strong> into the giveaway</li>
+              <li><strong>VIP</strong> invitation to all events</li>
+              <li>
+                <strong>1 Month</strong> access to 2,000+ Partner Discounts
+              </li>
+              <li>
+                <strong>1,000 XP</strong> in-app and
+                <strong>1,000 LMCT+ Coins</strong>
+              </li>
+            </ul>
+          </div>
+          <div class="lmct-pkg-incl-card lmct-pkg-incl-gold">
+            <div class="lmct-pkg-incl-header">
+              <span class="lmct-pkg-incl-badge">Gold</span>
+              <span class="lmct-pkg-incl-price">$200</span>
+            </div>
+            <ul class="lmct-ul-background">
+              <li><strong>100 free entries</strong> into the giveaway</li>
+              <li><strong>VIP</strong> invitation to all events</li>
+              <li>
+                <strong>6 Months</strong> access to 2,000+ Partner Discounts
+              </li>
+              <li>
+                <strong>2,500 XP</strong> in-app and
+                <strong>2,500 LMCT+ Coins</strong>
+              </li>
+            </ul>
+          </div>
+          <div class="lmct-pkg-incl-card lmct-pkg-incl-platinum">
+            <div class="lmct-pkg-incl-header">
+              <span class="lmct-pkg-incl-badge">Platinum</span>
+              <span class="lmct-pkg-incl-price">$500</span>
+            </div>
+            <ul class="lmct-ul-background">
+              <li><strong>500 free entries</strong> into the giveaway</li>
+              <li><strong>VIP</strong> invitation to all events</li>
+              <li>
+                <strong>12 Months</strong> access to 2,000+ Partner Discounts
+              </li>
+              <li>
+                <strong>5,000 XP</strong> in-app and
+                <strong>5,000 LMCT+ Coins</strong>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var btn = document.getElementById("lmctPkgToggle");
+    var drawer = document.getElementById("lmctPkgDrawer");
+    if (!btn || !drawer) return;
+    btn.addEventListener("click", function () {
+      var isOpen = drawer.classList.contains("lmct-drawer-open");
+      if (isOpen) {
+        drawer.classList.remove("lmct-drawer-open");
+        btn.classList.remove("lmct-open");
+      } else {
+        drawer.classList.add("lmct-drawer-open");
+        btn.classList.add("lmct-open");
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,341 @@
+<!-- ============================================ -->
+<!-- WHOLESALE FUEL PRICING
+<!-- ============================================ -->
+<style>
+  .lmctFU__wrap {
+    background: linear-gradient(180deg, #05162a 0%, #0a1d3a 100%);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 56px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .lmctFU__wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(12, 159, 253, 0.6) 25%,
+      #0c9ffd 50%,
+      rgba(12, 159, 253, 0.6) 75%,
+      transparent
+    );
+  }
+  .lmctFU__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .lmctFU__head {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .lmctFU__kick {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(12, 159, 253, 0.12);
+    border: 1px solid rgba(12, 159, 253, 0.35);
+    color: #3fb8ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .lmctFU__title {
+    margin: 0 0 12px;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -1.4px;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .lmctFU__title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #3fb8ff, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctFU__lead {
+    margin: 0 auto;
+    max-width: 600px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #cbd5e1;
+    line-height: 1.55;
+  }
+  .lmctFU__lead strong {
+    color: #fff;
+    font-weight: 800;
+  }
+  .lmctFU__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  .lmctFU__hero {
+    background: #0a1f3a;
+    border: 1px solid rgba(12, 159, 253, 0.22);
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .lmctFU__hero::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 460px;
+    height: 460px;
+    background: radial-gradient(
+      circle,
+      rgba(12, 159, 253, 0.18) 0%,
+      rgba(12, 159, 253, 0) 65%
+    );
+    filter: blur(50px);
+  }
+  .lmctFU__heroLbl {
+    position: relative;
+    z-index: 1;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #3fb8ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .lmctFU__heroNum {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(58px, 11vw, 100px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -3px;
+    background: linear-gradient(180deg, #3fb8ff, #0c9ffd 50%, #0476c4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .lmctFU__heroSub {
+    position: relative;
+    z-index: 1;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: #cbd5e1;
+    line-height: 1.5;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+  .lmctFU__heroSub strong {
+    color: #fff;
+    font-weight: 800;
+  }
+  .lmctFU__earn {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .lmctFU__item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #0a1f3a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 16px;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .lmctFU__item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(12, 159, 253, 0.35);
+  }
+  .lmctFU__iIco {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #0476c4, #0c9ffd);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 14px rgba(12, 159, 253, 0.32);
+  }
+  .lmctFU__iIco svg {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+  }
+  .lmctFU__iTxt h4 {
+    margin: 0 0 2px;
+    font-size: 13.5px;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .lmctFU__iTxt p {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: #94a3b8;
+    line-height: 1.4;
+  }
+  .lmctFU__loc {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(12, 159, 253, 0.06);
+    border: 1px solid rgba(12, 159, 253, 0.22);
+    border-radius: 14px;
+    padding: 15px 18px;
+    font-size: 13.5px;
+    color: #cbd5e1;
+    font-weight: 500;
+    line-height: 1.45;
+  }
+  .lmctFU__loc strong {
+    color: #fff;
+    font-weight: 800;
+  }
+  .lmctFU__locIco {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: rgba(12, 159, 253, 0.15);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #3fb8ff;
+  }
+  .lmctFU__locIco svg {
+    width: 20px;
+    height: 20px;
+  }
+  @media (min-width: 820px) {
+    .lmctFU__grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+    .lmctFU__earn {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .lmctFU__wrap {
+      padding: 42px 14px;
+    }
+  }
+</style>
+<div class="lmctFU__wrap">
+  <div class="lmctFU__inner">
+    <div class="lmctFU__head">
+      <span class="lmctFU__kick">Members Only</span>
+      <h2 class="lmctFU__title">Wholesale Fuel <em>At The Pump</em></h2>
+      <p class="lmctFU__lead">
+        Fill up at <strong>LMCT+ Petrol</strong> and pay genuine wholesale rates
+        — the kind normally locked away for fleets. And every litre stacks
+        entries on your account.
+      </p>
+    </div>
+    <div class="lmctFU__grid">
+      <div class="lmctFU__hero">
+        <div class="lmctFU__heroLbl">Top Saver · First 3 Weeks</div>
+        <div class="lmctFU__heroNum">$1,128</div>
+        <p class="lmctFU__heroSub">
+          That's <strong>10+ years of membership paid for</strong> on fuel
+          savings alone — and the station's only been open three weeks.
+        </p>
+      </div>
+      <div class="lmctFU__earn">
+        <div class="lmctFU__item">
+          <span class="lmctFU__iIco"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-6z" /></svg
+          ></span>
+          <div class="lmctFU__iTxt">
+            <h4>Wholesale Pricing</h4>
+            <p>Members-only rates, plus 5–10% off in-store.</p>
+          </div>
+        </div>
+        <div class="lmctFU__item">
+          <span class="lmctFU__iIco"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v10M9 10h4.5a2 2 0 0 1 0 4H9" /></svg
+          ></span>
+          <div class="lmctFU__iTxt">
+            <h4>Earn As You Fill</h4>
+            <p>Every fill-up adds entries, coins &amp; EXP to your account.</p>
+          </div>
+        </div>
+        <div class="lmctFU__item">
+          <span class="lmctFU__iIco"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M4 19l5-9 4 5 7-12" />
+              <path d="M4 21h16" /></svg
+          ></span>
+          <div class="lmctFU__iTxt">
+            <h4>Pays For Itself</h4>
+            <p>A few tanks a month can cover your whole membership.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lmctFU__loc">
+      <span class="lmctFU__locIco"
+        ><svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" /></svg
+      ></span>
+      <span
+        >Now open: <strong>LMCT+ Petrol, Preston</strong> · 7 days, 6 AM–10 PM.
+        <strong>More locations coming soon.</strong></span
+      >
+    </div>
+  </div>
+</div>

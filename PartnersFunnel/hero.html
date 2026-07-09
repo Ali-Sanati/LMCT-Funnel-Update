@@ -1,0 +1,271 @@
+<!-- ============================================ -->
+<!-- HERO — MEMBER VALUE
+<!-- ============================================ -->
+<style>
+  .lmctMH__wrap{
+    background:#ffffff;
+    font-family:'Montserrat','Helvetica Neue',Arial,sans-serif;
+    padding:48px 16px 0;
+    overflow:hidden;
+  }
+  .lmctMH__inner{
+    max-width:1080px;margin:0 auto;
+    display:grid;grid-template-columns:1fr;gap:40px;align-items:center;
+  }
+  .lmctMH__logo{
+    height:38px;width:auto;display:block;margin-bottom:24px;
+    opacity:0;transform:translateY(10px);
+    animation:lmctMH__in .6s ease-out .05s forwards;
+  }
+  .lmctMH__eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(12,159,253,0.08);
+    border:1px solid rgba(12,159,253,0.25);
+    color:#0476c4;
+    font-size:11px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;
+    padding:7px 14px;border-radius:999px;margin-bottom:20px;
+    opacity:0;transform:translateY(10px);
+    animation:lmctMH__in .6s ease-out .15s forwards;
+  }
+  .lmctMH__eyebrow span{
+    width:7px;height:7px;border-radius:50%;background:#0C9FFD;
+    box-shadow:0 0 8px #0C9FFD;
+  }
+  .lmctMH__h1{
+    margin:0 0 18px;
+    font-size:clamp(38px,7.2vw,68px);
+    font-weight:900;line-height:1.02;letter-spacing:-2px;
+    color:#05162a;text-transform:uppercase;
+    opacity:0;transform:translateY(12px);
+    animation:lmctMH__in .7s ease-out .25s forwards;
+  }
+  .lmctMH__h1 em{
+    font-style:normal;
+    background:linear-gradient(180deg,#0476c4 0%,#0C9FFD 55%,#3fb8ff 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .lmctMH__sub{
+    margin:0 0 32px;max-width:540px;
+    font-size:clamp(15px,2.4vw,18px);font-weight:500;color:#475569;line-height:1.55;
+    opacity:0;transform:translateY(12px);
+    animation:lmctMH__in .7s ease-out .35s forwards;
+  }
+  .lmctMH__sub strong{color:#05162a;font-weight:800;}
+  /* trust strip */
+  .lmctMH__trust{
+    display:flex;flex-wrap:wrap;gap:14px;
+    opacity:0;transform:translateY(12px);
+    animation:lmctMH__in .7s ease-out .55s forwards;
+  }
+  .lmctMH__trustItem{
+    display:flex;flex-direction:column;line-height:1;
+    padding-right:18px;border-right:1px solid #e2e8f0;
+  }
+  .lmctMH__trustItem:last-child{border-right:none;padding-right:0;}
+  .lmctMH__trustNum{
+    font-size:clamp(22px,3.4vw,28px);font-weight:900;color:#05162a;letter-spacing:-1px;
+  }
+  .lmctMH__trustNum em{font-style:normal;color:#0C9FFD;}
+  .lmctMH__trustLbl{
+    font-size:10.5px;font-weight:800;color:#94a3b8;letter-spacing:1px;
+    text-transform:uppercase;margin-top:6px;
+  }
+  /* RIGHT — membership card visual */
+  .lmctMH__visual{
+    position:relative;display:flex;align-items:center;justify-content:center;
+    min-height:300px;
+    opacity:0;transform:translateY(14px) scale(.97);
+    animation:lmctMH__in .8s ease-out .4s forwards;
+  }
+  .lmctMH__glow{
+    position:absolute;width:380px;height:380px;border-radius:50%;
+    background:radial-gradient(circle,rgba(12,159,253,0.22) 0%,rgba(12,159,253,0) 65%);
+    filter:blur(20px);z-index:0;
+  }
+  .lmctMH__card{
+    position:relative;z-index:2;width:100%;max-width:380px;
+    aspect-ratio:1.586/1;
+    border-radius:22px;
+    background:linear-gradient(135deg,#0a1f3a 0%,#05162a 60%,#0a1f3a 100%);
+    border:1px solid rgba(12,159,253,0.30);
+    box-shadow:0 30px 70px rgba(5,22,42,0.35),0 0 0 1px rgba(255,255,255,0.04) inset;
+    padding:26px 26px 22px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    overflow:hidden;
+    animation:lmctMH__float 6s ease-in-out infinite;
+  }
+  .lmctMH__card::after{
+    content:"";position:absolute;top:-40%;left:-30%;
+    width:60%;height:180%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.10),transparent);
+    transform:skewX(-18deg);
+    animation:lmctMH__shine 5s ease-in-out 1.2s infinite;
+  }
+  .lmctMH__cardTop{display:flex;align-items:center;justify-content:space-between;z-index:1;}
+  .lmctMH__cardBrand{
+    font-size:22px;font-weight:900;letter-spacing:-.5px;color:#fff;
+  }
+  .lmctMH__cardBrand b{color:#0C9FFD;}
+  .lmctMH__gem{width:34px;height:34px;}
+  .lmctMH__cardChip{
+    width:46px;height:34px;border-radius:7px;z-index:1;
+    background:linear-gradient(135deg,#F5B721 0%,#D4941A 100%);
+    box-shadow:0 4px 10px rgba(245,183,33,0.30);
+    position:relative;
+  }
+  .lmctMH__cardChip::before{
+    content:"";position:absolute;inset:6px 8px;
+    border:1px solid rgba(0,0,0,0.18);border-radius:3px;
+  }
+  .lmctMH__cardMid{z-index:1;}
+  .lmctMH__cardTier{
+    font-size:11px;font-weight:800;letter-spacing:2.4px;text-transform:uppercase;
+    color:#3fb8ff;margin-bottom:6px;
+  }
+  .lmctMH__cardName{
+    font-size:19px;font-weight:800;color:#fff;letter-spacing:.5px;
+  }
+  .lmctMH__cardBot{display:flex;align-items:flex-end;justify-content:space-between;z-index:1;}
+  .lmctMH__cardMeta small{
+    display:block;font-size:8.5px;font-weight:700;color:#94a3b8;
+    letter-spacing:1.4px;text-transform:uppercase;margin-bottom:3px;
+  }
+  .lmctMH__cardMeta strong{font-size:13px;font-weight:800;color:#e2e8f0;letter-spacing:.5px;}
+  .lmctMH__cardEntries{text-align:right;}
+  .lmctMH__cardEntries b{
+    font-size:24px;font-weight:900;letter-spacing:-1px;
+    background:linear-gradient(180deg,#3fb8ff,#0C9FFD);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  /* floating chips */
+  .lmctMH__chip{
+    position:absolute;z-index:3;
+    display:inline-flex;align-items:center;gap:8px;
+    background:#fff;border:1px solid #e2e8f0;border-radius:12px;
+    padding:9px 13px;box-shadow:0 14px 30px rgba(5,22,42,0.14);
+    font-size:12px;font-weight:800;color:#05162a;
+    animation:lmctMH__floatChip 5s ease-in-out infinite;
+  }
+  .lmctMH__chip small{display:block;font-size:9px;font-weight:700;color:#94a3b8;letter-spacing:.5px;text-transform:uppercase;}
+  .lmctMH__chipIco{
+    width:26px;height:26px;border-radius:50%;flex-shrink:0;
+    display:inline-flex;align-items:center;justify-content:center;color:#fff;
+  }
+  .lmctMH__chipIco svg{width:14px;height:14px;}
+  .lmctMH__chip--win{top:6%;left:-2%;animation-delay:0s;}
+  .lmctMH__chip--win .lmctMH__chipIco{background:linear-gradient(135deg,#1FA851,#0E7A3A);}
+  .lmctMH__chip--fuel{bottom:8%;right:-2%;animation-delay:2s;}
+  .lmctMH__chip--fuel .lmctMH__chipIco{background:linear-gradient(135deg,#0476c4,#0C9FFD);}
+  @keyframes lmctMH__in{to{opacity:1;transform:translateY(0) scale(1);}}
+  @keyframes lmctMH__float{0%,100%{transform:translateY(0) rotate(-1deg);}50%{transform:translateY(-12px) rotate(-1deg);}}
+  @keyframes lmctMH__floatChip{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+  @keyframes lmctMH__shine{0%{left:-30%;}55%{left:130%;}100%{left:130%;}}
+  .lmctMH__marquee{
+    margin:44px -16px 0;
+    background:linear-gradient(90deg,#0476c4 0%,#0C9FFD 50%,#3fb8ff 100%);
+    overflow:hidden;
+    padding:15px 0;
+    position:relative;
+    box-shadow:0 1px 0 rgba(255,255,255,0.22) inset;
+  }
+  .lmctMH__marqueeTrack{
+    display:flex;width:max-content;
+    animation:lmctMH__marqueeScroll 32s linear infinite;
+    will-change:transform;
+  }
+  .lmctMH__marqueeHalf{display:flex;flex-shrink:0;align-items:center;}
+  .lmctMH__mItem{
+    display:inline-flex;align-items:center;gap:22px;padding:0 22px;
+    font-size:14px;font-weight:800;letter-spacing:2.4px;text-transform:uppercase;
+    color:#fff;white-space:nowrap;
+  }
+  .lmctMH__mStar{width:13px;height:13px;flex-shrink:0;opacity:.6;}
+  @keyframes lmctMH__marqueeScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media (min-width:900px){
+    .lmctMH__inner{grid-template-columns:1.1fr 0.9fr;gap:48px;}
+    .lmctMH__wrap{padding:72px 16px 0;}
+  }
+  @media (max-width:560px){
+    .lmctMH__wrap{padding:36px 14px 0;}
+    .lmctMH__visual{min-height:240px;}
+    .lmctMH__chip--win{left:0;}
+    .lmctMH__chip--fuel{right:0;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .lmctMH__wrap *{animation:none !important;opacity:1 !important;transform:none !important;}
+  }
+</style>
+<div class="lmctMH__wrap">
+  <div class="lmctMH__inner">
+    <div class="lmctMH__content">
+      <img class="lmctMH__logo" src="https://images.clickfunnels.com/11/5808e1954343cc90744e7bcca46ae8/logo.3bf7fa51a183b716b171.png" alt="LMCT+">
+      <div class="lmctMH__eyebrow"><span></span>Australia's Original &amp; Best</div>
+      <h1 class="lmctMH__h1">The Membership<br>That <em>Pays For Itself</em></h1>
+      <p class="lmctMH__sub">Wholesale fuel, mates rates at <strong>2,000+ Aussie brands</strong>, and automatic entry into every giveaway we run — most members save more than their membership ever costs.</p>
+      <div class="lmctMH__trust">
+        <div class="lmctMH__trustItem"><span class="lmctMH__trustNum">1,000+</span><span class="lmctMH__trustLbl">Winners Paid</span></div>
+        <div class="lmctMH__trustItem"><span class="lmctMH__trustNum"><em>42</em></span><span class="lmctMH__trustLbl">Millionaires Made</span></div>
+        <div class="lmctMH__trustItem"><span class="lmctMH__trustNum">$1,000s</span><span class="lmctMH__trustLbl">Saved Yearly</span></div>
+      </div>
+    </div>
+    <div class="lmctMH__visual">
+      <div class="lmctMH__glow"></div>
+      <div class="lmctMH__chip lmctMH__chip--win">
+        <span class="lmctMH__chipIco"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5L10 17.5L19 7.5"/></svg></span>
+        <span><small>You're Entered</small>Every Giveaway</span>
+      </div>
+      <div class="lmctMH__chip lmctMH__chip--fuel">
+        <span class="lmctMH__chipIco"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h13l3 4v6h-3"/><path d="M3 8v10h10"/></svg></span>
+        <span><small>Wholesale</small>Fuel Pricing</span>
+      </div>
+      <div class="lmctMH__card">
+        <div class="lmctMH__cardTop">
+          <div class="lmctMH__cardBrand">LMCT<b>+</b></div>
+          <svg class="lmctMH__gem" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 6h20l8 10-18 26L6 16z" fill="#0C9FFD" opacity=".25"/>
+            <path d="M14 6h20l8 10-18 26L6 16z" stroke="#3fb8ff" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M6 16h36M14 6l10 10 10-10M24 16v26" stroke="#3fb8ff" stroke-width="1.4" stroke-linejoin="round" opacity=".8"/>
+          </svg>
+        </div>
+        <div class="lmctMH__cardMid">
+          <div class="lmctMH__cardTier">Premium Member</div>
+          <div class="lmctMH__cardName">YOUR NAME HERE</div>
+        </div>
+        <div class="lmctMH__cardBot">
+          <div class="lmctMH__cardMeta">
+            <small>Member Since</small>
+            <strong>2026</strong>
+          </div>
+          <div class="lmctMH__cardEntries">
+            <div class="lmctMH__cardMeta"><small>Entries Banked</small></div>
+            <b>147</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lmctMH__marquee" aria-hidden="true">
+    <div class="lmctMH__marqueeTrack">
+      <div class="lmctMH__marqueeHalf">
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+      </div>
+      <div class="lmctMH__marqueeHalf">
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+        <span class="lmctMH__mItem">Australia's Most Valuable Membership<svg class="lmctMH__mStar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"/></svg></span>
+      </div>
+    </div>
+  </div>
+</div>

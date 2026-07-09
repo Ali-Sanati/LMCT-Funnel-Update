@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LMCT+ One Time Offer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Core color system */
+        --lmct-oto-color-bg: #f3f7fc;
+        --lmct-oto-color-bg-soft: #fbfdff;
+        --lmct-oto-color-surface: #ffffff;
+        --lmct-oto-color-surface-alt: #f5faff;
+        --lmct-oto-color-border: rgba(24, 108, 226, 0.16);
+        --lmct-oto-color-border-strong: rgba(24, 108, 226, 0.24);
+        --lmct-oto-color-text: #111827;
+        --lmct-oto-color-text-soft: #475569;
+        --lmct-oto-color-text-muted: #64748b;
+        --lmct-oto-color-blue: #1766e5;
+        --lmct-oto-color-blue-strong: #0f56cc;
+        --lmct-oto-color-blue-light: #dcebff;
+        --lmct-oto-color-blue-pale: #edf5ff;
+        --lmct-oto-color-red: #f11d1b;
+        --lmct-oto-color-red-deep: #cf1318;
+        --lmct-oto-color-red-dark: #a71016;
+        --lmct-oto-color-green: #16a34a;
+        --lmct-oto-color-green-soft: #dff6e7;
+        --lmct-oto-color-warning-bg: #fff4d5;
+        --lmct-oto-color-warning-text: #b15a17;
+        --lmct-oto-color-shadow: rgba(15, 35, 64, 0.11);
+
+        /* Spacing */
+        --lmct-oto-space-1: 0.25rem;
+        --lmct-oto-space-2: 0.5rem;
+        --lmct-oto-space-3: 0.75rem;
+        --lmct-oto-space-4: 1rem;
+        --lmct-oto-space-5: 1.25rem;
+        --lmct-oto-space-6: 1.5rem;
+        --lmct-oto-space-7: 1.75rem;
+        --lmct-oto-space-8: 2rem;
+        --lmct-oto-space-9: 2.5rem;
+        --lmct-oto-space-10: 3rem;
+
+        /* Radius */
+        --lmct-oto-radius-sm: 14px;
+        --lmct-oto-radius-md: 18px;
+        --lmct-oto-radius-lg: 24px;
+        --lmct-oto-radius-xl: 28px;
+        --lmct-oto-radius-pill: 999px;
+
+        /* Shadows */
+        --lmct-oto-shadow-soft:
+          0 10px 30px rgba(15, 35, 64, 0.06),
+          0 24px 60px rgba(15, 35, 64, 0.08);
+        --lmct-oto-shadow-card:
+          0 16px 40px rgba(15, 35, 64, 0.08),
+          0 32px 70px rgba(15, 35, 64, 0.08);
+        --lmct-oto-shadow-button:
+          0 12px 26px rgba(23, 102, 229, 0.28),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+        /* Typography */
+        --lmct-oto-font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+        --lmct-oto-font-size-body: clamp(0.98rem, 0.25vw + 0.92rem, 1.15rem);
+        --lmct-oto-font-size-label: clamp(0.72rem, 0.2vw + 0.7rem, 0.92rem);
+        --lmct-oto-font-size-title: clamp(2.55rem, 4.5vw + 1rem, 5.35rem);
+        --lmct-oto-font-size-price: clamp(4.5rem, 4.4vw + 3.3rem, 7.6rem);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        font-family: var(--lmct-oto-font-family);
+        color: var(--lmct-oto-color-text);
+        background:
+          radial-gradient(circle at top left, rgba(98, 170, 255, 0.2), transparent 32%),
+          radial-gradient(circle at bottom right, rgba(184, 224, 255, 0.24), transparent 30%),
+          linear-gradient(180deg, #eff4fa 0%, #f8fbff 22%, #eef4fb 100%);
+      }
+
+      .lmct-oto-page,
+      .lmct-oto-page * {
+        box-sizing: border-box;
+      }
+
+      .lmct-oto-page {
+        position: relative;
+        padding: clamp(0.75rem, 1.4vw, 1.35rem);
+        overflow-x: clip;
+      }
+
+      .lmct-oto-shell {
+        max-width: 1680px;
+        margin: 0 auto;
+        border-radius: var(--lmct-oto-radius-xl);
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top center, rgba(42, 122, 255, 0.08), transparent 34%),
+          linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        box-shadow: var(--lmct-oto-shadow-soft);
+      }
+
+      .lmct-oto-topbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--lmct-oto-space-4);
+        padding: clamp(1rem, 1.4vw, 1.35rem) clamp(1rem, 2.1vw, 2.2rem);
+        background: linear-gradient(180deg, #ff2c27 0%, #f21917 58%, #e71212 100%);
+        color: #ffffff;
+      }
+
+      .lmct-oto-topbar-main {
+        display: flex;
+        flex: 1 1 460px;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--lmct-oto-space-4);
+        min-width: 0;
+      }
+
+      .lmct-oto-logo {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.05em;
+        font-size: clamp(2rem, 2vw + 1.2rem, 3.3rem);
+        font-weight: 900;
+        font-style: italic;
+        line-height: 0.9;
+        letter-spacing: -0.06em;
+        white-space: nowrap;
+      }
+
+      .lmct-oto-logo-plus {
+        color: #39b7ff;
+        text-shadow: 0 5px 14px rgba(57, 183, 255, 0.3);
+      }
+
+      .lmct-oto-divider {
+        width: 1px;
+        align-self: stretch;
+        min-height: 42px;
+        background: rgba(255, 255, 255, 0.55);
+      }
+
+      .lmct-oto-topbar-title {
+        font-size: clamp(1.45rem, 1.6vw + 0.65rem, 3rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .lmct-oto-timer-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        min-width: 150px;
+        margin-left: auto;
+        padding: 0.8rem 1.15rem;
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.26));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        font-size: clamp(1.35rem, 1.3vw + 0.75rem, 2rem);
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.05em;
+      }
+
+      .lmct-oto-timer-icon {
+        width: 1.15em;
+        height: 1.15em;
+        flex: 0 0 auto;
+      }
+
+      .lmct-oto-warning-strip {
+        padding: 0.9rem 1rem;
+        text-align: center;
+        font-size: clamp(0.95rem, 0.35vw + 0.88rem, 1.1rem);
+        font-weight: 700;
+        color: var(--lmct-oto-color-warning-text);
+        background:
+          linear-gradient(90deg, rgba(255, 244, 213, 0.55), rgba(255, 250, 235, 0.92), rgba(255, 244, 213, 0.55)),
+          linear-gradient(180deg, #fff7de 0%, #fff1c5 100%);
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+        border-bottom: 1px solid rgba(226, 202, 139, 0.3);
+      }
+
+      .lmct-oto-main-wrap {
+        padding: clamp(1rem, 2.3vw, 2.2rem);
+      }
+
+      .lmct-oto-main-card {
+        position: relative;
+        padding: clamp(1rem, 2.1vw, 1.9rem);
+        border-radius: var(--lmct-oto-radius-xl);
+        background:
+          radial-gradient(circle at top center, rgba(42, 122, 255, 0.08), transparent 34%),
+          linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+        box-shadow: var(--lmct-oto-shadow-card);
+      }
+
+      .lmct-oto-main-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: clamp(1.25rem, 1.8vw, 2.4rem);
+        align-items: start;
+      }
+
+      .lmct-oto-content {
+        min-width: 0;
+      }
+
+      .lmct-oto-pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-bottom: 1.2rem;
+      }
+
+      .lmct-oto-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 36px;
+        padding: 0.72rem 1.15rem;
+        border-radius: var(--lmct-oto-radius-pill);
+        font-size: clamp(0.72rem, 0.15vw + 0.7rem, 0.9rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .lmct-oto-pill--solid {
+        color: #ffffff;
+        background: linear-gradient(180deg, #2684ff 0%, #1766e5 100%);
+        box-shadow: 0 12px 24px rgba(23, 102, 229, 0.22);
+      }
+
+      .lmct-oto-pill--outlined {
+        color: var(--lmct-oto-color-blue);
+        background: linear-gradient(180deg, rgba(236, 245, 255, 0.95), rgba(227, 240, 255, 0.85));
+        border: 1px solid rgba(23, 102, 229, 0.22);
+      }
+
+      .lmct-oto-headline {
+        margin: 0;
+        font-size: var(--lmct-oto-font-size-title);
+        font-weight: 900;
+        line-height: 0.92;
+        letter-spacing: -0.075em;
+        text-transform: uppercase;
+        text-wrap: balance;
+      }
+
+      .lmct-oto-headline-accent {
+        display: block;
+        margin-top: 0.2rem;
+        color: var(--lmct-oto-color-blue);
+        background: linear-gradient(180deg, #2478ff 0%, #1766e5 55%, #0f56cc 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .lmct-oto-copy {
+        margin: 1.25rem 0 0;
+        max-width: 60ch;
+        color: var(--lmct-oto-color-text-soft);
+        font-size: var(--lmct-oto-font-size-body);
+        line-height: 1.62;
+      }
+
+      .lmct-oto-copy strong {
+        color: var(--lmct-oto-color-text);
+      }
+
+      .lmct-oto-selected-card,
+      .lmct-oto-boost-card,
+      .lmct-oto-benefit-card,
+      .lmct-oto-prize-card,
+      .lmct-oto-pricing-card {
+        border: 1px solid rgba(15, 35, 64, 0.08);
+        background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+        box-shadow: 0 10px 26px rgba(15, 35, 64, 0.045);
+      }
+
+      .lmct-oto-selected-card {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-top: 1.3rem;
+        padding: 0.95rem 1rem;
+        border-radius: 16px;
+      }
+
+      .lmct-oto-selected-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.2) 32%, transparent 33%),
+          linear-gradient(180deg, #f0f2f6 0%, #b7bdc8 100%);
+        border: 1px solid rgba(17, 24, 39, 0.15);
+        color: #303644;
+        box-shadow: inset 0 2px 3px rgba(255, 255, 255, 0.55);
+        flex: 0 0 auto;
+      }
+
+      .lmct-oto-selected-copy {
+        margin: 0;
+        font-size: clamp(0.95rem, 0.25vw + 0.9rem, 1.15rem);
+        color: var(--lmct-oto-color-text-soft);
+      }
+
+      .lmct-oto-selected-copy strong {
+        color: var(--lmct-oto-color-text);
+      }
+
+      .lmct-oto-boost-card {
+        margin-top: 0.95rem;
+        padding: 1.15rem 1rem 1rem;
+        border-radius: 18px;
+      }
+
+      .lmct-oto-boost-title {
+        margin: 0 0 0.9rem;
+        text-align: center;
+        color: var(--lmct-oto-color-blue);
+        font-size: clamp(0.95rem, 0.25vw + 0.9rem, 1.15rem);
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .lmct-oto-boost-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        align-items: center;
+        gap: 0.85rem;
+      }
+
+      .lmct-oto-boost-stat {
+        text-align: center;
+      }
+
+      .lmct-oto-boost-label {
+        margin: 0 0 0.35rem;
+        font-size: clamp(0.86rem, 0.18vw + 0.82rem, 1rem);
+        font-weight: 600;
+        color: var(--lmct-oto-color-text-muted);
+      }
+
+      .lmct-oto-boost-value {
+        margin: 0;
+        font-size: clamp(3rem, 2.5vw + 1.9rem, 4.2rem);
+        font-weight: 900;
+        line-height: 0.95;
+        letter-spacing: -0.07em;
+      }
+
+      .lmct-oto-boost-value--new {
+        color: var(--lmct-oto-color-blue);
+      }
+
+      .lmct-oto-boost-bonus {
+        margin: 0.45rem 0 0;
+        font-size: clamp(0.92rem, 0.24vw + 0.88rem, 1.08rem);
+        font-weight: 700;
+        color: var(--lmct-oto-color-green);
+      }
+
+      .lmct-oto-boost-arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(4.2rem, 5.4vw, 5.4rem);
+        height: clamp(4.2rem, 5.4vw, 5.4rem);
+        border-radius: 50%;
+        background: linear-gradient(180deg, #edf5ff 0%, #dbeaff 100%);
+        color: var(--lmct-oto-color-blue);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      }
+
+      .lmct-oto-boost-arrow svg {
+        width: 52%;
+        height: 52%;
+      }
+
+      .lmct-oto-benefit-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.85rem;
+        margin-top: 1rem;
+      }
+
+      .lmct-oto-benefit-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.9rem;
+        padding: 0.9rem 0.95rem;
+        border-radius: 18px;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .lmct-oto-benefit-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(23, 102, 229, 0.16);
+        box-shadow: 0 16px 28px rgba(23, 102, 229, 0.08);
+      }
+
+      .lmct-oto-benefit-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        color: #ffffff;
+        flex: 0 0 auto;
+      }
+
+      .lmct-oto-benefit-icon--blue {
+        background: linear-gradient(180deg, #2c88ff 0%, #1766e5 100%);
+        box-shadow: 0 10px 24px rgba(23, 102, 229, 0.22);
+      }
+
+      .lmct-oto-benefit-icon--green {
+        background: linear-gradient(180deg, #3ed57a 0%, #16a34a 100%);
+        box-shadow: 0 10px 24px rgba(22, 163, 74, 0.18);
+      }
+
+      .lmct-oto-benefit-icon svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .lmct-oto-benefit-title {
+        margin: 0 0 0.25rem;
+        font-size: clamp(1rem, 0.25vw + 0.95rem, 1.18rem);
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .lmct-oto-benefit-text {
+        margin: 0;
+        color: var(--lmct-oto-color-text-soft);
+        font-size: clamp(0.92rem, 0.18vw + 0.88rem, 1rem);
+        line-height: 1.45;
+      }
+
+      .lmct-oto-prize-card {
+        display: grid;
+        grid-template-columns: 108px minmax(0, 1fr);
+        gap: 1rem;
+        align-items: center;
+        margin-top: 1rem;
+        padding: 0.9rem;
+        border-radius: 18px;
+      }
+
+      .lmct-oto-prize-thumb {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1.22 / 1;
+        border-radius: 16px;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent),
+          linear-gradient(180deg, #dadfe8 0%, #b6beca 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+      }
+
+      .lmct-oto-prize-thumb svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .lmct-oto-prize-label {
+        margin: 0 0 0.45rem;
+        color: var(--lmct-oto-color-blue);
+        font-size: clamp(0.82rem, 0.14vw + 0.8rem, 0.95rem);
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .lmct-oto-prize-name {
+        margin: 0;
+        font-size: clamp(1.3rem, 0.5vw + 1.1rem, 1.9rem);
+        font-weight: 800;
+        line-height: 1.18;
+      }
+
+      .lmct-oto-pricing-card {
+        padding: clamp(1.3rem, 2vw, 2rem);
+        border-radius: 22px;
+        background:
+          radial-gradient(circle at top center, rgba(34, 120, 255, 0.08), transparent 38%),
+          linear-gradient(180deg, #fbfdff 0%, #f2f8ff 100%);
+        border: 1px solid var(--lmct-oto-color-border-strong);
+      }
+
+      .lmct-oto-pricing-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-bottom: 0.7rem;
+      }
+
+      .lmct-oto-pricing-title {
+        margin: 0;
+        color: var(--lmct-oto-color-blue);
+        font-size: clamp(1.2rem, 0.45vw + 1.05rem, 1.55rem);
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .lmct-oto-save-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.72rem 1rem;
+        border-radius: var(--lmct-oto-radius-pill);
+        background: linear-gradient(180deg, #e9f9ee 0%, #d8f3e1 100%);
+        border: 1px solid rgba(22, 163, 74, 0.18);
+        color: var(--lmct-oto-color-green);
+        font-size: clamp(0.82rem, 0.16vw + 0.8rem, 0.96rem);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .lmct-oto-pricing-copy {
+        margin: 0;
+        color: var(--lmct-oto-color-text-soft);
+        font-size: clamp(1rem, 0.3vw + 0.95rem, 1.18rem);
+        line-height: 1.55;
+      }
+
+      .lmct-oto-pricing-divider {
+        height: 1px;
+        margin: 1.35rem 0;
+        background: linear-gradient(90deg, rgba(17, 24, 39, 0.04), rgba(17, 24, 39, 0.16), rgba(17, 24, 39, 0.04));
+      }
+
+      .lmct-oto-price-wrap {
+        text-align: center;
+      }
+
+      .lmct-oto-old-price {
+        position: relative;
+        display: inline-block;
+        margin: 0;
+        color: #5d6575;
+        font-size: clamp(1.15rem, 0.5vw + 1rem, 1.5rem);
+        font-weight: 700;
+      }
+
+      .lmct-oto-old-price::after {
+        content: "";
+        position: absolute;
+        left: -4%;
+        right: -4%;
+        top: 50%;
+        height: 3px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(255, 44, 39, 0.95), rgba(220, 28, 28, 0.95));
+        transform: translateY(-50%);
+      }
+
+      .lmct-oto-current-price {
+        margin: 0.3rem 0 0;
+        font-size: var(--lmct-oto-font-size-price);
+        font-weight: 900;
+        line-height: 0.9;
+        letter-spacing: -0.08em;
+      }
+
+      .lmct-oto-price-savings {
+        margin: 0.7rem 0 0;
+        color: var(--lmct-oto-color-green);
+        font-size: clamp(1.2rem, 0.45vw + 1.05rem, 1.55rem);
+        font-weight: 800;
+      }
+
+      .lmct-oto-price-note {
+        margin: 0.7rem 0 0;
+        color: var(--lmct-oto-color-text-soft);
+        font-size: clamp(1rem, 0.22vw + 0.96rem, 1.14rem);
+        line-height: 1.45;
+      }
+
+      #lmct-oto-accept-btn {
+        position: relative;
+        width: 100%;
+        margin-top: 1.5rem;
+        padding: 1.3rem 1.25rem 1.15rem;
+        border: 0;
+        border-radius: 18px;
+        background: linear-gradient(180deg, #2382ff 0%, #1766e5 70%, #0f56cc 100%);
+        color: #ffffff;
+        box-shadow: var(--lmct-oto-shadow-button);
+        cursor: pointer;
+        overflow: hidden;
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          filter 180ms ease;
+      }
+
+      #lmct-oto-accept-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent 24%, rgba(255, 255, 255, 0.16) 38%, transparent 52%);
+        transform: translateX(-120%);
+        transition: transform 500ms ease;
+      }
+
+      #lmct-oto-accept-btn:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 16px 30px rgba(23, 102, 229, 0.32),
+          inset 0 1px 0 rgba(255, 255, 255, 0.34);
+        filter: saturate(1.05);
+      }
+
+      #lmct-oto-accept-btn:hover::before {
+        transform: translateX(115%);
+      }
+
+      #lmct-oto-accept-btn:active {
+        transform: translateY(0);
+        box-shadow:
+          0 10px 18px rgba(23, 102, 229, 0.24),
+          inset 0 1px 0 rgba(255, 255, 255, 0.28);
+      }
+
+      .lmct-oto-cta-title {
+        display: block;
+        font-size: clamp(1.1rem, 0.55vw + 0.98rem, 1.7rem);
+        font-weight: 900;
+        line-height: 1.15;
+        text-transform: uppercase;
+      }
+
+      .lmct-oto-cta-subtitle {
+        display: block;
+        margin-top: 0.45rem;
+        font-size: clamp(0.84rem, 0.15vw + 0.82rem, 1rem);
+        font-weight: 700;
+      }
+
+      #lmct-oto-decline-link {
+        display: inline-block;
+        margin-top: 1.3rem;
+        color: #697891;
+        font-size: clamp(0.95rem, 0.2vw + 0.9rem, 1.1rem);
+        font-weight: 600;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.2em;
+        transition: color 180ms ease;
+      }
+
+      #lmct-oto-decline-link:hover {
+        color: #44526a;
+      }
+
+      .lmct-oto-trust-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.7rem 1.1rem;
+        color: var(--lmct-oto-color-text-soft);
+      }
+
+      .lmct-oto-trust-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: clamp(0.86rem, 0.16vw + 0.82rem, 0.98rem);
+        font-weight: 500;
+      }
+
+      .lmct-oto-trust-item svg {
+        width: 18px;
+        height: 18px;
+        color: #6c7b92;
+        flex: 0 0 auto;
+      }
+
+      .lmct-oto-expired .lmct-oto-timer-pill {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.34));
+      }
+
+      .lmct-oto-expired .lmct-oto-warning-strip {
+        background:
+          linear-gradient(90deg, rgba(255, 236, 203, 0.72), rgba(255, 246, 223, 0.96), rgba(255, 236, 203, 0.72)),
+          linear-gradient(180deg, #fff6dc 0%, #ffecc0 100%);
+      }
+
+      @media (min-width: 720px) {
+        .lmct-oto-benefit-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (min-width: 980px) {
+        .lmct-oto-main-card {
+          padding: clamp(1.5rem, 2.2vw, 2rem);
+        }
+
+        .lmct-oto-main-grid {
+          grid-template-columns: minmax(0, 1.38fr) minmax(360px, 0.92fr);
+        }
+      }
+
+      @media (max-width: 979px) {
+        .lmct-oto-pricing-card {
+          max-width: 760px;
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .lmct-oto-page {
+          padding: 0.6rem;
+        }
+
+        .lmct-oto-topbar {
+          align-items: flex-start;
+        }
+
+        .lmct-oto-topbar-main {
+          gap: 0.8rem;
+        }
+
+        .lmct-oto-divider {
+          min-height: 28px;
+        }
+
+        .lmct-oto-timer-pill {
+          min-width: 0;
+          padding: 0.72rem 0.95rem;
+        }
+
+        .lmct-oto-main-wrap {
+          padding: 0.85rem;
+        }
+
+        .lmct-oto-main-card {
+          padding: 1rem;
+        }
+
+        .lmct-oto-prize-card {
+          grid-template-columns: 92px minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 560px) {
+        .lmct-oto-topbar-main {
+          gap: 0.55rem 0.85rem;
+        }
+
+        .lmct-oto-divider {
+          display: none;
+        }
+
+        .lmct-oto-topbar-title {
+          white-space: normal;
+        }
+
+        .lmct-oto-timer-pill {
+          margin-left: 0;
+        }
+
+        .lmct-oto-boost-grid {
+          gap: 0.45rem;
+        }
+
+        .lmct-oto-prize-card {
+          grid-template-columns: 1fr;
+        }
+
+        .lmct-oto-prize-thumb {
+          max-width: 112px;
+        }
+
+        .lmct-oto-pricing-top {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="lmct-oto-page" id="lmct-oto-page">
+      <div class="lmct-oto-shell">
+        <header class="lmct-oto-topbar">
+          <div class="lmct-oto-topbar-main">
+            <div class="lmct-oto-logo" aria-label="LMCT Plus">
+              <span>LMCT</span><span class="lmct-oto-logo-plus">+</span>
+            </div>
+            <span class="lmct-oto-divider" aria-hidden="true"></span>
+            <div class="lmct-oto-topbar-title">WAIT &mdash; ONE TIME OFFER</div>
+          </div>
+
+          <div
+            class="lmct-oto-timer-pill"
+            aria-live="polite"
+            aria-label="Offer countdown timer"
+          >
+            <svg
+              class="lmct-oto-timer-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="13" r="8.5" stroke="currentColor" stroke-width="2.4" />
+              <path
+                d="M12 9V13L14.8 15.4"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9.5 2.8H14.5"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span data-lmct-oto-timer>03:48</span>
+          </div>
+        </header>
+
+        <div class="lmct-oto-warning-strip">
+          This offer disappears when you leave this page.
+        </div>
+
+        <div class="lmct-oto-main-wrap">
+          <div class="lmct-oto-main-card">
+            <div class="lmct-oto-main-grid">
+              <div class="lmct-oto-content">
+                <div class="lmct-oto-pill-row">
+                  <span class="lmct-oto-pill lmct-oto-pill--solid">ONE TIME OFFER</span>
+                  <span class="lmct-oto-pill lmct-oto-pill--outlined">
+                    UNLOCK 2X VALUE ON THIS DRAW
+                  </span>
+                </div>
+
+                <h1 class="lmct-oto-headline">
+                  LAST CHANCE TO
+                  <span class="lmct-oto-headline-accent">DOUBLE YOUR ENTRIES</span>
+                </h1>
+
+                <p class="lmct-oto-copy">
+                  This is your only chance to add the 2X entry upgrade before checkout.
+                  Get <strong>double the entries</strong> for this giveaway with a
+                  <strong>one-time payment only</strong>. No subscription. No hidden
+                  fees.
+                </p>
+
+                <!-- Selected package -->
+                <div class="lmct-oto-selected-card">
+                  <span class="lmct-oto-selected-icon" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 3.6L14.3 8.2L19.4 8.9L15.7 12.5L16.6 17.6L12 15.2L7.4 17.6L8.3 12.5L4.6 8.9L9.7 8.2L12 3.6Z"
+                        stroke="currentColor"
+                        stroke-width="1.9"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <p class="lmct-oto-selected-copy">
+                    You selected:
+                    <strong data-lmct-oto-package>Silver Package</strong>
+                  </p>
+                </div>
+
+                <!-- Entry boost card -->
+                <div class="lmct-oto-boost-card">
+                  <h2 class="lmct-oto-boost-title">YOUR ENTRY BOOST</h2>
+                  <div class="lmct-oto-boost-grid">
+                    <div class="lmct-oto-boost-stat">
+                      <p class="lmct-oto-boost-label">Current entries</p>
+                      <p class="lmct-oto-boost-value" data-lmct-oto-current>100</p>
+                    </div>
+
+                    <div class="lmct-oto-boost-arrow" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M5 12H19M13 6L19 12L13 18"
+                          stroke="currentColor"
+                          stroke-width="2.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+
+                    <div class="lmct-oto-boost-stat">
+                      <p class="lmct-oto-boost-label">New total</p>
+                      <p
+                        class="lmct-oto-boost-value lmct-oto-boost-value--new"
+                        data-lmct-oto-new-total
+                      >
+                        200
+                      </p>
+                      <p class="lmct-oto-boost-bonus">
+                        +<span data-lmct-oto-bonus>100</span> bonus entries
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Benefit cards -->
+                <div class="lmct-oto-benefit-grid">
+                  <article class="lmct-oto-benefit-card">
+                    <span class="lmct-oto-benefit-icon lmct-oto-benefit-icon--blue" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M13.4 2.8L6.9 13.2H11.3L10.6 21.2L17.1 10.8H12.7L13.4 2.8Z"
+                          stroke="currentColor"
+                          stroke-width="2.4"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </span>
+                    <div>
+                      <h3 class="lmct-oto-benefit-title">2X entries instantly</h3>
+                      <p class="lmct-oto-benefit-text">
+                        Your upgrade is applied right away.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="lmct-oto-benefit-card">
+                    <span class="lmct-oto-benefit-icon lmct-oto-benefit-icon--green" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 4.2V19.8"
+                          stroke="currentColor"
+                          stroke-width="2.4"
+                          stroke-linecap="round"
+                        />
+                        <path
+                          d="M15.8 7.4C15.1 6.2 13.7 5.5 12.1 5.5C9.8 5.5 8 6.8 8 8.8C8 10.8 9.8 11.7 12.1 12.2C14.4 12.7 16.2 13.6 16.2 15.6C16.2 17.6 14.3 19 11.7 19C9.8 19 8.1 18.2 7.2 16.8"
+                          stroke="currentColor"
+                          stroke-width="2.4"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </span>
+                    <div>
+                      <h3 class="lmct-oto-benefit-title">
+                        Save <span data-lmct-oto-savings-inline>$125</span> today
+                      </h3>
+                      <p class="lmct-oto-benefit-text">
+                        Get the upgrade for half the original price.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="lmct-oto-benefit-card">
+                    <span class="lmct-oto-benefit-icon lmct-oto-benefit-icon--blue" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12 3.8L18.5 6.4V11.4C18.5 15.3 15.8 18.9 12 20.2C8.2 18.9 5.5 15.3 5.5 11.4V6.4L12 3.8Z"
+                          stroke="currentColor"
+                          stroke-width="2.3"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M9.5 12.1L11.3 13.9L14.9 10.3"
+                          stroke="currentColor"
+                          stroke-width="2.3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </span>
+                    <div>
+                      <h3 class="lmct-oto-benefit-title">No recurring charge</h3>
+                      <p class="lmct-oto-benefit-text">
+                        One-time payment only. No hidden subscription.
+                      </p>
+                    </div>
+                  </article>
+                </div>
+
+                <!-- Prize card -->
+                <div class="lmct-oto-prize-card">
+                  <div class="lmct-oto-prize-thumb" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 180 148"
+                      xmlns="http://www.w3.org/2000/svg"
+                      role="presentation"
+                    >
+                      <defs>
+                        <linearGradient id="lmct-oto-thumb-sky" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#e9edf3" />
+                          <stop offset="100%" stop-color="#bec8d4" />
+                        </linearGradient>
+                        <linearGradient id="lmct-oto-thumb-road" x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0%" stop-color="#585f6d" />
+                          <stop offset="100%" stop-color="#272c35" />
+                        </linearGradient>
+                        <linearGradient id="lmct-oto-thumb-car" x1="0" y1="0" x2="1" y2="1">
+                          <stop offset="0%" stop-color="#ff5654" />
+                          <stop offset="100%" stop-color="#aa0f16" />
+                        </linearGradient>
+                      </defs>
+                      <rect width="180" height="148" rx="18" fill="url(#lmct-oto-thumb-sky)" />
+                      <rect y="104" width="180" height="44" fill="url(#lmct-oto-thumb-road)" />
+                      <path d="M24 100C48 92 78 88 112 89C135 90 154 93 170 100V112H24V100Z" fill="#8892a2" opacity="0.18" />
+                      <path
+                        d="M28 92L51 70C54 67 58 65 62 65H106C112 65 116 66 120 69L143 87L153 89C159 90 164 95 164 101V109H18V98C18 94 21 91 25 91L28 92Z"
+                        fill="url(#lmct-oto-thumb-car)"
+                      />
+                      <path d="M52 70L114 70C118 70 121 71 124 73L136 85H46L52 70Z" fill="#a50f15" opacity="0.35" />
+                      <path d="M51 72H79V84H46L51 72Z" fill="#dbe9f7" />
+                      <path d="M82 72H112C116 72 118 73 121 75L131 84H82V72Z" fill="#dbe9f7" />
+                      <path d="M21 95H160V104H21Z" fill="#151820" opacity="0.4" />
+                      <circle cx="54" cy="110" r="15" fill="#181c22" />
+                      <circle cx="54" cy="110" r="7" fill="#b9c2cf" />
+                      <circle cx="130" cy="110" r="15" fill="#181c22" />
+                      <circle cx="130" cy="110" r="7" fill="#b9c2cf" />
+                      <rect x="24" y="91" width="16" height="7" rx="3.5" fill="#f9fbff" opacity="0.8" />
+                      <rect x="145" y="91" width="13" height="7" rx="3.5" fill="#f9c649" opacity="0.9" />
+                    </svg>
+                  </div>
+
+                  <div>
+                    <p class="lmct-oto-prize-label">ENTERING TO WIN</p>
+                    <p class="lmct-oto-prize-name" data-lmct-oto-prize>
+                      Holden Evoke or $2.5K Cash
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <aside class="lmct-oto-pricing-card">
+                <div class="lmct-oto-pricing-top">
+                  <h2 class="lmct-oto-pricing-title">TODAY ONLY</h2>
+                  <span class="lmct-oto-save-pill">
+                    SAVE <span data-lmct-oto-save-percent>50</span>%
+                  </span>
+                </div>
+
+                <p class="lmct-oto-pricing-copy">
+                  Add this before checkout and lock in the full 2X entry boost.
+                </p>
+
+                <div class="lmct-oto-pricing-divider" aria-hidden="true"></div>
+
+                <div class="lmct-oto-price-wrap">
+                  <p class="lmct-oto-old-price">
+                    Was <span data-lmct-oto-was-price>$250</span>
+                  </p>
+                  <p class="lmct-oto-current-price" data-lmct-oto-offer-price>$125</p>
+                  <p class="lmct-oto-price-savings">
+                    You save <span data-lmct-oto-savings>$125</span> today
+                  </p>
+                  <p class="lmct-oto-price-note">
+                    One-time payment for the full 2X upgrade.
+                  </p>
+                </div>
+
+                <button id="lmct-oto-accept-btn" type="button">
+                  <span class="lmct-oto-cta-title">YES &mdash; DOUBLE MY ENTRIES NOW</span>
+                  <span class="lmct-oto-cta-subtitle">
+                    Instant upgrade &bull; One-time payment &bull; No subscription
+                  </span>
+                </button>
+
+                <a href="#" id="lmct-oto-decline-link">
+                  No thanks, I&rsquo;ll keep my current entries
+                </a>
+
+                <div class="lmct-oto-pricing-divider" aria-hidden="true"></div>
+
+                <div class="lmct-oto-trust-row">
+                  <span class="lmct-oto-trust-item">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M8.5 10.2V7.8C8.5 5.6 10.1 4 12.2 4C14.3 4 15.9 5.6 15.9 7.8V10.2"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                      <rect
+                        x="6"
+                        y="10"
+                        width="12.4"
+                        height="10"
+                        rx="2"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                    </svg>
+                    Secure checkout
+                  </span>
+                  <span class="lmct-oto-trust-item">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M13.4 2.8L6.9 13.2H11.3L10.6 21.2L17.1 10.8H12.7L13.4 2.8Z"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    Upgrade applied instantly
+                  </span>
+                  <span class="lmct-oto-trust-item">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M8 8.2C8 6 9.8 4.2 12 4.2C14.2 4.2 16 6 16 8.2C16 10.4 14.2 12.2 12 12.2C9.8 12.2 8 10.4 8 8.2Z"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      />
+                      <path
+                        d="M5 19.2C5.9 16.4 8.5 14.8 12 14.8C15.5 14.8 18.1 16.4 19 19.2"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    Entries apply to this giveaway only
+                  </span>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        // Update these values to change the package, entries, price, and prize copy.
+        var selectedPackage = "Silver Package";
+        var currentEntries = 100;
+        var newTotalEntries = 200;
+        var bonusEntries = 100;
+        var originalPrice = 250;
+        var offerPrice = 125;
+        var prizeName = "Holden Evoke or $2.5K Cash";
+
+        var countdownSeconds = 3 * 60 + 48;
+        var page = document.getElementById("lmct-oto-page");
+        var timerTarget = document.querySelector("[data-lmct-oto-timer]");
+        var acceptButton = document.getElementById("lmct-oto-accept-btn");
+        var declineLink = document.getElementById("lmct-oto-decline-link");
+
+        function formatCurrency(amount) {
+          return "$" + Number(amount).toLocaleString("en-US");
+        }
+
+        function setText(selector, value) {
+          var elements = document.querySelectorAll(selector);
+          elements.forEach(function (element) {
+            element.textContent = value;
+          });
+        }
+
+        function renderOfferDetails() {
+          var savings = Math.max(originalPrice - offerPrice, 0);
+          var savePercent = originalPrice > 0
+            ? Math.round((savings / originalPrice) * 100)
+            : 0;
+
+          setText("[data-lmct-oto-package]", selectedPackage);
+          setText("[data-lmct-oto-current]", currentEntries.toLocaleString("en-US"));
+          setText("[data-lmct-oto-new-total]", newTotalEntries.toLocaleString("en-US"));
+          setText("[data-lmct-oto-bonus]", bonusEntries.toLocaleString("en-US"));
+          setText("[data-lmct-oto-was-price]", formatCurrency(originalPrice));
+          setText("[data-lmct-oto-offer-price]", formatCurrency(offerPrice));
+          setText("[data-lmct-oto-savings]", formatCurrency(savings));
+          setText("[data-lmct-oto-savings-inline]", formatCurrency(savings));
+          setText("[data-lmct-oto-prize]", prizeName);
+          setText("[data-lmct-oto-save-percent]", savePercent);
+        }
+
+        function renderTimer() {
+          var minutes = Math.floor(countdownSeconds / 60);
+          var seconds = countdownSeconds % 60;
+          var minuteText = String(minutes).padStart(2, "0");
+          var secondText = String(seconds).padStart(2, "0");
+
+          if (timerTarget) {
+            timerTarget.textContent = minuteText + ":" + secondText;
+          }
+        }
+
+        function startCountdown() {
+          renderTimer();
+
+          var timer = window.setInterval(function () {
+            if (countdownSeconds <= 0) {
+              countdownSeconds = 0;
+              renderTimer();
+              if (page) {
+                page.classList.add("lmct-oto-expired");
+              }
+              window.clearInterval(timer);
+              return;
+            }
+
+            countdownSeconds -= 1;
+            renderTimer();
+
+            if (countdownSeconds === 0 && page) {
+              page.classList.add("lmct-oto-expired");
+            }
+          }, 1000);
+        }
+
+        if (acceptButton) {
+          acceptButton.addEventListener("click", function () {
+            console.log("OTO accepted");
+          });
+        }
+
+        if (declineLink) {
+          declineLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            console.log("OTO declined");
+          });
+        }
+
+        renderOfferDetails();
+        startCountdown();
+      })();
+    </script>
+  </body>
+</html>

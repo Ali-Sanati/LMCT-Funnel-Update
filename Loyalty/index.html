@@ -1,0 +1,6264 @@
+<!-- ##################################################################### -->
+<!--  LMCT+ MEMBERSHIP FUNNEL  |  COMPLETE BUILD                            -->
+<!--                                                                        -->
+<!--  Brand: Montserrat, blue #0C9FFD, navy #05162a, gradient #0476c4 to    -->
+<!--  #3fb8ff. Every section below is self contained: its own style block,  -->
+<!--  markup, and any script it needs, under a unique CSS prefix. You can   -->
+<!--  reorder, duplicate, or delete any section without breaking the rest.  -->
+<!--                                                                        -->
+<!--  Paste the whole file as one CF1 element, or split it section by       -->
+<!--  section using the banners. Two anchor targets matter:                 -->
+<!--    #packages    every Become A Member button scrolls here (Section 02) -->
+<!--    #open-popup  the three plan SELECT buttons point here               -->
+<!--  Keep Section 02 present, since its script powers the smooth scroll.   -->
+<!--  Every section has a Become A Member button except Member Perks (08).  -->
+<!--  The hero video is a Wistia iframe embed, so it needs no scripts.      -->
+<!--  All motion respects prefers-reduced-motion.                           -->
+<!--                                                                        -->
+<!--  ORDER                                                                 -->
+<!--    01 Hero            06 Petrol                                         -->
+<!--    02 Packages        07 Coming Soon                                   -->
+<!--    03 Entries         08 Member Perks                                   -->
+<!--    04 Discounts       09 App and Final CTA                              -->
+<!--    05 Supermarket     10 Footer                                        -->
+<!-- ##################################################################### -->
+<!-- ===================================================================== -->
+<!--  SECTION 01  |  HERO  -->
+<!--  Video is a Wistia iframe embed (not the script based player), so it renders in CF1 without any scripts. To swap the video, change the media id 1rxh3i53aw in the iframe src.  -->
+<!--  Editable copy: eyebrow, headline, subtext, and the two trust stats (1,000+ Winners Paid and 44 Millionaires Made). Logo image URL sits near the top of the markup.  -->
+<!--  Desktop shows the button on the left with the video on the right. Mobile centres everything with the button under the video.  -->
+<!-- ===================================================================== -->
+<style>
+  .lmctMH__wrap {
+    background: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 44px 16px 0;
+    overflow: hidden;
+  }
+  .lmctMH__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .lmctMH__content {
+    text-align: center;
+  }
+  .lmctMH__logo {
+    height: 38px;
+    width: auto;
+    display: block;
+    margin: 0 auto 24px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: lmctMH__in 0.6s ease-out 0.05s forwards;
+  }
+  .lmctMH__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.25);
+    color: #0476c4;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: lmctMH__in 0.6s ease-out 0.15s forwards;
+  }
+  .lmctMH__eyebrow span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #0c9ffd;
+    box-shadow: 0 0 8px #0c9ffd;
+  }
+  .lmctMH__h1 {
+    margin: 0 0 22px;
+    font-size: clamp(46px, 11vw, 66px);
+    font-weight: 900;
+    line-height: 0.97;
+    letter-spacing: -2.4px;
+    color: #05162a;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: lmctMH__in 0.7s ease-out 0.25s forwards;
+  }
+  .lmctMH__h1 em {
+    font-style: normal;
+    background: linear-gradient(180deg, #0476c4 0%, #0c9ffd 55%, #3fb8ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctMH__sub {
+    margin: 0 auto 30px;
+    max-width: 500px;
+    font-size: clamp(14px, 2.2vw, 16px);
+    font-weight: 500;
+    color: #64748b;
+    line-height: 1.55;
+    text-align: justify;
+    text-align-last: center;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: lmctMH__in 0.7s ease-out 0.35s forwards;
+  }
+  .lmctMH__sub strong {
+    color: #05162a;
+    font-weight: 800;
+  }
+  .lmctMH__ctaD {
+    display: none;
+  }
+  .lmctMH__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: lmctMH__in 0.7s ease-out 0.55s forwards;
+  }
+  .lmctMH__trustItem {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    padding-right: 18px;
+    border-right: 1px solid #e2e8f0;
+  }
+  .lmctMH__trustItem:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+  .lmctMH__trustNum {
+    font-size: clamp(22px, 3.4vw, 28px);
+    font-weight: 900;
+    color: #05162a;
+    letter-spacing: -1px;
+  }
+  .lmctMH__trustNum em {
+    font-style: normal;
+    color: #0c9ffd;
+  }
+  .lmctMH__trustLbl {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .lmctMH__visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    animation: lmctMH__in 0.8s ease-out 0.4s forwards;
+  }
+  .lmctMH__vsl {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #05162a;
+    box-shadow:
+      0 26px 60px rgba(5, 22, 42, 0.24),
+      0 0 0 1px rgba(12, 159, 253, 0.16);
+  }
+  .lmctMH__vslPad {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+  }
+  .lmctMH__vslPad iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .lmctMH__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(180deg, #0c9ffd 0%, #0476c4 100%);
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    padding: 16px 34px;
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(12, 159, 253, 0.4);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctMH__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px rgba(12, 159, 253, 0.52);
+  }
+  .lmctMH__cta svg {
+    width: 18px;
+    height: 18px;
+  }
+  @keyframes lmctMH__in {
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  .lmctMH__marquee {
+    margin: 44px -16px 0;
+    background: linear-gradient(90deg, #0476c4 0%, #0c9ffd 50%, #3fb8ff 100%);
+    overflow: hidden;
+    padding: 15px 0;
+    position: relative;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.22) inset;
+  }
+  .lmctMH__marqueeTrack {
+    display: flex;
+    width: max-content;
+    animation: lmctMH__marqueeScroll 32s linear infinite;
+    will-change: transform;
+  }
+  .lmctMH__marqueeHalf {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+  .lmctMH__mItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 22px;
+    padding: 0 22px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .lmctMH__mStar {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+  @keyframes lmctMH__marqueeScroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (max-width: 560px) {
+    .lmctMH__wrap {
+      padding: 34px 14px 0;
+    }
+    .lmctMH__cta {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  @media (min-width: 900px) {
+    .lmctMH__wrap {
+      padding: 64px 16px 0;
+    }
+    .lmctMH__inner {
+      grid-template-columns: 0.74fr 1.26fr;
+      gap: 52px;
+    }
+    .lmctMH__content {
+      text-align: left;
+    }
+    .lmctMH__logo {
+      margin: 0 0 24px;
+    }
+    .lmctMH__sub {
+      margin: 0 0 30px;
+      text-align: left;
+      text-align-last: auto;
+    }
+    .lmctMH__trust {
+      justify-content: flex-start;
+    }
+    .lmctMH__ctaD {
+      display: block;
+      margin-bottom: 30px;
+    }
+    .lmctMH__ctaM {
+      display: none;
+    }
+    .lmctMH__vsl {
+      max-width: 880px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmctMH__wrap * {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+<div class="lmctMH__wrap">
+  <div class="lmctMH__inner">
+    <div class="lmctMH__content">
+      <img
+        class="lmctMH__logo"
+        src="https://images.clickfunnels.com/11/5808e1954343cc90744e7bcca46ae8/logo.3bf7fa51a183b716b171.png"
+        alt="LMCT+"
+      />
+      <div class="lmctMH__eyebrow">
+        <span></span>Australia's Original &amp; Best
+      </div>
+      <h1 class="lmctMH__h1">
+        The Membership<br />That <em>Pays For Itself</em>
+      </h1>
+      <p class="lmctMH__sub">
+        Wholesale fuel, mates rates at <strong>2,000+ Aussie brands</strong>,
+        and you're in every giveaway we run. Most members save more than they
+        pay.
+      </p>
+      <div class="lmctMH__ctaD">
+        <a class="lmctMH__cta" href="#packages"
+          >Become A Member
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6" /></svg
+        ></a>
+      </div>
+      <div class="lmctMH__trust">
+        <div class="lmctMH__trustItem">
+          <span class="lmctMH__trustNum">1,000+</span
+          ><span class="lmctMH__trustLbl">Winners Paid</span>
+        </div>
+        <div class="lmctMH__trustItem">
+          <span class="lmctMH__trustNum"><em>44</em></span
+          ><span class="lmctMH__trustLbl">Millionaires Made</span>
+        </div>
+      </div>
+    </div>
+    <div class="lmctMH__visual">
+      <div class="lmctMH__vsl">
+        <div class="lmctMH__vslPad">
+          <iframe
+            src="https://fast.wistia.net/embed/iframe/1rxh3i53aw"
+            title="LMCT+ Video"
+            allow="autoplay; fullscreen"
+            allowtransparency="true"
+            frameborder="0"
+            scrolling="no"
+            class="wistia_embed"
+            name="wistia_embed"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+      <a class="lmctMH__cta lmctMH__ctaM" href="#packages"
+        >Become A Member
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" /></svg
+      ></a>
+    </div>
+  </div>
+  <div class="lmctMH__marquee" aria-hidden="true">
+    <div class="lmctMH__marqueeTrack">
+      <div class="lmctMH__marqueeHalf">
+        <span class="lmctMH__mItem"
+          >Australia's Most Valuable Membership<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >44 Millionaires Made<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >Australia's Most Valuable Membership<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >44 Millionaires Made<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >Australia's Most Valuable Membership<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >44 Millionaires Made<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >Australia's Most Valuable Membership<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >44 Millionaires Made<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+      </div>
+      <div class="lmctMH__marqueeHalf">
+        <span class="lmctMH__mItem"
+          >Australia's Most Valuable Membership<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >44 Millionaires Made<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >Australia's Most Valuable Membership<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >44 Millionaires Made<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >Australia's Most Valuable Membership<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >44 Millionaires Made<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >Australia's Most Valuable Membership<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+        <span class="lmctMH__mItem"
+          >44 Millionaires Made<svg
+            class="lmctMH__mStar"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z"
+            /></svg
+        ></span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- =====  END SECTION 01  |  HERO  ===== -->
+<!-- ===================================================================== -->
+<!--  SECTION 02  |  PACKAGES  -->
+<!--  This section is the scroll target (id=packages) for every Become A Member button in the funnel, and it holds the script that powers the inclusions drawer and that smooth scroll. Keep it on the page.  -->
+<!--  Editable: prices, plan names, features, the Get 2 Months Free banner, and the full inclusions list.  -->
+<!--  SELECT buttons link to #open-popup and carry the order classes: Entry is css-order-bronze, Premium is css-order-silver, Elite is css-order-gold. Attach your CF1 purchase actions to these.  -->
+<!-- ===================================================================== -->
+<style>
+  /* ============ MERGED SECTION SHELL ============ */
+  .lmctPkg__section {
+    background: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 46px 16px 54px;
+    scroll-margin-top: 90px;
+  }
+  .lmctPkg__section > * + * {
+    margin-top: 32px;
+  }
+  @media (max-width: 520px) {
+    .lmctPkg__section {
+      padding: 34px 14px 42px;
+    }
+    .lmctPkg__section > * + * {
+      margin-top: 24px;
+    }
+  }
+  /* ============ 1 · ANNUAL BILLING ============ */
+  .lmctAB__wrap {
+    background: transparent;
+    text-align: center;
+    padding: 0;
+  }
+  .lmctAB__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: lmctAB__in 0.7s ease-out 0.1s forwards;
+  }
+  .lmctAB__line1 {
+    margin: 0;
+    font-size: clamp(26px, 5.4vw, 46px);
+    font-weight: 900;
+    line-height: 1.06;
+    letter-spacing: -1px;
+    color: #05162a;
+    text-transform: uppercase;
+  }
+  .lmctAB__free {
+    font-style: italic;
+    background: linear-gradient(
+      90deg,
+      #0476c4 0%,
+      #3fb8ff 25%,
+      #0c9ffd 50%,
+      #3fb8ff 75%,
+      #0476c4 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: lmctAB__flow 7s ease-in-out infinite alternate;
+  }
+  .lmctAB__line2 {
+    margin: 7px 0 0;
+    font-size: clamp(16px, 3vw, 26px);
+    font-weight: 600;
+    color: #64748b;
+    letter-spacing: -0.2px;
+  }
+  @keyframes lmctAB__in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes lmctAB__flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  .lmctPP__wrap {
+    background: transparent;
+    padding: 0;
+  }
+  .lmctPP__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+  .lmctPP__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    align-items: stretch;
+  }
+  /* ---- per-tier colour tokens ---- */
+  .lmctPP__card--entry {
+    --solid: #1fa851;
+    --tint: rgba(31, 168, 81, 0.12);
+    --tintB: rgba(31, 168, 81, 0.24);
+    --headFrom: #37c463;
+    --headTo: #1f9c4b;
+    --bandFrom: #103a20;
+    --bandTo: #040906;
+    --border: rgba(31, 168, 81, 0.42);
+    --glow: rgba(31, 168, 81, 0.22);
+  }
+  .lmctPP__card--premium {
+    --solid: #1f63d6;
+    --tint: rgba(31, 99, 214, 0.12);
+    --tintB: rgba(31, 99, 214, 0.24);
+    --headFrom: #2f7de8;
+    --headTo: #1850c0;
+    --bandFrom: #0a1f3a;
+    --bandTo: #04070d;
+    --border: rgba(31, 99, 214, 0.48);
+    --glow: rgba(31, 99, 214, 0.28);
+  }
+  .lmctPP__card--elite {
+    --solid: #c28a14;
+    --tint: rgba(212, 154, 40, 0.15);
+    --tintB: rgba(212, 154, 40, 0.3);
+    --headFrom: #f0c350;
+    --headTo: #d49a28;
+    --bandFrom: #2a1d07;
+    --bandTo: #070502;
+    --border: rgba(212, 154, 40, 0.52);
+    --glow: rgba(212, 154, 40, 0.3);
+  }
+  /* ---- card shell ---- */
+  .lmctPP__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fafbfc;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 18px 44px rgba(5, 22, 42, 0.1);
+    opacity: 0;
+    transform: translateY(14px);
+    animation: lmctPP__in 0.6s ease-out forwards;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .lmctPP__card--premium {
+    box-shadow: 0 22px 54px rgba(31, 99, 214, 0.18);
+  }
+  .lmctPP__grid > .lmctPP__card:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+  .lmctPP__grid > .lmctPP__card:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .lmctPP__grid > .lmctPP__card:nth-child(3) {
+    animation-delay: 0.25s;
+  }
+  @keyframes lmctPP__in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* ---- coloured header ---- */
+  .lmctPP__top {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--headFrom) 0%, var(--headTo) 100%);
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .lmctPP__top::after {
+    content: "";
+    position: absolute;
+    top: -60%;
+    left: -25%;
+    width: 45%;
+    height: 220%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transform: skewX(-18deg);
+    pointer-events: none;
+  }
+  .lmctPP__mark {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    display: inline-flex;
+    position: relative;
+    z-index: 1;
+  }
+  .lmctPP__mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
+  }
+  .lmctPP__tier {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+  }
+  .lmctPP__tier b {
+    font-size: clamp(22px, 2.8vw, 28px);
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .lmctPP__tier span {
+    font-size: clamp(15px, 2vw, 19px);
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin-top: 4px;
+    opacity: 0.96;
+  }
+  /* ---- price band ---- */
+  .lmctPP__priceBand {
+    background: linear-gradient(180deg, var(--bandFrom) 0%, var(--bandTo) 100%);
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+  }
+  .lmctPP__price {
+    display: inline-flex;
+    align-items: flex-start;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -1.5px;
+  }
+  .lmctPP__cur {
+    font-size: clamp(20px, 2.4vw, 26px);
+    font-weight: 800;
+    margin-top: 7px;
+    margin-right: 1px;
+  }
+  .lmctPP__int {
+    font-size: clamp(46px, 7vw, 62px);
+  }
+  .lmctPP__dec {
+    font-size: clamp(28px, 4.2vw, 38px);
+    margin-top: 6px;
+  }
+  .lmctPP__priceSub {
+    margin-top: 9px;
+    font-size: clamp(12px, 1.6vw, 13.5px);
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  /* ---- body / features ---- */
+  .lmctPP__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 22px 22px 24px;
+  }
+  .lmctPP__feats {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    flex: 1;
+  }
+  .lmctPP__feat {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+  .lmctPP__featIco {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--tint);
+    border: 1px solid var(--tintB);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lmctPP__featIco svg {
+    width: 18px;
+    height: 18px;
+    color: var(--solid);
+    stroke: var(--solid);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .lmctPP__featTxt {
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.4;
+  }
+  .lmctPP__featTxt strong {
+    color: #05162a;
+    font-weight: 800;
+  }
+  /* ---- select button ---- */
+  .lmctPP__select {
+    display: block;
+    text-align: center;
+    text-decoration: none !important;
+    background: linear-gradient(180deg, #2a6ef0 0%, #1850c8 100%);
+    color: #fff !important;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(31, 80, 200, 0.34);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease;
+  }
+  .lmctPP__select:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(31, 80, 200, 0.45);
+    filter: brightness(1.05);
+  }
+  /* ---- DESKTOP: 3-up portrait cards ---- */
+  @media (min-width: 860px) {
+    .lmctPP__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+    .lmctPP__card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 64px var(--glow);
+    }
+  }
+  /* ---- MOBILE: full-width horizontal rectangles ---- */
+  @media (max-width: 859px) {
+    .lmctPP__head {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+    }
+    .lmctPP__top {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .lmctPP__tier {
+      min-width: 0;
+    }
+    .lmctPP__tier b {
+      font-size: clamp(18px, 4.8vw, 26px);
+    }
+    .lmctPP__tier span {
+      font-size: clamp(13px, 3.4vw, 18px);
+    }
+    .lmctPP__priceBand {
+      flex: 0 0 auto;
+      width: 38%;
+      min-width: 128px;
+      max-width: 230px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 12px;
+    }
+    .lmctPP__price {
+      justify-content: center;
+    }
+    .lmctPP__int {
+      font-size: clamp(34px, 9vw, 48px);
+    }
+    .lmctPP__dec {
+      font-size: clamp(20px, 5.5vw, 32px);
+    }
+    .lmctPP__cur {
+      font-size: clamp(16px, 4vw, 22px);
+      margin-top: 5px;
+    }
+    .lmctPP__priceSub {
+      margin-top: 7px;
+    }
+  }
+  @media (max-width: 520px) {
+    .lmctPP__wrap {
+      padding: 0;
+    }
+    .lmctPP__top {
+      padding: 16px 14px;
+      gap: 11px;
+    }
+    .lmctPP__mark {
+      width: 38px;
+      height: 38px;
+    }
+    .lmctPP__priceBand {
+      padding: 14px 10px;
+    }
+    .lmctPP__body {
+      padding: 20px 18px 22px;
+    }
+  }
+  @media (max-width: 360px) {
+    .lmctPP__top {
+      justify-content: center;
+    }
+    .lmctPP__mark {
+      display: none;
+    }
+    .lmctPP__tier {
+      text-align: center;
+      align-items: center;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmctPP__card {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .lmctPP__card:hover {
+      transform: none !important;
+    }
+  }
+  /* ============ 3 · FULL INCLUSIONS ============ */
+  .lmctPkgInclV7_container,
+  .lmctPkgInclV7_container * {
+    box-sizing: border-box !important;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif !important;
+  }
+  .lmctPkgInclV7_container {
+    padding: 0 !important;
+    background: transparent !important;
+    margin: 36px auto 0 !important;
+    width: 100% !important;
+    max-width: 1140px !important;
+  }
+  .lmctPkgInclV7_toggleBtn {
+    background: #f1f5f9 !important;
+    color: #05162a !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    width: 100% !important;
+    padding: 20px 36px !important;
+    border: 1px solid #e8eef4 !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    margin: 0 !important;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease,
+      border-color 0.2s ease !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    outline: none !important;
+    box-shadow: 0 2px 10px rgba(5, 22, 42, 0.05) !important;
+    text-shadow: none !important;
+    background-image: none !important;
+    line-height: 1.2 !important;
+  }
+  .lmctPkgInclV7_toggleBtn:hover {
+    background: #eaf1f8 !important;
+    border-color: rgba(12, 159, 253, 0.3) !important;
+    transform: translateY(-1px) !important;
+  }
+  .lmctPkgInclV7_toggleBtn:active {
+    transform: translateY(0) !important;
+  }
+  .lmctPkgInclV7_chevron {
+    display: inline-block !important;
+    margin-left: 10px !important;
+    color: #0c9ffd !important;
+    font-size: 14px !important;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  .lmctPkgInclV7_toggleBtn.lmctPkgInclV7_open .lmctPkgInclV7_chevron {
+    transform: rotate(180deg) !important;
+  }
+  .lmctPkgInclV7_drawer {
+    overflow: hidden !important;
+    max-height: 0 !important;
+    opacity: 0 !important;
+    transition:
+      max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.4s ease !important;
+  }
+  .lmctPkgInclV7_drawer.lmctPkgInclV7_drawerOpen {
+    max-height: 3000px !important;
+    opacity: 1 !important;
+  }
+  .lmctPkgInclV7_list {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+    padding: 14px 0 0 !important;
+    margin: 0 !important;
+  }
+  .lmctPkgInclV7_card {
+    position: relative !important;
+    padding: 22px 24px 24px !important;
+    border-radius: 16px !important;
+    color: #fff !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(5, 22, 42, 0.16) !important;
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease,
+      box-shadow 0.3s ease !important;
+    margin: 0 !important;
+  }
+  .lmctPkgInclV7_drawer.lmctPkgInclV7_drawerOpen .lmctPkgInclV7_card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .lmctPkgInclV7_card:hover {
+    box-shadow: 0 14px 40px rgba(5, 22, 42, 0.22) !important;
+  }
+  .lmctPkgInclV7_drawer.lmctPkgInclV7_drawerOpen
+    .lmctPkgInclV7_card:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+  .lmctPkgInclV7_drawer.lmctPkgInclV7_drawerOpen
+    .lmctPkgInclV7_card:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+  .lmctPkgInclV7_drawer.lmctPkgInclV7_drawerOpen
+    .lmctPkgInclV7_card:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+  .lmctPkgInclV7_drawer:not(.lmctPkgInclV7_drawerOpen) .lmctPkgInclV7_card {
+    transition-delay: 0s !important;
+  }
+  .lmctPkgInclV7_card::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 50% !important;
+    height: 100% !important;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%
+    ) !important;
+    transition: left 0.55s ease !important;
+    pointer-events: none !important;
+  }
+  .lmctPkgInclV7_card:hover::after {
+    left: 130% !important;
+  }
+  .lmctPkgInclV7_entry {
+    background: linear-gradient(
+      140deg,
+      #37c463 0%,
+      #1f9c4b 55%,
+      #15823c 100%
+    ) !important;
+  }
+  .lmctPkgInclV7_premium {
+    background: linear-gradient(
+      140deg,
+      #2f7de8 0%,
+      #1f63d6 55%,
+      #1850c0 100%
+    ) !important;
+  }
+  .lmctPkgInclV7_elite {
+    background: linear-gradient(
+      140deg,
+      #f0c350 0%,
+      #d49a28 55%,
+      #bf870f 100%
+    ) !important;
+  }
+  .lmctPkgInclV7_header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 0 16px !important;
+    padding: 0 !important;
+    flex-wrap: wrap !important;
+  }
+  .lmctPkgInclV7_badge {
+    display: inline-block !important;
+    background: rgba(255, 255, 255, 0.25) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    padding: 5px 16px !important;
+    border-radius: 20px !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    color: #fff !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+  }
+  .lmctPkgInclV7_price {
+    display: inline-block !important;
+    background: rgba(0, 0, 0, 0.18) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    padding: 5px 16px !important;
+    border-radius: 20px !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.02em !important;
+    color: #fff !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+  }
+  .lmctPkgInclV7_card ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .lmctPkgInclV7_card li {
+    margin: 0 0 8px !important;
+    padding: 0 !important;
+    font-size: 14.5px !important;
+    font-weight: 500 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    line-height: 1.5 !important;
+    color: rgba(255, 255, 255, 0.97) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.18) !important;
+    list-style: none !important;
+    background: none !important;
+  }
+  .lmctPkgInclV7_card li > span {
+    flex: 1 !important;
+    min-width: 0 !important;
+    display: block !important;
+  }
+  .lmctPkgInclV7_card li::before {
+    content: "\2713" !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-radius: 50% !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    color: #fff !important;
+    margin: 2px 0 0 !important;
+    padding: 0 !important;
+    flex-shrink: 0 !important;
+    position: static !important;
+  }
+  .lmctPkgInclV7_card li:last-child {
+    margin-bottom: 0 !important;
+  }
+  .lmctPkgInclV7_card strong {
+    font-weight: 800 !important;
+    color: #fff !important;
+  }
+  @media (max-width: 859px) {
+    .lmctPkgInclV7_container {
+      padding: 0 !important;
+      margin-top: 28px !important;
+    }
+    .lmctPkgInclV7_toggleBtn {
+      font-size: 14px !important;
+      padding: 18px !important;
+    }
+    .lmctPkgInclV7_list {
+      grid-template-columns: 1fr !important;
+    }
+    .lmctPkgInclV7_card {
+      padding: 18px 18px 20px !important;
+    }
+    .lmctPkgInclV7_card li {
+      font-size: 13.5px !important;
+    }
+    .lmctPkgInclV7_badge {
+      font-size: 12px !important;
+      padding: 4px 13px !important;
+    }
+    .lmctPkgInclV7_price {
+      font-size: 12px !important;
+      padding: 4px 13px !important;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmctAB__inner,
+    .lmctAB__free {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+<div class="lmctPkg__section" id="packages">
+  <div class="lmctAB__wrap">
+    <div class="lmctAB__inner">
+      <p class="lmctAB__line1">
+        Get 2 Months <span class="lmctAB__free">Free</span>
+      </p>
+      <p class="lmctAB__line2">with Annual Billing</p>
+    </div>
+  </div>
+  <div class="lmctPP__wrap">
+    <div class="lmctPP__inner">
+      <div class="lmctPP__grid">
+        <div class="lmctPP__card lmctPP__card--entry">
+          <div class="lmctPP__head">
+            <div class="lmctPP__top">
+              <span class="lmctPP__mark"
+                ><img
+                  src="https://images.clickfunnels.com/a2/31e493a15b4d098c8e0d5e29bfb712/White-plus.png"
+                  alt=""
+                  loading="lazy"
+              /></span>
+              <span class="lmctPP__tier"
+                ><b>Entry</b><span>Membership</span></span
+              >
+            </div>
+            <div class="lmctPP__priceBand">
+              <div class="lmctPP__price">
+                <span class="lmctPP__cur">$</span
+                ><span class="lmctPP__int">19</span
+                ><span class="lmctPP__dec">.99</span>
+              </div>
+              <div class="lmctPP__priceSub">
+                Monthly Billing · Cancel Anytime
+              </div>
+            </div>
+          </div>
+          <div class="lmctPP__body">
+            <ul class="lmctPP__feats">
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <path d="M5 21h9" />
+                    <path d="M6 21V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v15" />
+                    <path d="M6 12h6" />
+                    <path
+                      d="M14 9h2.5a2 2 0 0 1 2 2v6a1.75 1.75 0 0 0 3.5 0V9l-3-3"
+                    /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>LMCT+</strong> Petrol Discounts</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="3.5" y="9" width="17" height="11.5" rx="1.5" />
+                    <path d="M3.5 13h17" />
+                    <path d="M12 9v11.5" />
+                    <path d="M12 9C12 9 11 4.5 8 5s1 4 4 4Z" />
+                    <path d="M12 9C12 9 13 4.5 16 5s-1 4-4 4Z" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>1 FREE</strong> Accumulating Giveaway Entry</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="2.5" y="6.5" width="19" height="11" rx="2" />
+                    <path
+                      d="M13.6 10.4a1.7 1.7 0 0 0-3 .5c0 1.6 3 .8 3 2.4a1.7 1.7 0 0 1-3 .5"
+                    />
+                    <path d="M12 9.3v.9M12 13.8v.9" />
+                    <circle
+                      cx="6"
+                      cy="12"
+                      r=".5"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                    <circle
+                      cx="18"
+                      cy="12"
+                      r=".5"
+                      fill="currentColor"
+                      stroke="none"
+                    /></svg></span
+                ><span class="lmctPP__featTxt"
+                  >Up to <strong>$50,000</strong> In Savings</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <path
+                      d="M4 9.2 5.2 5A1 1 0 0 1 6.16 4.3h11.68a1 1 0 0 1 .96.7L20 9.2"
+                    />
+                    <path d="M5 9.2V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.2" />
+                    <path
+                      d="M4 9.2a2.4 2.4 0 0 0 4.8 0 2.4 2.4 0 0 0 4.8 0 2.4 2.4 0 0 0 4.8 0"
+                    />
+                    <path d="M9.5 20v-4.3h5V20" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>"Entry" Discounts</strong> at Selected Partners</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <line x1="18.5" y1="5.5" x2="5.5" y2="18.5" />
+                    <circle cx="7.6" cy="7.6" r="2.2" />
+                    <circle cx="16.4" cy="16.4" r="2.2" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>5% Off</strong> Instore Purchases at LMCT+ Petrol
+                  Stations</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" />
+                    <line x1="10.5" y1="18.5" x2="13.5" y2="18.5" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>Exclusive</strong> App Access</span
+                >
+              </li>
+            </ul>
+            <a
+              href="#open-popup"
+              class="lmctPP__select css-order-bronze"
+              data-title="css-order-bronze"
+              >Select</a
+            >
+          </div>
+        </div>
+        <div class="lmctPP__card lmctPP__card--premium">
+          <div class="lmctPP__head">
+            <div class="lmctPP__top">
+              <span class="lmctPP__mark"
+                ><img
+                  src="https://images.clickfunnels.com/a2/31e493a15b4d098c8e0d5e29bfb712/White-plus.png"
+                  alt=""
+                  loading="lazy"
+              /></span>
+              <span class="lmctPP__tier"
+                ><b>Premium</b><span>Membership</span></span
+              >
+            </div>
+            <div class="lmctPP__priceBand">
+              <div class="lmctPP__price">
+                <span class="lmctPP__cur">$</span
+                ><span class="lmctPP__int">49</span
+                ><span class="lmctPP__dec">.99</span>
+              </div>
+              <div class="lmctPP__priceSub">
+                Monthly Billing · Cancel Anytime
+              </div>
+            </div>
+          </div>
+          <div class="lmctPP__body">
+            <ul class="lmctPP__feats">
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <path d="M5 21h9" />
+                    <path d="M6 21V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v15" />
+                    <path d="M6 12h6" />
+                    <path
+                      d="M14 9h2.5a2 2 0 0 1 2 2v6a1.75 1.75 0 0 0 3.5 0V9l-3-3"
+                    /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>LMCT+</strong> Petrol Discounts</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="3.5" y="9" width="17" height="11.5" rx="1.5" />
+                    <path d="M3.5 13h17" />
+                    <path d="M12 9v11.5" />
+                    <path d="M12 9C12 9 11 4.5 8 5s1 4 4 4Z" />
+                    <path d="M12 9C12 9 13 4.5 16 5s-1 4-4 4Z" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>5 FREE</strong> Accumulating Giveaway Entry</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="2.5" y="6.5" width="19" height="11" rx="2" />
+                    <path
+                      d="M13.6 10.4a1.7 1.7 0 0 0-3 .5c0 1.6 3 .8 3 2.4a1.7 1.7 0 0 1-3 .5"
+                    />
+                    <path d="M12 9.3v.9M12 13.8v.9" />
+                    <circle
+                      cx="6"
+                      cy="12"
+                      r=".5"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                    <circle
+                      cx="18"
+                      cy="12"
+                      r=".5"
+                      fill="currentColor"
+                      stroke="none"
+                    /></svg></span
+                ><span class="lmctPP__featTxt"
+                  >Up to <strong>$150,000</strong> In Savings</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <path
+                      d="M4 9.2 5.2 5A1 1 0 0 1 6.16 4.3h11.68a1 1 0 0 1 .96.7L20 9.2"
+                    />
+                    <path d="M5 9.2V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.2" />
+                    <path
+                      d="M4 9.2a2.4 2.4 0 0 0 4.8 0 2.4 2.4 0 0 0 4.8 0 2.4 2.4 0 0 0 4.8 0"
+                    />
+                    <path d="M9.5 20v-4.3h5V20" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>"Premium" Discounts</strong> at Selected
+                  Partners</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <line x1="18.5" y1="5.5" x2="5.5" y2="18.5" />
+                    <circle cx="7.6" cy="7.6" r="2.2" />
+                    <circle cx="16.4" cy="16.4" r="2.2" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>7.5% Off</strong> Instore Purchases at LMCT+ Petrol
+                  Stations</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" />
+                    <line x1="10.5" y1="18.5" x2="13.5" y2="18.5" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>Exclusive</strong> App Access</span
+                >
+              </li>
+            </ul>
+            <a
+              href="#open-popup"
+              class="lmctPP__select css-order-silver"
+              data-title="css-order-silver"
+              >Select</a
+            >
+          </div>
+        </div>
+        <div class="lmctPP__card lmctPP__card--elite">
+          <div class="lmctPP__head">
+            <div class="lmctPP__top">
+              <span class="lmctPP__mark"
+                ><img
+                  src="https://images.clickfunnels.com/a2/31e493a15b4d098c8e0d5e29bfb712/White-plus.png"
+                  alt=""
+                  loading="lazy"
+              /></span>
+              <span class="lmctPP__tier"
+                ><b>Elite</b><span>Membership</span></span
+              >
+            </div>
+            <div class="lmctPP__priceBand">
+              <div class="lmctPP__price">
+                <span class="lmctPP__cur">$</span
+                ><span class="lmctPP__int">99</span
+                ><span class="lmctPP__dec">.99</span>
+              </div>
+              <div class="lmctPP__priceSub">
+                Monthly Billing · Cancel Anytime
+              </div>
+            </div>
+          </div>
+          <div class="lmctPP__body">
+            <ul class="lmctPP__feats">
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <path d="M5 21h9" />
+                    <path d="M6 21V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v15" />
+                    <path d="M6 12h6" />
+                    <path
+                      d="M14 9h2.5a2 2 0 0 1 2 2v6a1.75 1.75 0 0 0 3.5 0V9l-3-3"
+                    /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>LMCT+</strong> Petrol Discounts</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="3.5" y="9" width="17" height="11.5" rx="1.5" />
+                    <path d="M3.5 13h17" />
+                    <path d="M12 9v11.5" />
+                    <path d="M12 9C12 9 11 4.5 8 5s1 4 4 4Z" />
+                    <path d="M12 9C12 9 13 4.5 16 5s-1 4-4 4Z" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>10 FREE</strong> Accumulating Giveaway Entry</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="2.5" y="6.5" width="19" height="11" rx="2" />
+                    <path
+                      d="M13.6 10.4a1.7 1.7 0 0 0-3 .5c0 1.6 3 .8 3 2.4a1.7 1.7 0 0 1-3 .5"
+                    />
+                    <path d="M12 9.3v.9M12 13.8v.9" />
+                    <circle
+                      cx="6"
+                      cy="12"
+                      r=".5"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                    <circle
+                      cx="18"
+                      cy="12"
+                      r=".5"
+                      fill="currentColor"
+                      stroke="none"
+                    /></svg></span
+                ><span class="lmctPP__featTxt"
+                  >Up to <strong>$250,000</strong> In Savings</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <path
+                      d="M4 9.2 5.2 5A1 1 0 0 1 6.16 4.3h11.68a1 1 0 0 1 .96.7L20 9.2"
+                    />
+                    <path d="M5 9.2V19a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.2" />
+                    <path
+                      d="M4 9.2a2.4 2.4 0 0 0 4.8 0 2.4 2.4 0 0 0 4.8 0 2.4 2.4 0 0 0 4.8 0"
+                    />
+                    <path d="M9.5 20v-4.3h5V20" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>"Elite" Discounts</strong> at Selected Partners</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <line x1="18.5" y1="5.5" x2="5.5" y2="18.5" />
+                    <circle cx="7.6" cy="7.6" r="2.2" />
+                    <circle cx="16.4" cy="16.4" r="2.2" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>10% Off</strong> Instore Purchases at LMCT+ Petrol
+                  Stations</span
+                >
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" />
+                    <line x1="10.5" y1="18.5" x2="13.5" y2="18.5" /></svg></span
+                ><span class="lmctPP__featTxt"
+                  ><strong>Exclusive</strong> App Access</span
+                >
+              </li>
+            </ul>
+            <a
+              href="#open-popup"
+              class="lmctPP__select css-order-gold"
+              data-title="css-order-gold"
+              >Select</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lmctPkgInclV7_container">
+    <button
+      class="lmctPkgInclV7_toggleBtn"
+      id="lmctPkgInclV7_btn"
+      type="button"
+    >
+      Click To View Full Inclusions
+      <span class="lmctPkgInclV7_chevron">&#9660;</span>
+    </button>
+    <div class="lmctPkgInclV7_drawer" id="lmctPkgInclV7_drawer">
+      <div class="lmctPkgInclV7_list">
+        <div class="lmctPkgInclV7_card lmctPkgInclV7_entry">
+          <div class="lmctPkgInclV7_header">
+            <span class="lmctPkgInclV7_badge">Entry</span>
+            <span class="lmctPkgInclV7_price">$19.99</span>
+          </div>
+          <ul>
+            <li>
+              <span
+                ><strong>1 FREE</strong> Accumulating Entry Into EVERY Draw Each
+                Month</span
+              >
+            </li>
+            <li>
+              <span><strong>LMCT+ Fuel Saver Discount</strong> Included</span>
+            </li>
+            <li>
+              <span
+                ><strong>5% off</strong> instore products excl. cigarettes and
+                epay</span
+              >
+            </li>
+            <li>
+              <span><strong>Entry</strong> Discounts at Selected Partners</span>
+            </li>
+            <li><span>Invites to LMCT+ Games Across Australia</span></li>
+            <li><span>LMCT+ Early Bird Promotion Emails</span></li>
+            <li><span>Exclusive App Access</span></li>
+          </ul>
+        </div>
+        <div class="lmctPkgInclV7_card lmctPkgInclV7_premium">
+          <div class="lmctPkgInclV7_header">
+            <span class="lmctPkgInclV7_badge">Premium</span>
+            <span class="lmctPkgInclV7_price">$49.99</span>
+          </div>
+          <ul>
+            <li>
+              <span
+                ><strong>5 FREE</strong> Accumulating Entries Into EVERY Draw
+                Each Month</span
+              >
+            </li>
+            <li>
+              <span><strong>LMCT+ Fuel Saver Discount</strong> Included</span>
+            </li>
+            <li>
+              <span
+                ><strong>7.5% off</strong> instore products excl. cigarettes and
+                epay</span
+              >
+            </li>
+            <li>
+              <span
+                ><strong>Premium</strong> Discounts at Selected Partners</span
+              >
+            </li>
+            <li><span>Invites to LMCT+ Games Across Australia</span></li>
+            <li><span>LMCT+ Early Bird Promotion Emails</span></li>
+            <li><span>Exclusive App Access</span></li>
+          </ul>
+        </div>
+        <div class="lmctPkgInclV7_card lmctPkgInclV7_elite">
+          <div class="lmctPkgInclV7_header">
+            <span class="lmctPkgInclV7_badge">Elite</span>
+            <span class="lmctPkgInclV7_price">$99.99</span>
+          </div>
+          <ul>
+            <li>
+              <span
+                ><strong>10 FREE</strong> Accumulating Entries Into EVERY Draw
+                Each Month</span
+              >
+            </li>
+            <li>
+              <span><strong>LMCT+ Fuel Saver Discount</strong> Included</span>
+            </li>
+            <li>
+              <span
+                ><strong>10% off</strong> instore products excl. cigarettes and
+                epay</span
+              >
+            </li>
+            <li>
+              <span><strong>Elite</strong> Discounts at Selected Partners</span>
+            </li>
+            <li><span>Invites to LMCT+ Games Across Australia</span></li>
+            <li><span>LMCT+ Early Bird Promotion Emails</span></li>
+            <li><span>Exclusive App Access</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", function () {
+    var btn = document.getElementById("lmctPkgInclV7_btn");
+    var drawer = document.getElementById("lmctPkgInclV7_drawer");
+    if (btn && drawer) {
+      btn.addEventListener("click", function () {
+        var isOpen = drawer.classList.contains("lmctPkgInclV7_drawerOpen");
+        if (isOpen) {
+          drawer.classList.remove("lmctPkgInclV7_drawerOpen");
+          btn.classList.remove("lmctPkgInclV7_open");
+        } else {
+          drawer.classList.add("lmctPkgInclV7_drawerOpen");
+          btn.classList.add("lmctPkgInclV7_open");
+        }
+      });
+    }
+    var pkgTarget = document.getElementById("packages");
+    var pkgLinks = document.querySelectorAll('a[href="#packages"]');
+    var reduce =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var ease = function (t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    };
+    pkgLinks.forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        if (!pkgTarget) return;
+        e.preventDefault();
+        var startY = window.pageYOffset || document.documentElement.scrollTop;
+        var endY = pkgTarget.getBoundingClientRect().top + startY - 80;
+        if (reduce) {
+          window.scrollTo(0, endY);
+          return;
+        }
+        var dist = endY - startY,
+          t0 = null,
+          dur = 650;
+        var step = function (ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1);
+          window.scrollTo(0, startY + dist * ease(p));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    });
+  });
+</script>
+<!-- =====  END SECTION 02  |  PACKAGES  ===== -->
+<!-- ===================================================================== -->
+<!--  SECTION 03  |  ENTRIES (THE DRAW)  -->
+<!--  The tier entry counts that drive the bar chart are set in the chart script at the end of this section.  -->
+<!--  Headline and supporting copy are editable in the markup. Ends with a Become A Member button.  -->
+<!-- ===================================================================== -->
+<style>
+  .lmctEN__wrap {
+    background: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 56px 16px;
+  }
+  .lmctEN__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .lmctEN__head {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .lmctEN__kick {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.25);
+    color: #0476c4;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .lmctEN__title {
+    margin: 0 0 12px;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -1.4px;
+    color: #05162a;
+    text-transform: uppercase;
+  }
+  .lmctEN__title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #0476c4, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctEN__lead {
+    margin: 0 auto;
+    max-width: 620px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.55;
+  }
+  /* two value pills above chart */
+  .lmctEN__points {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .lmctEN__point {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f7fafc;
+    border: 1px solid #e8eef4;
+    border-radius: 16px;
+    padding: 18px 20px;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctEN__point:hover {
+    transform: translateY(-2px);
+    border-color: rgba(12, 159, 253, 0.35);
+    box-shadow: 0 12px 28px rgba(12, 159, 253, 0.1);
+  }
+  .lmctEN__pIco {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #0476c4, #0c9ffd);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 18px rgba(12, 159, 253, 0.32);
+  }
+  .lmctEN__pIco svg {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+  }
+  .lmctEN__pTxt h4 {
+    margin: 0 0 3px;
+    font-size: 15px;
+    font-weight: 900;
+    color: #05162a;
+    text-transform: uppercase;
+    letter-spacing: -0.2px;
+  }
+  .lmctEN__pTxt p {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #64748b;
+    line-height: 1.45;
+  }
+  /* chart card */
+  .lmctEN__chartCard {
+    background: #ffffff;
+    border: 1px solid #e8eef4;
+    border-radius: 22px;
+    padding: 28px 26px 24px;
+    box-shadow: 0 24px 60px rgba(5, 22, 42, 0.06);
+  }
+  .lmctEN__toggleWrap {
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .lmctEN__toggle {
+    display: inline-flex;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+    padding: 5px;
+    gap: 4px;
+  }
+  .lmctEN__tBtn {
+    appearance: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12.5px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #64748b;
+    padding: 9px 18px;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition:
+      background 0.25s ease,
+      color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .lmctEN__tDot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+  .lmctEN__tBtn[data-tier="entry"] .lmctEN__tDot {
+    background: #1fa851;
+  }
+  .lmctEN__tBtn[data-tier="premium"] .lmctEN__tDot {
+    background: #0c9ffd;
+  }
+  .lmctEN__tBtn[data-tier="elite"] .lmctEN__tDot {
+    background: #f5b721;
+  }
+  .lmctEN__tBtn.is-active[data-tier="entry"] {
+    background: linear-gradient(180deg, #1fa851, #0e7a3a);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(31, 168, 81, 0.35);
+  }
+  .lmctEN__tBtn.is-active[data-tier="premium"] {
+    background: linear-gradient(180deg, #0c9ffd, #0476c4);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(12, 159, 253, 0.35);
+  }
+  .lmctEN__tBtn.is-active[data-tier="elite"] {
+    background: linear-gradient(180deg, #f5b721, #d4941a);
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(245, 183, 33, 0.35);
+  }
+  .lmctEN__chart {
+    background: #f7fafc;
+    border: 1px solid #eef2f6;
+    border-radius: 16px;
+    padding: 22px 20px 16px;
+  }
+  .lmctEN__legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .lmctEN__legend .dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+  }
+  .lmctEN__grid {
+    position: relative;
+    height: 260px;
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    gap: 10px;
+    padding-bottom: 34px;
+  }
+  .lmctEN__yAxis {
+    position: relative;
+    height: 100%;
+  }
+  .lmctEN__yLabel {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translateY(50%);
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #94a3b8;
+    text-align: right;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+  .lmctEN__yLabel strong {
+    display: block;
+    font-size: 12.5px;
+    color: #475569;
+    font-weight: 900;
+    margin-bottom: 1px;
+  }
+  .lmctEN__bars {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    border-left: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0 8px;
+    height: 100%;
+  }
+  .lmctEN__gl {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #eef2f6;
+    pointer-events: none;
+  }
+  .lmctEN__bar {
+    flex: 1;
+    margin: 0 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    position: relative;
+  }
+  .lmctEN__fill {
+    width: 100%;
+    max-width: 56px;
+    border-radius: 8px 8px 0 0;
+    transition: height 0.9s cubic-bezier(0.2, 0.85, 0.3, 1);
+    min-height: 4px;
+    position: relative;
+  }
+  .lmctEN__fill[data-tier="entry"] {
+    background: linear-gradient(180deg, #1fa851, #0e7a3a);
+  }
+  .lmctEN__fill[data-tier="premium"] {
+    background: linear-gradient(180deg, #3fb8ff, #0476c4);
+  }
+  .lmctEN__fill[data-tier="elite"] {
+    background: linear-gradient(180deg, #f5b721, #d4941a);
+  }
+  .lmctEN__val {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12.5px;
+    font-weight: 900;
+    color: #05162a;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.6s;
+  }
+  .lmctEN__fill.is-shown .lmctEN__val {
+    opacity: 1;
+  }
+  .lmctEN__bLabel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .lmctEN__bLabel strong {
+    display: block;
+    font-size: 12.5px;
+    color: #475569;
+    font-weight: 900;
+    margin-bottom: 2px;
+  }
+  .lmctEN__foot {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #05162a;
+    line-height: 1.5;
+    padding: 14px 18px;
+    background: rgba(12, 159, 253, 0.06);
+    border: 1px solid rgba(12, 159, 253, 0.22);
+    border-radius: 12px;
+  }
+  .lmctEN__foot strong {
+    background: linear-gradient(180deg, #0476c4, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+  @media (min-width: 760px) {
+    .lmctEN__points {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .lmctEN__wrap {
+      padding: 42px 14px;
+    }
+    .lmctEN__chartCard {
+      padding: 20px 16px 18px;
+    }
+  }
+  .lmctEN__ctaWrap {
+    text-align: center;
+    margin-top: 38px;
+  }
+  .lmctEN__cta {
+    display: flex;
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, #0c9ffd, #0476c4);
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 19px 32px;
+    border-radius: 16px;
+    box-shadow: 0 14px 30px rgba(12, 159, 253, 0.42);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctEN__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px rgba(12, 159, 253, 0.52);
+  }
+  .lmctEN__cta svg {
+    width: 18px;
+    height: 18px;
+  }
+</style>
+<div class="lmctEN__wrap">
+  <div class="lmctEN__inner">
+    <div class="lmctEN__head">
+      <span class="lmctEN__kick">The Giveaways</span>
+      <h2 class="lmctEN__title">
+        You're In Every Draw. <em>Automatically.</em>
+      </h2>
+      <p class="lmctEN__lead">
+        The moment you join, your name goes into every LMCT+ giveaway. Cars,
+        cash, the lot. Enter once, never miss one again.
+      </p>
+    </div>
+    <div class="lmctEN__points">
+      <div class="lmctEN__point">
+        <span class="lmctEN__pIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12.5L10 17.5L19 7.5" /></svg
+        ></span>
+        <div class="lmctEN__pTxt">
+          <h4>Entered Automatically</h4>
+          <p>
+            One membership puts you in every giveaway we ever run. No forms, no
+            fine print.
+          </p>
+        </div>
+      </div>
+      <div class="lmctEN__point">
+        <span class="lmctEN__pIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 19l5-9 4 5 7-12" />
+            <path d="M4 21h16" /></svg
+        ></span>
+        <div class="lmctEN__pTxt">
+          <h4>Entries Accumulate</h4>
+          <p>
+            The longer you stay, the bigger your stack gets. Every entry rolls
+            into the next draw.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="lmctEN__chartCard">
+      <div class="lmctEN__toggleWrap">
+        <div class="lmctEN__toggle" role="tablist" aria-label="Membership tier">
+          <button class="lmctEN__tBtn" data-tier="entry" type="button">
+            <span class="lmctEN__tDot"></span>Entry
+          </button>
+          <button
+            class="lmctEN__tBtn is-active"
+            data-tier="premium"
+            type="button"
+            aria-selected="true"
+          >
+            <span class="lmctEN__tDot"></span>Premium
+          </button>
+          <button class="lmctEN__tBtn" data-tier="elite" type="button">
+            <span class="lmctEN__tDot"></span>Elite
+          </button>
+        </div>
+      </div>
+      <div class="lmctEN__chart">
+        <div class="lmctEN__legend">
+          <span class="dot" id="lmctEN__legendDot"></span
+          ><span id="lmctEN__legendTxt">Premium · 5 entries / month</span>
+        </div>
+        <div class="lmctEN__grid">
+          <div class="lmctEN__yAxis" id="lmctEN__yAxis"></div>
+          <div class="lmctEN__bars" id="lmctEN__bars"></div>
+        </div>
+      </div>
+      <div class="lmctEN__foot">
+        Every entry <strong>stays with you</strong>, draw after draw.
+      </div>
+    </div>
+    <div class="lmctEN__ctaWrap">
+      <a class="lmctEN__cta" href="#packages"
+        >Become A Member
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" /></svg
+      ></a>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", function () {
+    var TIERS = {
+      entry: {
+        rate: 1,
+        label: "Entry",
+        color: "#1FA851",
+        desc: "1 entry / month",
+      },
+      premium: {
+        rate: 5,
+        label: "Premium",
+        color: "#0C9FFD",
+        desc: "5 entries / month",
+      },
+      elite: {
+        rate: 10,
+        label: "Elite",
+        color: "#F5B721",
+        desc: "10 entries / month",
+      },
+    };
+    var MONTHS = [3, 6, 9, 12, 15];
+    var Y_STEPS = 5;
+    var bars = document.getElementById("lmctEN__bars");
+    var yAxis = document.getElementById("lmctEN__yAxis");
+    var legendDot = document.getElementById("lmctEN__legendDot");
+    var legendTxt = document.getElementById("lmctEN__legendTxt");
+    var buttons = document.querySelectorAll(".lmctEN__tBtn");
+    function render(tierKey) {
+      var tier = TIERS[tierKey];
+      var values = MONTHS.map(function (m) {
+        return m * tier.rate;
+      });
+      var maxVal = values[values.length - 1];
+      yAxis.innerHTML = "";
+      for (var i = Y_STEPS; i >= 1; i--) {
+        var v = Math.round((maxVal * i) / Y_STEPS);
+        var lbl = document.createElement("div");
+        lbl.className = "lmctEN__yLabel";
+        lbl.style.bottom = (i / Y_STEPS) * 100 + "%";
+        lbl.innerHTML = "<strong>" + v + "</strong>Entries";
+        yAxis.appendChild(lbl);
+      }
+      bars.innerHTML = "";
+      for (var g = 1; g <= Y_STEPS; g++) {
+        var gl = document.createElement("div");
+        gl.className = "lmctEN__gl";
+        gl.style.bottom = (g / Y_STEPS) * 100 + "%";
+        bars.appendChild(gl);
+      }
+      values.forEach(function (val, idx) {
+        var pct = (val / maxVal) * 92;
+        var bar = document.createElement("div");
+        bar.className = "lmctEN__bar";
+        bar.innerHTML =
+          '<div class="lmctEN__fill" data-tier="' +
+          tierKey +
+          '" style="height:0%"><span class="lmctEN__val">' +
+          val +
+          '</span></div><div class="lmctEN__bLabel"><strong>' +
+          MONTHS[idx] +
+          "</strong>M</div>";
+        bars.appendChild(bar);
+        requestAnimationFrame(function () {
+          setTimeout(function () {
+            var fill = bar.querySelector(".lmctEN__fill");
+            fill.style.height = pct + "%";
+            fill.classList.add("is-shown");
+          }, idx * 80);
+        });
+      });
+      legendDot.style.background = tier.color;
+      legendTxt.textContent = tier.label + " · " + tier.desc;
+    }
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        buttons.forEach(function (b) {
+          b.classList.remove("is-active");
+          b.removeAttribute("aria-selected");
+        });
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-selected", "true");
+        render(btn.dataset.tier);
+      });
+    });
+    render("premium");
+  });
+</script>
+<!-- =====  END SECTION 03  |  ENTRIES (THE DRAW)  ===== -->
+<!-- ===================================================================== -->
+<!--  SECTION 04  |  PARTNER DISCOUNTS  -->
+<!--  Partner logos are the image URLs inside the marquee. Swap or add as many as you like.  -->
+<!--  The receipt line items and their member discount amounts are editable. Keep them adding up to the TOTAL SAVED figure (currently 152 plus 98 plus 200 equals 450).  -->
+<!--  Stat numbers (2,000+, 1,700+, $1,000s) and the exclusive line are editable. A shorter lead sentence swaps in on mobile. The receipt tucks behind the logo strip and a Become A Member button sits below it.  -->
+<!-- ===================================================================== -->
+<style>
+  .lmctDS__wrap {
+    background: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 60px 0;
+  }
+  .lmctDS__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .lmctDS__head {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .lmctDS__kick {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.25);
+    color: #0476c4;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 7px 15px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  .lmctDS__title {
+    margin: 0 0 14px;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.06;
+    letter-spacing: -1.4px;
+    color: #05162a;
+    text-transform: uppercase;
+  }
+  .lmctDS__title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #0476c4, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctDS__lead {
+    margin: 0 auto;
+    max-width: 620px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.6;
+  }
+  .lmctDS__leadShort {
+    display: none;
+  }
+  .lmctDS__excl {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    max-width: 440px;
+    margin: 20px auto 0;
+    font-size: 12.5px;
+    font-weight: 800;
+    color: #0476c4;
+    background: rgba(12, 159, 253, 0.07);
+    border: 1px solid rgba(12, 159, 253, 0.22);
+    padding: 10px 18px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    line-height: 1.4;
+    text-wrap: balance;
+  }
+  .lmctDS__excl svg {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+  }
+  .lmctDS__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 32px 0;
+  }
+  .lmctDS__stat {
+    background: #f7fafc;
+    border: 1px solid #e8eef4;
+    border-radius: 16px;
+    padding: 24px 12px;
+    text-align: center;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .lmctDS__stat:hover {
+    transform: translateY(-3px);
+    border-color: rgba(12, 159, 253, 0.35);
+  }
+  .lmctDS__statNum {
+    font-size: clamp(26px, 4.4vw, 40px);
+    font-weight: 900;
+    letter-spacing: -1.4px;
+    color: #0c9ffd;
+    line-height: 1;
+    margin-bottom: 7px;
+  }
+  .lmctDS__statLbl {
+    font-size: 11px;
+    font-weight: 800;
+    color: #64748b;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    line-height: 1.35;
+  }
+  /* logo marquee - opaque white and above the receipt so the receipt tucks behind it */
+  .lmctDS__marqueeWrap {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    padding: 10px 0;
+    background: #ffffff;
+  }
+  .lmctDS__marqueeWrap::before,
+  .lmctDS__marqueeWrap::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .lmctDS__marqueeWrap::before {
+    left: 0;
+    background: linear-gradient(90deg, #fff, transparent);
+  }
+  .lmctDS__marqueeWrap::after {
+    right: 0;
+    background: linear-gradient(270deg, #fff, transparent);
+  }
+  .lmctDS__marquee {
+    display: flex;
+    width: max-content;
+    animation: lmctDS__scroll 90s linear infinite;
+    will-change: transform;
+  }
+  .lmctDS__marquee:hover {
+    animation-play-state: paused;
+  }
+  .lmctDS__half {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+  .lmctDS__tile {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 158px;
+    height: 74px;
+    margin: 0 9px;
+    background: #fff;
+    border: 1px solid #e8eef4;
+    border-radius: 14px;
+    padding: 0 18px;
+    overflow: hidden;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+  }
+  .lmctDS__tile:hover {
+    border-color: rgba(12, 159, 253, 0.4);
+    box-shadow: 0 12px 26px rgba(12, 159, 253, 0.1);
+    transform: translateY(-2px);
+  }
+  .lmctDS__tile img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  @keyframes lmctDS__scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  /* receipt - sits behind the logo strip and emerges below it */
+  .lmctDS__rcptSection {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    margin-top: -26px;
+    padding-top: 0;
+  }
+  .lmctDS__rcptWrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 60px;
+  }
+  .lmctDS__rcpt {
+    position: relative;
+    width: 336px;
+    font-family:
+      "SFMono-Regular", ui-monospace, "Roboto Mono", Menlo, Consolas, monospace;
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+    padding: 34px 26px 18px;
+    filter: drop-shadow(0 24px 50px rgba(12, 159, 253, 0.18));
+  }
+  .lmctDS__rcpt::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 10px;
+    transform: translateY(100%);
+    background:
+      linear-gradient(45deg, transparent 50%, #fff 50%) 0 0/10px 10px repeat-x,
+      linear-gradient(-45deg, transparent 50%, #fff 50%) 0 0/10px 10px repeat-x;
+  }
+  .lmctDS__rhead {
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #05162a;
+    font-size: 13px;
+  }
+  .lmctDS__rsub {
+    text-align: center;
+    font-size: 10px;
+    color: #94a3b8;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-top: 5px;
+  }
+  .lmctDS__rsep {
+    border: none;
+    border-top: 1.5px dashed #cbd5e1;
+    margin: 16px 0;
+  }
+  .lmctDS__grp {
+    padding: 5px 0;
+  }
+  .lmctDS__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    font-size: 12.5px;
+    color: #475569;
+    padding: 1.5px 0;
+    text-align: left;
+    line-height: 1.45;
+  }
+  .lmctDS__row span:last-child {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .lmctDS__disc {
+    color: #0c9ffd;
+    font-weight: 700;
+  }
+  .lmctDS__disc span:first-child {
+    padding-left: 14px;
+  }
+  .lmctDS__rtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 18px;
+    font-weight: 800;
+    color: #0c9ffd;
+    letter-spacing: 0.5px;
+  }
+  .lmctDS__rtotal span:last-child {
+    font-variant-numeric: tabular-nums;
+  }
+  .lmctDS__rfoot {
+    text-align: center;
+    font-size: 10px;
+    color: #64748b;
+    letter-spacing: 0.7px;
+    margin-top: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1.6;
+  }
+  .lmctDS__barcode {
+    height: 32px;
+    width: 78%;
+    margin: 16px auto 0;
+    background: repeating-linear-gradient(
+      90deg,
+      #05162a 0 2px,
+      transparent 2px 4px,
+      #05162a 4px 7px,
+      transparent 7px 9px,
+      #05162a 9px 11px,
+      transparent 11px 15px,
+      #05162a 15px 17px,
+      transparent 17px 19px
+    );
+  }
+  .lmctDS__armed {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  .lmctDS__in {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 0.55s ease,
+      transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @media (max-width: 560px) {
+    .lmctDS__wrap {
+      padding: 46px 0;
+    }
+    .lmctDS__stats {
+      gap: 9px;
+    }
+    .lmctDS__stat {
+      padding: 18px 8px;
+    }
+  }
+  @media (max-width: 600px) {
+    .lmctDS__rcptSection {
+      margin-top: -22px;
+    }
+    .lmctDS__leadFull {
+      display: none;
+    }
+    .lmctDS__leadShort {
+      display: inline;
+    }
+    .lmctDS__rcptWrap {
+      padding: 0 0 46px;
+    }
+    .lmctDS__rcpt {
+      width: 312px;
+      padding: 32px 24px 16px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmctDS__marquee {
+      animation: none !important;
+    }
+  }
+  .lmctDS__ctaWrap {
+    text-align: center;
+    margin-top: -14px;
+  }
+  .lmctDS__cta {
+    display: flex;
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, #0c9ffd, #0476c4);
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 19px 32px;
+    border-radius: 16px;
+    box-shadow: 0 14px 30px rgba(12, 159, 253, 0.42);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctDS__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px rgba(12, 159, 253, 0.52);
+  }
+  .lmctDS__cta svg {
+    width: 18px;
+    height: 18px;
+  }
+</style>
+<div class="lmctDS__wrap">
+  <div class="lmctDS__inner">
+    <div class="lmctDS__head">
+      <span class="lmctDS__kick">Members Only Discounts</span>
+      <h2 class="lmctDS__title">
+        Mates Rates At <em>2,000+ Aussie Brands</em>
+      </h2>
+      <p class="lmctDS__lead">
+        <span class="lmctDS__leadFull"
+          >These are member only prices you will not find anywhere else. Your
+          LMCT+ membership unlocks exclusive discounts at thousands of
+          Australian businesses, in store and online, and most members save far
+          more than the membership costs.</span
+        ><span class="lmctDS__leadShort"
+          >Member only prices you will not find anywhere else, at thousands of
+          Aussie businesses in store and online.</span
+        >
+      </p>
+      <div class="lmctDS__excl">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="4.5" y="11" width="15" height="9" rx="2" />
+          <path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg
+        >Our discounts are exclusive to LMCT+ members
+      </div>
+    </div>
+    <div class="lmctDS__stats">
+      <div class="lmctDS__stat">
+        <div class="lmctDS__statNum">2,000+</div>
+        <div class="lmctDS__statLbl">Partner Brands</div>
+      </div>
+      <div class="lmctDS__stat">
+        <div class="lmctDS__statNum">1,700+</div>
+        <div class="lmctDS__statLbl">Stores To Redeem</div>
+      </div>
+      <div class="lmctDS__stat">
+        <div class="lmctDS__statNum">$1,000s</div>
+        <div class="lmctDS__statLbl">Saved Each Year</div>
+      </div>
+    </div>
+  </div>
+  <div class="lmctDS__marqueeWrap">
+    <div class="lmctDS__marquee">
+      <div class="lmctDS__half">
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/c7860003e44853904ddb51e4bea948/Untitled-3_0001_UT_0005_Untitled-3_0005_lotus.png"
+            alt="Lotus Caravans"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/41/92908f25ac4ac2aa6637583ee7dd12/Untitled-3_0001_UT_0004_Untitled-3_0002_Layer-6.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/28/90c9850e7745c3a6cf17f8dc62ee51/Untitled-3_0001_UT_0003_Untitled-3_0000_Layer-7-copy.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b6/38cbd184fd49cf893b3afd374eef4c/Untitled-3_0001_UT_0001_Untitled-3_0006_betta.png"
+            alt="Betta"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/48/1f3e0a011e4e53b64a3c676419fe48/Untitled-3_0001_UT_0000_Untitled-3_0003_adore.png"
+            alt="Adore Beauty"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b3/52c5a8b3254b7cba7c5646946497cb/Untitled-3_0001_UT_0002_Untitled-3_0004_flippy.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/c7860003e44853904ddb51e4bea948/Untitled-3_0001_UT_0005_Untitled-3_0005_lotus.png"
+            alt="Lotus Caravans"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/41/92908f25ac4ac2aa6637583ee7dd12/Untitled-3_0001_UT_0004_Untitled-3_0002_Layer-6.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/28/90c9850e7745c3a6cf17f8dc62ee51/Untitled-3_0001_UT_0003_Untitled-3_0000_Layer-7-copy.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b6/38cbd184fd49cf893b3afd374eef4c/Untitled-3_0001_UT_0001_Untitled-3_0006_betta.png"
+            alt="Betta"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/48/1f3e0a011e4e53b64a3c676419fe48/Untitled-3_0001_UT_0000_Untitled-3_0003_adore.png"
+            alt="Adore Beauty"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b3/52c5a8b3254b7cba7c5646946497cb/Untitled-3_0001_UT_0002_Untitled-3_0004_flippy.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/c7860003e44853904ddb51e4bea948/Untitled-3_0001_UT_0005_Untitled-3_0005_lotus.png"
+            alt="Lotus Caravans"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/41/92908f25ac4ac2aa6637583ee7dd12/Untitled-3_0001_UT_0004_Untitled-3_0002_Layer-6.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/28/90c9850e7745c3a6cf17f8dc62ee51/Untitled-3_0001_UT_0003_Untitled-3_0000_Layer-7-copy.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b6/38cbd184fd49cf893b3afd374eef4c/Untitled-3_0001_UT_0001_Untitled-3_0006_betta.png"
+            alt="Betta"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/48/1f3e0a011e4e53b64a3c676419fe48/Untitled-3_0001_UT_0000_Untitled-3_0003_adore.png"
+            alt="Adore Beauty"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b3/52c5a8b3254b7cba7c5646946497cb/Untitled-3_0001_UT_0002_Untitled-3_0004_flippy.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/c7860003e44853904ddb51e4bea948/Untitled-3_0001_UT_0005_Untitled-3_0005_lotus.png"
+            alt="Lotus Caravans"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/41/92908f25ac4ac2aa6637583ee7dd12/Untitled-3_0001_UT_0004_Untitled-3_0002_Layer-6.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/28/90c9850e7745c3a6cf17f8dc62ee51/Untitled-3_0001_UT_0003_Untitled-3_0000_Layer-7-copy.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b6/38cbd184fd49cf893b3afd374eef4c/Untitled-3_0001_UT_0001_Untitled-3_0006_betta.png"
+            alt="Betta"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/48/1f3e0a011e4e53b64a3c676419fe48/Untitled-3_0001_UT_0000_Untitled-3_0003_adore.png"
+            alt="Adore Beauty"
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b3/52c5a8b3254b7cba7c5646946497cb/Untitled-3_0001_UT_0002_Untitled-3_0004_flippy.png"
+            alt="LMCT+ partner brand"
+          />
+        </div>
+      </div>
+      <div class="lmctDS__half" aria-hidden="true">
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/c7860003e44853904ddb51e4bea948/Untitled-3_0001_UT_0005_Untitled-3_0005_lotus.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/41/92908f25ac4ac2aa6637583ee7dd12/Untitled-3_0001_UT_0004_Untitled-3_0002_Layer-6.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/28/90c9850e7745c3a6cf17f8dc62ee51/Untitled-3_0001_UT_0003_Untitled-3_0000_Layer-7-copy.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b6/38cbd184fd49cf893b3afd374eef4c/Untitled-3_0001_UT_0001_Untitled-3_0006_betta.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/48/1f3e0a011e4e53b64a3c676419fe48/Untitled-3_0001_UT_0000_Untitled-3_0003_adore.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b3/52c5a8b3254b7cba7c5646946497cb/Untitled-3_0001_UT_0002_Untitled-3_0004_flippy.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/c7860003e44853904ddb51e4bea948/Untitled-3_0001_UT_0005_Untitled-3_0005_lotus.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/41/92908f25ac4ac2aa6637583ee7dd12/Untitled-3_0001_UT_0004_Untitled-3_0002_Layer-6.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/28/90c9850e7745c3a6cf17f8dc62ee51/Untitled-3_0001_UT_0003_Untitled-3_0000_Layer-7-copy.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b6/38cbd184fd49cf893b3afd374eef4c/Untitled-3_0001_UT_0001_Untitled-3_0006_betta.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/48/1f3e0a011e4e53b64a3c676419fe48/Untitled-3_0001_UT_0000_Untitled-3_0003_adore.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b3/52c5a8b3254b7cba7c5646946497cb/Untitled-3_0001_UT_0002_Untitled-3_0004_flippy.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/c7860003e44853904ddb51e4bea948/Untitled-3_0001_UT_0005_Untitled-3_0005_lotus.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/41/92908f25ac4ac2aa6637583ee7dd12/Untitled-3_0001_UT_0004_Untitled-3_0002_Layer-6.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/28/90c9850e7745c3a6cf17f8dc62ee51/Untitled-3_0001_UT_0003_Untitled-3_0000_Layer-7-copy.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b6/38cbd184fd49cf893b3afd374eef4c/Untitled-3_0001_UT_0001_Untitled-3_0006_betta.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/48/1f3e0a011e4e53b64a3c676419fe48/Untitled-3_0001_UT_0000_Untitled-3_0003_adore.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b3/52c5a8b3254b7cba7c5646946497cb/Untitled-3_0001_UT_0002_Untitled-3_0004_flippy.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/c7860003e44853904ddb51e4bea948/Untitled-3_0001_UT_0005_Untitled-3_0005_lotus.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/41/92908f25ac4ac2aa6637583ee7dd12/Untitled-3_0001_UT_0004_Untitled-3_0002_Layer-6.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/28/90c9850e7745c3a6cf17f8dc62ee51/Untitled-3_0001_UT_0003_Untitled-3_0000_Layer-7-copy.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b6/38cbd184fd49cf893b3afd374eef4c/Untitled-3_0001_UT_0001_Untitled-3_0006_betta.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/48/1f3e0a011e4e53b64a3c676419fe48/Untitled-3_0001_UT_0000_Untitled-3_0003_adore.png"
+            alt=""
+          />
+        </div>
+        <div class="lmctDS__tile">
+          <img
+            src="https://images.clickfunnels.com/b3/52c5a8b3254b7cba7c5646946497cb/Untitled-3_0001_UT_0002_Untitled-3_0004_flippy.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lmctDS__inner lmctDS__rcptSection">
+    <div class="lmctDS__rcptWrap">
+      <div class="lmctDS__rcpt">
+        <div class="lmctDS__rhead">LMCT+ MEMBER SAVINGS</div>
+        <div class="lmctDS__rsub">Exclusive member pricing</div>
+        <hr class="lmctDS__rsep" />
+        <div class="lmctDS__grp">
+          <div class="lmctDS__row">
+            <span>Tyres, set of four</span><span>$760.00</span>
+          </div>
+          <div class="lmctDS__row lmctDS__disc">
+            <span>LMCT+ member discount</span><span>-$152.00</span>
+          </div>
+        </div>
+        <div class="lmctDS__grp">
+          <div class="lmctDS__row">
+            <span>Car service</span><span>$420.00</span>
+          </div>
+          <div class="lmctDS__row lmctDS__disc">
+            <span>LMCT+ member discount</span><span>-$98.00</span>
+          </div>
+        </div>
+        <div class="lmctDS__grp">
+          <div class="lmctDS__row">
+            <span>New couch</span><span>$1,290.00</span>
+          </div>
+          <div class="lmctDS__row lmctDS__disc">
+            <span>LMCT+ member discount</span><span>-$200.00</span>
+          </div>
+        </div>
+        <hr class="lmctDS__rsep" />
+        <div class="lmctDS__rtotal">
+          <span>TOTAL SAVED</span><span>$450.00</span>
+        </div>
+        <div class="lmctDS__rfoot">
+          Members only. Not available to the public.
+        </div>
+        <div class="lmctDS__barcode"></div>
+      </div>
+    </div>
+  </div>
+  <div class="lmctDS__ctaWrap">
+    <a class="lmctDS__cta" href="#packages"
+      >Become A Member
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M5 12h14M13 6l6 6-6 6" /></svg
+    ></a>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", function () {
+    var wrap = document.querySelector(".lmctDS__rcptWrap");
+    if (!wrap) {
+      return;
+    }
+    var rcpt = wrap.querySelector(".lmctDS__rcpt");
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !("IntersectionObserver" in window)) {
+      return;
+    }
+    rcpt.classList.add("lmctDS__armed");
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            rcpt.classList.add("lmctDS__in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(rcpt);
+  });
+</script>
+<!-- =====  END SECTION 04  |  PARTNER DISCOUNTS  ===== -->
+<!-- ===================================================================== -->
+<!--  SECTION 05  |  SUPERMARKET (COMING SOON)  -->
+<!--  Store address (10/8 Hatchlands Dr, Deer Park VIC 3023) is editable in the markup.  -->
+<!--  Storefront image is the lmctSM__shotImg src. Swap it for any photo or render.  -->
+<!--  Coming soon copy and the three chips are editable. The grocery belt is decorative.  -->
+<!-- ===================================================================== -->
+<style>
+  .lmctSM__wrap {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(
+      120% 120% at 50% -10%,
+      #46bcff 0%,
+      #0c9ffd 44%,
+      #0476c4 100%
+    );
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 64px 0 0;
+    color: #fff;
+  }
+  .lmctSM__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 18px;
+    text-align: center;
+  }
+  .lmctSM__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+    backdrop-filter: blur(4px);
+  }
+  .lmctSM__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #eaffb8;
+    box-shadow: 0 0 0 0 rgba(234, 255, 184, 0.7);
+    animation: lmctSM__pulse 2s ease-out infinite;
+  }
+  .lmctSM__title {
+    margin: 0 0 14px;
+    font-size: clamp(30px, 5.4vw, 52px);
+    font-weight: 900;
+    line-height: 1.03;
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
+    text-shadow: 0 6px 22px rgba(2, 40, 80, 0.22);
+  }
+  .lmctSM__sub {
+    margin: 0 auto 26px;
+    max-width: 600px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.94);
+  }
+  .lmctSM__shot {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto 24px;
+    aspect-ratio: 16/9;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 22px 50px rgba(2, 40, 80, 0.28);
+  }
+  .lmctSM__shotImg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .lmctSM__shotPh {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.86);
+    overflow: hidden;
+  }
+  .lmctSM__shotPh svg {
+    width: 40px;
+    height: 40px;
+    opacity: 0.9;
+  }
+  .lmctSM__shotPh span {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  .lmctSM__shotPh small {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .lmctSM__shotPh::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 32%,
+      rgba(255, 255, 255, 0.18) 50%,
+      transparent 68%
+    );
+    transform: translateX(-100%);
+    animation: lmctSM__sheen 3.6s ease-in-out infinite;
+  }
+  .lmctSM__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 22px;
+  }
+  .lmctSM__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 15px;
+    border-radius: 999px;
+  }
+  .lmctSM__chip svg {
+    width: 16px;
+    height: 16px;
+    color: #eaffb8;
+  }
+  .lmctSM__addr {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 16px;
+    padding: 13px 20px;
+    margin-bottom: 26px;
+  }
+  .lmctSM__addrIco {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: rgba(255, 255, 255, 0.18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lmctSM__addrIco svg {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+  }
+  .lmctSM__addr small {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #eaffb8;
+    margin-bottom: 2px;
+  }
+  .lmctSM__addr b {
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .lmctSM__cta {
+    display: flex;
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    box-sizing: border-box;
+    background: #fff;
+    color: #0476c4;
+    font-weight: 800;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 19px 32px;
+    border-radius: 16px;
+    text-decoration: none;
+    box-shadow: 0 16px 36px rgba(2, 40, 80, 0.3);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+  .lmctSM__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 44px rgba(2, 40, 80, 0.38);
+  }
+  .lmctSM__cta svg {
+    width: 18px;
+    height: 18px;
+  }
+  .lmctSM__float {
+    position: absolute;
+    z-index: 0;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    animation: lmctSM__bob 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .lmctSM__beltWrap {
+    position: relative;
+    margin-top: 40px;
+    padding: 18px 0 22px;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(2, 40, 80, 0.1);
+  }
+  .lmctSM__beltWrap::before,
+  .lmctSM__beltWrap::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 90px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .lmctSM__beltWrap::before {
+    left: 0;
+    background: linear-gradient(90deg, #0a8fe0, transparent);
+  }
+  .lmctSM__beltWrap::after {
+    right: 0;
+    background: linear-gradient(270deg, #0a8fe0, transparent);
+  }
+  .lmctSM__belt {
+    display: flex;
+    width: max-content;
+    animation: lmctSM__beltMove 60s linear infinite;
+    will-change: transform;
+  }
+  .lmctSM__belt:hover {
+    animation-play-state: paused;
+  }
+  .lmctSM__beltGrp {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+  .lmctSM__item {
+    flex-shrink: 0;
+    width: 66px;
+    height: 66px;
+    margin: 0 9px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .lmctSM__ico {
+    width: 32px;
+    height: 32px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  @keyframes lmctSM__pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(234, 255, 184, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 9px rgba(234, 255, 184, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(234, 255, 184, 0);
+    }
+  }
+  @keyframes lmctSM__sheen {
+    0% {
+      transform: translateX(-100%);
+    }
+    55%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes lmctSM__bob {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--r, 0deg));
+    }
+    50% {
+      transform: translateY(-16px) rotate(calc(var(--r, 0deg) + 7deg));
+    }
+  }
+  @keyframes lmctSM__beltMove {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (max-width: 600px) {
+    .lmctSM__wrap {
+      padding: 48px 0 0;
+    }
+    .lmctSM__item {
+      width: 54px;
+      height: 54px;
+      margin: 0 7px;
+    }
+    .lmctSM__ico {
+      width: 27px;
+      height: 27px;
+    }
+    .lmctSM__float {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmctSM__belt,
+    .lmctSM__float,
+    .lmctSM__dot,
+    .lmctSM__shotPh::after {
+      animation: none !important;
+    }
+  }
+</style>
+<div class="lmctSM__wrap">
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <defs>
+      <symbol id="sm-apple" viewBox="0 0 24 24">
+        <path
+          d="M12 8.2c-2-1.7-5.6-.9-5.6 3 0 4.3 2.8 7.6 5.6 7.6s5.6-3.3 5.6-7.6c0-3.9-3.6-4.7-5.6-3z"
+        />
+        <path d="M12 8.2V4.6" />
+        <path d="M12 6.4c.8-1.8 2.7-2 3.9-1.2" />
+      </symbol>
+      <symbol id="sm-carrot" viewBox="0 0 24 24">
+        <path d="M13.6 9.8 6.2 18.8a1.7 1.7 0 0 0 2.4 2.4L18 13.8z" />
+        <path d="m13.6 9.8 1.8-3M15.4 9.4l3-1M13.2 7.6l.8-3" />
+      </symbol>
+      <symbol id="sm-broccoli" viewBox="0 0 24 24">
+        <circle cx="9" cy="8.5" r="2.3" />
+        <circle cx="13.2" cy="7" r="2.3" />
+        <circle cx="15.2" cy="10.2" r="2.3" />
+        <path d="M9.4 10.6 11 19M14.8 11.8 13 19M11 19h2.2" />
+      </symbol>
+      <symbol id="sm-milk" viewBox="0 0 24 24">
+        <path d="M8.2 9.2h7.6V19a1 1 0 0 1-1 1H9.2a1 1 0 0 1-1-1z" />
+        <path d="M8.2 9.2 9.7 6h4.6l1.5 3.2" />
+        <path d="M11 13h2" />
+      </symbol>
+      <symbol id="sm-bread" viewBox="0 0 24 24">
+        <path
+          d="M5 13.2c0-3 3-5 7-5s7 2 7 5V18a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"
+        />
+        <path d="M9.2 8.6V19M13 8.3V19" />
+      </symbol>
+      <symbol id="sm-egg" viewBox="0 0 24 24">
+        <path
+          d="M12 4.2c-3 0-5.2 4.2-5.2 8.2a5.2 5.2 0 0 0 10.4 0c0-4-2.2-8.2-5.2-8.2z"
+        />
+      </symbol>
+      <symbol id="sm-cheese" viewBox="0 0 24 24">
+        <path d="M5 16 18 9.5l1.2 6.5z" />
+        <path d="M5 16h14.2" />
+        <circle cx="9" cy="14.3" r=".7" />
+        <circle cx="13" cy="14.6" r=".7" />
+      </symbol>
+      <symbol id="sm-banana" viewBox="0 0 24 24">
+        <path
+          d="M6.2 7.2c1 6 5 10 11 10 1.1 0 1.6-1.1.5-1.5C12 13 9.6 9.6 9.1 6.6 8.9 5.6 6.4 6 6.2 7.2z"
+        />
+        <path d="M6.2 7.2 5 5.6" />
+      </symbol>
+      <symbol id="sm-grapes" viewBox="0 0 24 24">
+        <circle cx="10" cy="12.4" r="1.7" />
+        <circle cx="13.6" cy="12.4" r="1.7" />
+        <circle cx="11.8" cy="15.4" r="1.7" />
+        <circle cx="9" cy="15.6" r="1.7" />
+        <circle cx="14.6" cy="15.6" r="1.7" />
+        <circle cx="11.8" cy="18.3" r="1.7" />
+        <path d="M11.8 9.2V5.4M11.8 5.4c1-1.6 3-1.6 4.2 0" />
+      </symbol>
+      <symbol id="sm-basket" viewBox="0 0 24 24">
+        <path d="M5 9.4h14l-1.2 9.2a1 1 0 0 1-1 .9H7.2a1 1 0 0 1-1-.9z" />
+        <path d="M9 9.4l2.2-4.2M15 9.4l-2.2-4.2" />
+        <path d="M10 12.6v3.4M14 12.6v3.4" />
+      </symbol>
+      <symbol id="sm-bottle" viewBox="0 0 24 24">
+        <path
+          d="M10.2 4h3.6v2.2l1.2 2.2V19a1 1 0 0 1-1 1H10a1 1 0 0 1-1-1V8.4l1.2-2.2z"
+        />
+        <path d="M9 12h6" />
+      </symbol>
+      <symbol id="sm-tomato" viewBox="0 0 24 24">
+        <circle cx="12" cy="13.4" r="6" />
+        <path d="M12 7.4 9.8 5.2M12 7.4l2.2-2.2M12 7.4V5" />
+      </symbol>
+    </defs>
+  </svg>
+  <svg
+    class="lmctSM__float"
+    style="
+      top: 8%;
+      left: 6%;
+      width: 58px;
+      height: 58px;
+      --r: -12deg;
+      animation-duration: 7.5s;
+      animation-delay: 0s;
+      opacity: 0.12;
+    "
+    viewBox="0 0 24 24"
+  >
+    <use href="#sm-apple" />
+  </svg>
+  <svg
+    class="lmctSM__float"
+    style="
+      top: 16%;
+      left: 86%;
+      width: 52px;
+      height: 52px;
+      --r: 14deg;
+      animation-duration: 8.5s;
+      animation-delay: 0.6s;
+      opacity: 0.1;
+    "
+    viewBox="0 0 24 24"
+  >
+    <use href="#sm-carrot" />
+  </svg>
+  <svg
+    class="lmctSM__float"
+    style="
+      top: 58%;
+      left: 3%;
+      width: 60px;
+      height: 60px;
+      --r: -8deg;
+      animation-duration: 9s;
+      animation-delay: 1.2s;
+      opacity: 0.1;
+    "
+    viewBox="0 0 24 24"
+  >
+    <use href="#sm-broccoli" />
+  </svg>
+  <svg
+    class="lmctSM__float"
+    style="
+      top: 68%;
+      left: 90%;
+      width: 54px;
+      height: 54px;
+      --r: 10deg;
+      animation-duration: 7.8s;
+      animation-delay: 0.3s;
+      opacity: 0.11;
+    "
+    viewBox="0 0 24 24"
+  >
+    <use href="#sm-grapes" />
+  </svg>
+  <svg
+    class="lmctSM__float"
+    style="
+      top: 40%;
+      left: 94%;
+      width: 46px;
+      height: 46px;
+      --r: -6deg;
+      animation-duration: 8.2s;
+      animation-delay: 1s;
+      opacity: 0.09;
+    "
+    viewBox="0 0 24 24"
+  >
+    <use href="#sm-milk" />
+  </svg>
+  <svg
+    class="lmctSM__float"
+    style="
+      top: 78%;
+      left: 12%;
+      width: 56px;
+      height: 56px;
+      --r: 8deg;
+      animation-duration: 9.4s;
+      animation-delay: 0.9s;
+      opacity: 0.1;
+    "
+    viewBox="0 0 24 24"
+  >
+    <use href="#sm-bread" />
+  </svg>
+  <svg
+    class="lmctSM__float"
+    style="
+      top: 30%;
+      left: 2%;
+      width: 50px;
+      height: 50px;
+      --r: 16deg;
+      animation-duration: 8s;
+      animation-delay: 0.4s;
+      opacity: 0.1;
+    "
+    viewBox="0 0 24 24"
+  >
+    <use href="#sm-banana" />
+  </svg>
+  <div class="lmctSM__inner">
+    <span class="lmctSM__pill"
+      ><span class="lmctSM__dot"></span>Coming Soon</span
+    >
+    <h2 class="lmctSM__title">Groceries At Wholesale Prices</h2>
+    <p class="lmctSM__sub">
+      LMCT+ Supermarkets are on the way. Members get genuine wholesale pricing
+      on everyday groceries, and our first store is opening soon in Deer Park,
+      with more rolling out across Victoria.
+    </p>
+    <div class="lmctSM__shot">
+      <img
+        class="lmctSM__shotImg"
+        src="https://images.clickfunnels.com/29/a2dc4d36d34fa7bd36d001ebbf4d16/sssaaa.jpg"
+        alt="LMCT+ Supermarket, Deer Park"
+      />
+    </div>
+    <div class="lmctSM__chips">
+      <span class="lmctSM__chip"
+        ><svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M20 6L9 17l-5-5" /></svg
+        >Members only</span
+      >
+      <span class="lmctSM__chip"
+        ><svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M20 6L9 17l-5-5" /></svg
+        >Wholesale pricing</span
+      >
+      <span class="lmctSM__chip"
+        ><svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M20 6L9 17l-5-5" /></svg
+        >Rolling out now</span
+      >
+    </div>
+    <div class="lmctSM__addr">
+      <span class="lmctSM__addrIco"
+        ><svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" /></svg
+      ></span>
+      <span
+        ><small>First store opening</small
+        ><b>10/8 Hatchlands Dr, Deer Park VIC 3023</b></span
+      >
+    </div>
+    <div>
+      <a href="#packages" class="lmctSM__cta"
+        >Become A Member<svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" /></svg
+      ></a>
+    </div>
+  </div>
+  <div class="lmctSM__beltWrap">
+    <div class="lmctSM__belt">
+      <div class="lmctSM__beltGrp">
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-apple" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-carrot" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-broccoli" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-milk" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bread" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-egg" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-cheese" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-banana" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-grapes" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-basket" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bottle" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-tomato" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-apple" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-carrot" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-broccoli" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-milk" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bread" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-egg" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-cheese" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-banana" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-grapes" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-basket" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bottle" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-tomato" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-apple" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-carrot" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-broccoli" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-milk" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bread" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-egg" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-cheese" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-banana" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-grapes" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-basket" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bottle" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-tomato" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-apple" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-carrot" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-broccoli" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-milk" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bread" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-egg" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-cheese" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-banana" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-grapes" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-basket" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bottle" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-tomato" /></svg
+        ></span>
+      </div>
+      <div class="lmctSM__beltGrp" aria-hidden="true">
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-apple" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-carrot" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-broccoli" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-milk" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bread" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-egg" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-cheese" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-banana" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-grapes" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-basket" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bottle" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-tomato" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-apple" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-carrot" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-broccoli" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-milk" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bread" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-egg" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-cheese" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-banana" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-grapes" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-basket" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bottle" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-tomato" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-apple" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-carrot" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-broccoli" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-milk" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bread" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-egg" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-cheese" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-banana" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-grapes" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-basket" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bottle" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-tomato" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-apple" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-carrot" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-broccoli" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-milk" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bread" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-egg" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-cheese" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-banana" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-grapes" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-basket" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-bottle" /></svg
+        ></span>
+        <span class="lmctSM__item"
+          ><svg class="lmctSM__ico" viewBox="0 0 24 24">
+            <use href="#sm-tomato" /></svg
+        ></span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- =====  END SECTION 05  |  SUPERMARKET (COMING SOON)  ===== -->
+<!-- ===================================================================== -->
+<!--  SECTION 06  |  PETROL (WHOLESALE SAVINGS)  -->
+<!--  The station is open 24 hours, 7 days a week. Location is Preston. Both sit in the location block near the bottom.  -->
+<!--  Customer photos are the image URLs in the marquee. The proof figure ($1,128) and the three feature blocks are editable.  -->
+<!--  Each feature has a full desktop sentence and a shorter mobile one. Ends with a Become A Member button.  -->
+<!-- ===================================================================== -->
+<style>
+  .lmctPet__wrap {
+    background: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 56px 0;
+  }
+  .lmctPet__inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .lmctPet__head {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .lmctPet__kick {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.25);
+    color: #0476c4;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .lmctPet__title {
+    margin: 0 0 12px;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -1.4px;
+    color: #05162a;
+    text-transform: uppercase;
+  }
+  .lmctPet__title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #0476c4, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctPet__sub {
+    margin: 0 auto;
+    max-width: 620px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.55;
+  }
+  .lmctPet__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+  .lmctPet__card {
+    background: #f7fafc;
+    border: 1px solid #e8eef4;
+    border-radius: 18px;
+    padding: 26px 24px;
+    text-align: center;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctPet__card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(12, 159, 253, 0.35);
+    box-shadow: 0 16px 36px rgba(12, 159, 253, 0.1);
+  }
+  .lmctPet__cIco {
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, #0476c4, #0c9ffd);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 18px rgba(12, 159, 253, 0.3);
+  }
+  .lmctPet__cIco svg {
+    width: 27px;
+    height: 27px;
+    color: #fff;
+  }
+  .lmctPet__cTitle {
+    margin: 0 0 7px;
+    font-size: 17px;
+    font-weight: 900;
+    color: #05162a;
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+  }
+  .lmctPet__cTxt {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    line-height: 1.5;
+  }
+  .lmctPet__short {
+    display: none;
+  }
+  .lmctPet__proof {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 26px;
+    background: rgba(12, 159, 253, 0.06);
+    border: 1px solid rgba(12, 159, 253, 0.22);
+    border-radius: 18px;
+    padding: 22px 26px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .lmctPet__proofNum {
+    font-size: clamp(40px, 7vw, 60px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+    background: linear-gradient(180deg, #3fb8ff, #0476c4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctPet__proofTxt {
+    font-size: 15px;
+    font-weight: 600;
+    color: #05162a;
+    line-height: 1.45;
+    max-width: 360px;
+    text-align: left;
+  }
+  .lmctPet__proofTxt small {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #0476c4;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .lmctPet__mqHead {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin: 26px 0 16px;
+  }
+  .lmctPet__mqWrap {
+    position: relative;
+    overflow: hidden;
+    padding: 4px 0;
+  }
+  .lmctPet__mqWrap::before,
+  .lmctPet__mqWrap::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 90px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .lmctPet__mqWrap::before {
+    left: 0;
+    background: linear-gradient(90deg, #fff, transparent);
+  }
+  .lmctPet__mqWrap::after {
+    right: 0;
+    background: linear-gradient(270deg, #fff, transparent);
+  }
+  .lmctPet__mq {
+    display: flex;
+    width: max-content;
+    animation: lmctPet__scroll 90s linear infinite;
+    will-change: transform;
+  }
+  .lmctPet__mq:hover {
+    animation-play-state: paused;
+  }
+  .lmctPet__grp {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+  }
+  .lmctPet__tile {
+    flex-shrink: 0;
+    width: 178px;
+    height: 230px;
+    margin: 0 8px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #eef2f6;
+    border: 1px solid #e8eef4;
+  }
+  .lmctPet__tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  @keyframes lmctPet__scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .lmctPet__loc {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 26px;
+    text-align: left;
+  }
+  .lmctPet__locTxt {
+    display: flex;
+    flex-direction: column;
+  }
+  .lmctPet__locName {
+    font-size: 15px;
+    font-weight: 800;
+    color: #05162a;
+    line-height: 1.3;
+  }
+  .lmctPet__locSub {
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.45;
+    margin-top: 3px;
+    text-wrap: balance;
+    max-width: 380px;
+  }
+  .lmctPet__loc strong {
+    color: #05162a;
+    font-weight: 800;
+  }
+  .lmctPet__locIco {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(12, 159, 253, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #0c9ffd;
+  }
+  .lmctPet__locIco svg {
+    width: 19px;
+    height: 19px;
+  }
+  @media (min-width: 760px) {
+    .lmctPet__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+  }
+  @media (max-width: 759px) {
+    .lmctPet__full {
+      display: none;
+    }
+    .lmctPet__short {
+      display: inline;
+    }
+    .lmctPet__card {
+      padding: 20px 20px;
+    }
+    .lmctPet__cTitle {
+      margin-bottom: 4px;
+    }
+  }
+  @media (max-width: 520px) {
+    .lmctPet__wrap {
+      padding: 42px 0;
+    }
+    .lmctPet__tile {
+      width: 212px;
+      height: 274px;
+      margin: 0 6px;
+    }
+    .lmctPet__mqWrap::before,
+    .lmctPet__mqWrap::after {
+      width: 16px;
+    }
+    .lmctPet__proofTxt {
+      text-align: center;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmctPet__mq {
+      animation: none !important;
+    }
+  }
+  .lmctPet__ctaWrap {
+    text-align: center;
+    margin-top: 38px;
+  }
+  .lmctPet__cta {
+    display: flex;
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, #0c9ffd, #0476c4);
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 19px 32px;
+    border-radius: 16px;
+    box-shadow: 0 14px 30px rgba(12, 159, 253, 0.42);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctPet__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px rgba(12, 159, 253, 0.52);
+  }
+  .lmctPet__cta svg {
+    width: 18px;
+    height: 18px;
+  }
+</style>
+<div class="lmctPet__wrap">
+  <div class="lmctPet__inner">
+    <div class="lmctPet__head">
+      <span class="lmctPet__kick">LMCT+ Petrol</span>
+      <h2 class="lmctPet__title">Save Big <em>At The Pump</em></h2>
+      <p class="lmctPet__sub">
+        We sell petrol at genuine wholesale prices, so members save every single
+        visit. And every litre earns you bonus entries, coins and EXP.
+      </p>
+    </div>
+    <div class="lmctPet__grid">
+      <div class="lmctPet__card">
+        <span class="lmctPet__cIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 21h9" />
+            <path d="M6 21V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v15" />
+            <path d="M6 12h6" />
+            <path
+              d="M14 9h2.5a2 2 0 0 1 2 2v6a1.75 1.75 0 0 0 3.5 0V9l-3-3"
+            /></svg
+        ></span>
+        <h3 class="lmctPet__cTitle">Wholesale Pricing</h3>
+        <p class="lmctPet__cTxt">
+          <span class="lmctPet__full"
+            >We sell fuel at genuine wholesale prices, the kind normally only
+            for fleets. Members pay less at the pump, every visit.</span
+          ><span class="lmctPet__short"
+            >Members pay wholesale at the pump.</span
+          >
+        </p>
+      </div>
+      <div class="lmctPet__card">
+        <span class="lmctPet__cIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 2L15 8l7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1 3-6z" /></svg
+        ></span>
+        <h3 class="lmctPet__cTitle">Bonus Entries</h3>
+        <p class="lmctPet__cTxt">
+          <span class="lmctPet__full"
+            >Every fill up earns bonus entries into our giveaways. You could win
+            a car or cash just for filling your tank.</span
+          ><span class="lmctPet__short"
+            >Every fill up earns giveaway entries.</span
+          >
+        </p>
+      </div>
+      <div class="lmctPet__card">
+        <span class="lmctPet__cIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v10M9 10h4.5a2 2 0 0 1 0 4H9" /></svg
+        ></span>
+        <h3 class="lmctPet__cTitle">Coins &amp; EXP</h3>
+        <p class="lmctPet__cTxt">
+          <span class="lmctPet__full"
+            >Stack LMCT+ coins and EXP in the app with every visit, then level
+            up and spend them as you go.</span
+          ><span class="lmctPet__short">Earn coins and EXP every visit.</span>
+        </p>
+      </div>
+    </div>
+    <div class="lmctPet__proof">
+      <span class="lmctPet__proofNum">$1,128</span>
+      <span class="lmctPet__proofTxt"
+        ><small>Top saver, first 3 weeks open</small>That is more than ten years
+        of LMCT+ membership paid for on fuel alone.</span
+      >
+    </div>
+    <p class="lmctPet__mqHead">Real members saving at LMCT+ Petrol, Preston</p>
+  </div>
+  <div class="lmctPet__mqWrap">
+    <div class="lmctPet__mq">
+      <div class="lmctPet__grp">
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/58/cbd1cb2b024ec3aa6fdde4f1252df5/Untitled-2_0000_IMG_0955.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/49/5257c8a766401e9af772a956c39cba/Untitled-2_0004_IMG_2177.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/85/eac5b7d9cd45a4a688fdcfdbc67819/Untitled-2_0007_IMG_1502.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/94/6eae6c805747c1ad27d0dc68beecbb/Untitled-2_0006_IMG_1507.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/eb/45364a8c814a4b9becbd57ee1ebd94/Untitled-2_0005_IMG_2190.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/95/c0cd354b9145169ae1c8395680844e/Untitled-2_0002_IMG_0958.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/93/f36e85ec144348af3eb0124f1d81b0/Untitled-2_0003_IMG_2186.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/e5/90586f180749c98e1f9705ae7de366/Untitled-2_0001_IMG_0972.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/fc/f23402bf3948a8a35a9f2666c4a061/Untitled-2_0006_IMG_0947.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/d0/d26d55617e485b8c799bf48484ddc4/Untitled-2_0001_IMG_2170.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/d2/09d953bdd04d9aadee63ec3f2607e0/Untitled-2_0003_IMG_0965.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/01/d6fcb0360845518a9311d4bf5faf62/Untitled-2_0005_IMG_1486.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/1c09725af34daba6b9bff07e4e3c83/Untitled-2_0004_IMG_1505.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/14/b7ad6d5cbd40bf88b7d128197dcf5f/Untitled-2_0000_IMG_0952.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/c3/6e2e53c8364ad3b606be3991ea9514/Untitled-2_0002_IMG_1512.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/58/cbd1cb2b024ec3aa6fdde4f1252df5/Untitled-2_0000_IMG_0955.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/49/5257c8a766401e9af772a956c39cba/Untitled-2_0004_IMG_2177.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/85/eac5b7d9cd45a4a688fdcfdbc67819/Untitled-2_0007_IMG_1502.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/94/6eae6c805747c1ad27d0dc68beecbb/Untitled-2_0006_IMG_1507.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/eb/45364a8c814a4b9becbd57ee1ebd94/Untitled-2_0005_IMG_2190.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/95/c0cd354b9145169ae1c8395680844e/Untitled-2_0002_IMG_0958.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/93/f36e85ec144348af3eb0124f1d81b0/Untitled-2_0003_IMG_2186.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/e5/90586f180749c98e1f9705ae7de366/Untitled-2_0001_IMG_0972.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/fc/f23402bf3948a8a35a9f2666c4a061/Untitled-2_0006_IMG_0947.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/d0/d26d55617e485b8c799bf48484ddc4/Untitled-2_0001_IMG_2170.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/d2/09d953bdd04d9aadee63ec3f2607e0/Untitled-2_0003_IMG_0965.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/01/d6fcb0360845518a9311d4bf5faf62/Untitled-2_0005_IMG_1486.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/1c09725af34daba6b9bff07e4e3c83/Untitled-2_0004_IMG_1505.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/14/b7ad6d5cbd40bf88b7d128197dcf5f/Untitled-2_0000_IMG_0952.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/c3/6e2e53c8364ad3b606be3991ea9514/Untitled-2_0002_IMG_1512.jpg"
+            alt="Member saving at LMCT+ Petrol"
+          />
+        </div>
+      </div>
+      <div class="lmctPet__grp" aria-hidden="true">
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/58/cbd1cb2b024ec3aa6fdde4f1252df5/Untitled-2_0000_IMG_0955.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/49/5257c8a766401e9af772a956c39cba/Untitled-2_0004_IMG_2177.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/85/eac5b7d9cd45a4a688fdcfdbc67819/Untitled-2_0007_IMG_1502.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/94/6eae6c805747c1ad27d0dc68beecbb/Untitled-2_0006_IMG_1507.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/eb/45364a8c814a4b9becbd57ee1ebd94/Untitled-2_0005_IMG_2190.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/95/c0cd354b9145169ae1c8395680844e/Untitled-2_0002_IMG_0958.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/93/f36e85ec144348af3eb0124f1d81b0/Untitled-2_0003_IMG_2186.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/e5/90586f180749c98e1f9705ae7de366/Untitled-2_0001_IMG_0972.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/fc/f23402bf3948a8a35a9f2666c4a061/Untitled-2_0006_IMG_0947.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/d0/d26d55617e485b8c799bf48484ddc4/Untitled-2_0001_IMG_2170.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/d2/09d953bdd04d9aadee63ec3f2607e0/Untitled-2_0003_IMG_0965.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/01/d6fcb0360845518a9311d4bf5faf62/Untitled-2_0005_IMG_1486.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/1c09725af34daba6b9bff07e4e3c83/Untitled-2_0004_IMG_1505.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/14/b7ad6d5cbd40bf88b7d128197dcf5f/Untitled-2_0000_IMG_0952.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/c3/6e2e53c8364ad3b606be3991ea9514/Untitled-2_0002_IMG_1512.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/58/cbd1cb2b024ec3aa6fdde4f1252df5/Untitled-2_0000_IMG_0955.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/49/5257c8a766401e9af772a956c39cba/Untitled-2_0004_IMG_2177.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/85/eac5b7d9cd45a4a688fdcfdbc67819/Untitled-2_0007_IMG_1502.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/94/6eae6c805747c1ad27d0dc68beecbb/Untitled-2_0006_IMG_1507.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/eb/45364a8c814a4b9becbd57ee1ebd94/Untitled-2_0005_IMG_2190.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/95/c0cd354b9145169ae1c8395680844e/Untitled-2_0002_IMG_0958.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/93/f36e85ec144348af3eb0124f1d81b0/Untitled-2_0003_IMG_2186.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/e5/90586f180749c98e1f9705ae7de366/Untitled-2_0001_IMG_0972.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/fc/f23402bf3948a8a35a9f2666c4a061/Untitled-2_0006_IMG_0947.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/d0/d26d55617e485b8c799bf48484ddc4/Untitled-2_0001_IMG_2170.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/d2/09d953bdd04d9aadee63ec3f2607e0/Untitled-2_0003_IMG_0965.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/01/d6fcb0360845518a9311d4bf5faf62/Untitled-2_0005_IMG_1486.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/7f/1c09725af34daba6b9bff07e4e3c83/Untitled-2_0004_IMG_1505.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/14/b7ad6d5cbd40bf88b7d128197dcf5f/Untitled-2_0000_IMG_0952.jpg"
+            alt=""
+          />
+        </div>
+        <div class="lmctPet__tile">
+          <img
+            src="https://images.clickfunnels.com/c3/6e2e53c8364ad3b606be3991ea9514/Untitled-2_0002_IMG_1512.jpg"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lmctPet__inner">
+    <div class="lmctPet__loc">
+      <span class="lmctPet__locIco"
+        ><svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" /></svg
+      ></span>
+      <span class="lmctPet__locTxt">
+        <strong class="lmctPet__locName">LMCT+ Petrol, Preston</strong>
+        <span class="lmctPet__locSub"
+          >Open 24 hours, 7 days a week &middot; More locations coming
+          soon</span
+        >
+      </span>
+    </div>
+    <div class="lmctPet__ctaWrap">
+      <a class="lmctPet__cta" href="#packages"
+        >Become A Member
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" /></svg
+      ></a>
+    </div>
+  </div>
+</div>
+<!-- =====  END SECTION 06  |  PETROL (WHOLESALE SAVINGS)  ===== -->
+<!-- ===================================================================== -->
+<!--  SECTION 07  |  COMING SOON  -->
+<!--  The upcoming items and their copy are editable in the cards. Ends with a Become A Member button.  -->
+<!--  Note: a supermarket also has a dedicated section (05). Remove the supermarket card here if you do not want it mentioned twice.  -->
+<!-- ===================================================================== -->
+<style>
+  .lmctCS__wrap {
+    background: #f7fafc;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 56px 16px;
+    border-top: 1px solid #eef2f6;
+    border-bottom: 1px solid #eef2f6;
+  }
+  .lmctCS__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .lmctCS__head {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .lmctCS__kick {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245, 183, 33, 0.12);
+    border: 1px solid rgba(245, 183, 33, 0.4);
+    color: #b5790f;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .lmctCS__title {
+    margin: 0 0 12px;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -1.4px;
+    color: #05162a;
+    text-transform: uppercase;
+  }
+  .lmctCS__title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #0476c4, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctCS__lead {
+    margin: 0 auto;
+    max-width: 580px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.55;
+  }
+  .lmctCS__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .lmctCS__card {
+    position: relative;
+    background: #fff;
+    border: 1px solid #e8eef4;
+    border-radius: 18px;
+    padding: 24px 22px;
+    overflow: hidden;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctCS__card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(12, 159, 253, 0.35);
+    box-shadow: 0 16px 36px rgba(12, 159, 253, 0.1);
+  }
+  .lmctCS__badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #b5790f;
+    background: rgba(245, 183, 33, 0.14);
+    border: 1px solid rgba(245, 183, 33, 0.4);
+    padding: 4px 9px;
+    border-radius: 999px;
+  }
+  .lmctCS__cIco {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #0476c4, #0c9ffd);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 18px rgba(12, 159, 253, 0.3);
+    margin-bottom: 16px;
+  }
+  .lmctCS__cIco svg {
+    width: 26px;
+    height: 26px;
+    color: #fff;
+  }
+  .lmctCS__cTitle {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 900;
+    color: #05162a;
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+  }
+  .lmctCS__cTxt {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #64748b;
+    line-height: 1.5;
+  }
+  @media (min-width: 760px) {
+    .lmctCS__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .lmctCS__wrap {
+      padding: 42px 14px;
+    }
+  }
+  .lmctCS__ctaWrap {
+    text-align: center;
+    margin-top: 38px;
+  }
+  .lmctCS__cta {
+    display: flex;
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, #0c9ffd, #0476c4);
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 19px 32px;
+    border-radius: 16px;
+    box-shadow: 0 14px 30px rgba(12, 159, 253, 0.42);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctCS__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px rgba(12, 159, 253, 0.52);
+  }
+  .lmctCS__cta svg {
+    width: 18px;
+    height: 18px;
+  }
+</style>
+<div class="lmctCS__wrap">
+  <div class="lmctCS__inner">
+    <div class="lmctCS__head">
+      <span class="lmctCS__kick">Just Getting Started</span>
+      <h2 class="lmctCS__title">Your Membership <em>Keeps Growing</em></h2>
+      <p class="lmctCS__lead">
+        Lock in now and every new perk we add lands in your account
+        automatically, at no extra cost.
+      </p>
+    </div>
+    <div class="lmctCS__grid">
+      <div class="lmctCS__card">
+        <span class="lmctCS__badge">Coming Soon</span>
+        <span class="lmctCS__cIco"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="4em"
+            height="4em"
+            viewBox="0 0 50 50"
+          >
+            <path d="M0 0h50v50H0z" fill="none" />
+            <circle cx="44" cy="42" r="4" fill="currentColor" />
+            <circle cx="15" cy="42" r="4" fill="currentColor" />
+            <path
+              fill="currentColor"
+              d="M47 33H15.771l.667-1.082c.286-.464.37-1.025.233-1.553l-.651-2.506l28.983-1.506C46.102 26.297 47 25.35 47 24.25V11c0-1.1-.9-2-2-2H11.119l-.391-1.503A2 2 0 0 0 8.792 6H2a2 2 0 0 0 0 4h5.246l5.34 20.545l-2.1 3.405a2 2 0 0 0-.043 2.024A2 2 0 0 0 12.188 37H47a2 2 0 0 0 0-4"
+            />
+          </svg>
+        </span>
+        <h3 class="lmctCS__cTitle">LMCT+ Supermarkets</h3>
+        <p class="lmctCS__cTxt">
+          Member pricing on your weekly shop. The same wholesale model as our
+          fuel, coming to groceries.
+        </p>
+      </div>
+      <div class="lmctCS__card">
+        <span class="lmctCS__badge">Coming Soon</span>
+        <span class="lmctCS__cIco"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="4em"
+            height="4em"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              fill="currentColor"
+              d="M18 10a1 1 0 0 1-1-1a1 1 0 0 1 1-1a1 1 0 0 1 1 1a1 1 0 0 1-1 1m-6 0H6V5h6m7.77 2.23l.01-.01l-3.72-3.72L15 4.56l2.11 2.11C16.17 7 15.5 7.93 15.5 9a2.5 2.5 0 0 0 2.5 2.5c.36 0 .69-.08 1-.21v7.21a1 1 0 0 1-1 1a1 1 0 0 1-1-1V14a2 2 0 0 0-2-2h-1V5a2 2 0 0 0-2-2H6c-1.11 0-2 .89-2 2v16h10v-7.5h1.5v5A2.5 2.5 0 0 0 18 21a2.5 2.5 0 0 0 2.5-2.5V9c0-.69-.28-1.32-.73-1.77"
+            />
+          </svg>
+        </span>
+        <h3 class="lmctCS__cTitle">More Fuel Stations</h3>
+        <p class="lmctCS__cTxt">
+          Preston is just the first. New LMCT+ Petrol sites are rolling out
+          across the country.
+        </p>
+      </div>
+      <div class="lmctCS__card">
+        <span class="lmctCS__badge">Every Week</span>
+        <span class="lmctCS__cIco"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="4em"
+            height="4em"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              fill="currentColor"
+              d="M2.25 4.025A1.75 1.75 0 0 1 4.025 2.25l7.488.095a2.75 2.75 0 0 1 1.913.807l7.299 7.298c.423.423.798 1.034.952 1.687c.156.664.096 1.476-.529 2.1l-6.91 6.911c-.625.625-1.437.685-2.101.529a3.66 3.66 0 0 1-1.687-.952l-7.298-7.299a2.76 2.76 0 0 1-.807-1.913zm5.592 2.29a.75.75 0 0 0-1.06 1.06l.707.708a.75.75 0 0 0 1.06-1.061z"
+            />
+          </svg>
+        </span>
+        <h3 class="lmctCS__cTitle">New Partner Brands</h3>
+        <p class="lmctCS__cTxt">
+          Fresh discounts added weekly. Your savings list only gets bigger.
+        </p>
+      </div>
+    </div>
+    <div class="lmctCS__ctaWrap">
+      <a class="lmctCS__cta" href="#packages"
+        >Become A Member
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" /></svg
+      ></a>
+    </div>
+  </div>
+</div>
+<!-- =====  END SECTION 07  |  COMING SOON  ===== -->
+<!-- ===================================================================== -->
+<!--  SECTION 08  |  MEMBER PERKS  (the 'And There's More' section)  -->
+<!--  The perk items and their copy are editable in the cards.  -->
+<!--  By design this is the one section without a Become A Member button.  -->
+<!-- ===================================================================== -->
+<style>
+  .lmctPK__wrap {
+    background: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 56px 16px;
+  }
+  .lmctPK__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .lmctPK__head {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .lmctPK__kick {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.25);
+    color: #0476c4;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .lmctPK__title {
+    margin: 0;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -1.4px;
+    color: #05162a;
+    text-transform: uppercase;
+  }
+  .lmctPK__title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #0476c4, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctPK__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .lmctPK__card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #f7fafc;
+    border: 1px solid #e8eef4;
+    border-radius: 16px;
+    padding: 20px;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctPK__card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(12, 159, 253, 0.35);
+    box-shadow: 0 14px 30px rgba(12, 159, 253, 0.1);
+  }
+  .lmctPK__cIco {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0476c4, #0c9ffd);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(12, 159, 253, 0.3);
+  }
+  .lmctPK__cIco svg {
+    width: 23px;
+    height: 23px;
+    color: #fff;
+  }
+  .lmctPK__card--gold .lmctPK__cIco {
+    background: linear-gradient(135deg, #d4941a, #f5b721);
+    box-shadow: 0 6px 16px rgba(245, 183, 33, 0.34);
+  }
+  .lmctPK__cTxt h4 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 900;
+    color: #05162a;
+    text-transform: uppercase;
+    letter-spacing: -0.2px;
+  }
+  .lmctPK__cTxt p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+    line-height: 1.45;
+  }
+  @media (min-width: 760px) {
+    .lmctPK__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .lmctPK__wrap {
+      padding: 42px 14px;
+    }
+  }
+</style>
+<div class="lmctPK__wrap">
+  <div class="lmctPK__inner">
+    <div class="lmctPK__head">
+      <span class="lmctPK__kick">And There's More</span>
+      <h2 class="lmctPK__title">Even More <em>In Your Membership</em></h2>
+    </div>
+    <div class="lmctPK__grid">
+      <div class="lmctPK__card lmctPK__card--gold">
+        <span class="lmctPK__cIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 20V10M12 20V4M18 20v-7" /></svg
+        ></span>
+        <div class="lmctPK__cTxt">
+          <h4>Daily App Cash Giveaways</h4>
+          <p>
+            A new $1,000 winner every single day, only on the app. Plus pay to
+            play games with real cash prizes.
+          </p>
+        </div>
+      </div>
+      <div class="lmctPK__card">
+        <span class="lmctPK__cIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4V8z"
+            />
+            <path d="M13 6v2M13 11v2M13 16v2" /></svg
+        ></span>
+        <div class="lmctPK__cTxt">
+          <h4>Event &amp; Car Meet Invites</h4>
+          <p>
+            Get on the list for LMCT+ events, car meets and live games around
+            Australia.
+          </p>
+        </div>
+      </div>
+      <div class="lmctPK__card">
+        <span class="lmctPK__cIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="8" r="5" />
+            <path d="M3 21a9 9 0 0 1 18 0" /></svg
+        ></span>
+        <div class="lmctPK__cTxt">
+          <h4>In Person Games</h4>
+          <p>
+            Turn up and play live challenges for the chance to drive away in
+            cars and pocket prizes.
+          </p>
+        </div>
+      </div>
+      <div class="lmctPK__card">
+        <span class="lmctPK__cIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M3 7l9 6 9-6" /></svg
+        ></span>
+        <div class="lmctPK__cTxt">
+          <h4>Early Bird Promo Emails</h4>
+          <p>
+            First access to new giveaways and discount codes before they hit the
+            public.
+          </p>
+        </div>
+      </div>
+      <div class="lmctPK__card">
+        <span class="lmctPK__cIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" /></svg
+        ></span>
+        <div class="lmctPK__cTxt">
+          <h4>Discounted Merch</h4>
+          <p>Members get LMCT+ gear at mates rates too.</p>
+        </div>
+      </div>
+      <div class="lmctPK__card">
+        <span class="lmctPK__cIco"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v10M9 10h4.5a2 2 0 0 1 0 4H9" /></svg
+        ></span>
+        <div class="lmctPK__cTxt">
+          <h4>Coins, EXP &amp; Levels</h4>
+          <p>
+            Stack rewards as you go, climb the ranks and unlock more inside the
+            app.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- =====  END SECTION 08  |  MEMBER PERKS  (the 'And There's More' section)  ===== -->
+<!-- ===================================================================== -->
+<!--  SECTION 09  |  APP AND FINAL CTA  -->
+<!--  App store links: the Apple App Store and Google Play URLs are in the markup.  -->
+<!--  The app screenshot image URL is editable. The final Become A Member button points to #packages.  -->
+<!-- ===================================================================== -->
+<style>
+  .lmctAP__wrap {
+    background: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 56px 16px 64px;
+  }
+  .lmctAP__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .lmctAP__card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 26px;
+    background: linear-gradient(135deg, #0a1f3a 0%, #05162a 60%, #0a1f3a 100%);
+    border: 1px solid rgba(12, 159, 253, 0.25);
+    box-shadow: 0 30px 70px rgba(5, 22, 42, 0.3);
+    padding: 40px 28px;
+  }
+  .lmctAP__card::after {
+    content: "";
+    position: absolute;
+    top: -30%;
+    right: -20%;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(
+      circle,
+      rgba(12, 159, 253, 0.2) 0%,
+      rgba(12, 159, 253, 0) 65%
+    );
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .lmctAP__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+  .lmctAP__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .lmctAP__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(12, 159, 253, 0.12);
+    border: 1px solid rgba(12, 159, 253, 0.35);
+    color: #3fb8ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  .lmctAP__eyebrow span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #3fb8ff;
+    box-shadow: 0 0 8px #3fb8ff;
+  }
+  .lmctAP__title {
+    margin: 0 0 12px;
+    font-size: clamp(26px, 4.6vw, 42px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .lmctAP__title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #3fb8ff, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctAP__sub {
+    margin: 0 auto 26px;
+    max-width: 520px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #cbd5e1;
+    line-height: 1.55;
+  }
+  .lmctAP__cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .lmctAP__join {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, #0c9ffd, #0476c4);
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 19px 32px;
+    border-radius: 16px;
+    box-shadow: 0 14px 30px rgba(12, 159, 253, 0.42);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctAP__join:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px rgba(12, 159, 253, 0.52);
+  }
+  .lmctAP__join svg {
+    width: 18px;
+    height: 18px;
+  }
+  .lmctAP__stores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .lmctAP__btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    background: linear-gradient(180deg, #1a1a1a, #000);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 14px;
+    padding: 11px 20px 11px 17px;
+    text-decoration: none !important;
+    color: #fff !important;
+    min-width: 200px;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+    overflow: hidden;
+  }
+  .lmctAP__btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0)
+    );
+    pointer-events: none;
+  }
+  .lmctAP__btn:hover {
+    transform: translateY(-3px);
+    border-color: rgba(12, 159, 253, 0.7);
+    box-shadow: 0 14px 32px rgba(12, 159, 253, 0.28);
+  }
+  .lmctAP__btnIco {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  .lmctAP__btnIco svg {
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+  }
+  .lmctAP__btnTxt {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+  }
+  .lmctAP__btnTxt small {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.78);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .lmctAP__btnTxt strong {
+    font-size: 16px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .lmctAP__trust {
+    margin-top: 4px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+  .lmctAP__trust strong {
+    color: #fff;
+    font-weight: 800;
+  }
+  /* phone */
+  .lmctAP__visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+  }
+  .lmctAP__ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid rgba(12, 159, 253, 0.16);
+    pointer-events: none;
+  }
+  .lmctAP__ring--1 {
+    width: 300px;
+    height: 300px;
+  }
+  .lmctAP__ring--2 {
+    width: 400px;
+    height: 400px;
+    border-color: rgba(12, 159, 253, 0.08);
+  }
+  .lmctAP__phone {
+    position: relative;
+    z-index: 2;
+    max-width: 250px;
+    width: 100%;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.55));
+    animation: lmctAP__float 6s ease-in-out infinite;
+  }
+  .lmctAP__phone img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  @keyframes lmctAP__float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @media (min-width: 860px) {
+    .lmctAP__grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+    }
+    .lmctAP__content {
+      align-items: flex-start;
+      text-align: left;
+    }
+    .lmctAP__cta {
+      justify-content: flex-start;
+    }
+    .lmctAP__stores {
+      justify-content: flex-start;
+    }
+    .lmctAP__sub {
+      margin-left: 0;
+    }
+    .lmctAP__join {
+      margin-left: 0;
+    }
+    .lmctAP__card {
+      padding: 48px 44px;
+    }
+    .lmctAP__phone {
+      max-width: 290px;
+    }
+    .lmctAP__visual {
+      min-height: 440px;
+    }
+    .lmctAP__ring--1 {
+      width: 360px;
+      height: 360px;
+    }
+    .lmctAP__ring--2 {
+      width: 480px;
+      height: 480px;
+    }
+  }
+  @media (max-width: 560px) {
+    .lmctAP__wrap {
+      padding: 42px 14px 48px;
+    }
+  }
+</style>
+<div class="lmctAP__wrap">
+  <div class="lmctAP__inner">
+    <div class="lmctAP__card">
+      <div class="lmctAP__grid">
+        <div class="lmctAP__content">
+          <div class="lmctAP__eyebrow"><span></span>The LMCT+ App</div>
+          <h2 class="lmctAP__title">
+            Your Whole Membership, <em>In Your Pocket</em>
+          </h2>
+          <p class="lmctAP__sub">
+            Everything lives in one app. Your entries, daily giveaways, fuel
+            discount and 2,000+ member deals, all one tap away. Join thousands
+            of members already winning.
+          </p>
+          <div class="lmctAP__cta">
+            <a class="lmctAP__join" href="#packages">
+              Become A Member
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+          <div class="lmctAP__stores">
+            <a
+              class="lmctAP__btn"
+              href="https://apps.apple.com/au/app/lmct/id1621538736"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="lmctAP__btnIco"
+                ><svg viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+                  /></svg
+              ></span>
+              <span class="lmctAP__btnTxt"
+                ><small>Download on the</small><strong>App Store</strong></span
+              >
+            </a>
+            <a
+              class="lmctAP__btn"
+              href="https://play.google.com/store/apps/details?id=com.lmctmembers&pli=1"
+              target="_blank"
+              rel="noopener"
+            >
+              <span class="lmctAP__btnIco"
+                ><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"
+                  /></svg
+              ></span>
+              <span class="lmctAP__btnTxt"
+                ><small>Get it on</small><strong>Google Play</strong></span
+              >
+            </a>
+          </div>
+          <p class="lmctAP__trust">
+            Join <strong>thousands of LMCT+ members</strong> already winning
+            daily.
+          </p>
+        </div>
+        <div class="lmctAP__visual">
+          <div class="lmctAP__ring lmctAP__ring--2"></div>
+          <div class="lmctAP__ring lmctAP__ring--1"></div>
+          <div class="lmctAP__phone">
+            <img
+              src="https://images.clickfunnels.com/ab/9bb48150e24e368cbb3841f8fc9d29/Untitled-design-3-.png"
+              alt="LMCT+ App on iPhone"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- =====  END SECTION 09  |  APP AND FINAL CTA  ===== -->
+<!-- ===================================================================== -->
+<!--  SECTION 10  |  FOOTER  -->
+<!--  Customer support number (1300 683 688) appears as display text and as the tel link href. Update both if it changes.  -->
+<!--  ABN (93 627 297 474), the Terms and Conditions link, and the Privacy Policy link are editable. Copyright year is set to 2026.  -->
+<!-- ===================================================================== -->
+<style>
+  .lmctFT__wrap {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at 50% -20%,
+        rgba(12, 159, 253, 0.16),
+        transparent 55%
+      ),
+      #05162a;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 56px 0 36px;
+  }
+  .lmctFT__wrap::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0476c4, #0c9ffd, #3fb8ff);
+  }
+  .lmctFT__inner {
+    position: relative;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .lmctFT__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+    text-align: center;
+  }
+  .lmctFT__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .lmctFT__logo {
+    height: 42px;
+    width: auto;
+    display: block;
+  }
+  .lmctFT__tag {
+    margin: 13px 0 0;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+  .lmctFT__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    background: rgba(12, 159, 253, 0.1);
+    border: 1px solid rgba(12, 159, 253, 0.3);
+    border-radius: 15px;
+    padding: 12px 22px;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .lmctFT__phone:hover {
+    transform: translateY(-2px);
+    background: rgba(12, 159, 253, 0.17);
+    border-color: rgba(12, 159, 253, 0.5);
+  }
+  .lmctFT__phoneIco {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0476c4, #0c9ffd);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 6px 16px rgba(12, 159, 253, 0.35);
+  }
+  .lmctFT__phoneIco svg {
+    width: 21px;
+    height: 21px;
+    color: #fff;
+  }
+  .lmctFT__phoneTxt {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 1.2;
+  }
+  .lmctFT__phoneTxt small {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 4px;
+  }
+  .lmctFT__phoneTxt strong {
+    font-size: 19px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.4px;
+  }
+  .lmctFT__divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 34px 0 26px;
+  }
+  .lmctFT__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    text-align: center;
+  }
+  .lmctFT__links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .lmctFT__links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+  .lmctFT__links a:hover {
+    color: #3fb8ff;
+  }
+  .lmctFT__dot {
+    color: rgba(255, 255, 255, 0.3);
+  }
+  .lmctFT__legal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .lmctFT__abn {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.3px;
+  }
+  .lmctFT__copy {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.4);
+  }
+  @media (min-width: 768px) {
+    .lmctFT__top {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+    .lmctFT__brand {
+      align-items: flex-start;
+    }
+    .lmctFT__bottom {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+    .lmctFT__legal {
+      align-items: flex-end;
+    }
+  }
+</style>
+<footer class="lmctFT__wrap">
+  <div class="lmctFT__inner">
+    <div class="lmctFT__top">
+      <div class="lmctFT__brand">
+        <img
+          class="lmctFT__logo"
+          src="https://images.clickfunnels.com/11/5808e1954343cc90744e7bcca46ae8/logo.3bf7fa51a183b716b171.png"
+          alt="LMCT+"
+        />
+        <p class="lmctFT__tag">Australia's Original &amp; Best</p>
+      </div>
+      <a class="lmctFT__phone" href="tel:1300683688">
+        <span class="lmctFT__phoneIco"
+          ><svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+            /></svg
+        ></span>
+        <span class="lmctFT__phoneTxt"
+          ><small>Customer Support</small><strong>1300 683 688</strong></span
+        >
+      </a>
+    </div>
+    <div class="lmctFT__divider"></div>
+    <div class="lmctFT__bottom">
+      <nav class="lmctFT__links">
+        <a
+          href="https://lmctplus.com/terms-and-conditions"
+          target="_blank"
+          rel="noopener"
+          >Terms and Conditions</a
+        >
+        <span class="lmctFT__dot" aria-hidden="true">&middot;</span>
+        <a
+          href="https://lmctplus.com/privacy-policy"
+          target="_blank"
+          rel="noopener"
+          >Privacy Policy</a
+        >
+      </nav>
+      <div class="lmctFT__legal">
+        <span class="lmctFT__abn">LMCT PLUS ABN 93 627 297 474</span>
+        <span class="lmctFT__copy"
+          >&copy; 2026 LMCT+. All rights reserved.</span
+        >
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- =====  END SECTION 10  |  FOOTER  ===== -->

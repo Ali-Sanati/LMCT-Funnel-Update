@@ -1,0 +1,816 @@
+<div id="lmct-member-checker">
+  <style>
+    #lmct-member-checker,
+    #lmct-member-checker * {
+      box-sizing: border-box;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    #lmct-member-checker {
+      --lmct-navy-950: #020814;
+      --lmct-navy-900: #061225;
+      --lmct-navy-850: #071a33;
+      --lmct-navy-800: #092342;
+      --lmct-blue-500: #009dff;
+      --lmct-blue-400: #21b6ff;
+      --lmct-blue-300: #67d4ff;
+      --lmct-white: #ffffff;
+      --lmct-soft: rgba(255, 255, 255, 0.82);
+      --lmct-muted: rgba(255, 255, 255, 0.58);
+      --lmct-line: rgba(103, 212, 255, 0.24);
+      --lmct-panel-line: rgba(255, 255, 255, 0.12);
+      --lmct-blue-shadow: 0 18px 42px rgba(0, 157, 255, 0.28);
+      align-items: center;
+      background:
+        radial-gradient(
+          circle at 24% 18%,
+          rgba(0, 157, 255, 0.35) 0,
+          rgba(0, 157, 255, 0.12) 28%,
+          rgba(0, 157, 255, 0) 48%
+        ),
+        linear-gradient(
+          135deg,
+          var(--lmct-navy-950) 0%,
+          var(--lmct-navy-900) 52%,
+          var(--lmct-navy-800) 100%
+        );
+      color: var(--lmct-white);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 16px;
+      width: 100%;
+    }
+
+    .lmct-check-card {
+      backdrop-filter: blur(14px);
+      background:
+        radial-gradient(
+          circle at 86% 0%,
+          rgba(33, 182, 255, 0.18) 0,
+          rgba(33, 182, 255, 0) 42%
+        ),
+        rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--lmct-panel-line);
+      border-radius: 22px;
+      box-shadow: 0 24px 80px rgba(2, 8, 20, 0.42);
+      max-width: 620px;
+      overflow: hidden;
+      padding: 34px 26px;
+      position: relative;
+      text-align: center;
+      width: 100%;
+    }
+
+    .lmct-check-card::before {
+      background:
+        linear-gradient(90deg, rgba(33, 182, 255, 0.12), transparent),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.045) 0 1px,
+          transparent 1px 76px
+        );
+      content: "";
+      inset: 0;
+      opacity: 0.42;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    .lmct-check-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .lmct-check-badge {
+      align-items: center;
+      background: rgba(33, 182, 255, 0.13);
+      border: 1px solid rgba(103, 212, 255, 0.48);
+      border-radius: 999px;
+      color: #d8f5ff;
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 800;
+      justify-content: center;
+      letter-spacing: 0;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      text-transform: uppercase;
+    }
+
+    .lmct-check-title {
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.05;
+      margin: 0 0 14px;
+      text-transform: uppercase;
+    }
+
+    .lmct-check-title span {
+      color: var(--lmct-blue-400);
+      text-shadow: 0 0 28px rgba(0, 157, 255, 0.38);
+    }
+
+    .lmct-check-copy {
+      color: var(--lmct-soft);
+      font-size: 16px;
+      line-height: 1.55;
+      margin: 0 auto 24px;
+      max-width: 500px;
+    }
+
+    .lmct-check-loader {
+      animation: lmctSpin 0.8s linear infinite;
+      border: 4px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50%;
+      border-top-color: var(--lmct-blue-400);
+      height: 46px;
+      margin: 18px auto 0;
+      width: 46px;
+    }
+
+    @keyframes lmctSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .lmct-check-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    .lmct-check-btn {
+      align-items: center;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 15px;
+      font-weight: 900;
+      justify-content: center;
+      letter-spacing: 0;
+      min-height: 52px;
+      padding: 14px 22px;
+      text-decoration: none;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .lmct-check-btn:hover,
+    .lmct-check-btn:focus {
+      transform: translateY(-2px);
+    }
+
+    .lmct-check-btn:focus-visible,
+    .lmctAppDownloadModal__close:focus-visible,
+    .lmctAppDownloadModal__storeBtn:focus-visible {
+      outline: 3px solid rgba(103, 212, 255, 0.72);
+      outline-offset: 4px;
+    }
+
+    .lmct-check-btn-primary {
+      background: linear-gradient(
+        135deg,
+        var(--lmct-blue-400) 0%,
+        #0078ff 100%
+      );
+      border: 1px solid rgba(103, 212, 255, 0.62);
+      box-shadow: var(--lmct-blue-shadow);
+      color: var(--lmct-white);
+    }
+
+    .lmct-check-btn-primary:hover,
+    .lmct-check-btn-primary:focus {
+      box-shadow: 0 24px 54px rgba(0, 157, 255, 0.38);
+    }
+
+    .lmct-check-btn-secondary {
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(33, 182, 255, 0.52);
+      color: var(--lmct-white);
+    }
+
+    .lmct-check-btn-secondary:hover,
+    .lmct-check-btn-secondary:focus {
+      background: rgba(33, 182, 255, 0.11);
+      border-color: var(--lmct-blue-300);
+      box-shadow: 0 18px 42px rgba(0, 157, 255, 0.14);
+    }
+
+    .lmct-check-form {
+      display: none;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .lmct-check-form.is-visible {
+      display: flex;
+    }
+
+    .lmct-check-input {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(103, 212, 255, 0.28);
+      border-radius: 999px;
+      color: var(--lmct-white);
+      flex: 1;
+      font-size: 15px;
+      min-height: 52px;
+      min-width: 0;
+      outline: none;
+      padding: 0 18px;
+    }
+
+    .lmct-check-input:focus {
+      border-color: var(--lmct-blue-300);
+      box-shadow: 0 0 0 4px rgba(0, 157, 255, 0.14);
+    }
+
+    .lmct-check-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .lmct-check-small {
+      color: var(--lmct-muted);
+      font-size: 12px;
+      line-height: 1.45;
+      margin-top: 18px;
+    }
+
+    .lmctAppDownloadModal,
+    .lmctAppDownloadModal * {
+      box-sizing: border-box;
+    }
+
+    .lmctAppDownloadModal {
+      align-items: center;
+      display: none;
+      font-family: Montserrat, Arial, sans-serif;
+      inset: 0;
+      justify-content: center;
+      padding: 18px;
+      position: fixed;
+      z-index: 999999;
+    }
+
+    .lmctAppDownloadModal.is-open {
+      display: flex;
+    }
+
+    .lmctAppDownloadModal__overlay {
+      background: rgba(2, 8, 20, 0.78);
+      backdrop-filter: blur(6px);
+      inset: 0;
+      position: absolute;
+    }
+
+    .lmctAppDownloadModal__panel {
+      animation: lmctAppModalIn 0.28s ease both;
+      background:
+        radial-gradient(
+          circle at 80% 10%,
+          rgba(33, 182, 255, 0.18) 0%,
+          rgba(33, 182, 255, 0) 42%
+        ),
+        #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+      color: #071827;
+      max-width: 460px;
+      padding: 34px 28px 28px;
+      position: relative;
+      text-align: center;
+      width: 100%;
+      z-index: 1;
+    }
+
+    @keyframes lmctAppModalIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .lmctAppDownloadModal__close {
+      align-items: center;
+      background: rgba(7, 24, 39, 0.08);
+      border: 0;
+      border-radius: 999px;
+      color: #071827;
+      cursor: pointer;
+      display: flex;
+      font-size: 26px;
+      height: 38px;
+      justify-content: center;
+      line-height: 1;
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      width: 38px;
+    }
+
+    .lmctAppDownloadModal__close:hover {
+      background: rgba(7, 24, 39, 0.14);
+    }
+
+    .lmctAppDownloadModal__icon {
+      align-items: center;
+      background: linear-gradient(
+        135deg,
+        var(--lmct-blue-400) 0%,
+        #0078ff 100%
+      );
+      border-radius: 18px;
+      box-shadow: 0 16px 34px rgba(0, 157, 255, 0.32);
+      color: var(--lmct-white);
+      display: flex;
+      height: 64px;
+      justify-content: center;
+      margin: 0 auto 18px;
+      width: 64px;
+    }
+
+    .lmctAppDownloadModal__icon svg {
+      height: 34px;
+      width: 34px;
+    }
+
+    .lmctAppDownloadModal__title {
+      color: #071827;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.1;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+    }
+
+    .lmctAppDownloadModal__text {
+      color: #33435c;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.45;
+      margin: 0 auto 24px;
+      max-width: 350px;
+    }
+
+    .lmctAppDownloadModal__stores {
+      display: grid;
+      gap: 12px;
+    }
+
+    .lmctAppDownloadModal__storeBtn {
+      align-items: center;
+      background: #071827;
+      border-radius: 14px;
+      color: var(--lmct-white);
+      display: flex;
+      font-size: 16px;
+      font-weight: 900;
+      gap: 12px;
+      justify-content: center;
+      letter-spacing: 0;
+      min-height: 62px;
+      padding: 14px 18px;
+      text-decoration: none;
+      transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
+    }
+
+    .lmctAppDownloadModal__storeBtn:hover,
+    .lmctAppDownloadModal__storeBtn:focus {
+      background: #000000;
+      box-shadow: 0 16px 34px rgba(7, 24, 39, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .lmctAppDownloadModal__storeBtn svg {
+      flex: 0 0 auto;
+      height: 24px;
+      width: 24px;
+    }
+
+    .lmctAppDownloadModal__note {
+      color: #6f7d91;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin: 16px 0 0;
+    }
+
+    body.lmctAppModalLocked {
+      overflow: hidden;
+    }
+
+    @media (max-width: 520px) {
+      #lmct-member-checker {
+        padding: 28px 12px;
+      }
+
+      .lmct-check-card {
+        padding: 28px 18px;
+      }
+
+      .lmct-check-form {
+        flex-direction: column;
+      }
+
+      .lmct-check-btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .lmctAppDownloadModal__panel {
+        border-radius: 20px;
+        max-width: 100%;
+        padding: 32px 20px 24px;
+      }
+
+      .lmctAppDownloadModal__title {
+        font-size: 24px;
+      }
+
+      .lmctAppDownloadModal__storeBtn {
+        font-size: 15px;
+        min-height: 58px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lmct-check-loader {
+        animation: none;
+      }
+
+      .lmct-check-btn,
+      .lmctAppDownloadModal__panel,
+      .lmctAppDownloadModal__storeBtn {
+        animation: none;
+        transition: none;
+      }
+    }
+  </style>
+
+  <div class="lmct-check-card">
+    <div class="lmct-check-badge" id="lmctBadge">Checking Membership</div>
+
+    <h1 class="lmct-check-title" id="lmctTitle">
+      Checking your <span>LMCT+</span> membership
+    </h1>
+
+    <p class="lmct-check-copy" id="lmctCopy">
+      Please wait while we check your membership status.
+    </p>
+
+    <div class="lmct-check-loader" id="lmctLoader"></div>
+
+    <form class="lmct-check-form" id="lmctEmailForm">
+      <input
+        class="lmct-check-input"
+        id="lmctEmailInput"
+        type="email"
+        placeholder="Enter your email address"
+        required
+      />
+      <button class="lmct-check-btn lmct-check-btn-primary" type="submit">
+        Check Status
+      </button>
+    </form>
+
+    <div
+      class="lmct-check-actions"
+      id="lmctActions"
+      style="display: none"
+    ></div>
+
+    <p class="lmct-check-small" id="lmctSmall">
+      This helps prevent duplicate membership purchases.
+    </p>
+  </div>
+
+  <div
+    class="lmctAppDownloadModal"
+    id="lmctAppDownloadModal"
+    aria-hidden="true"
+  >
+    <div class="lmctAppDownloadModal__overlay" data-lmct-app-modal-close></div>
+    <div
+      class="lmctAppDownloadModal__panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lmctAppDownloadModalTitle"
+    >
+      <button
+        class="lmctAppDownloadModal__close"
+        type="button"
+        aria-label="Close app download popup"
+        data-lmct-app-modal-close
+      >
+        &times;
+      </button>
+
+      <div class="lmctAppDownloadModal__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 4v10"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+          />
+          <path
+            d="m7 10 5 5 5-5"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.4"
+          />
+          <path
+            d="M5 19h14"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.4"
+          />
+        </svg>
+      </div>
+
+      <h2 class="lmctAppDownloadModal__title" id="lmctAppDownloadModalTitle">
+        Download the LMCT+ App
+      </h2>
+      <p class="lmctAppDownloadModal__text">
+        Choose your device below and download the LMCT+ app from the official
+        app store.
+      </p>
+
+      <div class="lmctAppDownloadModal__stores">
+        <a
+          class="lmctAppDownloadModal__storeBtn"
+          href="https://apps.apple.com/au/app/lmct/id1621538736"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M16.37 1.51c0 1.16-.47 2.25-1.24 3.08-.83.91-2.17 1.61-3.25 1.52-.14-1.11.39-2.29 1.14-3.14.82-.94 2.25-1.63 3.35-1.46ZM20.76 17.39c-.47 1.08-.7 1.56-1.3 2.51-.84 1.28-2.02 2.88-3.49 2.9-1.31.01-1.65-.84-3.43-.83-1.78.01-2.15.85-3.46.84-1.47-.02-2.59-1.45-3.43-2.73-2.35-3.59-2.6-7.8-1.15-10.04 1.03-1.59 2.65-2.52 4.18-2.52 1.55 0 2.53.85 3.81.85 1.24 0 2-.85 3.79-.85 1.35 0 2.78.74 3.81 2.01-3.35 1.84-2.8 6.62.67 7.86Z"
+            />
+          </svg>
+          Download on the App Store
+        </a>
+
+        <a
+          class="lmctAppDownloadModal__storeBtn"
+          href="https://play.google.com/store/apps/details?id=com.lmctmembers&amp;pli=1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M3.55 2.19c-.34.36-.55.91-.55 1.63v16.36c0 .72.21 1.27.55 1.63l.06.05L12.77 12 3.61 2.14l-.06.05Zm12.27 6.76L13.2 11.77l2.62 2.82 3.16-1.8c.9-.51.9-1.34 0-1.85l-3.16-1.99ZM12.58 12.43 3.9 21.76c.53.28 1.22.24 2-.2l9.3-5.3-2.62-2.83Zm2.62-4.69-9.3-5.3c-.78-.44-1.47-.48-2-.2l8.68 9.33 2.62-2.83Z"
+            />
+          </svg>
+          Get it on Google Play
+        </a>
+      </div>
+
+      <p class="lmctAppDownloadModal__note">Links open in a new tab.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const CONFIG = {
+        apiUrl: "https://lmctmembers.com/api/check-user-active",
+
+        // Change this to the real membership checkout / ClickFunnels / Stripe link
+        membershipCheckoutUrl:
+          "https://lmctplus.com/portal?hash=YmstnB8-SqnVqWdkQ29vpiciMjiw6OGDeh7QPM-mnAn-CvLML7XdJ0wDbnV6dw_irkRV63DFnvojYgjyZlAb4Cb7zqtNftjikdKmUMA20vqorA&utm_source=Klaviyo&utm_medium=email&utm_campaign=Email%20%231&_kx=n9IhZcGheAW3nJCpi0jisA.S9SGLM",
+
+        activeGiveawaysUrl: "https://lmctplus.com/giveaways",
+        facebookUrl: "https://www.facebook.com/LMCTPlus/",
+        supportUrl: "https://lmctplus.com/contact-support",
+
+        // Auto-redirect non-members to checkout
+        autoRedirectIfNotMember: true,
+        redirectDelayMs: 1200,
+      };
+
+      const badge = document.getElementById("lmctBadge");
+      const title = document.getElementById("lmctTitle");
+      const copy = document.getElementById("lmctCopy");
+      const loader = document.getElementById("lmctLoader");
+      const actions = document.getElementById("lmctActions");
+      const emailForm = document.getElementById("lmctEmailForm");
+      const emailInput = document.getElementById("lmctEmailInput");
+      const small = document.getElementById("lmctSmall");
+      const modal = document.getElementById("lmctAppDownloadModal");
+      let lastFocusedElement = null;
+
+      function getParam(name) {
+        return new URLSearchParams(window.location.search).get(name);
+      }
+
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function setLoading(message) {
+        badge.textContent = "Checking Membership";
+        title.innerHTML = "Checking your <span>LMCT+</span> membership";
+        copy.textContent =
+          message || "Please wait while we check your membership status.";
+        loader.style.display = "block";
+        actions.style.display = "none";
+        actions.innerHTML = "";
+        emailForm.classList.remove("is-visible");
+      }
+
+      function showMissingEmail() {
+        badge.textContent = "Email Required";
+        title.innerHTML = "Enter your <span>email</span>";
+        copy.textContent =
+          "We need your email address to check your membership status.";
+        loader.style.display = "none";
+        actions.style.display = "none";
+        emailForm.classList.add("is-visible");
+        small.textContent =
+          "Use the same email connected to your LMCT+ account.";
+      }
+
+      function showAlreadyMember(email) {
+        badge.textContent = "Already Active";
+        title.innerHTML = "You are already an <span>LMCT+</span> member";
+        copy.textContent =
+          "No need to purchase again. Your membership is already active under " +
+          email +
+          ".";
+        loader.style.display = "none";
+        emailForm.classList.remove("is-visible");
+        actions.style.display = "flex";
+        actions.innerHTML = `
+          <a class="lmct-check-btn lmct-check-btn-primary" href="#" data-lmct-app-modal-open>
+            Open LMCT+ App
+          </a>
+          <a class="lmct-check-btn lmct-check-btn-secondary" href="${CONFIG.activeGiveawaysUrl}">
+            View Active Giveaways
+          </a>
+          <a class="lmct-check-btn lmct-check-btn-secondary" href="${CONFIG.facebookUrl}" target="_blank" rel="noopener noreferrer">
+            Watch Draw Live
+          </a>
+        `;
+        small.textContent =
+          "This check helps stop duplicate membership purchases.";
+      }
+
+      function showNotMember(email) {
+        badge.textContent = "Eligible To Join";
+        title.innerHTML = "You are eligible to <span>join</span>";
+        copy.textContent = "Redirecting you to the LMCT+ membership offer.";
+        loader.style.display = "block";
+        emailForm.classList.remove("is-visible");
+        actions.style.display = "flex";
+        actions.innerHTML = `
+          <a class="lmct-check-btn lmct-check-btn-primary" href="${CONFIG.membershipCheckoutUrl}">
+            Continue To Membership
+          </a>
+        `;
+        small.textContent = "Please use the same email during checkout.";
+
+        if (CONFIG.autoRedirectIfNotMember) {
+          setTimeout(function () {
+            window.location.href = CONFIG.membershipCheckoutUrl;
+          }, CONFIG.redirectDelayMs);
+        }
+      }
+
+      function showError() {
+        badge.textContent = "Check Failed";
+        title.innerHTML = "We could not verify your <span>status</span>";
+        copy.textContent =
+          "Please try again or contact support if this keeps happening.";
+        loader.style.display = "none";
+        emailForm.classList.add("is-visible");
+        actions.style.display = "flex";
+        actions.innerHTML = `
+          <a class="lmct-check-btn lmct-check-btn-secondary" href="${CONFIG.supportUrl}">
+            Contact Support
+          </a>
+        `;
+        small.textContent =
+          "This may happen if the membership checker is temporarily unavailable.";
+      }
+
+      function openModal(event) {
+        if (event) event.preventDefault();
+        if (!modal) return;
+        lastFocusedElement = document.activeElement;
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lmctAppModalLocked");
+
+        const closeBtn = modal.querySelector(".lmctAppDownloadModal__close");
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeModal() {
+        if (!modal) return;
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lmctAppModalLocked");
+
+        if (
+          lastFocusedElement &&
+          typeof lastFocusedElement.focus === "function"
+        ) {
+          lastFocusedElement.focus();
+        }
+      }
+
+      async function checkMembership(email) {
+        if (!email || !isValidEmail(email)) {
+          showMissingEmail();
+          return;
+        }
+
+        setLoading("Checking membership status for " + email + "...");
+
+        try {
+          const response = await fetch(
+            CONFIG.apiUrl + "?email=" + encodeURIComponent(email),
+            {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+              },
+            },
+          );
+
+          if (!response.ok) {
+            throw new Error("API error: " + response.status);
+          }
+
+          const data = await response.json();
+
+          if (data && data.is_active === true) {
+            showAlreadyMember(data.email || email);
+            return;
+          }
+
+          showNotMember(data.email || email);
+        } catch (error) {
+          console.error("LMCT membership check failed:", error);
+          showError();
+        }
+      }
+
+      emailForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        checkMembership(emailInput.value.trim());
+      });
+
+      document.addEventListener("click", function (event) {
+        const openButton = event.target.closest("[data-lmct-app-modal-open]");
+        const closeButton = event.target.closest("[data-lmct-app-modal-close]");
+
+        if (openButton) {
+          openModal(event);
+          return;
+        }
+
+        if (closeButton) {
+          event.preventDefault();
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (
+          event.key === "Escape" &&
+          modal &&
+          modal.classList.contains("is-open")
+        ) {
+          closeModal();
+        }
+      });
+
+      const emailFromUrl =
+        getParam("email") ||
+        getParam("contact_email") ||
+        getParam("customer_email");
+
+      checkMembership(emailFromUrl);
+    })();
+  </script>
+</div>

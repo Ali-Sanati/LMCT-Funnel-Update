@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LMCT+ Thank You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #eef4fb;
+        --bg-deep: #dbe8f8;
+        --surface: rgba(255, 255, 255, 0.92);
+        --surface-strong: #ffffff;
+        --surface-alt: #f6faff;
+        --ink: #0b1526;
+        --muted: #5f6f86;
+        --line: rgba(13, 38, 76, 0.1);
+        --brand-1: #0476c4;
+        --brand-2: #0c9ffd;
+        --brand-3: #3fb8ff;
+        --success: #0e9f6e;
+        --danger: #eb5757;
+        --shadow-lg: 0 24px 70px rgba(8, 25, 54, 0.12);
+        --shadow-md: 0 14px 34px rgba(8, 25, 54, 0.1);
+        --shadow-sm: 0 10px 22px rgba(8, 25, 54, 0.08);
+        --radius-xl: 32px;
+        --radius-lg: 24px;
+        --radius-md: 18px;
+        --radius-sm: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        max-width: 100%;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        max-width: 100%;
+        overflow-x: hidden;
+        font-family: "Manrope", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(63, 184, 255, 0.25), transparent 32%),
+          radial-gradient(circle at top right, rgba(4, 118, 196, 0.14), transparent 24%),
+          linear-gradient(180deg, #f7fbff 0%, var(--bg) 54%, #f8fbff 100%);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(12, 46, 88, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(12, 46, 88, 0.03) 1px, transparent 1px);
+        background-size: 44px 44px;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 90%);
+        pointer-events: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .ty-page {
+        position: relative;
+        z-index: 1;
+        width: min(1220px, calc(100% - 28px));
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 28px 0 52px;
+      }
+
+      .ty-shell {
+        background: rgba(255, 255, 255, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        border-radius: 40px;
+        box-shadow: var(--shadow-lg);
+        backdrop-filter: blur(18px);
+        max-width: 100%;
+        overflow: hidden;
+      }
+
+      .ty-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        padding: 24px 30px 0;
+      }
+
+      .ty-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+        flex-wrap: wrap;
+      }
+
+      .ty-brand img {
+        width: 138px;
+        height: auto;
+      }
+
+      .ty-brand-copy {
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        line-height: 1.4;
+      }
+
+      .ty-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        max-width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 12px 18px;
+        border-radius: 999px;
+        color: #ffffff;
+        background: linear-gradient(90deg, var(--brand-1), var(--brand-2), var(--brand-3));
+        box-shadow: 0 12px 26px rgba(12, 159, 253, 0.26);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        line-height: 1.35;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .ty-status-dot {
+        width: 10px;
+        height: 10px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.16);
+      }
+
+      .ty-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) clamp(350px, 34vw, 420px);
+        gap: 24px;
+        padding: 26px 30px 34px;
+        align-items: start;
+      }
+
+      .ty-hero > * {
+        min-width: 0;
+      }
+
+      .ty-left {
+        display: grid;
+        gap: 22px;
+        min-width: 0;
+      }
+
+      .ty-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        width: fit-content;
+        padding: 11px 18px;
+        border-radius: 999px;
+        background: rgba(4, 118, 196, 0.1);
+        color: var(--brand-1);
+        font-size: 0.84rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .ty-kicker svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .ty-heading {
+        display: grid;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .ty-heading h1 {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        font-size: clamp(2.45rem, 3.15vw, 3.9rem);
+        line-height: 0.96;
+        letter-spacing: -0.075em;
+        text-transform: uppercase;
+      }
+
+      .ty-heading h1 span {
+        display: block;
+        margin-top: 10px;
+        font-size: clamp(1rem, 1.4vw, 1.45rem);
+        line-height: 1.08;
+        letter-spacing: 0.04em;
+        background: linear-gradient(180deg, var(--brand-1), var(--brand-2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .ty-heading p {
+        max-width: 58ch;
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .ty-media-card {
+        position: relative;
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        max-width: 100%;
+        background:
+          linear-gradient(180deg, rgba(7, 20, 42, 0.05), rgba(7, 20, 42, 0.45)),
+          linear-gradient(135deg, #d8e6f7, #f8fbff 54%, #ddeffd);
+        border: 1px solid rgba(255, 255, 255, 0.75);
+        box-shadow: var(--shadow-md);
+        min-height: 480px;
+      }
+
+      .ty-media-inner {
+        position: relative;
+        min-height: 480px;
+        padding: 22px;
+      }
+
+      .ty-prize-banner {
+        position: absolute;
+        top: 22px;
+        left: 22px;
+        right: 22px;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 12px 16px;
+        border-radius: 18px;
+        background: rgba(9, 24, 47, 0.88);
+        color: #ffffff;
+        backdrop-filter: blur(8px);
+      }
+
+      .ty-prize-banner strong {
+        font-size: 0.88rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        line-height: 1.3;
+        text-transform: uppercase;
+      }
+
+      .ty-prize-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+        font-size: 0.77rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .ty-prize-copy {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        bottom: 18px;
+        z-index: 3;
+        display: grid;
+        gap: 14px;
+      }
+
+      .ty-prize-copy h2 {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        font-size: clamp(1.8rem, 3vw, 3rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        color: #ffffff;
+        text-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .ty-prize-copy p {
+        margin: 0;
+        max-width: 46ch;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 0.98rem;
+        line-height: 1.6;
+      }
+
+      .ty-prize-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .ty-prize-meta span {
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        color: #ffffff;
+        backdrop-filter: blur(8px);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .ty-media-stage {
+        position: absolute;
+        inset: 0;
+      }
+
+      .ty-media-stage::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(7, 20, 42, 0.06) 0%, rgba(7, 20, 42, 0.2) 45%, rgba(7, 20, 42, 0.74) 100%),
+          radial-gradient(circle at 50% 0%, transparent 40%, rgba(7, 20, 42, 0.14) 100%);
+        z-index: 2;
+      }
+
+      .ty-media-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transform: scale(1.03);
+        transition:
+          opacity 0.7s ease,
+          transform 1.6s ease;
+      }
+
+      .ty-media-slide.is-active {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .ty-media-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .ty-dots {
+        position: absolute;
+        right: 22px;
+        bottom: 24px;
+        z-index: 4;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .ty-dot {
+        width: 10px;
+        height: 10px;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.42);
+        cursor: pointer;
+        transition:
+          transform 0.25s ease,
+          background 0.25s ease;
+      }
+
+      .ty-dot.is-active {
+        transform: scale(1.2);
+        background: #ffffff;
+      }
+
+      .ty-note-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 20px;
+        border-radius: var(--radius-lg);
+        background: linear-gradient(135deg, #09182f 0%, #102d58 100%);
+        color: #ffffff;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .ty-note-bar strong {
+        font-size: 0.92rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        line-height: 1.35;
+        text-transform: uppercase;
+      }
+
+      .ty-note-bar p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .ty-quick-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .ty-quick-card {
+        padding: 20px;
+        border-radius: 22px;
+        background: var(--surface-strong);
+        border: 1px solid rgba(13, 38, 76, 0.08);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .ty-quick-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        color: var(--brand-1);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .ty-quick-label svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .ty-quick-card strong {
+        display: block;
+        margin-bottom: 8px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.2rem;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+      }
+
+      .ty-quick-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .ty-panel {
+        position: relative;
+        display: grid;
+        gap: 18px;
+        width: 100%;
+        min-width: 0;
+      }
+
+      .ty-card {
+        background: var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.78);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-md);
+        backdrop-filter: blur(14px);
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      .ty-account-card {
+        padding: 28px;
+      }
+
+      .ty-account-head {
+        display: grid;
+        gap: 14px;
+        margin-bottom: 22px;
+        min-width: 0;
+      }
+
+      .ty-account-kicker {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(4, 118, 196, 0.1);
+        color: var(--brand-1);
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .ty-account-head h2 {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        font-size: clamp(1.6rem, 2.2vw, 2.45rem);
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+      }
+
+      .ty-account-head h2 span {
+        color: var(--brand-2);
+      }
+
+      .ty-account-head p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .ty-steps {
+        display: grid;
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+
+      .ty-step {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 14px;
+        align-items: start;
+        padding: 18px;
+        border-radius: 22px;
+        background: linear-gradient(180deg, rgba(12, 159, 253, 0.08), rgba(255, 255, 255, 0.9));
+        border: 1px solid rgba(12, 159, 253, 0.14);
+        min-width: 0;
+      }
+
+      .ty-step-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+        color: #ffffff;
+        box-shadow: 0 10px 22px rgba(12, 159, 253, 0.24);
+      }
+
+      .ty-step-icon svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .ty-step-copy {
+        display: grid;
+        gap: 6px;
+        min-width: 0;
+      }
+
+      .ty-step-copy strong {
+        font-size: 1.02rem;
+        font-weight: 800;
+      }
+
+      .ty-step-copy p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .ty-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        border: 0;
+        border-radius: 18px;
+        padding: 18px 22px;
+        background: linear-gradient(135deg, var(--brand-1), var(--brand-2) 60%, var(--brand-3));
+        color: #ffffff;
+        box-shadow: 0 16px 30px rgba(12, 159, 253, 0.28);
+        font-size: 1.1rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        transition:
+          transform 0.24s ease,
+          box-shadow 0.24s ease,
+          filter 0.24s ease;
+      }
+
+      .ty-cta:hover,
+      .ty-cta:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 34px rgba(12, 159, 253, 0.34);
+        filter: saturate(1.06);
+      }
+
+      .ty-cta:focus-visible,
+      .ty-dot:focus-visible {
+        outline: 3px solid rgba(12, 159, 253, 0.28);
+        outline-offset: 3px;
+      }
+
+      .ty-help-card,
+      .ty-social-card {
+        padding: 24px 26px;
+      }
+
+      .ty-mini-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+
+      .ty-mini-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 18px;
+        background: rgba(4, 118, 196, 0.1);
+        color: var(--brand-1);
+        flex-shrink: 0;
+      }
+
+      .ty-mini-icon svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .ty-mini-head h3 {
+        margin: 0 0 4px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.5rem;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+
+      .ty-mini-head > div,
+      .ty-social-row > div:last-child {
+        min-width: 0;
+      }
+
+      .ty-mini-head p,
+      .ty-social-card p,
+      .ty-missed p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .ty-secondary {
+        width: 100%;
+        border: 1px solid rgba(12, 159, 253, 0.18);
+        border-radius: 18px;
+        padding: 16px 20px;
+        background: #ffffff;
+        color: var(--brand-1);
+        box-shadow: var(--shadow-sm);
+        font-size: 1.05rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition:
+          transform 0.24s ease,
+          box-shadow 0.24s ease,
+          border-color 0.24s ease;
+      }
+
+      .ty-secondary:hover,
+      .ty-secondary:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 26px rgba(8, 25, 54, 0.12);
+        border-color: rgba(12, 159, 253, 0.32);
+      }
+
+      .ty-social-row {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        min-width: 0;
+      }
+
+      .ty-social-row strong {
+        display: inline-block;
+        margin-bottom: 6px;
+        font-size: 1.05rem;
+        font-weight: 800;
+      }
+
+      .ty-social-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(24, 119, 242, 0.1);
+        color: #1877f2;
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        line-height: 1.35;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .ty-missed {
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+      }
+
+      .ty-missed strong {
+        display: inline-block;
+        margin-bottom: 8px;
+        font-size: 1.12rem;
+        font-weight: 800;
+      }
+
+      .ty-details {
+        padding: 6px 30px 32px;
+      }
+
+      .ty-section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+
+      .ty-section-head h2 {
+        margin: 0 0 8px;
+        font-family: "Montserrat", sans-serif;
+        font-size: clamp(1.7rem, 3vw, 2.75rem);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+      }
+
+      .ty-section-head h2 span {
+        color: var(--brand-2);
+      }
+
+      .ty-section-head p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 62ch;
+        line-height: 1.7;
+      }
+
+      .ty-detail-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .ty-detail-card {
+        position: relative;
+        padding: 22px;
+        border-radius: 26px;
+        background: var(--surface-strong);
+        border: 1px solid rgba(13, 38, 76, 0.08);
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+        min-width: 0;
+      }
+
+      .ty-detail-card::after {
+        content: attr(data-index);
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 4.5rem;
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.08em;
+        color: rgba(12, 159, 253, 0.08);
+      }
+
+      .ty-detail-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        margin-bottom: 18px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+        color: #ffffff;
+        box-shadow: 0 10px 20px rgba(12, 159, 253, 0.22);
+      }
+
+      .ty-detail-card h3 {
+        margin: 0 0 10px;
+        font-size: 0.84rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--brand-1);
+      }
+
+      .ty-detail-card strong {
+        position: relative;
+        z-index: 1;
+        display: block;
+        margin-bottom: 8px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.28rem;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+      }
+
+      .ty-detail-card p {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .ty-pill-row {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .ty-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .ty-pill.is-live {
+        background: rgba(235, 87, 87, 0.12);
+        color: #c0392b;
+      }
+
+      .ty-pill.is-event {
+        background: rgba(12, 159, 253, 0.12);
+        color: var(--brand-1);
+      }
+
+      .ty-pill.is-cert {
+        background: rgba(14, 159, 110, 0.12);
+        color: var(--success);
+      }
+
+      .ty-pill-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .ty-bottom-band {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+        gap: 16px;
+        margin-top: 18px;
+      }
+
+      .ty-band-card {
+        padding: 22px 24px;
+        border-radius: 24px;
+        background: linear-gradient(135deg, #09182f 0%, #102d58 100%);
+        color: #ffffff;
+        box-shadow: var(--shadow-sm);
+        min-width: 0;
+      }
+
+      .ty-band-card h3 {
+        margin: 0 0 10px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 1.4rem;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+
+      .ty-band-card p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.82);
+        line-height: 1.7;
+      }
+
+      .ty-band-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .ty-band-meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .ty-band-plain {
+        background: var(--surface-strong);
+        color: var(--ink);
+        border: 1px solid rgba(13, 38, 76, 0.08);
+      }
+
+      .ty-band-plain p {
+        color: var(--muted);
+      }
+
+      [data-reveal] {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+
+      [data-reveal].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1100px) {
+        .ty-hero {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .ty-left {
+          display: contents;
+        }
+
+        .ty-detail-grid,
+        .ty-bottom-band {
+          grid-template-columns: 1fr;
+        }
+
+        .ty-heading {
+          order: 1;
+        }
+
+        .ty-panel {
+          order: 2;
+        }
+
+        .ty-media-card {
+          order: 3;
+        }
+
+        .ty-note-bar {
+          order: 4;
+        }
+
+        .ty-quick-grid {
+          order: 5;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .ty-page {
+          width: 100%;
+          padding: 6px 6px 24px;
+        }
+
+        .ty-shell {
+          border-radius: 22px;
+        }
+
+        .ty-topbar,
+        .ty-hero,
+        .ty-details {
+          padding-left: 14px;
+          padding-right: 14px;
+        }
+
+        .ty-topbar {
+          gap: 12px;
+          flex-direction: column;
+          align-items: stretch;
+          padding-top: 14px;
+        }
+
+        .ty-status {
+          width: 100%;
+          padding: 12px 14px;
+          font-size: 0.72rem;
+          letter-spacing: 0.08em;
+        }
+
+        .ty-brand {
+          gap: 10px;
+        }
+
+        .ty-brand img {
+          width: 112px;
+        }
+
+        .ty-brand-copy {
+          font-size: 0.86rem;
+        }
+
+        .ty-hero {
+          gap: 16px;
+          padding-top: 18px;
+          padding-bottom: 22px;
+        }
+
+        .ty-kicker {
+          width: 100%;
+          justify-content: center;
+          padding: 10px 14px;
+          font-size: 0.74rem;
+          letter-spacing: 0.1em;
+        }
+
+        .ty-heading {
+          gap: 12px;
+        }
+
+        .ty-heading h1 {
+          font-size: clamp(1.72rem, 6.9vw, 2.2rem);
+          line-height: 0.96;
+          letter-spacing: -0.1em;
+        }
+
+        .ty-heading h1 span {
+          margin-top: 8px;
+          font-size: 0.9rem;
+          letter-spacing: 0.08em;
+        }
+
+        .ty-heading p {
+          font-size: 0.98rem;
+          line-height: 1.65;
+        }
+
+        .ty-media-card,
+        .ty-media-inner {
+          min-height: 430px;
+        }
+
+        .ty-prize-banner {
+          top: 16px;
+          left: 16px;
+          right: 16px;
+          gap: 10px;
+          padding: 12px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .ty-prize-banner strong,
+        .ty-prize-pill {
+          font-size: 0.72rem;
+        }
+
+        .ty-prize-copy {
+          left: 16px;
+          right: 16px;
+          bottom: 16px;
+          gap: 8px;
+        }
+
+        .ty-prize-meta {
+          gap: 8px;
+        }
+
+        .ty-prize-meta span {
+          padding: 8px 10px;
+          font-size: 0.68rem;
+          letter-spacing: 0.06em;
+        }
+
+        .ty-prize-copy h2 {
+          font-size: clamp(1.4rem, 6.4vw, 1.95rem);
+        }
+
+        .ty-prize-copy p {
+          font-size: 0.92rem;
+          line-height: 1.55;
+        }
+
+        .ty-dots {
+          right: 16px;
+          bottom: 18px;
+        }
+
+        .ty-account-card,
+        .ty-help-card,
+        .ty-social-card {
+          padding: 18px;
+        }
+
+        .ty-account-head h2 {
+          font-size: clamp(1.5rem, 6.4vw, 1.95rem);
+        }
+
+        .ty-account-kicker {
+          font-size: 0.68rem;
+          letter-spacing: 0.09em;
+        }
+
+        .ty-step {
+          grid-template-columns: 1fr;
+          gap: 12px;
+          padding: 16px;
+        }
+
+        .ty-step-icon {
+          width: 44px;
+          height: 44px;
+          border-radius: 14px;
+        }
+
+        .ty-cta,
+        .ty-secondary {
+          padding: 15px 18px;
+          font-size: 1rem;
+        }
+
+        .ty-mini-head,
+        .ty-social-row {
+          align-items: flex-start;
+        }
+
+        .ty-social-chip {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .ty-quick-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .ty-quick-card {
+          padding: 18px;
+        }
+
+        .ty-quick-card strong {
+          font-size: 1.08rem;
+        }
+
+        .ty-section-head {
+          align-items: start;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .ty-section-head h2 {
+          font-size: clamp(1.7rem, 8vw, 2.35rem);
+        }
+
+        .ty-section-head p {
+          font-size: 0.95rem;
+          line-height: 1.6;
+        }
+
+        .ty-note-bar {
+          padding: 16px;
+          gap: 10px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .ty-note-bar strong {
+          font-size: 0.84rem;
+        }
+
+        .ty-note-bar p {
+          font-size: 0.92rem;
+          line-height: 1.55;
+        }
+
+        .ty-detail-grid {
+          gap: 12px;
+        }
+
+        .ty-detail-card {
+          padding: 18px;
+          border-radius: 22px;
+        }
+
+        .ty-detail-card::after {
+          top: 16px;
+          right: 16px;
+          font-size: 3.2rem;
+        }
+
+        .ty-detail-card strong {
+          font-size: 1.12rem;
+        }
+
+        .ty-bottom-band {
+          gap: 12px;
+        }
+
+        .ty-band-card {
+          padding: 18px;
+          border-radius: 20px;
+        }
+
+        .ty-band-card h3 {
+          font-size: 1.22rem;
+        }
+
+        .ty-band-meta {
+          gap: 8px;
+        }
+
+        .ty-band-meta span {
+          font-size: 0.72rem;
+          padding: 9px 10px;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .ty-heading h1 {
+          font-size: clamp(1.55rem, 6.5vw, 1.95rem);
+        }
+
+        .ty-heading h1 span {
+          font-size: 0.82rem;
+        }
+
+        .ty-prize-copy h2 {
+          font-size: clamp(1.28rem, 5.8vw, 1.72rem);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        [data-reveal],
+        .ty-media-slide,
+        .ty-cta,
+        .ty-secondary,
+        .ty-dot {
+          transition: none !important;
+          animation: none !important;
+        }
+
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="ty-page">
+      <div class="ty-shell">
+        <header class="ty-topbar" data-reveal>
+          <div class="ty-brand">
+            <img src="../assets/lmct-logo.png" alt="LMCT+" />
+            <div class="ty-brand-copy">Members Club thank-you page</div>
+          </div>
+          <div class="ty-status">
+            <span class="ty-status-dot" aria-hidden="true"></span>
+            You're officially in the draw
+          </div>
+        </header>
+
+        <section class="ty-hero">
+          <div class="ty-left">
+            <div class="ty-heading" data-reveal>
+              <div class="ty-kicker">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Entry confirmed
+              </div>
+              <h1>Congratulations<span>You're in the draw.</span></h1>
+              <p>
+                Your entry is locked in. Follow the steps on this page to
+                access your LMCT+ account, check your login details, and stay
+                ready for the draw announcement.
+              </p>
+            </div>
+
+            <figure class="ty-media-card" data-reveal>
+              <div class="ty-media-inner">
+                <div class="ty-prize-banner">
+                  <strong>Current prize line-up</strong>
+                  <span class="ty-prize-pill">Torana SS or $100,000 cash</span>
+                </div>
+
+                <div class="ty-media-stage" id="tyMediaStage" aria-live="polite">
+                  <div class="ty-media-slide is-active">
+                    <img
+                      src="../assets/cars/front%20three%20quarter.png"
+                      alt="LMCT+ giveaway car front three quarter view"
+                    />
+                  </div>
+                  <div class="ty-media-slide">
+                    <img
+                      src="../assets/cars/Front.png"
+                      alt="LMCT+ giveaway car front view"
+                    />
+                  </div>
+                  <div class="ty-media-slide">
+                    <img
+                      src="../assets/cars/Left.png"
+                      alt="LMCT+ giveaway car side view"
+                    />
+                  </div>
+                  <div class="ty-media-slide">
+                    <img
+                      src="../assets/cars/rear%20three%20quarter.png"
+                      alt="LMCT+ giveaway car rear three quarter view"
+                    />
+                  </div>
+                </div>
+
+                <div class="ty-prize-copy">
+                  <div class="ty-prize-meta">
+                    <span>Draw entry confirmed</span>
+                    <span>Members exclusive</span>
+                  </div>
+                  <h2>Classic muscle. Modern member perks.</h2>
+                  <p>
+                    A cleaner thank-you experience that keeps the excitement up
+                    while making the account-access path obvious and friction
+                    free.
+                  </p>
+                </div>
+
+                <div class="ty-dots" id="tyDots" aria-label="Prize gallery navigation">
+                  <button class="ty-dot is-active" type="button" aria-label="Show slide 1"></button>
+                  <button class="ty-dot" type="button" aria-label="Show slide 2"></button>
+                  <button class="ty-dot" type="button" aria-label="Show slide 3"></button>
+                  <button class="ty-dot" type="button" aria-label="Show slide 4"></button>
+                </div>
+              </div>
+            </figure>
+
+            <div class="ty-note-bar" data-reveal>
+              <div>
+                <strong>Please read below to access your account</strong>
+                <p>
+                  Returning customers can log in with their existing email.
+                  First-time buyers should watch for the follow-up email with
+                  account details.
+                </p>
+              </div>
+            </div>
+
+            <div class="ty-quick-grid">
+              <article class="ty-quick-card" data-reveal>
+                <div class="ty-quick-label">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  Draw Date
+                </div>
+                <strong>May 3rd, 2026 at 2:30PM AEST</strong>
+                <p>
+                  Drawn at MotorEx and streamed on Facebook Live for members.
+                </p>
+              </article>
+
+              <article class="ty-quick-card" data-reveal>
+                <div class="ty-quick-label">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.1"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.8 12.8 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.8 12.8 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                    ></path>
+                  </svg>
+                  Notification
+                </div>
+                <strong>Phone, email, and socials</strong>
+                <p>
+                  Winners are contacted across multiple channels to reduce
+                  missed claims.
+                </p>
+              </article>
+            </div>
+          </div>
+
+          <aside class="ty-panel">
+            <section class="ty-card ty-account-card" data-reveal>
+              <div class="ty-account-head">
+                <div class="ty-account-kicker">Follow these steps</div>
+                <h2>Log in to your <span>LMCT+</span> account</h2>
+                <p>
+                  Keep this simple: check whether you already have an active
+                  membership account, then use the correct path below.
+                </p>
+              </div>
+
+              <div class="ty-steps">
+                <article class="ty-step">
+                  <div class="ty-step-icon" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M20 21a8 8 0 1 0-16 0"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </div>
+                  <div class="ty-step-copy">
+                    <strong>Returning Customer?</strong>
+                    <p>
+                      If you have previously made a purchase, your account is
+                      already set up. Log in using your existing email to view
+                      your active membership.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="ty-step">
+                  <div class="ty-step-icon" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M12 5v14"></path>
+                      <path d="M5 12h14"></path>
+                      <circle cx="12" cy="12" r="9"></circle>
+                    </svg>
+                  </div>
+                  <div class="ty-step-copy">
+                    <strong>First-Time Buyer?</strong>
+                    <p>
+                      Check your email for the second message containing your
+                      login details for the LMCT+ app and website.
+                    </p>
+                  </div>
+                </article>
+              </div>
+
+              <button class="ty-cta" type="button">Log in here</button>
+            </section>
+
+            <section class="ty-card ty-help-card" data-reveal>
+              <div class="ty-mini-head">
+                <div class="ty-mini-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="3" y="4" width="18" height="14" rx="2"></rect>
+                    <path d="M8 20h8"></path>
+                    <path d="M12 16v4"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3>Need help?</h3>
+                  <p>Forgot your login details or password?</p>
+                </div>
+              </div>
+              <button class="ty-secondary" type="button">
+                Reset your password here
+              </button>
+            </section>
+
+            <section class="ty-card ty-social-card" data-reveal>
+              <div class="ty-social-row">
+                <div class="ty-mini-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M13.5 22v-8h2.7l.5-3.3h-3.2V8.6c0-.9.3-1.5 1.6-1.5h1.7V4.2c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.2v2.4H8V14h2.4v8h3.1z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Follow us on Facebook</strong>
+                  <p>
+                    Turn on post notifications and join the live event when the
+                    winner is drawn.
+                  </p>
+                </div>
+              </div>
+              <div class="ty-social-chip">Live updates &middot; winner alerts</div>
+
+              <div class="ty-missed">
+                <strong>Missed it?</strong>
+                <p>
+                  We will email the results to all entrants and post the
+                  winners on our website and app.
+                </p>
+              </div>
+            </section>
+          </aside>
+        </section>
+
+        <section class="ty-details">
+          <div class="ty-section-head" data-reveal>
+            <div>
+              <h2>Important <span>Draw Details</span></h2>
+              <p>
+                The confirmation page should reassure the user, answer the
+                obvious questions, and reduce support friction before it starts.
+              </p>
+            </div>
+          </div>
+
+          <div class="ty-detail-grid">
+            <article class="ty-detail-card" data-index="01" data-reveal>
+              <div class="ty-detail-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <h3>Draw Date</h3>
+              <strong>May 3rd, 2026, from 2:30PM AEST at MotorEx</strong>
+              <p>
+                The draw streams live on Facebook so members can watch it play
+                out in real time.
+              </p>
+              <div class="ty-pill-row">
+                <span class="ty-pill is-live"
+                  ><span class="ty-pill-dot"></span>Facebook Live</span
+                >
+                <span class="ty-pill is-event">MotorEx event</span>
+              </div>
+            </article>
+
+            <article class="ty-detail-card" data-index="02" data-reveal>
+              <div class="ty-detail-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 2L4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"></path>
+                  <polyline points="9 12 11 14 15 10"></polyline>
+                </svg>
+              </div>
+              <h3>Selection</h3>
+              <strong>Winner chosen via a government approved automated system</strong>
+              <p>
+                The digital draw process is certified by NSF Global to keep the
+                outcome fair, transparent, and audit ready.
+              </p>
+              <div class="ty-pill-row">
+                <span class="ty-pill is-cert">NSF Global certified</span>
+              </div>
+            </article>
+
+            <article class="ty-detail-card" data-index="03" data-reveal>
+              <div class="ty-detail-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.8 12.8 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.8 12.8 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+              </div>
+              <h3>Notification</h3>
+              <strong>Winners are contacted by phone, email, and social media</strong>
+              <p>
+                Multiple contact channels reduce missed claims and make the
+                post-draw process clear for every entrant.
+              </p>
+            </article>
+          </div>
+
+          <div class="ty-bottom-band">
+            <article class="ty-band-card" data-reveal>
+              <h3>What happens next</h3>
+              <p>
+                Keep an eye on your inbox for account emails, check your login,
+                and make sure you are following LMCT+ for live draw reminders
+                and result updates.
+              </p>
+              <div class="ty-band-meta">
+                <span>Check your email</span>
+                <span>Log in to LMCT+</span>
+                <span>Join the live draw</span>
+              </div>
+            </article>
+
+            <article class="ty-band-card ty-band-plain" data-reveal>
+              <h3>Built for clarity</h3>
+              <p>
+                The layout keeps the page easy to scan on desktop and mobile
+                while pushing the primary account action above the fold.
+              </p>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        var slides = Array.prototype.slice.call(
+          document.querySelectorAll(".ty-media-slide"),
+        );
+        var dots = Array.prototype.slice.call(
+          document.querySelectorAll(".ty-dot"),
+        );
+        var activeIndex = 0;
+        var timer = null;
+        var delay = 3200;
+
+        function showSlide(index) {
+          activeIndex = (index + slides.length) % slides.length;
+          slides.forEach(function (slide, slideIndex) {
+            slide.classList.toggle("is-active", slideIndex === activeIndex);
+          });
+          dots.forEach(function (dot, dotIndex) {
+            dot.classList.toggle("is-active", dotIndex === activeIndex);
+          });
+        }
+
+        function startCarousel() {
+          stopCarousel();
+          timer = window.setInterval(function () {
+            showSlide(activeIndex + 1);
+          }, delay);
+        }
+
+        function stopCarousel() {
+          if (timer) {
+            window.clearInterval(timer);
+            timer = null;
+          }
+        }
+
+        dots.forEach(function (dot, index) {
+          dot.addEventListener("click", function () {
+            showSlide(index);
+            startCarousel();
+          });
+        });
+
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) {
+            stopCarousel();
+          } else {
+            startCarousel();
+          }
+        });
+
+        showSlide(0);
+        startCarousel();
+      })();
+
+      (function () {
+        var elements = Array.prototype.slice.call(
+          document.querySelectorAll("[data-reveal]"),
+        );
+
+        if (!("IntersectionObserver" in window)) {
+          elements.forEach(function (element) {
+            element.classList.add("is-visible");
+          });
+          return;
+        }
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.16 },
+        );
+
+        elements.forEach(function (element) {
+          observer.observe(element);
+        });
+      })();
+    </script>
+  </body>
+</html>

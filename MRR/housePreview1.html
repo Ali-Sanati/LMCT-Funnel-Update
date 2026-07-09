@@ -1,0 +1,801 @@
+<!-- ╔═══════════════════════════════════════════════╗ -->
+<!-- ║  MRR FINAL REVEALS SECTION                   ║ -->
+<!-- ╚═══════════════════════════════════════════════╝ -->
+<style>
+  /* ============ SHARED WRAPPER ============ */
+  .mrrFR_section, .mrrFR_section * { box-sizing: border-box; }
+  .mrrFR_section {
+    width: 100%;
+    max-width: 700px;
+    padding:0 10px;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .mrrFR_block { width: 100%; margin-bottom: 32px; }
+  .mrrFR_block:last-child { margin-bottom: 0; }
+  /* ============ HEADINGS ============ */
+  .mrrFR_h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 22px;
+    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    margin: 0 0 10px 0;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .mrrFR_h2 img { width: 28px; height: auto; flex-shrink: 0; display: block; }
+  .mrrFR_sub {
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 15px;
+    color: #1a1a1a;
+    text-align: center;
+    margin: 0 auto 18px;
+    line-height: 1.45;
+    max-width: 520px;
+  }
+  .mrrFR_sub b, .mrrFR_sub strong { font-weight: 800 !important; }
+  /* ============ VIDEO THUMBNAIL (FINAL REVEALS) — 16:9 horizontal ============ */
+  .mrrFR_trigger {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    padding: 0;
+    background: #000;
+    cursor: pointer;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .mrrFR_trigger:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(0,0,0,.24); }
+  .mrrFR_thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mrrFR_play {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.95);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    transition: transform .25s ease, background .25s ease;
+  }
+  .mrrFR_trigger:hover .mrrFR_play {
+    transform: translate(-50%, -50%) scale(1.08);
+    background: #fff;
+  }
+  .mrrFR_play::before {
+    content: '';
+    width: 0; height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 25px solid #0C9FFD;
+    margin-left: 6px;
+  }
+  .mrrFR_play::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,.6);
+    animation: mrrFRpulse 1.8s ease-out infinite;
+  }
+  @keyframes mrrFRpulse {
+    0% { transform: scale(1); opacity: .8; }
+    100% { transform: scale(1.4); opacity: 0; }
+  }
+  /* ============ HOUSE CARDS ============ */
+  .mrrFR_houseGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+  .mrrFR_card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  }
+  .mrrFR_card:last-child { margin-bottom: 0; }
+  .mrrFR_imgWrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #1a1a1a;
+    cursor: pointer;
+    touch-action: pan-y;
+  }
+  .mrrFR_slides { position: absolute; inset: 0; }
+  .mrrFR_slide {
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity .7s ease-in-out;
+    pointer-events: none;
+  }
+  .mrrFR_slide.mrrFR_active { opacity: 1; pointer-events: auto; }
+  .mrrFR_slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mrrFR_badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: #0C9FFD;
+    color: #fff;
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(12,159,253,.3);
+  }
+  .mrrFR_expandHint {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    pointer-events: none;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .mrrFR_imgWrap:hover .mrrFR_expandHint {
+    background: rgba(0,0,0,.75);
+    transform: scale(1.08);
+  }
+  .mrrFR_expandHint svg { width: 13px; height: 13px; stroke: #fff; stroke-width: 2.5; fill: none; }
+  .mrrFR_counter {
+    position: absolute;
+    bottom: 8px; right: 8px;
+    background: rgba(0,0,0,.6);
+    color: #fff;
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 16px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .mrrFR_content {
+    width: 100%;
+    padding: 14px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .mrrFR_specs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .mrrFR_specItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    flex: 1;
+    justify-content: center;
+  }
+  .mrrFR_specItem:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 22px;
+    background: #d4d4d4;
+  }
+  .mrrFR_specIcon { width: 22px; height: 22px; object-fit: contain; display: block; }
+  .mrrFR_specNum {
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 17px;
+    color: #000;
+    line-height: 1;
+  }
+  .mrrFR_copy {
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: #1a1a1a;
+    margin: 0;
+  }
+  .mrrFR_btnGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+  .mrrFR_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 9px 10px;
+    border: 0;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .mrrFR_btnPrimary {
+    background: #0C9FFD;
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(12,159,253,.32);
+  }
+  .mrrFR_btnPrimary:hover {
+    background: #0A8FE8;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(12,159,253,.45);
+  }
+  .mrrFR_btnSecondary {
+    background: #fff;
+    color: #0C9FFD;
+    border: 1.5px solid #0C9FFD;
+  }
+  .mrrFR_btnSecondary:hover {
+    background: #f0f9ff;
+    transform: translateY(-1px);
+  }
+  .mrrFR_btn svg { width: 11px; height: 11px; stroke-width: 3; fill: none; }
+  .mrrFR_btnPrimary svg { stroke: #fff; }
+  .mrrFR_btnSecondary svg { stroke: #0C9FFD; }
+  /* ============ DESKTOP ============ */
+  @media (min-width: 770px) {
+    .mrrFR_section{max-width:1080px;}
+    .mrrFR_block { margin-bottom: 56px; }
+    .mrrFR_h2 { font-size: 34px; gap: 14px; margin-bottom: 12px; }
+    .mrrFR_h2 img { width: 42px; }
+    .mrrFR_sub { font-size: 18px; margin-bottom: 28px; max-width: 640px; }
+    .mrrFR_trigger { border-radius: 18px; }
+    .mrrFR_play { width: 100px; height: 100px; }
+    .mrrFR_play::before {
+      border-top-width: 18px; border-bottom-width: 18px;
+      border-left-width: 30px; margin-left: 7px;
+    }
+    .mrrFR_houseGrid {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 24px;
+    }
+    .mrrFR_houseGrid .mrrFR_card {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+    .mrrFR_card { border-radius: 20px; margin-bottom: 0; }
+    .mrrFR_badge { top: 20px; left: 20px; font-size: 17px; padding: 8px 18px; border-radius: 8px; }
+    .mrrFR_expandHint { top: 20px; right: 20px; width: 38px; height: 38px; }
+    .mrrFR_expandHint svg { width: 18px; height: 18px; }
+    .mrrFR_counter { bottom: 14px; right: 14px; font-size: 13px; padding: 5px 12px; }
+    .mrrFR_content { padding: 26px 28px; gap: 16px; }
+    .mrrFR_specItem { gap: 10px; }
+    .mrrFR_specItem:not(:last-child)::after { height: 32px; }
+    .mrrFR_specIcon { width: 36px; height: 36px; }
+    .mrrFR_specNum { font-size: 26px; }
+    .mrrFR_copy { font-size: 16px; }
+    .mrrFR_btnGroup { flex-direction: column; gap: 10px; }
+    .mrrFR_btn { font-size: 13px; padding: 12px 16px; border-radius: 9px; gap: 8px; }
+    .mrrFR_btn svg { width: 12px; height: 12px; }
+  }
+  /* ============ VIDEO MODAL ============ */
+  .mrrFR_modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity .25s ease;
+  }
+  .mrrFR_modal.mrrFR_modalOpen { display: flex; opacity: 1; }
+  .mrrFR_modalInner {
+    position: relative;
+    width: auto;
+    height: 90vh;
+    max-height: 90vh;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+  }
+  .mrrFR_video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    background: #000;
+  }
+  .mrrFR_close {
+    position: absolute;
+    top: -48px; right: 0;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.15);
+    border: 0;
+    cursor: pointer;
+    transition: background .2s ease;
+  }
+  .mrrFR_close:hover { background: rgba(255,255,255,.3); }
+  .mrrFR_close::before, .mrrFR_close::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 20px; height: 2px;
+    background: #fff;
+  }
+  .mrrFR_close::before { transform: translate(-50%, -50%) rotate(45deg); }
+  .mrrFR_close::after  { transform: translate(-50%, -50%) rotate(-45deg); }
+  @media (max-width: 770px) {
+    .mrrFR_modal { padding: 16px; }
+    .mrrFR_modalInner {
+      height: auto;
+      width: 100%;
+      max-width: calc(56.25vh);
+    }
+    .mrrFR_close { top: -44px; right: 4px; }
+  }
+  /* ============ IMAGE LIGHTBOX (CAROUSEL) ============ */
+  .mrrFR_lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99998;
+    opacity: 0;
+    transition: opacity .25s ease;
+  }
+  .mrrFR_lightbox.mrrFR_lbOpen { display: flex; opacity: 1; }
+  .mrrFR_lbInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+  }
+  .mrrFR_lbImg {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+  }
+  .mrrFR_lbClose {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.15);
+    border: 0;
+    cursor: pointer;
+    z-index: 2;
+    transition: background .2s ease;
+  }
+  .mrrFR_lbClose:hover { background: rgba(255,255,255,.3); }
+  .mrrFR_lbClose::before, .mrrFR_lbClose::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 22px; height: 2px;
+    background: #fff;
+  }
+  .mrrFR_lbClose::before { transform: translate(-50%, -50%) rotate(45deg); }
+  .mrrFR_lbClose::after  { transform: translate(-50%, -50%) rotate(-45deg); }
+  .mrrFR_lbArrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.15);
+    border: 0;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s ease;
+  }
+  .mrrFR_lbArrow:hover { background: rgba(255,255,255,.3); }
+  .mrrFR_lbArrowPrev { left: 16px; }
+  .mrrFR_lbArrowNext { right: 16px; }
+  .mrrFR_lbArrow svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2.5; fill: none; }
+  .mrrFR_lbCounter {
+    position: absolute;
+    bottom: 16px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,.6);
+    color: #fff;
+    font-family: 'Mona Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+  @media (max-width: 767px) {
+    .mrrFR_lbInner { padding: 70px 12px; }
+    .mrrFR_lbArrow { width: 40px; height: 40px; }
+    .mrrFR_lbArrowPrev { left: 8px; }
+    .mrrFR_lbArrowNext { right: 8px; }
+    .mrrFR_lbArrow svg { width: 18px; height: 18px; }
+    .mrrFR_lbClose { top: 12px; right: 12px; }
+  }
+</style>
+<div class="mrrFR_section">
+  <!-- ============ BLOCK 1: WATCH THE FINAL REVEALS ============ -->
+  <div class="mrrFR_block">
+    <!--
+    <h2 class="mrrFR_h2">
+      <img src="https://images.clickfunnels.com/c8/d65d37c1b64f45928bd64bd2f4897b/Group-1618878127.png" alt="">
+      Watch The Final Reveals
+    </h2>
+    <p class="mrrFR_sub">Explore both home that 2 lucky Aussies will <b>WIN!</b></p>
+-->
+    <button class="mrrFR_trigger" type="button" data-mrrFR-video="reveals" aria-label="Play final reveals video">
+      <img class="mrrFR_thumb"
+           src="https://images.clickfunnels.com/d3/7d4b3442074a1ea77e1bb2ec4963be/thumbies.jpg"
+           alt="The Final Reveals">
+      <span class="mrrFR_play"></span>
+    </button>
+  </div>
+  <!-- ============ BLOCK 2: EXPLORE THE TWO HOMES ============ -->
+  <div class="mrrFR_block">
+    <h2 class="mrrFR_h2">The Wait Is Finally Over</h2>
+    <p class="mrrFR_sub">We're looking for <b>TWO WINNERS</b>, each person will win one of the 2 houses below or $2M cash!</p>
+    <div class="mrrFR_houseGrid">
+      <!-- HOUSE 1 -->
+      <div class="mrrFR_card" data-mrrFR-card="house1">
+      <div class="mrrFR_imgWrap" data-mrrFR-carousel="house1">
+        <div class="mrrFR_badge">HOUSE 1</div>
+        <div class="mrrFR_expandHint">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+        <div class="mrrFR_slides">
+          <div class="mrrFR_slide mrrFR_active"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TABR6csOMn7jSfJEgPAYpXTDzU6isrMbVyhGBl" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAjfBMJmIxBA0baz4isnQuMo2FJpOlXDr5NHhy" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAAToQLD5DQ2g8iSPXmspOkJt90jwzBFIfV63R" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA7LQfd0EbSfDl5MPcmoQBN12ArnsK90JCj6de" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAG3WZVhlRFyBJzXh8fnmakLGU0ZQsSjCPrqHc" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA9B2bSJZJHLWDYQg2vynGZ0bmewtUjOsIxlBC" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAf48IokQBgt9eQXNDpoYuSznaV5ORjZlUm6yh" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TArbUmqgdam3X5gt6MLfRh7NkYlc1FBAJxQiTb" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAKEBTwwViZT3GjomxyAqtupBbRNdcfFlv4WX5" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TATEcPBCFE01f3domgtVYbsSi8R6xqKOweNU9L" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAFJz5fVW0k9TAn5MZOf7hgiXVDRqexE4IUaNJ" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAyfWlCIkqRusBJdiS2KPQmkYTOFevWaVDgCIb" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAhd2UfytPRvXhKzeFflSWs3GYiMNZdBjpEcmH" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAlURkrrjm795ZuRhWf3CvTq48PFM6Owyat0ol" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAXxeGI9c6WbxZRT4DKVBp9nlvCUtIz58Ocr3M" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA8Ls9uS0UwOErHMWZVeIxksptfGuqF7vcbi0l" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAB4eUGLaMn7jSfJEgPAYpXTDzU6isrMbVyhGB" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAueTdW9yLF0YQJPOvsX4BopWfTgRzZc6AUiw9" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAjBKKuRIxBA0baz4isnQuMo2FJpOlXDr5NHhy" alt=""></div>
+        </div>
+        <div class="mrrFR_counter"><span class="mrrFR_counterCur">1</span> / <span class="mrrFR_counterTot">19</span></div>
+      </div>
+      <div class="mrrFR_content">
+        <div class="mrrFR_specs">
+          <div class="mrrFR_specItem">
+            <img class="mrrFR_specIcon" src="https://images.clickfunnels.com/5d/137e29f4ff4fe69e001c3cb205428f/Bed.png" alt="">
+            <span class="mrrFR_specNum">3</span>
+          </div>
+          <div class="mrrFR_specItem">
+            <img class="mrrFR_specIcon" src="https://images.clickfunnels.com/b1/4affa0c8b243dcb02320e4d4f929fa/Bath.png" alt="">
+            <span class="mrrFR_specNum">3</span>
+          </div>
+          <div class="mrrFR_specItem">
+            <img class="mrrFR_specIcon" src="https://images.clickfunnels.com/e7/add6d1772542e6bed7f1b28a659bec/ion_car-sport-outline.png" alt="">
+            <span class="mrrFR_specNum">2</span>
+          </div>
+        </div>
+        <p class="mrrFR_copy">Built by Emma & Michelle, Nathan & Julia delivers the ultimate modern family dream home with warm finishes, bright open spaces, natural textures and luxury comfort throughout. Every room feels inviting, premium and ready to move straight into.</p>
+        <div class="mrrFR_btnGroup">
+          <button class="mrrFR_btn mrrFR_btnPrimary" type="button" data-mrrFR-gallery="house1">
+            VIEW HOUSE
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+          <button class="mrrFR_btn mrrFR_btnSecondary" type="button" data-mrrFR-video="house1">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            PLAY REVEAL
+          </button>
+        </div>
+      </div>
+      </div>
+      <!-- HOUSE 2 -->
+      <div class="mrrFR_card" data-mrrFR-card="house2">
+      <div class="mrrFR_imgWrap" data-mrrFR-carousel="house2">
+        <div class="mrrFR_badge">HOUSE 2</div>
+        <div class="mrrFR_expandHint">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
+        <div class="mrrFR_slides">
+          <div class="mrrFR_slide mrrFR_active"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TABxgTpLMn7jSfJEgPAYpXTDzU6isrMbVyhGBl" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAluO7Ksjm795ZuRhWf3CvTq48PFM6Owyat0ol" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA7Vx67UEbSfDl5MPcmoQBN12ArnsK90JCj6de" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAIc47dmYyNWvUcrQm04lkDiaspXg29CLSwOFY" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA51stZfL3i4dM3arhR6WDyJA7ncIUzsVEHteB" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAWPnqhusXdl7BstIkrUwSR9EjH0ZxaKYNobi4" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA5WZh2l3i4dM3arhR6WDyJA7ncIUzsVEHteBo" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TArp7rnC6dam3X5gt6MLfRh7NkYlc1FBAJxQiT" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAo7g2PS564uFaPAYVthBX3UgS1xylcEjdCWZT" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAas3mXc7DCduUXgrbkaPNHS4OhyBLWvjc98ZI" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TABljj8fMn7jSfJEgPAYpXTDzU6isrMbVyhGBl" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAMucIvWCsTry60SFYxfuZiQAn24Dsc1gd9ezH" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAyZwjZBLkqRusBJdiS2KPQmkYTOFevWaVDgCI" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TABN9KNoMn7jSfJEgPAYpXTDzU6isrMbVyhGBl" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAFnTq8mW0k9TAn5MZOf7hgiXVDRqexE4IUaNJ" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAf6vz31QBgt9eQXNDpoYuSznaV5ORjZlUm6yh" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAWd4EtaXdl7BstIkrUwSR9EjH0ZxaKYNobi4J" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TArMTnhQdam3X5gt6MLfRh7NkYlc1FBAJxQiTb" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAN2Nu7v8YB6278ykWltZDbHdza3Mx15em4fqv" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA00ulh7o5XfmFSksqJT43IYe7tHgG0npyQbvR" alt=""></div>
+          <div class="mrrFR_slide"><img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAkl6qoT9VpHlsMubPZISCLNiYGAF5Ovdx17fK" alt=""></div>
+        </div>
+        <div class="mrrFR_counter"><span class="mrrFR_counterCur">1</span> / <span class="mrrFR_counterTot">21</span></div>
+      </div>
+      <div class="mrrFR_content">
+        <div class="mrrFR_specs">
+          <div class="mrrFR_specItem">
+            <img class="mrrFR_specIcon" src="https://images.clickfunnels.com/5d/137e29f4ff4fe69e001c3cb205428f/Bed.png" alt="">
+            <span class="mrrFR_specNum">4</span>
+          </div>
+          <div class="mrrFR_specItem">
+            <img class="mrrFR_specIcon" src="https://images.clickfunnels.com/b1/4affa0c8b243dcb02320e4d4f929fa/Bath.png" alt="">
+            <span class="mrrFR_specNum">2</span>
+          </div>
+          <div class="mrrFR_specItem">
+            <img class="mrrFR_specIcon" src="https://images.clickfunnels.com/e7/add6d1772542e6bed7f1b28a659bec/ion_car-sport-outline.png" alt="">
+            <span class="mrrFR_specNum">2</span>
+          </div>
+        </div>
+        <p class="mrrFR_copy">Buit by Franky & Isaac, Mitch & Shaz takes things to another level with a bold luxury-resort vibe featuring darker tones, designer finishes, statement lighting and high-end entertaining spaces that feel like a private retreat.</p>
+        <div class="mrrFR_btnGroup">
+          <button class="mrrFR_btn mrrFR_btnPrimary" type="button" data-mrrFR-gallery="house2">
+            VIEW HOUSE
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+          <button class="mrrFR_btn mrrFR_btnSecondary" type="button" data-mrrFR-video="house2">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            PLAY REVEAL
+          </button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ============ SHARED VIDEO MODAL ============ -->
+<div class="mrrFR_modal" id="mrrFRmodal" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="mrrFR_modalInner">
+    <button class="mrrFR_close" id="mrrFRclose" aria-label="Close video"></button>
+    <video class="mrrFR_video" id="mrrFRvideo" playsinline controls preload="metadata">
+      <source src="" type="video/mp4">
+    </video>
+  </div>
+</div>
+<!-- ============ SHARED IMAGE LIGHTBOX ============ -->
+<div class="mrrFR_lightbox" id="mrrFRlightbox" role="dialog" aria-modal="true" aria-label="House gallery">
+  <div class="mrrFR_lbInner">
+    <button class="mrrFR_lbClose" id="mrrFRlbClose" aria-label="Close gallery"></button>
+    <button class="mrrFR_lbArrow mrrFR_lbArrowPrev" id="mrrFRlbPrev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <img class="mrrFR_lbImg" id="mrrFRlbImg" src="" alt="">
+    <button class="mrrFR_lbArrow mrrFR_lbArrowNext" id="mrrFRlbNext" aria-label="Next image">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    <div class="mrrFR_lbCounter"><span id="mrrFRlbCur">1</span> / <span id="mrrFRlbTot">1</span></div>
+  </div>
+</div>
+<script>
+  window.addEventListener('load', function() {
+    /* ============ CAROUSEL LOGIC ============ */
+    var galleryData = {};
+    var cards = document.querySelectorAll('[data-mrrFR-card]');
+    cards.forEach(function(card) {
+      var key = card.getAttribute('data-mrrFR-card');
+      var carousel = card.querySelector('[data-mrrFR-carousel]');
+      if (!carousel) return;
+      var slides = carousel.querySelectorAll('.mrrFR_slide');
+      var counterCur = carousel.querySelector('.mrrFR_counterCur');
+      var counterTot = carousel.querySelector('.mrrFR_counterTot');
+      var total = slides.length;
+      var current = 0;
+      var autoTimer = null;
+      var autoDelay = 4000;
+      var srcs = [];
+      slides.forEach(function(s) {
+        var img = s.querySelector('img');
+        if (img) srcs.push(img.src);
+      });
+      galleryData[key] = srcs;
+      if (counterTot) counterTot.textContent = total;
+      function showSlide(index) {
+        slides.forEach(function(slide, i) {
+          if (i === index) slide.classList.add('mrrFR_active');
+          else slide.classList.remove('mrrFR_active');
+        });
+        if (counterCur) counterCur.textContent = (index + 1);
+        current = index;
+      }
+      function next() { showSlide((current + 1) % total); }
+      function prev() { showSlide((current - 1 + total) % total); }
+      function startAuto() { stopAuto(); autoTimer = setInterval(next, autoDelay); }
+      function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+      carousel.addEventListener('mouseenter', stopAuto);
+      carousel.addEventListener('mouseleave', startAuto);
+      /* swipe support on preview carousel */
+      var touchStartX = 0;
+      var touchStartY = 0;
+      var touchMoved = false;
+      var swipeFired = false;
+      carousel.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        touchMoved = false;
+        swipeFired = false;
+        stopAuto();
+      }, { passive: true });
+      carousel.addEventListener('touchmove', function(e) {
+        var dx = Math.abs(e.changedTouches[0].screenX - touchStartX);
+        var dy = Math.abs(e.changedTouches[0].screenY - touchStartY);
+        if (dx > 8 || dy > 8) touchMoved = true;
+      }, { passive: true });
+      carousel.addEventListener('touchend', function(e) {
+        var diffX = touchStartX - e.changedTouches[0].screenX;
+        var diffY = touchStartY - e.changedTouches[0].screenY;
+        if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX > 0) next(); else prev();
+          swipeFired = true;
+        }
+        startAuto();
+      }, { passive: true });
+      carousel.addEventListener('click', function(e) {
+        if (swipeFired || touchMoved) { swipeFired = false; return; }
+        openLightbox(srcs, current);
+      });
+      if (total > 1) startAuto();
+    });
+    /* ============ VIDEO MODAL LOGIC ============ */
+    var videoSources = {
+      reveals: 'https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA7wrAQXEbSfDl5MPcmoQBN12ArnsK90JCj6de',
+      house1:  'https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAFrQQwPW0k9TAn5MZOf7hgiXVDRqexE4IUaNJ',
+      house2:  'https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAsLfD5Tc4zicOELYeXxC7daRNDjv5oZATVG9m'
+    };
+    var modal   = document.getElementById('mrrFRmodal');
+    var closeBtn = document.getElementById('mrrFRclose');
+    var video   = document.getElementById('mrrFRvideo');
+    var source  = video.querySelector('source');
+    var videoTriggers = document.querySelectorAll('[data-mrrFR-video]');
+    function openVideoModal(key) {
+      var src = videoSources[key];
+      if (!src) return;
+      source.setAttribute('src', src);
+      video.load();
+      modal.classList.add('mrrFR_modalOpen');
+      document.body.style.overflow = 'hidden';
+      try { video.currentTime = 0; video.play(); } catch (e) {}
+    }
+    function closeVideoModal() {
+      modal.classList.remove('mrrFR_modalOpen');
+      document.body.style.overflow = '';
+      try { video.pause(); } catch (e) {}
+    }
+    videoTriggers.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        openVideoModal(btn.getAttribute('data-mrrFR-video'));
+      });
+    });
+    closeBtn.addEventListener('click', closeVideoModal);
+    modal.addEventListener('click', function(e) { if (e.target === modal) closeVideoModal(); });
+    /* ============ GALLERY BUTTON TRIGGERS ============ */
+    var galleryTriggers = document.querySelectorAll('[data-mrrFR-gallery]');
+    galleryTriggers.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var key = btn.getAttribute('data-mrrFR-gallery');
+        if (galleryData[key]) openLightbox(galleryData[key], 0);
+      });
+    });
+    /* ============ IMAGE LIGHTBOX LOGIC ============ */
+    var lightbox = document.getElementById('mrrFRlightbox');
+    var lbImg = document.getElementById('mrrFRlbImg');
+    var lbClose = document.getElementById('mrrFRlbClose');
+    var lbPrev = document.getElementById('mrrFRlbPrev');
+    var lbNext = document.getElementById('mrrFRlbNext');
+    var lbCur = document.getElementById('mrrFRlbCur');
+    var lbTot = document.getElementById('mrrFRlbTot');
+    var lbSources = [];
+    var lbIndex = 0;
+    function openLightbox(sources, startIdx) {
+      lbSources = sources;
+      lbIndex = startIdx || 0;
+      lbTot.textContent = lbSources.length;
+      updateLightboxImg();
+      lightbox.classList.add('mrrFR_lbOpen');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('mrrFR_lbOpen');
+      document.body.style.overflow = '';
+    }
+    function updateLightboxImg() {
+      lbImg.src = lbSources[lbIndex];
+      lbCur.textContent = lbIndex + 1;
+    }
+    function lbNextImg() {
+      lbIndex = (lbIndex + 1) % lbSources.length;
+      updateLightboxImg();
+    }
+    function lbPrevImg() {
+      lbIndex = (lbIndex - 1 + lbSources.length) % lbSources.length;
+      updateLightboxImg();
+    }
+    lbClose.addEventListener('click', closeLightbox);
+    lbNext.addEventListener('click', function(e) { e.stopPropagation(); lbNextImg(); });
+    lbPrev.addEventListener('click', function(e) { e.stopPropagation(); lbPrevImg(); });
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox || e.target.classList.contains('mrrFR_lbInner')) closeLightbox();
+    });
+    var lbTouchStartX = 0;
+    lightbox.addEventListener('touchstart', function(e) {
+      lbTouchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', function(e) {
+      var diff = lbTouchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 40) { if (diff > 0) lbNextImg(); else lbPrevImg(); }
+    }, { passive: true });
+    document.addEventListener('keydown', function(e) {
+      if (modal.classList.contains('mrrFR_modalOpen')) {
+        if (e.key === 'Escape') closeVideoModal();
+        return;
+      }
+      if (lightbox.classList.contains('mrrFR_lbOpen')) {
+        if (e.key === 'Escape') closeLightbox();
+        else if (e.key === 'ArrowRight') lbNextImg();
+        else if (e.key === 'ArrowLeft') lbPrevImg();
+      }
+    });
+  });
+</script>

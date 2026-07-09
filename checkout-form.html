@@ -1,0 +1,809 @@
+<!-- ============================================
+     LMCT+ Petrol - Tier -> Product Sync
+     Keeps the checkout product radios aligned
+     with the selected susTier tab.
+     ============================================ -->
+<script>
+  (function () {
+    var lmctTierProducts = {
+      fuel: "5073572",
+      full: "5073573",
+    };
+    var lmctTierSectionId = "susTier";
+    var lmctRetryTimer = null;
+
+    function lmctNormalizeTier(tier) {
+      return tier === "full" ? "full" : "fuel";
+    }
+
+    function lmctGetCurrentTier() {
+      var section = document.getElementById(lmctTierSectionId);
+      if (!section) return "fuel";
+      return lmctNormalizeTier(section.getAttribute("data-tier"));
+    }
+
+    function lmctGetProductRadios() {
+      return $(
+        '.o2step_step2 input[name="purchase[product_id]"], [data-de-type="orpo"] input[name="purchase[product_id]"]',
+      ).not("#cfAR input");
+    }
+
+    function lmctScheduleRetry(tier) {
+      clearTimeout(lmctRetryTimer);
+      lmctRetryTimer = setTimeout(function () {
+        lmctSelectTierProduct(tier);
+      }, 200);
+    }
+
+    function lmctSelectTierProduct(tier) {
+      var normalizedTier = lmctNormalizeTier(tier);
+      var productId = lmctTierProducts[normalizedTier];
+      var $allRadios = lmctGetProductRadios();
+
+      if (!productId) return;
+
+      if (!$allRadios.length) {
+        lmctScheduleRetry(normalizedTier);
+        return;
+      }
+
+      clearTimeout(lmctRetryTimer);
+
+      $allRadios.each(function () {
+        var $radio = $(this);
+        var isMatch = $radio.val() === productId;
+        var $row = $radio.closest(".elOrderProductOptinProducts");
+
+        if ($row.length) {
+          $row.toggle(isMatch);
+          $row.removeClass("checked-item");
+        }
+
+        if (!isMatch) {
+          $radio.prop("checked", false);
+        }
+      });
+
+      var $targetRadio = $allRadios
+        .filter('[value="' + productId + '"]')
+        .first();
+      if (!$targetRadio.length) return;
+
+      $targetRadio.prop("checked", true).trigger("change").trigger("click");
+      $targetRadio
+        .closest(".elOrderProductOptinProducts")
+        .addClass("checked-item");
+
+      $('#cfAR input[name="purchase[product_ids][]"]').each(function () {
+        $(this).prop("checked", $(this).val() === productId);
+      });
+
+      document.body.setAttribute("data-lmct-tier", normalizedTier);
+
+      if (typeof rebuildOrderSummary === "function") {
+        rebuildOrderSummary();
+      }
+
+      $(document).trigger("cfpt:cart-updated");
+    }
+
+    function lmctSyncFromTier(tier) {
+      lmctSelectTierProduct(tier || lmctGetCurrentTier());
+    }
+
+    function lmctBindTierSection() {
+      var section = document.getElementById(lmctTierSectionId);
+      if (!section) return;
+
+      section.addEventListener("tierchange", function (event) {
+        lmctSyncFromTier(event.detail && event.detail.tier);
+      });
+
+      section.addEventListener("click", function (event) {
+        var button = event.target.closest(".sus-toggle-btn");
+        if (!button) return;
+
+        setTimeout(function () {
+          lmctSyncFromTier(button.getAttribute("data-tier-target"));
+        }, 0);
+      });
+
+      if (window.MutationObserver) {
+        var observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (mutation.attributeName === "data-tier") {
+              lmctSyncFromTier(section.getAttribute("data-tier"));
+            }
+          });
+        });
+
+        observer.observe(section, {
+          attributes: true,
+          attributeFilter: ["data-tier"],
+        });
+      }
+    }
+
+    $(function () {
+      lmctBindTierSection();
+
+      setTimeout(function () {
+        lmctSyncFromTier();
+      }, 400);
+    });
+
+    $(document).on(
+      "click",
+      '.o2step_step1 a, .o2step_step1 button, .o2step_step1 input[type="submit"]',
+      function () {
+        setTimeout(function () {
+          lmctSyncFromTier();
+        }, 350);
+      },
+    );
+  })();
+</script>
+
+<script>
+  $(document).ready(function () {
+    function syncCheckbox() {
+      var step1Hidden = $(".o2step_step1").css("display") === "none";
+      $("#tmp_cb_headline1-37291").toggle(step1Hidden);
+    }
+    syncCheckbox();
+    setTimeout(syncCheckbox, 400);
+    $(document).on("click", "a, button, input", function () {
+      setTimeout(syncCheckbox, 150);
+      setTimeout(syncCheckbox, 500);
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function () {
+    var $checkbox = $("#tmp_cb_headline1-37291").find('input[type="checkbox"]');
+    // Only gate step 2's button, not step 1's "continue"
+    var $submitBtn = $(
+      '.o2step_step2 .elBTN, .o2step_step2 .elButton, .o2step_step2 button[type="submit"]',
+    );
+
+    function toggleBtn() {
+      if ($checkbox.is(":checked")) {
+        $submitBtn.css({
+          opacity: "1",
+          "pointer-events": "auto",
+          cursor: "pointer",
+        });
+      } else {
+        $submitBtn.css({
+          opacity: "0.5",
+          "pointer-events": "none",
+          cursor: "not-allowed",
+        });
+      }
+    }
+
+    toggleBtn();
+    $checkbox.on("change", toggleBtn);
+
+    // Belt-and-braces: block the form submit if somehow bypassed (only on step 2)
+    $("#tmp_order2step-95906")
+      .find("form")
+      .on("submit", function (e) {
+        var onStep2 = $(".o2step_step2").is(":visible");
+        if (onStep2 && !$checkbox.is(":checked")) {
+          e.preventDefault();
+          alert("Please accept the Terms & Conditions to continue.");
+          return false;
+        }
+      });
+  });
+</script>
+
+<script>
+  /**************************
+   * Copyright 2023 FunnelCare LLC, All Rights Reserved
+   * Do not share, or distribute this code without author's consent.
+   * This copyright notice must remain in place whenever using
+   * this code - DO NOT REMOVE
+   * Author - Tareq Mahmud
+   * Website: https://www.funnelcare.net
+   **************************/
+  $(function () {
+    $(".elOS1Shipping").hide();
+    var prodMap = {
+      bronze: ["5033190", "5033198"],
+      silver: ["5033193", "5033199"],
+      gold: ["5033195", "5033201"],
+    };
+
+    $('[data-title*="css-order-"]').on("click", function (e) {
+      $(".elOrderProductOptions .elOrderProductOptinProductName").hide();
+      var package = $(this).attr("data-title").split("-").pop();
+      localStorage.setItem("selected_package", package);
+      showDynamicPackage(package);
+      $('[data-title*="open-popup"] a').click();
+      $('input[value="' + prodMap[package][0] + '"]:not(#cfAR input)')
+        .first()
+        .click();
+      rebuildOrderSummary();
+    });
+
+    function showDynamicPackage(package) {
+      console.log(package);
+      if (package == "gold") {
+        $(".elOS1Shipping").hide();
+      } else {
+        $(".elOS1Shipping").hide();
+      }
+      var prodArray = prodMap[package];
+      console.log(prodArray);
+      $(
+        '[data-de-type*="orpo"] input[name="purchase[product_id]"], .o2step_step2 input[name="purchase[product_id]"]',
+      ).each(function () {
+        if (prodArray.indexOf($(this).val()) > -1) {
+          $(this).parents('[data-cf-product-template="true"]').show();
+        } else {
+          $(this).parents('[data-cf-product-template="true"]').hide();
+        }
+      });
+
+      rebuildOrderSummary();
+    }
+
+    //$("tr.elOrderProductOptinProductName").after('<tr class="tr-spacer"/>');
+    $('[name="purchase[product_id]"]').each(function () {
+      $(this)
+        .parents(".elOrderProductOptinProducts")
+        .css({
+          "margin-top": "10px",
+          padding: "5px",
+          border: "1px solid rgba(0,0,0,0.2)",
+          "border-radius": "20px",
+          cursor: "pointer",
+          display: "block",
+        });
+    });
+
+    $(".elOrderProductOptinProducts").each(function () {
+      if ($(this).find("input").is(":checked")) {
+        $(this).addClass("checked-item");
+      }
+    });
+
+    $(".elOrderProductOptinProductName input").change(function () {
+      if ($(this).is(":checked")) {
+        $(".elOrderProductOptinProducts").removeClass("checked-item");
+        $(this)
+          .parents(".elOrderProductOptinProducts")
+          .addClass("checked-item");
+      }
+    });
+  });
+</script>
+
+<!-- ===== APPLE PAY / ANDROID PAY RELOCATION INTO STEP 2 ===== -->
+<script>
+  /**************************
+   * Move Apple Pay / Android Pay element into Step 2 of the 2-step order form,
+   * positioned BELOW the credit card form as an express checkout option.
+   **************************/
+  $(function () {
+    var applePaySelector = "#tmp_oapap-74616";
+    var step2CardFormSelector =
+      "#tmp_order2step-95906 .o2step_step2 .elCreditCardForm";
+
+    function moveApplePay() {
+      var $applePay = $(applePaySelector);
+      var $target = $(step2CardFormSelector);
+
+      if (
+        $applePay.length &&
+        $target.length &&
+        !$target.next(".express-checkout-wrap").length
+      ) {
+        var $wrap = $('<div class="express-checkout-wrap"></div>');
+        var $label = $(
+          '<div class="express-checkout-label"><span>OR EXPRESS CHECKOUT</span></div>',
+        );
+        $wrap.append($label);
+        $target.after($wrap);
+        $applePay.appendTo($wrap);
+      }
+    }
+
+    // Initial move
+    moveApplePay();
+
+    // Re-check when user clicks the step 1 continue button (step 2 becomes visible)
+    $(document).on(
+      "click",
+      '.o2step_step1 a, .o2step_step1 button, .o2step_step1 input[type="submit"]',
+      function () {
+        setTimeout(moveApplePay, 300);
+        setTimeout(moveApplePay, 800);
+      },
+    );
+  });
+</script>
+
+<style>
+  /* Express Checkout wrapper */
+  .express-checkout-wrap {
+    margin: 20px 0 15px 0;
+    padding: 0 5px;
+  }
+
+  /* "OR EXPRESS CHECKOUT" divider label with lines on either side */
+  .express-checkout-label {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #888;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+
+  .express-checkout-label::before,
+  .express-checkout-label::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .express-checkout-label span {
+    padding: 0 12px;
+  }
+
+  .express-checkout-wrap #tmp_oapap-74616 {
+    margin: 0 auto !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+</style>
+<!-- ===== END APPLE PAY RELOCATION ===== -->
+
+<style>
+  .activeRadioProduct {
+    background: none !important;
+  }
+
+  .elOrderProductOptinProducts label {
+    font-weight: 700 !important;
+    font-size: 10px !important;
+  }
+
+  .checked-item {
+    display: block !important;
+    border: 2px solid rgba(0, 0, 0, 0.2) !important;
+    border-image-slice: 1 !important;
+    box-shadow: 0px 10px 5px -5px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  @media only screen and (max-width: 770px) and (min-width: 0px) {
+    [data-title*="smart-product-"] .elHeadline {
+      text-align: left !important;
+    }
+  }
+</style>
+
+<script>
+  // ** NOTE: THIS SECTION MUST BE INCLUDED, BUT DOES NOT ALWAYS
+  // ** REQUIRE MODIFICATION
+  // OPTIONAL CONFIGURATION //
+  CFPT = {};
+  CFPT.prodPrices = {
+    //modify with your product IDs and prices
+    4566563: 199.0, // key = product_id; value = true product price float
+    4566567: 499.0,
+    4566568: 999.0,
+  };
+  CFPT.freePriceDisplay = "FREE"; //what to say for subtotal when price is $0.00
+  CFPT.orderTotalLabel = "Order Total:"; //what to say for Order Total at the bottom
+  // END OPTIONAL CONFIGURATION //
+</script>
+<script>
+  /**************************
+   * Copyright 2019 CF Pro Tools, All Rights Reserved
+   * Do not share, or distribute this code without author's consent.
+   * This copyright notice must remain in place whenever using
+   * this code - DO NOT REMOVE
+   * Author: Jaime Smith
+   * Website: https://cfprotools.com
+   * Add-on: CF Order Summary
+   * Version: 2.0
+   * Last Updated: 10/28/2019
+   **************************/
+  var $summTemplate = null;
+
+  $(function () {
+    //set default value to kill bug in L&E JS
+    window.cfpe = window.cfpe || {};
+    window.cfpe.orderTotal = window.cfpe.orderTotal || 0;
+
+    window.cfptOrderTotal = null;
+
+    setSummaryTemplate();
+
+    $("#bump-offer").off();
+
+    rebuildOrderSummary();
+    $(document).on(
+      "change",
+      '.qty_select, .o2step_step2 [name="purchase[product_id]"], [data-de-type="orpo"] [name="purchase[product_id]"], #bump-offer',
+      function (ev) {
+        $('#bump-offer, [id*="bump_offer_"]').each(function () {
+          var bumpId = $(this).val();
+
+          if ($(this).is(":checked")) {
+            $(
+              '#cfAR [name="purchase[product_ids][]"][value="' + bumpId + '"]',
+            ).attr("checked", true);
+          } else {
+            $(
+              '#cfAR [name="purchase[product_ids][]"][value="' + bumpId + '"]',
+            ).attr("checked", false);
+          }
+        });
+        rebuildOrderSummary();
+      },
+    );
+    $(document).on("cfpt:cart-updated", function () {
+      rebuildOrderSummary();
+    });
+  });
+
+  function setSummaryTemplate() {
+    $('[data-de-type="ors"], .elOrderProductOptions:not(:has(input,select))')
+      .first()
+      .attr("data-title", "cf-order-summary");
+
+    $summTemplate = $(
+      '[data-title="cf-order-summary"] .elOrderProductOptinProducts',
+    )
+      .first()
+      .clone();
+  }
+
+  function rebuildOrderSummary() {
+    var cfpt = window.CFPT || {};
+    var prodPrices = cfpt.prodPrices || {};
+    var freePriceDisplay = cfpt.freePriceDisplay || null;
+    var orderTotalLabel = cfpt.orderTotalLabel || null;
+    var prodSelParent = '[data-de-type="orpo"]';
+    var appendTo = '[data-title="cf-order-summary"] .elOrderProductOptions';
+
+    var cartMode = $(".qty_select").length ? true : false;
+
+    if ($(".o2step_wrapper").length > 0) {
+      prodSelParent = ".o2step_step2";
+      appendTo = '[data-title="cf-order-summary"]';
+    }
+
+    if (!$summTemplate) {
+      setSummaryTemplate();
+    }
+
+    $('[data-title="cf-order-summary"]').hide();
+    if (
+      $('[data-title="cf-order-summary"] .qty-head').length == 0 &&
+      $(".qty_select").length > 0
+    ) {
+      if ($("table.elOrderProductOptions").length > 0) {
+        //this is the new way
+        $('[data-title="cf-order-summary"] .elOrderProductOptinItem').prepend(
+          '<span class="pull-left qty-head">Qty</span>',
+        );
+        appendTo = '[data-title="cf-order-summary"] tbody';
+      } else {
+        $(
+          '[data-title="cf-order-summary"] .elOrderProductOptinLabel .elOrderProductOptinItem',
+        ).before('<div class="pull-left qty-head">Qty</div>');
+      }
+    }
+
+    var orderTotal = 0.0;
+    var orderCurrency = "AUD"; //default
+
+    $('[data-title="cf-order-summary"] .elOrderProductOptinProducts').remove();
+
+    window.cfptCartProds = {};
+    $('#cfAR [name="purchase[product_ids][]"]:checked').each(function () {
+      var prodId = $(this).val();
+
+      if (window.cfptCartProds.hasOwnProperty(prodId)) {
+        window.cfptCartProds[prodId].qty++;
+      } else {
+        window.cfptCartProds[prodId] = { qty: 1 };
+      }
+    });
+
+    //$('#cfAR [name="purchase[product_ids][]"]:checked').each(function () {
+    $.each(window.cfptCartProds, function (index, value) {
+      var qty = value.qty;
+      var prodId = index;
+
+      var $prodItem = $(prodSelParent + ' [name="' + prodId + '_qty"]');
+      if (!$prodItem.length) {
+        $prodItem = $(
+          prodSelParent +
+            ' [name="purchase[product_id]"][value="' +
+            prodId +
+            '"]',
+        );
+      }
+
+      var prodParent = $prodItem.parents("[data-cf-product-template]").first();
+      var prodDesc = prodParent.find("[data-cf-product-name]").html();
+      var prodPriceStr = prodParent.find("[data-cf-product-price]").html();
+      if (prodPrices.hasOwnProperty(prodId)) {
+        var prodPriceNum = prodPrices[prodId].toFixed(2);
+      } else {
+        var prodPriceNum = parseFloat(
+          prodPriceStr.replace(/[^0-9\.]+/g, ""),
+        ).toFixed(2);
+      }
+      var subTotal = qty * prodPriceNum;
+      var currency = prodParent
+        .find("[data-cf-product-price]")
+        .attr("taxamo-currency");
+      orderCurrency = currency;
+
+      $currTemplate = $summTemplate.clone();
+      $currTemplate.attr("data-product_id", prodId);
+      $currTemplate.attr("data-quantity", qty);
+
+      var prodName = prodDesc;
+      if ($(".qty_select").length > 0) {
+        prodName = '<span class="prodQty">' + qty + "</span>" + prodDesc;
+      }
+      $currTemplate.find(".product-name").html(prodName);
+      if (freePriceDisplay && subTotal == 0) {
+        $currTemplate
+          .find(".product-price")
+          .attr("taxamo-currency", currency)
+          .html(freePriceDisplay);
+        $currTemplate.attr("data-subtotal", freePriceDisplay);
+      } else {
+        var priceDisplay = subTotal.toLocaleString(undefined, {
+          style: "currency",
+          currency: currency,
+        });
+        $currTemplate
+          .find(".product-price")
+          .attr("taxamo-currency", currency)
+          .html(priceDisplay);
+        $currTemplate.attr("data-subtotal", priceDisplay);
+      }
+
+      $currTemplate.appendTo($(appendTo));
+
+      orderTotal += subTotal;
+    });
+
+    if (orderTotal) {
+      $ttlTemplate = $summTemplate.clone();
+
+      $ttlTemplate
+        .addClass("cf-order-total-row")
+        .css({ "border-top": "1px solid #DDD", "margin-top": ".5em" });
+      $ttlTemplate.find(".product-name").html(orderTotalLabel);
+      $ttlTemplate
+        .find(".product-price")
+        .attr("taxamo-currency", orderCurrency)
+        .html(
+          orderTotal.toLocaleString(undefined, {
+            style: "currency",
+            currency: orderCurrency,
+          }),
+        );
+      $ttlTemplate.appendTo($(appendTo));
+
+      $('[data-title="cf-order-summary"]').show();
+      window.cfptOrderTotal = orderTotal;
+    } else {
+      $('[data-title="cf-order-summary"]').hide();
+      window.cfptOrderTotal = null;
+    }
+  }
+</script>
+<style>
+  /* Custom CSS for CF Pro Tools cf-order-summary script
+     * Copyright 2017 CF Pro Tools, All Rights Reserved
+     * Do not share, or distribute this code without author's consent.
+     * Author: Jaime Smith
+     * Website: https://cfprotools.com
+     */
+
+  .cf-order-total-row {
+    border-top: 1px solid #ddd;
+    margin-top: 0.5em;
+  }
+
+  .cf-order-total-row .product-name {
+    font-weight: bold;
+  }
+
+  .cf-order-total-row .product-price {
+    font-weight: bold;
+  }
+
+  [data-title="cf-order-summary"] .qty-head {
+    display: inline-block;
+    font-weight: bold;
+    width: 3em;
+  }
+
+  .prodQty {
+    display: inline-block;
+    width: 3em;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@14.0.3/build/js/intlTelInput.min.js"></script>
+
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css"
+  rel="stylesheet"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+
+<script>
+  /**************************
+   * Copyright 2023 FunnelCare LLC, All Rights Reserved
+   * Do not share, or distribute this code without author's consent.
+   * This copyright notice must remain in place whenever using
+   * this code - DO NOT REMOVE
+   * Author - Tareq Mahmud
+   * Website: https://www.funnelcare.net
+   **************************/
+  $(function () {
+    var nameField = $('input[name="name"]');
+    nameField.after(
+      '<div id="valid-msg-name" class="hide"></div> <div id="error-msg-name" class="hide"></div>',
+    );
+    $(nameField).data("storage", false);
+    var errorMsg = $("#error-msg-name");
+    var validMsg = $("#valid-msg-name");
+
+    $(nameField).on("keyup", function (e) {
+      reset();
+      var input = $(this).val();
+      var regex = /^[a-zA-Z\s]*$/; // Regex to allow only letters and spaces
+      if (input.length > 3 && !regex.test(input)) {
+        $(
+          '[href="#submit-form"], [href="#submit-form-2step"], [href="#submit-form-2step-order"]',
+        ).prop("disabled", true);
+        $(nameField).css({ "border-color": "#b91517", "border-width": "3px" });
+        $(errorMsg).text("Invalid Name Character");
+        $(errorMsg).removeClass("hide").addClass("errorMsgName");
+      } else {
+        $(
+          '[href="#submit-form"], [href="#submit-form-2step"], [href="#submit-form-2step-order"]',
+        ).prop("disabled", false);
+        $(validMsg).removeClass("hide").addClass("validMsgName");
+        $(nameField).css({ "border-color": "#4a8920", "border-width": "3px" });
+      }
+    });
+
+    function reset() {
+      $(errorMsg).text();
+      $(errorMsg).addClass("hide").removeClass("errorMsgName");
+      $(validMsg).addClass("hide").removeClass("validMsgName");
+    }
+  });
+</script>
+
+<style>
+  .errorMsgName {
+    display: block !important;
+    color: red;
+    position: absolute;
+    margin-top: 1.5rem;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/js/intlTelInput.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/css/intlTelInput.css"
+/>
+<script>
+  /**************************
+   * Copyright 2024 FunnelCare LLC, All Rights Reserved
+   * Do not share, or distribute this code without author's consent.
+   * This copyright notice must remain in place whenever using
+   * this code - DO NOT REMOVE
+   * Author - Tareq Mahmud
+   * Website: https://www.funnelcare.net
+   **************************/
+  $(function () {
+    var phoneField = $('input[name="phone"]');
+    phoneField.after(
+      '<div id="valid-msg" class="hide">✓ Valid</div> <div id="error-msg" class="hide"></div>',
+    );
+    $(phoneField).data("storage", false);
+    var errorMsg = $("#error-msg");
+    var validMsg = $("#valid-msg");
+    var errorMap = [
+      "Invalid number",
+      "Invalid country code",
+      "Too short",
+      "Too long",
+      "Invalid number",
+    ];
+    var iti = window.intlTelInput(phoneField[0], {
+      utilsScript:
+        "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.16/build/js/utils.js",
+      initialCountry: "au",
+      onlyCountries: ["au"],
+      nationalMode: true,
+      formatOnDisplay: true,
+
+      customPlaceholder: function (countryPlaceholder) {
+        return "Number Here... " + countryPlaceholder;
+      },
+      autoPlaceholder: "aggressive",
+    });
+
+    function reset() {
+      //$(phoneField).removeClass("error");
+      $(errorMsg).text();
+      $(errorMsg).addClass("hide").removeClass("errorMsg");
+      $(validMsg).addClass("hide").removeClass("validMsg");
+    }
+    // on keyup: validate
+    $(phoneField).on("keyup", function () {
+      reset();
+      if ($(phoneField).val().trim()) {
+        if (iti.isValidNumberPrecise()) {
+          $(
+            '[href="#submit-form"], [href="#submit-form-2step"], [href="#submit-form-2step-order"]',
+          ).prop("disabled", false);
+          var intFormat = iti.getNumber(intlTelInputUtils.numberFormat.E164);
+          iti.setNumber(intFormat);
+          console.log(intFormat);
+          //$(phoneField).val(intFormat);
+          $(validMsg).removeClass("hide").addClass("validMsg");
+          $(phoneField).css({
+            "border-color": "#4a8920",
+            "border-width": "3px",
+          });
+        } else {
+          $(
+            '[href="#submit-form"], [href="#submit-form-2step"], [href="#submit-form-2step-order"]',
+          ).prop("disabled", true);
+          $(phoneField).css({
+            "border-color": "#b91517",
+            "border-width": "3px",
+          });
+          var errorCode = iti.getValidationError();
+          $(errorMsg).text(errorMap[errorCode]);
+          $(errorMsg).removeClass("hide").addClass("errorMsg");
+        }
+      }
+    });
+  });
+</script>
+<style>
+  .iti {
+    display: block !important;
+    margin-top: 2em !important;
+  }
+  [data-associated-to=".elS1Phone"] {
+    top: -5.2em !important;
+  }
+
+  .errorMsg {
+    display: block !important;
+    color: red;
+    position: absolute;
+  }
+  .validMsg {
+    display: block !important;
+    color: #00c900;
+    position: absolute;
+  }
+</style>
