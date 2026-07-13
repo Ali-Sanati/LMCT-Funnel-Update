@@ -28,6 +28,7 @@
     font-family: "Montserrat", sans-serif;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
   }
   /* ── card ─────────────────────────────────────────────── */
   @property --otoAngle {
@@ -86,6 +87,59 @@
   .otoInner {
     padding: 24px 24px 30px;
   }
+  .otoScreenTimer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto 18px;
+    text-align: center;
+  }
+  .otoScreenTimerCopy {
+    color: #b9b9b9;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+  }
+  .otoScreenTimerBox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-width: 208px;
+    min-height: 48px;
+    padding: 7px 26px;
+    border: 2px solid #ff2029;
+    border-radius: 9px;
+    background:
+      radial-gradient(
+        circle at 50% 0%,
+        rgba(255, 32, 41, 0.22),
+        transparent 62%
+      ),
+      linear-gradient(180deg, rgba(29, 0, 0, 0.96) 0%, #080000 100%);
+    color: #ff2029;
+    box-shadow:
+      0 0 13px rgba(255, 32, 41, 0.62),
+      inset 0 0 18px rgba(255, 32, 41, 0.14);
+  }
+  .otoScreenTimerIcon {
+    width: 25px;
+    height: 25px;
+    flex: 0 0 auto;
+    color: currentColor;
+    filter: drop-shadow(0 0 8px rgba(255, 32, 41, 0.55));
+  }
+  .otoScreenTimerValue {
+    color: currentColor;
+    font-size: 33px;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(255, 32, 41, 0.6);
+    font-variant-numeric: tabular-nums;
+  }
   /* ── images ───────────────────────────────────────────── */
   .otoHeading,
   .otoBody {
@@ -117,6 +171,319 @@
     width: 100%;
     height: auto;
   }
+  .otoBoostDesign {
+    display: grid;
+    grid-template-columns: 43% 57%;
+    min-height: 218px;
+    background: #050505;
+  }
+  .otoBoostPhotoWrap {
+    position: relative;
+    display:flex;
+    align-items:center;
+    overflow: hidden;
+    border-radius: 14px 0 0 14px;
+    background: #ffffff;
+  }
+  .otoBoostPhotoWrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 74%,
+      rgba(0, 0, 0, 0.34) 100%
+    );
+    pointer-events: none;
+  }
+  .otoImageFrame .otoBoostPhoto {
+    width: 100%;
+    /* height: 100%; */
+    object-fit: cover;
+    object-position: center;
+  }
+  .otoBoostPanel {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    border: 2px solid #76f182;
+    border-left: 0;
+    border-radius: 0 14px 14px 0;
+    overflow: hidden;
+    background:
+      radial-gradient(
+        circle at 94% 12%,
+        rgba(63, 242, 77, 0.22),
+        transparent 36%
+      ),
+      linear-gradient(180deg, #171717 0%, #070707 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 0 18px rgba(73, 255, 86, 0.3);
+  }
+  .otoBoostStats {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 25px 24px 16px;
+  }
+  .otoBoostStat {
+    min-width: 0;
+    text-align: center;
+  }
+  .otoBoostLabel {
+    display: block;
+    min-height: 24px;
+    color: #f2f2f2;
+    font-size: clamp(12px, 2vw, 16px);
+    font-weight: 800;
+    line-height: 1.1;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.55);
+  }
+  .otoBoostStatAfter .otoBoostLabel,
+  .otoBoostStatAfter .otoBoostNumber {
+    color: #35f044;
+  }
+  .otoBoostNumber {
+    display: block;
+    margin-top: 4px;
+    color: #fff;
+    font-size: clamp(15px, 6vw, 25px);
+    font-weight: 900;
+    line-height: 0.86;
+    text-shadow:
+      0 3px 0 rgba(255, 255, 255, 0.04),
+      0 7px 15px rgba(0, 0, 0, 0.55);
+  }
+  .otoBoostEntries {
+    display: block;
+    margin-top: 10px;
+    color: #9b9b9b;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .otoBoostDivider {
+    width: 2px;
+    height: 108px;
+    margin: 0 19px;
+    border-radius: 999px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.62),
+      rgba(255, 255, 255, 0.06)
+    );
+  }
+  .otoBoostArrow {
+    color: #31ef42;
+    font-size: clamp(28px, 6vw, 40px);
+    text-shadow: 0 0 14px rgba(54, 239, 70, 0.42);
+  }
+  .otoBoostStats {
+    position: relative;
+  }
+  .otoBoostBonus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    min-height: 48px;
+    padding: 10px 16px;
+    background: linear-gradient(180deg, #51fb42 0%, #34e82e 100%);
+    color: #061307;
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.32);
+  }
+  .otoBoostGift {
+    font-size: clamp(20px, 4vw, 28px);
+    line-height: 1;
+    filter: brightness(0);
+  }
+  .otoCheckoutOffer {
+    margin: 24px auto 0;
+    text-align: center;
+  }
+  .otoCheckoutPanel {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(18px, 4vw, 27px) clamp(16px, 4vw, 34px)
+      clamp(16px, 3.5vw, 24px);
+    border: 1px solid rgba(255, 83, 83, 0.45);
+    border-radius: 17px;
+    background:
+      radial-gradient(
+        circle at 50% -18%,
+        rgba(255, 56, 56, 0.18),
+        transparent 34%
+      ),
+      linear-gradient(180deg, #1b1d20 0%, #070a0a 78%, #050707 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 -1px 18px rgba(255, 44, 44, 0.12);
+  }
+  .otoCheckoutPanel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 7%;
+    right: 7%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 92, 92, 0.9),
+      transparent
+    );
+  }
+  .otoWasLine {
+    position: relative;
+    z-index: 1;
+    color: #a7a8ac;
+    font-size: clamp(14px, 3vw, 18px);
+    font-weight: 800;
+    line-height: 1.05;
+  }
+  .otoWasPrice {
+    position: relative;
+    display: inline-block;
+    color: #c7c7ca;
+  }
+  .otoWasPrice::after {
+    content: "";
+    position: absolute;
+    left: -4%;
+    right: -4%;
+    top: 52%;
+    height: 2px;
+    border-radius: 999px;
+    background: #f13838;
+    box-shadow: 0 0 8px rgba(255, 40, 40, 0.55);
+    transform: rotate(-5deg);
+  }
+  .otoOfferTitle {
+    position: relative;
+    z-index: 1;
+    margin-top: 4px;
+    color: #f3f3f4;
+    font-size: clamp(18px, 4vw, 23px);
+    font-weight: 900;
+    line-height: 1;
+  }
+  .otoOfferPrice {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 5px;
+    color: #fff;
+    font-size: clamp(76px, 18vw, 118px);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.86;
+    text-shadow:
+      0 0 14px rgba(255, 36, 36, 0.24),
+      0 8px 20px rgba(0, 0, 0, 0.55);
+  }
+  .otoPurchaseNote {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(7px, 1.8vw, 10px);
+    max-width: 390px;
+    margin: clamp(11px, 2.5vw, 16px) auto 0;
+    color: #c6c7cc;
+    font-size: clamp(12px, 2.5vw, 14px);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .otoShieldIcon {
+    width: clamp(18px, 4vw, 24px);
+    height: clamp(18px, 4vw, 24px);
+    flex: 0 0 auto;
+    color: #858a92;
+  }
+  .otoOfferCta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 3vw, 18px);
+    width: 100%;
+    margin-top: clamp(8px, 2vw, 10px);
+    min-height: clamp(64px, 13vw, 86px);
+    padding: clamp(14px, 3.5vw, 22px) clamp(16px, 4vw, 26px);
+    border: 0;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #58ff3f 0%, #35ec2f 100%);
+    color: #061507;
+    font-size: clamp(16px, 4.7vw, 26px);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    text-transform: uppercase;
+    box-shadow:
+      0 0 22px rgba(63, 255, 49, 0.55),
+      inset 0 2px 0 rgba(255, 255, 255, 0.32),
+      inset 0 -4px 0 rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+  }
+  .otoOfferCta > span:last-child {
+    white-space: nowrap;
+  }
+  .otoRocketBadge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(44px, 10vw, 56px);
+    height: clamp(44px, 10vw, 56px);
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: #031505;
+    color: #49f943;
+  }
+  .otoRocketBadge svg {
+    width: 60%;
+    height: 60%;
+  }
+  .otoOneClick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+    margin-top: clamp(10px, 2.5vw, 14px);
+    color: #acadb3;
+    font-size: clamp(13px, 2.8vw, 16px);
+    font-weight: 700;
+    line-height: 1;
+  }
+  .otoLockIcon {
+    width: clamp(14px, 3vw, 17px);
+    height: clamp(14px, 3vw, 17px);
+    flex: 0 0 auto;
+    color: #a9aab0;
+  }
+  .otoDeclineLink {
+    display: block;
+    margin-top: clamp(15px, 3.5vw, 20px);
+    margin-right: auto;
+    margin-left: auto;
+    border: 0;
+    background: none;
+    color: #9b9ca2;
+    font-size: clamp(12px, 2.8vw, 15px);
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: rgba(155, 156, 162, 0.58);
+    cursor: pointer;
+  }
   /* ── entrance ─────────────────────────────────────────── */
   .otoAnim {
     opacity: 0;
@@ -135,6 +502,12 @@
   .otoD4 {
     animation-delay: 0.44s;
   }
+  .otoD5 {
+    animation-delay: 0.56s;
+  }
+  .otoD6 {
+    animation-delay: 0.68s;
+  }
   @keyframes otoRise {
     to {
       opacity: 1;
@@ -148,8 +521,75 @@
     .otoInner {
       padding: 18px 16px 24px;
     }
+    .otoScreenTimer {
+      gap: 7px;
+      margin-bottom: 15px;
+    }
+    .otoScreenTimerCopy {
+      font-size: 13px;
+    }
+    .otoScreenTimerBox {
+      min-width: 174px;
+      min-height: 42px;
+      gap: 10px;
+      padding: 7px 18px;
+      border-radius: 8px;
+    }
+    .otoScreenTimerIcon {
+      width: 21px;
+      height: 21px;
+    }
+    .otoScreenTimerValue {
+      font-size: 28px;
+    }
     .otoBody {
       max-width: 100%;
+    }
+    .otoBoostDesign {
+      min-height: 150px;
+    }
+    .otoBoostStats {
+      padding: 18px 14px 10px;
+    }
+    .otoBoostLabel {
+      min-height: 18px;
+    }
+    .otoBoostNumber {
+      margin-top: 3px;
+    }
+    .otoBoostEntries {
+      margin-top: 7px;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+    }
+    .otoBoostDivider {
+      height: 77px;
+      margin: 0 12px;
+    }
+
+    .otoBoostBonus {
+      min-height: 36px;
+      gap: 8px;
+      padding: 8px 10px;
+    }
+    .otoCheckoutOffer {
+      margin-top: 18px;
+    }
+    .otoCheckoutPanel {
+      border-radius: 14px;
+    }
+    .otoPurchaseNote {
+      max-width: 300px;
+    }
+    .otoOfferCta {
+      border-radius: 12px;
+      gap: clamp(8px, 2.6vw, 12px);
+      padding: clamp(13px, 3.2vw, 18px) clamp(12px, 3.5vw, 18px);
+      font-size: clamp(12px, 3.8vw, 15px);
+    }
+    .otoRocketBadge {
+      width: clamp(36px, 9vw, 44px);
+      height: clamp(36px, 9vw, 44px);
     }
   }
   /* ═══════════ RED URGENCY BANNER (header) ═══════════ */
@@ -407,21 +847,191 @@
       </div>
     </div>
     <div class="otoInner">
+      <div class="otoScreenTimer otoAnim otoD2">
+        <p class="otoScreenTimerCopy">
+          This deal disappears when you leave this screen
+        </p>
+        <div
+          class="otoScreenTimerBox"
+          id="otoScreenTimerBox"
+          role="timer"
+          aria-live="polite"
+          aria-label="This deal expires in 01:00"
+        >
+          <svg
+            class="otoScreenTimerIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="1em"
+            height="1em"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              fill="currentColor"
+              d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9,9,0,0,1,12,21Z"
+            />
+            <rect width="2" height="7" x="11" y="6" fill="currentColor" rx="1">
+              <animateTransform
+                attributeName="transform"
+                dur="9s"
+                repeatCount="indefinite"
+                type="rotate"
+                values="0 12 12;360 12 12"
+              />
+            </rect>
+            <rect width="2" height="9" x="11" y="11" fill="currentColor" rx="1">
+              <animateTransform
+                attributeName="transform"
+                dur="0.75s"
+                repeatCount="indefinite"
+                type="rotate"
+                values="0 12 12;360 12 12"
+              />
+            </rect>
+          </svg>
+
+          <span class="otoScreenTimerValue" id="otoScreenTimerValue"
+            >01:00</span
+          >
+        </div>
+      </div>
       <img
-        class="otoHeading otoAnim otoD2"
-        src="https://images.clickfunnels.com/e1/d09fc305c444fca5fd937d2902942a/Heading2.2.png"
+        class="otoHeading otoAnim otoD3"
+        src="https://images.clickfunnels.com/c5/ade313849d435c8cb0756cdb6ee7e9/Double-Ur-Entries-OTO.svg"
         alt="Exclusive offer unlocked"
       />
-      <img
-        class="otoBody otoAnim otoD3"
-        src="https://images.clickfunnels.com/67/a0bd2d8cd14fc9939207c96deacf2b/body_text3.png"
-        alt="Double your entries with a 50% off package"
-      />
-      <div class="otoImageFrame otoAnim otoD4">
-        <img
-          src="https://pub-5daa6c7eb94c4316b99f8fb7c5b941b3.r2.dev/funnels/100k/ty-image.webp"
-          alt="Stacks of cash on the table"
-        />
+      <div class="otoImageFrame otoAnim otoD5">
+        <div
+          class="otoBoostDesign"
+          aria-label="Current 300 entries boosted to 600 entries with 300 bonus entries"
+        >
+          <div class="otoBoostPhotoWrap">
+            <img
+              class="otoBoostPhoto"
+              src="https://pub-5daa6c7eb94c4316b99f8fb7c5b941b3.r2.dev/funnels/100k/ty-image.webp"
+              alt="Cash prize winner"
+            />
+          </div>
+          <div class="otoBoostPanel">
+            <div class="otoBoostStats">
+              <div class="otoBoostStat">
+                <span class="otoBoostLabel">Current</span>
+                <span class="otoBoostNumber">300</span>
+                <span class="otoBoostEntries">Entries</span>
+              </div>
+
+              <span class="otoBoostArrow" aria-hidden="true"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 48 48"
+                >
+                  <path d="M0 0h48v48H0z" fill="none" />
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="4"
+                    d="m19 12l12 12l-12 12"
+                  />
+                </svg>
+              </span>
+              <div class="otoBoostStat otoBoostStatAfter">
+                <span class="otoBoostLabel">After Boost</span>
+                <span class="otoBoostNumber">600</span>
+                <span class="otoBoostEntries">Entries</span>
+              </div>
+            </div>
+            <div class="otoBoostBonus">
+              <span class="otoBoostGift" aria-hidden="true"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1em"
+                  height="1em"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M0 0h24v24H0z" fill="none" />
+                  <path
+                    fill="currentColor"
+                    d="M9.06 1.93C7.17 1.92 5.33 3.74 6.17 6H3a2 2 0 0 0-2 2v2a1 1 0 0 0 1 1h9V8h2v3h9a1 1 0 0 0 1-1V8a2 2 0 0 0-2-2h-3.17C19 2.73 14.6.42 12.57 3.24L12 4l-.57-.78c-.63-.89-1.5-1.28-2.37-1.29M9 4c.89 0 1.34 1.08.71 1.71S8 5.89 8 5a1 1 0 0 1 1-1m6 0c.89 0 1.34 1.08.71 1.71S14 5.89 14 5a1 1 0 0 1 1-1M2 12v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-8h-9v8h-2v-8z"
+                  />
+                </svg>
+              </span>
+              <span>+300 Bonus Entries</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="otoCheckoutOffer otoAnim otoD6">
+        <div class="otoCheckoutPanel">
+          <div class="otoWasLine">
+            Was <span class="otoWasPrice">$50.00</span>
+          </div>
+          <div class="otoOfferTitle">One Time Offer</div>
+          <div class="otoOfferPrice">$25</div>
+          <div class="otoPurchaseNote">
+            <svg
+              class="otoShieldIcon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 3.2 5.4 5.8v5.7c0 4.1 2.7 7.9 6.6 9.3 3.9-1.4 6.6-5.2 6.6-9.3V5.8L12 3.2Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-linejoin="round"
+                stroke-width="2"
+              />
+              <path
+                d="m9.1 12 2 2 4-4.6"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              />
+            </svg>
+            <span
+              >You're purchasing an extra package &mdash; entries remain a free
+              bonus.</span
+            >
+          </div>
+        </div>
+        <button class="otoOfferCta" type="button" data-oto-claim-boost>
+          <span class="otoRocketBadge" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill="currentColor"
+                d="M13.1 3.1c2.8-.9 5.9-.4 7.8.4.8 1.9 1.3 5 .4 7.8-.8 2.5-2.8 4.9-5.4 6.3l-1.8-1.8-3 3-2.6-2.6 3-3-1.8-1.8c1.4-2.6 3.9-4.6 6.3-5.4Zm4.2 5.7a1.8 1.8 0 1 0-2.5-2.5 1.8 1.8 0 0 0 2.5 2.5ZM5.9 14.7l3.4 3.4-4.7 1.3 1.3-4.7Z"
+              />
+            </svg>
+          </span>
+          <span>Claim My 50% Entry Boost</span>
+        </button>
+        <div class="otoOneClick">
+          <svg
+            class="otoLockIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill="currentColor"
+              d="M7 10V8a5 5 0 0 1 10 0v2h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1Zm2 0h6V8a3 3 0 0 0-6 0v2Zm3 4a1.5 1.5 0 0 0-.7 2.8V18h1.4v-1.2A1.5 1.5 0 0 0 12 14Z"
+            />
+          </svg>
+          <span>One-click add-on</span>
+        </div>
+        <button class="otoDeclineLink" type="button" data-oto-decline>
+          No thanks, keep my current package
+        </button>
       </div>
     </div>
   </div>
@@ -432,14 +1042,37 @@
   /* ======================================= */
   window.addEventListener("load", function () {
     var el = document.getElementById("epsCountText");
-    if (!el) return;
+    var screenTimer = document.getElementById("otoScreenTimerValue");
+    var screenTimerBox = document.getElementById("otoScreenTimerBox");
+    if (!el && !screenTimer) return;
     var remaining = EPS_SECONDS;
+    function formatClock(totalSeconds) {
+      var safeSeconds = Math.max(0, totalSeconds);
+      var minutes = Math.floor(safeSeconds / 60);
+      var seconds = safeSeconds % 60;
+      var mm = minutes < 10 ? "0" + minutes : "" + minutes;
+      var ss = seconds < 10 ? "0" + seconds : "" + seconds;
+      return mm + ":" + ss;
+    }
     function render() {
-      if (remaining > 0) {
-        var s = remaining < 10 ? "0" + remaining : "" + remaining;
-        el.textContent = "OFFER EXPIRING: " + s;
-      } else {
-        el.textContent = "OFFER EXPIRED";
+      if (el) {
+        if (remaining > 0) {
+          var s = remaining < 10 ? "0" + remaining : "" + remaining;
+          el.textContent = "OFFER EXPIRING: " + s;
+        } else {
+          el.textContent = "OFFER EXPIRED";
+        }
+      }
+      if (screenTimer) {
+        screenTimer.textContent = formatClock(remaining);
+      }
+      if (screenTimerBox) {
+        screenTimerBox.setAttribute(
+          "aria-label",
+          remaining > 0
+            ? "This deal expires in " + formatClock(remaining)
+            : "This deal has expired",
+        );
       }
     }
     render();
