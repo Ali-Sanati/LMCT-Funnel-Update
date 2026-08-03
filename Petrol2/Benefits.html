@@ -1,0 +1,278 @@
+<!-- LMCT+ MEMBERSHIP BENEFITS START -->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
+  .lmctMembershipBenefits {
+    --lmct-mb-blue: #087cf0;
+    --lmct-mb-navy: #001a3d;
+    --lmct-mb-copy: #536b8d;
+    --lmct-mb-border: #d8e4f2;
+    --lmct-mb-green: #2ac55b;
+    --lmct-mb-white: #ffffff;
+    --lmct-mb-shadow: 0 16px 34px rgba(4, 35, 76, 0.075);
+    background: #ffffff;
+    box-sizing: border-box;
+    font-family: "Montserrat", Arial, sans-serif;
+    width: 100%;
+  }
+  .lmctMembershipBenefits *,
+  .lmctMembershipBenefits *::before,
+  .lmctMembershipBenefits *::after {
+    box-sizing: border-box;
+  }
+  .lmctMembershipBenefits__inner {
+    margin: 0 auto;
+    max-width: 1140px;
+    width: 100%;
+  }
+  .lmctMembershipBenefits__header {
+    margin: 0 auto 28px;
+    max-width: 760px;
+    text-align: center;
+  }
+  .lmctMembershipBenefits__eyebrow {
+    display: inline-flex;
+    text-transform: uppercase;
+    align-items: center;
+    min-height: 28px;
+    margin: 0 0 12px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(8, 124, 240, 0.1);
+    border: 1px solid rgba(8, 124, 240, 0.16);
+    color: #087cf0;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 1px;
+    gap: 5px;
+  }
+  .lmctMembershipBenefits__eyebrow::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #087cf0;
+    box-shadow: 0 0 0 4px rgba(8, 124, 240, 0.16);
+    animation: lmorder-pulse 1.6s ease-in-out infinite;
+  }
+  .lmctMembershipBenefits__title {
+    color: var(--lmct-mb-navy);
+    font-size: clamp(30px, 3.55vw, 38px);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 1.01;
+    margin: 0;
+  }
+  .lmctMembershipBenefits__grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .lmctMembershipBenefits__card {
+    background: var(--lmct-mb-white);
+    border: 1px solid var(--lmct-mb-border);
+    border-radius: 7px;
+    box-shadow: var(--lmct-mb-shadow);
+    min-height: 215px;
+    padding: 20px 21px 19px;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+  .lmctMembershipBenefits__card:hover {
+    border-color: rgba(13, 99, 255, 0.35);
+    box-shadow: 0 20px 44px rgba(4, 35, 76, 0.11);
+    transform: translateY(-3px);
+  }
+  .lmctMembershipBenefits__iconBox {
+    align-items: center;
+    background: var(--lmct-mb-blue);
+    border-radius: 8px;
+    color: #ffffff;
+    display: inline-flex;
+    height: 42px;
+    justify-content: center;
+    margin: 0 0 14px;
+    width: 42px;
+  }
+  .lmctMembershipBenefits__icon {
+    display: block;
+    height: 25px;
+    width: 25px;
+  }
+  .lmctMembershipBenefits__cardTitle {
+    color: var(--lmct-mb-navy);
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    margin: 0 0 12px;
+  }
+  .lmctMembershipBenefits__text {
+    color: var(--lmct-mb-copy);
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.68;
+    margin: 0;
+  }
+  @media (max-width: 980px) {
+    .lmctMembershipBenefits {
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+    .lmctMembershipBenefits__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 560px) {
+    .lmctMembershipBenefits {
+      padding: 54px 14px 58px;
+    }
+    .lmctMembershipBenefits__header {
+      margin-bottom: 24px;
+      max-width: 390px;
+    }
+    .lmctMembershipBenefits__title {
+      font-size: 31px;
+      line-height: 1.06;
+    }
+    .lmctMembershipBenefits__grid {
+      gap: 14px;
+      grid-template-columns: 1fr;
+    }
+    .lmctMembershipBenefits__card {
+      min-height: 0;
+      padding: 20px;
+    }
+    .lmctMembershipBenefits__cardTitle {
+      font-size: 18px;
+    }
+    .lmctMembershipBenefits__text {
+      font-size: 13px;
+    }
+  }
+  @media (hover: none) {
+    .lmctMembershipBenefits__card:hover {
+      border-color: var(--lmct-mb-border);
+      box-shadow: var(--lmct-mb-shadow);
+      transform: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmctMembershipBenefits__card {
+      transition: none;
+    }
+  }
+</style>
+<section
+  class="lmctMembershipBenefits"
+  aria-labelledby="lmctMembershipBenefitsTitle"
+>
+  <div class="lmctMembershipBenefits__inner">
+    <header class="lmctMembershipBenefits__header">
+      <div class="lmctMembershipBenefits__eyebrow">
+        <span
+          class="lmctMembershipBenefits__eyebrowDot"
+          aria-hidden="true"
+        ></span>
+        Membership benefits
+      </div>
+      <h2
+        class="lmctMembershipBenefits__title"
+        id="lmctMembershipBenefitsTitle"
+      >
+        Practical value without complicated tiers.
+      </h2>
+    </header>
+    <div class="lmctMembershipBenefits__grid">
+      <article class="lmctMembershipBenefits__card">
+        <div class="lmctMembershipBenefits__iconBox" aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.5em"
+            height="1.5em"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              fill="currentColor"
+              d="M18 10a1 1 0 0 1-1-1a1 1 0 0 1 1-1a1 1 0 0 1 1 1a1 1 0 0 1-1 1m-6 0H6V5h6m7.77 2.23l.01-.01l-3.72-3.72L15 4.56l2.11 2.11C16.17 7 15.5 7.93 15.5 9a2.5 2.5 0 0 0 2.5 2.5c.36 0 .69-.08 1-.21v7.21a1 1 0 0 1-1 1a1 1 0 0 1-1-1V14a2 2 0 0 0-2-2h-1V5a2 2 0 0 0-2-2H6c-1.11 0-2 .89-2 2v16h10v-7.5h1.5v5A2.5 2.5 0 0 0 18 21a2.5 2.5 0 0 0 2.5-2.5V9c0-.69-.28-1.32-.73-1.77"
+            />
+          </svg>
+        </div>
+        <h3 class="lmctMembershipBenefits__cardTitle">Fuel savings</h3>
+        <p class="lmctMembershipBenefits__text">
+          Access members-only pricing at participating LMCT+ Petrol locations.
+        </p>
+      </article>
+      <article class="lmctMembershipBenefits__card">
+        <div class="lmctMembershipBenefits__iconBox" aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.5em"
+            height="1.5em"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              fill="currentColor"
+              d="M21 6H7.05L5.94 2.68A1 1 0 0 0 4.99 2h-3v2h2.28l3.54 10.63A2 2 0 0 0 9.71 16h7.59a2 2 0 0 0 1.87-1.3l2.76-7.35A.997.997 0 0 0 21 6M10 18a2 2 0 1 0 0 4a2 2 0 1 0 0-4m7 0a2 2 0 1 0 0 4a2 2 0 1 0 0-4"
+            />
+          </svg>
+        </div>
+        <h3 class="lmctMembershipBenefits__cardTitle">Grocery offers</h3>
+        <p class="lmctMembershipBenefits__text">
+          Unlock available grocery and everyday member offers where
+          participating.
+        </p>
+      </article>
+      <article class="lmctMembershipBenefits__card">
+        <div class="lmctMembershipBenefits__iconBox" aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.5em"
+            height="1.5em"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              fill="currentColor"
+              d="M15.328 2.718h-1.25v.266a.275.275 0 0 1-.275.275h-3.268a.275.275 0 0 1-.275-.275v-.266H8.672a1.045 1.045 0 0 0-.979 1.1v16.347a1.045 1.045 0 0 0 .98 1.1h6.655a1.045 1.045 0 0 0 .98-1.1V3.819a1.045 1.045 0 0 0-.98-1.101M16.033 2H7.967A1.187 1.187 0 0 0 6.78 3.187v17.626A1.187 1.187 0 0 0 7.967 22h8.066a1.187 1.187 0 0 0 1.187-1.187V3.187A1.187 1.187 0 0 0 16.033 2m.646 18.463a1.105 1.105 0 0 1-1.068 1.14H8.355a1.105 1.105 0 0 1-1.068-1.14V3.521A1.106 1.106 0 0 1 8.355 2.38h7.256a1.106 1.106 0 0 1 1.068 1.141Z"
+            />
+          </svg>
+        </div>
+        <h3 class="lmctMembershipBenefits__cardTitle">Simple app access</h3>
+        <p class="lmctMembershipBenefits__text">
+          Access your membership and find participating locations through the
+          LMCT+ app.
+        </p>
+      </article>
+      <article class="lmctMembershipBenefits__card">
+        <div class="lmctMembershipBenefits__iconBox" aria-hidden="true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="1.5em"
+            height="1.5em"
+            viewBox="0 0 24 24"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              fill="currentColor"
+              d="M3.5 7a5 5 0 1 1 10 0a5 5 0 0 1-10 0M5 14a5 5 0 0 0-5 5v2h17v-2a5 5 0 0 0-5-5zm19 7h-5v-2c0-1.959-.804-3.73-2.1-5H19a5 5 0 0 1 5 5zm-8.5-9a5 5 0 0 1-1.786-.329A6.97 6.97 0 0 0 15.5 7a6.97 6.97 0 0 0-1.787-4.671A5 5 0 1 1 15.5 12"
+            />
+          </svg>
+        </div>
+        <h3 class="lmctMembershipBenefits__cardTitle">
+          One annual<br />membership
+        </h3>
+        <p class="lmctMembershipBenefits__text">
+          Pay $49 per year for Everyday Saver access, with no setup fee in the
+          supplied funnel copy.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- LMCT+ MEMBERSHIP BENEFITS END -->

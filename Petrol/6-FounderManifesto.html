@@ -1,0 +1,434 @@
+<!-- ============================================================
+     LMCT+ FOUNDER MANIFESTO BLOCK
+     Paste-ready ClickFunnels 1.0 Custom HTML/Code block.
+     Place near the bottom of the funnel, ABOVE the FAQ + footer.
+     Reading level ~ grade 6–7. Short sentences. Plain language.
+     Designed as an editorial "open letter" — not a marketing block.
+     Optional: drop in a real Adrian photo by setting --lmman-avatar-url
+     in the inline style on the .lmman-sig-avatar element, OR replace the
+     placeholder <span>A</span> initial with an <img>.
+     ============================================================ -->
+<style>
+  .lmman *,
+  .lmman *::before,
+  .lmman *::after {
+    box-sizing: border-box;
+  }
+  .lmman {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    color: #0a1d3a;
+  }
+  /* ===== Outer card — editorial feel ===== */
+  .lmman-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 16px;
+    box-shadow:
+      0 24px 60px rgba(5, 22, 42, 0.42),
+      0 0 0 1px rgba(12, 99, 253, 0.08);
+    padding: 34px 24px 32px 24px;
+    overflow: hidden;
+  }
+  .lmman-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0c9ffd 0%, #0c63fd 50%, #5cc6f7 100%);
+    z-index: 1;
+  }
+  /* ===== Eyebrow ===== */
+  .lmman-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px 6px 8px;
+    background: rgba(12, 99, 253, 0.08);
+    border-radius: 999px;
+    color: #0c63fd;
+    font-weight: 900;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 18px 0;
+  }
+  .lmman-eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #0c63fd;
+  }
+  /* ===== Title ===== */
+  .lmman-title {
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin: 0 0 20px 0;
+  }
+  .lmman-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* ===== Numbered beats — collapsible accordion ===== */
+  .lmman-beats {
+    border-top: 1px solid rgba(10, 29, 58, 0.08);
+    margin: 0 0 4px 0;
+  }
+  .lmman-beat {
+    border-bottom: 1px solid rgba(10, 29, 58, 0.08);
+    margin: 0;
+  }
+  .lmman-beat-summary {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 2px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: padding 0.2s ease;
+  }
+  .lmman-beat-summary::-webkit-details-marker {
+    display: none;
+  }
+  .lmman-beat-summary::marker {
+    display: none;
+  }
+  .lmman-beat-summary:hover .lmman-beat-head {
+    color: #0c63fd;
+  }
+  .lmman-beat-summary:hover .lmman-beat-chevron {
+    color: #0c63fd;
+  }
+  .lmman-beat-num {
+    flex-shrink: 0;
+    color: rgba(10, 29, 58, 0.4);
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    font-feature-settings: "tnum";
+    margin: 0;
+  }
+  .lmman-beat-num strong {
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+  .lmman-beat-head {
+    flex: 1;
+    min-width: 0;
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin: 0;
+    transition: color 0.15s ease;
+  }
+  .lmman-beat-chevron {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: rgba(10, 29, 58, 0.45);
+    transition:
+      transform 0.25s ease,
+      color 0.15s ease;
+  }
+  .lmman-beat-chevron svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .lmman-beat[open] .lmman-beat-chevron {
+    transform: rotate(180deg);
+    color: #0c63fd;
+  }
+  .lmman-beat[open] .lmman-beat-head {
+    color: #0c63fd;
+  }
+  .lmman-beat-body {
+    color: rgba(10, 29, 58, 0.78);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: 0.005em;
+    margin: 0 0 18px 0;
+    padding: 0 0 0 2px;
+  }
+  .lmman-beat-body strong {
+    color: #0a1d3a;
+    font-weight: 800;
+  }
+  /* ===== Pull quote ===== */
+  .lmman-pull {
+    position: relative;
+    margin: 36px -4px 36px -4px;
+    padding: 24px 22px 24px 26px;
+    border-left: 4px solid;
+    border-image: linear-gradient(180deg, #0c9ffd 0%, #0c63fd 100%) 1;
+    background: linear-gradient(
+      90deg,
+      rgba(12, 99, 253, 0.04) 0%,
+      transparent 100%
+    );
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-style: italic;
+  }
+  .lmman-pull::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    top: 4px;
+    color: #0c63fd;
+    font-size: 60px;
+    line-height: 1;
+    font-weight: 900;
+    opacity: 0.18;
+    font-style: normal;
+  }
+  .lmman-pull span {
+    position: relative;
+    z-index: 1;
+  }
+  /* ===== Divider between sections (subtle, optional) ===== */
+  .lmman-rule {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(10, 29, 58, 0.1) 50%,
+      transparent 100%
+    );
+    border: 0;
+    margin: 0 0 28px 0;
+  }
+  /* ===== Signature block ===== */
+  .lmman-sig {
+    margin-top: 14px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(10, 29, 58, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .lmman-sig-avatar {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 18px rgba(12, 99, 253, 0.32);
+    overflow: hidden;
+    /* To use a real photo:
+       1) Replace the <span>A</span> below with <img src="..." alt="Adrian">
+       2) Set the img to width/height 100%; object-fit: cover; */
+  }
+  .lmman-sig-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .lmman-sig-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .lmman-sig-name {
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin: 0;
+    /* Hand-written-ish signature feel via font-style (graceful fallback) */
+    font-style: italic;
+  }
+  .lmman-sig-title {
+    color: rgba(10, 29, 58, 0.55);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin: 3px 0 0 0;
+  }
+  .lmman-sig-badge {
+    flex-shrink: 0;
+    padding: 5px 11px;
+    background: rgba(12, 99, 253, 0.08);
+    border-radius: 999px;
+    color: #0c63fd;
+    font-weight: 900;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  /* ===== Responsive ===== */
+  @media (min-width: 640px) {
+    .lmman-card {
+      padding: 32px 32px 28px 32px;
+    }
+    .lmman-title {
+      font-size: 28px;
+      margin-bottom: 24px;
+    }
+    .lmman-beat-summary {
+      padding: 18px 4px;
+    }
+    .lmman-beat-head {
+      font-size: 18px;
+    }
+    .lmman-beat-body {
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .lmman-sig-avatar {
+      width: 52px;
+      height: 52px;
+      font-size: 22px;
+    }
+    .lmman-sig-name {
+      font-size: 17px;
+    }
+  }
+  @media (min-width: 900px) {
+    .lmman-title {
+      font-size: 32px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmman-card {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+<section
+  class="lmman"
+  id="lmman"
+  role="region"
+  aria-label="A note from Adrian, founder of LMCT+"
+>
+  <div class="lmman-card">
+    <span class="lmman-eyebrow">
+      <span class="lmman-eyebrow-dot" aria-hidden="true"></span>
+      A note from Adrian
+    </span>
+    <h2 class="lmman-title">
+      Why I built LMCT+ Petrol — and why it's <em>not too good to be true</em>.
+    </h2>
+    <!-- Accordion beats — each collapsed by default, click to expand -->
+    <div class="lmman-beats">
+      <details class="lmman-beat">
+        <summary class="lmman-beat-summary">
+          <span class="lmman-beat-num"><strong>01</strong></span>
+          <h3 class="lmman-beat-head">The problem.</h3>
+          <span class="lmman-beat-chevron" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" /></svg>
+          </span>
+        </summary>
+        <p class="lmman-beat-body">
+          Four big companies sell <strong>80% of the fuel in Australia</strong>.
+          They make record profits. You pay top prices. Loyalty cards give you 4
+          cents a litre back. <strong>That's a crumb.</strong>
+        </p>
+      </details>
+      <details class="lmman-beat">
+        <summary class="lmman-beat-summary">
+          <span class="lmman-beat-num"><strong>02</strong></span>
+          <h3 class="lmman-beat-head">So we did something different.</h3>
+          <span class="lmman-beat-chevron" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" /></svg>
+          </span>
+        </summary>
+        <p class="lmman-beat-body">
+          We built a real petrol station. We buy from the
+          <strong>same suppliers as Shell, BP, and 7-Eleven</strong>. Then we
+          pass that wholesale rate through to members —
+          <strong>on average</strong>. We make our money from the $99 yearly
+          membership, not the pump.
+        </p>
+      </details>
+      <details class="lmman-beat">
+        <summary class="lmman-beat-summary">
+          <span class="lmman-beat-num"><strong>03</strong></span>
+          <h3 class="lmman-beat-head">Why only LMCT+ can do this.</h3>
+          <span class="lmman-beat-chevron" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" /></svg>
+          </span>
+        </summary>
+        <p class="lmman-beat-body">
+          We already have <strong>hundreds of thousands of Aussies</strong> in
+          our community. That lets us run a station with razor-thin margins on
+          fuel.
+          <strong
+            >No one else in Australia could pull this off — that's why no one
+            has.</strong
+          >
+        </p>
+      </details>
+      <details class="lmman-beat">
+        <summary class="lmman-beat-summary">
+          <span class="lmman-beat-num"><strong>04</strong></span>
+          <h3 class="lmman-beat-head">The ask.</h3>
+          <span class="lmman-beat-chevron" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" /></svg>
+          </span>
+        </summary>
+        <p class="lmman-beat-body">
+          $99 isn't a fee. It's
+          <strong>a bet with us — against the big petrol companies</strong>.
+          Come fill up. See for yourself.
+        </p>
+      </details>
+    </div>
+    <!-- Signature -->
+    <div class="lmman-sig">
+      <div class="lmman-sig-avatar" aria-hidden="true">
+        <!-- Swap this span for <img src="path/to/adrian.jpg" alt="Adrian"/> when ready -->
+        <span>A</span>
+      </div>
+      <div class="lmman-sig-body">
+        <p class="lmman-sig-name">— Adrian</p>
+        <p class="lmman-sig-title">Founder · LMCT+</p>
+      </div>
+      <span class="lmman-sig-badge">Verified</span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,570 @@
+<!-- ============================================
+     LMCT+ PETROL LOCATION SECTION
+     Outer: 1170px | Inner content rail: 760px
+     ============================================ -->
+<style>
+  .lmloc *,
+  .lmloc *::before,
+  .lmloc *::after {
+    box-sizing: border-box;
+  }
+  .lmloc {
+    position: relative;
+    width: 100%;
+    background: transparent;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    color: #ffffff;
+    box-sizing: border-box;
+  }
+  .lmloc-inner {
+    max-width: 760px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .lmloc-head {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .lmloc-eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 7px 10px;
+    background: #ffffff;
+    border-radius: 999px;
+    color: #0a1d3a;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 16px 0;
+    box-shadow: 0 4px 14px rgba(5, 22, 42, 0.15);
+  }
+  .lmloc-eyebrow-pill-icon {
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .lmloc-eyebrow-pill-icon svg {
+    width: 10px;
+    height: 10px;
+    stroke: #ffffff;
+  }
+  .lmloc-title {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px 0;
+    text-shadow: 0 2px 10px rgba(5, 22, 42, 0.22);
+  }
+  .lmloc-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 540px;
+    text-shadow: 0 1px 3px rgba(5, 22, 42, 0.15);
+  }
+  .lmloc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-items: stretch;
+  }
+  .lmloc-info {
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(5, 22, 42, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .lmloc-reviews {
+    padding: 14px 16px;
+    background: #f5f8fb;
+    border: 1px solid rgba(10, 29, 58, 0.06);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none !important;
+  }
+  .lmloc-reviews:hover,
+  .lmloc-reviews:focus,
+  .lmloc-reviews:active,
+  .lmloc-reviews:visited {
+    text-decoration: none !important;
+  }
+  .lmloc-reviews-g {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lmloc-reviews-g svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .lmloc-reviews-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .lmloc-reviews-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 3px;
+  }
+  .lmloc-reviews-rating {
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .lmloc-stars {
+    display: inline-flex;
+    gap: 1px;
+  }
+  .lmloc-stars svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+  .lmloc-reviews-meta {
+    color: rgba(10, 29, 58, 0.65);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  .lmloc-reviews-meta strong {
+    color: #0a1d3a;
+    font-weight: 700;
+  }
+  .lmloc-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .lmloc-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(12, 99, 253, 0.28);
+  }
+  .lmloc-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: #ffffff;
+  }
+  .lmloc-label {
+    color: rgba(10, 29, 58, 0.5);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 4px 0;
+  }
+  .lmloc-value {
+    color: #0a1d3a;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.35;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .lmloc-value-sub {
+    color: rgba(10, 29, 58, 0.65);
+    font-weight: 500;
+    font-size: 13px;
+    margin: 4px 0 0 0;
+    letter-spacing: 0.01em;
+  }
+  .lmloc-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 14px;
+    margin-top: 0;
+    border-top: 1px solid rgba(10, 29, 58, 0.08);
+  }
+  .lmloc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    background: #f5f8fb;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 999px;
+    color: #0a1d3a;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .lmloc-chip svg {
+    width: 12px;
+    height: 12px;
+    stroke: #1a7cc4;
+  }
+  .lmloc-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 22px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    color: #ffffff;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    border-radius: 10px;
+    line-height: 1;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease;
+    box-shadow:
+      0 4px 14px rgba(12, 99, 253, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    margin-top: 4px;
+    align-self: stretch;
+    white-space: nowrap;
+  }
+  .lmloc-cta:hover,
+  .lmloc-cta:focus,
+  .lmloc-cta:active,
+  .lmloc-cta:visited {
+    text-decoration: none !important;
+    color: #ffffff;
+  }
+  .lmloc-cta:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 8px 22px rgba(12, 99, 253, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    filter: brightness(1.06);
+  }
+  .lmloc-cta:active {
+    transform: translateY(0);
+  }
+  .lmloc-cta svg {
+    width: 14px;
+    height: 14px;
+  }
+  .lmloc-map {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    box-shadow: 0 10px 30px rgba(5, 22, 42, 0.2);
+    background: #ffffff;
+    aspect-ratio: 4 / 3;
+    min-height: 280px;
+    display: block;
+  }
+  .lmloc-map iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  @media (min-width: 900px) {
+    .lmloc-title {
+      font-size: 38px;
+    }
+    .lmloc-subtitle {
+      font-size: 16px;
+    }
+    .lmloc-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .lmloc-info {
+      padding: 24px;
+      grid-column: 1;
+    }
+    .lmloc-map {
+      aspect-ratio: auto;
+      min-height: 0;
+      height: 100%;
+      grid-column: 2;
+    }
+    .lmloc-value {
+      font-size: 16px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .lmloc-title {
+      font-size: 42px;
+    }
+  }
+</style>
+<section class="lmloc" role="region" aria-label="LMCT+ Petrol location">
+  <div class="lmloc-inner">
+    <div class="lmloc-head">
+      <span class="lmloc-eyebrow-pill">
+        <span class="lmloc-eyebrow-pill-icon">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+        </span>
+        Find Us
+      </span>
+      <h2 class="lmloc-title">Visit LMCT+ Petrol</h2>
+      <p class="lmloc-subtitle">
+        One convenient location in Preston — serving wholesale fuel to members
+        24/7, 7 days a week.
+      </p>
+    </div>
+    <div class="lmloc-grid">
+      <div class="lmloc-info">
+        <a
+          class="lmloc-reviews"
+          href="https://www.google.com/maps/place/?q=place_id:ChIJvTqrBgBF1moR4NzQ-2JSH-g"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="lmloc-reviews-g" aria-hidden="true">
+            <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill="#EA4335"
+                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+              />
+              <path
+                fill="#4285F4"
+                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+              />
+              <path
+                fill="#34A853"
+                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+              />
+            </svg>
+          </span>
+          <div class="lmloc-reviews-body">
+            <div class="lmloc-reviews-top">
+              <span class="lmloc-reviews-rating">4.7</span>
+              <span class="lmloc-stars" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="#FBBC05"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="#FBBC05"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="#FBBC05"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="#FBBC05"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                  />
+                </svg>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="star70" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="70%" stop-color="#FBBC05" />
+                      <stop offset="70%" stop-color="#E0E0E0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+                    fill="url(#star70)"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div class="lmloc-reviews-meta">
+              <strong>163+ reviews</strong> &nbsp;·&nbsp; Google
+            </div>
+          </div>
+        </a>
+        <div class="lmloc-row">
+          <span class="lmloc-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </span>
+          <div>
+            <p class="lmloc-label">Address</p>
+            <p class="lmloc-value">343 Plenty Rd</p>
+            <p class="lmloc-value-sub">Preston VIC 3072, Australia</p>
+          </div>
+        </div>
+        <div class="lmloc-row">
+          <span class="lmloc-icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          </span>
+          <div>
+            <p class="lmloc-label">Hours</p>
+            <p class="lmloc-value">24/7</p>
+          </div>
+        </div>
+        <div class="lmloc-chips">
+          <span class="lmloc-chip">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M20 12V8H6a2 2 0 00-2 2v12h12v-2" />
+              <circle cx="9" cy="17" r="2" />
+              <path d="M14 12h4l4 4v4h-2" />
+              <circle cx="18" cy="17" r="2" />
+            </svg>
+            Wholesale Fuel
+          </span>
+          <span class="lmloc-chip">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            Members Only
+          </span>
+          <span class="lmloc-chip">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Trusted AU Brand
+          </span>
+        </div>
+        <a
+          class="lmloc-cta"
+          href="https://www.google.com/maps/dir/?api=1&destination=LMCT%2B+Petrol+343+Plenty+Rd+Preston+VIC+3072&destination_place_id=ChIJvTqrBgBF1moR4NzQ-2JSH-g"
+          target="_blank"
+          rel="noopener"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <polygon points="3 11 22 2 13 21 11 13 3 11" />
+          </svg>
+          Get Directions
+        </a>
+      </div>
+      <div class="lmloc-map">
+        <iframe
+          src="https://www.google.com/maps?q=LMCT%2B+Petrol+343+Plenty+Rd+Preston+VIC+3072&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="LMCT+ Petrol location map"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>

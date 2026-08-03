@@ -1,0 +1,537 @@
+<!-- ============================================================
+      LMCT+ ORDER FORM ENHANCEMENT BLOCK
+      Paste-ready ClickFunnels 1.0 Custom HTML/Code block.
+      Place this block ABOVE #row--30567 (the row holding the 2-step form).
+      ============================================================ -->
+<style>
+  .lmorder *,
+  .lmorder *::before,
+  .lmorder *::after {
+    box-sizing: border-box;
+  }
+  .lmorder {
+    position: relative;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto 20px auto;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    color: #0a1d3a;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  /* ============================
+      VALUE RECAP STRIP
+      ============================ */
+  .lmorder-recap {
+    text-align: center;
+    padding: 6px 10px 0 10px;
+  }
+  .lmorder-recap-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 7px 10px;
+    background: #ffffff;
+    border-radius: 999px;
+    color: #0a1d3a;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    box-shadow: 0 4px 14px rgba(5, 22, 42, 0.18);
+    margin-bottom: 14px;
+  }
+  .lmorder-recap-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #1f8b4c;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.22);
+    animation: lmorder-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes lmorder-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.22);
+    }
+    50% {
+      box-shadow: 0 0 0 6px rgba(46, 204, 113, 0.05);
+    }
+  }
+  .lmorder-recap-title {
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 auto 14px auto;
+    max-width: 560px;
+    text-shadow: 0 2px 12px rgba(5, 22, 42, 0.32);
+  }
+  .lmorder-recap-title em {
+    font-style: normal;
+    color: #208a31;
+  }
+  .lmorder-recap-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  .lmorder-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 999px;
+    color: #0a1d3a;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    box-shadow: 0 3px 10px rgba(5, 22, 42, 0.16);
+  }
+  .lmorder-chip svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    stroke: #0c63fd;
+  }
+  /* ============================
+      MAIN CARD
+      ============================ */
+  .lmorder-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 24px 60px rgba(5, 22, 42, 0.42);
+    padding: 26px 22px 28px 22px;
+  }
+  .lmorder-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0c9ffd 0%, #0c63fd 50%, #5cc6f7 100%);
+  }
+  .lmorder-card-eyebrow {
+    color: rgba(10, 29, 58, 0.5);
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 8px 0;
+  }
+  .lmorder-card-title {
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px 0;
+  }
+  .lmorder-card-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmorder-card-sub {
+    color: rgba(10, 29, 58, 0.6);
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0 0 22px 0;
+  }
+  /* ============================
+      PATH PILLS
+      ============================ */
+  .lmorder-pills-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: rgba(10, 29, 58, 0.5);
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 12px 0;
+  }
+  .lmorder-pills-hint svg {
+    width: 12px;
+    height: 12px;
+    stroke: #0c63fd;
+    fill: none;
+    stroke-width: 2.4;
+  }
+  .lmorder-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 18px 0;
+  }
+  .lmorder-pill {
+    flex: 1 1 0;
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 16px 14px;
+    background: #ffffff;
+    border: 1.5px solid rgba(10, 29, 58, 0.14);
+    border-radius: 12px;
+    color: rgba(10, 29, 58, 0.7);
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .lmorder-pill:hover {
+    color: #0a1d3a;
+    background: #f5f8fb;
+    border-color: rgba(12, 99, 253, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(12, 99, 253, 0.18);
+  }
+  .lmorder-pill.is-active {
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 22px rgba(12, 99, 253, 0.32);
+    transform: translateY(-1px);
+  }
+  .lmorder-pill:focus-visible {
+    outline: 2px solid #0c63fd;
+    outline-offset: 3px;
+  }
+  .lmorder-pill-icon {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lmorder-pill-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.6;
+  }
+  .lmorder-pill .lmorder-pill-icon--arrow {
+    display: inline-flex;
+  }
+  .lmorder-pill .lmorder-pill-icon--check {
+    display: none;
+  }
+  .lmorder-pill.is-active .lmorder-pill-icon--arrow {
+    display: none;
+  }
+  .lmorder-pill.is-active .lmorder-pill-icon--check {
+    display: inline-flex;
+  }
+  .lmorder-pill-detail {
+    background: linear-gradient(
+      135deg,
+      rgba(12, 159, 253, 0.06) 0%,
+      rgba(12, 99, 253, 0.06) 100%
+    );
+    border: 1px solid rgba(12, 99, 253, 0.18);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #0a1d3a;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+    transition: opacity 0.2s ease;
+  }
+  .lmorder-pill-detail strong {
+    font-weight: 900;
+  }
+  .lmorder-pill-detail.is-swapping {
+    opacity: 0;
+  }
+  /* ============================
+      SIGNUP TRANSITION TITLE
+      ============================ */
+  .lmorder-signup {
+    text-align: center;
+
+    margin: 4px 0 -4px 0;
+  }
+  .lmorder-signup-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #16c93a 0%, #0fa10b 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 18px rgba(15, 161, 11, 0.45);
+  }
+  .lmorder-signup-eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+    animation: lmorder-signup-pulse 1.8s infinite;
+  }
+  @keyframes lmorder-signup-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+  }
+  .lmorder-signup-title {
+    color: #fff;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 0 auto 10px auto;
+    /* max-width: 620px; */
+    /* text-shadow: 0 4px 24px rgba(5, 22, 42, 0.45); */
+  }
+  .lmorder-signup-title em {
+    font-style: normal;
+    color: #2ac744;
+  }
+  .lmorder-signup-sub {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.45;
+    margin: 0 auto 18px auto;
+    /* max-width: 460px; */
+  }
+  .lmorder-signup-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 22px rgba(5, 22, 42, 0.32);
+    animation: lmorder-signup-bounce 1.6s ease-in-out infinite;
+  }
+  .lmorder-signup-arrow svg {
+    width: 22px;
+    height: 22px;
+    stroke: #0c63fd;
+    fill: none;
+    stroke-width: 3;
+  }
+  @keyframes lmorder-signup-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+  /* ============================
+      APPLE PAY / EXPRESS CHECKOUT
+      ============================ */
+  #tmp_oapap-89166 {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+  #tmp_oapap-89166 .apple-pay-button,
+  #tmp_oapap-89166 button.apple-pay-button,
+  #tmp_oapap-89166 .apple-pay-button-with-text {
+    width: 100% !important;
+    height: 48px !important;
+    border-radius: 6px !important;
+    -webkit-appearance: -apple-pay-button !important;
+    appearance: -apple-pay-button;
+    -apple-pay-button-style: black !important;
+    -apple-pay-button-type: subscribe !important;
+  }
+  .express-checkout-wrap {
+    margin: 18px 0 14px 0;
+    padding: 0 5px;
+  }
+  .express-checkout-label {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 12px;
+    color: #888;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+  .express-checkout-label::before,
+  .express-checkout-label::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+  }
+  .express-checkout-label span {
+    padding: 0 12px;
+  }
+  /* ============================
+      RESPONSIVE
+      ============================ */
+  @media (min-width: 640px) {
+    .lmorder {
+      gap: 22px;
+      margin-bottom: 28px;
+    }
+    .lmorder-card {
+      padding: 32px 30px 34px 30px;
+    }
+    .lmorder-recap-title {
+      font-size: 32px;
+    }
+    .lmorder-card-title {
+      font-size: 28px;
+    }
+    .lmorder-card-sub {
+      font-size: 14px;
+    }
+    .lmorder-pill {
+      padding: 18px 16px;
+      font-size: 14px;
+    }
+    .lmorder-pill-detail {
+      font-size: 14px;
+      padding: 16px 18px;
+    }
+    .lmorder-signup-title {
+      font-size: 40px;
+    }
+  }
+  @media (min-width: 900px) {
+    .lmorder-recap-title {
+      font-size: 36px;
+    }
+    .lmorder-signup-title {
+      font-size: 46px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmorder-recap-dot,
+    .lmorder-signup-eyebrow-dot,
+    .lmorder-signup-arrow {
+      animation: none !important;
+    }
+  }
+</style>
+
+<section
+  class="lmorder"
+  id="lmorder"
+  role="region"
+  aria-label="Lock in your savings — what happens next"
+>
+  <!-- ============ SIGNUP TRANSITION TITLE ============ -->
+  <div class="lmorder-signup">
+    <span class="lmorder-signup-eyebrow">
+      <span class="lmorder-signup-eyebrow-dot"></span>
+      Final step
+    </span>
+    <h2 class="lmorder-signup-title">
+      Sign up below to <em>start saving</em>.
+    </h2>
+    <p class="lmorder-signup-sub">
+      Takes 60 seconds. You'll be filling up at wholesale within the hour.
+    </p>
+    <div class="lmorder-signup-arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    // Move Apple Pay into step 2
+    function moveApplePay() {
+      var applePay = document.querySelector("#tmp_oapap-89166");
+      var target = document.querySelector(
+        "#tmp_order2step-95906 .o2step_step2 .elCreditCardForm",
+      );
+      if (!applePay || !target) return false;
+      if (
+        target.nextElementSibling &&
+        target.nextElementSibling.classList.contains("express-checkout-wrap")
+      ) {
+        return true;
+      }
+      var wrap = document.createElement("div");
+      wrap.className = "express-checkout-wrap";
+      var label = document.createElement("div");
+      label.className = "express-checkout-label";
+      label.innerHTML = "<span>OR EXPRESS CHECKOUT</span>";
+      wrap.appendChild(label);
+      target.parentNode.insertBefore(wrap, target.nextSibling);
+      wrap.appendChild(applePay);
+      return true;
+    }
+
+    function tryMoveApplePay() {
+      if (moveApplePay()) return;
+      var tries = 0;
+      var t = setInterval(function () {
+        if (moveApplePay() || ++tries > 20) clearInterval(t);
+      }, 400);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", tryMoveApplePay);
+    } else {
+      tryMoveApplePay();
+    }
+
+    // Re-run when step 1 form submits (user clicks to step 2)
+    document.addEventListener("click", function (e) {
+      var target = e.target.closest(
+        '#tmp_order2step-95906 .o2step_step1 a, #tmp_order2step-95906 .o2step_step1 button, #tmp_order2step-95906 .o2step_step1 input[type="submit"]',
+      );
+      if (!target) return;
+      setTimeout(moveApplePay, 300);
+      setTimeout(moveApplePay, 800);
+      setTimeout(moveApplePay, 1600);
+    });
+  })();
+</script>

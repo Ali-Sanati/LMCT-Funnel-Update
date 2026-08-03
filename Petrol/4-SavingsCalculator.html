@@ -1,0 +1,2837 @@
+<!-- ============================================================
+      LMCT+ PROGRESSIVE SAVINGS CALCULATOR
+      Paste-ready ClickFunnels 1.0 Custom HTML/Code block.
+      Self-contained: HTML + CSS + JS in one snippet.
+      Namespaced .lmcalc-* so it won't collide with .sus-*, .lmloc-*, etc.
+      CONFIG: edit LMCALC_CONFIG at top of <script> to update
+      pump prices, membership fee, grocery flag, etc.
+      ============================================================ -->
+<style>
+  .lmcalc *,
+  .lmcalc *::before,
+  .lmcalc *::after {
+    box-sizing: border-box;
+  }
+  .lmcalc {
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    color: #0a1d3a;
+  }
+  /* ===== Outer card ===== */
+  .lmcalc-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 16px;
+    box-shadow:
+      0 24px 60px rgba(5, 22, 42, 0.42),
+      0 0 0 1px rgba(12, 99, 253, 0.08);
+    padding: 22px 20px 24px 20px;
+    overflow: hidden;
+  }
+  /* Top gradient accent bar */
+  .lmcalc-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #0c9ffd 0%, #0c63fd 50%, #5cc6f7 100%);
+    z-index: 1;
+  }
+  /* Soft glow behind card on dark bg */
+  .lmcalc::before {
+    content: "";
+    position: absolute;
+    inset: -20px -20px auto -20px;
+    height: 70%;
+    background: radial-gradient(
+      60% 50% at 50% 0%,
+      rgba(12, 159, 253, 0.18) 0%,
+      transparent 70%
+    );
+    z-index: -1;
+    pointer-events: none;
+  }
+  /* ===== Top bar — progress + step label ===== */
+  .lmcalc-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .lmcalc-progress {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lmcalc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(10, 29, 58, 0.15);
+    transition:
+      background 0.25s ease,
+      transform 0.25s ease;
+  }
+  .lmcalc-dot.is-active {
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    transform: scale(1.15);
+  }
+  .lmcalc-dot.is-done {
+    background: #0c63fd;
+  }
+  .lmcalc-step-label {
+    color: rgba(10, 29, 58, 0.5);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .lmcalc-back {
+    background: none;
+    border: 0;
+    padding: 6px 10px;
+    margin-left: -6px;
+    color: rgba(10, 29, 58, 0.65);
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition:
+      background 0.15s ease,
+      color 0.15s ease;
+  }
+  .lmcalc-back:hover {
+    color: #0a1d3a;
+    background: rgba(10, 29, 58, 0.04);
+  }
+  .lmcalc-back[hidden] {
+    display: none !important;
+  }
+  /* ===== Hero eyebrow chip ===== */
+  .lmcalc-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px 7px 10px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 999px;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    box-shadow: 0 4px 14px rgba(12, 99, 253, 0.35);
+    margin: 0 0 14px 0;
+  }
+  .lmcalc-eyebrow-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+  }
+  .lmcalc-eyebrow-icon svg {
+    width: 9px;
+    height: 9px;
+  }
+  .lmcalc-eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #5cff8a;
+    box-shadow: 0 0 8px rgba(92, 255, 138, 0.7);
+    animation: lmcalc-pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes lmcalc-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.3);
+    }
+  }
+  /* ===== Step heading ===== */
+  .lmcalc-heading {
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 22px;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin: 0 0 6px 0;
+  }
+  .lmcalc-heading em {
+    font-style: normal;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmcalc-sub {
+    color: rgba(10, 29, 58, 0.65);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.45;
+    margin: 0 0 18px 0;
+  }
+  .lmcalc-sub strong {
+    color: #0a1d3a;
+    font-weight: 800;
+  }
+  .lmcalc-sub-amount {
+    color: #0c63fd;
+    font-weight: 900;
+  }
+  .lmcalc-live-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2ecc71;
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.18);
+    margin-right: 4px;
+    vertical-align: 1px;
+    animation: lmcalc-live-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes lmcalc-live-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.18);
+    }
+    50% {
+      box-shadow: 0 0 0 6px rgba(46, 204, 113, 0.06);
+    }
+  }
+  /* ===== Social proof teaser strip ===== */
+  .lmcalc-proof {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(
+      135deg,
+      rgba(12, 159, 253, 0.08) 0%,
+      rgba(12, 99, 253, 0.08) 100%
+    );
+    border: 1px solid rgba(12, 99, 253, 0.15);
+    border-radius: 10px;
+    margin: 14px 0 0 0;
+  }
+  .lmcalc-proof-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 900;
+  }
+  .lmcalc-proof-text {
+    flex: 1;
+    min-width: 0;
+    color: rgba(10, 29, 58, 0.75);
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+  }
+  .lmcalc-proof-text strong {
+    color: #0a1d3a;
+    font-weight: 900;
+  }
+  .lmcalc-proof-text .lmcalc-proof-amount {
+    color: #0c63fd;
+    font-weight: 900;
+    font-size: 14px;
+  }
+  /* ===== Step containers — fade transitions ===== */
+  .lmcalc-step {
+    display: none;
+  }
+  .lmcalc-step.is-active {
+    display: block;
+    animation: lmcalc-fade-up 0.4s ease-out both;
+  }
+  @keyframes lmcalc-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  /* ===== Intro view (button-first hook) ===== */
+  .lmcalc-intro {
+    text-align: center;
+    padding: 2px 0 2px 0;
+  }
+  .lmcalc-heading--center {
+    text-align: center;
+    margin: 2px auto 16px auto;
+    max-width: 520px;
+  }
+  .lmcalc-bigbtn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 460px;
+    padding: 16px 22px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    color: #ffffff;
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow:
+      0 12px 26px rgba(12, 99, 253, 0.42),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease;
+    overflow: hidden;
+  }
+  .lmcalc-bigbtn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 18px 40px rgba(12, 99, 253, 0.55),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    filter: brightness(1.06);
+  }
+  .lmcalc-bigbtn:active {
+    transform: translateY(0);
+  }
+  .lmcalc-bigbtn-icon {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .lmcalc-bigbtn-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+    stroke: #fff;
+  }
+  .lmcalc-bigbtn-text {
+    flex: none;
+  }
+  .lmcalc-bigbtn-arrow {
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+  .lmcalc-bigbtn:hover .lmcalc-bigbtn-arrow {
+    transform: translateX(4px);
+  }
+  /* Subtle expanding ring pulse around the button */
+  .lmcalc-bigbtn-pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 rgba(12, 99, 253, 0.55);
+    animation: lmcalc-bigbtn-pulse 2.4s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes lmcalc-bigbtn-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(12, 99, 253, 0.45);
+    }
+    60% {
+      box-shadow: 0 0 0 16px rgba(12, 99, 253, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(12, 99, 253, 0);
+    }
+  }
+  .lmcalc-intro-hint {
+    color: rgba(10, 29, 58, 0.5);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin: 14px 0 22px 0;
+  }
+  /* Compact testimonial chip — sits above the button */
+  .lmcalc-test-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 14px 4px 4px;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 999px;
+    margin: 0 auto 22px auto;
+    box-shadow: 0 4px 14px rgba(5, 22, 42, 0.1);
+    max-width: max-content;
+  }
+  .lmcalc-test-chip-avatar {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lmcalc-test-chip-name {
+    color: #0a1d3a;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: -0.005em;
+    line-height: 1;
+  }
+  .lmcalc-test-chip-amount {
+    color: rgba(10, 29, 58, 0.55);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+    padding-left: 8px;
+    margin-left: 2px;
+    border-left: 1px solid rgba(10, 29, 58, 0.12);
+  }
+  .lmcalc-test-chip-amount strong {
+    color: #0c63fd;
+    font-weight: 900;
+  }
+  /* Reveal animation when intro swaps to input */
+  .lmcalc-input-view.is-revealed {
+    animation: lmcalc-fade-up 0.45s ease-out both;
+  }
+  /* ===== Step 1: car picker ===== */
+  .lmcalc-search-wrap {
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .lmcalc-search {
+    width: 100%;
+    background: #f5f8fb;
+    border: 1px solid rgba(10, 29, 58, 0.1);
+    border-radius: 12px;
+    padding: 13px 16px 13px 42px;
+    color: #0a1d3a;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    transition:
+      border-color 0.15s ease,
+      background 0.15s ease;
+  }
+  .lmcalc-search:focus {
+    outline: none;
+    border-color: #0c63fd;
+    background: #ffffff;
+  }
+  .lmcalc-search::placeholder {
+    color: rgba(10, 29, 58, 0.4);
+    font-weight: 500;
+  }
+  .lmcalc-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: rgba(10, 29, 58, 0.5);
+    pointer-events: none;
+  }
+  .lmcalc-section-label {
+    color: rgba(10, 29, 58, 0.5);
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 8px 0 10px 0;
+  }
+  .lmcalc-car-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 4px;
+    margin: 0 -4px 0 0;
+  }
+  .lmcalc-car-grid:empty {
+    margin: 0;
+    padding: 0;
+  }
+  .lmcalc-car-grid::-webkit-scrollbar {
+    width: 6px;
+  }
+  .lmcalc-car-grid::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .lmcalc-car-grid::-webkit-scrollbar-thumb {
+    background: rgba(10, 29, 58, 0.15);
+    border-radius: 3px;
+  }
+  .lmcalc-car {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.1);
+    border-radius: 10px;
+    padding: 11px 14px;
+    color: #0a1d3a;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.2;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      border-color 0.15s ease,
+      background 0.15s ease,
+      transform 0.1s ease;
+    width: 100%;
+  }
+  .lmcalc-car:hover {
+    border-color: #0c63fd;
+    background: #f5f8fb;
+  }
+  .lmcalc-car:active {
+    transform: scale(0.99);
+  }
+  .lmcalc-car-name {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+  }
+  .lmcalc-car-hint {
+    color: rgba(10, 29, 58, 0.55);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .lmcalc-car-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .lmcalc-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .lmcalc-pill.is-petrol {
+    background: rgba(12, 99, 253, 0.1);
+    color: #0c63fd;
+  }
+  .lmcalc-pill.is-diesel {
+    background: rgba(26, 124, 196, 0.12);
+    color: #1a7cc4;
+  }
+  .lmcalc-pill.is-tank {
+    background: #f5f8fb;
+    color: rgba(10, 29, 58, 0.7);
+  }
+  .lmcalc-empty {
+    text-align: center;
+    color: rgba(10, 29, 58, 0.5);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 24px 12px;
+  }
+  .lmcalc-other {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: 0;
+    padding: 14px 0 0 0;
+    color: rgba(10, 29, 58, 0.55);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(10, 29, 58, 0.25);
+  }
+  .lmcalc-other:hover {
+    color: #0c63fd;
+    text-decoration-color: #0c63fd;
+  }
+  /* ===== Manual car entry (Other) ===== */
+  .lmcalc-manual {
+    background: #f5f8fb;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 14px;
+  }
+  .lmcalc-manual-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+  .lmcalc-manual-field {
+    flex: 1;
+    min-width: 130px;
+  }
+  .lmcalc-manual-label {
+    display: block;
+    color: rgba(10, 29, 58, 0.55);
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .lmcalc-fuel-toggle {
+    display: inline-flex;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.1);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 0;
+  }
+  .lmcalc-fuel-btn {
+    background: transparent;
+    border: 0;
+    padding: 7px 14px;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(10, 29, 58, 0.5);
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+  }
+  .lmcalc-fuel-btn.is-active {
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    color: #ffffff;
+  }
+  .lmcalc-tank-input {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.1);
+    border-radius: 8px;
+    padding: 9px 12px;
+    color: #0a1d3a;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .lmcalc-tank-input:focus {
+    outline: none;
+    border-color: #0c63fd;
+  }
+  .lmcalc-manual-confirm {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    color: #ffffff;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(12, 99, 253, 0.3);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .lmcalc-manual-confirm:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(12, 99, 253, 0.4);
+  }
+  /* ===== Step 2: frequency cards ===== */
+  .lmcalc-freq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .lmcalc-freq {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.1);
+    border-radius: 12px;
+    padding: 16px 16px 18px 16px;
+    color: #0a1d3a;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      border-color 0.15s ease,
+      background 0.15s ease,
+      transform 0.1s ease;
+  }
+  .lmcalc-freq:hover {
+    border-color: #0c63fd;
+    background: #f5f8fb;
+  }
+  .lmcalc-freq:active {
+    transform: scale(0.99);
+  }
+  .lmcalc-freq-icon {
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .lmcalc-freq-title {
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .lmcalc-freq-sub {
+    color: rgba(10, 29, 58, 0.55);
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  /* ===== Step 3 (grocery, hidden by default) ===== */
+  .lmcalc-slider-wrap {
+    background: #f5f8fb;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .lmcalc-slider-readout {
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .lmcalc-slider-amount {
+    font-weight: 900;
+    font-size: 36px;
+    letter-spacing: -0.02em;
+    color: #0a1d3a;
+    line-height: 1;
+  }
+  .lmcalc-slider-unit {
+    color: rgba(10, 29, 58, 0.6);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .lmcalc-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    height: 28px;
+    cursor: pointer;
+  }
+  .lmcalc-slider::-webkit-slider-runnable-track {
+    height: 6px;
+    background: linear-gradient(90deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 3px;
+  }
+  .lmcalc-slider::-moz-range-track {
+    height: 6px;
+    background: linear-gradient(90deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 3px;
+  }
+  .lmcalc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #0c63fd;
+    margin-top: -8px;
+    box-shadow: 0 3px 8px rgba(12, 99, 253, 0.35);
+    cursor: pointer;
+  }
+  .lmcalc-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #0c63fd;
+    box-shadow: 0 3px 8px rgba(12, 99, 253, 0.35);
+    cursor: pointer;
+  }
+  .lmcalc-slider-confirm {
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    color: #ffffff;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(12, 99, 253, 0.3);
+  }
+  /* ===== Reveal ===== */
+  .lmcalc-reveal-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: linear-gradient(
+      135deg,
+      rgba(12, 159, 253, 0.12) 0%,
+      rgba(12, 99, 253, 0.12) 100%
+    );
+    border-radius: 999px;
+    color: #0c63fd;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .lmcalc-big {
+    font-weight: 900;
+    color: #0a1d3a;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-size: 64px;
+    margin: 4px 0 4px 0;
+    background: linear-gradient(135deg, #0c63fd 0%, #0a1d3a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmcalc-big-currency {
+    font-size: 0.55em;
+    vertical-align: 0.25em;
+    margin-right: 2px;
+  }
+  .lmcalc-big-period {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(10, 29, 58, 0.55);
+    -webkit-text-fill-color: rgba(10, 29, 58, 0.55);
+    margin-top: 8px;
+    background: none;
+  }
+  .lmcalc-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 18px 0 16px 0;
+  }
+  .lmcalc-stat {
+    background: #f5f8fb;
+    border: 1px solid rgba(10, 29, 58, 0.06);
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+  }
+  .lmcalc-stat-value {
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    color: #0a1d3a;
+    line-height: 1;
+  }
+  .lmcalc-stat-label {
+    color: rgba(10, 29, 58, 0.5);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .lmcalc-roi-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 14px 0 18px 0;
+  }
+  .lmcalc-roi {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: #f5f8fb;
+    border: 1px solid rgba(10, 29, 58, 0.06);
+    border-radius: 10px;
+    color: #0a1d3a;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    line-height: 1.35;
+  }
+  .lmcalc-roi strong {
+    font-weight: 900;
+    color: #0c63fd;
+  }
+  .lmcalc-roi-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 13px;
+  }
+  .lmcalc-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    color: #ffffff;
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none !important;
+    box-shadow:
+      0 8px 22px rgba(12, 99, 253, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease,
+      filter 0.2s ease;
+  }
+  .lmcalc-cta:hover,
+  .lmcalc-cta:focus,
+  .lmcalc-cta:active,
+  .lmcalc-cta:visited {
+    color: #ffffff;
+    text-decoration: none !important;
+  }
+  .lmcalc-cta:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 28px rgba(12, 99, 253, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    filter: brightness(1.06);
+  }
+  .lmcalc-cta:active {
+    transform: translateY(0);
+  }
+  .lmcalc-cta svg {
+    width: 16px;
+    height: 16px;
+  }
+  .lmcalc-reveal-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  .lmcalc-foot-btn {
+    background: none;
+    border: 0;
+    padding: 4px 8px;
+    color: rgba(10, 29, 58, 0.55);
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 6px;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
+  }
+  .lmcalc-foot-btn:hover {
+    color: #0c63fd;
+    background: rgba(10, 29, 58, 0.04);
+  }
+  /* ===== Expandable sections ===== */
+  .lmcalc-expand {
+    display: none;
+    margin-top: 14px;
+    padding: 14px;
+    background: #f5f8fb;
+    border: 1px solid rgba(10, 29, 58, 0.06);
+    border-radius: 10px;
+    animation: lmcalc-fade-up 0.3s ease-out both;
+  }
+  .lmcalc-expand.is-open {
+    display: block;
+  }
+  .lmcalc-bd-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .lmcalc-bd-table th,
+  .lmcalc-bd-table td {
+    padding: 6px 0;
+    text-align: left;
+    font-weight: 700;
+  }
+  .lmcalc-bd-table th {
+    color: rgba(10, 29, 58, 0.5);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(10, 29, 58, 0.08);
+  }
+  .lmcalc-bd-table td:last-child {
+    text-align: right;
+    font-weight: 900;
+  }
+  .lmcalc-bd-table tr.is-total td {
+    border-top: 1px solid rgba(10, 29, 58, 0.12);
+    padding-top: 10px;
+    color: #0c63fd;
+  }
+  .lmcalc-price-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  .lmcalc-price-row .lmcalc-manual-field {
+    flex: 1;
+  }
+  .lmcalc-price-row .lmcalc-tank-input {
+    font-size: 13px;
+  }
+  .lmcalc-disclaimer {
+    color: rgba(10, 29, 58, 0.35);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-top: 22px;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+  /* ===== Responsive ===== */
+  @media (min-width: 640px) {
+    .lmcalc-card {
+      padding: 34px 32px 36px 32px;
+    }
+    .lmcalc-eyebrow {
+      font-size: 11px;
+      padding: 8px 16px 8px 12px;
+      margin-bottom: 18px;
+    }
+    .lmcalc-heading {
+      font-size: 36px;
+    }
+    .lmcalc-sub {
+      font-size: 15px;
+      margin-bottom: 22px;
+    }
+    .lmcalc-bigbtn {
+      padding: 22px 28px;
+      font-size: 16px;
+      max-width: 480px;
+    }
+    .lmcalc-test-chip-name {
+      font-size: 13px;
+    }
+    .lmcalc-proof {
+      padding: 12px 16px;
+    }
+    .lmcalc-proof-text {
+      font-size: 13px;
+    }
+    .lmcalc-proof-text .lmcalc-proof-amount {
+      font-size: 16px;
+    }
+    .lmcalc-car-grid {
+      grid-template-columns: 1fr 1fr;
+      max-height: 320px;
+    }
+    .lmcalc-big {
+      font-size: 88px;
+    }
+    .lmcalc-stat-value {
+      font-size: 22px;
+    }
+    .lmcalc-freq {
+      padding: 20px;
+    }
+    .lmcalc-freq-title {
+      font-size: 17px;
+    }
+  }
+  @media (min-width: 900px) {
+    .lmcalc-heading {
+      font-size: 42px;
+    }
+    .lmcalc-big {
+      font-size: 108px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmcalc-step.is-active,
+    .lmcalc-expand,
+    .lmcalc-cta,
+    .lmcalc-dot {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+<section
+  class="lmcalc"
+  id="lmcalc"
+  role="region"
+  aria-label="LMCT+ Savings Calculator"
+>
+  <div class="lmcalc-card">
+    <!-- Top: progress + back -->
+    <div class="lmcalc-top">
+      <div class="lmcalc-progress" id="lmcalcProgress" aria-hidden="true">
+        <span class="lmcalc-dot is-active" data-step="1"></span>
+        <span class="lmcalc-dot" data-step="2"></span>
+        <span class="lmcalc-dot" data-step="reveal"></span>
+      </div>
+      <button class="lmcalc-back" id="lmcalcBack" hidden type="button">
+        <svg
+          viewBox="0 0 24 24"
+          width="14"
+          height="14"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        Back
+      </button>
+    </div>
+    <!-- ============ STEP 1: CAR ============ -->
+    <div class="lmcalc-step is-active" id="lmcalcStep1" data-step="1">
+      <!-- INTRO: button-first hook, shown initially -->
+      <div class="lmcalc-intro" id="lmcalcIntro">
+        <!-- Compact testimonial chip — the button copy is the heading -->
+        <div class="lmcalc-test-chip" aria-label="Member testimonial">
+          <span class="lmcalc-test-chip-avatar">MM</span>
+          <span class="lmcalc-test-chip-name">Marco M.</span>
+          <span class="lmcalc-test-chip-amount">$988 saved last month</span>
+        </div>
+        <button class="lmcalc-bigbtn" id="lmcalcStartBtn" type="button">
+          <span class="lmcalc-bigbtn-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+          </span>
+          <span class="lmcalc-bigbtn-text">Calculate my savings</span>
+          <span class="lmcalc-bigbtn-arrow" aria-hidden="true">→</span>
+          <span class="lmcalc-bigbtn-pulse" aria-hidden="true"></span>
+        </button>
+        <p class="lmcalc-intro-hint">Takes 15 seconds · no email required</p>
+      </div>
+      <!-- INPUT: revealed after the intro button click -->
+      <div class="lmcalc-input-view" id="lmcalcStep1Input" hidden>
+        <h2 class="lmcalc-heading">What do you drive?</h2>
+        <p class="lmcalc-sub">
+          Tell us your car. We'll auto-fill fuel type and tank size.
+        </p>
+        <div class="lmcalc-search-wrap">
+          <svg
+            class="lmcalc-search-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <line x1="20" y1="20" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            type="text"
+            class="lmcalc-search"
+            id="lmcalcSearch"
+            placeholder="Start typing — Ranger, RAV4, Hilux…"
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Search for your car"
+          />
+        </div>
+        <p class="lmcalc-section-label" id="lmcalcCarSectionLabel" hidden></p>
+        <div class="lmcalc-car-grid" id="lmcalcCarGrid" role="listbox"></div>
+        <button class="lmcalc-other" id="lmcalcOtherBtn" type="button">
+          Don't see your car? Enter it manually →
+        </button>
+        <!-- Manual fallback -->
+        <div class="lmcalc-manual" id="lmcalcManual" hidden>
+          <p class="lmcalc-section-label" style="margin-top: 0">Manual Entry</p>
+          <div class="lmcalc-manual-row">
+            <div class="lmcalc-manual-field">
+              <label class="lmcalc-manual-label">Fuel</label>
+              <div
+                class="lmcalc-fuel-toggle"
+                id="lmcalcFuelToggle"
+                role="tablist"
+              >
+                <button
+                  class="lmcalc-fuel-btn is-active"
+                  data-fuel="petrol"
+                  type="button"
+                  role="tab"
+                  aria-selected="true"
+                >
+                  Petrol
+                </button>
+                <button
+                  class="lmcalc-fuel-btn"
+                  data-fuel="diesel"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                >
+                  Diesel
+                </button>
+              </div>
+            </div>
+            <div class="lmcalc-manual-field">
+              <label class="lmcalc-manual-label" for="lmcalcTankInput"
+                >Tank size (L)</label
+              >
+              <input
+                type="number"
+                class="lmcalc-tank-input"
+                id="lmcalcTankInput"
+                min="20"
+                max="200"
+                step="1"
+                value="55"
+                inputmode="numeric"
+              />
+            </div>
+          </div>
+          <button
+            class="lmcalc-manual-confirm"
+            id="lmcalcManualConfirm"
+            type="button"
+          >
+            Continue →
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- ============ STEP 2: FREQUENCY ============ -->
+    <div class="lmcalc-step" id="lmcalcStep2" data-step="2">
+      <h2 class="lmcalc-heading">How often do you fill up?</h2>
+      <p class="lmcalc-sub" id="lmcalcStep2Sub">
+        Your tank: <strong>—</strong>
+      </p>
+      <div class="lmcalc-freq-grid">
+        <button class="lmcalc-freq" data-fpw="0.5" type="button">
+          <span class="lmcalc-freq-icon">🌑</span>
+          <span class="lmcalc-freq-title">Fortnightly</span>
+          <span class="lmcalc-freq-sub">Every 2 weeks</span>
+        </button>
+        <button class="lmcalc-freq" data-fpw="1" type="button">
+          <span class="lmcalc-freq-icon">🌒</span>
+          <span class="lmcalc-freq-title">Weekly</span>
+          <span class="lmcalc-freq-sub">Once a week</span>
+        </button>
+        <button class="lmcalc-freq" data-fpw="2" type="button">
+          <span class="lmcalc-freq-icon">🌓</span>
+          <span class="lmcalc-freq-title">Twice a week</span>
+          <span class="lmcalc-freq-sub">2 fills / week</span>
+        </button>
+        <button class="lmcalc-freq" data-fpw="3" type="button">
+          <span class="lmcalc-freq-icon">🌕</span>
+          <span class="lmcalc-freq-title">Heavy driver</span>
+          <span class="lmcalc-freq-sub">3+ fills / week</span>
+        </button>
+      </div>
+    </div>
+    <!-- ============ STEP 3 (HIDDEN BY DEFAULT): GROCERIES ============ -->
+    <div class="lmcalc-step" id="lmcalcStep3" data-step="3">
+      <h2 class="lmcalc-heading">What's your weekly grocery spend?</h2>
+      <p class="lmcalc-sub">
+        Members get wholesale pricing on everyday essentials too.
+      </p>
+      <div class="lmcalc-slider-wrap">
+        <div class="lmcalc-slider-readout">
+          <div class="lmcalc-slider-amount" id="lmcalcGrocReadout">$200</div>
+          <div class="lmcalc-slider-unit">per week</div>
+        </div>
+        <input
+          type="range"
+          class="lmcalc-slider"
+          id="lmcalcGrocSlider"
+          min="50"
+          max="500"
+          step="10"
+          value="200"
+          aria-label="Weekly grocery spend"
+        />
+        <button
+          class="lmcalc-slider-confirm"
+          id="lmcalcGrocConfirm"
+          type="button"
+        >
+          See my savings →
+        </button>
+      </div>
+    </div>
+    <!-- ============ REVEAL ============ -->
+    <div class="lmcalc-step" id="lmcalcReveal" data-step="reveal">
+      <span class="lmcalc-reveal-eyebrow">
+        <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor">
+          <polygon
+            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+          />
+        </svg>
+        You'd save
+      </span>
+      <div class="lmcalc-big" id="lmcalcBigNumber">
+        <span class="lmcalc-big-currency">$</span>0
+      </div>
+      <span class="lmcalc-big-period">per year</span>
+      <div class="lmcalc-stats">
+        <div class="lmcalc-stat">
+          <div class="lmcalc-stat-value" id="lmcalcMonth">$0</div>
+          <div class="lmcalc-stat-label">Per month</div>
+        </div>
+        <div class="lmcalc-stat">
+          <div class="lmcalc-stat-value" id="lmcalcDay">$0</div>
+          <div class="lmcalc-stat-label">Per day</div>
+        </div>
+        <div class="lmcalc-stat">
+          <div class="lmcalc-stat-value" id="lmcalcFill">$0</div>
+          <div class="lmcalc-stat-label">Per fill</div>
+        </div>
+      </div>
+      <div class="lmcalc-roi-row">
+        <div class="lmcalc-roi">
+          <span class="lmcalc-roi-icon">✓</span>
+          <span id="lmcalcPayback"
+            >Membership pays for itself in <strong>—</strong>.</span
+          >
+        </div>
+        <div class="lmcalc-roi">
+          <span class="lmcalc-roi-icon">×</span>
+          <span id="lmcalcRoi"
+            >That's <strong>—</strong> your $99 yearly fee.</span
+          >
+        </div>
+      </div>
+      <a class="lmcalc-cta" id="lmcalcCta" href="#" role="button">
+        Become a Member
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
+      <div class="lmcalc-reveal-foot">
+        <button class="lmcalc-foot-btn" data-toggle="breakdown" type="button">
+          Show breakdown
+        </button>
+        <button class="lmcalc-foot-btn" data-toggle="prices" type="button">
+          Use my own prices
+        </button>
+        <button class="lmcalc-foot-btn" data-toggle="restart" type="button">
+          Start over
+        </button>
+      </div>
+      <!-- Breakdown expandable -->
+      <div class="lmcalc-expand" id="lmcalcBreakdown">
+        <table class="lmcalc-bd-table">
+          <tbody>
+            <tr>
+              <th>One fill</th>
+              <td id="lmcalcBdTank">— L</td>
+            </tr>
+            <tr>
+              <td>Pump average × tank</td>
+              <td id="lmcalcBdAvg">$0</td>
+            </tr>
+            <tr>
+              <td>LMCT+ wholesale × tank</td>
+              <td id="lmcalcBdLmct">$0</td>
+            </tr>
+            <tr>
+              <td><strong>Saved per fill</strong></td>
+              <td id="lmcalcBdPerFill">$0</td>
+            </tr>
+            <tr>
+              <th>Per year</th>
+              <td id="lmcalcBdFills">— fills</td>
+            </tr>
+            <tr class="is-total">
+              <td><strong>Total annual saving</strong></td>
+              <td id="lmcalcBdYear">$0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Price override expandable -->
+      <div class="lmcalc-expand" id="lmcalcPrices">
+        <p class="lmcalc-section-label" style="margin-top: 0">
+          Override pump prices (¢/L)
+        </p>
+        <div class="lmcalc-price-row">
+          <div class="lmcalc-manual-field">
+            <label class="lmcalc-manual-label" for="lmcalcPriceLmct"
+              >LMCT+ wholesale</label
+            >
+            <input
+              type="number"
+              class="lmcalc-tank-input"
+              id="lmcalcPriceLmct"
+              min="50"
+              max="400"
+              step="0.1"
+              inputmode="decimal"
+            />
+          </div>
+          <div class="lmcalc-manual-field">
+            <label class="lmcalc-manual-label" for="lmcalcPriceAvg"
+              >Local pump average</label
+            >
+            <input
+              type="number"
+              class="lmcalc-tank-input"
+              id="lmcalcPriceAvg"
+              min="50"
+              max="400"
+              step="0.1"
+              inputmode="decimal"
+            />
+          </div>
+        </div>
+      </div>
+      <p class="lmcalc-disclaimer">Estimates only · fuel prices vary daily</p>
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    /* ============================================================
+      LMCT+ CALCULATOR — CONFIG
+      Edit these values to update prices / fees / behaviour.
+      ============================================================ */
+    const LMCALC_CONFIG = {
+      // Per-fuel current pump prices (AUD/L)
+      prices: {
+        petrol: { lmct: 1.59, avg: 1.85 },
+        diesel: { lmct: 2.049, avg: 2.45 },
+      },
+      // Annual membership fee (AUD)
+      membershipFee: 99,
+      // Groceries step — set enabled:true when grocery offer launches
+      groceries: {
+        enabled: false,
+        discountPct: 15, // % off typical weekly shop
+        defaultWeeklySpend: 200, // AUD
+      },
+      // CTA behaviour:
+      //  - If scrollSelector resolves on the page, smooth-scroll to it
+      //  - Else fall back to fallbackUrl
+      cta: {
+        scrollSelector: "#row--30567",
+        fallbackUrl:
+          "https://lmctgiveaway.com/order-639460901777617719067?el=calculator&utm_source=calculator",
+      },
+    };
+    /* ============================================================
+      CARS — full Aussie fleet, popular tagged first
+      ============================================================ */
+    const CARS = [
+      {
+        name: "Ford Ranger",
+        tank: 80,
+        fuel: "diesel",
+        popular: true,
+        hint: "#1 selling vehicle in Australia.",
+      },
+      {
+        name: "Toyota HiLux",
+        tank: 80,
+        fuel: "diesel",
+        popular: true,
+        hint: "Aussie ute legend.",
+      },
+      {
+        name: "Toyota RAV4",
+        tank: 55,
+        fuel: "petrol",
+        popular: true,
+        hint: "Top-selling SUV in the country.",
+      },
+      {
+        name: "Toyota LandCruiser 300",
+        tank: 110,
+        fuel: "diesel",
+        popular: true,
+        hint: "Outback king.",
+      },
+      {
+        name: "Toyota Corolla",
+        tank: 50,
+        fuel: "petrol",
+        popular: true,
+        hint: "Australia's go-to small car.",
+      },
+      {
+        name: "Isuzu D-Max",
+        tank: 76,
+        fuel: "diesel",
+        popular: true,
+        hint: "Reliable workhorse ute.",
+      },
+      {
+        name: "Mazda CX-5",
+        tank: 58,
+        fuel: "petrol",
+        popular: true,
+        hint: "Best-selling Mazda.",
+      },
+      {
+        name: "Mitsubishi Triton",
+        tank: 75,
+        fuel: "diesel",
+        popular: true,
+        hint: "Tradie's pick.",
+      },
+      {
+        name: "Hyundai i30",
+        tank: 47,
+        fuel: "petrol",
+        popular: true,
+        hint: "Compact hatch favourite.",
+      },
+      {
+        name: "Kia Sportage",
+        tank: 54,
+        fuel: "petrol",
+        popular: true,
+        hint: "Mid-size SUV staple.",
+      },
+      { name: "Toyota Camry", tank: 60, fuel: "petrol", hint: "Family sedan." },
+      {
+        name: "Toyota Kluger",
+        tank: 68,
+        fuel: "petrol",
+        hint: "7-seat family SUV.",
+      },
+      { name: "Toyota Yaris", tank: 42, fuel: "petrol", hint: "City hatch." },
+      {
+        name: "Toyota Prado",
+        tank: 87,
+        fuel: "diesel",
+        hint: "4WD family wagon.",
+      },
+      {
+        name: "Toyota LandCruiser 70-Series",
+        tank: 130,
+        fuel: "diesel",
+        hint: "Twin tanks, massive range.",
+      },
+      {
+        name: "Toyota HiAce",
+        tank: 70,
+        fuel: "diesel",
+        hint: "Tradie van workhorse.",
+      },
+      {
+        name: "Toyota Fortuner",
+        tank: 80,
+        fuel: "diesel",
+        hint: "HiLux-based SUV.",
+      },
+      {
+        name: "Ford Everest",
+        tank: 80,
+        fuel: "diesel",
+        hint: "Ranger-based 7-seat 4WD.",
+      },
+      { name: "Ford Mustang", tank: 61, fuel: "petrol", hint: "V8 muscle." },
+      { name: "Ford Puma", tank: 42, fuel: "petrol", hint: "Compact SUV." },
+      {
+        name: "Ford Escape",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Mid-size family SUV.",
+      },
+      {
+        name: "Ford Transit",
+        tank: 70,
+        fuel: "diesel",
+        hint: "Cargo van workhorse.",
+      },
+      { name: "Ford Focus", tank: 52, fuel: "petrol", hint: "Compact hatch." },
+      {
+        name: "Ford Falcon",
+        tank: 68,
+        fuel: "petrol",
+        hint: "Aussie classic sedan.",
+      },
+      {
+        name: "Ford Territory",
+        tank: 75,
+        fuel: "petrol",
+        hint: "Mid-size family SUV.",
+      },
+      {
+        name: "Mazda CX-3",
+        tank: 48,
+        fuel: "petrol",
+        hint: "Compact urban SUV.",
+      },
+      {
+        name: "Mazda CX-30",
+        tank: 51,
+        fuel: "petrol",
+        hint: "Small premium SUV.",
+      },
+      {
+        name: "Mazda CX-8",
+        tank: 72,
+        fuel: "diesel",
+        hint: "7-seat diesel SUV.",
+      },
+      {
+        name: "Mazda CX-9",
+        tank: 74,
+        fuel: "petrol",
+        hint: "Large 7-seat SUV.",
+      },
+      {
+        name: "Mazda CX-60",
+        tank: 58,
+        fuel: "diesel",
+        hint: "Premium mid-size SUV.",
+      },
+      {
+        name: "Mazda CX-90",
+        tank: 75,
+        fuel: "petrol",
+        hint: "Large premium 7-seater.",
+      },
+      { name: "Mazda 2", tank: 44, fuel: "petrol", hint: "City car." },
+      {
+        name: "Mazda 3",
+        tank: 51,
+        fuel: "petrol",
+        hint: "Compact hatch/sedan.",
+      },
+      { name: "Mazda BT-50", tank: 76, fuel: "diesel", hint: "Dual-cab ute." },
+      { name: "Mazda MX-5", tank: 45, fuel: "petrol", hint: "Roadster." },
+      {
+        name: "Hyundai Tucson",
+        tank: 54,
+        fuel: "petrol",
+        hint: "Mid-size SUV.",
+      },
+      {
+        name: "Hyundai Santa Fe",
+        tank: 67,
+        fuel: "diesel",
+        hint: "Family 7-seater.",
+      },
+      { name: "Hyundai Kona", tank: 50, fuel: "petrol", hint: "Compact SUV." },
+      {
+        name: "Hyundai Venue",
+        tank: 45,
+        fuel: "petrol",
+        hint: "Small city SUV.",
+      },
+      {
+        name: "Hyundai Palisade",
+        tank: 71,
+        fuel: "diesel",
+        hint: "Large 8-seat family SUV.",
+      },
+      {
+        name: "Hyundai Staria",
+        tank: 75,
+        fuel: "diesel",
+        hint: "11-seat people mover.",
+      },
+      { name: "Hyundai i20", tank: 40, fuel: "petrol", hint: "City hatch." },
+      {
+        name: "Hyundai Sonata",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Mid-size sedan.",
+      },
+      {
+        name: "Kia Cerato",
+        tank: 50,
+        fuel: "petrol",
+        hint: "Compact sedan/hatch.",
+      },
+      {
+        name: "Kia Sorento",
+        tank: 67,
+        fuel: "diesel",
+        hint: "7-seat family SUV.",
+      },
+      {
+        name: "Kia Picanto",
+        tank: 35,
+        fuel: "petrol",
+        hint: "Cheapest new car.",
+      },
+      {
+        name: "Kia Carnival",
+        tank: 72,
+        fuel: "diesel",
+        hint: "8-seat family hauler.",
+      },
+      { name: "Kia Seltos", tank: 50, fuel: "petrol", hint: "Compact SUV." },
+      { name: "Kia Stonic", tank: 45, fuel: "petrol", hint: "Small SUV." },
+      { name: "Kia Rio", tank: 45, fuel: "petrol", hint: "Light hatch." },
+      {
+        name: "Kia Stinger",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Performance sedan.",
+      },
+      {
+        name: "Mitsubishi Outlander",
+        tank: 55,
+        fuel: "petrol",
+        hint: "7-seater family SUV.",
+      },
+      {
+        name: "Mitsubishi ASX",
+        tank: 63,
+        fuel: "petrol",
+        hint: "Compact SUV.",
+      },
+      {
+        name: "Mitsubishi Pajero Sport",
+        tank: 68,
+        fuel: "diesel",
+        hint: "7-seat 4WD.",
+      },
+      {
+        name: "Mitsubishi Pajero",
+        tank: 88,
+        fuel: "diesel",
+        hint: "Classic large 4WD.",
+      },
+      {
+        name: "Mitsubishi Eclipse Cross",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Mid-size SUV.",
+      },
+      {
+        name: "Mitsubishi Lancer",
+        tank: 59,
+        fuel: "petrol",
+        hint: "Compact sedan.",
+      },
+      {
+        name: "Nissan X-Trail",
+        tank: 55,
+        fuel: "petrol",
+        hint: "Compact family SUV.",
+      },
+      {
+        name: "Nissan Navara",
+        tank: 80,
+        fuel: "diesel",
+        hint: "Tradie ute favourite.",
+      },
+      {
+        name: "Nissan Patrol Y62",
+        tank: 140,
+        fuel: "petrol",
+        hint: "Massive 140L V8 4WD.",
+      },
+      {
+        name: "Nissan Qashqai",
+        tank: 55,
+        fuel: "petrol",
+        hint: "Compact urban SUV.",
+      },
+      { name: "Nissan Juke", tank: 46, fuel: "petrol", hint: "Small SUV." },
+      {
+        name: "Nissan Pathfinder",
+        tank: 71,
+        fuel: "petrol",
+        hint: "7-seat family SUV.",
+      },
+      {
+        name: "Holden Commodore (VF/VE)",
+        tank: 71,
+        fuel: "petrol",
+        hint: "Aussie V6/V8 sedan.",
+      },
+      {
+        name: "Holden Commodore ZB",
+        tank: 61,
+        fuel: "petrol",
+        hint: "Final-gen Commodore.",
+      },
+      {
+        name: "Holden Colorado",
+        tank: 76,
+        fuel: "diesel",
+        hint: "Aussie-era ute.",
+      },
+      {
+        name: "Holden Astra",
+        tank: 52,
+        fuel: "petrol",
+        hint: "Compact hatch.",
+      },
+      { name: "Holden Captiva", tank: 65, fuel: "petrol", hint: "7-seat SUV." },
+      {
+        name: "Holden Trailblazer",
+        tank: 76,
+        fuel: "diesel",
+        hint: "Body-on-frame 7-seater.",
+      },
+      { name: "Subaru Forester", tank: 63, fuel: "petrol", hint: "AWD SUV." },
+      {
+        name: "Subaru Outback",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Lifted wagon, AWD.",
+      },
+      {
+        name: "Subaru Impreza",
+        tank: 50,
+        fuel: "petrol",
+        hint: "AWD compact hatch.",
+      },
+      {
+        name: "Subaru XV / Crosstrek",
+        tank: 48,
+        fuel: "petrol",
+        hint: "Small AWD SUV.",
+      },
+      {
+        name: "Subaru WRX",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Performance sedan.",
+      },
+      { name: "Subaru BRZ", tank: 50, fuel: "petrol", hint: "Sports coupe." },
+      {
+        name: "Subaru Liberty",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Mid-size sedan.",
+      },
+      {
+        name: "Volkswagen Golf",
+        tank: 50,
+        fuel: "petrol",
+        hint: "European hatch.",
+      },
+      {
+        name: "Volkswagen Polo",
+        tank: 40,
+        fuel: "petrol",
+        hint: "City hatch.",
+      },
+      {
+        name: "Volkswagen Tiguan",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Mid-size SUV.",
+      },
+      {
+        name: "Volkswagen Amarok",
+        tank: 80,
+        fuel: "diesel",
+        hint: "Premium dual-cab ute.",
+      },
+      {
+        name: "Volkswagen Passat",
+        tank: 66,
+        fuel: "petrol",
+        hint: "Premium sedan/wagon.",
+      },
+      {
+        name: "Volkswagen T-Cross",
+        tank: 40,
+        fuel: "petrol",
+        hint: "Small SUV.",
+      },
+      {
+        name: "Volkswagen T-Roc",
+        tank: 50,
+        fuel: "petrol",
+        hint: "Compact SUV.",
+      },
+      {
+        name: "Volkswagen Caddy",
+        tank: 50,
+        fuel: "diesel",
+        hint: "Compact tradie van.",
+      },
+      {
+        name: "Volkswagen Transporter",
+        tank: 70,
+        fuel: "diesel",
+        hint: "Mid-size cargo van.",
+      },
+      {
+        name: "Isuzu MU-X",
+        tank: 80,
+        fuel: "diesel",
+        hint: "D-Max based 7-seat 4WD.",
+      },
+      {
+        name: "MG ZS",
+        tank: 48,
+        fuel: "petrol",
+        hint: "Best-selling small SUV.",
+      },
+      { name: "MG ZST", tank: 48, fuel: "petrol", hint: "Sportier ZS." },
+      { name: "MG 3", tank: 35, fuel: "petrol", hint: "Light hatch." },
+      { name: "MG HS", tank: 55, fuel: "petrol", hint: "Mid-size SUV." },
+      { name: "MG 5", tank: 49, fuel: "petrol", hint: "Compact sedan." },
+      {
+        name: "BMW X3",
+        tank: 65,
+        fuel: "petrol",
+        hint: "Premium mid-size SUV.",
+      },
+      { name: "BMW X5", tank: 83, fuel: "diesel", hint: "Large premium SUV." },
+      {
+        name: "BMW X1",
+        tank: 51,
+        fuel: "petrol",
+        hint: "Compact premium SUV.",
+      },
+      {
+        name: "BMW 3 Series",
+        tank: 59,
+        fuel: "petrol",
+        hint: "Premium compact sedan.",
+      },
+      {
+        name: "BMW 5 Series",
+        tank: 68,
+        fuel: "petrol",
+        hint: "Premium executive sedan.",
+      },
+      {
+        name: "BMW 1 Series",
+        tank: 50,
+        fuel: "petrol",
+        hint: "Premium hatch.",
+      },
+      {
+        name: "BMW X7",
+        tank: 83,
+        fuel: "diesel",
+        hint: "Flagship 7-seat SUV.",
+      },
+      {
+        name: "Mercedes-Benz A-Class",
+        tank: 43,
+        fuel: "petrol",
+        hint: "Premium small hatch.",
+      },
+      {
+        name: "Mercedes-Benz C-Class",
+        tank: 66,
+        fuel: "petrol",
+        hint: "Premium compact sedan.",
+      },
+      {
+        name: "Mercedes-Benz E-Class",
+        tank: 66,
+        fuel: "petrol",
+        hint: "Premium executive.",
+      },
+      {
+        name: "Mercedes-Benz GLA",
+        tank: 51,
+        fuel: "petrol",
+        hint: "Premium compact SUV.",
+      },
+      {
+        name: "Mercedes-Benz GLC",
+        tank: 66,
+        fuel: "petrol",
+        hint: "Premium mid-size SUV.",
+      },
+      {
+        name: "Mercedes-Benz GLE",
+        tank: 85,
+        fuel: "diesel",
+        hint: "Premium large SUV.",
+      },
+      {
+        name: "Mercedes-Benz Sprinter",
+        tank: 75,
+        fuel: "diesel",
+        hint: "Large cargo van.",
+      },
+      {
+        name: "Audi A3",
+        tank: 50,
+        fuel: "petrol",
+        hint: "Premium small hatch.",
+      },
+      {
+        name: "Audi A4",
+        tank: 54,
+        fuel: "petrol",
+        hint: "Premium compact sedan.",
+      },
+      {
+        name: "Audi Q3",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Premium compact SUV.",
+      },
+      {
+        name: "Audi Q5",
+        tank: 70,
+        fuel: "diesel",
+        hint: "Premium mid-size SUV.",
+      },
+      {
+        name: "Audi Q7",
+        tank: 75,
+        fuel: "diesel",
+        hint: "Premium 7-seat SUV.",
+      },
+      {
+        name: "Honda CR-V",
+        tank: 57,
+        fuel: "petrol",
+        hint: "Family mid-size SUV.",
+      },
+      { name: "Honda HR-V", tank: 40, fuel: "petrol", hint: "Compact SUV." },
+      {
+        name: "Honda Civic",
+        tank: 47,
+        fuel: "petrol",
+        hint: "Compact sedan/hatch.",
+      },
+      { name: "Honda Jazz", tank: 40, fuel: "petrol", hint: "City hatch." },
+      {
+        name: "Honda Accord",
+        tank: 56,
+        fuel: "petrol",
+        hint: "Mid-size sedan.",
+      },
+      {
+        name: "Honda Odyssey",
+        tank: 55,
+        fuel: "petrol",
+        hint: "7-seat people mover.",
+      },
+      { name: "Suzuki Jimny", tank: 40, fuel: "petrol", hint: "Pocket 4WD." },
+      { name: "Suzuki Swift", tank: 37, fuel: "petrol", hint: "City hatch." },
+      { name: "Suzuki Vitara", tank: 47, fuel: "petrol", hint: "Compact SUV." },
+      { name: "Suzuki Baleno", tank: 37, fuel: "petrol", hint: "Light hatch." },
+      {
+        name: "Suzuki Ignis",
+        tank: 32,
+        fuel: "petrol",
+        hint: "Tiny crossover.",
+      },
+      {
+        name: "Suzuki S-Cross",
+        tank: 47,
+        fuel: "petrol",
+        hint: "Compact crossover.",
+      },
+      {
+        name: "Land Rover Defender",
+        tank: 89,
+        fuel: "diesel",
+        hint: "Iconic off-roader.",
+      },
+      {
+        name: "Land Rover Discovery",
+        tank: 89,
+        fuel: "diesel",
+        hint: "7-seat luxury 4WD.",
+      },
+      {
+        name: "Land Rover Discovery Sport",
+        tank: 65,
+        fuel: "diesel",
+        hint: "Mid-size premium SUV.",
+      },
+      {
+        name: "Range Rover Sport",
+        tank: 78,
+        fuel: "diesel",
+        hint: "Luxury sport SUV.",
+      },
+      {
+        name: "Range Rover Evoque",
+        tank: 67,
+        fuel: "diesel",
+        hint: "Premium compact SUV.",
+      },
+      {
+        name: "Range Rover Velar",
+        tank: 82,
+        fuel: "diesel",
+        hint: "Mid-size premium SUV.",
+      },
+      {
+        name: "Range Rover",
+        tank: 90,
+        fuel: "diesel",
+        hint: "Flagship luxury 4WD.",
+      },
+      {
+        name: "Jeep Grand Cherokee",
+        tank: 87,
+        fuel: "petrol",
+        hint: "Large 4WD SUV.",
+      },
+      {
+        name: "Jeep Wrangler",
+        tank: 81,
+        fuel: "petrol",
+        hint: "Iconic off-roader.",
+      },
+      { name: "Jeep Compass", tank: 60, fuel: "petrol", hint: "Compact SUV." },
+      {
+        name: "Jeep Cherokee",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Mid-size SUV.",
+      },
+      {
+        name: "Jeep Gladiator",
+        tank: 83,
+        fuel: "petrol",
+        hint: "Wrangler-based ute.",
+      },
+      {
+        name: "SsangYong Musso",
+        tank: 75,
+        fuel: "diesel",
+        hint: "Budget dual-cab ute.",
+      },
+      {
+        name: "SsangYong Rexton",
+        tank: 70,
+        fuel: "diesel",
+        hint: "7-seat 4WD SUV.",
+      },
+      { name: "LDV T60", tank: 75, fuel: "diesel", hint: "Budget dual-cab." },
+      { name: "LDV D90", tank: 78, fuel: "diesel", hint: "7-seat 4WD SUV." },
+      { name: "LDV G10", tank: 75, fuel: "petrol", hint: "Cargo van." },
+      { name: "LDV V80", tank: 70, fuel: "diesel", hint: "Mid-size van." },
+      {
+        name: "LDV Deliver 9",
+        tank: 92,
+        fuel: "diesel",
+        hint: "Large cargo van.",
+      },
+      { name: "Haval Jolion", tank: 55, fuel: "petrol", hint: "Compact SUV." },
+      { name: "Haval H6", tank: 55, fuel: "petrol", hint: "Mid-size SUV." },
+      { name: "GWM Cannon", tank: 78, fuel: "diesel", hint: "Dual-cab ute." },
+      { name: "GWM Tank 300", tank: 80, fuel: "petrol", hint: "Retro 4WD." },
+      {
+        name: "GWM Tank 500",
+        tank: 80,
+        fuel: "petrol",
+        hint: "Large 7-seat 4WD.",
+      },
+      {
+        name: "Lexus RX",
+        tank: 72,
+        fuel: "petrol",
+        hint: "Premium mid-size SUV.",
+      },
+      {
+        name: "Lexus NX",
+        tank: 55,
+        fuel: "petrol",
+        hint: "Premium compact SUV.",
+      },
+      { name: "Lexus ES", tank: 60, fuel: "petrol", hint: "Premium sedan." },
+      {
+        name: "Lexus LX",
+        tank: 110,
+        fuel: "diesel",
+        hint: "Premium 200-Series sibling.",
+      },
+      {
+        name: "Lexus IS",
+        tank: 66,
+        fuel: "petrol",
+        hint: "Premium compact sedan.",
+      },
+      {
+        name: "Renault Trafic",
+        tank: 80,
+        fuel: "diesel",
+        hint: "Mid-size cargo van.",
+      },
+      {
+        name: "Renault Master",
+        tank: 105,
+        fuel: "diesel",
+        hint: "Large cargo van.",
+      },
+      {
+        name: "Renault Koleos",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Mid-size SUV.",
+      },
+      {
+        name: "Renault Kangoo",
+        tank: 60,
+        fuel: "diesel",
+        hint: "Compact van.",
+      },
+      { name: "Peugeot 308", tank: 52, fuel: "petrol", hint: "Compact hatch." },
+      { name: "Peugeot 3008", tank: 53, fuel: "petrol", hint: "Compact SUV." },
+      { name: "Peugeot 5008", tank: 56, fuel: "petrol", hint: "7-seat SUV." },
+      {
+        name: "Peugeot Partner",
+        tank: 50,
+        fuel: "diesel",
+        hint: "Compact tradie van.",
+      },
+      {
+        name: "Peugeot Expert",
+        tank: 70,
+        fuel: "diesel",
+        hint: "Mid-size van.",
+      },
+      { name: "Skoda Kamiq", tank: 50, fuel: "petrol", hint: "Compact SUV." },
+      { name: "Skoda Karoq", tank: 50, fuel: "petrol", hint: "Mid-size SUV." },
+      { name: "Skoda Kodiaq", tank: 60, fuel: "petrol", hint: "7-seat SUV." },
+      {
+        name: "Skoda Octavia",
+        tank: 50,
+        fuel: "petrol",
+        hint: "Mid-size hatch/wagon.",
+      },
+      {
+        name: "Skoda Superb",
+        tank: 66,
+        fuel: "petrol",
+        hint: "Premium large sedan.",
+      },
+      {
+        name: "Volvo XC40",
+        tank: 54,
+        fuel: "petrol",
+        hint: "Premium compact SUV.",
+      },
+      {
+        name: "Volvo XC60",
+        tank: 60,
+        fuel: "petrol",
+        hint: "Premium mid-size SUV.",
+      },
+      {
+        name: "Volvo XC90",
+        tank: 71,
+        fuel: "petrol",
+        hint: "Premium 7-seat SUV.",
+      },
+      {
+        name: "Iveco Daily",
+        tank: 90,
+        fuel: "diesel",
+        hint: "Heavy-duty cargo van.",
+      },
+      { name: "Fiat 500", tank: 35, fuel: "petrol", hint: "City car." },
+      {
+        name: "Mini Cooper",
+        tank: 44,
+        fuel: "petrol",
+        hint: "Premium small hatch.",
+      },
+      {
+        name: "Mini Countryman",
+        tank: 51,
+        fuel: "petrol",
+        hint: "Premium compact SUV.",
+      },
+      {
+        name: "HSV ClubSport",
+        tank: 71,
+        fuel: "petrol",
+        hint: "Aussie V8 muscle sedan.",
+      },
+      {
+        name: "HSV GTS",
+        tank: 71,
+        fuel: "petrol",
+        hint: "Iconic Aussie supercar.",
+      },
+      { name: "HSV Maloo", tank: 71, fuel: "petrol", hint: "V8 ute legend." },
+      {
+        name: "HSV Senator Signature",
+        tank: 71,
+        fuel: "petrol",
+        hint: "Luxury V8 sedan.",
+      },
+      {
+        name: "Ford Falcon XR6 Turbo",
+        tank: 68,
+        fuel: "petrol",
+        hint: "Turbo I6 Aussie legend.",
+      },
+      {
+        name: "Ford Falcon XR8",
+        tank: 68,
+        fuel: "petrol",
+        hint: "V8 Falcon classic.",
+      },
+      {
+        name: "Ford Falcon FPV GT",
+        tank: 68,
+        fuel: "petrol",
+        hint: "FPV-tuned V8.",
+      },
+      { name: "Ford Mustang GT", tank: 61, fuel: "petrol", hint: "V8 muscle." },
+    ];
+    /* ============================================================
+      STATE
+      ============================================================ */
+    const state = {
+      step: 1,
+      car: null, // { name, tank, fuel, ... }
+      manualFuel: "petrol",
+      manualTank: 55,
+      fillsPerWeek: null,
+      weeklyGrocery: LMCALC_CONFIG.groceries.defaultWeeklySpend,
+      // Per-fuel price overrides (null = use config default)
+      priceOverride: {
+        petrol: { lmct: null, avg: null },
+        diesel: { lmct: null, avg: null },
+      },
+    };
+    /* ============================================================
+      ROOT + HELPERS
+      ============================================================ */
+    const root = document.getElementById("lmcalc");
+    if (!root) return;
+    const $ = (sel) => root.querySelector(sel);
+    const $$ = (sel) => Array.from(root.querySelectorAll(sel));
+    const money = (n, opts = {}) => {
+      if (!isFinite(n)) n = 0;
+      const round = opts.round || false;
+      const value = round ? Math.round(n) : n;
+      return (
+        "$" +
+        value.toLocaleString("en-AU", {
+          minimumFractionDigits: round ? 0 : 2,
+          maximumFractionDigits: round ? 0 : 2,
+        })
+      );
+    };
+    /* ============================================================
+      CALCULATION
+      ============================================================ */
+    function getFuelPrices(fuel) {
+      const defaults = LMCALC_CONFIG.prices[fuel];
+      const override = state.priceOverride[fuel];
+      return {
+        lmct: override.lmct != null ? override.lmct : defaults.lmct,
+        avg: override.avg != null ? override.avg : defaults.avg,
+      };
+    }
+    function getActiveTank() {
+      return state.car ? state.car.tank : state.manualTank;
+    }
+    function getActiveFuel() {
+      return state.car ? state.car.fuel : state.manualFuel;
+    }
+    function calc() {
+      const fuel = getActiveFuel();
+      const tank = getActiveTank();
+      const fpw = state.fillsPerWeek || 0;
+      const { lmct, avg } = getFuelPrices(fuel);
+      const perLitreSave = Math.max(0, avg - lmct);
+      const perFillSave = perLitreSave * tank;
+      const fillsPerYear = fpw * 52;
+      const fuelYearSave = perFillSave * fillsPerYear;
+      // Groceries (only if enabled)
+      let grocYearSave = 0;
+      if (LMCALC_CONFIG.groceries.enabled) {
+        grocYearSave =
+          state.weeklyGrocery *
+          (LMCALC_CONFIG.groceries.discountPct / 100) *
+          52;
+      }
+      const yearSave = fuelYearSave + grocYearSave;
+      const monthSave = yearSave / 12;
+      const daySave = yearSave / 365;
+      const fee = LMCALC_CONFIG.membershipFee;
+      const roiMultiple = fee > 0 ? yearSave / fee : 0;
+      const fillsToPayback = perFillSave > 0 ? fee / perFillSave : Infinity;
+      const daysToPayback = daySave > 0 ? fee / daySave : Infinity;
+      return {
+        fuel,
+        tank,
+        lmct,
+        avg,
+        perLitreSave,
+        perFillSave,
+        fillsPerYear,
+        fuelYearSave,
+        grocYearSave,
+        yearSave,
+        monthSave,
+        daySave,
+        roiMultiple,
+        fillsToPayback,
+        daysToPayback,
+        fee,
+      };
+    }
+    /* ============================================================
+      RENDER — STEP 1 (car grid)
+      ============================================================ */
+    const carGrid = $("#lmcalcCarGrid");
+    const carSectionLabel = $("#lmcalcCarSectionLabel");
+    const searchInput = $("#lmcalcSearch");
+    function renderCars(query) {
+      const q = (query || "").trim().toLowerCase();
+      const proof = $("#lmcalcProof");
+      if (!q) {
+        carGrid.innerHTML = "";
+        carSectionLabel.hidden = true;
+        if (proof) proof.hidden = false;
+        return;
+      }
+      if (proof) proof.hidden = true;
+      const list = CARS.filter((c) => c.name.toLowerCase().includes(q)).slice(
+        0,
+        50,
+      );
+      carSectionLabel.hidden = false;
+      carSectionLabel.textContent = list.length
+        ? `${list.length} match${list.length === 1 ? "" : "es"}`
+        : "No matches";
+      if (!list.length) {
+        carGrid.innerHTML =
+          '<div class="lmcalc-empty">No matches. Try a different model — or enter manually below.</div>';
+        return;
+      }
+      carGrid.innerHTML = list
+        .map((c, i) => {
+          const fuelLabel = c.fuel === "diesel" ? "Diesel" : "Petrol";
+          const fuelCls = c.fuel === "diesel" ? "is-diesel" : "is-petrol";
+          return `
+          <button class="lmcalc-car" data-car-idx="${CARS.indexOf(c)}" type="button">
+            <span class="lmcalc-car-name">
+              <span>${c.name}</span>
+              ${c.hint ? `<span class="lmcalc-car-hint">${c.hint}</span>` : ""}
+            </span>
+            <span class="lmcalc-car-meta">
+              <span class="lmcalc-pill ${fuelCls}">${fuelLabel}</span>
+              <span class="lmcalc-pill is-tank">${c.tank}L</span>
+            </span>
+          </button>
+        `;
+        })
+        .join("");
+    }
+    /* Click delegation — pick a car */
+    carGrid.addEventListener("click", (e) => {
+      const btn = e.target.closest(".lmcalc-car");
+      if (!btn) return;
+      const idx = parseInt(btn.getAttribute("data-car-idx"), 10);
+      if (isNaN(idx)) return;
+      selectCar(CARS[idx]);
+    });
+    /* Search */
+    let searchTimer;
+    searchInput.addEventListener("input", (e) => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => renderCars(e.target.value), 80);
+    });
+    /* Manual entry toggle */
+    $("#lmcalcOtherBtn").addEventListener("click", () => {
+      $("#lmcalcManual").hidden = !$("#lmcalcManual").hidden;
+    });
+    /* Manual fuel toggle */
+    $("#lmcalcFuelToggle").addEventListener("click", (e) => {
+      const btn = e.target.closest(".lmcalc-fuel-btn");
+      if (!btn) return;
+      $$("#lmcalcFuelToggle .lmcalc-fuel-btn").forEach((b) => {
+        const active = b === btn;
+        b.classList.toggle("is-active", active);
+        b.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      state.manualFuel = btn.getAttribute("data-fuel");
+    });
+    /* Manual confirm */
+    $("#lmcalcManualConfirm").addEventListener("click", () => {
+      const tank = parseInt($("#lmcalcTankInput").value, 10) || 55;
+      state.car = null;
+      state.manualTank = Math.max(20, Math.min(200, tank));
+      goToStep(2);
+    });
+    function selectCar(car) {
+      state.car = car;
+      goToStep(2);
+    }
+    /* ============================================================
+      RENDER — STEP 2 (frequency)
+      ============================================================ */
+    function renderStep2() {
+      const fuel = getActiveFuel();
+      const tank = getActiveTank();
+      const fuelLabel = fuel === "diesel" ? "Diesel" : "Petrol";
+      const name = state.car
+        ? state.car.name
+        : `Custom (${tank}L ${fuelLabel.toLowerCase()})`;
+      $("#lmcalcStep2Sub").innerHTML =
+        `Your <strong>${name}</strong> · <strong>${tank}L</strong> ${fuelLabel.toLowerCase()} tank`;
+    }
+    /* Frequency click */
+    $$(".lmcalc-freq").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.fillsPerWeek = parseFloat(btn.getAttribute("data-fpw"));
+        if (LMCALC_CONFIG.groceries.enabled) {
+          goToStep(3);
+        } else {
+          goToReveal();
+        }
+      });
+    });
+    /* ============================================================
+      RENDER — STEP 3 (groceries, conditional)
+      ============================================================ */
+    const grocSlider = $("#lmcalcGrocSlider");
+    const grocReadout = $("#lmcalcGrocReadout");
+    if (grocSlider) {
+      grocSlider.value = LMCALC_CONFIG.groceries.defaultWeeklySpend;
+      grocReadout.textContent = "$" + grocSlider.value;
+      grocSlider.addEventListener("input", () => {
+        state.weeklyGrocery = parseInt(grocSlider.value, 10);
+        grocReadout.textContent = "$" + state.weeklyGrocery;
+      });
+    }
+    $("#lmcalcGrocConfirm").addEventListener("click", () => goToReveal());
+    /* ============================================================
+      RENDER — REVEAL
+      ============================================================ */
+    function renderReveal() {
+      const r = calc();
+      $("#lmcalcBigNumber").innerHTML =
+        '<span class="lmcalc-big-currency">$</span>' +
+        Math.round(r.yearSave).toLocaleString("en-AU");
+      $("#lmcalcMonth").textContent = money(r.monthSave, { round: true });
+      $("#lmcalcDay").textContent = money(r.daySave);
+      $("#lmcalcFill").textContent = money(r.perFillSave);
+      // Payback
+      let paybackText;
+      if (r.perFillSave <= 0) {
+        paybackText =
+          "Adjust your prices to see when membership pays itself off.";
+      } else if (r.fillsToPayback <= 1) {
+        paybackText =
+          "Membership pays for itself in <strong>just 1 fill</strong>.";
+      } else if (r.fillsToPayback < 12) {
+        paybackText = `Membership pays for itself in <strong>${Math.ceil(r.fillsToPayback)} fills</strong> (~${Math.ceil(r.daysToPayback)} days).`;
+      } else {
+        paybackText = `Membership pays for itself in <strong>~${Math.ceil(r.daysToPayback)} days</strong>.`;
+      }
+      $("#lmcalcPayback").innerHTML = paybackText;
+      // ROI multiple
+      let roiText;
+      if (r.roiMultiple <= 0) {
+        roiText = `Enter your numbers to see the multiple.`;
+      } else if (r.roiMultiple < 1) {
+        roiText = `That's <strong>${Math.round(r.roiMultiple * 100)}%</strong> of your $${r.fee} yearly fee.`;
+      } else if (r.roiMultiple < 10) {
+        roiText = `That's <strong>${r.roiMultiple.toFixed(1)}×</strong> your $${r.fee} yearly fee.`;
+      } else {
+        roiText = `That's <strong>${Math.round(r.roiMultiple)}×</strong> your $${r.fee} yearly fee.`;
+      }
+      $("#lmcalcRoi").innerHTML = roiText;
+      // Breakdown table
+      $("#lmcalcBdTank").textContent = `${r.tank} L`;
+      $("#lmcalcBdAvg").textContent = money(r.avg * r.tank);
+      $("#lmcalcBdLmct").textContent = money(r.lmct * r.tank);
+      $("#lmcalcBdPerFill").textContent = money(r.perFillSave);
+      $("#lmcalcBdFills").textContent = `${Math.round(r.fillsPerYear)} fills`;
+      $("#lmcalcBdYear").textContent = money(r.yearSave, { round: true });
+      // Sync price-override inputs to current values (only first time on a fuel)
+      const fuel = getActiveFuel();
+      const prices = getFuelPrices(fuel);
+      const lmctEl = $("#lmcalcPriceLmct");
+      const avgEl = $("#lmcalcPriceAvg");
+      if (lmctEl && !lmctEl.dataset.touched)
+        lmctEl.value = (prices.lmct * 100).toFixed(1);
+      if (avgEl && !avgEl.dataset.touched)
+        avgEl.value = (prices.avg * 100).toFixed(1);
+    }
+    /* ============================================================
+      CTA — scroll to checkout form or fallback URL
+      ============================================================ */
+    const cta = $("#lmcalcCta");
+    cta.addEventListener("click", (e) => {
+      const target = document.querySelector(LMCALC_CONFIG.cta.scrollSelector);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        cta.href = LMCALC_CONFIG.cta.fallbackUrl;
+      }
+    });
+    // Set fallback href on load (so it's clickable even if JS scroll path doesn't fire)
+    cta.href = LMCALC_CONFIG.cta.fallbackUrl;
+    /* ============================================================
+      EXPANDABLES — breakdown / prices / restart
+      ============================================================ */
+    $$(".lmcalc-foot-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const action = btn.getAttribute("data-toggle");
+        if (action === "breakdown") {
+          const el = $("#lmcalcBreakdown");
+          el.classList.toggle("is-open");
+          btn.textContent = el.classList.contains("is-open")
+            ? "Hide breakdown"
+            : "Show breakdown";
+        } else if (action === "prices") {
+          const el = $("#lmcalcPrices");
+          el.classList.toggle("is-open");
+          btn.textContent = el.classList.contains("is-open")
+            ? "Hide prices"
+            : "Use my own prices";
+        } else if (action === "restart") {
+          restart();
+        }
+      });
+    });
+    /* Price override inputs */
+    ["lmcalcPriceLmct", "lmcalcPriceAvg"].forEach((id) => {
+      const el = $("#" + id);
+      if (!el) return;
+      el.addEventListener("input", () => {
+        el.dataset.touched = "1";
+        const fuel = getActiveFuel();
+        const cents = parseFloat(el.value) || 0;
+        const dollars = cents / 100;
+        if (id === "lmcalcPriceLmct") state.priceOverride[fuel].lmct = dollars;
+        else state.priceOverride[fuel].avg = dollars;
+        renderReveal();
+      });
+    });
+    /* ============================================================
+      NAVIGATION
+      ============================================================ */
+    function goToStep(n) {
+      state.step = n;
+      showStep("lmcalcStep" + n);
+      setProgress(n);
+      if (n === 2) renderStep2();
+    }
+    function goToReveal() {
+      state.step = "reveal";
+      showStep("lmcalcReveal");
+      setProgress("reveal");
+      renderReveal();
+    }
+    function showStep(id) {
+      $$(".lmcalc-step").forEach((s) =>
+        s.classList.toggle("is-active", s.id === id),
+      );
+      // Manage back button
+      const backBtn = $("#lmcalcBack");
+      const onFirstStep = id === "lmcalcStep1";
+      backBtn.hidden = onFirstStep;
+      // Scroll the card into view on transition (helps on mobile)
+      if (id !== "lmcalcStep1") {
+        try {
+          root.scrollIntoView({ behavior: "smooth", block: "start" });
+        } catch (_) {}
+      }
+    }
+    function setProgress(step) {
+      const dots = $$(".lmcalc-dot");
+      const order = { 1: 0, 2: 1, reveal: 2 };
+      const idx = order[String(step)] != null ? order[String(step)] : 0;
+      dots.forEach((d, i) => {
+        d.classList.toggle("is-active", i === idx);
+        d.classList.toggle("is-done", i < idx);
+      });
+    }
+    $("#lmcalcBack").addEventListener("click", () => {
+      if (state.step === "reveal")
+        goToStep(LMCALC_CONFIG.groceries.enabled ? 3 : 2);
+      else if (state.step === 3) goToStep(2);
+      else if (state.step === 2) {
+        // Skip intro on back-nav — they've already engaged
+        showInputView();
+        goToStep(1);
+      }
+    });
+    /* Restart */
+    function restart() {
+      state.car = null;
+      state.fillsPerWeek = null;
+      state.manualTank = 55;
+      state.manualFuel = "petrol";
+      state.priceOverride = {
+        petrol: { lmct: null, avg: null },
+        diesel: { lmct: null, avg: null },
+      };
+      searchInput.value = "";
+      renderCars("");
+      $("#lmcalcManual").hidden = true;
+      $("#lmcalcTankInput").value = 55;
+      $$("#lmcalcFuelToggle .lmcalc-fuel-btn").forEach((b) => {
+        const active = b.getAttribute("data-fuel") === "petrol";
+        b.classList.toggle("is-active", active);
+        b.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      // Reset expandables
+      ["lmcalcBreakdown", "lmcalcPrices"].forEach((id) =>
+        $("#" + id).classList.remove("is-open"),
+      );
+      $$(".lmcalc-foot-btn").forEach((b) => {
+        if (b.getAttribute("data-toggle") === "breakdown")
+          b.textContent = "Show breakdown";
+        if (b.getAttribute("data-toggle") === "prices")
+          b.textContent = "Use my own prices";
+      });
+      // Reset price input touch flags
+      ["lmcalcPriceLmct", "lmcalcPriceAvg"].forEach((id) => {
+        const el = $("#" + id);
+        if (el) {
+          delete el.dataset.touched;
+          el.value = "";
+        }
+      });
+      // Reset back to the intro view (button-first hook)
+      showIntroView();
+      goToStep(1);
+    }
+    /* ============================================================
+      INTRO → INPUT swap (button-first hook)
+      ============================================================ */
+    const introEl = $("#lmcalcIntro");
+    const inputViewEl = $("#lmcalcStep1Input");
+    const startBtn = $("#lmcalcStartBtn");
+    function showInputView() {
+      if (!introEl || !inputViewEl) return;
+      introEl.hidden = true;
+      inputViewEl.hidden = false;
+      inputViewEl.classList.add("is-revealed");
+      // Auto-focus the search after the reveal animation kicks in
+      setTimeout(() => {
+        try {
+          searchInput.focus();
+        } catch (_) {}
+      }, 80);
+    }
+    function showIntroView() {
+      if (!introEl || !inputViewEl) return;
+      inputViewEl.hidden = true;
+      inputViewEl.classList.remove("is-revealed");
+      introEl.hidden = false;
+    }
+    if (startBtn) startBtn.addEventListener("click", showInputView);
+    /* ============================================================
+      BOOT
+      ============================================================ */
+    renderCars("");
+    goToStep(1);
+  })();
+</script>

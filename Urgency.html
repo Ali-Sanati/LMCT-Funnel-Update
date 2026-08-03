@@ -1,0 +1,712 @@
+<!--
+╔════════════════════════════════════════════════════════════════════╗
+║ LMCT+ INTEGRATED URGENCY BAR                                      ║
+║                                                                    ║
+║ TO EDIT:                                                          ║
+║ 1. Countdown date  -> LMCT_TARGET_DATE in the script               ║
+║ 2. Timezone        -> LMCT_TIMEZONE as "AEST" or "AEDT"            ║
+║ 3. Section text    -> sectionMessages in the script                ║
+║                                                                    ║
+║ The dynamic text intentionally uses:                               ║
+║ document.querySelectorAll(".container.fullContainer[data-title]")  ║
+╚════════════════════════════════════════════════════════════════════╝
+-->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+<style>
+.lmctUrgencyRoot,
+.lmctUrgencyRoot * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.lmctUrgencyRoot {
+  --lmct-bg: #111111;
+  --lmct-fill-start: #a90000;
+  --lmct-fill-mid: #ff0000;
+  --lmct-fill-end: #ff4d22;
+  --lmct-fill: 68%;
+  --lmct-edge: rgba(255, 255, 255, .45);
+  --lmct-hot: rgba(255, 0, 0, .55);
+  --lmct-text: #ffffff;
+  --lmct-muted: rgba(255, 255, 255, .74);
+  width: 100%;
+  font-family: 'Montserrat', Arial, sans-serif;
+  position: relative;
+  isolation: isolate;
+}
+
+.lmctUrgencyShell {
+  width: 100%;
+  min-height: 78px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 50%, rgba(255, 255, 255, .09), transparent 28%),
+    linear-gradient(90deg, #090909 0%, var(--lmct-bg) 45%, #060606 100%);
+  box-shadow:
+    0 0 24px var(--lmct-hot),
+    0 0 70px rgba(255, 0, 0, .16),
+    inset 0 1px 0 rgba(255, 255, 255, .08),
+    inset 0 -1px 0 rgba(0, 0, 0, .5);
+}
+
+.lmctUrgencyFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    var(--lmct-fill-start) 0%,
+    var(--lmct-fill-mid) 46%,
+    var(--lmct-fill-end) 76%,
+    var(--lmct-fill-mid) 100%
+  );
+  animation:
+    lmctUrgencyFillIn 1.9s cubic-bezier(.2, .9, .22, 1) forwards,
+    lmctUrgencyBreath 2.2s ease-in-out 2s infinite;
+  transition: width .55s cubic-bezier(.2, .9, .22, 1);
+}
+
+@keyframes lmctUrgencyFillIn {
+  from { width: 0%; }
+  to { width: var(--lmct-fill); }
+}
+
+@keyframes lmctUrgencyBreath {
+  0%, 100% { filter: saturate(1) brightness(1); }
+  50% { filter: saturate(1.18) brightness(1.08); }
+}
+
+.lmctUrgencyStripes {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 9px,
+    rgba(0, 0, 0, .18) 9px,
+    rgba(0, 0, 0, .18) 18px
+  );
+  background-size: 25px 100%;
+  animation: lmctUrgencyStripes .72s linear infinite;
+}
+
+@keyframes lmctUrgencyStripes {
+  from { background-position: 0 0; }
+  to { background-position: 25px 0; }
+}
+
+.lmctUrgencyFill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 48%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, .12) 42%,
+    rgba(255, 255, 255, .26) 50%,
+    rgba(255, 255, 255, .12) 58%,
+    transparent 100%
+  );
+  animation: lmctUrgencySweep 2.15s ease-in-out 1s infinite;
+}
+
+@keyframes lmctUrgencySweep {
+  from { left: -80%; }
+  to { left: 135%; }
+}
+
+.lmctUrgencyEdge {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 5px;
+  background: var(--lmct-edge);
+  box-shadow:
+    0 0 14px 2px rgba(255, 255, 255, .32),
+    0 0 28px 4px rgba(255, 0, 0, .32);
+  animation: lmctUrgencyEdgePulse 1s ease-in-out infinite;
+}
+
+@keyframes lmctUrgencyEdgePulse {
+  0%, 100% { opacity: .58; transform: scaleY(.9); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+.lmctUrgencyScan {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .08), transparent 34%, transparent 66%, rgba(0, 0, 0, .2)),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .05) 0 1px, transparent 1px 5px);
+  mix-blend-mode: screen;
+  opacity: .38;
+}
+
+.lmctUrgencyInner {
+  position: relative;
+  z-index: 2;
+  width: min(1120px, 100%);
+  min-height: 78px;
+  margin: 0 auto;
+  padding: 12px clamp(12px, 4vw, 44px);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(10px, 2.8vw, 34px);
+  color: var(--lmct-text);
+}
+
+.lmctUrgencyLogo {
+  width: clamp(36px, 6vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lmctUrgencyLogo 2.2s ease-in-out infinite;
+}
+
+.lmctUrgencyLogo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .35));
+}
+
+@keyframes lmctUrgencyLogo {
+  0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 4px rgba(255, 255, 255, .18)); }
+  50% { transform: translateY(-1px) scale(1.04); filter: drop-shadow(0 0 16px rgba(255, 255, 255, .34)); }
+}
+
+.lmctUrgencyCopy {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  align-content: center;
+}
+
+.lmctUrgencyKicker {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  color: var(--lmct-muted);
+  font-size: clamp(9px, 1.4vw, 12px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.lmctUrgencyKicker::before,
+.lmctUrgencyKicker::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border: 2px solid rgba(255, 255, 255, .9);
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px rgba(255, 255, 255, .35);
+  animation: lmctUrgencySpark .9s ease-in-out infinite;
+}
+
+.lmctUrgencyKicker::after {
+  animation-delay: .28s;
+}
+
+@keyframes lmctUrgencySpark {
+  0%, 100% { opacity: .42; transform: rotate(45deg) scale(.72); }
+  50% { opacity: 1; transform: rotate(45deg) scale(1); }
+}
+
+.lmctUrgencyMessage {
+  min-width: 0;
+  max-width: 100%;
+  color: var(--lmct-text);
+  font-size: clamp(19px, 3.45vw, 38px);
+  font-weight: 900;
+  line-height: .98;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, .36),
+    0 0 28px rgba(255, 0, 0, .52),
+    0 2px 8px rgba(0, 0, 0, .32);
+  transform-origin: left center;
+  animation: lmctUrgencyTextPulse 1.35s ease-in-out infinite;
+}
+
+.lmctUrgencyMessage.lmctUrgencySmash {
+  animation:
+    lmctUrgencySmash .42s cubic-bezier(.18, 1.35, .35, 1) both,
+    lmctUrgencyTextPulse 1.35s ease-in-out .42s infinite;
+}
+
+@keyframes lmctUrgencySmash {
+  0% {
+    opacity: 0;
+    transform: scale(1.8) translateY(-12px);
+    filter: blur(5px);
+  }
+  48% {
+    opacity: 1;
+    transform: scale(.9) translateY(2px);
+    filter: blur(0);
+  }
+  70% { transform: scale(1.08) translateY(0); }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes lmctUrgencyTextPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .9; }
+}
+
+.lmctCountdown {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(5px, 1.2vw, 13px);
+  white-space: nowrap;
+}
+
+.lmctCountdownUnit {
+  min-width: clamp(46px, 7.5vw, 76px);
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.lmctCountdownValue {
+  width: 100%;
+  color: #ffffff;
+  font-size: clamp(25px, 5.2vw, 48px);
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: .02em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  text-shadow:
+    0 0 14px rgba(255, 255, 255, .32),
+    0 2px 10px rgba(0, 0, 0, .42);
+}
+
+.lmctCountdownLabel {
+  color: rgba(255, 255, 255, .76);
+  font-size: clamp(6px, 1vw, 9px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.lmctCountdownColon {
+  color: rgba(255, 255, 255, .72);
+  font-size: clamp(20px, 4vw, 38px);
+  font-weight: 900;
+  line-height: 1;
+  transform: translateY(-7px);
+  animation: lmctUrgencyColon 1s ease-in-out infinite;
+}
+
+@keyframes lmctUrgencyColon {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .24; }
+}
+
+.lmctCountdownValue.lmctCountdownFlip {
+  animation: lmctCountdownFlip .34s cubic-bezier(.2, 1, .36, 1);
+}
+
+@keyframes lmctCountdownFlip {
+  0% { transform: translateY(-7px) scale(1.08); opacity: .35; filter: blur(2px); }
+  100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
+}
+
+.lmctUrgencyRoot.lmctUrgencyHot .lmctCountdownValue {
+  animation: lmctCountdownHot .76s ease-in-out infinite;
+}
+
+@keyframes lmctCountdownHot {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+.lmctUrgencyRoot.lmctUrgencyExpired .lmctUrgencyShell {
+  box-shadow:
+    0 0 20px rgba(255, 255, 255, .16),
+    inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+
+.lmctUrgencyRoot.lmctUrgencyExpired .lmctUrgencyFill {
+  filter: grayscale(.2) brightness(.78);
+}
+
+@media (max-width: 740px) {
+  .lmctUrgencyShell,
+  .lmctUrgencyInner {
+    min-height: 96px;
+  }
+
+  .lmctUrgencyInner {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "logo copy"
+      "count count";
+    row-gap: 9px;
+    padding: 11px 12px 12px;
+  }
+
+  .lmctUrgencyLogo { grid-area: logo; }
+  .lmctUrgencyCopy { grid-area: copy; }
+  .lmctCountdown {
+    grid-area: count;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .lmctUrgencyMessage {
+    font-size: clamp(18px, 5.7vw, 28px);
+    letter-spacing: .03em;
+  }
+
+  .lmctCountdownUnit {
+    min-width: clamp(44px, 17vw, 72px);
+  }
+}
+
+@media (max-width: 420px) {
+  .lmctUrgencyShell,
+  .lmctUrgencyInner {
+    min-height: 92px;
+  }
+
+  .lmctUrgencyInner {
+    gap: 8px;
+    padding-inline: 10px;
+  }
+
+  .lmctUrgencyLogo {
+    width: 34px;
+  }
+
+  .lmctUrgencyKicker {
+    font-size: 8px;
+    gap: 6px;
+    letter-spacing: .08em;
+  }
+
+  .lmctUrgencyKicker::before,
+  .lmctUrgencyKicker::after {
+    width: 6px;
+    height: 6px;
+  }
+
+  .lmctUrgencyMessage {
+    font-size: clamp(16px, 5.4vw, 23px);
+  }
+
+  .lmctCountdown {
+    gap: 3px;
+  }
+
+  .lmctCountdownUnit {
+    min-width: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lmctUrgencyRoot *,
+  .lmctUrgencyRoot *::before,
+  .lmctUrgencyRoot *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+
+<div class="lmctUrgencyRoot" id="lmctUrgencyRoot" role="status" aria-live="polite">
+  <div class="lmctUrgencyShell">
+    <div class="lmctUrgencyFill">
+      <div class="lmctUrgencyStripes"></div>
+      <div class="lmctUrgencyEdge"></div>
+    </div>
+    <div class="lmctUrgencyScan"></div>
+
+    <div class="lmctUrgencyInner">
+      <div class="lmctUrgencyLogo">
+        <img src="https://images.clickfunnels.com/f3/d203e346f34f56bbdd34d64d37f2cc/White-plus-1-.png" alt="LMCT+">
+      </div>
+
+      <div class="lmctUrgencyCopy">
+        <div class="lmctUrgencyKicker" id="lmctUrgencyKicker">HURRY! 10X ENDS IN</div>
+        <div class="lmctUrgencyMessage" id="lmctUrgencyMessage">FINAL DAYS LEFT</div>
+      </div>
+
+      <div class="lmctCountdown" aria-label="Countdown timer">
+        <div class="lmctCountdownUnit">
+          <div class="lmctCountdownValue" id="lmctHours">00</div>
+          <div class="lmctCountdownLabel">Hours</div>
+        </div>
+        <div class="lmctCountdownColon">:</div>
+        <div class="lmctCountdownUnit">
+          <div class="lmctCountdownValue" id="lmctMins">00</div>
+          <div class="lmctCountdownLabel">Mins</div>
+        </div>
+        <div class="lmctCountdownColon">:</div>
+        <div class="lmctCountdownUnit">
+          <div class="lmctCountdownValue" id="lmctSecs">00</div>
+          <div class="lmctCountdownLabel">Secs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var LMCT_TARGET_DATE = "2026-07-24 00:00:00";
+var LMCT_TIMEZONE = "AEST";
+
+(function () {
+  var sectionMessages = [
+    {
+      match: ["UrgencyBar"],
+      text: "FINAL DAYS LEFT",
+      fill: "68%"
+    },
+    {
+      match: ["Hero"],
+      text: "TIME IS RUNNING OUT!",
+      fill: "72%"
+    },
+    {
+      match: ["Pacakges", "Packages"],
+      text: "DON'T MISS 5X ENTRIES",
+      fill: "80%"
+    },
+    {
+      match: ["Giveaway-Details", "Giveaway Details"],
+      text: "DRAW CLOSES SOON",
+      fill: "84%"
+    },
+    {
+      match: ["Proof"],
+      text: "THIS COULD BE YOU",
+      fill: "92%"
+    },
+    {
+      match: ["Footer"],
+      text: "FINAL CALL",
+      fill: "98%"
+    }
+  ];
+
+  var timezoneOffset = {
+    AEST: 10,
+    AEDT: 11
+  };
+
+  var root = document.getElementById("lmctUrgencyRoot");
+  var message = document.getElementById("lmctUrgencyMessage");
+  var kicker = document.getElementById("lmctUrgencyKicker");
+  var hoursEl = document.getElementById("lmctHours");
+  var minsEl = document.getElementById("lmctMins");
+  var secsEl = document.getElementById("lmctSecs");
+
+  var previousHours = "";
+  var previousMins = "";
+  var previousSecs = "";
+  var activeMessageText = "";
+
+  function normalize(str) {
+    return String(str || "")
+      .toLowerCase()
+      .replace(/\s+/g, "")
+      .replace(/-/g, "");
+  }
+
+  function parseTargetDate() {
+    var parts = String(LMCT_TARGET_DATE || "").match(/(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})/);
+    var offset = timezoneOffset[LMCT_TIMEZONE] || timezoneOffset.AEST;
+
+    if (!parts) {
+      return Date.now();
+    }
+
+    return Date.UTC(
+      +parts[1],
+      +parts[2] - 1,
+      +parts[3],
+      +parts[4] - offset,
+      +parts[5],
+      +parts[6]
+    );
+  }
+
+  var targetTime = parseTargetDate();
+
+  function pad(num) {
+    return num < 10 ? "0" + num : "" + num;
+  }
+
+  function flip(el) {
+    if (!el) return;
+    el.classList.remove("lmctCountdownFlip");
+    void el.offsetWidth;
+    el.classList.add("lmctCountdownFlip");
+  }
+
+  function updateNumber(el, value, previousValueName) {
+    if (!el) return value;
+
+    if (value !== previousValueName) {
+      el.textContent = value;
+      flip(el);
+    }
+
+    return value;
+  }
+
+  function tickCountdown() {
+    if (!root) return;
+
+    var totalSeconds = Math.max(0, Math.floor((targetTime - Date.now()) / 1000));
+    var hours = Math.floor(totalSeconds / 3600);
+    var remaining = totalSeconds % 3600;
+    var minutes = Math.floor(remaining / 60);
+    var seconds = remaining % 60;
+
+    previousHours = updateNumber(hoursEl, pad(hours), previousHours);
+    previousMins = updateNumber(minsEl, pad(minutes), previousMins);
+    previousSecs = updateNumber(secsEl, pad(seconds), previousSecs);
+
+    root.classList.toggle("lmctUrgencyHot", totalSeconds > 0 && totalSeconds <= 3600);
+    root.classList.toggle("lmctUrgencyExpired", totalSeconds === 0);
+
+    if (totalSeconds === 0 && kicker) {
+      kicker.textContent = "FINAL CALL";
+    }
+  }
+
+  function animateMessage() {
+    if (!message) return;
+
+    message.classList.remove("lmctUrgencySmash");
+    void message.offsetWidth;
+    message.classList.add("lmctUrgencySmash");
+  }
+
+  function setBanner(item) {
+    if (!root || !message || !item) return;
+
+    root.style.setProperty("--lmct-fill", item.fill || "68%");
+
+    if (activeMessageText === item.text) {
+      return;
+    }
+
+    activeMessageText = item.text;
+    message.textContent = item.text;
+    animateMessage();
+  }
+
+  function findMatchedSection(allSections, item) {
+    var matches = Array.isArray(item.match) ? item.match : [item.match];
+    var normalizedMatches = matches.map(normalize);
+
+    return allSections.find(function (section) {
+      var title = normalize(section.getAttribute("data-title"));
+
+      return normalizedMatches.some(function (target) {
+        return title.indexOf(target) !== -1;
+      });
+    });
+  }
+
+  function initDynamicUrgencyText() {
+    if (!root || !message) return false;
+
+    const allSections = Array.from(
+      document.querySelectorAll(".container.fullContainer[data-title]")
+    );
+
+    var activeSections = sectionMessages
+      .map(function (item) {
+        return {
+          text: item.text,
+          fill: item.fill,
+          element: findMatchedSection(allSections, item)
+        };
+      })
+      .filter(function (item) {
+        return item.element;
+      });
+
+    if (!activeSections.length) {
+      setBanner(sectionMessages[0]);
+      return false;
+    }
+
+    function getActiveSection() {
+      var triggerY = window.innerHeight * 0.42;
+      var current = activeSections[0];
+
+      activeSections.forEach(function (item) {
+        var rect = item.element.getBoundingClientRect();
+
+        if (rect.top <= triggerY) {
+          current = item;
+        }
+      });
+
+      return current;
+    }
+
+    var ticking = false;
+
+    function onScroll() {
+      if (ticking) return;
+
+      ticking = true;
+
+      requestAnimationFrame(function () {
+        setBanner(getActiveSection());
+        ticking = false;
+      });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    onScroll();
+
+    return true;
+  }
+
+  tickCountdown();
+  setInterval(tickCountdown, 1000);
+
+  var tries = 0;
+  var finder = setInterval(function () {
+    tries++;
+
+    if (initDynamicUrgencyText() || tries >= 40) {
+      clearInterval(finder);
+    }
+  }, 250);
+})();
+</script>

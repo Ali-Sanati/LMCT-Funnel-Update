@@ -1,0 +1,1036 @@
+<style>
+  .lmctEliteThankyou,
+  .lmctEliteThankyou *,
+  .lmctEliteThankyou *::before,
+  .lmctEliteThankyou *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctEliteThankyou {
+    --lmctEliteBlue: #087ff5;
+    --lmctEliteBlueDark: #075fd4;
+    --lmctEliteNavy: #071a36;
+    --lmctEliteText: #263a52;
+    --lmctEliteMuted: #607086;
+    --lmctEliteBorder: #dce7f1;
+    --lmctEliteGold: #e5a516;
+    --lmctEliteGoldLight: #f7c94c;
+    --lmctEliteGoldDark: #be7e00;
+    --lmctEliteGoldSoft: #fff6dc;
+    --lmctEliteGreen: #16a34a;
+    --lmctEliteGreenSoft: #eaf8ef;
+    --lmctEliteRed: #ef2525;
+    --lmctEliteRedSoft: #fff0f0;
+    --lmctEliteWhite: #ffffff;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 42px 20px 56px;
+    background:
+      radial-gradient(circle at 14% 6%, rgba(8, 127, 245, 0.1), transparent 30%),
+      radial-gradient(circle at 88% 20%, rgba(229, 165, 22, 0.14), transparent 28%),
+      linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+    color: var(--lmctEliteNavy);
+    font-family: Inter, Arial, sans-serif;
+  }
+
+  .lmctEliteThankyou .lmctEliteHero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    padding: 62px 40px 42px;
+    background:
+      radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.28), transparent 38%),
+      radial-gradient(circle at 14% 24%, rgba(247, 201, 76, 0.24), transparent 30%),
+      radial-gradient(circle at 88% 72%, rgba(8, 127, 245, 0.18), transparent 32%),
+      linear-gradient(135deg, #071a36 0%, #082b62 42%, #041326 100%);
+    color: var(--lmctEliteWhite);
+    text-align: center;
+    box-shadow:
+      0 28px 70px rgba(7, 26, 54, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    isolation: isolate;
+  }
+
+  .lmctEliteThankyou .lmctEliteCashRain {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .lmctEliteThankyou .lmctEliteCashParticle {
+    position: absolute;
+    top: -120px;
+    left: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  .lmctEliteThankyou .lmctEliteCashDollar {
+    width: var(--size, 56px);
+    height: calc(var(--size, 56px) * 0.58);
+    opacity: var(--opacity, 0.48);
+    background-image: url('data:image/svg+xml,%3Csvg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"%3E%3Cg%3E%3Cpath fill="%2374D24F" d="M496 112H16c-8.82 0-16 7.18-16 16v256c0 8.82 7.18 16 16 16h480c8.82 0 16-7.18 16-16V128c0-8.82-7.18-16-16-16z"/%3E%3Cpath fill="%23FFEFBC" d="M472 192c-22.055 0-40-17.945-40-40c0-4.422-3.578-8-8-8H88c-4.422 0-8 3.578-8 8c0 22.055-17.945 40-40 40c-4.422 0-8 3.578-8 8v112c0 4.422 3.578 8 8 8c22.055 0 40 17.945 40 40c0 4.422 3.578 8 8 8h336c4.422 0 8-3.578 8-8c0-22.055 17.945-40 40-40c4.422 0 8-3.578 8-8V200c0-4.422-3.578-8-8-8z"/%3E%3Cpath fill="%23869B55" d="M128 256c0 48.221 26.691 90.175 66.081 112h123.839C357.309 346.175 384 304.221 384 256s-26.691-90.175-66.081-112H194.08C154.691 165.825 128 207.779 128 256z"/%3E%3Cpath fill="%23FFEFBC" d="M256 244c-16.023 0-28-8.445-28-16s11.977-16 28-16s28 8.445 28 16c0 6.625 5.375 12 12 12s12-5.375 12-12c0-19.236-16.824-34.862-40-38.932V184c0-6.625-5.375-12-12-12s-12 5.375-12 12v5.068c-23.176 4.07-40 19.695-40 38.932c0 22.43 22.844 40 52 40c16.023 0 28 8.445 28 16s-11.977 16-28 16s-28-8.445-28-16c0-6.625-5.375-12-12-12s-12 5.375-12 12c0 19.236 16.824 34.862 40 38.932V328c0 6.625 5.375 12 12 12s12-5.375 12-12v-5.068c23.176-4.07 40-19.695 40-38.932c0-22.43-22.844-40-52-40z"/%3E%3Ccircle fill="%2374D24F" cx="80" cy="256" r="24"/%3E%3Ccircle fill="%2374D24F" cx="432" cy="256" r="24"/%3E%3C/g%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.18));
+    animation: lmctEliteCashFall var(--duration, 7s) linear infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  .lmctEliteThankyou .lmctEliteCashCoin {
+    width: var(--size, 24px);
+    height: var(--size, 24px);
+    border-radius: 50%;
+    opacity: var(--opacity, 0.58);
+    background: radial-gradient(circle at 35% 35%, #fff3a6 0%, #ffd700 38%, #d4a514 72%, #9b7400 100%);
+    box-shadow:
+      inset 0 2px 3px rgba(255, 255, 255, 0.45),
+      inset 0 -2px 3px rgba(0, 0, 0, 0.18),
+      0 4px 10px rgba(0, 0, 0, 0.18);
+    animation: lmctEliteCashSpin var(--duration, 5s) ease-in infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  .lmctEliteThankyou .lmctEliteCashCoin::before {
+    content: "$";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: rgba(80, 55, 0, 0.9);
+    font-size: calc(var(--size, 24px) * 0.55);
+    font-weight: 900;
+  }
+
+  .lmctEliteThankyou .lmctEliteHeroContent {
+    position: relative;
+    z-index: 1;
+    max-width: 850px;
+    margin: 0 auto;
+  }
+
+  .lmctEliteThankyou .lmctElitePill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin: 0 0 22px;
+    padding: 10px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.94);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  .lmctEliteThankyou .lmctElitePillIcon {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--lmctEliteWhite);
+    color: var(--lmctEliteGoldDark);
+  }
+
+  .lmctEliteThankyou .lmctEliteIcon {
+    display: block;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.2;
+  }
+
+  .lmctEliteThankyou .lmctEliteTitle {
+    margin: 0;
+    color: var(--lmctEliteWhite);
+    font-size: clamp(42px, 7vw, 82px);
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    text-shadow:
+      0 3px 18px rgba(0, 0, 0, 0.28),
+      0 0 30px rgba(229, 165, 22, 0.18);
+  }
+
+  .lmctEliteThankyou .lmctEliteTitleAccent {
+    display: inline-block;
+    background: linear-gradient(180deg, #fff4b8 0%, var(--lmctEliteGoldLight) 44%, var(--lmctEliteGold) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lmctEliteThankyou .lmctEliteHeroText {
+    max-width: 700px;
+    margin: 18px auto 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctEliteThankyou .lmctEliteStrong {
+    color: var(--lmctEliteWhite);
+    font-weight: 900;
+  }
+
+  .lmctEliteThankyou .lmctEliteHeroGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 30px auto 0;
+  }
+
+  .lmctEliteThankyou .lmctEliteHeroStat {
+    min-width: 0;
+    padding: 18px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .lmctEliteThankyou .lmctEliteHeroStatLabel {
+    display: block;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .lmctEliteThankyou .lmctEliteHeroStatValue {
+    display: block;
+    margin-top: 8px;
+    color: var(--lmctEliteWhite);
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.12;
+  }
+
+  .lmctEliteThankyou .lmctEliteSection {
+    margin-top: 24px;
+  }
+
+  .lmctEliteThankyou .lmctElitePanel {
+    border: 1px solid var(--lmctEliteBorder);
+    border-radius: 24px;
+    background: var(--lmctEliteWhite);
+    box-shadow: 0 18px 42px rgba(7, 26, 54, 0.08);
+    overflow: hidden;
+  }
+
+  .lmctEliteThankyou .lmctEliteSummary {
+    display: grid;
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+    gap: 0;
+  }
+
+  .lmctEliteThankyou .lmctEliteBenefits {
+    padding: 30px;
+    background:
+      radial-gradient(circle at 96% 6%, rgba(229, 165, 22, 0.18), transparent 34%),
+      linear-gradient(180deg, #ffffff 0%, #fffaf0 100%);
+  }
+
+  .lmctEliteThankyou .lmctEliteSectionKicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 0 12px;
+    padding: 7px 11px;
+    border: 1px solid rgba(190, 126, 0, 0.18);
+    border-radius: 999px;
+    background: var(--lmctEliteGoldSoft);
+    color: var(--lmctEliteGoldDark);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .lmctEliteThankyou .lmctEliteSectionTitle {
+    margin: 0;
+    color: var(--lmctEliteNavy);
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  .lmctEliteThankyou .lmctEliteSectionTitleLight {
+    color: var(--lmctEliteWhite);
+  }
+
+  .lmctEliteThankyou .lmctEliteSectionText {
+    margin: 10px 0 0;
+    color: var(--lmctEliteMuted);
+    font-size: 15.5px;
+    font-weight: 600;
+    line-height: 1.58;
+  }
+
+  .lmctEliteThankyou .lmctEliteSectionTextLight {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .lmctEliteThankyou .lmctEliteBenefitGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .lmctEliteThankyou .lmctEliteBenefitCard {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    border: 1px solid rgba(190, 126, 0, 0.16);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.82);
+  }
+
+  .lmctEliteThankyou .lmctEliteBenefitIconBox {
+    display: inline-flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--lmctEliteGoldSoft);
+    color: var(--lmctEliteGoldDark);
+    flex: 0 0 42px;
+  }
+
+  .lmctEliteThankyou .lmctEliteBenefitText {
+    min-width: 0;
+    color: var(--lmctEliteNavy);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.28;
+  }
+
+  .lmctEliteThankyou .lmctEliteGiveaway {
+    padding: 30px;
+    background:
+      radial-gradient(circle at 50% 4%, rgba(67, 255, 119, 0.2), transparent 31%),
+      radial-gradient(circle at 92% 90%, rgba(250, 204, 21, 0.14), transparent 28%),
+      linear-gradient(180deg, #082514 0%, #04170d 50%, #020a06 100%);
+    color: var(--lmctEliteWhite);
+  }
+
+  .lmctEliteThankyou .lmctElitePrizeBox {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 22px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.08);
+    text-align: center;
+  }
+
+  .lmctEliteThankyou .lmctElitePrizeAmount {
+    display: block;
+    color: var(--lmctEliteWhite);
+    font-size: 46px;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: 0;
+    text-shadow: 0 3px 18px rgba(0, 0, 0, 0.28);
+  }
+
+  .lmctEliteThankyou .lmctElitePrizeSub {
+    display: block;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .lmctEliteThankyou .lmctEliteDateGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .lmctEliteThankyou .lmctEliteDateCard {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    border-radius: 15px;
+    background: var(--lmctEliteWhite);
+    color: var(--lmctEliteNavy);
+  }
+
+  .lmctEliteThankyou .lmctEliteDateIconBox {
+    display: inline-flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    flex: 0 0 42px;
+  }
+
+  .lmctEliteThankyou .lmctEliteDateIconClose {
+    background: var(--lmctEliteGreenSoft);
+    color: var(--lmctEliteGreen);
+  }
+
+  .lmctEliteThankyou .lmctEliteDateIconLive {
+    background: var(--lmctEliteRedSoft);
+    color: var(--lmctEliteRed);
+  }
+
+  .lmctEliteThankyou .lmctEliteDateLabel {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  .lmctEliteThankyou .lmctEliteDateValue {
+    display: block;
+    margin-top: 4px;
+    color: var(--lmctEliteNavy);
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+
+  .lmctEliteThankyou .lmctEliteDateTime {
+    display: block;
+    margin-top: 3px;
+    color: var(--lmctEliteMuted);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctEliteThankyou .lmctEliteAppPanel {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 24px;
+    align-items: center;
+    padding: 28px;
+  }
+
+  .lmctEliteThankyou .lmctEliteAppImage {
+    display: block;
+    width: 100%;
+    border-radius: 18px;
+    box-shadow: 0 18px 34px rgba(7, 26, 54, 0.12);
+  }
+
+  .lmctEliteThankyou .lmctEliteStoreRow {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .lmctEliteThankyou .lmctEliteStoreButton {
+    display: flex;
+    min-height: 58px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 13px;
+    background: #050b14;
+    color: var(--lmctEliteWhite);
+    text-decoration: none;
+    box-shadow: 0 12px 24px rgba(5, 11, 20, 0.18);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      background 180ms ease;
+  }
+
+  .lmctEliteThankyou .lmctEliteStoreButton:focus-visible,
+  .lmctEliteThankyou .lmctEliteHelpLink:focus-visible {
+    outline: 3px solid rgba(8, 127, 245, 0.34);
+    outline-offset: 4px;
+  }
+
+  .lmctEliteThankyou .lmctEliteStoreIcon {
+    display: block;
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+  }
+
+  .lmctEliteThankyou .lmctEliteStoreCopy {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+    text-align: left;
+  }
+
+  .lmctEliteThankyou .lmctEliteStoreSmall {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .lmctEliteThankyou .lmctEliteStoreBig {
+    color: var(--lmctEliteWhite);
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .lmctEliteThankyou .lmctEliteSteps {
+    padding: 30px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  }
+
+  .lmctEliteThankyou .lmctEliteStepGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  .lmctEliteThankyou .lmctEliteStep {
+    position: relative;
+    min-width: 0;
+    padding: 23px 18px 20px;
+    border: 1px solid var(--lmctEliteBorder);
+    border-radius: 17px;
+    background: var(--lmctEliteWhite);
+    text-align: center;
+    box-shadow: 0 12px 26px rgba(7, 26, 54, 0.06);
+  }
+
+  .lmctEliteThankyou .lmctEliteStepNumber {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    border: 3px solid var(--lmctEliteWhite);
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--lmctEliteGoldLight) 0%, var(--lmctEliteGoldDark) 100%);
+    color: var(--lmctEliteWhite);
+    font-size: 20px;
+    font-weight: 900;
+    box-shadow: 0 10px 22px rgba(190, 126, 0, 0.24);
+  }
+
+  .lmctEliteThankyou .lmctEliteStepTitle {
+    margin: 0;
+    color: var(--lmctEliteNavy);
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctEliteThankyou .lmctEliteStepText {
+    margin: 8px 0 0;
+    color: var(--lmctEliteMuted);
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .lmctEliteThankyou .lmctEliteHelp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    margin-top: 18px;
+    padding: 14px 16px;
+    border: 1px dashed rgba(8, 127, 245, 0.32);
+    border-radius: 14px;
+    background: rgba(8, 127, 245, 0.06);
+    color: var(--lmctEliteText);
+    font-size: 13.5px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .lmctEliteThankyou .lmctEliteHelpLink {
+    color: var(--lmctEliteBlueDark);
+    font-weight: 900;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(7, 95, 212, 0.35);
+  }
+
+  @keyframes lmctEliteCashFall {
+    0% {
+      transform: translate3d(0, -120px, 0) rotate(0deg);
+    }
+
+    100% {
+      transform: translate3d(var(--drift, 30px), 560px, 0) rotate(var(--spin, 360deg));
+    }
+  }
+
+  @keyframes lmctEliteCashSpin {
+    0% {
+      transform: translate3d(0, -120px, 0) rotateY(0deg) rotate(0deg);
+    }
+
+    100% {
+      transform: translate3d(var(--drift, 12px), 560px, 0) rotateY(720deg) rotate(var(--spin, 300deg));
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lmctEliteThankyou .lmctEliteStoreButton:hover {
+      background: #0b1422;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(5, 11, 20, 0.24);
+    }
+
+    .lmctEliteThankyou .lmctEliteStep:hover,
+    .lmctEliteThankyou .lmctEliteBenefitCard:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(7, 26, 54, 0.08);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .lmctEliteThankyou {
+      padding: 34px 18px 46px;
+    }
+
+    .lmctEliteThankyou .lmctEliteHero {
+      padding: 54px 28px 36px;
+    }
+
+    .lmctEliteThankyou .lmctEliteHeroGrid,
+    .lmctEliteThankyou .lmctEliteSummary,
+    .lmctEliteThankyou .lmctEliteAppPanel {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctEliteThankyou .lmctEliteAppPanel {
+      gap: 20px;
+    }
+
+    .lmctEliteThankyou .lmctEliteStepGrid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 620px) {
+    .lmctEliteThankyou {
+      max-width: none;
+      padding: 26px 16px 38px;
+    }
+
+    .lmctEliteThankyou .lmctEliteHero {
+      border-radius: 22px;
+      padding: 46px 18px 28px;
+    }
+
+    .lmctEliteThankyou .lmctElitePill {
+      padding: 9px 13px;
+      font-size: 11px;
+      letter-spacing: 0.8px;
+    }
+
+    .lmctEliteThankyou .lmctEliteTitle {
+      font-size: 42px;
+    }
+
+    .lmctEliteThankyou .lmctEliteHeroText {
+      font-size: 17px;
+    }
+
+    .lmctEliteThankyou .lmctEliteHeroGrid,
+    .lmctEliteThankyou .lmctEliteBenefitGrid,
+    .lmctEliteThankyou .lmctEliteDateGrid,
+    .lmctEliteThankyou .lmctEliteStoreRow {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctEliteThankyou .lmctEliteBenefits,
+    .lmctEliteThankyou .lmctEliteGiveaway,
+    .lmctEliteThankyou .lmctEliteAppPanel,
+    .lmctEliteThankyou .lmctEliteSteps {
+      padding: 22px 18px;
+    }
+
+    .lmctEliteThankyou .lmctEliteSectionTitle {
+      font-size: 25px;
+    }
+
+    .lmctEliteThankyou .lmctElitePrizeAmount {
+      font-size: 38px;
+    }
+
+    .lmctEliteThankyou .lmctEliteStep {
+      text-align: left;
+      padding: 18px 18px 18px 76px;
+    }
+
+    .lmctEliteThankyou .lmctEliteStepNumber {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 44px;
+      height: 44px;
+      margin: 0;
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .lmctEliteThankyou .lmctEliteTitle {
+      font-size: 36px;
+    }
+
+    .lmctEliteThankyou .lmctEliteHeroText {
+      font-size: 16px;
+    }
+
+    .lmctEliteThankyou .lmctElitePrizeAmount {
+      font-size: 33px;
+    }
+
+    .lmctEliteThankyou .lmctEliteStoreButton {
+      gap: 9px;
+      padding: 12px;
+    }
+
+    .lmctEliteThankyou .lmctEliteStoreBig {
+      font-size: 16px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctEliteThankyou .lmctEliteCashDollar,
+    .lmctEliteThankyou .lmctEliteCashCoin {
+      animation: none;
+    }
+
+    .lmctEliteThankyou .lmctEliteStoreButton,
+    .lmctEliteThankyou .lmctEliteStep,
+    .lmctEliteThankyou .lmctEliteBenefitCard {
+      transition: none;
+    }
+  }
+</style>
+
+<section class="lmctEliteThankyou" aria-label="Premium to Elite upgrade thank you page">
+  <div class="lmctEliteHero">
+    <div class="lmctEliteCashRain" aria-hidden="true"></div>
+    <div class="lmctEliteHeroContent">
+      <div class="lmctElitePill">
+        <span class="lmctElitePillIcon" aria-hidden="true">
+          <svg class="lmctEliteIcon" viewBox="0 0 24 24" focusable="false">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </span>
+        Upgrade confirmed
+      </div>
+      <h1 class="lmctEliteTitle">
+        You are now an <span class="lmctEliteTitleAccent">Elite</span> member
+      </h1>
+      <p class="lmctEliteHeroText">
+        Your Premium membership has been upgraded to Elite. Your
+        <strong class="lmctEliteStrong">500 bonus entries</strong> are secured
+        for the <strong class="lmctEliteStrong">August $1M giveaway</strong>,
+        and your Elite benefits are ready in your LMCT+ account.
+      </p>
+      <div class="lmctEliteHeroGrid" aria-label="Elite upgrade highlights">
+        <div class="lmctEliteHeroStat">
+          <span class="lmctEliteHeroStatLabel">Bonus entries</span>
+          <span class="lmctEliteHeroStatValue">500 secured</span>
+        </div>
+        <div class="lmctEliteHeroStat">
+          <span class="lmctEliteHeroStatLabel">Monthly entries</span>
+          <span class="lmctEliteHeroStatValue">10 FREE</span>
+        </div>
+        <div class="lmctEliteHeroStat">
+          <span class="lmctEliteHeroStatLabel">Membership level</span>
+          <span class="lmctEliteHeroStatValue">Elite</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lmctEliteSection lmctElitePanel lmctEliteSummary">
+    <div class="lmctEliteBenefits">
+      <span class="lmctEliteSectionKicker">Elite unlocked</span>
+      <h2 class="lmctEliteSectionTitle">Your upgraded benefits are active.</h2>
+      <p class="lmctEliteSectionText">
+        You have moved from Premium to Elite, with stronger entries, discounts,
+        and savings potential now attached to your membership.
+      </p>
+
+      <div class="lmctEliteBenefitGrid">
+        <div class="lmctEliteBenefitCard">
+          <span class="lmctEliteBenefitIconBox" aria-hidden="true">
+            <svg class="lmctEliteIcon" viewBox="0 0 24 24" focusable="false">
+              <path d="M3 9.2V7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v2.2a2.6 2.6 0 0 0 0 5.2V17a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2.6a2.6 2.6 0 0 0 0-5.2Z" />
+              <path d="M14.5 6.6v2M14.5 11v2M14.5 15.4v2" />
+            </svg>
+          </span>
+          <span class="lmctEliteBenefitText">10 FREE accumulating entries each month</span>
+        </div>
+
+        <div class="lmctEliteBenefitCard">
+          <span class="lmctEliteBenefitIconBox" aria-hidden="true">
+            <svg class="lmctEliteIcon" viewBox="0 0 24 24" focusable="false">
+              <path d="M19 5 5 19" />
+              <circle cx="7.3" cy="7.3" r="2.2" />
+              <circle cx="16.7" cy="16.7" r="2.2" />
+            </svg>
+          </span>
+          <span class="lmctEliteBenefitText">10% off instore products excl. cigarettes and epay</span>
+        </div>
+
+        <div class="lmctEliteBenefitCard">
+          <span class="lmctEliteBenefitIconBox" aria-hidden="true">
+            <svg class="lmctEliteIcon" viewBox="0 0 24 24" focusable="false">
+              <path d="M3 12.6V4.4a1 1 0 0 1 1-1h8.2a1 1 0 0 1 .7.3l7.4 7.4a1 1 0 0 1 0 1.4l-8.2 8.2a1 1 0 0 1-1.4 0L3.3 13.3a1 1 0 0 1-.3-.7Z" />
+              <circle cx="7.6" cy="7.6" r="1.5" />
+            </svg>
+          </span>
+          <span class="lmctEliteBenefitText">Elite discounts at selected partners</span>
+        </div>
+
+        <div class="lmctEliteBenefitCard">
+          <span class="lmctEliteBenefitIconBox" aria-hidden="true">
+            <svg class="lmctEliteIcon" viewBox="0 0 24 24" focusable="false">
+              <path d="M8.4 7.2 10 3.8h4l1.6 3.4" />
+              <path d="M6.2 12.5c0-3.1 2.4-5.3 5.8-5.3s5.8 2.2 5.8 5.3c0 4.8-2.7 7.7-5.8 7.7s-5.8-2.9-5.8-7.7Z" />
+              <path d="M12 9.7v6.4" />
+            </svg>
+          </span>
+          <span class="lmctEliteBenefitText">Up to $250,000 in potential savings</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lmctEliteGiveaway">
+      <span class="lmctEliteSectionKicker">August draw</span>
+      <h2 class="lmctEliteSectionTitle lmctEliteSectionTitleLight">You are in for the $1M giveaway.</h2>
+      <p class="lmctEliteSectionText lmctEliteSectionTextLight">
+        Your bonus entries are attached to this upgrade. Keep an eye on your app
+        and email for member updates.
+      </p>
+      <div class="lmctElitePrizeBox">
+        <span class="lmctElitePrizeAmount">$1,000,000</span>
+        <span class="lmctElitePrizeSub">tax-free cash</span>
+      </div>
+      <div class="lmctEliteDateGrid">
+        <div class="lmctEliteDateCard">
+          <span class="lmctEliteDateIconBox lmctEliteDateIconClose" aria-hidden="true">
+            <svg class="lmctEliteIcon" viewBox="0 0 24 24" focusable="false">
+              <rect x="3.5" y="5" width="17" height="15.5" rx="2" />
+              <path d="M8 3.5v3.2M16 3.5v3.2M3.5 9.5h17" />
+            </svg>
+          </span>
+          <span>
+            <span class="lmctEliteDateLabel">Entries close</span>
+            <time class="lmctEliteDateValue" datetime="2026-08-27T20:00:00+10:00">27 August</time>
+            <span class="lmctEliteDateTime">8PM AEST</span>
+          </span>
+        </div>
+        <div class="lmctEliteDateCard">
+          <span class="lmctEliteDateIconBox lmctEliteDateIconLive" aria-hidden="true">
+            <svg class="lmctEliteIcon" viewBox="0 0 24 24" focusable="false">
+              <circle cx="12" cy="12" r="7.6" />
+              <circle cx="12" cy="12" r="2.5" />
+              <path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4" />
+            </svg>
+          </span>
+          <span>
+            <span class="lmctEliteDateLabel">Live draw</span>
+            <time class="lmctEliteDateValue" datetime="2026-08-27T20:30:00+10:00">27 August</time>
+            <span class="lmctEliteDateTime">8:30PM AEST</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lmctEliteSection lmctElitePanel lmctEliteAppPanel">
+    <img
+      class="lmctEliteAppImage"
+      src="https://images.clickfunnels.com/30/be623d4de641ea8313ca4ea3a721dc/app-banner.png"
+      alt="Download the LMCT+ app"
+    />
+    <div>
+      <span class="lmctEliteSectionKicker">Access your account</span>
+      <h2 class="lmctEliteSectionTitle">Open the app to view your Elite membership.</h2>
+      <p class="lmctEliteSectionText">
+        Your existing LMCT+ login still works. Download or open the app to see
+        your entries, giveaways, fuel saver access, and selected partner deals.
+      </p>
+      <div class="lmctEliteStoreRow">
+        <a
+          class="lmctEliteStoreButton"
+          href="https://apps.apple.com/au/app/lmct/id1621538736"
+          target="_blank"
+          rel="noopener"
+          aria-label="Download LMCT plus on the App Store"
+        >
+          <svg class="lmctEliteStoreIcon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M22.4 16.8c0-3.1 2.5-4.5 2.6-4.6-1.4-2.1-3.6-2.3-4.4-2.4-1.9-.2-3.6 1.1-4.6 1.1-.9 0-2.4-1.1-3.9-1.1-2 0-3.9 1.2-4.9 3-2.1 3.6-.5 9 1.5 12 1 1.5 2.2 3.1 3.8 3 1.5-.1 2.1-1 3.9-1s2.3 1 3.9 1c1.6 0 2.7-1.5 3.7-3 1.2-1.7 1.6-3.3 1.7-3.4-.1-.1-3.3-1.2-3.3-4.6zM19.4 8c.8-1 1.4-2.5 1.3-3.9-1.2.1-2.7.8-3.6 1.8-.8.9-1.5 2.3-1.3 3.7 1.4.1 2.8-.7 3.6-1.6z" fill="currentColor" />
+          </svg>
+          <span class="lmctEliteStoreCopy">
+            <span class="lmctEliteStoreSmall">Download on the</span>
+            <span class="lmctEliteStoreBig">App Store</span>
+          </span>
+        </a>
+        <a
+          class="lmctEliteStoreButton"
+          href="https://play.google.com/store/apps/details?id=com.lmctmembers&hl=en_AU"
+          target="_blank"
+          rel="noopener"
+          aria-label="Get LMCT plus on Google Play"
+        >
+          <svg class="lmctEliteStoreIcon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M5.4 4.2c-.3.3-.4.8-.4 1.4v20.8c0 .6.2 1.1.4 1.4l.1.1L17 16.4v-.3L5.5 4.1l-.1.1z" fill="#4285F4" />
+            <path d="M20.8 20.3L17 16.4v-.3l3.8-3.9.1.1 4.5 2.6c1.3.7 1.3 1.9 0 2.7l-4.5 2.6-.1.1z" fill="#FBBC04" />
+            <path d="M20.9 20.2L17 16.2 5.4 27.8c.4.5 1.1.5 1.9.1l13.6-7.7" fill="#EA4335" />
+            <path d="M20.9 12.2 7.3 4.5c-.8-.5-1.5-.4-1.9.1L17 16.2l3.9-4z" fill="#34A853" />
+          </svg>
+          <span class="lmctEliteStoreCopy">
+            <span class="lmctEliteStoreSmall">Get it on</span>
+            <span class="lmctEliteStoreBig">Google Play</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="lmctEliteSection lmctElitePanel lmctEliteSteps">
+    <span class="lmctEliteSectionKicker">What happens next</span>
+    <h2 class="lmctEliteSectionTitle">Your Elite account is ready to use.</h2>
+    <p class="lmctEliteSectionText">
+      Follow these simple steps if you want to check your upgrade and entries.
+    </p>
+
+    <div class="lmctEliteStepGrid">
+      <article class="lmctEliteStep">
+        <span class="lmctEliteStepNumber">1</span>
+        <h3 class="lmctEliteStepTitle">Check your email</h3>
+        <p class="lmctEliteStepText">
+          Your upgrade confirmation and receipt will arrive at the email used at checkout.
+        </p>
+      </article>
+      <article class="lmctEliteStep">
+        <span class="lmctEliteStepNumber">2</span>
+        <h3 class="lmctEliteStepTitle">Open the app</h3>
+        <p class="lmctEliteStepText">
+          Sign in with your existing account to view entries, giveaways, and member perks.
+        </p>
+      </article>
+      <article class="lmctEliteStep">
+        <span class="lmctEliteStepNumber">3</span>
+        <h3 class="lmctEliteStepTitle">Use Elite access</h3>
+        <p class="lmctEliteStepText">
+          Start using Elite discounts, fuel saver access, app access, and partner offers.
+        </p>
+      </article>
+    </div>
+
+    <div class="lmctEliteHelp">
+      <svg class="lmctEliteIcon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+        <path d="M12 17h.01" />
+      </svg>
+      <span>Forgot your password or cannot access your account?</span>
+      <a
+        class="lmctEliteHelpLink"
+        href="https://lmctplus.com/auth/forgot"
+        target="_blank"
+        rel="noopener"
+      >
+        Reset it here
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var pages = document.querySelectorAll(".lmctEliteThankyou");
+    if (!pages.length) return;
+
+    function rand(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function makeParticle(type) {
+      var el = document.createElement("span");
+      el.className = "lmctEliteCashParticle " + type;
+      el.style.left = rand(0, 100) + "%";
+      el.style.setProperty("--delay", rand(0, 6).toFixed(2) + "s");
+      el.style.setProperty("--drift", rand(-58, 58).toFixed(0) + "px");
+      el.style.setProperty("--spin", rand(180, 720).toFixed(0) + "deg");
+      el.style.setProperty("--opacity", rand(0.24, 0.58).toFixed(2));
+
+      if (type === "lmctEliteCashDollar") {
+        el.style.setProperty("--size", rand(38, 66).toFixed(0) + "px");
+        el.style.setProperty("--duration", rand(5.8, 9).toFixed(2) + "s");
+      }
+
+      if (type === "lmctEliteCashCoin") {
+        el.style.setProperty("--size", rand(17, 30).toFixed(0) + "px");
+        el.style.setProperty("--duration", rand(3.8, 6.2).toFixed(2) + "s");
+      }
+
+      return el;
+    }
+
+    function populate(page) {
+      var layer = page.querySelector(".lmctEliteCashRain");
+      if (!layer || layer.getAttribute("data-lmct-elite-cash") === "true") return;
+      layer.setAttribute("data-lmct-elite-cash", "true");
+
+      for (var i = 0; i < 16; i++) {
+        layer.appendChild(makeParticle("lmctEliteCashDollar"));
+      }
+
+      for (var j = 0; j < 8; j++) {
+        layer.appendChild(makeParticle("lmctEliteCashCoin"));
+      }
+    }
+
+    for (var p = 0; p < pages.length; p++) {
+      populate(pages[p]);
+    }
+  })();
+</script>

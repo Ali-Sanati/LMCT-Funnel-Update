@@ -1,0 +1,1598 @@
+<!-- ============================================================
+     LMCT+ PETROL HERO - Integrated ClickFunnels Classic block
+     ============================================================ -->
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+  /* =========================
+     Hero styles
+     ========================= */
+  .lmctHero,
+  .lmctHero *,
+  .lmctHero *::before,
+  .lmctHero *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctHero {
+    width: 100%;
+    padding: 56px 16px;
+    background:
+      radial-gradient(
+        circle at 70% 25%,
+        rgba(135, 206, 255, 0.4) 0,
+        rgba(135, 206, 255, 0.15) 60%,
+        rgba(135, 206, 255, 0) 90%
+      ),
+      linear-gradient(90deg, #1a7cc4 0%, #3ba8ee 50%, #5cc6f7 100%);
+    color: #ffffff;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+    overflow: hidden;
+  }
+
+  .lmctHero__inner {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    align-items: center;
+  }
+
+  .lmctHero__left,
+  .lmctHero__right {
+    min-width: 0;
+  }
+
+  .lmctHero__toggleWrap {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 0 18px 0;
+  }
+
+  .lmctHero__toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: stretch;
+    width: 100%;
+    max-width: 430px;
+    min-height: 48px;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    background: rgba(6, 27, 53, 0.34);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+  }
+
+  .lmctHero__toggleIndicator {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: calc(100% - 8px);
+    width: 120px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #32b7f3 0%, #087cf0 100%);
+    box-shadow: 0 8px 18px rgba(8, 124, 240, 0.26);
+    transition:
+      left 0.28s ease,
+      width 0.28s ease;
+    z-index: 0;
+  }
+
+  .lmctHero__toggleIndicator--instant {
+    transition: none !important;
+  }
+
+  .lmctHero .sus-toggle-btn {
+    position: relative;
+    z-index: 1;
+    flex: 0 1 auto;
+    min-width: 0;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.72);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1.15;
+    cursor: pointer;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lmctHero .sus-toggle-btn:hover {
+    color: #ffffff;
+  }
+
+  .lmctHero .sus-toggle-btn[aria-selected="true"] {
+    color: #ffffff;
+  }
+
+  .lmctHero .sus-toggle-btn:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.74);
+    outline-offset: 3px;
+  }
+
+  .lmctHero__tier[hidden] {
+    display: none;
+  }
+
+  .lmctHero__badge {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+    margin: 0 0 14px 0;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .lmctHero__badgeIcon {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #32b7f3;
+    color: #ffffff;
+    flex: 0 0 auto;
+  }
+
+  .lmctHero__badgeIconSvg {
+    width: 12px;
+    height: 12px;
+    display: block;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .lmctHero__headline {
+    max-width: 560px;
+    margin: 0 0 12px 0;
+    color: #ffffff;
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.08;
+    text-shadow: 0 2px 12px rgba(6, 27, 53, 0.18);
+  }
+
+  .lmctHero__price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 0 0 12px 0;
+  }
+
+  .lmctHero__priceAmount {
+    color: #ffffff;
+    font-size: 54px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.95;
+  }
+
+  .lmctHero__priceUnit {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  .lmctHero__copy {
+    max-width: 520px;
+    margin: 0 0 18px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15.5px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.55;
+  }
+
+  .lmctHero__benefits {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    max-width: 500px;
+    margin: 0 0 18px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmctHero__benefit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 38px;
+    padding: 8px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.94);
+    font-size: 13px;
+    font-weight: 750;
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
+
+  .lmctHero__benefitIcon {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    color: #ffffff;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .lmctHero__cta {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+    min-height: 56px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 22px;
+    border: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #19b95b 0%, #0d9a43 100%);
+    color: #ffffff;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.15;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow:
+      0 14px 28px rgba(13, 154, 67, 0.26),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      filter 0.18s ease;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lmctHero__cta:hover {
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+    box-shadow:
+      0 18px 34px rgba(13, 154, 67, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+
+  .lmctHero__cta:active {
+    transform: translateY(0);
+  }
+
+  .lmctHero__cta:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.82);
+    outline-offset: 4px;
+  }
+
+  .lmctHero__ctaSheen {
+    position: absolute;
+    top: 0;
+    left: -90%;
+    width: 42%;
+    height: 100%;
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.22) 50%,
+      transparent 100%
+    );
+    transform: skewX(-18deg);
+    animation: lmctHeroSheen 5.8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .lmctHero__ctaIcon {
+    position: relative;
+    z-index: 1;
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.18s ease;
+  }
+
+  .lmctHero__cta:hover .lmctHero__ctaIcon {
+    transform: translateX(2px);
+  }
+
+  .lmctHero__ctaLabel {
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmctHero__reassurance {
+    margin: 10px 0 0 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  .lmctHero__location {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .lmctHero__viewport {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(6, 27, 53, 0.28);
+    box-shadow: 0 18px 44px rgba(5, 22, 42, 0.24);
+  }
+
+  .lmctHero__track {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .lmctHero__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lmctHero__slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .lmctHero__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #061b35;
+    overflow: hidden;
+  }
+
+  .lmctHero__locationImage {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .lmctHero__status {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 11px;
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    box-shadow: 0 8px 18px rgba(5, 22, 42, 0.2);
+  }
+
+  .lmctHero__status--open {
+    background: #19b95b;
+  }
+
+  .lmctHero__status--soon {
+    background: #087cf0;
+  }
+
+  .lmctHero__statusDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: currentColor;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.18);
+  }
+
+  .lmctHero__place {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    gap: 7px;
+    max-width: calc(100% - 150px);
+    padding: 8px 11px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    background: rgba(6, 27, 53, 0.72);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    box-shadow: 0 8px 18px rgba(5, 22, 42, 0.18);
+  }
+
+  .lmctHero__pin {
+    width: 13px;
+    height: 13px;
+    flex: 0 0 auto;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .lmctHero__proofCard {
+    display: none;
+  }
+
+  .lmctHero__locationInfo {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #061b35;
+  }
+
+  .lmctHero__locationIcon {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(8, 124, 240, 0.1);
+    color: #087cf0;
+  }
+
+  .lmctHero__locationIconSvg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .lmctHero__locationName {
+    display: block;
+    color: #061b35;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.2;
+  }
+
+  .lmctHero__address {
+    display: block;
+    margin-top: 3px;
+    color: rgba(6, 27, 53, 0.68);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.35;
+  }
+
+  .lmctHero__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .lmctHero__arrow {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    cursor: pointer;
+    transition:
+      transform 0.16s ease,
+      background 0.16s ease,
+      opacity 0.16s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lmctHero__arrow:hover {
+    background: rgba(255, 255, 255, 0.22);
+    transform: translateY(-1px);
+  }
+
+  .lmctHero__arrow:disabled {
+    opacity: 0.38;
+    cursor: default;
+    transform: none;
+  }
+
+  .lmctHero__arrow:focus-visible,
+  .lmctHero__locationDot:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.78);
+    outline-offset: 3px;
+  }
+
+  .lmctHero__arrowIcon {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .lmctHero__dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lmctHero__locationDot {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lmctHero__locationDot::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.42);
+    transition:
+      width 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .lmctHero__locationDot[aria-selected="true"]::before {
+    width: 26px;
+    background: #ffffff;
+  }
+
+  @keyframes lmctHeroSheen {
+    0% {
+      left: -90%;
+    }
+    42% {
+      left: 130%;
+    }
+    100% {
+      left: 130%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .lmctHero {
+      padding: 42px 12px;
+    }
+
+    .lmctHero__inner {
+      grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
+      gap: 46px;
+    }
+
+    .lmctHero__headline {
+      font-size: 52px;
+      line-height: 1.04;
+      margin-bottom: 14px;
+    }
+
+    .lmctHero__priceAmount {
+      font-size: 64px;
+    }
+
+    .lmctHero__copy {
+      font-size: 16.5px;
+      margin-bottom: 20px;
+    }
+
+    .lmctHero__benefits {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .lmctHero__benefit {
+      justify-content: center;
+      gap: 6px;
+      padding: 10px;
+    }
+
+    .lmctHero__cta {
+      min-height: 58px;
+      font-size: 17px;
+    }
+
+    .lmctHero__reassurance {
+      text-align: left;
+    }
+
+    .lmctHero__location {
+      max-width: none;
+    }
+
+    .lmctHero__proofCard {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      z-index: 3;
+      display: block;
+      min-width: 178px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      background: rgba(6, 27, 53, 0.82);
+      color: #ffffff;
+      box-shadow: 0 12px 26px rgba(5, 22, 42, 0.26);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .lmctHero__proofEyebrow {
+      display: block;
+      margin-bottom: 4px;
+      color: #32b7f3;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .lmctHero__proofAmount {
+      display: block;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+    }
+
+    .lmctHero__proofNote {
+      display: block;
+      margin-top: 3px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1.25;
+    }
+  }
+
+  @media (min-width: 1120px) {
+    .lmctHero__headline {
+      font-size: 56px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .lmctHero {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .lmctHero__toggle {
+      max-width: 100%;
+    }
+
+    .lmctHero .sus-toggle-btn {
+      padding-left: 11px;
+      padding-right: 11px;
+      font-size: 11px;
+    }
+
+    .lmctHero__headline {
+      font-size: 32px;
+    }
+
+    .lmctHero__priceAmount {
+      font-size: 50px;
+    }
+
+    .lmctHero__place {
+      max-width: calc(100% - 132px);
+      font-size: 10px;
+    }
+
+    .lmctHero__status {
+      font-size: 10px;
+    }
+
+    .lmctHero__locationInfo {
+      padding: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctHero *,
+    .lmctHero *::before,
+    .lmctHero *::after {
+      animation: none !important;
+      scroll-behavior: auto !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<section
+  class="lmctHero"
+  id="susTier"
+  data-tier="fuel"
+  role="region"
+  aria-labelledby="lmctHeroTitleFuel"
+>
+  <div class="lmctHero__inner">
+    <div class="lmctHero__left">
+      <!-- =========================
+           Membership tier markup
+           ========================= -->
+
+      <div
+        class="lmctHero__tier lmctHero__tier--fuel"
+        id="lmctHeroPanelFuel"
+        role="tabpanel"
+      >
+        <span class="lmctHero__badge">
+          <span class="lmctHero__badgeIcon" aria-hidden="true">
+            <svg class="lmctHero__badgeIconSvg" viewBox="0 0 24 24">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+          </span>
+          MEMBERS-ONLY EVERYDAY PRICING
+        </span>
+
+        <h1 class="lmctHero__headline" id="lmctHeroTitleFuel">
+          Pay less for fuel and groceries &mdash; All year.
+        </h1>
+
+        <div class="lmctHero__price" aria-label="$49 per year">
+          <span class="lmctHero__priceAmount">$49</span>
+          <span class="lmctHero__priceUnit">/ year</span>
+        </div>
+
+        <p class="lmctHero__copy">
+          One simple annual membership gives you access to member-only pricing
+          on eligible fuel and groceries.
+        </p>
+
+        <ul class="lmctHero__benefits" aria-label="Fuel membership benefits">
+          <li class="lmctHero__benefit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="2em"
+              height="2em"
+              viewBox="0 0 24 24"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M5 14.5s1.5 0 3.5 3.5c0 0 5.559-9.167 10.5-11"
+              />
+            </svg>
+
+            Cancel anytime
+          </li>
+          <li class="lmctHero__benefit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="2em"
+              height="2em"
+              viewBox="0 0 24 24"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <g fill="none">
+                <path
+                  d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 4a1 1 0 0 0-1 1v5a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V7a1 1 0 0 0-1-1"
+                />
+              </g>
+            </svg>
+
+            Instant access
+          </li>
+          <li class="lmctHero__benefit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="2em"
+              height="2em"
+              viewBox="0 0 24 24"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path
+                fill="currentColor"
+                d="M3 2h3c.28 0 .53.11.71.29l2.08 2.09l.8-.79C10 3.2 10.5 3 11 3h6c.5 0 1 .2 1.41.59l1 1C19.8 5 20 5.5 20 6v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8c0-.5.2-1 .59-1.41l.79-.8L5.59 4H3zm8 3v2h6V5zm.41 6l-2-2H8v1.41l2 2v3.18l-2 2V19h1.41l2-2h3.18l2 2H18v-1.41l-2-2v-3.18l2-2V9h-1.41l-2 2zm.59 2h2v2h-2z"
+              />
+            </svg>
+
+            Fuel savings
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="lmctHero__tier lmctHero__tier--full"
+        id="lmctHeroPanelFull"
+        role="tabpanel"
+        hidden
+      >
+        <span class="lmctHero__badge">
+          <span class="lmctHero__badgeIcon" aria-hidden="true">
+            <svg class="lmctHero__badgeIconSvg" viewBox="0 0 24 24">
+              <path
+                d="M12 3 14.8 8.8 21 9.7 16.5 14.1 17.6 20.3 12 17.3 6.4 20.3 7.5 14.1 3 9.7 9.2 8.8 12 3Z"
+              ></path>
+            </svg>
+          </span>
+          EVERYDAY SAVINGS + GIVEAWAY ENTRY
+        </span>
+
+        <h1 class="lmctHero__headline" id="lmctHeroTitleFull">
+          Save every day. Enter every giveaway.
+        </h1>
+
+        <div class="lmctHero__price" aria-label="$199 per year">
+          <span class="lmctHero__priceAmount">$199</span>
+          <span class="lmctHero__priceUnit">/ year</span>
+        </div>
+
+        <p class="lmctHero__copy">
+          Get everyday member savings plus automatic entry into eligible LMCT+
+          giveaways.
+        </p>
+
+        <ul
+          class="lmctHero__benefits"
+          aria-label="Save and Win membership benefits"
+        >
+          <li class="lmctHero__benefit">
+            <svg
+              class="lmctHero__benefitIcon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M4 12h16"></path>
+              <path d="M12 4v16"></path>
+              <path d="m7 7 10 10"></path>
+              <path d="m17 7-10 10"></path>
+            </svg>
+            Everyday savings
+          </li>
+          <li class="lmctHero__benefit">
+            <svg
+              class="lmctHero__benefitIcon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 3 14.8 8.8 21 9.7 16.5 14.1 17.6 20.3 12 17.3 6.4 20.3 7.5 14.1 3 9.7 9.2 8.8 12 3Z"
+              ></path>
+            </svg>
+            Giveaway entry
+          </li>
+          <li class="lmctHero__benefit">
+            <svg
+              class="lmctHero__benefitIcon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            Cancel anytime
+          </li>
+        </ul>
+      </div>
+
+      <!-- =========================
+           CTA
+           ========================= -->
+      <div class="lmctHero__ctaWrap">
+        <a
+          class="lmctHero__cta"
+          id="lmctaBtn"
+          href="#row--30567"
+          aria-label="Start Saving - $49/year - jump to signup"
+        >
+          <span class="lmctHero__ctaSheen" aria-hidden="true"></span>
+          <span class="lmctHero__ctaLabel" id="lmctHeroCtaLabel"
+            >Start Saving &mdash; $49/year</span
+          >
+          <svg class="lmctHero__ctaIcon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14"></path>
+            <path d="m13 5 7 7-7 7"></path>
+          </svg>
+        </a>
+        <p class="lmctHero__reassurance">
+          No lock-in contract &bull; 60-second signup &bull; Immediate access
+        </p>
+      </div>
+    </div>
+
+    <div class="lmctHero__right">
+      <!-- =========================
+           Location slider
+           ========================= -->
+      <div class="lmctHero__location" aria-label="LMCT+ Petrol locations">
+        <div class="lmctHero__viewport">
+          <div class="lmctHero__track" data-lmct-hero-track>
+            <article
+              class="lmctHero__slide"
+              id="lmctHeroSlidePreston"
+              aria-label="Preston VIC location"
+            >
+              <div class="lmctHero__media">
+                <img
+                  class="lmctHero__locationImage"
+                  src="https://images.clickfunnels.com/42/42e157f7ff4414a2f039a6699f21b3/LMCTFUEL14_enhanced_16x9.png"
+                  alt="LMCT+ Petrol Preston station with members-only fuel pricing"
+                  loading="eager"
+                  fetchpriority="high"
+                />
+                <span class="lmctHero__status lmctHero__status--open"
+                  ><span class="lmctHero__statusDot" aria-hidden="true"></span
+                  >Open Now</span
+                >
+                <span class="lmctHero__place">
+                  <svg
+                    class="lmctHero__pin"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Preston VIC
+                </span>
+                <!-- Placeholder savings proof: replace Marco saved $18.40 with verified customer savings data when available. -->
+                <span class="lmctHero__proofCard">
+                  <span class="lmctHero__proofEyebrow">MEMBER SAVING</span>
+                  <span class="lmctHero__proofAmount">Marco saved $18.40</span>
+                  <span class="lmctHero__proofNote">On a recent fill-up</span>
+                </span>
+              </div>
+              <div class="lmctHero__locationInfo">
+                <span class="lmctHero__locationIcon" aria-hidden="true">
+                  <svg class="lmctHero__locationIconSvg" viewBox="0 0 24 24">
+                    <path
+                      d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </span>
+                <span>
+                  <span class="lmctHero__locationName">Preston VIC</span>
+                  <span class="lmctHero__address"
+                    >343-349 Plenty Road, Preston VIC 3072</span
+                  >
+                </span>
+              </div>
+            </article>
+
+            <article
+              class="lmctHero__slide"
+              id="lmctHeroSlideTarneit"
+              aria-label="Tarneit VIC location"
+            >
+              <div class="lmctHero__media">
+                <img
+                  class="lmctHero__locationImage"
+                  src="https://images.clickfunnels.com/1e/0501f2c6814bd2af4a9c8a9e36b969/Location-2-Under-Construction-1.jpg"
+                  alt="LMCT+ Petrol Tarneit location under construction"
+                  loading="lazy"
+                />
+                <span class="lmctHero__status lmctHero__status--soon"
+                  ><span class="lmctHero__statusDot" aria-hidden="true"></span
+                  >Coming Soon</span
+                >
+                <span class="lmctHero__place">
+                  <svg
+                    class="lmctHero__pin"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Tarneit VIC
+                </span>
+              </div>
+              <div class="lmctHero__locationInfo">
+                <span class="lmctHero__locationIcon" aria-hidden="true">
+                  <svg class="lmctHero__locationIconSvg" viewBox="0 0 24 24">
+                    <path
+                      d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </span>
+                <span>
+                  <span class="lmctHero__locationName"
+                    >Wyndham Village Shopping Centre</span
+                  >
+                  <span class="lmctHero__address"
+                    >380 Sayers Rd, Tarneit VIC 3029</span
+                  >
+                </span>
+              </div>
+            </article>
+
+            <article
+              class="lmctHero__slide"
+              id="lmctHeroSlideDeerPark"
+              aria-label="Deer Park VIC location"
+            >
+              <div class="lmctHero__media">
+                <img
+                  class="lmctHero__locationImage"
+                  src="https://images.clickfunnels.com/3a/dafa142ee549569ab54abe67d82d5d/DEER-PARK-LMCT-MARKETS.jpg"
+                  alt="LMCT+ Markets Deer Park coming soon"
+                  loading="lazy"
+                />
+                <span class="lmctHero__status lmctHero__status--soon"
+                  ><span class="lmctHero__statusDot" aria-hidden="true"></span
+                  >Coming Soon</span
+                >
+                <span class="lmctHero__place">
+                  <svg
+                    class="lmctHero__pin"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Deer Park VIC
+                </span>
+              </div>
+              <div class="lmctHero__locationInfo">
+                <span class="lmctHero__locationIcon" aria-hidden="true">
+                  <svg class="lmctHero__locationIconSvg" viewBox="0 0 24 24">
+                    <path
+                      d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </span>
+                <span>
+                  <span class="lmctHero__locationName">Deer Park VIC</span>
+                  <span class="lmctHero__address"
+                    >10/8 Hatchlands Dr, Deer Park VIC 3023</span
+                  >
+                </span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="lmctHero__nav" aria-label="Location slider controls">
+          <button
+            class="lmctHero__arrow"
+            type="button"
+            data-lmct-hero-prev
+            aria-label="Previous location"
+          >
+            <svg
+              class="lmctHero__arrowIcon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+          </button>
+
+          <div
+            class="lmctHero__dots"
+            role="tablist"
+            aria-label="Choose location"
+          >
+            <button
+              class="lmctHero__locationDot"
+              type="button"
+              role="tab"
+              aria-label="Show Preston VIC location"
+              aria-controls="lmctHeroSlidePreston"
+              aria-selected="true"
+              data-lmct-hero-dot="0"
+            ></button>
+            <button
+              class="lmctHero__locationDot"
+              type="button"
+              role="tab"
+              aria-label="Show Tarneit VIC location"
+              aria-controls="lmctHeroSlideTarneit"
+              aria-selected="false"
+              data-lmct-hero-dot="1"
+            ></button>
+            <button
+              class="lmctHero__locationDot"
+              type="button"
+              role="tab"
+              aria-label="Show Deer Park VIC location"
+              aria-controls="lmctHeroSlideDeerPark"
+              aria-selected="false"
+              data-lmct-hero-dot="2"
+            ></button>
+          </div>
+
+          <button
+            class="lmctHero__arrow"
+            type="button"
+            data-lmct-hero-next
+            aria-label="Next location"
+          >
+            <svg
+              class="lmctHero__arrowIcon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    "use strict";
+
+    var root = document.getElementById("susTier");
+    if (!root || root.getAttribute("data-lmct-hero-ready") === "true") return;
+    root.setAttribute("data-lmct-hero-ready", "true");
+
+    var reducedMotion = false;
+    try {
+      reducedMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (e) {}
+
+    function qs(selector, scope) {
+      return (scope || root).querySelector(selector);
+    }
+
+    function qsa(selector, scope) {
+      return Array.prototype.slice.call(
+        (scope || root).querySelectorAll(selector),
+      );
+    }
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    /* =========================
+       Membership tier JavaScript
+       ========================= */
+    var tierButtons = qsa(".sus-toggle-btn", root);
+    var toggleIndicator = qs(".lmctHero__toggleIndicator", root);
+    var cta = document.getElementById("lmctaBtn");
+    var ctaLabel = document.getElementById("lmctHeroCtaLabel");
+
+    var tierCopy = {
+      fuel: {
+        cta: "Start Saving \u2014 $49/year",
+        titleId: "lmctHeroTitleFuel",
+        panelId: "lmctHeroPanelFuel",
+      },
+      full: {
+        cta: "Save + Win \u2014 $199/year",
+        titleId: "lmctHeroTitleFull",
+        panelId: "lmctHeroPanelFull",
+      },
+    };
+
+    function normalizeTier(tier) {
+      return tier === "full" ? "full" : "fuel";
+    }
+
+    function positionToggle(animate) {
+      var active =
+        qs('.sus-toggle-btn[aria-selected="true"]', root) || tierButtons[0];
+      if (!toggleIndicator || !active) return;
+
+      if (!animate)
+        toggleIndicator.classList.add("lmctHero__toggleIndicator--instant");
+      toggleIndicator.style.left = active.offsetLeft + "px";
+      toggleIndicator.style.width = active.offsetWidth + "px";
+
+      if (!animate) {
+        toggleIndicator.offsetWidth;
+        toggleIndicator.classList.remove("lmctHero__toggleIndicator--instant");
+      }
+    }
+
+    function dispatchTierChange(tier) {
+      var eventObject;
+      if (typeof window.CustomEvent === "function") {
+        eventObject = new CustomEvent("tierchange", { detail: { tier: tier } });
+      } else {
+        eventObject = document.createEvent("CustomEvent");
+        eventObject.initCustomEvent("tierchange", false, false, { tier: tier });
+      }
+      root.dispatchEvent(eventObject);
+    }
+
+    function applyTier(tier, options) {
+      var selectedTier = normalizeTier(tier);
+      var config = tierCopy[selectedTier];
+      var i;
+      var proof = document.getElementById("susProof");
+      var panels = qsa(".lmctHero__tier", root);
+
+      options = options || {};
+      root.setAttribute("data-tier", selectedTier);
+      root.setAttribute("aria-labelledby", config.titleId);
+
+      for (i = 0; i < tierButtons.length; i += 1) {
+        var isActive =
+          tierButtons[i].getAttribute("data-tier-target") === selectedTier;
+        tierButtons[i].setAttribute(
+          "aria-selected",
+          isActive ? "true" : "false",
+        );
+        tierButtons[i].setAttribute("tabindex", isActive ? "0" : "-1");
+      }
+
+      for (i = 0; i < panels.length; i += 1) {
+        panels[i].hidden = panels[i].id !== config.panelId;
+      }
+
+      if (ctaLabel) ctaLabel.textContent = config.cta;
+      if (cta) cta.setAttribute("aria-label", config.cta + " - jump to signup");
+
+      if (proof) proof.setAttribute("data-tier", selectedTier);
+
+      if (options.persist !== false) {
+        try {
+          sessionStorage.setItem("sus-tier", selectedTier);
+        } catch (e) {}
+      }
+
+      positionToggle(options.animate !== false);
+
+      if (options.emit !== false) {
+        dispatchTierChange(selectedTier);
+      }
+    }
+
+    function getUrlTier() {
+      var match;
+      try {
+        if (window.URLSearchParams) {
+          return new URLSearchParams(window.location.search).get("tier");
+        }
+      } catch (e) {}
+
+      match = window.location.search.match(/[?&]tier=(fuel|full)(?:&|$)/);
+      return match ? match[1] : null;
+    }
+
+    function getInitialTier() {
+      var urlTier = getUrlTier();
+      var savedTier = null;
+
+      if (urlTier === "fuel" || urlTier === "full") return urlTier;
+
+      try {
+        savedTier = sessionStorage.getItem("sus-tier");
+      } catch (e) {}
+
+      if (savedTier === "fuel" || savedTier === "full") return savedTier;
+      return normalizeTier(root.getAttribute("data-tier"));
+    }
+
+    for (var tb = 0; tb < tierButtons.length; tb += 1) {
+      tierButtons[tb].addEventListener("click", function () {
+        applyTier(this.getAttribute("data-tier-target"), {
+          animate: true,
+          emit: true,
+          persist: true,
+        });
+      });
+
+      tierButtons[tb].addEventListener("keydown", function (event) {
+        var key = event.key || event.keyCode;
+        var currentIndex = tierButtons.indexOf ? tierButtons.indexOf(this) : -1;
+        var nextIndex = currentIndex;
+
+        if (key === "ArrowRight" || key === 39) nextIndex = currentIndex + 1;
+        if (key === "ArrowLeft" || key === 37) nextIndex = currentIndex - 1;
+        if (key === "Home" || key === 36) nextIndex = 0;
+        if (key === "End" || key === 35) nextIndex = tierButtons.length - 1;
+
+        if (nextIndex !== currentIndex && nextIndex >= 0) {
+          event.preventDefault();
+          nextIndex = clamp(nextIndex, 0, tierButtons.length - 1);
+          tierButtons[nextIndex].focus();
+          applyTier(tierButtons[nextIndex].getAttribute("data-tier-target"), {
+            animate: true,
+            emit: true,
+            persist: true,
+          });
+        }
+      });
+    }
+
+    root.addEventListener("tierchange", function (event) {
+      if (!event.detail || !event.detail.tier) return;
+      if (
+        normalizeTier(root.getAttribute("data-tier")) ===
+        normalizeTier(event.detail.tier)
+      ) {
+        positionToggle(false);
+        return;
+      }
+      applyTier(event.detail.tier, {
+        animate: true,
+        emit: false,
+        persist: true,
+      });
+    });
+
+    applyTier(getInitialTier(), { animate: false, emit: true, persist: true });
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        positionToggle(false);
+      });
+    }
+
+    window.addEventListener("load", function () {
+      positionToggle(false);
+    });
+
+    var resizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        positionToggle(false);
+        keepLocationAligned();
+      }, 120);
+    });
+
+    if (cta) {
+      cta.addEventListener("click", function (event) {
+        var target = document.getElementById("row--30567");
+        var firstInput;
+
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: reducedMotion ? "auto" : "smooth",
+          block: "start",
+        });
+
+        window.setTimeout(
+          function () {
+            firstInput = target.querySelector(
+              'input[name="name"], input[type="text"], input[type="email"], input',
+            );
+            if (firstInput && typeof firstInput.focus === "function") {
+              try {
+                firstInput.focus({ preventScroll: true });
+              } catch (e) {
+                firstInput.focus();
+              }
+            }
+          },
+          reducedMotion ? 0 : 600,
+        );
+      });
+    }
+
+    /* =========================
+       Location slider JavaScript
+       ========================= */
+    var track = qs("[data-lmct-hero-track]", root);
+    var slides = track ? qsa(".lmctHero__slide", track) : [];
+    var prevButton = qs("[data-lmct-hero-prev]", root);
+    var nextButton = qs("[data-lmct-hero-next]", root);
+    var dots = qsa("[data-lmct-hero-dot]", root);
+    var currentSlide = 0;
+    var scrollRaf = null;
+
+    function scrollToLeft(left, smooth) {
+      if (!track) return;
+
+      if (track.scrollTo) {
+        try {
+          track.scrollTo({
+            left: left,
+            behavior: smooth && !reducedMotion ? "smooth" : "auto",
+          });
+          return;
+        } catch (e) {}
+      }
+
+      track.scrollLeft = left;
+    }
+
+    function setActiveLocation(index) {
+      var i;
+      var safeIndex = clamp(index, 0, slides.length - 1);
+
+      currentSlide = safeIndex;
+
+      for (i = 0; i < dots.length; i += 1) {
+        dots[i].setAttribute(
+          "aria-selected",
+          i === safeIndex ? "true" : "false",
+        );
+        dots[i].setAttribute("tabindex", i === safeIndex ? "0" : "-1");
+      }
+
+      for (i = 0; i < slides.length; i += 1) {
+        slides[i].setAttribute(
+          "aria-hidden",
+          i === safeIndex ? "false" : "true",
+        );
+      }
+
+      if (prevButton) prevButton.disabled = safeIndex === 0;
+      if (nextButton) nextButton.disabled = safeIndex === slides.length - 1;
+    }
+
+    function goToLocation(index, smooth) {
+      var safeIndex = clamp(index, 0, slides.length - 1);
+      if (!track || !slides[safeIndex]) return;
+
+      scrollToLeft(slides[safeIndex].offsetLeft, smooth !== false);
+      setActiveLocation(safeIndex);
+    }
+
+    function updateLocationFromScroll() {
+      var center;
+      var nearest = 0;
+      var best = Infinity;
+      var i;
+
+      if (!track || !slides.length) return;
+
+      center = track.scrollLeft + track.clientWidth / 2;
+
+      for (i = 0; i < slides.length; i += 1) {
+        var slideCenter = slides[i].offsetLeft + slides[i].offsetWidth / 2;
+        var distance = Math.abs(slideCenter - center);
+        if (distance < best) {
+          best = distance;
+          nearest = i;
+        }
+      }
+
+      setActiveLocation(nearest);
+    }
+
+    function keepLocationAligned() {
+      if (!slides.length) return;
+      goToLocation(currentSlide, false);
+    }
+
+    if (track && slides.length) {
+      setActiveLocation(0);
+
+      track.addEventListener("scroll", function () {
+        if (scrollRaf) window.cancelAnimationFrame(scrollRaf);
+        scrollRaf = window.requestAnimationFrame(updateLocationFromScroll);
+      });
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener("click", function () {
+        goToLocation(currentSlide - 1, true);
+      });
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener("click", function () {
+        goToLocation(currentSlide + 1, true);
+      });
+    }
+
+    for (var db = 0; db < dots.length; db += 1) {
+      dots[db].addEventListener("click", function () {
+        goToLocation(Number(this.getAttribute("data-lmct-hero-dot")), true);
+      });
+
+      dots[db].addEventListener("keydown", function (event) {
+        var key = event.key || event.keyCode;
+        var nextIndex = currentSlide;
+
+        if (key === "ArrowRight" || key === 39) nextIndex = currentSlide + 1;
+        if (key === "ArrowLeft" || key === 37) nextIndex = currentSlide - 1;
+        if (key === "Home" || key === 36) nextIndex = 0;
+        if (key === "End" || key === 35) nextIndex = slides.length - 1;
+
+        if (nextIndex !== currentSlide) {
+          event.preventDefault();
+          nextIndex = clamp(nextIndex, 0, slides.length - 1);
+          goToLocation(nextIndex, true);
+          if (dots[nextIndex]) dots[nextIndex].focus();
+        }
+      });
+    }
+  })();
+</script>

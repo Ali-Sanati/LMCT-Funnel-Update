@@ -1,0 +1,573 @@
+<!-- LMCT+ RESPONSIVE HEADER START -->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap");
+
+  .lmctSiteHeader,
+  .lmctSiteHeader *,
+  .lmctSiteHeader *::before,
+  .lmctSiteHeader *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctSiteHeader {
+    --lmct-nav-bg: #102135;
+    --lmct-nav-panel: #071b31;
+    --lmct-nav-text: rgba(255, 255, 255, 0.72);
+    --lmct-nav-text-active: #ffffff;
+    --lmct-nav-green: #16b93d;
+    --lmct-nav-green-hover: #12a936;
+    --lmct-nav-blue: #0c9ffd;
+    position: sticky;
+    top: 0;
+    z-index: 99999;
+    width: 100%;
+    background: var(--lmct-nav-bg);
+    border-bottom: 1px solid rgba(12, 159, 253, 0.12);
+    box-shadow: 0 8px 28px rgba(2, 18, 35, 0.16);
+    color: #ffffff;
+    font-family: "Montserrat", Arial, sans-serif;
+  }
+
+  .lmctSiteHeader__inner {
+    width: 100%;
+    max-width: 1220px;
+    min-height: 72px;
+    margin: 0 auto;
+    padding: 9px 18px;
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .lmctSiteHeader__logoLink {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .lmctSiteHeader__logo {
+    display: block;
+    width: 152px;
+    height: auto;
+  }
+
+  .lmctSiteHeader__desktopNav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(24px, 3.1vw, 42px);
+  }
+
+  .lmctSiteHeader__link,
+  .lmctSiteHeader__login {
+    position: relative;
+    color: var(--lmct-nav-text) !important;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition:
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .lmctSiteHeader__link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #0c9ffd, #64cfff);
+    transform: translateX(-50%);
+    transition: width 180ms ease;
+  }
+
+  .lmctSiteHeader__link:hover,
+  .lmctSiteHeader__link:focus,
+  .lmctSiteHeader__login:hover,
+  .lmctSiteHeader__login:focus {
+    color: var(--lmct-nav-text-active) !important;
+  }
+
+  .lmctSiteHeader__link:hover::after,
+  .lmctSiteHeader__link:focus::after {
+    width: 100%;
+  }
+
+  .lmctSiteHeader__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+  }
+
+  .lmctSiteHeader__cta {
+    min-height: 52px;
+    padding: 0 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #19c443 0%, #12ad37 100%);
+    color: #ffffff !important;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.1;
+    text-align: center;
+    text-decoration: none !important;
+    white-space: nowrap;
+    box-shadow:
+      0 10px 26px rgba(18, 173, 55, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctSiteHeader__cta:hover,
+  .lmctSiteHeader__cta:focus {
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+    box-shadow:
+      0 14px 32px rgba(18, 173, 55, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .lmctSiteHeader__menuButton {
+    display: none;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(12, 159, 253, 0.46);
+    border-radius: 11px;
+    background: #102135;
+    color: #ffffff;
+    box-shadow:
+      0 0 0 4px rgba(12, 99, 253, 0.16),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .lmctSiteHeader__menuButton:hover {
+    background: #142b45;
+    border-color: rgba(12, 159, 253, 0.78);
+  }
+
+  .lmctSiteHeader__menuIcon {
+    position: relative;
+    width: 18px;
+    height: 14px;
+  }
+
+  .lmctSiteHeader__menuIcon span {
+    position: absolute;
+    left: 0;
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background: currentColor;
+    transition:
+      top 220ms ease,
+      transform 220ms ease,
+      opacity 180ms ease;
+  }
+
+  .lmctSiteHeader__menuIcon span:nth-child(1) {
+    top: 0;
+  }
+  .lmctSiteHeader__menuIcon span:nth-child(2) {
+    top: 6px;
+  }
+  .lmctSiteHeader__menuIcon span:nth-child(3) {
+    top: 12px;
+  }
+
+  .lmctSiteHeader.is-open .lmctSiteHeader__menuIcon span:nth-child(1) {
+    top: 6px;
+    transform: rotate(45deg);
+  }
+
+  .lmctSiteHeader.is-open .lmctSiteHeader__menuIcon span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .lmctSiteHeader.is-open .lmctSiteHeader__menuIcon span:nth-child(3) {
+    top: 6px;
+    transform: rotate(-45deg);
+  }
+
+  .lmctSiteHeader__mobilePanel {
+    display: none;
+  }
+
+  @media (max-width: 940px) {
+    .lmctSiteHeader__inner {
+      min-height: 70px;
+      grid-template-columns: minmax(120px, 1fr) auto auto;
+      gap: 10px;
+      padding: 8px 18px;
+    }
+
+    .lmctSiteHeader__logo {
+      width: 142px;
+    }
+
+    .lmctSiteHeader__desktopNav,
+    .lmctSiteHeader__login {
+      display: none;
+    }
+
+    .lmctSiteHeader__actions {
+      gap: 12px;
+    }
+
+    .lmctSiteHeader__cta {
+      min-height: 46px;
+      padding: 0 20px;
+      font-size: 13px;
+    }
+
+    .lmctSiteHeader__menuButton {
+      display: inline-flex;
+    }
+
+    .lmctSiteHeader__mobilePanel {
+      position: absolute;
+      top: calc(100% + 7px);
+      left: 50%;
+      width: calc(100% - 46px);
+      max-width: 1180px;
+      max-height: calc(100vh - 94px);
+      overflow-y: auto;
+      display: block;
+      padding: 7px 20px 10px;
+      border: 1px solid rgba(12, 159, 253, 0.2);
+      border-radius: 7px;
+      background:
+        linear-gradient(180deg, rgba(12, 159, 253, 0.025), transparent 34%),
+        var(--lmct-nav-panel);
+      box-shadow:
+        0 22px 55px rgba(0, 10, 25, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate(-50%, -12px) scaleY(0.96);
+      transform-origin: top center;
+    }
+
+    .lmctSiteHeader.is-open .lmctSiteHeader__mobilePanel {
+      visibility: visible;
+      pointer-events: auto;
+      animation: lmctMobileMenuOpen 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .lmctSiteHeader.is-closing .lmctSiteHeader__mobilePanel {
+      visibility: visible;
+      pointer-events: none;
+      animation: lmctMobileMenuClose 190ms ease both;
+    }
+
+    .lmctSiteHeader__mobileNav {
+      display: grid;
+    }
+
+    .lmctSiteHeader__mobileLink {
+      min-height: 41px;
+      padding: 13px 0;
+      display: flex;
+      align-items: center;
+      color: rgba(255, 255, 255, 0.72) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-decoration: none !important;
+      transition:
+        color 160ms ease,
+        padding-left 160ms ease,
+        background 160ms ease;
+    }
+
+    .lmctSiteHeader__mobileLink:last-child {
+      border-bottom: 0;
+    }
+
+    .lmctSiteHeader__mobileLink:hover,
+    .lmctSiteHeader__mobileLink:focus {
+      padding-left: 8px;
+      color: #ffffff !important;
+      background: linear-gradient(90deg, rgba(12, 159, 253, 0.08), transparent);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .lmctSiteHeader__inner {
+      grid-template-columns: minmax(98px, 1fr) auto auto;
+      padding-inline: 14px;
+    }
+
+    .lmctSiteHeader__logo {
+      width: 124px;
+    }
+
+    .lmctSiteHeader__cta {
+      min-height: 44px;
+      padding: 0 14px;
+      border-radius: 7px;
+      font-size: 11px;
+    }
+
+    .lmctSiteHeader__menuButton {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+    }
+
+    .lmctSiteHeader__mobilePanel {
+      width: calc(100% - 28px);
+      padding-inline: 18px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .lmctSiteHeader__logo {
+      width: 106px;
+    }
+
+    .lmctSiteHeader__cta {
+      padding-inline: 10px;
+      font-size: 10px;
+    }
+
+    .lmctSiteHeader__menuButton {
+      width: 43px;
+      height: 43px;
+    }
+  }
+
+  @keyframes lmctMobileMenuOpen {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -14px) scaleY(0.94);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0) scaleY(1);
+    }
+  }
+
+  @keyframes lmctMobileMenuClose {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, 0) scaleY(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -10px) scaleY(0.97);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctSiteHeader *,
+    .lmctSiteHeader *::before,
+    .lmctSiteHeader *::after {
+      animation: none !important;
+      scroll-behavior: auto !important;
+      transition: none !important;
+    }
+
+    .lmctSiteHeader.is-open .lmctSiteHeader__mobilePanel {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+</style>
+
+<header class="lmctSiteHeader" id="lmctSiteHeader">
+  <div class="lmctSiteHeader__inner">
+    <a
+      class="lmctSiteHeader__logoLink"
+      href="#top"
+      aria-label="LMCT+ Petrol home"
+    >
+      <img
+        class="lmctSiteHeader__logo"
+        src="https://images.clickfunnels.com/c2/7a895b741146e0ae6a11cc40e350cf/Origil-1-.png"
+        alt="LMCT+ Petrol"
+      />
+    </a>
+
+    <nav class="lmctSiteHeader__desktopNav" aria-label="Primary navigation">
+      <a class="lmctSiteHeader__link" href="#susTier">How It Works</a>
+      <a class="lmctSiteHeader__link" href="#savings">Savings</a>
+      <a class="lmctSiteHeader__link" href="#locations">Locations</a>
+      <a class="lmctSiteHeader__link" href="#member-stories">Member Stories</a>
+      <a class="lmctSiteHeader__link" href="#faqs">FAQs</a>
+    </nav>
+
+    <div class="lmctSiteHeader__actions">
+      <!-- <a class="lmctSiteHeader__login" href="/login">Member login</a> -->
+      <a class="lmctSiteHeader__cta" href="#row--30567">Join for $49/year</a>
+
+      <button
+        class="lmctSiteHeader__menuButton"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="lmctMobileMenu"
+      >
+        <span class="lmctSiteHeader__menuIcon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="lmctSiteHeader__mobilePanel" id="lmctMobileMenu">
+    <nav class="lmctSiteHeader__mobileNav" aria-label="Mobile navigation">
+      <a class="lmctSiteHeader__mobileLink" href="#how-it-works"
+        >How It Works</a
+      >
+      <a class="lmctSiteHeader__mobileLink" href="#savings">Savings</a>
+      <a class="lmctSiteHeader__mobileLink" href="#locations">Locations</a>
+      <a class="lmctSiteHeader__mobileLink" href="#member-stories"
+        >Member Stories</a
+      >
+      <a class="lmctSiteHeader__mobileLink" href="#faqs">FAQs</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  (function () {
+    "use strict";
+
+    var header = document.getElementById("lmctSiteHeader");
+    if (!header || header.getAttribute("data-ready") === "true") return;
+    header.setAttribute("data-ready", "true");
+
+    var button = header.querySelector(".lmctSiteHeader__menuButton");
+    var mobilePanel = header.querySelector(".lmctSiteHeader__mobilePanel");
+    var mobileLinks = header.querySelectorAll(".lmctSiteHeader__mobileLink");
+    var closeTimer = null;
+
+    function setButtonState(open) {
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+      button.setAttribute(
+        "aria-label",
+        open ? "Close navigation menu" : "Open navigation menu",
+      );
+    }
+
+    function openMenu() {
+      window.clearTimeout(closeTimer);
+      header.classList.remove("is-closing");
+      header.classList.add("is-open");
+      setButtonState(true);
+    }
+
+    function closeMenu(restoreFocus) {
+      if (!header.classList.contains("is-open")) return;
+
+      header.classList.remove("is-open");
+      header.classList.add("is-closing");
+      setButtonState(false);
+
+      closeTimer = window.setTimeout(function () {
+        header.classList.remove("is-closing");
+      }, 210);
+
+      if (restoreFocus) button.focus();
+    }
+
+    button.addEventListener("click", function () {
+      if (header.classList.contains("is-open")) {
+        closeMenu(false);
+      } else {
+        openMenu();
+      }
+    });
+
+    for (var i = 0; i < mobileLinks.length; i += 1) {
+      mobileLinks[i].addEventListener("click", function () {
+        closeMenu(false);
+      });
+    }
+
+    document.addEventListener("click", function (event) {
+      if (
+        header.classList.contains("is-open") &&
+        !header.contains(event.target)
+      ) {
+        closeMenu(false);
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && header.classList.contains("is-open")) {
+        closeMenu(true);
+      }
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 940) {
+        window.clearTimeout(closeTimer);
+        header.classList.remove("is-open", "is-closing");
+        setButtonState(false);
+      }
+    });
+
+    /* Smooth-scroll only when the referenced section exists on the page. */
+    header.addEventListener("click", function (event) {
+      var link = event.target.closest('a[href^="#"]');
+      if (!link) return;
+
+      var selector = link.getAttribute("href");
+      if (!selector || selector === "#") return;
+
+      var target;
+      try {
+        target = document.querySelector(selector);
+      } catch (error) {
+        return;
+      }
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      var reducedMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      var headerHeight = header.offsetHeight;
+      var top =
+        target.getBoundingClientRect().top +
+        window.pageYOffset -
+        headerHeight -
+        12;
+
+      window.scrollTo({
+        top: Math.max(0, top),
+        behavior: reducedMotion ? "auto" : "smooth",
+      });
+    });
+  })();
+</script>
+<!-- LMCT+ RESPONSIVE HEADER END -->

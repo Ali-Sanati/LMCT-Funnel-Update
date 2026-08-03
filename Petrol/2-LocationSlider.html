@@ -1,0 +1,525 @@
+<!-- ============================================================
+     LMCT+ LOCATIONS SLIDER
+     Paste-ready ClickFunnels 1.0 Custom HTML/Code block.
+     Replaces the single servo frame at the top with a swipeable
+     slider of all locations.
+     Slides:
+       1. Preston    — OPEN NOW   (live photo)
+       2. Tarneit    — COMING SOON (under-construction photo)
+       3. Supermarket — COMING SOON (branded placeholder)
+     Swipe on mobile, arrows + dots on desktop. Namespaced .lmls-*.
+     ============================================================ -->
+<style>
+  .lmls *,
+  .lmls *::before,
+  .lmls *::after {
+    box-sizing: border-box;
+  }
+  .lmls {
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+  /* Viewport + track */
+  .lmls-viewport {
+    overflow: hidden;
+    border-radius: 16px;
+  }
+  .lmls-track {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+  .lmls-track::-webkit-scrollbar {
+    display: none;
+  }
+  .lmls-slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  /* Frame */
+  .lmls-frame {
+    position: relative;
+    display: block;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(10, 29, 58, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 14px 38px rgba(5, 22, 42, 0.32);
+    line-height: 0;
+  }
+  .lmls-imgwrap {
+    position: relative;
+    width: 100%;
+    background: #0a1d3a;
+    display: block;
+    aspect-ratio: 16 / 9;
+  }
+  .lmls-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  /* Status flag (bottom-left) */
+  .lmls-flag {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+    height: 30px;
+    z-index: 2;
+  }
+  .lmls-flag svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    stroke: #ffffff;
+    fill: none;
+    stroke-width: 2.4;
+  }
+  /* OPEN NOW — green, pulsing dot */
+  .lmls-flag--open {
+    background: linear-gradient(135deg, #16c93a 0%, #0fa10b 100%);
+    box-shadow: 0 4px 12px rgba(15, 161, 11, 0.5);
+  }
+  .lmls-flag--open::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #ffffff;
+    border-radius: 50%;
+    animation: lmls-pulse 1.6s ease-in-out infinite;
+  }
+  /* COMING SOON — amber */
+  .lmls-flag--soon {
+    background: linear-gradient(135deg, #ffb01f 0%, #e8930a 100%);
+    box-shadow: 0 4px 12px rgba(232, 147, 10, 0.5);
+  }
+  @keyframes lmls-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.3);
+    }
+  }
+  /* Location pill (bottom-right) */
+  .lmls-loc {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+    height: 30px;
+    box-shadow: 0 4px 12px rgba(12, 99, 253, 0.45);
+    z-index: 2;
+  }
+  .lmls-loc svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    stroke: #ffffff;
+    fill: none;
+    stroke-width: 2.4;
+  }
+  /* Slim address bar below the image — fixed height so every slide matches */
+  .lmls-info {
+    min-height: 58px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+  }
+  .lmls-addr {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #0a1d3a;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  .lmls-addr svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    stroke: #0c63fd;
+    fill: none;
+    stroke-width: 2.2;
+  }
+  .lmls-addr small {
+    display: block;
+    color: rgba(10, 29, 58, 0.5);
+    font-weight: 600;
+    font-size: 11.5px;
+    margin-top: 1px;
+  }
+  /* Nav: arrows + dots */
+  .lmls-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .lmls-arrow {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 14px rgba(5, 22, 42, 0.25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      opacity 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lmls-arrow:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(5, 22, 42, 0.32);
+  }
+  .lmls-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+    transform: none;
+    box-shadow: 0 4px 14px rgba(5, 22, 42, 0.18);
+  }
+  .lmls-arrow svg {
+    width: 16px;
+    height: 16px;
+    stroke: #0c63fd;
+    fill: none;
+    stroke-width: 3;
+  }
+  .lmls-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lmls-dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    transition:
+      width 0.25s ease,
+      background 0.25s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lmls-dot.is-active {
+    width: 26px;
+    background: #ffffff;
+  }
+  @media (min-width: 768px) {
+    .lmls-flag,
+    .lmls-loc {
+      padding: 9px 14px;
+      font-size: 12px;
+      height: 32px;
+      bottom: 16px;
+    }
+    .lmls-flag {
+      left: 16px;
+    }
+    .lmls-loc {
+      right: 16px;
+    }
+    .lmls-name {
+      font-size: 17px;
+    }
+    .lmls-addr {
+      font-size: 13px;
+    }
+    .lmls-ph-title {
+      font-size: 26px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmls-flag--open::before {
+      animation: none;
+    }
+    .lmls-track {
+      scroll-behavior: auto;
+    }
+  }
+</style>
+<section class="lmls" id="lmls" aria-label="LMCT+ locations">
+  <div class="lmls-viewport">
+    <div class="lmls-track" id="lmlsTrack">
+      <!-- ===== Slide 1: Preston (OPEN NOW) ===== -->
+      <div class="lmls-slide">
+        <div class="lmls-frame">
+          <div class="lmls-imgwrap">
+            <img
+              class="lmls-img"
+              src="https://images.clickfunnels.com/42/42e157f7ff4414a2f039a6699f21b3/LMCTFUEL14_enhanced_16x9.png"
+              alt="LMCT+ Petrol — Preston station, members-only wholesale fuel"
+              loading="lazy"
+            />
+            <span class="lmls-flag lmls-flag--open">Open Now</span>
+            <span class="lmls-loc">
+              <svg
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Preston VIC
+            </span>
+          </div>
+          <div class="lmls-info">
+            <div class="lmls-addr">
+              <svg
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>343–349 Plenty Road, Preston VIC 3072</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ===== Slide 2: Tarneit (COMING SOON) ===== -->
+      <div class="lmls-slide">
+        <div class="lmls-frame">
+          <div class="lmls-imgwrap">
+            <img
+              class="lmls-img"
+              src="https://images.clickfunnels.com/1e/0501f2c6814bd2af4a9c8a9e36b969/Location-2-Under-Construction-1.jpg"
+              alt="LMCT+ Petrol — Tarneit, under construction"
+              loading="lazy"
+            />
+            <span class="lmls-flag lmls-flag--soon">
+              <svg
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <polyline points="12 7 12 12 15 14" />
+              </svg>
+              Coming Soon
+            </span>
+            <span class="lmls-loc">
+              <svg
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Tarneit VIC
+            </span>
+          </div>
+          <div class="lmls-info">
+            <div class="lmls-addr">
+              <svg
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span
+                >Wyndham Village Shopping Centre<small
+                  >380 Sayers Rd, Tarneit VIC 3029</small
+                ></span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ===== Slide 3: Supermarket — Deer Park (COMING SOON) ===== -->
+      <div class="lmls-slide">
+        <div class="lmls-frame">
+          <div class="lmls-imgwrap">
+            <img
+              class="lmls-img"
+              src="https://images.clickfunnels.com/3a/dafa142ee549569ab54abe67d82d5d/DEER-PARK-LMCT-MARKETS.jpg"
+              alt="LMCT+ Markets — Deer Park, coming soon"
+              loading="lazy"
+            />
+            <span class="lmls-flag lmls-flag--soon">
+              <svg
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <polyline points="12 7 12 12 15 14" />
+              </svg>
+              Coming Soon
+            </span>
+            <span class="lmls-loc">
+              <svg
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Deer Park VIC
+            </span>
+          </div>
+          <div class="lmls-info">
+            <div class="lmls-addr">
+              <svg
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>10/8 Hatchlands Dr, Deer Park VIC 3023</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.lmls-track -->
+  </div>
+  <!-- /.lmls-viewport -->
+  <div class="lmls-nav">
+    <button
+      class="lmls-arrow"
+      id="lmlsPrev"
+      type="button"
+      aria-label="Previous location"
+    >
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
+    <div
+      class="lmls-dots"
+      id="lmlsDots"
+      role="tablist"
+      aria-label="Choose location"
+    ></div>
+    <button
+      class="lmls-arrow"
+      id="lmlsNext"
+      type="button"
+      aria-label="Next location"
+    >
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
+  </div>
+</section>
+<script>
+  (function () {
+    const track = document.getElementById("lmlsTrack");
+    const dotsWrap = document.getElementById("lmlsDots");
+    const prevBtn = document.getElementById("lmlsPrev");
+    const nextBtn = document.getElementById("lmlsNext");
+    if (!track) return;
+    const slides = Array.from(track.children);
+    let current = 0;
+    // Build dots
+    const dots = slides.map((_, i) => {
+      const d = document.createElement("button");
+      d.className = "lmls-dot" + (i === 0 ? " is-active" : "");
+      d.type = "button";
+      d.setAttribute("role", "tab");
+      d.setAttribute("aria-label", "Go to location " + (i + 1));
+      d.addEventListener("click", () => goTo(i));
+      dotsWrap.appendChild(d);
+      return d;
+    });
+    function goTo(i) {
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      track.scrollTo({ left: slides[i].offsetLeft, behavior: "smooth" });
+    }
+    function setActive(i) {
+      if (i === current) return;
+      current = i;
+      dots.forEach((d, idx) => d.classList.toggle("is-active", idx === i));
+      if (prevBtn) prevBtn.disabled = i === 0;
+      if (nextBtn) nextBtn.disabled = i === slides.length - 1;
+    }
+    // Track which slide is centered as the user scrolls/swipes
+    let raf;
+    track.addEventListener("scroll", () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const center = track.scrollLeft + track.clientWidth / 2;
+        let nearest = 0,
+          best = Infinity;
+        slides.forEach((s, idx) => {
+          const sc = s.offsetLeft + s.offsetWidth / 2;
+          const dist = Math.abs(sc - center);
+          if (dist < best) {
+            best = dist;
+            nearest = idx;
+          }
+        });
+        setActive(nearest);
+      });
+    });
+    if (prevBtn) prevBtn.addEventListener("click", () => goTo(current - 1));
+    if (nextBtn) nextBtn.addEventListener("click", () => goTo(current + 1));
+    // Init arrow state
+    setActive(0);
+    if (prevBtn) prevBtn.disabled = true;
+  })();
+</script>

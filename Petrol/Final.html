@@ -1,0 +1,3769 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LMCT+ Petrol - Everyday Saver Membership</title>
+    <meta
+      name="description"
+      content="Join LMCT+ Petrol for $99 per year and access available members-only fuel and grocery pricing at participating locations."
+    />
+    <link rel="preconnect" href="https://images.clickfunnels.com" />
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preload" as="image" href="assets/lmct-preston-station.png" />
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        --navy: #06182d;
+        --navy-2: #082340;
+        --blue: #0c63fd;
+        --blue-2: #0c9ffd;
+        --sky: #eaf6ff;
+        --sky-2: #f5fbff;
+        --green: #18b938;
+        --green-2: #13a531;
+        --ink: #0a1d3a;
+        --muted: #59708b;
+        --line: #d8e6f2;
+        --white: #ffffff;
+        --warning: #fff7df;
+        --shadow: 0 20px 55px rgba(6, 24, 45, 0.13);
+        --radius: 8px;
+        --container: 1200px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 88px;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--white);
+        font-family:
+          "Montserrat",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+      }
+
+      img,
+      svg,
+      iframe {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      button,
+      a,
+      input,
+      select,
+      summary {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgba(12, 99, 253, 0.45);
+        outline-offset: 3px;
+      }
+
+      .page-shell {
+        overflow: clip;
+        background: linear-gradient(180deg, #f5fbff 0, #ffffff 360px), #ffffff;
+      }
+
+      .container {
+        width: min(var(--container), calc(100% - 48px));
+        margin-inline: auto;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 14px;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 4px rgba(24, 185, 56, 0.16);
+      }
+
+      .section {
+        padding: 82px 0;
+      }
+
+      .section--tight {
+        padding: 54px 0;
+      }
+
+      .section--sky {
+        background: var(--sky-2);
+      }
+
+      .section--navy {
+        color: var(--white);
+        background: linear-gradient(145deg, var(--navy) 0%, var(--navy-2) 100%);
+      }
+
+      .section-head {
+        max-width: 760px;
+        margin: 0 0 34px;
+      }
+
+      .section-head.center {
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .section-title {
+        margin: 0;
+        color: inherit;
+        font-size: clamp(34px, 4vw, 42px);
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 1.06;
+      }
+
+      .section-copy {
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.7;
+      }
+
+      .section--navy .section-copy {
+        color: rgba(255, 255, 255, 0.76);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .btn {
+        display: inline-flex;
+        min-height: 52px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border: 0;
+        border-radius: var(--radius);
+        padding: 14px 22px;
+        font-weight: 900;
+        line-height: 1;
+        text-decoration: none;
+        cursor: pointer;
+        transition:
+          transform 0.18s ease,
+          box-shadow 0.18s ease,
+          background-color 0.18s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn--green {
+        color: var(--white);
+        background: linear-gradient(
+          180deg,
+          var(--green) 0%,
+          var(--green-2) 100%
+        );
+        box-shadow: 0 12px 26px rgba(24, 185, 56, 0.28);
+      }
+
+      .btn--blue {
+        color: var(--white);
+        background: linear-gradient(180deg, var(--blue-2) 0%, var(--blue) 100%);
+        box-shadow: 0 12px 26px rgba(12, 99, 253, 0.23);
+      }
+
+      .btn--ghost {
+        color: var(--ink);
+        background: var(--white);
+        border: 1px solid var(--line);
+        box-shadow: none;
+      }
+
+      .btn svg {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        color: var(--white);
+        background: rgba(6, 24, 45, 0.96);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+
+      .site-header__inner {
+        min-height: 74px;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .site-logo {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+      }
+
+      .site-logo img {
+        width: 150px;
+        height: auto;
+      }
+
+      .site-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .site-nav a {
+        text-decoration: none;
+      }
+
+      .site-nav a:hover {
+        color: var(--white);
+      }
+
+      .site-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .site-login {
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 14px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .site-menu-btn {
+        display: none;
+        width: 46px;
+        height: 46px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: var(--radius);
+        color: var(--white);
+        background: transparent;
+      }
+
+      .site-menu-btn svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .hero {
+        color: var(--white);
+        background:
+          linear-gradient(
+            135deg,
+            rgba(8, 35, 64, 0.98),
+            rgba(10, 85, 154, 0.92)
+          ),
+          linear-gradient(180deg, #0b69b9 0%, #49c8ef 100%);
+        padding: 78px 0 44px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.04fr) minmax(410px, 0.96fr);
+        align-items: center;
+        gap: 54px;
+      }
+
+      .tier-control {
+        display: inline-grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+        margin: 0 0 22px;
+        padding: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.11);
+      }
+
+      .sus-toggle-btn {
+        min-height: 38px;
+        border: 0;
+        border-radius: 999px;
+        padding: 10px 16px;
+        color: rgba(255, 255, 255, 0.75);
+        background: transparent;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .sus-toggle-btn[aria-selected="true"] {
+        color: var(--ink);
+        background: var(--white);
+      }
+
+      .hero h1 {
+        max-width: 720px;
+        margin: 0;
+        font-size: clamp(44px, 6vw, 60px);
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 1;
+      }
+
+      .hero-copy {
+        max-width: 650px;
+        margin: 22px 0 0;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 18px;
+        line-height: 1.72;
+      }
+
+      .price-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        gap: 14px;
+        margin: 26px 0 26px;
+      }
+
+      .price {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+      }
+
+      .price strong {
+        font-size: clamp(60px, 8vw, 80px);
+        font-weight: 950;
+        letter-spacing: 0;
+        line-height: 0.9;
+      }
+
+      .price span {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 18px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .per-week {
+        margin: 0 0 8px;
+        padding: 9px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: var(--radius);
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.09);
+        font-size: 14px;
+        font-weight: 850;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 0 0 24px;
+      }
+
+      .trust-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .trust-list li {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        min-height: 34px;
+        padding: 8px 11px;
+        border-radius: 999px;
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.92);
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      .trust-list svg {
+        width: 15px;
+        height: 15px;
+        color: var(--blue);
+      }
+
+      .location-card {
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: var(--radius);
+        background: var(--white);
+        color: var(--ink);
+        box-shadow: var(--shadow);
+      }
+
+      .location-card__image {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        background: #cfe7f8;
+        overflow: hidden;
+      }
+
+      .location-card__image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .status-badge,
+      .state-badge {
+        position: absolute;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        min-height: 32px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 900;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .status-badge {
+        left: 14px;
+        bottom: 14px;
+        background: var(--green);
+      }
+
+      .state-badge {
+        right: 14px;
+        bottom: 14px;
+        background: var(--blue);
+      }
+
+      .location-card__body {
+        display: grid;
+        gap: 18px;
+        padding: 20px;
+      }
+
+      .location-card__top {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .location-card h2,
+      .location-card h3 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 900;
+        line-height: 1.15;
+      }
+
+      .location-card address {
+        margin: 7px 0 0;
+        color: var(--muted);
+        font-style: normal;
+        font-size: 15px;
+      }
+
+      .rating-mini {
+        flex: 0 0 auto;
+        text-align: right;
+        font-weight: 900;
+        color: var(--ink);
+      }
+
+      .rating-mini span {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .hero-savings {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 16px;
+        align-items: center;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--sky-2);
+      }
+
+      .hero-savings p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .hero-savings strong {
+        display: block;
+        margin-top: 3px;
+        color: var(--ink);
+        font-size: 18px;
+        line-height: 1.2;
+        text-transform: none;
+      }
+
+      .trust-strip {
+        background: var(--white);
+        box-shadow:
+          0 1px 0 var(--line),
+          0 -1px 0 var(--line);
+      }
+
+      .trust-strip__grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1px;
+        background: var(--line);
+        border-left: 1px solid var(--line);
+        border-right: 1px solid var(--line);
+      }
+
+      .trust-item {
+        min-height: 104px;
+        display: grid;
+        align-content: center;
+        gap: 6px;
+        padding: 18px;
+        background: var(--white);
+      }
+
+      .trust-item strong {
+        font-size: 18px;
+        font-weight: 950;
+        line-height: 1.12;
+      }
+
+      .trust-item span {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 760;
+        line-height: 1.35;
+      }
+
+      .calculator-layout {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .calc-panel,
+      .calc-results,
+      .benefit-card,
+      .story-card,
+      .faq-list,
+      .signup-offer,
+      .checkout-panel,
+      .founder-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--white);
+        box-shadow: 0 12px 34px rgba(6, 24, 45, 0.08);
+      }
+
+      .calc-panel {
+        padding: 28px;
+      }
+
+      .calc-panel h3 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 900;
+        line-height: 1.18;
+      }
+
+      .lmcalc {
+        display: grid;
+        gap: 22px;
+        margin-top: 22px;
+      }
+
+      .lmcalc-field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .lmcalc-label {
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .lmcalc-input,
+      .lmcalc-select {
+        width: 100%;
+        min-height: 50px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 12px 14px;
+        color: var(--ink);
+        background: var(--white);
+        font-size: 16px;
+        font-weight: 760;
+      }
+
+      .lmcalc-input:focus,
+      .lmcalc-select:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 4px rgba(12, 99, 253, 0.12);
+        outline: none;
+      }
+
+      .lmcalc-car-grid,
+      .lmcalc-freq-grid,
+      .lmcalc-fuel-toggle,
+      .lmcalc-price-row {
+        display: grid;
+        gap: 10px;
+      }
+
+      .lmcalc-car-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lmcalc-car,
+      .lmcalc-freq,
+      .lmcalc-fuel-btn {
+        min-height: 48px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        color: var(--ink);
+        background: #f9fcff;
+        font-weight: 850;
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .lmcalc-car {
+        padding: 12px;
+      }
+
+      .lmcalc-car span,
+      .lmcalc-freq span {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .lmcalc-car.is-active,
+      .lmcalc-freq.is-active,
+      .lmcalc-fuel-btn.is-active {
+        border-color: rgba(12, 99, 253, 0.45);
+        background: rgba(12, 99, 253, 0.08);
+        box-shadow: inset 0 0 0 1px rgba(12, 99, 253, 0.18);
+      }
+
+      .lmcalc-fuel-toggle {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lmcalc-fuel-btn {
+        text-align: center;
+        padding: 12px;
+      }
+
+      .lmcalc-freq-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .lmcalc-freq {
+        padding: 12px;
+      }
+
+      .lmcalc-manual-row,
+      .lmcalc-price-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lmcalc-expand {
+        display: none;
+        margin-top: 10px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #f9fcff;
+      }
+
+      .lmcalc-expand.is-open {
+        display: block;
+      }
+
+      .lmcalc-foot {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 4px;
+      }
+
+      .lmcalc-foot-btn {
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 10px 12px;
+        color: var(--ink);
+        background: var(--white);
+        font-size: 13px;
+        font-weight: 850;
+        cursor: pointer;
+      }
+
+      .calc-results {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        overflow: hidden;
+      }
+
+      .calc-results__main {
+        padding: 30px;
+        color: var(--white);
+        background: linear-gradient(145deg, var(--navy) 0%, #07395f 100%);
+      }
+
+      .calc-results__label {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .lmcalc-big {
+        margin: 8px 0 0;
+        font-size: clamp(58px, 8vw, 86px);
+        font-weight: 950;
+        letter-spacing: 0;
+        line-height: 0.92;
+      }
+
+      .lmcalc-big-period {
+        display: block;
+        color: rgba(255, 255, 255, 0.78);
+        font-weight: 850;
+      }
+
+      .calc-meter {
+        height: 10px;
+        margin-top: 24px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.18);
+        overflow: hidden;
+      }
+
+      .calc-meter span {
+        display: block;
+        width: 45%;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--green);
+        transition: width 0.25s ease;
+      }
+
+      .lmcalc-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .lmcalc-stat {
+        min-height: 106px;
+        display: grid;
+        align-content: center;
+        gap: 5px;
+        padding: 18px;
+        background: var(--white);
+      }
+
+      .lmcalc-stat-value {
+        color: var(--ink);
+        font-size: 26px;
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .lmcalc-stat-label {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 820;
+      }
+
+      .calc-results__detail {
+        display: grid;
+        gap: 12px;
+        padding: 24px 30px 30px;
+        background: var(--white);
+      }
+
+      .lmcalc-roi {
+        display: flex;
+        gap: 10px;
+        color: var(--ink);
+        font-weight: 780;
+      }
+
+      .lmcalc-roi-icon {
+        width: 24px;
+        height: 24px;
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: var(--white);
+        background: var(--green);
+        font-size: 13px;
+        font-weight: 950;
+      }
+
+      .lmcalc-bd-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+
+      .lmcalc-bd-table th,
+      .lmcalc-bd-table td {
+        padding: 9px 0;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+
+      .lmcalc-bd-table td {
+        text-align: right;
+        font-weight: 850;
+      }
+
+      .benefit-grid,
+      .stories-grid,
+      .steps-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .benefit-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .benefit-card {
+        min-height: 230px;
+        display: grid;
+        align-content: start;
+        gap: 16px;
+        padding: 24px;
+      }
+
+      .benefit-icon,
+      .step-num {
+        width: 46px;
+        height: 46px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius);
+        color: var(--white);
+        background: var(--blue);
+      }
+
+      .benefit-icon svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .benefit-card h3,
+      .story-card h3,
+      .step-card h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 900;
+        line-height: 1.2;
+      }
+
+      .benefit-card p,
+      .story-card p,
+      .step-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .step-card {
+        padding: 28px;
+        border-left: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .step-num {
+        margin-bottom: 18px;
+        color: var(--navy);
+        background: var(--white);
+        font-weight: 950;
+      }
+
+      .step-card p {
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .signup-grid {
+        display: grid;
+        grid-template-columns: 0.86fr 1.14fr;
+        gap: 28px;
+        align-items: start;
+      }
+
+      .signup-offer {
+        padding: 30px;
+        background: linear-gradient(180deg, var(--white), #f8fcff);
+      }
+
+      .signup-price {
+        margin: 24px 0;
+        padding: 22px;
+        border-radius: var(--radius);
+        color: var(--white);
+        background: var(--navy);
+      }
+
+      .signup-price strong {
+        display: block;
+        font-size: 48px;
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .signup-list {
+        display: grid;
+        gap: 12px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .signup-list li {
+        display: flex;
+        gap: 10px;
+        color: var(--ink);
+        font-weight: 780;
+      }
+
+      .signup-list svg {
+        width: 20px;
+        height: 20px;
+        flex: 0 0 auto;
+        margin-top: 2px;
+        color: var(--green);
+      }
+
+      .checkout-panel {
+        padding: 28px;
+      }
+
+      .checkout-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .checkout-head h3 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .checkout-secure {
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .checkout-form {
+        display: grid;
+        gap: 16px;
+        margin-top: 22px;
+      }
+
+      .form-field {
+        display: grid;
+        gap: 7px;
+      }
+
+      .form-field label,
+      .terms-control label {
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 850;
+      }
+
+      .form-field input {
+        min-height: 52px;
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 12px 14px;
+        color: var(--ink);
+        background: #f9fcff;
+        font-size: 16px;
+      }
+
+      .form-field input:focus {
+        border-color: var(--blue);
+        box-shadow: 0 0 0 4px rgba(12, 99, 253, 0.12);
+        outline: none;
+      }
+
+      .form-error {
+        min-height: 18px;
+        color: #b42318;
+        font-size: 13px;
+        font-weight: 780;
+      }
+
+      .terms-control {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #f9fcff;
+      }
+
+      .terms-control input {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+        margin-top: 2px;
+      }
+
+      .terms-control a {
+        color: var(--blue);
+        font-weight: 900;
+      }
+
+      .form-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        text-align: center;
+      }
+
+      .stories-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .story-card {
+        overflow: hidden;
+      }
+
+      .story-visual {
+        min-height: 172px;
+        display: grid;
+        place-items: center;
+        color: var(--white);
+        background:
+          linear-gradient(
+            135deg,
+            rgba(6, 24, 45, 0.78),
+            rgba(12, 99, 253, 0.64)
+          ),
+          url("assets/lmct-preston-station.png") center / cover;
+      }
+
+      .story-visual strong {
+        display: grid;
+        place-items: center;
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.17);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        font-size: 22px;
+        font-weight: 950;
+      }
+
+      .story-card__body {
+        padding: 22px;
+      }
+
+      .verified-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 12px;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .locations-layout {
+        display: grid;
+        grid-template-columns: 1fr 0.82fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .map-panel,
+      .location-details {
+        min-height: 460px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--white);
+        box-shadow: 0 12px 34px rgba(6, 24, 45, 0.08);
+      }
+
+      .map-panel {
+        position: relative;
+        background: var(--navy);
+      }
+
+      .map-panel img {
+        width: 100%;
+        height: 100%;
+        min-height: 460px;
+        object-fit: cover;
+      }
+
+      .map-panel__overlay {
+        position: absolute;
+        left: 22px;
+        right: 22px;
+        bottom: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px;
+        border-radius: var(--radius);
+        color: var(--white);
+        background: rgba(6, 24, 45, 0.86);
+        backdrop-filter: blur(10px);
+      }
+
+      .map-panel__overlay p {
+        margin: 0;
+        font-weight: 850;
+        line-height: 1.35;
+      }
+
+      .map-panel__overlay span {
+        display: block;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 13px;
+      }
+
+      .location-details {
+        display: grid;
+        gap: 20px;
+        align-content: start;
+        padding: 28px;
+      }
+
+      .location-details h3 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 950;
+        line-height: 1.08;
+      }
+
+      .detail-row {
+        display: grid;
+        grid-template-columns: 38px 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+
+      .detail-icon {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border-radius: var(--radius);
+        color: var(--blue);
+        background: rgba(12, 99, 253, 0.09);
+      }
+
+      .detail-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .detail-row p {
+        margin: 0;
+      }
+
+      .detail-row strong {
+        display: block;
+        font-size: 15px;
+        font-weight: 900;
+      }
+
+      .detail-row span {
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .founder-card {
+        padding: 32px;
+      }
+
+      .founder-intro {
+        max-width: 820px;
+        margin: 0 0 22px;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .founder-signature {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-top: 22px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+      }
+
+      .avatar {
+        width: 54px;
+        height: 54px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        color: var(--white);
+        background: var(--blue);
+        font-weight: 950;
+      }
+
+      .founder-signature p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .founder-signature strong {
+        display: block;
+        color: var(--ink);
+        font-size: 17px;
+      }
+
+      .faq-list {
+        overflow: hidden;
+      }
+
+      .faq-list details {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .faq-list details:last-child {
+        border-bottom: 0;
+      }
+
+      .faq-list summary {
+        min-height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 18px 22px;
+        cursor: pointer;
+        font-size: 17px;
+        font-weight: 900;
+        list-style: none;
+      }
+
+      .faq-list summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq-list summary::after {
+        content: "+";
+        flex: 0 0 auto;
+        color: var(--blue);
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .faq-list details[open] summary::after {
+        content: "-";
+      }
+
+      .faq-list p {
+        margin: 0;
+        padding: 0 22px 22px;
+        color: var(--muted);
+        font-size: 16px;
+      }
+
+      .sus-proof {
+        display: none;
+        padding: 70px 0;
+        color: var(--ink);
+        background: var(--sky-2);
+      }
+
+      .sus-proof[data-tier="full"] {
+        display: block;
+      }
+
+      .sus-prize-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .sus-prize,
+      .sus-prize-empty,
+      .sus-prize-loading {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--white);
+        box-shadow: 0 12px 34px rgba(6, 24, 45, 0.08);
+        overflow: hidden;
+      }
+
+      .sus-prize {
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .sus-prize-imgwrap {
+        position: relative;
+        display: block;
+        aspect-ratio: 16 / 9;
+        background: #dceefc;
+        overflow: hidden;
+      }
+
+      .sus-prize-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .sus-prize-body {
+        padding: 16px;
+      }
+
+      .sus-prize-title {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 900;
+        line-height: 1.25;
+      }
+
+      .sus-tag {
+        display: inline-flex;
+        margin: 10px 6px 0 0;
+        padding: 6px 9px;
+        border-radius: 999px;
+        color: var(--white);
+        background: var(--blue);
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .sus-prize-empty,
+      .sus-prize-loading {
+        grid-column: 1 / -1;
+        margin: 0;
+        padding: 24px;
+        color: var(--muted);
+        font-weight: 820;
+        text-align: center;
+      }
+
+      .lmdis-card {
+        padding: 18px 22px;
+        border: 1px solid #ffe3a2;
+        border-radius: var(--radius);
+        color: #6a4c00;
+        background: var(--warning);
+        font-size: 14px;
+      }
+
+      .lmdis-label {
+        display: block;
+        margin-bottom: 4px;
+        color: #4d3700;
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .final-cta {
+        text-align: center;
+      }
+
+      .final-cta .section-title {
+        max-width: 760px;
+        margin-inline: auto;
+      }
+
+      .final-price {
+        display: inline-flex;
+        margin: 24px 0;
+        padding: 12px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: var(--radius);
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.08);
+        font-size: 24px;
+        font-weight: 950;
+      }
+
+      .site-footer {
+        color: rgba(255, 255, 255, 0.76);
+        background: var(--navy);
+        padding: 48px 0 28px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.7fr 0.9fr;
+        gap: 34px;
+        padding-bottom: 34px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-logo {
+        width: 154px;
+        margin-bottom: 14px;
+      }
+
+      .footer-heading {
+        margin: 0 0 14px;
+        color: var(--white);
+        font-size: 13px;
+        font-weight: 950;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .footer-links,
+      .footer-contact {
+        display: grid;
+        gap: 10px;
+      }
+
+      .footer-links a,
+      .footer-contact a {
+        color: rgba(255, 255, 255, 0.78);
+        font-weight: 780;
+        text-decoration: none;
+      }
+
+      .footer-links a:hover,
+      .footer-contact a:hover {
+        color: var(--white);
+      }
+
+      .footer-bottom {
+        margin: 24px 0 0;
+        color: rgba(255, 255, 255, 0.54);
+        font-size: 13px;
+      }
+
+      .mobile-sticky-cta {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        z-index: 60;
+        display: none;
+        box-shadow: 0 16px 34px rgba(6, 24, 45, 0.22);
+      }
+
+      .mobile-sticky-cta.is-hidden {
+        transform: translateY(130%);
+        pointer-events: none;
+      }
+
+      @media (max-width: 1080px) {
+        .site-header__inner {
+          grid-template-columns: auto auto;
+          justify-content: space-between;
+        }
+
+        .site-nav {
+          position: absolute;
+          left: 24px;
+          right: 24px;
+          top: calc(100% + 8px);
+          display: none;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 10px;
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          border-radius: var(--radius);
+          background: var(--navy);
+          box-shadow: var(--shadow);
+        }
+
+        .site-header.is-open .site-nav {
+          display: flex;
+        }
+
+        .site-nav a {
+          padding: 12px;
+        }
+
+        .site-menu-btn {
+          display: inline-flex;
+        }
+
+        .site-login {
+          display: none;
+        }
+
+        .hero-grid,
+        .calculator-layout,
+        .signup-grid,
+        .locations-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .benefit-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .trust-strip__grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (max-width: 760px) {
+        .container {
+          width: min(100% - 40px, var(--container));
+        }
+
+        .section {
+          padding: 62px 0;
+        }
+
+        .hero {
+          padding: 46px 0 34px;
+        }
+
+        .hero-grid {
+          gap: 30px;
+        }
+
+        .hero-copy,
+        .section-copy,
+        .founder-intro {
+          font-size: 16px;
+        }
+
+        .hero-actions,
+        .price-row {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .hero-actions .btn,
+        .final-cta .btn,
+        .checkout-form .btn {
+          width: 100%;
+        }
+
+        .trust-list li {
+          width: 100%;
+        }
+
+        .location-card__top,
+        .checkout-head {
+          flex-direction: column;
+        }
+
+        .rating-mini {
+          text-align: left;
+        }
+
+        .trust-strip__grid,
+        .benefit-grid,
+        .steps-grid,
+        .stories-grid,
+        .sus-prize-list,
+        .lmcalc-stats,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .lmcalc-car-grid,
+        .lmcalc-freq-grid,
+        .lmcalc-manual-row,
+        .lmcalc-price-row {
+          grid-template-columns: 1fr;
+        }
+
+        .calc-results__main,
+        .calc-results__detail,
+        .calc-panel,
+        .checkout-panel,
+        .signup-offer,
+        .founder-card,
+        .location-details {
+          padding: 22px;
+        }
+
+        .mobile-sticky-cta {
+          display: inline-flex;
+        }
+
+        body {
+          padding-bottom: 86px;
+        }
+      }
+
+      @media (max-width: 430px) {
+        .container {
+          width: min(100% - 40px, var(--container));
+        }
+
+        .site-logo img {
+          width: 128px;
+        }
+
+        .site-actions .btn {
+          min-height: 46px;
+          padding: 12px 14px;
+          font-size: 13px;
+        }
+
+        .tier-control {
+          width: 100%;
+        }
+
+        .sus-toggle-btn {
+          padding-inline: 10px;
+          font-size: 11px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell" id="top">
+      <header class="site-header" id="siteHeader">
+        <div class="container site-header__inner">
+          <a class="site-logo" href="#top" aria-label="LMCT+ Petrol home">
+            <img
+              src="assets/lmct-petrol-logo.png"
+              alt="LMCT+ Petrol"
+              width="300"
+              height="86"
+              decoding="async"
+            />
+          </a>
+          <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+            <a href="#how-it-works">How It Works</a>
+            <a href="#savings">Savings</a>
+            <a href="#locations">Locations</a>
+            <a href="#member-stories">Member Stories</a>
+            <a href="#faqs">FAQs</a>
+          </nav>
+          <div class="site-actions">
+            <a
+              class="site-login"
+              href="https://app.lmctplus.com/"
+              target="_blank"
+              rel="noopener"
+              >Member login</a
+            >
+            <a class="btn btn--green" href="#row--30567">Join for $99/year</a>
+            <button
+              class="site-menu-btn"
+              id="siteMenuBtn"
+              type="button"
+              aria-expanded="false"
+              aria-controls="siteNav"
+            >
+              <span class="sr-only">Open menu</span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+              >
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section
+          class="hero"
+          id="susTier"
+          data-tier="fuel"
+          aria-labelledby="heroTitle"
+        >
+          <div class="container hero-grid">
+            <div>
+              <div
+                class="tier-control"
+                role="tablist"
+                aria-label="Membership tier"
+              >
+                <button
+                  class="sus-toggle-btn"
+                  type="button"
+                  role="tab"
+                  data-tier-target="fuel"
+                  aria-selected="true"
+                  aria-controls="susPanelFuel"
+                >
+                  Save on Fuel + Groceries
+                </button>
+                <button
+                  class="sus-toggle-btn"
+                  type="button"
+                  role="tab"
+                  data-tier-target="full"
+                  aria-selected="false"
+                  aria-controls="susPanelFull"
+                >
+                  Save + Win
+                </button>
+              </div>
+
+              <span class="eyebrow">LMCT+ members-only everyday pricing</span>
+              <h1 id="heroTitle">Save on fuel and groceries. Every week.</h1>
+              <p class="hero-copy" id="heroCopy">
+                Join LMCT+ Petrol for $99 per year and access member pricing and
+                available everyday savings at participating locations.
+              </p>
+              <div class="price-row">
+                <div class="price">
+                  <strong id="heroPrice">$99</strong>
+                  <span id="heroPriceUnit">/ year</span>
+                </div>
+                <p class="per-week" id="heroPriceNote">Less than $2 per week</p>
+              </div>
+              <div class="hero-actions">
+                <a class="btn btn--green" href="#row--30567">
+                  Start Saving Today
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </a>
+                <a class="btn btn--ghost" href="#savings"
+                  >Calculate My Savings</a
+                >
+              </div>
+              <ul class="trust-list" aria-label="Signup benefits">
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  Takes about 60 seconds
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                  </svg>
+                  Instant membership access
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  Cancel anytime
+                </li>
+              </ul>
+            </div>
+
+            <aside
+              class="location-card"
+              aria-label="Preston LMCT+ Petrol location"
+            >
+              <div class="location-card__image">
+                <img
+                  src="assets/lmct-preston-station.png"
+                  alt="LMCT+ Petrol Preston station"
+                  width="1200"
+                  height="675"
+                  decoding="async"
+                />
+                <span class="status-badge">Open 24/7</span>
+                <span class="state-badge">Preston VIC</span>
+              </div>
+              <div class="location-card__body">
+                <div class="location-card__top">
+                  <div>
+                    <h2>LMCT+ Petrol Preston</h2>
+                    <address>
+                      343 Plenty Rd, Preston VIC 3072, Australia
+                    </address>
+                  </div>
+                  <div
+                    class="rating-mini"
+                    aria-label="Google rating 4.7 from 163 plus reviews"
+                  >
+                    4.7 stars
+                    <span>163+ Google reviews</span>
+                  </div>
+                </div>
+                <div class="hero-savings">
+                  <p>
+                    Potential annual savings
+                    <strong id="heroSavingsExample"
+                      >Use the calculator for your estimate</strong
+                    >
+                  </p>
+                  <a
+                    class="btn btn--blue"
+                    href="https://www.google.com/maps/dir/?api=1&destination=LMCT%2B+Petrol+343+Plenty+Rd+Preston+VIC+3072&destination_place_id=ChIJvTqrBgBF1moR4NzQ-2JSH-g"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Get Directions
+                  </a>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="trust-strip" aria-label="LMCT+ Petrol trust indicators">
+          <div class="container trust-strip__grid">
+            <div class="trust-item">
+              <strong>4.7-star Google rating</strong>
+              <span>163+ reviews for the Preston location.</span>
+            </div>
+            <div class="trust-item">
+              <strong>Members-only pricing</strong>
+              <span>Access available pricing at participating locations.</span>
+            </div>
+            <div class="trust-item">
+              <strong>Fast online signup</strong>
+              <span>The existing funnel copy says about 60 seconds.</span>
+            </div>
+            <div class="trust-item">
+              <strong>App-based access</strong>
+              <span>Use the LMCT+ app after joining online.</span>
+            </div>
+            <div class="trust-item">
+              <strong>Participating locations</strong>
+              <span
+                >Preston open, with Tarneit and Deer Park marked as coming
+                soon.</span
+              >
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="section section--sky"
+          id="savings"
+          aria-labelledby="savingsTitle"
+        >
+          <div class="container">
+            <div class="section-head">
+              <span class="eyebrow">Savings calculator</span>
+              <h2 class="section-title" id="savingsTitle">
+                Estimate what member pricing could be worth for your car.
+              </h2>
+              <p class="section-copy">
+                The calculator keeps the existing formula: estimated saving per
+                litre x tank size x fill frequency, less your annual membership
+                fee for net benefit.
+              </p>
+            </div>
+
+            <div class="calculator-layout">
+              <div class="calc-panel">
+                <h3>Your driving details</h3>
+                <section
+                  class="lmcalc"
+                  id="lmcalc"
+                  role="region"
+                  aria-label="LMCT+ Savings Calculator"
+                >
+                  <div class="lmcalc-field">
+                    <label class="lmcalc-label" for="lmcalcSearch"
+                      >Choose a common vehicle or enter your own</label
+                    >
+                    <input
+                      class="lmcalc-input"
+                      id="lmcalcSearch"
+                      type="text"
+                      autocomplete="off"
+                      spellcheck="false"
+                      placeholder="Search Ranger, RAV4, Hilux..."
+                      aria-describedby="lmcalcCarSectionLabel"
+                    />
+                  </div>
+                  <p class="lmcalc-label" id="lmcalcCarSectionLabel">
+                    Popular vehicles
+                  </p>
+                  <div
+                    class="lmcalc-car-grid"
+                    id="lmcalcCarGrid"
+                    role="listbox"
+                    aria-label="Popular vehicle presets"
+                  ></div>
+                  <div class="lmcalc-manual" id="lmcalcManual">
+                    <div class="lmcalc-manual-row">
+                      <div class="lmcalc-field">
+                        <span class="lmcalc-label">Fuel type</span>
+                        <div
+                          class="lmcalc-fuel-toggle"
+                          id="lmcalcFuelToggle"
+                          role="tablist"
+                          aria-label="Fuel type"
+                        >
+                          <button
+                            class="lmcalc-fuel-btn is-active"
+                            data-fuel="petrol"
+                            type="button"
+                            role="tab"
+                            aria-selected="true"
+                          >
+                            Petrol
+                          </button>
+                          <button
+                            class="lmcalc-fuel-btn"
+                            data-fuel="diesel"
+                            type="button"
+                            role="tab"
+                            aria-selected="false"
+                          >
+                            Diesel
+                          </button>
+                        </div>
+                      </div>
+                      <div class="lmcalc-field">
+                        <label class="lmcalc-label" for="lmcalcTankInput"
+                          >Tank size (L)</label
+                        >
+                        <input
+                          class="lmcalc-input"
+                          id="lmcalcTankInput"
+                          type="number"
+                          min="20"
+                          max="200"
+                          step="1"
+                          value="55"
+                          inputmode="numeric"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="lmcalc-field">
+                    <span class="lmcalc-label">How often do you fill up?</span>
+                    <div class="lmcalc-freq-grid">
+                      <button class="lmcalc-freq" data-fpw="0.5" type="button">
+                        Fortnightly<span>Every 2 weeks</span>
+                      </button>
+                      <button
+                        class="lmcalc-freq is-active"
+                        data-fpw="1"
+                        type="button"
+                      >
+                        Weekly<span>Once a week</span>
+                      </button>
+                      <button class="lmcalc-freq" data-fpw="2" type="button">
+                        Twice weekly<span>2 fills / week</span>
+                      </button>
+                      <button class="lmcalc-freq" data-fpw="3" type="button">
+                        Heavy driver<span>3 fills / week</span>
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    class="lmcalc-foot-btn"
+                    id="lmcalcOtherBtn"
+                    type="button"
+                  >
+                    Use manual vehicle details
+                  </button>
+                  <button
+                    class="lmcalc-foot-btn"
+                    data-toggle="prices"
+                    type="button"
+                  >
+                    Use my own fuel prices
+                  </button>
+                  <div class="lmcalc-expand" id="lmcalcPrices">
+                    <div class="lmcalc-price-row">
+                      <div class="lmcalc-field">
+                        <label class="lmcalc-label" for="lmcalcPriceLmct"
+                          >LMCT+ price (c/L)</label
+                        >
+                        <input
+                          class="lmcalc-input"
+                          id="lmcalcPriceLmct"
+                          type="number"
+                          min="50"
+                          max="400"
+                          step="0.1"
+                          inputmode="decimal"
+                        />
+                      </div>
+                      <div class="lmcalc-field">
+                        <label class="lmcalc-label" for="lmcalcPriceAvg"
+                          >Local average (c/L)</label
+                        >
+                        <input
+                          class="lmcalc-input"
+                          id="lmcalcPriceAvg"
+                          type="number"
+                          min="50"
+                          max="400"
+                          step="0.1"
+                          inputmode="decimal"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <input
+                    id="lmcalcGrocSlider"
+                    type="range"
+                    min="50"
+                    max="500"
+                    step="10"
+                    value="200"
+                    hidden
+                    aria-hidden="true"
+                  />
+                  <span id="lmcalcGrocReadout" hidden>$200</span>
+                  <button id="lmcalcGrocConfirm" type="button" hidden>
+                    See my savings
+                  </button>
+                </section>
+              </div>
+
+              <aside class="calc-results" id="lmcalcReveal" aria-live="polite">
+                <div class="calc-results__main">
+                  <p class="calc-results__label">Estimated annual savings</p>
+                  <div class="lmcalc-big" id="lmcalcBigNumber">
+                    <span class="lmcalc-big-currency">$</span>743
+                  </div>
+                  <span class="lmcalc-big-period"
+                    >before the $99 annual membership fee</span
+                  >
+                  <div class="calc-meter" aria-hidden="true">
+                    <span id="lmcalcMeter"></span>
+                  </div>
+                </div>
+                <div class="lmcalc-stats">
+                  <div class="lmcalc-stat">
+                    <div class="lmcalc-stat-value" id="lmcalcMonth">$62</div>
+                    <div class="lmcalc-stat-label">Per month</div>
+                  </div>
+                  <div class="lmcalc-stat">
+                    <div class="lmcalc-stat-value" id="lmcalcDay">$2.04</div>
+                    <div class="lmcalc-stat-label">Per day</div>
+                  </div>
+                  <div class="lmcalc-stat">
+                    <div class="lmcalc-stat-value" id="lmcalcFill">$14.30</div>
+                    <div class="lmcalc-stat-label">Per fill</div>
+                  </div>
+                </div>
+                <div class="calc-results__detail">
+                  <div class="lmcalc-roi">
+                    <span class="lmcalc-roi-icon">OK</span>
+                    <span id="lmcalcPayback"
+                      >Membership pays for itself in
+                      <strong>7 fills</strong>.</span
+                    >
+                  </div>
+                  <div class="lmcalc-roi">
+                    <span class="lmcalc-roi-icon">OK</span>
+                    <span id="lmcalcRoi"
+                      >Estimated net benefit: <strong>$644</strong> after the
+                      $99 yearly fee.</span
+                    >
+                  </div>
+                  <a
+                    class="btn btn--green"
+                    id="lmcalcCta"
+                    href="https://lmctgiveaway.com/order-639460901777617719067?el=calculator&utm_source=calculator"
+                    role="button"
+                  >
+                    Get My $99 Membership
+                  </a>
+                  <div class="lmcalc-foot">
+                    <button
+                      class="lmcalc-foot-btn"
+                      data-toggle="breakdown"
+                      type="button"
+                    >
+                      Show breakdown
+                    </button>
+                    <button
+                      class="lmcalc-foot-btn"
+                      data-toggle="restart"
+                      type="button"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                  <div class="lmcalc-expand" id="lmcalcBreakdown">
+                    <table class="lmcalc-bd-table">
+                      <tbody>
+                        <tr>
+                          <th>One fill</th>
+                          <td id="lmcalcBdTank">55 L</td>
+                        </tr>
+                        <tr>
+                          <th>Pump average x tank</th>
+                          <td id="lmcalcBdAvg">$101.75</td>
+                        </tr>
+                        <tr>
+                          <th>LMCT+ pricing x tank</th>
+                          <td id="lmcalcBdLmct">$87.45</td>
+                        </tr>
+                        <tr>
+                          <th>Saved per fill</th>
+                          <td id="lmcalcBdPerFill">$14.30</td>
+                        </tr>
+                        <tr>
+                          <th>Per year</th>
+                          <td id="lmcalcBdFills">52 fills</td>
+                        </tr>
+                        <tr>
+                          <th>Total annual saving</th>
+                          <td id="lmcalcBdYear">$743</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p class="form-note">
+                    Estimates only. Fuel prices vary daily and actual savings
+                    will vary.
+                  </p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="benefitsTitle">
+          <div class="container">
+            <div class="section-head center">
+              <span class="eyebrow">Membership benefits</span>
+              <h2 class="section-title" id="benefitsTitle">
+                Practical value without complicated tiers.
+              </h2>
+            </div>
+            <div class="benefit-grid">
+              <article class="benefit-card">
+                <span class="benefit-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M3 22V4a2 2 0 0 1 2-2h8v20M13 8h2a2 2 0 0 1 2 2v4.5a2.5 2.5 0 0 0 5 0V9l-3-3"
+                    />
+                    <path d="M6 7h4" />
+                  </svg>
+                </span>
+                <h3>Fuel savings</h3>
+                <p>
+                  Access members-only pricing at participating LMCT+ Petrol
+                  locations.
+                </p>
+              </article>
+              <article class="benefit-card">
+                <span class="benefit-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path
+                      d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"
+                    />
+                  </svg>
+                </span>
+                <h3>Grocery offers</h3>
+                <p>
+                  Unlock available grocery and everyday member offers where
+                  participating.
+                </p>
+              </article>
+              <article class="benefit-card">
+                <span class="benefit-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="7" y="2" width="10" height="20" rx="2" />
+                    <path d="M11 18h2" />
+                  </svg>
+                </span>
+                <h3>Simple app access</h3>
+                <p>
+                  Access your membership and find participating locations
+                  through the LMCT+ app.
+                </p>
+              </article>
+              <article class="benefit-card">
+                <span class="benefit-icon" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                </span>
+                <h3>One annual membership</h3>
+                <p>
+                  Pay $99 per year for Everyday Saver access, with no setup fee
+                  in the supplied funnel copy.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="section section--navy"
+          id="how-it-works"
+          aria-labelledby="stepsTitle"
+        >
+          <div class="container">
+            <div class="section-head">
+              <span class="eyebrow">How it works</span>
+              <h2 class="section-title" id="stepsTitle">
+                Join online, open the app, start using member pricing.
+              </h2>
+            </div>
+            <div class="steps-grid">
+              <article class="step-card">
+                <span class="step-num">1</span>
+                <h3>Join online</h3>
+                <p>Create your membership in about 60 seconds.</p>
+              </article>
+              <article class="step-card">
+                <span class="step-num">2</span>
+                <h3>Access the LMCT+ app</h3>
+                <p>View your membership and participating locations.</p>
+              </article>
+              <article class="step-card">
+                <span class="step-num">3</span>
+                <h3>Start saving</h3>
+                <p>
+                  Use your membership at participating locations and offers.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="section section--sky"
+          id="signup"
+          aria-labelledby="signupTitle"
+        >
+          <div class="container signup-grid">
+            <aside class="signup-offer">
+              <span class="eyebrow">Final step</span>
+              <h2 class="section-title" id="signupTitle">
+                Continue to your LMCT+ Petrol membership.
+              </h2>
+              <p class="section-copy">
+                Choose the $99/year Everyday Saver membership or switch to Save
+                + Win if you want the giveaway product selected at checkout.
+              </p>
+              <div class="signup-price">
+                <strong id="signupPrice">$99/year</strong>
+                <span id="signupPriceLabel">Everyday Saver Membership</span>
+              </div>
+              <ul class="signup-list">
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  Members-only fuel pricing at participating LMCT+ Petrol
+                  locations.
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  Available grocery and everyday member offers.
+                </li>
+                <li>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  Instant access and cancel anytime, as stated in the supplied
+                  funnel copy.
+                </li>
+              </ul>
+            </aside>
+
+            <div
+              class="checkout-panel"
+              id="row--30567"
+              data-title="lmct-petrol-checkout-row"
+            >
+              <div class="checkout-head">
+                <h3>Secure membership signup</h3>
+                <span class="checkout-secure">Account info</span>
+              </div>
+              <div
+                id="tmp_order2step-95906"
+                data-title="lmct-petrol-order-form"
+              >
+                <form
+                  class="checkout-form"
+                  id="lmctStandaloneCheckout"
+                  action="https://lmctgiveaway.com/order-639460901777617719067"
+                  method="get"
+                  novalidate
+                >
+                  <div class="form-field">
+                    <label for="lmFullName">Full name</label>
+                    <input
+                      id="lmFullName"
+                      name="name"
+                      type="text"
+                      autocomplete="name"
+                      required
+                      placeholder="Full name"
+                    />
+                    <span
+                      class="form-error"
+                      id="lmFullNameError"
+                      aria-live="polite"
+                    ></span>
+                  </div>
+                  <div class="form-field">
+                    <label for="lmEmail">Email</label>
+                    <input
+                      id="lmEmail"
+                      name="email"
+                      type="email"
+                      autocomplete="email"
+                      inputmode="email"
+                      required
+                      placeholder="you@example.com"
+                    />
+                    <span
+                      class="form-error"
+                      id="lmEmailError"
+                      aria-live="polite"
+                    ></span>
+                  </div>
+                  <div class="form-field">
+                    <label for="lmPhone">Phone number</label>
+                    <input
+                      id="lmPhone"
+                      name="phone"
+                      type="tel"
+                      autocomplete="tel"
+                      inputmode="tel"
+                      required
+                      placeholder="0412 345 678"
+                    />
+                    <span
+                      class="form-error"
+                      id="lmPhoneError"
+                      aria-live="polite"
+                    ></span>
+                  </div>
+                  <div class="terms-control" id="tmp_cb_headline1-37291">
+                    <input
+                      id="lmTerms"
+                      name="accept_terms"
+                      type="checkbox"
+                      value="yes"
+                      required
+                    />
+                    <label for="lmTerms">
+                      I agree to the
+                      <a
+                        href="https://lmctgiveaway.com/petrolterms"
+                        target="_blank"
+                        rel="noopener"
+                        >Terms &amp; Conditions</a
+                      >
+                      and
+                      <a
+                        href="https://lmctgiveaway.com/fuelprivacy"
+                        target="_blank"
+                        rel="noopener"
+                        >Privacy Policy</a
+                      >.
+                    </label>
+                  </div>
+                  <span
+                    class="form-error"
+                    id="lmTermsError"
+                    aria-live="polite"
+                  ></span>
+
+                  <div class="o2step_step2" hidden>
+                    <label class="elOrderProductOptinProducts"
+                      ><input
+                        type="radio"
+                        name="purchase[product_id]"
+                        value="5073572"
+                        checked
+                      />
+                      Everyday Saver</label
+                    >
+                    <label class="elOrderProductOptinProducts"
+                      ><input
+                        type="radio"
+                        name="purchase[product_id]"
+                        value="5073573"
+                      />
+                      Save + Win</label
+                    >
+                    <div class="elCreditCardForm"></div>
+                  </div>
+                  <input
+                    id="lmMembershipTierInput"
+                    type="hidden"
+                    name="membership_tier"
+                    value="fuel"
+                  />
+                  <input
+                    type="hidden"
+                    name="utm_source"
+                    value="petrol_final_page"
+                  />
+                  <button class="btn btn--green" type="submit">
+                    Continue to Membership
+                  </button>
+                  <p class="form-note">
+                    We keep your privacy and information protected.
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="section"
+          id="member-stories"
+          aria-labelledby="storiesTitle"
+        >
+          <div class="container">
+            <div class="section-head center">
+              <span class="eyebrow">Member stories</span>
+              <h2 class="section-title" id="storiesTitle">
+                Real proof without inflated promises.
+              </h2>
+              <p class="section-copy">
+                The supplied source includes member proof labels, a calculator
+                proof chip, and verified location review data. This redesign
+                avoids adding unsupplied testimonial quotes or invented savings
+                figures.
+              </p>
+            </div>
+            <div class="stories-grid">
+              <article class="story-card">
+                <div class="story-visual"><strong>MM</strong></div>
+                <div class="story-card__body">
+                  <span class="verified-label">Source proof chip</span>
+                  <h3>Marco M.</h3>
+                  <p>
+                    The existing calculator chip references Marco M. and a
+                    saved-last-month proof point. Use the live calculator for
+                    your own estimate.
+                  </p>
+                </div>
+              </article>
+              <article class="story-card">
+                <div class="story-visual"><strong>4.7</strong></div>
+                <div class="story-card__body">
+                  <span class="verified-label">Google review data</span>
+                  <h3>Preston location</h3>
+                  <p>
+                    LMCT+ Petrol Preston is shown in the source with a 4.7
+                    Google rating from 163+ reviews.
+                  </p>
+                </div>
+              </article>
+              <article class="story-card">
+                <div class="story-visual"><strong>24/7</strong></div>
+                <div class="story-card__body">
+                  <span class="verified-label">Member location access</span>
+                  <h3>Fuel when you need it</h3>
+                  <p>
+                    The supplied location section lists Preston as open 24/7 for
+                    member wholesale fuel access.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="section section--sky"
+          id="locations"
+          aria-labelledby="locationsTitle"
+        >
+          <div class="container">
+            <div class="section-head">
+              <span class="eyebrow">Locations</span>
+              <h2 class="section-title" id="locationsTitle">
+                Visit LMCT+ Petrol in Preston.
+              </h2>
+              <p class="section-copy">
+                Preston is shown as open now. Tarneit and Deer Park are retained
+                as coming-soon locations from the source slider.
+              </p>
+            </div>
+            <div class="locations-layout">
+              <div class="map-panel">
+                <img
+                  src="assets/lmct-preston-station.png"
+                  alt="LMCT+ Petrol Preston station exterior"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="map-panel__overlay">
+                  <p>
+                    Preston station visual
+                    <span>Use Google Maps for live directions.</span>
+                  </p>
+                  <a
+                    class="btn btn--blue"
+                    href="https://www.google.com/maps/place/?q=place_id:ChIJvTqrBgBF1moR4NzQ-2JSH-g"
+                    target="_blank"
+                    rel="noopener"
+                    >Open Map</a
+                  >
+                </div>
+              </div>
+              <aside class="location-details">
+                <h3>LMCT+ Petrol Preston</h3>
+                <div class="detail-row">
+                  <span class="detail-icon" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
+                      />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  </span>
+                  <p>
+                    <strong>Address</strong
+                    ><span>343 Plenty Rd, Preston VIC 3072, Australia</span>
+                  </p>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-icon" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 6v6l4 2" />
+                    </svg>
+                  </span>
+                  <p><strong>Trading hours</strong><span>24/7</span></p>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-icon" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M3 22V4a2 2 0 0 1 2-2h8v20M13 8h2a2 2 0 0 1 2 2v4.5a2.5 2.5 0 0 0 5 0V9l-3-3"
+                      />
+                    </svg>
+                  </span>
+                  <p>
+                    <strong>Available services</strong
+                    ><span
+                      >Wholesale fuel, members only, trusted Australian
+                      brand.</span
+                    >
+                  </p>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3L5.8 21 7 14.2 2 9.3l6.9-1L12 2Z"
+                      />
+                    </svg>
+                  </span>
+                  <p>
+                    <strong>Google rating</strong
+                    ><span>4.7 stars from 163+ reviews.</span>
+                  </p>
+                </div>
+                <a
+                  class="btn btn--blue"
+                  href="https://www.google.com/maps/dir/?api=1&destination=LMCT%2B+Petrol+343+Plenty+Rd+Preston+VIC+3072&destination_place_id=ChIJvTqrBgBF1moR4NzQ-2JSH-g"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Get Directions
+                </a>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="founderTitle">
+          <div class="container">
+            <div class="founder-card">
+              <span class="eyebrow">A note from Adrian</span>
+              <h2 class="section-title" id="founderTitle">
+                Why we created LMCT+ Petrol
+              </h2>
+              <p class="founder-intro">
+                Fuel is a regular cost for Australian households, and
+                traditional loyalty discounts can feel small. LMCT+ Petrol was
+                created to pass member pricing through at participating
+                locations while keeping the membership simple.
+              </p>
+              <details>
+                <summary>The problem</summary>
+                <p>
+                  Four big companies sell a large share of fuel in Australia.
+                  The source copy frames LMCT+ Petrol as a practical response to
+                  high pump prices and small loyalty-card discounts.
+                </p>
+              </details>
+              <details>
+                <summary>What LMCT+ built</summary>
+                <p>
+                  The existing founder copy says LMCT+ built a real petrol
+                  station, buys from major suppliers, and makes money from
+                  membership rather than the pump.
+                </p>
+              </details>
+              <details>
+                <summary>The member value</summary>
+                <p>
+                  The ask is simple: join, use the app, and see whether the
+                  member pricing works for your fuel routine.
+                </p>
+              </details>
+              <div class="founder-signature">
+                <span class="avatar" aria-hidden="true">A</span>
+                <p><strong>Adrian</strong>Founder, LMCT+</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="section section--sky"
+          id="faqs"
+          aria-labelledby="faqTitle"
+        >
+          <div class="container">
+            <div class="section-head center">
+              <span class="eyebrow">FAQs</span>
+              <h2 class="section-title" id="faqTitle">
+                Membership questions, answered carefully.
+              </h2>
+            </div>
+            <div class="faq-list">
+              <details>
+                <summary>How does the membership work?</summary>
+                <p>
+                  Join online, access your LMCT+ membership through the app,
+                  then use it at participating fuel and everyday offer
+                  locations.
+                </p>
+              </details>
+              <details>
+                <summary>Where can the membership be used?</summary>
+                <p>
+                  The supplied source lists LMCT+ Petrol Preston as open now.
+                  Tarneit and Deer Park are shown as coming soon.
+                </p>
+              </details>
+              <details>
+                <summary>How do fuel savings work?</summary>
+                <p>
+                  The calculator estimates savings from the difference between
+                  the entered local pump price and LMCT+ price, multiplied by
+                  tank size and fill frequency. Actual prices and savings vary.
+                </p>
+              </details>
+              <details>
+                <summary>What grocery offers are included?</summary>
+                <p>
+                  The supplied copy references grocery and everyday member
+                  pricing. Use the current membership terms and in-app offers
+                  for exact participating grocery details.
+                </p>
+              </details>
+              <details>
+                <summary>When does membership activate?</summary>
+                <p>
+                  The existing funnel copy states instant access and an online
+                  setup path through the LMCT+ app.
+                </p>
+              </details>
+              <details>
+                <summary>Is the $99 fee recurring?</summary>
+                <p>
+                  The supplied page confirms $99 per year and links to Terms
+                  &amp; Conditions. Check the checkout terms before payment for
+                  the current renewal rules.
+                </p>
+              </details>
+              <details>
+                <summary>Can members cancel?</summary>
+                <p>The supplied funnel copy says cancel anytime.</p>
+              </details>
+              <details>
+                <summary>Is the LMCT+ app required?</summary>
+                <p>
+                  The online path in the supplied copy tells members to set
+                  themselves up in the LMCT+ app, so app access is part of the
+                  membership experience.
+                </p>
+              </details>
+              <details>
+                <summary>Can family members share one membership?</summary>
+                <p>
+                  The supplied source does not specify family sharing. Use the
+                  linked Terms &amp; Conditions for the current membership
+                  rules.
+                </p>
+              </details>
+              <details>
+                <summary>What happens after signup?</summary>
+                <p>
+                  Complete membership signup, set yourself up in the LMCT+ app,
+                  and use the app to access your membership and participating
+                  locations.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="sus-proof"
+          id="susProof"
+          data-tier="fuel"
+          role="region"
+          aria-label="Active LMCT+ giveaways for Save + Win members"
+        >
+          <div class="container">
+            <div class="section-head center">
+              <span class="eyebrow">Save + Win tier</span>
+              <h2 class="section-title">
+                Active giveaways load here when Save + Win is selected.
+              </h2>
+              <p class="section-copy">
+                This keeps the existing API-driven giveaway functionality
+                without distracting from the $99 Petrol offer.
+              </p>
+            </div>
+            <div class="sus-prize-list" id="susPrizeList">
+              <p class="sus-prize-loading">Loading live giveaways...</p>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="section section--tight"
+          id="lmdis"
+          aria-label="Savings disclaimer"
+        >
+          <div class="container">
+            <div class="lmdis-card">
+              <span class="lmdis-label">Disclaimer</span>
+              <div>
+                All savings figures are <strong>estimates only</strong>,
+                calculated from the prices you enter at the time of use.
+                Real-world fuel prices fluctuate daily, actual savings will
+                vary. This calculator is provided as a guide and does not
+                constitute a guarantee of savings.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="section section--navy final-cta"
+          aria-labelledby="finalCtaTitle"
+        >
+          <div class="container">
+            <h2 class="section-title" id="finalCtaTitle">
+              Start saving with LMCT+ Petrol
+            </h2>
+            <p class="section-copy">
+              Join for $99 per year and access available members-only fuel and
+              grocery pricing.
+            </p>
+            <div class="final-price">$99/year</div>
+            <div>
+              <a class="btn btn--green" href="#row--30567">Become a Member</a>
+            </div>
+            <p class="section-copy">
+              Fast signup. Instant access. Cancel anytime.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer" id="footer">
+        <div class="container">
+          <div class="footer-grid">
+            <div>
+              <img
+                class="footer-logo"
+                src="assets/lmct-petrol-logo.png"
+                alt="LMCT+ Petrol"
+                loading="lazy"
+                decoding="async"
+              />
+              <p>Wholesale Petrol Pricing<br />All Year Long</p>
+            </div>
+            <div>
+              <h3 class="footer-heading">Legal</h3>
+              <div class="footer-links">
+                <a
+                  href="https://lmctgiveaway.com/petrolterms"
+                  target="_blank"
+                  rel="noopener"
+                  >Terms &amp; Conditions</a
+                >
+                <a
+                  href="https://lmctgiveaway.com/fuelprivacy"
+                  target="_blank"
+                  rel="noopener"
+                  >Privacy Policy</a
+                >
+              </div>
+            </div>
+            <div>
+              <h3 class="footer-heading">Customer Support</h3>
+              <div class="footer-contact">
+                <a href="tel:1300683688">1300 683 688</a>
+                <span><strong>LMCT PETROLEUM</strong> ABN 28 235 098 465</span>
+              </div>
+            </div>
+          </div>
+          <p class="footer-bottom">
+            &copy; 2026 LMCT PETROLEUM. All rights reserved.
+          </p>
+        </div>
+      </footer>
+
+      <a
+        class="btn btn--green mobile-sticky-cta"
+        id="mobileStickyCta"
+        href="#row--30567"
+        >Join for $99/year</a
+      >
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var ORDER_URL = "https://lmctgiveaway.com/order-639460901777617719067";
+        var tierProducts = {
+          fuel: "5073572",
+          full: "5073573",
+        };
+        var tierCopy = {
+          fuel: {
+            price: "$99",
+            unit: "/ year",
+            note: "Less than $2 per week",
+            hero: "Join LMCT+ Petrol for $99 per year and access member pricing and available everyday savings at participating locations.",
+            signup: "$99/year",
+            label: "Everyday Saver Membership",
+          },
+          full: {
+            price: "$199",
+            unit: "/ year",
+            note: "Everyday savings plus giveaway access",
+            hero: "Upgrade to Save + Win for fuel, groceries, and the giveaway product shown in the existing funnel.",
+            signup: "$199/year",
+            label: "Save + Win Membership",
+          },
+        };
+
+        function qs(selector, root) {
+          return (root || document).querySelector(selector);
+        }
+
+        function qsa(selector, root) {
+          return Array.prototype.slice.call(
+            (root || document).querySelectorAll(selector),
+          );
+        }
+
+        function money(value, round) {
+          var n = Number(value);
+          if (!isFinite(n)) n = 0;
+          return (
+            "$" +
+            n.toLocaleString("en-AU", {
+              minimumFractionDigits: round ? 0 : 2,
+              maximumFractionDigits: round ? 0 : 2,
+            })
+          );
+        }
+
+        function setText(id, text) {
+          var el = document.getElementById(id);
+          if (el) el.textContent = text;
+        }
+
+        function setTier(tier) {
+          tier = tier === "full" ? "full" : "fuel";
+          var hero = document.getElementById("susTier");
+          var proof = document.getElementById("susProof");
+          var copy = tierCopy[tier];
+          if (hero) hero.setAttribute("data-tier", tier);
+          if (proof) proof.setAttribute("data-tier", tier);
+
+          qsa(".sus-toggle-btn").forEach(function (btn) {
+            var active = btn.getAttribute("data-tier-target") === tier;
+            btn.setAttribute("aria-selected", active ? "true" : "false");
+          });
+
+          setText("heroPrice", copy.price);
+          setText("heroPriceUnit", copy.unit);
+          setText("heroPriceNote", copy.note);
+          setText("heroCopy", copy.hero);
+          setText("signupPrice", copy.signup);
+          setText("signupPriceLabel", copy.label);
+
+          var tierInput = document.getElementById("lmMembershipTierInput");
+          if (tierInput) tierInput.value = tier;
+
+          syncCheckoutProduct(tier);
+
+          try {
+            sessionStorage.setItem("sus-tier", tier);
+          } catch (e) {}
+
+          if (hero && typeof CustomEvent === "function") {
+            hero.dispatchEvent(
+              new CustomEvent("tierchange", { detail: { tier: tier } }),
+            );
+          }
+        }
+
+        function syncCheckoutProduct(tier) {
+          tier = tier === "full" ? "full" : "fuel";
+          var productId = tierProducts[tier];
+          if (!productId) return;
+
+          var radios = qsa(
+            'input[name="purchase[product_id]"], input[name="purchase[product_ids][]"]',
+          );
+          radios.forEach(function (radio) {
+            var checked = radio.value === productId;
+            radio.checked = checked;
+            if (checked) {
+              radio.setAttribute("checked", "checked");
+            } else {
+              radio.removeAttribute("checked");
+            }
+            radio.dispatchEvent(new Event("change", { bubbles: true }));
+          });
+
+          document.body.setAttribute("data-lmct-tier", tier);
+
+          if (window.jQuery) {
+            window.jQuery(document).trigger("cfpt:cart-updated");
+          }
+          if (typeof window.rebuildOrderSummary === "function") {
+            window.rebuildOrderSummary();
+          }
+        }
+
+        qsa(".sus-toggle-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            setTier(btn.getAttribute("data-tier-target"));
+          });
+        });
+
+        (function initHeader() {
+          var header = document.getElementById("siteHeader");
+          var menuBtn = document.getElementById("siteMenuBtn");
+          if (!header || !menuBtn) return;
+          menuBtn.addEventListener("click", function () {
+            var open = !header.classList.contains("is-open");
+            header.classList.toggle("is-open", open);
+            menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+          });
+          qsa(".site-nav a").forEach(function (link) {
+            link.addEventListener("click", function () {
+              header.classList.remove("is-open");
+              menuBtn.setAttribute("aria-expanded", "false");
+            });
+          });
+        })();
+
+        (function initCalculator() {
+          var root = document.getElementById("lmcalc");
+          if (!root) return;
+
+          var config = {
+            prices: {
+              petrol: { lmct: 1.59, avg: 1.85 },
+              diesel: { lmct: 2.049, avg: 2.45 },
+            },
+            membershipFee: 99,
+            groceries: {
+              enabled: false,
+              discountPct: 15,
+              defaultWeeklySpend: 200,
+            },
+          };
+          var cars = [
+            {
+              name: "Ford Ranger",
+              tank: 80,
+              fuel: "diesel",
+              hint: "Popular ute",
+            },
+            {
+              name: "Toyota HiLux",
+              tank: 80,
+              fuel: "diesel",
+              hint: "Popular ute",
+            },
+            {
+              name: "Toyota RAV4",
+              tank: 55,
+              fuel: "petrol",
+              hint: "Popular SUV",
+            },
+            {
+              name: "Toyota LandCruiser",
+              tank: 110,
+              fuel: "diesel",
+              hint: "Large 4WD",
+            },
+            {
+              name: "Toyota Corolla",
+              tank: 50,
+              fuel: "petrol",
+              hint: "Small car",
+            },
+            { name: "Isuzu D-Max", tank: 76, fuel: "diesel", hint: "Ute" },
+            { name: "Mazda CX-5", tank: 58, fuel: "petrol", hint: "SUV" },
+            {
+              name: "Mitsubishi Triton",
+              tank: 75,
+              fuel: "diesel",
+              hint: "Ute",
+            },
+          ];
+          var state = {
+            car: cars[2],
+            manualFuel: "petrol",
+            manualTank: 55,
+            fillsPerWeek: 1,
+            weeklyGrocery: config.groceries.defaultWeeklySpend,
+            priceOverride: {
+              petrol: { lmct: null, avg: null },
+              diesel: { lmct: null, avg: null },
+            },
+          };
+
+          var carGrid = document.getElementById("lmcalcCarGrid");
+          var search = document.getElementById("lmcalcSearch");
+          var tankInput = document.getElementById("lmcalcTankInput");
+          var priceLmct = document.getElementById("lmcalcPriceLmct");
+          var priceAvg = document.getElementById("lmcalcPriceAvg");
+
+          function renderCars(filter) {
+            if (!carGrid) return;
+            var f = (filter || "").trim().toLowerCase();
+            var visible = cars.filter(function (car) {
+              return !f || car.name.toLowerCase().indexOf(f) !== -1;
+            });
+            if (!visible.length) {
+              carGrid.innerHTML =
+                '<button class="lmcalc-car" type="button" data-manual="true">Use manual details<span>Enter tank size and fuel type</span></button>';
+              return;
+            }
+            carGrid.innerHTML = visible
+              .map(function (car) {
+                var active = state.car && state.car.name === car.name;
+                return (
+                  '<button class="lmcalc-car' +
+                  (active ? " is-active" : "") +
+                  '" type="button" data-car="' +
+                  escapeAttr(car.name) +
+                  '">' +
+                  escapeHtml(car.name) +
+                  "<span>" +
+                  car.tank +
+                  "L " +
+                  escapeHtml(car.fuel) +
+                  " - " +
+                  escapeHtml(car.hint) +
+                  "</span></button>"
+                );
+              })
+              .join("");
+          }
+
+          function escapeHtml(text) {
+            return String(text).replace(/[&<>"']/g, function (m) {
+              return {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              }[m];
+            });
+          }
+
+          function escapeAttr(text) {
+            return escapeHtml(text);
+          }
+
+          function getFuel() {
+            return state.car ? state.car.fuel : state.manualFuel;
+          }
+
+          function getTank() {
+            return state.car ? state.car.tank : Number(state.manualTank || 55);
+          }
+
+          function getFuelPrices(fuel) {
+            var base = config.prices[fuel] || config.prices.petrol;
+            var override = state.priceOverride[fuel] || {};
+            return {
+              lmct: override.lmct != null ? override.lmct : base.lmct,
+              avg: override.avg != null ? override.avg : base.avg,
+            };
+          }
+
+          function calc() {
+            var fuel = getFuel();
+            var tank = getTank();
+            var fpw = Number(state.fillsPerWeek || 0);
+            var prices = getFuelPrices(fuel);
+            var perLitreSave = Math.max(0, prices.avg - prices.lmct);
+            var perFillSave = perLitreSave * tank;
+            var fillsPerYear = fpw * 52;
+            var fuelYearSave = perFillSave * fillsPerYear;
+            var grocYearSave = config.groceries.enabled
+              ? state.weeklyGrocery * (config.groceries.discountPct / 100) * 52
+              : 0;
+            var yearSave = fuelYearSave + grocYearSave;
+            var monthSave = yearSave / 12;
+            var daySave = yearSave / 365;
+            var fee = config.membershipFee;
+            var netBenefit = yearSave - fee;
+            return {
+              fuel: fuel,
+              tank: tank,
+              lmct: prices.lmct,
+              avg: prices.avg,
+              perFillSave: perFillSave,
+              fillsPerYear: fillsPerYear,
+              yearSave: yearSave,
+              monthSave: monthSave,
+              daySave: daySave,
+              fee: fee,
+              netBenefit: netBenefit,
+              fillsToPayback: perFillSave > 0 ? fee / perFillSave : Infinity,
+              daysToPayback: daySave > 0 ? fee / daySave : Infinity,
+            };
+          }
+
+          function render() {
+            var result = calc();
+            var roundedYear = Math.round(result.yearSave);
+            var roundedNet = Math.round(result.netBenefit);
+            var meter = document.getElementById("lmcalcMeter");
+            var currentFuel = getFuel();
+            var prices = getFuelPrices(currentFuel);
+
+            document.getElementById("lmcalcBigNumber").innerHTML =
+              '<span class="lmcalc-big-currency">$</span>' +
+              roundedYear.toLocaleString("en-AU");
+            setText("lmcalcMonth", money(result.monthSave, true));
+            setText("lmcalcDay", money(result.daySave, false));
+            setText("lmcalcFill", money(result.perFillSave, false));
+            setText("lmcalcBdTank", result.tank + " L");
+            setText("lmcalcBdAvg", money(result.avg * result.tank, false));
+            setText("lmcalcBdLmct", money(result.lmct * result.tank, false));
+            setText("lmcalcBdPerFill", money(result.perFillSave, false));
+            setText(
+              "lmcalcBdFills",
+              Math.round(result.fillsPerYear) + " fills",
+            );
+            setText("lmcalcBdYear", money(result.yearSave, true));
+            setText(
+              "heroSavingsExample",
+              roundedYear > 0
+                ? money(result.yearSave, true) + " estimated by the calculator"
+                : "Use the calculator for your estimate",
+            );
+
+            if (meter) {
+              meter.style.width =
+                Math.max(8, Math.min(100, roundedYear / 15)) + "%";
+            }
+
+            var payback = document.getElementById("lmcalcPayback");
+            if (payback) {
+              if (result.perFillSave <= 0) {
+                payback.innerHTML =
+                  "Adjust your prices to see when membership pays itself off.";
+              } else if (result.fillsToPayback <= 1) {
+                payback.innerHTML =
+                  "Membership pays for itself in <strong>just 1 fill</strong>.";
+              } else {
+                payback.innerHTML =
+                  "Membership pays for itself in <strong>" +
+                  Math.ceil(result.fillsToPayback) +
+                  " fills</strong>.";
+              }
+            }
+
+            var roi = document.getElementById("lmcalcRoi");
+            if (roi) {
+              roi.innerHTML =
+                "Estimated net benefit: <strong>" +
+                money(roundedNet, true) +
+                "</strong> after the $" +
+                result.fee +
+                " yearly fee.";
+            }
+
+            if (priceLmct && document.activeElement !== priceLmct) {
+              priceLmct.value = (prices.lmct * 100).toFixed(1);
+            }
+            if (priceAvg && document.activeElement !== priceAvg) {
+              priceAvg.value = (prices.avg * 100).toFixed(1);
+            }
+          }
+
+          renderCars("");
+
+          if (carGrid) {
+            carGrid.addEventListener("click", function (event) {
+              var btn = event.target.closest(".lmcalc-car");
+              if (!btn) return;
+              var carName = btn.getAttribute("data-car");
+              if (!carName) {
+                state.car = null;
+              } else {
+                state.car =
+                  cars.filter(function (car) {
+                    return car.name === carName;
+                  })[0] || state.car;
+                if (tankInput && state.car) tankInput.value = state.car.tank;
+                state.manualFuel = state.car
+                  ? state.car.fuel
+                  : state.manualFuel;
+              }
+              qsa(".lmcalc-fuel-btn", root).forEach(function (fuelBtn) {
+                var active = fuelBtn.getAttribute("data-fuel") === getFuel();
+                fuelBtn.classList.toggle("is-active", active);
+                fuelBtn.setAttribute(
+                  "aria-selected",
+                  active ? "true" : "false",
+                );
+              });
+              renderCars(search ? search.value : "");
+              render();
+            });
+          }
+
+          if (search) {
+            search.addEventListener("input", function () {
+              renderCars(search.value);
+            });
+          }
+
+          qsa(".lmcalc-fuel-btn", root).forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              state.car = null;
+              state.manualFuel = btn.getAttribute("data-fuel");
+              qsa(".lmcalc-fuel-btn", root).forEach(function (b) {
+                var active = b === btn;
+                b.classList.toggle("is-active", active);
+                b.setAttribute("aria-selected", active ? "true" : "false");
+              });
+              renderCars(search ? search.value : "");
+              render();
+            });
+          });
+
+          if (tankInput) {
+            tankInput.addEventListener("input", function () {
+              state.car = null;
+              state.manualTank = Number(tankInput.value || 55);
+              renderCars(search ? search.value : "");
+              render();
+            });
+          }
+
+          qsa(".lmcalc-freq", root).forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              state.fillsPerWeek = Number(btn.getAttribute("data-fpw"));
+              qsa(".lmcalc-freq", root).forEach(function (b) {
+                b.classList.toggle("is-active", b === btn);
+              });
+              render();
+            });
+          });
+
+          qsa("[data-toggle]", document).forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var action = btn.getAttribute("data-toggle");
+              if (action === "prices") {
+                var pricesPanel = document.getElementById("lmcalcPrices");
+                if (pricesPanel) pricesPanel.classList.toggle("is-open");
+              } else if (action === "breakdown") {
+                var breakdown = document.getElementById("lmcalcBreakdown");
+                if (breakdown) breakdown.classList.toggle("is-open");
+              } else if (action === "restart") {
+                state.car = cars[2];
+                state.manualFuel = "petrol";
+                state.manualTank = 55;
+                state.fillsPerWeek = 1;
+                if (tankInput) tankInput.value = 55;
+                if (search) search.value = "";
+                qsa(".lmcalc-freq", root).forEach(function (b) {
+                  b.classList.toggle(
+                    "is-active",
+                    b.getAttribute("data-fpw") === "1",
+                  );
+                });
+                renderCars("");
+                render();
+              }
+            });
+          });
+
+          if (priceLmct) {
+            priceLmct.addEventListener("input", function () {
+              var fuel = getFuel();
+              state.priceOverride[fuel].lmct =
+                Number(priceLmct.value || 0) / 100;
+              render();
+            });
+          }
+          if (priceAvg) {
+            priceAvg.addEventListener("input", function () {
+              var fuel = getFuel();
+              state.priceOverride[fuel].avg = Number(priceAvg.value || 0) / 100;
+              render();
+            });
+          }
+
+          var calcCta = document.getElementById("lmcalcCta");
+          if (calcCta) {
+            calcCta.addEventListener("click", function (event) {
+              var target = document.getElementById("row--30567");
+              if (target) {
+                event.preventDefault();
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+              }
+            });
+          }
+
+          render();
+        })();
+
+        (function initForm() {
+          var form = document.getElementById("lmctStandaloneCheckout");
+          if (!form) return;
+
+          function setError(id, message) {
+            var el = document.getElementById(id);
+            if (el) el.textContent = message || "";
+          }
+
+          form.addEventListener("submit", function (event) {
+            var valid = true;
+            var name = document.getElementById("lmFullName");
+            var email = document.getElementById("lmEmail");
+            var phone = document.getElementById("lmPhone");
+            var terms = document.getElementById("lmTerms");
+
+            setError("lmFullNameError", "");
+            setError("lmEmailError", "");
+            setError("lmPhoneError", "");
+            setError("lmTermsError", "");
+
+            if (!name || !name.value.trim()) {
+              valid = false;
+              setError("lmFullNameError", "Enter your full name.");
+            }
+            if (
+              !email ||
+              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())
+            ) {
+              valid = false;
+              setError("lmEmailError", "Enter a valid email address.");
+            }
+            if (!phone || phone.value.replace(/\D/g, "").length < 8) {
+              valid = false;
+              setError("lmPhoneError", "Enter a valid phone number.");
+            }
+            if (!terms || !terms.checked) {
+              valid = false;
+              setError(
+                "lmTermsError",
+                "Accept the membership terms to continue.",
+              );
+            }
+
+            if (!valid) {
+              event.preventDefault();
+              var firstError = qs(".form-error:not(:empty)");
+              if (firstError)
+                firstError.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
+            }
+          });
+        })();
+
+        (function initApplePayRelocation() {
+          var applePaySelector = "#tmp_oapap-89166";
+          var step2CardFormSelector =
+            "#tmp_order2step-95906 .o2step_step2 .elCreditCardForm";
+
+          function moveApplePay() {
+            var applePay = qs(applePaySelector);
+            var target = qs(step2CardFormSelector);
+            if (!applePay || !target) return false;
+            if (
+              target.nextElementSibling &&
+              target.nextElementSibling.classList.contains(
+                "express-checkout-wrap",
+              )
+            )
+              return true;
+            var wrap = document.createElement("div");
+            wrap.className = "express-checkout-wrap";
+            var label = document.createElement("div");
+            label.className = "express-checkout-label";
+            label.innerHTML = "<span>OR EXPRESS CHECKOUT</span>";
+            wrap.appendChild(label);
+            target.parentNode.insertBefore(wrap, target.nextSibling);
+            wrap.appendChild(applePay);
+            return true;
+          }
+
+          function tryMoveApplePay() {
+            if (moveApplePay()) return;
+            var tries = 0;
+            var timer = setInterval(function () {
+              tries += 1;
+              if (moveApplePay() || tries > 20) clearInterval(timer);
+            }, 400);
+          }
+
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", tryMoveApplePay);
+          } else {
+            tryMoveApplePay();
+          }
+
+          document.addEventListener("click", function (event) {
+            if (
+              !event.target.closest(
+                '#tmp_order2step-95906 .o2step_step1 a, #tmp_order2step-95906 .o2step_step1 button, #tmp_order2step-95906 .o2step_step1 input[type="submit"]',
+              )
+            )
+              return;
+            setTimeout(moveApplePay, 300);
+            setTimeout(moveApplePay, 800);
+            setTimeout(moveApplePay, 1600);
+          });
+        })();
+
+        (function initGiveaways() {
+          var list = document.getElementById("susPrizeList");
+          if (!list || !window.fetch) return;
+          var API =
+            "https://api.lmctplus.com/api/v1/giveaways?limit=9&offset=0&status=active";
+
+          function esc(text) {
+            var d = document.createElement("div");
+            d.textContent = text == null ? "" : String(text);
+            return d.innerHTML;
+          }
+
+          function validLink(url) {
+            return url && url !== "tbd" && /^https?:\/\//i.test(url);
+          }
+
+          function pickLink(giveaway) {
+            if (validLink(giveaway.publicPromotionLink))
+              return giveaway.publicPromotionLink;
+            if (validLink(giveaway.promotionLink))
+              return giveaway.promotionLink;
+            return "https://lmctgiveaway.com";
+          }
+
+          function render(items) {
+            if (!items || !items.length) {
+              list.innerHTML =
+                '<p class="sus-prize-empty">No live giveaways right now. Check back soon.</p>';
+              return;
+            }
+            list.innerHTML = items
+              .slice(0, 6)
+              .map(function (g) {
+                var title =
+                  g.prizes && g.prizes[0] && g.prizes[0].title
+                    ? g.prizes[0].title
+                    : g.title;
+                var img = g.image || "";
+                return (
+                  '<a class="sus-prize" href="' +
+                  esc(pickLink(g)) +
+                  '" target="_blank" rel="noopener">' +
+                  '<span class="sus-prize-imgwrap"><img class="sus-prize-img" src="' +
+                  esc(img) +
+                  '" alt="' +
+                  esc(g.title || title) +
+                  '" loading="lazy"></span>' +
+                  '<span class="sus-tag">Live</span>' +
+                  '<div class="sus-prize-body"><h3 class="sus-prize-title">' +
+                  esc(title) +
+                  "</h3></div>" +
+                  "</a>"
+                );
+              })
+              .join("");
+          }
+
+          fetch(API, { headers: { Accept: "application/json" } })
+            .then(function (response) {
+              if (!response.ok) throw new Error("HTTP " + response.status);
+              return response.json();
+            })
+            .then(function (payload) {
+              render(payload && payload.data ? payload.data : []);
+            })
+            .catch(function () {
+              list.innerHTML =
+                '<p class="sus-prize-empty">Giveaways are taking a moment to load. Please refresh.</p>';
+            });
+        })();
+
+        (function initStickyCta() {
+          var sticky = document.getElementById("mobileStickyCta");
+          if (!sticky || !window.IntersectionObserver) return;
+          var targets = ["row--30567", "footer"]
+            .map(function (id) {
+              return document.getElementById(id);
+            })
+            .filter(Boolean);
+          var observer = new IntersectionObserver(
+            function (entries) {
+              var hide = entries.some(function (entry) {
+                return entry.isIntersecting;
+              });
+              sticky.classList.toggle("is-hidden", hide);
+            },
+            { threshold: 0.08 },
+          );
+          targets.forEach(function (target) {
+            observer.observe(target);
+          });
+        })();
+
+        (function initTierFromState() {
+          var initialTier = "fuel";
+          try {
+            var params = new URLSearchParams(window.location.search);
+            var urlTier = params.get("tier");
+            var saved = sessionStorage.getItem("sus-tier");
+            if (urlTier === "fuel" || urlTier === "full") initialTier = urlTier;
+            else if (saved === "fuel" || saved === "full") initialTier = saved;
+          } catch (e) {}
+          setTier(initialTier);
+        })();
+      })();
+    </script>
+  </body>
+</html>

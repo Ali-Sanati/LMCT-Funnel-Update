@@ -1,0 +1,835 @@
+<style>
+  .lmctGiveawayPromo,
+  .lmctGiveawayPromo *,
+  .lmctGiveawayPromo *::before,
+  .lmctGiveawayPromo *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctGiveawayPromo {
+    --lmctGiveawayBlue: #0798f5;
+    --lmctGiveawayNavy: #061a38;
+    --lmctGiveawayCampaign: #03152d;
+    --lmctGiveawayGreen: #16a34a;
+    --lmctGiveawayGreenSoft: #eaf8ef;
+    --lmctGiveawayRed: #ef2525;
+    --lmctGiveawayRedDark: #d71010;
+    --lmctGiveawayRedSoft: #fff0f0;
+    --lmctGiveawayWhite: #ffffff;
+    --lmctGiveawayBorder: #dce6f2;
+    --lmctGiveawayMuted: #5c6878;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 58px 20px 66px;
+    background: transparent;
+    color: var(--lmctGiveawayNavy);
+    font-family: Inter, Arial, sans-serif;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayHeader {
+    max-width: 860px;
+    margin: 0 auto 30px;
+    text-align: center;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayTitle {
+    margin: 0;
+    color: var(--lmctGiveawayNavy);
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayTitleAccent {
+    color: var(--lmctGiveawayBlue);
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayWrap {
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayWrap::before {
+    content: "";
+    position: absolute;
+    inset: 42px 24px -18px;
+    z-index: -1;
+    border-radius: 30px;
+    background: radial-gradient(
+      circle,
+      rgba(7, 152, 245, 0.24) 0,
+      rgba(7, 152, 245, 0.1) 45%,
+      rgba(7, 152, 245, 0) 76%
+    );
+    filter: blur(4px);
+    pointer-events: none;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayCard {
+    display: grid;
+    grid-template-columns: minmax(0, 1.48fr) minmax(310px, 1fr);
+    min-height: 386px;
+    overflow: hidden;
+    border: 1px solid rgba(220, 230, 242, 0.95);
+    border-radius: 24px;
+    background: var(--lmctGiveawayWhite);
+    box-shadow: 0 24px 58px rgba(6, 26, 56, 0.15);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayVisual {
+    position: relative;
+    min-height: 386px;
+    overflow: hidden;
+    padding: 40px 34px 34px;
+    background:
+      radial-gradient(
+        circle at 50% 8%,
+        rgba(67, 255, 119, 0.22),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 16% 24%,
+        rgba(255, 218, 85, 0.16),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 84% 18%,
+        rgba(43, 255, 135, 0.14),
+        transparent 30%
+      ),
+      linear-gradient(180deg, #082514 0%, #04170d 46%, #020a06 100%) !important;
+    color: var(--lmctGiveawayWhite);
+    isolation: isolate;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayVisual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(
+        110deg,
+        rgba(255, 255, 255, 0.1) 0,
+        rgba(255, 255, 255, 0) 31%
+      ),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size:
+      auto,
+      44px 44px,
+      44px 44px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayVisual::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -44px;
+    height: 158px;
+    z-index: -1;
+    background-image: url("https://images.clickfunnels.com/7b/8d1ced47a245e0ad6794e674f1ec52/ChatGPT-Image-May-7-2026-10_32_23-AM.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    transform: rotate(-1deg);
+    filter: drop-shadow(0 -12px 26px rgba(0, 0, 0, 0.24));
+    pointer-events: none;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayVisualInner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    min-height: 312px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayPrize {
+    display: block;
+    margin: 0;
+    color: var(--lmctGiveawayWhite);
+    font-size: 66px;
+    font-weight: 900;
+    line-height: 0.96;
+    letter-spacing: 0;
+    text-shadow:
+      0 3px 20px rgba(0, 0, 0, 0.28),
+      0 0 34px rgba(7, 152, 245, 0.42);
+  }
+
+  .lmctGiveawayPromo .lmctGiveawaySubtitle {
+    display: inline-flex;
+    align-self: center;
+    margin-top: 14px;
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.96);
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+
+  .lmctGiveawayPromo .lmctgiveawayNote {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    width: 80px;
+    height: auto;
+    border-radius: 8px;
+    opacity: var(--lmctGiveawayNoteOpacity, 0.76);
+    filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.2));
+    pointer-events: none;
+    transform: translate3d(0, 0, 0)
+      rotate(var(--lmctGiveawayNoteRotate, -12deg));
+    transform-origin: 50% 50%;
+    will-change: transform;
+    animation: lmctGiveawayNoteFall var(--lmctGiveawayNoteDuration, 5.4s)
+      ease-in-out infinite;
+    animation-delay: var(--lmctGiveawayNoteDelay, 0s);
+  }
+
+  .lmctGiveawayPromo .lmctgiveawayNote:nth-of-type(1) {
+    --lmctGiveawayNoteRotate: -15deg;
+    --lmctGiveawayNoteDrift: 11px;
+    --lmctGiveawayNoteDrop: 18px;
+    --lmctGiveawayNoteReturnDrift: -5px;
+    --lmctGiveawayNoteReturnDrop: 8px;
+    --lmctGiveawayNoteFallRotate: -8deg;
+    --lmctGiveawayNoteReturnRotate: -19deg;
+    --lmctGiveawayNoteDuration: 5.2s;
+    --lmctGiveawayNoteDelay: -0.45s;
+  }
+
+  .lmctGiveawayPromo .lmctgiveawayNoteOne {
+    top: 28px;
+    left: 32px;
+  }
+
+  .lmctGiveawayPromo .lmctgiveawayNote:nth-of-type(2) {
+    --lmctGiveawayNoteRotate: 17deg;
+    --lmctGiveawayNoteDrift: -10px;
+    --lmctGiveawayNoteDrop: 15px;
+    --lmctGiveawayNoteReturnDrift: 4px;
+    --lmctGiveawayNoteReturnDrop: 7px;
+    --lmctGiveawayNoteFallRotate: 11deg;
+    --lmctGiveawayNoteReturnRotate: 20deg;
+    --lmctGiveawayNoteDuration: 5.8s;
+    --lmctGiveawayNoteDelay: -1.15s;
+  }
+
+  .lmctGiveawayPromo .lmctgiveawayNoteTwo {
+    top: 56px;
+    right: 36px;
+  }
+
+  .lmctGiveawayPromo .lmctgiveawayNote:nth-of-type(3) {
+    --lmctGiveawayNoteRotate: -8deg;
+    --lmctGiveawayNoteDrift: 8px;
+    --lmctGiveawayNoteDrop: 12px;
+    --lmctGiveawayNoteReturnDrift: -3px;
+    --lmctGiveawayNoteReturnDrop: 5px;
+    --lmctGiveawayNoteFallRotate: -3deg;
+    --lmctGiveawayNoteReturnRotate: -11deg;
+    --lmctGiveawayNoteDuration: 6.4s;
+    --lmctGiveawayNoteDelay: -2.1s;
+    --lmctGiveawayNoteOpacity: 0.54;
+  }
+
+  .lmctGiveawayPromo .lmctgiveawayNoteThree {
+    right: 86px;
+    bottom: 100px;
+  }
+
+  .lmctGiveawayPromo .lmctgiveawayNote:nth-of-type(4) {
+    --lmctGiveawayNoteRotate: 12deg;
+    --lmctGiveawayNoteDrift: -9px;
+    --lmctGiveawayNoteDrop: 17px;
+    --lmctGiveawayNoteReturnDrift: 5px;
+    --lmctGiveawayNoteReturnDrop: 6px;
+    --lmctGiveawayNoteFallRotate: 6deg;
+    --lmctGiveawayNoteReturnRotate: 16deg;
+    --lmctGiveawayNoteDuration: 6s;
+    --lmctGiveawayNoteDelay: -3s;
+    --lmctGiveawayNoteOpacity: 0.62;
+  }
+
+  .lmctGiveawayPromo .lmctgiveawayNoteFour {
+    left: 92px;
+    bottom: 82px;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayDetails {
+    display: grid;
+    gap: 16px;
+    min-width: 0;
+    padding: 24px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayInfoCard {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    border: 1px solid var(--lmctGiveawayBorder);
+    border-radius: 18px;
+    background: var(--lmctGiveawayWhite);
+    box-shadow: 0 14px 30px rgba(6, 26, 56, 0.07);
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayIconBox {
+    display: inline-flex;
+    width: 54px;
+    height: 54px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    flex: 0 0 54px;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayIconBoxClose {
+    background: var(--lmctGiveawayGreenSoft);
+    color: var(--lmctGiveawayGreen);
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayIconBoxLive {
+    background: var(--lmctGiveawayRedSoft);
+    color: var(--lmctGiveawayRed);
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayIcon {
+    display: block;
+    width: 25px;
+    height: 25px;
+    fill: none;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayInfoText {
+    min-width: 0;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayLabel {
+    display: block;
+    margin: 0 0 7px;
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayLabelClose {
+    color: var(--lmctGiveawayGreen);
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayLabelLive {
+    color: var(--lmctGiveawayRed);
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayDate {
+    display: block;
+    color: var(--lmctGiveawayNavy);
+    font-size: 29px;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayTime {
+    display: block;
+    margin-top: 7px;
+    color: var(--lmctGiveawayMuted);
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayCta {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 64px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    padding: 18px 24px;
+    overflow: hidden;
+    border-radius: 18px;
+    background: linear-gradient(
+      135deg,
+      #ff3a3a 0%,
+      var(--lmctGiveawayRed) 42%,
+      var(--lmctGiveawayRedDark) 100%
+    );
+    color: var(--lmctGiveawayWhite);
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: 0;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow:
+      0 18px 34px rgba(215, 16, 16, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.24);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayCta::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -42%;
+    width: 34%;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.26) 48%,
+      transparent 100%
+    );
+    transform: skewX(-18deg);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      left 420ms ease,
+      opacity 180ms ease;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayCtaText {
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayCta:focus-visible {
+    outline: 3px solid rgba(7, 152, 245, 0.38);
+    outline-offset: 4px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lmctGiveawayPromo .lmctGiveawayCard:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 30px 66px rgba(6, 26, 56, 0.18);
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayCta:hover {
+      color: var(--lmctGiveawayWhite);
+      text-decoration: none;
+      transform: translateY(-2px);
+      filter: brightness(1.04);
+      box-shadow:
+        0 22px 40px rgba(215, 16, 16, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayCta:hover::before {
+      left: 108%;
+      opacity: 1;
+    }
+  }
+
+  .lmctGiveawayPromo .lmctGiveawayCta:active {
+    transform: translateY(0);
+    filter: brightness(0.98);
+  }
+
+  @keyframes lmctGiveawayNoteFall {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0)
+        rotate(var(--lmctGiveawayNoteRotate, -12deg));
+    }
+
+    42% {
+      transform: translate3d(
+          var(--lmctGiveawayNoteDrift, 9px),
+          var(--lmctGiveawayNoteDrop, 16px),
+          0
+        )
+        rotate(var(--lmctGiveawayNoteFallRotate, -6deg)) scale(0.985);
+    }
+
+    72% {
+      transform: translate3d(
+          var(--lmctGiveawayNoteReturnDrift, -4px),
+          var(--lmctGiveawayNoteReturnDrop, 7px),
+          0
+        )
+        rotate(var(--lmctGiveawayNoteReturnRotate, -15deg)) scale(1.01);
+    }
+  }
+
+  @media (max-width: 920px) {
+    .lmctGiveawayPromo .lmctGiveawayCard {
+      grid-template-columns: minmax(0, 1.28fr) minmax(288px, 0.9fr);
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayPrize {
+      font-size: 56px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayDetails {
+      padding: 20px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayInfoCard {
+      padding: 21px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayDate {
+      font-size: 25px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .lmctGiveawayPromo {
+      padding: 52px 18px 60px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayTitle {
+      font-size: 37px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayCard {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayVisual {
+      min-height: 314px;
+      padding: 36px 24px 32px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayVisualInner {
+      min-height: 246px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayDetails {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayInfoCard {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 14px;
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .lmctGiveawayPromo {
+      max-width: none;
+      padding: 46px 16px 54px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayHeader {
+      margin-bottom: 22px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayTitle {
+      font-size: 32px;
+      line-height: 1.08;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayCard {
+      border-radius: 20px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayVisual {
+      min-height: 278px;
+      padding: 30px 18px 28px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayVisualInner {
+      min-height: 220px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayPrize {
+      font-size: 45px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawaySubtitle {
+      margin-top: 12px;
+      font-size: 15px;
+      padding: 9px 13px;
+    }
+
+    .lmctGiveawayPromo .lmctgiveawayNote {
+      width: 72px;
+    }
+
+    .lmctGiveawayPromo .lmctgiveawayNoteOne {
+      top: 22px;
+      left: 18px;
+    }
+
+    .lmctGiveawayPromo .lmctgiveawayNoteTwo {
+      top: 42px;
+      right: 18px;
+    }
+
+    .lmctGiveawayPromo .lmctgiveawayNoteThree {
+      right: 36px;
+      bottom: 46px;
+    }
+
+    .lmctGiveawayPromo .lmctgiveawayNoteFour {
+      left: 34px;
+      bottom: 48px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayDetails {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 16px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayInfoCard {
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+      padding: 17px;
+      border-radius: 16px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayIconBox {
+      width: 48px;
+      height: 48px;
+      flex-basis: 48px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayDate {
+      font-size: 24px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayTime {
+      font-size: 13px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayCta {
+      min-height: 58px;
+      padding: 15px 18px;
+      border-radius: 16px;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .lmctGiveawayPromo {
+      padding: 42px 16px 50px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayTitle {
+      font-size: 29px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayVisual {
+      min-height: 252px;
+      padding: 26px 14px 26px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayVisualInner {
+      min-height: 200px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayPrize {
+      font-size: 39px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawaySubtitle {
+      font-size: 14px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayDetails {
+      padding: 13px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayInfoCard {
+      padding: 15px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayIconBox {
+      width: 44px;
+      height: 44px;
+      flex-basis: 44px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayIcon {
+      width: 23px;
+      height: 23px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayDate {
+      font-size: 22px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayLabel {
+      font-size: 12px;
+    }
+
+    .lmctGiveawayPromo .lmctGiveawayCta {
+      min-height: 56px;
+      padding: 14px 14px;
+      font-size: 15px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctGiveawayPromo .lmctGiveawayCard,
+    .lmctGiveawayPromo .lmctGiveawayCta,
+    .lmctGiveawayPromo .lmctGiveawayCta::before {
+      transition: none;
+    }
+
+    .lmctGiveawayPromo .lmctgiveawayNote {
+      animation: none;
+      transform: translate3d(0, 0, 0)
+        rotate(var(--lmctGiveawayNoteRotate, -12deg));
+    }
+  }
+</style>
+
+<section
+  class="lmctGiveawayPromo"
+  aria-label="August one million dollar giveaway details"
+>
+  <header class="lmctGiveawayHeader">
+    <h2 class="lmctGiveawayTitle">
+      AUGUST <span class="lmctGiveawayTitleAccent">$1M</span> GIVEAWAY
+    </h2>
+  </header>
+
+  <div class="lmctGiveawayWrap">
+    <div class="lmctGiveawayCard">
+      <div class="lmctGiveawayVisual">
+        <img
+          class="lmctgiveawayNote lmctgiveawayNoteOne"
+          src="https://images.clickfunnels.com/c9/3da53e1a6a403b8592ebbe3d06957c/single-cash.png"
+          alt="Single Cash Giveaway"
+        />
+        <img
+          class="lmctgiveawayNote lmctgiveawayNoteTwo"
+          src="https://images.clickfunnels.com/c9/3da53e1a6a403b8592ebbe3d06957c/single-cash.png"
+          alt="Single Cash Giveaway"
+        />
+        <img
+          class="lmctgiveawayNote lmctgiveawayNoteThree"
+          src="https://images.clickfunnels.com/c9/3da53e1a6a403b8592ebbe3d06957c/single-cash.png"
+          alt="Single Cash Giveaway"
+        />
+        <img
+          class="lmctgiveawayNote lmctgiveawayNoteFour"
+          src="https://images.clickfunnels.com/c9/3da53e1a6a403b8592ebbe3d06957c/single-cash.png"
+          alt="Single Cash Giveaway"
+        />
+
+        <div class="lmctGiveawayVisualInner">
+          <span class="lmctGiveawayPrize">$1,000,000</span>
+          <span class="lmctGiveawaySubtitle">TAX-FREE CASH</span>
+        </div>
+      </div>
+
+      <div class="lmctGiveawayDetails">
+        <article class="lmctGiveawayInfoCard" aria-label="Entries close">
+          <span
+            class="lmctGiveawayIconBox lmctGiveawayIconBoxClose"
+            aria-hidden="true"
+          >
+            <svg
+              class="lmctGiveawayIcon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 16 16"
+            >
+              <path d="M0 0h16v16H0z" fill="none" />
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+              >
+                <circle cx="8" cy="8" r="6.25" />
+                <path d="m8.25 4.75v3.5l-2.5 2" />
+              </g>
+            </svg>
+          </span>
+          <span class="lmctGiveawayInfoText">
+            <span class="lmctGiveawayLabel lmctGiveawayLabelClose">
+              ENTRIES CLOSE
+            </span>
+            <time class="lmctGiveawayDate" datetime="2026-08-27T20:00:00+10:00">
+              27 August
+            </time>
+            <span class="lmctGiveawayTime">8PM AEST</span>
+          </span>
+        </article>
+
+        <article class="lmctGiveawayInfoCard" aria-label="Live draw">
+          <span
+            class="lmctGiveawayIconBox lmctGiveawayIconBoxLive"
+            aria-hidden="true"
+          >
+            <svg
+              class="lmctGiveawayIcon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path
+                fill="currentColor"
+                d="M19.02 4.975A9.93 9.93 0 0 0 2.07 12A9.935 9.935 0 0 0 12 21.935a10 10 0 0 0 3.8-.75a10.2 10.2 0 0 0 3.22-2.16a9.934 9.934 0 0 0 0-14.05m-.7 13.34a8.92 8.92 0 0 1-5.32 2.57v-6.56h1.88a1 1 0 0 0 0-2H13v-2.74a1 1 0 0 1 1-1h1.2a1 1 0 0 0 0-2h-1.7a2.5 2.5 0 0 0-2.5 2.5v3.24H9.13a1 1 0 1 0 0 2H11v6.56a8.919 8.919 0 1 1 9.26-5.47a9.1 9.1 0 0 1-1.94 2.9"
+              />
+            </svg>
+          </span>
+          <span class="lmctGiveawayInfoText">
+            <span class="lmctGiveawayLabel lmctGiveawayLabelLive">
+              LIVE DRAW
+            </span>
+            <time class="lmctGiveawayDate" datetime="2026-08-27T20:30:00+10:00">
+              27 August
+            </time>
+            <span class="lmctGiveawayTime">8:30PM AEST</span>
+          </span>
+        </article>
+      </div>
+    </div>
+
+    <a
+      class="lmctGiveawayCta"
+      href="#section--51900"
+      aria-label="Upgrade to Premium and get 500 entries"
+    >
+      <span class="lmctGiveawayCtaText">
+        UPGRADE TO PREMIUM &amp; GET 500 ENTRIES
+      </span>
+    </a>
+  </div>
+</section>

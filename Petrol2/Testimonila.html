@@ -1,0 +1,462 @@
+<!-- ============================================================
+     LMCT+ TESTIMONIALS BLOCK
+     Paste-ready ClickFunnels 1.0 Custom HTML/Code block.
+     Ripped from lmctpetrol.com — exact design, namespaced as
+     .lmtest-* to avoid collisions with anything else on the funnel.
+     Behaviour:
+       - Desktop (>720px): seamless auto-scrolling marquee (60s loop)
+       - Mobile (≤720px): horizontal swipe carousel with snap
+       - Pauses on hover, respects prefers-reduced-motion
+       - Images hosted on lmctpetrol.com — no extra upload needed
+     ============================================================ -->
+<style>
+  .lmtest *,
+  .lmtest *::before,
+  .lmtest *::after {
+    box-sizing: border-box;
+  }
+  .lmtest {
+    margin: 0px auto;
+    max-width: 1180px;
+    padding: 56px 16px;
+    font-family:
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
+    color: #0a1d3a;
+  }
+  /* ============ HEAD ============
+     Styled for the funnel's blue/dark background.
+     Headline goes white, subtitle goes light blue. */
+  .lmtest-head {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .lmtest-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #16c93a 0%, #0fa10b 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    box-shadow:
+      0 6px 18px rgba(15, 161, 11, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+  .lmtest-eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+    animation: lmtest-pulse 1.8s infinite;
+  }
+  @keyframes lmtest-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+  }
+  .lmtest-head h2 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    font-weight: 900;
+    color: #001a3d;
+    letter-spacing: -0.4px;
+    line-height: 1.15;
+    /* text-shadow: 0 2px 12px rgba(5, 22, 42, 0.32); */
+  }
+  .lmtest-head p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.82);
+    font-size: 13.5px;
+    font-weight: 500;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+  @media (min-width: 640px) {
+    .lmtest {
+      padding: 42px 12px;
+    }
+    .lmtest-head h2 {
+      font-size: 30px;
+    }
+    .lmtest-head p {
+      font-size: 14px;
+    }
+  }
+  /* ============ DESKTOP MARQUEE ============ */
+  .lmtest-grid {
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+  }
+  .lmtest-track {
+    display: flex;
+    gap: 14px;
+    width: max-content;
+    animation: lmtest-marquee 60s linear infinite;
+    will-change: transform;
+  }
+  .lmtest-track:hover {
+    animation-play-state: paused;
+  }
+  .lmtest-card {
+    flex: 0 0 240px;
+  }
+  @keyframes lmtest-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-50% - 7px));
+    }
+  }
+  /* ============ MOBILE CAROUSEL ============ */
+  @media (max-width: 720px) {
+    .lmtest-grid {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-padding-left: 16px;
+      scroll-padding-right: 16px;
+      margin-left: -16px;
+      margin-right: -16px;
+      padding: 6px 16px 14px;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .lmtest-grid::-webkit-scrollbar {
+      display: none;
+    }
+    .lmtest-grid {
+      scrollbar-width: none;
+    }
+    .lmtest-track {
+      animation: none;
+      width: auto;
+      gap: 12px;
+    }
+    .lmtest-card {
+      flex: 0 0 78%;
+      max-width: 320px;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+    }
+    .lmtest-card.is-clone {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmtest-track {
+      animation: none;
+    }
+  }
+  /* ============ CARDS ============ */
+  .lmtest-card {
+    background: #ffffff;
+    border: 1px solid #e6ebf2;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 22px rgba(5, 22, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmtest-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(5, 22, 42, 0.12);
+  }
+  .lmtest-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #eef2f7;
+    position: relative;
+  }
+  .lmtest-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .lmtest-body {
+    padding: 12px 14px 14px;
+    text-align: center;
+  }
+  .lmtest-name {
+    font-weight: 800;
+    font-size: 13px;
+    color: #05162a;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.2);
+    padding: 5px 11px;
+    border-radius: 999px;
+    letter-spacing: 0.3px;
+  }
+  .lmtest-name .lmtest-verified {
+    color: #0c9ffd;
+    font-size: 12px;
+  }
+  /* ============ MOBILE SWIPE HINT ============ */
+  .lmtest-hint {
+    display: none;
+  }
+  @media (max-width: 720px) {
+    .lmtest-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 8px 0 0;
+      font-size: 11px;
+      font-weight: 700;
+      color: #5b6065;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .lmtest-hint .arr {
+      display: inline-block;
+      animation: lmtest-swipe 1.4s ease-in-out infinite;
+      color: #0c9ffd;
+      font-weight: 900;
+      font-size: 14px;
+    }
+    @keyframes lmtest-swipe {
+      0%,
+      100% {
+        transform: translateX(0);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translateX(4px);
+        opacity: 1;
+      }
+    }
+  }
+</style>
+<section
+  class="lmtest"
+  id="member-stories"
+  aria-label="LMCT+ Petrol member testimonials"
+>
+  <div class="lmtest-head">
+    <div class="lmtest-eyebrow">
+      <span class="lmtest-eyebrow-dot"></span>
+      Real Members · Real Savings
+    </div>
+    <h2>Already saving at LMCT+ Petrol</h2>
+    <p>
+      Real members from our Preston site — savings tracked in their LMCT+ app.
+    </p>
+  </div>
+  <div class="lmtest-grid">
+    <div class="lmtest-track">
+      <div class="lmtest-card">
+        <div class="lmtest-photo">
+          <img
+            src="https://www.lmctpetrol.com/testimonial-mary.jpg"
+            alt="Verified LMCT+ Petrol member showing app savings"
+            loading="lazy"
+          />
+        </div>
+        <div class="lmtest-body">
+          <div class="lmtest-name">
+            Verified Member
+            <span class="lmtest-verified" title="Verified member">✓</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmtest-card">
+        <div class="lmtest-photo">
+          <img
+            src="https://www.lmctpetrol.com/testimonial-shayne.jpg"
+            alt="Verified LMCT+ Petrol member showing app savings"
+            loading="lazy"
+          />
+        </div>
+        <div class="lmtest-body">
+          <div class="lmtest-name">
+            Verified Member
+            <span class="lmtest-verified" title="Verified member">✓</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmtest-card">
+        <div class="lmtest-photo">
+          <img
+            src="https://www.lmctpetrol.com/testimonial-receipt.jpg"
+            alt="Verified LMCT+ Petrol member with fuel receipt"
+            loading="lazy"
+          />
+        </div>
+        <div class="lmtest-body">
+          <div class="lmtest-name">
+            Verified Member
+            <span class="lmtest-verified" title="Verified member">✓</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmtest-card">
+        <div class="lmtest-photo">
+          <img
+            src="https://www.lmctpetrol.com/testimonial-0947.jpg"
+            alt="Verified LMCT+ Petrol member showing app savings"
+            loading="lazy"
+          />
+        </div>
+        <div class="lmtest-body">
+          <div class="lmtest-name">
+            Verified Member
+            <span class="lmtest-verified" title="Verified member">✓</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmtest-card">
+        <div class="lmtest-photo">
+          <img
+            src="https://www.lmctpetrol.com/testimonial-0952.jpg"
+            alt="Verified LMCT+ Petrol members showing app savings"
+            loading="lazy"
+          />
+        </div>
+        <div class="lmtest-body">
+          <div class="lmtest-name">
+            Verified Member
+            <span class="lmtest-verified" title="Verified member">✓</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmtest-card">
+        <div class="lmtest-photo">
+          <img
+            src="https://www.lmctpetrol.com/testimonial-0957.jpg"
+            alt="Verified LMCT+ Petrol member at the Preston site"
+            loading="lazy"
+          />
+        </div>
+        <div class="lmtest-body">
+          <div class="lmtest-name">
+            Verified Member
+            <span class="lmtest-verified" title="Verified member">✓</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmtest-card">
+        <div class="lmtest-photo">
+          <img
+            src="https://www.lmctpetrol.com/testimonial-0958.jpg"
+            alt="Verified LMCT+ Petrol member at the Preston site"
+            loading="lazy"
+          />
+        </div>
+        <div class="lmtest-body">
+          <div class="lmtest-name">
+            Verified Member
+            <span class="lmtest-verified" title="Verified member">✓</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmtest-card">
+        <div class="lmtest-photo">
+          <img
+            src="https://www.lmctpetrol.com/testimonial-0965.jpg"
+            alt="Verified LMCT+ Petrol member at the Preston site"
+            loading="lazy"
+          />
+        </div>
+        <div class="lmtest-body">
+          <div class="lmtest-name">
+            Verified Member
+            <span class="lmtest-verified" title="Verified member">✓</span>
+          </div>
+        </div>
+      </div>
+      <div class="lmtest-card">
+        <div class="lmtest-photo">
+          <img
+            src="https://www.lmctpetrol.com/testimonial-0972.jpg"
+            alt="Verified LMCT+ Petrol member at the Preston site"
+            loading="lazy"
+          />
+        </div>
+        <div class="lmtest-body">
+          <div class="lmtest-name">
+            Verified Member
+            <span class="lmtest-verified" title="Verified member">✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.lmtest-track -->
+  </div>
+  <!-- /.lmtest-grid -->
+  <div class="lmtest-hint">
+    <span class="arr">‹</span> Swipe <span class="arr">›</span>
+  </div>
+</section>
+<script>
+  (function () {
+    /* ============================================================
+     Clone the 9 cards once so the desktop marquee loops
+     seamlessly. Clones are hidden on mobile via .is-clone CSS,
+     so the swipe carousel keeps its real count of 9.
+     ============================================================ */
+    function setupMarquee() {
+      const track = document.querySelector(".lmtest-track");
+      if (!track) return;
+      // Don't double-clone if script runs twice
+      if (track.querySelector(".is-clone")) return;
+      const originals = Array.from(track.children);
+      originals.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.classList.add("is-clone");
+        clone.setAttribute("aria-hidden", "true");
+        clone
+          .querySelectorAll("img[loading]")
+          .forEach((img) => img.removeAttribute("loading"));
+        track.appendChild(clone);
+      });
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", setupMarquee);
+    } else {
+      setupMarquee();
+    }
+  })();
+</script>
