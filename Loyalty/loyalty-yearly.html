@@ -8,10 +8,10 @@
 <!--                                                                        -->
 <!--  Paste the whole file as one CF1 element, or split it section by       -->
 <!--  section using the banners. Two anchor targets matter:                 -->
-<!--    #packages    every Become A Member button scrolls here (Section 02) -->
+<!--    #packages    every View Yearly Packages button scrolls here (Section 02) -->
 <!--    #open-popup  the three plan SELECT buttons point here               -->
 <!--  Keep Section 02 present, since its script powers the smooth scroll.   -->
-<!--  Every section has a Become A Member button except Member Perks (08).  -->
+<!--  Every section has a yearly package CTA except Member Perks (08).       -->
 <!--  The hero video is a Wistia iframe embed, so it needs no scripts.      -->
 <!--  All motion respects prefers-reduced-motion.                           -->
 <!--                                                                        -->
@@ -82,7 +82,7 @@
   }
   .lmctMH__h1 {
     margin: 0 0 22px;
-    font-size: clamp(46px, 11vw, 66px);
+    font-size: clamp(42px, 4vw, 53px);
     font-weight: 900;
     line-height: 0.97;
     letter-spacing: -2.4px;
@@ -326,20 +326,18 @@
         src="https://images.clickfunnels.com/11/5808e1954343cc90744e7bcca46ae8/logo.3bf7fa51a183b716b171.png"
         alt="LMCT+"
       />
-      <div class="lmctMH__eyebrow">
-        <span></span>Australia's Original &amp; Best
-      </div>
+      <div class="lmctMH__eyebrow"><span></span>Yearly Membership</div>
       <h1 class="lmctMH__h1">
-        The Membership<br />That <em>Pays For Itself</em>
+        Your Whole <br />
+        Year Of LMCT+ Sorted. <br /><em>Save 15%</em>
       </h1>
       <p class="lmctMH__sub">
-        Wholesale fuel, mates rates at <strong>2,000+ Aussie brands</strong>,
-        and you're in every giveaway we run. Most members save more than they
-        pay.
+        <strong>Lock in 12 months of LMCT+</strong> and enjoy automatic giveaway
+        entries, Mates Rates, supermarket savings, petrol savings and more.
       </p>
       <div class="lmctMH__ctaD">
         <a class="lmctMH__cta" href="#packages"
-          >Become A Member
+          >View Yearly Packages
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -379,7 +377,7 @@
         </div>
       </div>
       <a class="lmctMH__cta lmctMH__ctaM" href="#packages"
-        >Become A Member
+        >View Yearly Packages
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -564,9 +562,9 @@
 <!-- =====  END SECTION 01  |  HERO  ===== -->
 <!-- ===================================================================== -->
 <!--  SECTION 02  |  PACKAGES  -->
-<!--  This section is the scroll target (id=packages) for every Become A Member button in the funnel, and it holds the script that powers the inclusions drawer and that smooth scroll. Keep it on the page.  -->
-<!--  Editable: prices, plan names, features, the Get 2 Months Free banner, and the full inclusions list.  -->
-<!--  SELECT buttons link to #open-popup and carry the order classes: Entry is css-order-bronze, Premium is css-order-silver, Elite is css-order-gold. Attach your CF1 purchase actions to these.  -->
+<!--  This section is the scroll target (id=packages) for every yearly package CTA in the funnel, and it holds the script that powers the inclusions drawer and that smooth scroll. Keep it on the page.  -->
+<!--  Editable: yearly prices, plan names, features, yearly value strip, and the full inclusions list.  -->
+<!--  SELECT buttons link to #open-popup and carry the order classes: Entry is css-order-bronze, Premium is css-order-silver, Elite is css-order-gold. Attach your CF1 yearly purchase actions to these.  -->
 <!-- ===================================================================== -->
 <style>
   /* ============ MERGED SECTION SHELL ============ */
@@ -587,7 +585,7 @@
       margin-top: 24px;
     }
   }
-  /* ============ 1 · ANNUAL BILLING ============ */
+  /* ============ 1 · YEARLY PACKAGE HEADING ============ */
   .lmctAB__wrap {
     background: transparent;
     text-align: center;
@@ -600,6 +598,21 @@
     transform: translateY(10px);
     animation: lmctAB__in 0.7s ease-out 0.1s forwards;
   }
+  .lmctAB__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 12px;
+    background: rgba(12, 159, 253, 0.08);
+    border: 1px solid rgba(12, 159, 253, 0.25);
+    color: #0476c4;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 999px;
+  }
   .lmctAB__line1 {
     margin: 0;
     font-size: clamp(26px, 5.4vw, 46px);
@@ -610,7 +623,7 @@
     text-transform: uppercase;
   }
   .lmctAB__free {
-    font-style: italic;
+    
     background: linear-gradient(
       90deg,
       #0476c4 0%,
@@ -627,7 +640,8 @@
     animation: lmctAB__flow 7s ease-in-out infinite alternate;
   }
   .lmctAB__line2 {
-    margin: 7px 0 0;
+    margin: 7px auto 0;
+    max-width: 660px;
     font-size: clamp(16px, 3vw, 26px);
     font-weight: 600;
     color: #64748b;
@@ -802,6 +816,34 @@
     text-align: center;
     color: #fff;
   }
+  .lmctPP__deal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7px;
+    margin-bottom: 10px;
+  }
+  .lmctPP__deal span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 25px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    line-height: 1;
+    padding: 2px 9px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .lmctPP__dealPop {
+    background: rgba(12, 159, 253, 0.28) !important;
+    border-color: rgba(63, 184, 255, 0.46) !important;
+  }
   .lmctPP__price {
     display: inline-flex;
     align-items: flex-start;
@@ -828,6 +870,23 @@
     font-weight: 700;
     letter-spacing: 0.3px;
     color: rgba(255, 255, 255, 0.85);
+  }
+  .lmctPP__priceSub strong,
+  .lmctPP__priceSub span {
+    display: block;
+  }
+  .lmctPP__priceSub strong {
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .lmctPP__priceSub span {
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.78);
   }
   /* ---- body / features ---- */
   .lmctPP__body {
@@ -905,6 +964,35 @@
     box-shadow: 0 16px 32px rgba(31, 80, 200, 0.45);
     filter: brightness(1.05);
   }
+  .lmctYV__grid {
+    max-width: 1140px;
+    margin: 26px auto 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .lmctYV__card {
+    background: #f8fbff;
+    border: 1px solid #e8eef4;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 10px 26px rgba(5, 22, 42, 0.06);
+  }
+  .lmctYV__card h3 {
+    margin: 0 0 6px;
+    color: #05162a;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .lmctYV__card p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.45;
+  }
   /* ---- DESKTOP: 3-up portrait cards ---- */
   @media (min-width: 860px) {
     .lmctPP__grid {
@@ -914,6 +1002,9 @@
     .lmctPP__card:hover {
       transform: translateY(-6px);
       box-shadow: 0 30px 64px var(--glow);
+    }
+    .lmctYV__grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   /* ---- MOBILE: full-width horizontal rectangles ---- */
@@ -1286,10 +1377,13 @@
 <div class="lmctPkg__section" id="packages">
   <div class="lmctAB__wrap">
     <div class="lmctAB__inner">
+      <p class="lmctAB__eyebrow">Yearly Memberships</p>
       <p class="lmctAB__line1">
-        Get 2 Months <span class="lmctAB__free">Free</span>
+        Choose Your <span class="lmctAB__free">Yearly Package</span>
       </p>
-      <p class="lmctAB__line2">with Annual Billing</p>
+      <p class="lmctAB__line2">
+        Pay once and enjoy 2 months free of LMCT+ benefits.
+      </p>
     </div>
   </div>
   <div class="lmctPP__wrap">
@@ -1304,18 +1398,19 @@
                   alt=""
                   loading="lazy"
               /></span>
-              <span class="lmctPP__tier"
-                ><b>Entry</b><span>Membership</span></span
-              >
+              <span class="lmctPP__tier"><b>Entry</b><span>Yearly</span></span>
             </div>
             <div class="lmctPP__priceBand">
+              <div class="lmctPP__deal">
+                <span>Yearly &bull; 15% Off</span>
+              </div>
               <div class="lmctPP__price">
                 <span class="lmctPP__cur">$</span
-                ><span class="lmctPP__int">19</span
-                ><span class="lmctPP__dec">.99</span>
+                ><span class="lmctPP__int">199</span>
               </div>
               <div class="lmctPP__priceSub">
-                Monthly Billing · Cancel Anytime
+                <strong>/ Year</strong>
+                <span>Only $16.58/month equivalent.</span>
               </div>
             </div>
           </div>
@@ -1411,8 +1506,11 @@
             <a
               href="#open-popup"
               class="lmctPP__select css-order-bronze"
+              data-lmct-yearly-package="entry"
+              data-lmct-product-id="5112721"
               data-title="css-order-bronze"
-              >Select</a
+              aria-label="Select LMCT+ Entry Yearly for $199 per year"
+              >Select Entry</a
             >
           </div>
         </div>
@@ -1426,17 +1524,21 @@
                   loading="lazy"
               /></span>
               <span class="lmctPP__tier"
-                ><b>Premium</b><span>Membership</span></span
+                ><b>Premium</b><span>Yearly</span></span
               >
             </div>
             <div class="lmctPP__priceBand">
+              <div class="lmctPP__deal">
+                <span>Yearly &bull; 15% Off</span>
+                <!-- <span class="lmctPP__dealPop">Most Popular</span> -->
+              </div>
               <div class="lmctPP__price">
                 <span class="lmctPP__cur">$</span
-                ><span class="lmctPP__int">49</span
-                ><span class="lmctPP__dec">.99</span>
+                ><span class="lmctPP__int">499</span>
               </div>
               <div class="lmctPP__priceSub">
-                Monthly Billing · Cancel Anytime
+                <strong>/ Year</strong>
+                <span>Only $41.58/month equivalent.</span>
               </div>
             </div>
           </div>
@@ -1533,8 +1635,11 @@
             <a
               href="#open-popup"
               class="lmctPP__select css-order-silver"
+              data-lmct-yearly-package="premium"
+              data-lmct-product-id="5112722"
               data-title="css-order-silver"
-              >Select</a
+              aria-label="Select LMCT+ Premium Yearly for $499 per year"
+              >Select Premium</a
             >
           </div>
         </div>
@@ -1547,18 +1652,19 @@
                   alt=""
                   loading="lazy"
               /></span>
-              <span class="lmctPP__tier"
-                ><b>Elite</b><span>Membership</span></span
-              >
+              <span class="lmctPP__tier"><b>Elite</b><span>Yearly</span></span>
             </div>
             <div class="lmctPP__priceBand">
+              <div class="lmctPP__deal">
+                <span>Yearly &bull; 15% Off</span>
+              </div>
               <div class="lmctPP__price">
                 <span class="lmctPP__cur">$</span
-                ><span class="lmctPP__int">99</span
-                ><span class="lmctPP__dec">.99</span>
+                ><span class="lmctPP__int">999</span>
               </div>
               <div class="lmctPP__priceSub">
-                Monthly Billing · Cancel Anytime
+                <strong>/ Year</strong>
+                <span>Only $83.25/month equivalent.</span>
               </div>
             </div>
           </div>
@@ -1654,12 +1760,29 @@
             <a
               href="#open-popup"
               class="lmctPP__select css-order-gold"
+              data-lmct-yearly-package="elite"
+              data-lmct-product-id="5112723"
               data-title="css-order-gold"
-              >Select</a
+              aria-label="Select LMCT+ Elite Yearly for $999 per year"
+              >Select Elite</a
             >
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="lmctYV__grid" aria-label="Yearly membership value">
+    <div class="lmctYV__card">
+      <h3>12 Months Access</h3>
+      <p>Enjoy LMCT+ membership benefits for the entire year.</p>
+    </div>
+    <div class="lmctYV__card">
+      <h3>Save 15%</h3>
+      <p>Save compared with the standard membership pricing.</p>
+    </div>
+    <div class="lmctYV__card">
+      <h3>One Annual Payment</h3>
+      <p>Your selected yearly package is billed annually.</p>
     </div>
   </div>
   <div class="lmctPkgInclV7_container">
@@ -1676,7 +1799,7 @@
         <div class="lmctPkgInclV7_card lmctPkgInclV7_entry">
           <div class="lmctPkgInclV7_header">
             <span class="lmctPkgInclV7_badge">Entry</span>
-            <span class="lmctPkgInclV7_price">$19.99</span>
+            <span class="lmctPkgInclV7_price">$199/year</span>
           </div>
           <ul>
             <li>
@@ -1705,7 +1828,7 @@
         <div class="lmctPkgInclV7_card lmctPkgInclV7_premium">
           <div class="lmctPkgInclV7_header">
             <span class="lmctPkgInclV7_badge">Premium</span>
-            <span class="lmctPkgInclV7_price">$49.99</span>
+            <span class="lmctPkgInclV7_price">$499/year</span>
           </div>
           <ul>
             <li>
@@ -1736,7 +1859,7 @@
         <div class="lmctPkgInclV7_card lmctPkgInclV7_elite">
           <div class="lmctPkgInclV7_header">
             <span class="lmctPkgInclV7_badge">Elite</span>
-            <span class="lmctPkgInclV7_price">$99.99</span>
+            <span class="lmctPkgInclV7_price">$999/year</span>
           </div>
           <ul>
             <li>
@@ -1767,58 +1890,147 @@
   </div>
 </div>
 <script>
-  window.addEventListener("load", function () {
-    var btn = document.getElementById("lmctPkgInclV7_btn");
-    var drawer = document.getElementById("lmctPkgInclV7_drawer");
-    if (btn && drawer) {
-      btn.addEventListener("click", function () {
-        var isOpen = drawer.classList.contains("lmctPkgInclV7_drawerOpen");
-        if (isOpen) {
-          drawer.classList.remove("lmctPkgInclV7_drawerOpen");
-          btn.classList.remove("lmctPkgInclV7_open");
-        } else {
-          drawer.classList.add("lmctPkgInclV7_drawerOpen");
-          btn.classList.add("lmctPkgInclV7_open");
-        }
-      });
-    }
-    var pkgTarget = document.getElementById("packages");
-    var pkgLinks = document.querySelectorAll('a[href="#packages"]');
-    var reduce =
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var ease = function (t) {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  (function () {
+    const yearlyPackages = {
+      entry: {
+        name: "LMCT+ Entry Yearly",
+        price: 199,
+        discount: "15% OFF",
+        monthlyEquivalent: 16.58,
+      },
+      premium: {
+        name: "LMCT+ Premium Yearly",
+        price: 499,
+        discount: "15% OFF",
+        monthlyEquivalent: 41.58,
+      },
+      elite: {
+        name: "LMCT+ Elite Yearly",
+        price: 999,
+        discount: "15% OFF",
+        monthlyEquivalent: 83.25,
+      },
     };
-    pkgLinks.forEach(function (link) {
-      link.addEventListener("click", function (e) {
-        if (!pkgTarget) return;
-        e.preventDefault();
-        var startY = window.pageYOffset || document.documentElement.scrollTop;
-        var endY = pkgTarget.getBoundingClientRect().top + startY - 80;
-        if (reduce) {
-          window.scrollTo(0, endY);
-          return;
+
+    var yearlyProductIds = {
+      entry: "5112721",
+      premium: "5112722",
+      elite: "5112723",
+    };
+
+    window.lmctYearlyPackages = yearlyPackages;
+    window.lmctYearlyProductIds = yearlyProductIds;
+
+    function lmctSelectYearlyProduct(packageKey) {
+      var productId = yearlyProductIds[packageKey];
+      if (!productId) return;
+
+      var radios = document.querySelectorAll(
+        '.o2step_step2 input[name="purchase[product_id]"], [data-de-type="orpo"] input[name="purchase[product_id]"]',
+      );
+      var targetRadio = null;
+
+      radios.forEach(function (radio) {
+        if (radio.closest("#cfAR")) return;
+        var isMatch = radio.value === productId;
+        var row = radio.closest(".elOrderProductOptinProducts");
+        if (row) {
+          row.style.display = isMatch ? "" : "none";
+          row.classList.toggle("checked-item", isMatch);
         }
-        var dist = endY - startY,
-          t0 = null,
-          dur = 650;
-        var step = function (ts) {
-          if (t0 === null) t0 = ts;
-          var p = Math.min((ts - t0) / dur, 1);
-          window.scrollTo(0, startY + dist * ease(p));
-          if (p < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
+        radio.checked = isMatch;
+        if (isMatch) targetRadio = radio;
       });
+
+      if (!targetRadio) return;
+
+      targetRadio.dispatchEvent(new Event("change", { bubbles: true }));
+      targetRadio.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+      document
+        .querySelectorAll('#cfAR input[name="purchase[product_ids][]"]')
+        .forEach(function (input) {
+          input.checked = input.value === productId;
+        });
+
+      document.body.setAttribute("data-lmct-yearly-package", packageKey);
+      window.lmctSelectedYearlyPackage = yearlyPackages[packageKey];
+
+      if (typeof window.rebuildOrderSummary === "function") {
+        window.rebuildOrderSummary();
+      }
+
+      if (window.jQuery) {
+        window.jQuery(document).trigger("cfpt:cart-updated");
+      }
+    }
+
+    window.addEventListener("load", function () {
+      var btn = document.getElementById("lmctPkgInclV7_btn");
+      var drawer = document.getElementById("lmctPkgInclV7_drawer");
+      if (btn && drawer) {
+        btn.addEventListener("click", function () {
+          var isOpen = drawer.classList.contains("lmctPkgInclV7_drawerOpen");
+          if (isOpen) {
+            drawer.classList.remove("lmctPkgInclV7_drawerOpen");
+            btn.classList.remove("lmctPkgInclV7_open");
+          } else {
+            drawer.classList.add("lmctPkgInclV7_drawerOpen");
+            btn.classList.add("lmctPkgInclV7_open");
+          }
+        });
+      }
+      var pkgTarget = document.getElementById("packages");
+      var pkgLinks = document.querySelectorAll('a[href="#packages"]');
+      var reduce =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var ease = function (t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      };
+      pkgLinks.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          if (!pkgTarget) return;
+          e.preventDefault();
+          var startY = window.pageYOffset || document.documentElement.scrollTop;
+          var endY = pkgTarget.getBoundingClientRect().top + startY - 80;
+          if (reduce) {
+            window.scrollTo(0, endY);
+            return;
+          }
+          var dist = endY - startY,
+            t0 = null,
+            dur = 650;
+          var step = function (ts) {
+            if (t0 === null) t0 = ts;
+            var p = Math.min((ts - t0) / dur, 1);
+            window.scrollTo(0, startY + dist * ease(p));
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+      });
+      document
+        .querySelectorAll("[data-lmct-yearly-package]")
+        .forEach(function (button) {
+          button.addEventListener("click", function () {
+            var packageKey = button.getAttribute("data-lmct-yearly-package");
+            // These yearly IDs are the existing $199/$499/$999 product IDs found in the checkout code.
+            [0, 200, 600, 1200].forEach(function (delay) {
+              setTimeout(function () {
+                lmctSelectYearlyProduct(packageKey);
+              }, delay);
+            });
+          });
+        });
     });
-  });
+  })();
 </script>
 <!-- =====  END SECTION 02  |  PACKAGES  ===== -->
 <!-- ===================================================================== -->
 <!--  SECTION 03  |  ENTRIES (THE DRAW)  -->
 <!--  The tier entry counts that drive the bar chart are set in the chart script at the end of this section.  -->
-<!--  Headline and supporting copy are editable in the markup. Ends with a Become A Member button.  -->
+<!--  Headline and supporting copy are editable in the markup. Ends with a yearly package CTA.  -->
 <!-- ===================================================================== -->
 <style>
   .lmctEN__wrap {
@@ -2212,8 +2424,8 @@
         You're In Every Draw. <em>Automatically.</em>
       </h2>
       <p class="lmctEN__lead">
-        The moment you join, your name goes into every LMCT+ giveaway. Cars,
-        cash, the lot. Enter once, never miss one again.
+        Lock in your yearly membership and stay entered into eligible LMCT+
+        giveaways throughout your membership. Cars, cash, the lot.
       </p>
     </div>
     <div class="lmctEN__points">
@@ -2294,7 +2506,7 @@
     </div>
     <div class="lmctEN__ctaWrap">
       <a class="lmctEN__cta" href="#packages"
-        >Become A Member
+        >View Yearly Packages
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -2402,7 +2614,7 @@
 <!--  SECTION 04  |  PARTNER DISCOUNTS  -->
 <!--  Partner logos are the image URLs inside the marquee. Swap or add as many as you like.  -->
 <!--  The receipt line items and their member discount amounts are editable. Keep them adding up to the TOTAL SAVED figure (currently 152 plus 98 plus 200 equals 450).  -->
-<!--  Stat numbers (2,000+, 1,700+, $1,000s) and the exclusive line are editable. A shorter lead sentence swaps in on mobile. The receipt tucks behind the logo strip and a Become A Member button sits below it.  -->
+<!--  Stat numbers (2,000+, 1,700+, $1,000s) and the exclusive line are editable. A shorter lead sentence swaps in on mobile. The receipt tucks behind the logo strip and a yearly package CTA sits below it.  -->
 <!-- ===================================================================== -->
 <style>
   .lmctDS__wrap {
@@ -3185,7 +3397,7 @@
   </div>
   <div class="lmctDS__ctaWrap">
     <a class="lmctDS__cta" href="#packages"
-      >Become A Member
+      >View Yearly Packages
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -3776,9 +3988,9 @@
     >
     <h2 class="lmctSM__title">Groceries At Wholesale Prices</h2>
     <p class="lmctSM__sub">
-      LMCT+ Supermarkets are on the way. Members get genuine wholesale pricing
-      on everyday groceries, and our first store is opening soon in Deer Park,
-      with more rolling out across Victoria.
+      Enjoy access to LMCT+ supermarket savings throughout your yearly
+      membership. Our first store is opening soon in Deer Park, with more
+      rolling out across Victoria.
     </p>
     <div class="lmctSM__shot">
       <img
@@ -3845,7 +4057,7 @@
     </div>
     <div>
       <a href="#packages" class="lmctSM__cta"
-        >Become A Member<svg
+        >View Yearly Packages<svg
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -4255,7 +4467,7 @@
 <!--  SECTION 06  |  PETROL (WHOLESALE SAVINGS)  -->
 <!--  The station is open 24 hours, 7 days a week. Location is Preston. Both sit in the location block near the bottom.  -->
 <!--  Customer photos are the image URLs in the marquee. The proof figure ($1,128) and the three feature blocks are editable.  -->
-<!--  Each feature has a full desktop sentence and a shorter mobile one. Ends with a Become A Member button.  -->
+<!--  Each feature has a full desktop sentence and a shorter mobile one. Ends with a yearly package CTA.  -->
 <!-- ===================================================================== -->
 <style>
   .lmctPet__wrap {
@@ -4608,8 +4820,9 @@
       <span class="lmctPet__kick">LMCT+ Petrol</span>
       <h2 class="lmctPet__title">Save Big <em>At The Pump</em></h2>
       <p class="lmctPet__sub">
-        We sell petrol at genuine wholesale prices, so members save every single
-        visit. And every litre earns you bonus entries, coins and EXP.
+        Access LMCT+ fuel savings throughout your 12-month membership. Members
+        save every single visit, and every litre earns bonus entries, coins and
+        EXP.
       </p>
     </div>
     <div class="lmctPet__grid">
@@ -5085,7 +5298,7 @@
     </div>
     <div class="lmctPet__ctaWrap">
       <a class="lmctPet__cta" href="#packages"
-        >Become A Member
+        >View Yearly Packages
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -5102,7 +5315,7 @@
 <!-- =====  END SECTION 06  |  PETROL (WHOLESALE SAVINGS)  ===== -->
 <!-- ===================================================================== -->
 <!--  SECTION 07  |  COMING SOON  -->
-<!--  The upcoming items and their copy are editable in the cards. Ends with a Become A Member button.  -->
+<!--  The upcoming items and their copy are editable in the cards. Ends with a yearly package CTA.  -->
 <!--  Note: a supermarket also has a dedicated section (05). Remove the supermarket card here if you do not want it mentioned twice.  -->
 <!-- ===================================================================== -->
 <style>
@@ -5280,8 +5493,8 @@
       <span class="lmctCS__kick">Just Getting Started</span>
       <h2 class="lmctCS__title">Your Membership <em>Keeps Growing</em></h2>
       <p class="lmctCS__lead">
-        Lock in now and every new perk we add lands in your account
-        automatically, at no extra cost.
+        Join for the year and every new LMCT+ member benefit we add lands in
+        your account automatically, at no extra cost.
       </p>
     </div>
     <div class="lmctCS__grid">
@@ -5352,7 +5565,7 @@
     </div>
     <div class="lmctCS__ctaWrap">
       <a class="lmctCS__cta" href="#packages"
-        >Become A Member
+        >View Yearly Packages
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -5370,7 +5583,7 @@
 <!-- ===================================================================== -->
 <!--  SECTION 08  |  MEMBER PERKS  (the 'And There's More' section)  -->
 <!--  The perk items and their copy are editable in the cards.  -->
-<!--  By design this is the one section without a Become A Member button.  -->
+<!--  By design this is the one section without a package CTA.  -->
 <!-- ===================================================================== -->
 <style>
   .lmctPK__wrap {
@@ -5625,7 +5838,7 @@
 <!-- ===================================================================== -->
 <!--  SECTION 09  |  APP AND FINAL CTA  -->
 <!--  App store links: the Apple App Store and Google Play URLs are in the markup.  -->
-<!--  The app screenshot image URL is editable. The final Become A Member button points to #packages.  -->
+<!--  The app screenshot image URL is editable. The app CTA points to #packages.  -->
 <!-- ===================================================================== -->
 <style>
   .lmctAP__wrap {
@@ -5954,12 +6167,12 @@
           </h2>
           <p class="lmctAP__sub">
             Everything lives in one app. Your entries, daily giveaways, fuel
-            discount and 2,000+ member deals, all one tap away. Join thousands
-            of members already winning.
+            discount and 2,000+ member deals stay one tap away for your yearly
+            membership.
           </p>
           <div class="lmctAP__cta">
             <a class="lmctAP__join" href="#packages">
-              Become A Member
+              Choose Yearly Package
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -6026,6 +6239,176 @@
   </div>
 </div>
 <!-- =====  END SECTION 09  |  APP AND FINAL CTA  ===== -->
+<!-- ===================================================================== -->
+<!--  SECTION 09B  |  FINAL YEARLY CTA  -->
+<!-- ===================================================================== -->
+<style>
+  .lmctYC__wrap {
+    background: #05162a;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    padding: 54px 16px 58px;
+    overflow: hidden;
+  }
+  .lmctYC__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .lmctYC__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(12, 159, 253, 0.12);
+    border: 1px solid rgba(12, 159, 253, 0.35);
+    color: #3fb8ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  .lmctYC__eyebrow span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #3fb8ff;
+    box-shadow: 0 0 8px #3fb8ff;
+  }
+  .lmctYC__title {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(30px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+  }
+  .lmctYC__title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #3fb8ff, #0c9ffd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lmctYC__sub {
+    max-width: 620px;
+    margin: 14px auto 26px;
+    color: #cbd5e1;
+    font-size: 15.5px;
+    font-weight: 500;
+    line-height: 1.55;
+  }
+  .lmctYC__prices {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    max-width: 760px;
+    margin: 0 auto 28px;
+  }
+  .lmctYC__priceItem {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 15px 16px;
+  }
+  .lmctYC__priceItem span {
+    display: block;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+  .lmctYC__priceItem strong {
+    display: block;
+    margin-top: 5px;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.4px;
+  }
+  .lmctYC__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    width: 100%;
+    max-width: 390px;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, #0c9ffd, #0476c4);
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 18px 28px;
+    border-radius: 16px;
+    box-shadow: 0 14px 30px rgba(12, 159, 253, 0.42);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .lmctYC__cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px rgba(12, 159, 253, 0.52);
+  }
+  .lmctYC__cta svg {
+    width: 18px;
+    height: 18px;
+  }
+  @media (min-width: 720px) {
+    .lmctYC__prices {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .lmctYC__wrap {
+      padding: 44px 14px 48px;
+    }
+  }
+</style>
+<section class="lmctYC__wrap" aria-labelledby="lmctYC__title">
+  <div class="lmctYC__inner">
+    <div class="lmctYC__eyebrow"><span></span>Yearly Membership</div>
+    <h2 class="lmctYC__title" id="lmctYC__title">
+      Ready To <em>Lock In Your Year?</em>
+    </h2>
+    <p class="lmctYC__sub">
+      Choose your LMCT+ yearly membership and enjoy 12 months of member
+      benefits.
+    </p>
+    <div class="lmctYC__prices" aria-label="Yearly membership prices">
+      <div class="lmctYC__priceItem">
+        <span>Entry</span>
+        <strong>$199/year</strong>
+      </div>
+      <div class="lmctYC__priceItem">
+        <span>Premium</span>
+        <strong>$499/year</strong>
+      </div>
+      <div class="lmctYC__priceItem">
+        <span>Elite</span>
+        <strong>$999/year</strong>
+      </div>
+    </div>
+    <a class="lmctYC__cta" href="#packages"
+      >Choose My Yearly Membership
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M5 12h14M13 6l6 6-6 6" /></svg
+    ></a>
+  </div>
+</section>
+<!-- =====  END SECTION 09B  |  FINAL YEARLY CTA  ===== -->
 <!-- ===================================================================== -->
 <!--  SECTION 10  |  FOOTER  -->
 <!--  Customer support number (1300 683 688) appears as display text and as the tel link href. Update both if it changes.  -->

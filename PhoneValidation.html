@@ -1,0 +1,760 @@
+<!-- ============================================================
+     SECTION 05 — PHONE VALIDATION
+     intl-tel-input v29.1.2
+     AUSTRALIAN MOBILE ONLY
+     ============================================================ -->
+
+<!-- [VENDOR] intl-tel-input -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/intl-tel-input@29.1.2/dist/css/intlTelInput.min.css"
+/>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@29.1.2/dist/js/intlTelInput.min.js"></script>
+
+<script>
+  (function ($) {
+    "use strict";
+
+    /* ------------------------------------------------------------
+     PREVENT DUPLICATE INITIALISATION
+     ------------------------------------------------------------ */
+
+    if (window.__LMCT_PHONE_VALIDATION_ACTIVE__) {
+      return;
+    }
+
+    window.__LMCT_PHONE_VALIDATION_ACTIVE__ = true;
+
+    /* ------------------------------------------------------------
+     CONFIG
+     ------------------------------------------------------------ */
+
+    var ITI_VERSION = "29.1.2";
+
+    var UTILS_URL =
+      "https://cdn.jsdelivr.net/npm/intl-tel-input@" +
+      ITI_VERSION +
+      "/dist/js/utils.js";
+
+    var PHONE_SELECTOR = 'input[name="phone"]';
+
+    /*
+     * ClickFunnels Classic submission buttons.
+     *
+     * Step 1:
+     *   #submit-form-2step
+     *
+     * Final payment:
+     *   #submit-form-2step-order
+     *
+     * Normal forms:
+     *   #submit-form
+     */
+    var SUBMIT_SELECTOR =
+      '[href="#submit-form"],' +
+      '[href="#submit-form-2step"],' +
+      '[href="#submit-form-2step-order"]';
+
+    var SUBMIT_AS_E164 = true;
+
+    /*
+     * Australian mobiles:
+     *
+     * National:
+     *   0412 345 678
+     *
+     * E.164:
+     *   +61412345678
+     */
+    var AU_MOBILE_RE = /^\+614\d{8}$/;
+
+    var AU_MOBILE_MSG = "Enter a valid Australian mobile number";
+
+    var OK_COLOUR = "#4a8920";
+    var BAD_COLOUR = "#b91517";
+
+    /* ------------------------------------------------------------
+     STATE
+     ------------------------------------------------------------ */
+
+    var fields = [];
+    var gatesBound = false;
+
+    /* ------------------------------------------------------------
+     HELPERS
+     ------------------------------------------------------------ */
+
+    function value(f) {
+      return (f.input.value || "").trim();
+    }
+
+    function isAttached(f) {
+      return document.documentElement.contains(f.input);
+    }
+
+    function utilsReady(f) {
+      return f.utilsReady === true;
+    }
+
+    function lengthValid(f) {
+      if (!utilsReady(f)) {
+        return false;
+      }
+
+      try {
+        return f.iti.isValidNumber() === true;
+      } catch (err) {
+        return false;
+      }
+    }
+
+    function getE164(f) {
+      if (!utilsReady(f)) {
+        return "";
+      }
+
+      try {
+        return f.iti.getNumber() || "";
+      } catch (err) {
+        return "";
+      }
+    }
+
+    function mobileValid(f) {
+      return AU_MOBILE_RE.test(getE164(f));
+    }
+
+    /*
+     * IMPORTANT:
+     *
+     * Empty = INVALID
+     * Utils not loaded = INVALID
+     * Landline = INVALID
+     * Non-AU number = INVALID
+     */
+    function isValid(f) {
+      if (!value(f)) {
+        return false;
+      }
+
+      if (!utilsReady(f)) {
+        return false;
+      }
+
+      return lengthValid(f) && mobileValid(f);
+    }
+
+    /* ------------------------------------------------------------
+     ERROR MESSAGES
+     ------------------------------------------------------------ */
+
+    function messageFor(f) {
+      if (!value(f)) {
+        return "Please enter your phone number";
+      }
+
+      if (!utilsReady(f)) {
+        return "Phone validation is still loading. Please try again.";
+      }
+
+      /*
+       * libphonenumber considers it structurally valid,
+       * but it isn't an Australian mobile.
+       */
+      if (lengthValid(f) && !mobileValid(f)) {
+        return AU_MOBILE_MSG;
+      }
+
+      var codes =
+        (window.intlTelInput && window.intlTelInput.VALIDATION_ERROR) || {};
+
+      var code = null;
+
+      try {
+        code = f.iti.getValidationError();
+      } catch (err) {}
+
+      if (code === codes.INVALID_COUNTRY_CODE) {
+        return AU_MOBILE_MSG;
+      }
+
+      if (code === codes.TOO_SHORT) {
+        return "Phone number is too short";
+      }
+
+      if (code === codes.TOO_LONG) {
+        return "Phone number is too long";
+      }
+
+      return AU_MOBILE_MSG;
+    }
+
+    /* ------------------------------------------------------------
+     UI
+     ------------------------------------------------------------ */
+
+    function paintNeutral(f) {
+      f.$error.text("").addClass("hide").removeClass("errorMsg");
+
+      f.$valid.addClass("hide").removeClass("validMsg");
+
+      f.$input.css({
+        "border-color": "",
+        "border-width": "",
+      });
+    }
+
+    function paintValid(f) {
+      f.$error.text("").addClass("hide").removeClass("errorMsg");
+
+      f.$valid.removeClass("hide").addClass("validMsg");
+
+      f.$input.css({
+        "border-color": OK_COLOUR,
+        "border-width": "3px",
+      });
+    }
+
+    function paintInvalid(f) {
+      f.$valid.addClass("hide").removeClass("validMsg");
+
+      f.$error.text(messageFor(f)).removeClass("hide").addClass("errorMsg");
+
+      f.$input.css({
+        "border-color": BAD_COLOUR,
+        "border-width": "3px",
+      });
+    }
+
+    /* ------------------------------------------------------------
+     VALIDATE FIELD
+     ------------------------------------------------------------ */
+
+    function evaluate(f, forceErrors) {
+      /*
+       * EMPTY PHONE IS INVALID.
+       *
+       * We no longer depend on ClickFunnels to catch this.
+       */
+      if (!value(f)) {
+        if (forceErrors || f.touched) {
+          f.touched = true;
+          paintInvalid(f);
+        } else {
+          paintNeutral(f);
+        }
+
+        return false;
+      }
+
+      /*
+       * FAIL CLOSED.
+       *
+       * Previously the script treated all numbers as valid
+       * until utils.js finished loading.
+       */
+      if (!utilsReady(f)) {
+        if (forceErrors) {
+          f.touched = true;
+          paintInvalid(f);
+        } else {
+          paintNeutral(f);
+        }
+
+        return false;
+      }
+
+      if (isValid(f)) {
+        paintValid(f);
+        return true;
+      }
+
+      if (forceErrors || f.touched) {
+        f.touched = true;
+        paintInvalid(f);
+      } else {
+        paintNeutral(f);
+      }
+
+      return false;
+    }
+
+    /* ------------------------------------------------------------
+     FIND INVALID PHONE
+     ------------------------------------------------------------ */
+
+    function firstInvalid() {
+      for (var i = 0; i < fields.length; i++) {
+        var f = fields[i];
+
+        /*
+         * Ignore inputs that have actually been removed from DOM.
+         *
+         * IMPORTANT:
+         * We DO NOT skip hidden fields.
+         *
+         * ClickFunnels hides Step 1 when the customer reaches
+         * the payment step. The phone must still be validated.
+         */
+        if (!isAttached(f)) {
+          continue;
+        }
+
+        if (!isValid(f)) {
+          return f;
+        }
+      }
+
+      return null;
+    }
+
+    /* ------------------------------------------------------------
+     NORMALIZE TO E.164
+     ------------------------------------------------------------ */
+
+    function writeE164() {
+      if (!SUBMIT_AS_E164) {
+        return;
+      }
+
+      for (var i = 0; i < fields.length; i++) {
+        var f = fields[i];
+
+        if (!isAttached(f)) {
+          continue;
+        }
+
+        if (!isValid(f)) {
+          continue;
+        }
+
+        var full = getE164(f);
+
+        if (!full) {
+          continue;
+        }
+
+        /*
+         * Example:
+         *
+         * 0412 345 678
+         *
+         * becomes:
+         *
+         * +61412345678
+         */
+        f.input.value = full;
+
+        /*
+         * Notify ClickFunnels / Garlic / other listeners that
+         * the value changed.
+         */
+        try {
+          f.input.dispatchEvent(
+            new Event("input", {
+              bubbles: true,
+            }),
+          );
+
+          f.input.dispatchEvent(
+            new Event("change", {
+              bubbles: true,
+            }),
+          );
+        } catch (err) {
+          /*
+           * IE/old-browser fallback is unnecessary for most CF
+           * traffic, but at least update through jQuery.
+           */
+          f.$input.trigger("input").trigger("change");
+        }
+      }
+    }
+
+    /* ------------------------------------------------------------
+     RETURN CUSTOMER TO STEP 1
+     ------------------------------------------------------------ */
+
+    function revealField(f) {
+      var $input = f.$input;
+
+      var $step1 = $input.closest(".o2step_step1");
+
+      if (!$step1.length || $step1.is(":visible")) {
+        try {
+          f.input.focus();
+        } catch (err) {}
+
+        return;
+      }
+
+      /*
+       * Phone is hidden because customer is currently on
+       * payment Step 2.
+       *
+       * Use ClickFunnels' own "Edit Shipping Details" button
+       * rather than manually modifying the order form.
+       */
+      var $orderForm = $input.closest('[data-de-type="order2step"]');
+
+      var $back = $orderForm.find(".goBacktoStepOneOrderBump").first();
+
+      if ($back.length) {
+        $back.trigger("click");
+      }
+
+      /*
+       * Give ClickFunnels a moment to display Step 1.
+       */
+      setTimeout(function () {
+        try {
+          f.input.focus();
+        } catch (err) {}
+      }, 100);
+    }
+
+    /* ------------------------------------------------------------
+     BLOCK INVALID SUBMISSION
+     ------------------------------------------------------------ */
+
+    function blockSubmission(e, bad) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (typeof e.stopImmediatePropagation === "function") {
+          e.stopImmediatePropagation();
+        }
+      }
+
+      bad.touched = true;
+
+      paintInvalid(bad);
+      revealField(bad);
+    }
+
+    /* ------------------------------------------------------------
+     CLICKFUNNELS BUTTON GATE
+     ------------------------------------------------------------ */
+
+    function onSubmitClick(e) {
+      var button = null;
+
+      if (e.target && e.target.closest) {
+        button = e.target.closest(SUBMIT_SELECTOR);
+      }
+
+      if (!button) {
+        return;
+      }
+
+      var bad = firstInvalid();
+
+      if (bad) {
+        blockSubmission(e, bad);
+        return;
+      }
+
+      /*
+       * Number is valid.
+       *
+       * Convert it before ClickFunnels' own click handler runs.
+       */
+      writeE164();
+    }
+
+    /* ------------------------------------------------------------
+     ACTUAL FORM SUBMIT GATE
+     ------------------------------------------------------------ */
+
+    function onFormSubmit(e) {
+      var form = e.target;
+
+      if (!form || form.tagName !== "FORM") {
+        return;
+      }
+
+      /*
+       * Only interfere with forms containing the phone field
+       * or the main CF form.
+       */
+      var hasPhone = form.querySelector && form.querySelector(PHONE_SELECTOR);
+
+      if (!hasPhone && form.id !== "cfAR") {
+        return;
+      }
+
+      var bad = firstInvalid();
+
+      if (bad) {
+        blockSubmission(e, bad);
+        return;
+      }
+
+      /*
+       * Last chance to ensure CF receives E.164.
+       */
+      writeE164();
+    }
+
+    /* ------------------------------------------------------------
+     SETUP INDIVIDUAL PHONE INPUT
+     ------------------------------------------------------------ */
+
+    function setup(input) {
+      /*
+       * Prevent this script itself from binding twice.
+       */
+      if (input.getAttribute("data-lmct-phone-bound") === "1") {
+        return;
+      }
+
+      input.setAttribute("data-lmct-phone-bound", "1");
+
+      /*
+       * Additional native-browser protection.
+       */
+      input.setAttribute("required", "required");
+      input.setAttribute("aria-required", "true");
+      input.setAttribute("autocomplete", "tel");
+      input.setAttribute("inputmode", "tel");
+
+      var $input = $(input);
+
+      /*
+       * IMPORTANT:
+       *
+       * Do not return just because an intl-tel-input
+       * instance already exists.
+       *
+       * Reuse it instead.
+       */
+      var iti = null;
+
+      try {
+        iti = window.intlTelInput.getInstance(input) || null;
+      } catch (err) {}
+
+      /*
+       * No existing instance:
+       * initialise our own.
+       */
+      if (!iti) {
+        iti = window.intlTelInput(input, {
+          initialCountry: "au",
+
+          onlyCountries: ["au"],
+
+          countrySelectorMode: "OFF",
+
+          separateDialCode: false,
+
+          numberDisplayFormat: "NATIONAL",
+
+          allowedNumberTypes: ["MOBILE"],
+
+          formatAsYouType: true,
+
+          strictMode: true,
+
+          strictRejectAnimation: true,
+
+          placeholderNumberPolicy: "AGGRESSIVE",
+
+          customPlaceholder: function (exampleNumber) {
+            return exampleNumber
+              ? "Number Here... " + exampleNumber
+              : "Number Here...";
+          },
+
+          loadUtils: function () {
+            return import(UTILS_URL);
+          },
+        });
+      } else {
+        /*
+         * If another script already initialised ITI,
+         * keep AU selected.
+         */
+        try {
+          iti.setCountry("au");
+        } catch (err) {}
+      }
+
+      var $wrap = $input.closest(".iti");
+
+      if (!$wrap.length) {
+        $wrap = $input;
+      }
+
+      var isFirst = fields.length === 0;
+
+      var $valid = $('<div class="hide lmct-phone-valid">\u2713 Valid</div>');
+
+      var $error = $('<div class="hide lmct-phone-error"></div>');
+
+      if (isFirst) {
+        $valid.attr("id", "valid-msg");
+        $error.attr("id", "error-msg");
+      }
+
+      $wrap.after($error);
+      $wrap.after($valid);
+
+      var f = {
+        input: input,
+        $input: $input,
+        iti: iti,
+        $valid: $valid,
+        $error: $error,
+        touched: false,
+        utilsReady: false,
+      };
+
+      fields.push(f);
+
+      /* ----------------------------------------------------------
+       LIVE EVENTS
+       ---------------------------------------------------------- */
+
+      $input.on(
+        "input.lmctPhone change.lmctPhone countrychange.lmctPhone",
+        function () {
+          evaluate(f, false);
+        },
+      );
+
+      $input.on("blur.lmctPhone", function () {
+        evaluate(f, true);
+      });
+
+      /* ----------------------------------------------------------
+       UTILS READY STATE
+       ---------------------------------------------------------- */
+
+      /*
+       * If utils already exist globally, we're ready.
+       */
+      if (window.intlTelInput && window.intlTelInput.utils) {
+        f.utilsReady = true;
+
+        if (value(f)) {
+          evaluate(f, false);
+        }
+      }
+
+      /*
+       * Otherwise wait for the ITI instance.
+       */
+      if (iti.promise && iti.promise.then) {
+        iti.promise.then(
+          function () {
+            /*
+             * A promise resolution normally means required ITI
+             * dependencies have completed.
+             */
+            f.utilsReady = true;
+
+            if (value(f)) {
+              evaluate(f, false);
+            }
+          },
+
+          function () {
+            /*
+             * Fail closed if utils cannot load.
+             */
+            f.utilsReady = false;
+
+            if (value(f)) {
+              evaluate(f, true);
+            }
+          },
+        );
+      }
+    }
+
+    /* ------------------------------------------------------------
+     SCAN PAGE
+     ------------------------------------------------------------ */
+
+    function scan() {
+      if (!window.intlTelInput) {
+        return;
+      }
+
+      $(PHONE_SELECTOR).each(function () {
+        setup(this);
+      });
+
+      /*
+       * Bind gates once.
+       *
+       * Capture phase = true.
+       *
+       * This runs before ClickFunnels' normal button handlers.
+       */
+      if (!gatesBound) {
+        document.addEventListener("click", onSubmitClick, true);
+
+        document.addEventListener("submit", onFormSubmit, true);
+
+        gatesBound = true;
+      }
+    }
+
+    /* ------------------------------------------------------------
+     START
+     ------------------------------------------------------------ */
+
+    $(function () {
+      /*
+       * Remove messages left behind by older versions
+       * if the page/editor injected them.
+       */
+      $(
+        "#valid-msg, #error-msg, " +
+          ".lmct-phone-valid, " +
+          ".lmct-phone-error",
+      ).remove();
+
+      scan();
+
+      /*
+       * CF occasionally finishes injecting elements slightly
+       * after DOM ready.
+       */
+      setTimeout(scan, 250);
+      setTimeout(scan, 750);
+      setTimeout(scan, 1500);
+    });
+
+    window.addEventListener("load", scan);
+  })(window.jQuery);
+</script>
+
+<style>
+  .iti {
+    display: block !important;
+    margin-top: 2em !important;
+  }
+
+  [data-associated-to=".elS1Phone"] {
+    top: -5.2em !important;
+  }
+
+  .errorMsg {
+    display: block !important;
+    color: red;
+    position: absolute;
+  }
+
+  .validMsg {
+    display: block !important;
+    color: #00c900;
+    position: absolute;
+  }
+</style>
+
+<!-- End of Phone Validation Script -->

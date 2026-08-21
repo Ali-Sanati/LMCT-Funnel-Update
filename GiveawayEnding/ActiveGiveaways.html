@@ -626,7 +626,11 @@
   }
 </style>
 
-<section id="ActiveGiveawaySection" class="lmctActiveGiveaways" aria-label="Active LMCT+ giveaways">
+<section
+  id="ActiveGiveawaySection"
+  class="lmctActiveGiveaways"
+  aria-label="Active LMCT+ giveaways"
+>
   <div class="lmctActiveGiveaways__inner">
     <div class="lmctActiveGiveaways__header">
       <div class="lmctActiveGiveaways__badge">
@@ -845,10 +849,33 @@
       );
     }
 
-    function lmctActiveGiveawaysGetTime(endDate) {
-      var lmctActiveGiveawaysEnd = new Date(endDate).getTime();
+    function lmctActiveGiveawaysGetDateTime(dateValue) {
+      var lmctActiveGiveawaysTime = new Date(dateValue).getTime();
+      return Number.isFinite(lmctActiveGiveawaysTime)
+        ? lmctActiveGiveawaysTime
+        : null;
+    }
 
-      if (!Number.isFinite(lmctActiveGiveawaysEnd)) {
+    function lmctActiveGiveawaysIsUpcoming(startDate) {
+      var lmctActiveGiveawaysStart = lmctActiveGiveawaysGetDateTime(startDate);
+      return (
+        lmctActiveGiveawaysStart !== null &&
+        lmctActiveGiveawaysStart > Date.now()
+      );
+    }
+
+    function lmctActiveGiveawaysGetTimerTarget(cardData) {
+      return cardData.isUpcoming ? cardData.startDate : cardData.endDate;
+    }
+
+    function lmctActiveGiveawaysGetTimerLabel(cardData) {
+      return cardData.isUpcoming ? "OPENING IN" : "ENTRIES CLOSE IN";
+    }
+
+    function lmctActiveGiveawaysGetTime(endDate) {
+      var lmctActiveGiveawaysEnd = lmctActiveGiveawaysGetDateTime(endDate);
+
+      if (lmctActiveGiveawaysEnd === null) {
         return null;
       }
 
@@ -1060,11 +1087,14 @@
         lmctActiveGiveawaysTimer,
         "span",
         "lmctActiveGiveaways__timerLabel",
-        "ENTRIES CLOSE IN",
+        lmctActiveGiveawaysGetTimerLabel(cardData),
+      );
+      cardData.timerLabel = lmctActiveGiveawaysTimer.querySelector(
+        ".lmctActiveGiveaways__timerLabel",
       );
 
       var lmctActiveGiveawaysTime = lmctActiveGiveawaysGetTime(
-        cardData.endDate,
+        lmctActiveGiveawaysGetTimerTarget(cardData),
       );
 
       if (!lmctActiveGiveawaysTime || lmctActiveGiveawaysTime.closed) {
@@ -1114,14 +1144,12 @@
     function lmctActiveGiveawaysRenderCta(cardData) {
       var lmctActiveGiveawaysUrl = lmctActiveGiveawaysGetUrl(cardData.giveaway);
 
-      if (cardData.isClosed || !lmctActiveGiveawaysUrl) {
+      if (cardData.isUpcoming || cardData.isClosed || !lmctActiveGiveawaysUrl) {
         var lmctActiveGiveawaysDisabled = document.createElement("span");
         lmctActiveGiveawaysDisabled.className =
           "lmctActiveGiveaways__cta lmctActiveGiveaways__ctaDisabled";
         lmctActiveGiveawaysDisabled.setAttribute("aria-disabled", "true");
-        lmctActiveGiveawaysDisabled.textContent = cardData.isClosed
-          ? "CLOSED"
-          : "ENTER NOW";
+        lmctActiveGiveawaysDisabled.textContent = "ENTER NOW";
         return lmctActiveGiveawaysDisabled;
       }
 
@@ -1177,9 +1205,15 @@
     function lmctActiveGiveawaysCreateCard(giveaway) {
       var lmctActiveGiveawaysCardData = {
         giveaway: giveaway || {},
+        startDate: giveaway && giveaway.startDate,
         endDate: giveaway && giveaway.endDate,
+        isUpcoming: lmctActiveGiveawaysIsUpcoming(
+          giveaway && giveaway.startDate,
+        ),
         isClosed: false,
+        ctaElement: null,
         timerGrid: null,
+        timerLabel: null,
       };
 
       var lmctActiveGiveawaysCard = document.createElement("article");
@@ -1275,9 +1309,11 @@
         lmctActiveGiveawaysContent.appendChild(lmctActiveGiveawaysChips);
       }
 
-      lmctActiveGiveawaysContent.appendChild(
-        lmctActiveGiveawaysRenderCta(lmctActiveGiveawaysCardData),
+      var lmctActiveGiveawaysCta = lmctActiveGiveawaysRenderCta(
+        lmctActiveGiveawaysCardData,
       );
+      lmctActiveGiveawaysCardData.ctaElement = lmctActiveGiveawaysCta;
+      lmctActiveGiveawaysContent.appendChild(lmctActiveGiveawaysCta);
       lmctActiveGiveawaysCard.appendChild(lmctActiveGiveawaysContent);
       lmctActiveGiveawaysCards.push(lmctActiveGiveawaysCardData);
 
@@ -1337,12 +1373,28 @@
 
     function lmctActiveGiveawaysUpdateTimers() {
       lmctActiveGiveawaysCards.forEach(function (cardData) {
-        if (!cardData.timerGrid || cardData.isClosed) {
+        if (cardData.isClosed) {
+          return;
+        }
+
+        var lmctActiveGiveawaysWasUpcoming = cardData.isUpcoming;
+        cardData.isUpcoming = lmctActiveGiveawaysIsUpcoming(cardData.startDate);
+
+        if (cardData.timerLabel) {
+          cardData.timerLabel.textContent =
+            lmctActiveGiveawaysGetTimerLabel(cardData);
+        }
+
+        if (lmctActiveGiveawaysWasUpcoming !== cardData.isUpcoming) {
+          lmctActiveGiveawaysUpdateCta(cardData);
+        }
+
+        if (!cardData.timerGrid) {
           return;
         }
 
         var lmctActiveGiveawaysTime = lmctActiveGiveawaysGetTime(
-          cardData.endDate,
+          lmctActiveGiveawaysGetTimerTarget(cardData),
         );
 
         if (!lmctActiveGiveawaysTime || lmctActiveGiveawaysTime.closed) {
@@ -1350,6 +1402,7 @@
           cardData.timerGrid.remove();
           cardData.timerGrid = null;
           cardData.isClosed = true;
+          lmctActiveGiveawaysUpdateCta(cardData);
           lmctActiveGiveawaysAppendText(
             lmctActiveGiveawaysTimer,
             "div",
@@ -1373,6 +1426,20 @@
           valueElement.textContent = lmctActiveGiveawaysNextValues[index];
         });
       });
+    }
+
+    function lmctActiveGiveawaysUpdateCta(cardData) {
+      if (!cardData.ctaElement || !cardData.ctaElement.parentNode) {
+        return;
+      }
+
+      var lmctActiveGiveawaysCurrentCta = cardData.ctaElement;
+      var lmctActiveGiveawaysNextCta = lmctActiveGiveawaysRenderCta(cardData);
+      lmctActiveGiveawaysCurrentCta.parentNode.replaceChild(
+        lmctActiveGiveawaysNextCta,
+        lmctActiveGiveawaysCurrentCta,
+      );
+      cardData.ctaElement = lmctActiveGiveawaysNextCta;
     }
 
     function lmctActiveGiveawaysStartTimers() {

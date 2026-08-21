@@ -1,6 +1,6 @@
 <style>
   /* ============================================
-   GIVEAWAY DETAILS - LMCT+ LUXE CASH STAGE
+   GIVEAWAY DETAILS - LMCT+ FLASH GIVEAWAY
    Namespace: gd-
    ============================================ */
   .gd-section,
@@ -11,33 +11,16 @@
     font-family:
       "Montserrat",
       "Inter",
+      "Segoe UI",
       system-ui,
       -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
       sans-serif;
   }
-
   .gd-section {
-    --gd-cream: #fff8d7;
-    --gd-gold: #ffd95a;
-    --gd-gold-deep: #b88616;
-    --gd-green: #85ff61;
-    --gd-green-hot: #43ff77;
-    --gd-ink: #05130b;
-    --gd-panel: rgba(7, 24, 14, 0.72);
-    --gd-panel-soft: rgba(255, 255, 255, 0.08);
-    --gd-border: rgba(255, 228, 130, 0.34);
-
     width: 100%;
     max-width: 1120px;
     margin: 0 auto;
-    padding: clamp(40px, 5vw, 70px) clamp(16px, 4vw, 48px)
-      clamp(32px, 4vw, 58px);
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    color: #ffffff;
+    padding: 64px 42px;
     background: radial-gradient(
         circle at 50% 8%,
         rgba(67, 255, 119, 0.22),
@@ -53,530 +36,283 @@
         rgba(43, 255, 135, 0.14),
         transparent 30%
       ),
-      linear-gradient(180deg, #082514 0%, #04170d 46%, #020a06 100%)
-      !important;
-    border: 1px solid rgba(192, 255, 163, 0.22);
+      linear-gradient(180deg, #082514 0%, #04170d 46%, #020a06 100%) !important;
     border-radius: 24px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     box-shadow:
-      0 24px 80px rgba(0, 0, 0, 0.48),
-      0 0 0 1px rgba(255, 222, 112, 0.08),
-      0 0 42px rgba(67, 255, 119, 0.22),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      0 24px 64px rgba(0, 0, 0, 0.28),
+      0 0 28px rgba(67, 255, 119, 0.2);
   }
-
-  .gd-section::before {
-    content: "";
-    position: absolute;
-    inset: -28% -18% auto;
-    height: 78%;
-    z-index: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(
-        circle at 50% 18%,
-        rgba(255, 245, 175, 0.24),
-        transparent 18%
-      ),
-      radial-gradient(
-        circle at 28% 48%,
-        rgba(72, 255, 130, 0.16),
-        transparent 26%
-      ),
-      radial-gradient(
-        circle at 74% 42%,
-        rgba(255, 214, 86, 0.12),
-        transparent 27%
-      );
-    filter: blur(18px);
-    opacity: 0.95;
-    animation: gd-aura-drift 12s ease-in-out infinite alternate;
-  }
-
+  .gd-section::before,
   .gd-section::after {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: 0;
     pointer-events: none;
+    z-index: 1;
+  }
+  .gd-section::before {
     background:
-      linear-gradient(
-        115deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.045) 39%,
-        rgba(255, 246, 180, 0.1) 48%,
-        transparent 58%
-      ),
-      radial-gradient(
-        circle at 50% 112%,
-        rgba(0, 0, 0, 0.58),
-        transparent 48%
-      );
+      linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 22%),
+      radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.45), transparent 58%);
     mix-blend-mode: screen;
-    opacity: 0.86;
+    opacity: 0.8;
   }
-
-  .gd-stage {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
+  .gd-section::after {
+    inset: 18px;
+    border: 1px solid rgba(211, 255, 185, 0.13);
+    border-radius: 20px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
-
-  .gd-stage-line {
-    position: absolute;
-    left: 50%;
-    top: 5%;
-    width: min(92%, 880px);
-    height: 1px;
-    transform: translateX(-50%);
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 224, 112, 0.8),
-      rgba(95, 255, 108, 0.64),
-      transparent
-    );
-    box-shadow:
-      0 0 22px rgba(255, 214, 86, 0.28),
-      0 0 42px rgba(67, 255, 119, 0.18);
-  }
-
-  .gd-stage-halo {
-    position: absolute;
-    left: 50%;
-    top: 19%;
-    width: min(70vw, 700px);
-    height: min(70vw, 700px);
-    border-radius: 999px;
-    transform: translate(-50%, -50%);
-    background:
-      radial-gradient(circle, rgba(255, 235, 122, 0.13), transparent 36%),
-      conic-gradient(
-        from 20deg,
-        transparent 0deg,
-        rgba(255, 220, 90, 0.28) 52deg,
-        transparent 98deg,
-        rgba(67, 255, 119, 0.24) 164deg,
-        transparent 212deg,
-        rgba(255, 220, 90, 0.18) 278deg,
-        transparent 360deg
-      );
-    filter: blur(1px);
-    opacity: 0.42;
-    animation: gd-halo-turn 18s linear infinite;
-  }
-
-  .gd-stage-beam {
-    position: absolute;
-    top: -24%;
-    width: 24vw;
-    min-width: 180px;
-    max-width: 340px;
-    height: 130%;
-    opacity: 0.26;
-    filter: blur(5px);
-    transform-origin: top center;
-    background: linear-gradient(
-      180deg,
-      transparent 0%,
-      rgba(255, 238, 160, 0.12) 18%,
-      rgba(93, 255, 127, 0.16) 44%,
-      rgba(255, 219, 92, 0.08) 74%,
-      transparent 100%
-    );
-    clip-path: polygon(44% 0, 58% 0, 100% 100%, 0 100%);
-    mix-blend-mode: screen;
-    animation: gd-beam-breathe 9s ease-in-out infinite;
-  }
-
-  .gd-stage-beam-1 {
-    left: 3%;
-    --gd-beam-rotate: -20deg;
-    animation-delay: -1.8s;
-  }
-
-  .gd-stage-beam-2 {
-    right: 4%;
-    --gd-beam-rotate: 18deg;
-    animation-delay: -5.2s;
-  }
-
-  .gd-stage-floor {
-    position: absolute;
-    left: 50%;
-    bottom: -98px;
-    width: min(78%, 760px);
-    height: 190px;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    border: 1px solid rgba(255, 220, 90, 0.34);
-    background:
-      radial-gradient(
-        ellipse at 50% 34%,
-        rgba(133, 255, 97, 0.22),
-        transparent 42%
-      ),
-      radial-gradient(
-        ellipse at 50% 50%,
-        rgba(255, 220, 90, 0.18),
-        transparent 58%
-      ),
-      linear-gradient(180deg, rgba(6, 29, 14, 0.82), rgba(0, 0, 0, 0));
-    box-shadow:
-      0 0 34px rgba(133, 255, 97, 0.14),
-      inset 0 0 22px rgba(255, 220, 90, 0.1);
-  }
-
-  .gd-stage-floor::before,
-  .gd-stage-floor::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 22%;
-    width: 82%;
-    height: 44%;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    border: 1px solid rgba(255, 232, 136, 0.2);
-  }
-
-  .gd-stage-floor::after {
-    top: 33%;
-    width: 58%;
-    height: 30%;
-    border-color: rgba(133, 255, 97, 0.18);
-  }
-
   .gd-cash-rain-layer {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    z-index: 0;
     overflow: hidden;
     pointer-events: none;
+    border-radius: inherit;
   }
-
   .gd-wrap {
     position: relative;
     z-index: 2;
+    max-width: 1000px;
+    margin: 0 auto;
   }
-
-  .gd-title {
-    position: relative;
-    width: fit-content;
-    max-width: 100%;
-    margin: 0 auto clamp(28px, 4vw, 42px);
-    color: var(--gd-cream);
-    font-size: clamp(36px, 5.6vw, 68px);
-    font-weight: 950;
-    line-height: 0.92;
-    letter-spacing: 0;
+  /* ===== TITLE ===== */
+  .gd-header {
+    max-width: 780px;
+    margin: 0 auto 34px;
     text-align: center;
-    text-transform: uppercase;
-    text-wrap: balance;
-    background: linear-gradient(
-      180deg,
-      #fffce8 0%,
-      #ffe98c 32%,
-      #ffca45 48%,
-      #fff5bc 66%,
-      #caffaa 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  }
+  .gd-title {
+    font-size: 52px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    letter-spacing: 0;
+    line-height: 1;
+    text-align: center;
     text-shadow:
-      0 2px 0 rgba(72, 48, 0, 0.58),
-      0 0 22px rgba(255, 221, 90, 0.28),
-      0 0 42px rgba(67, 255, 119, 0.16);
+      0 3px 16px rgba(0, 0, 0, 0.26),
+      0 0 24px rgba(67, 255, 119, 0.14);
+    text-transform: uppercase;
   }
-
-  .gd-title::before,
-  .gd-title::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    pointer-events: none;
+  .gd-subtitle {
+    max-width: 650px;
+    margin: 0 auto;
+    color: rgba(246, 255, 242, 0.88);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.55;
   }
-
-  .gd-title::before {
-    bottom: -18px;
-    width: min(74%, 440px);
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 221, 90, 0.92),
-      rgba(133, 255, 97, 0.8),
-      transparent
-    );
-    box-shadow: 0 0 18px rgba(255, 221, 90, 0.32);
-  }
-
-  .gd-title::after {
-    bottom: -21px;
-    width: 84px;
-    height: 7px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #fff3b0, var(--gd-green));
-    box-shadow:
-      0 0 18px rgba(255, 221, 90, 0.42),
-      0 0 24px rgba(67, 255, 119, 0.26);
-  }
-
+  /* ===== WINNER CARDS ===== */
   .gd-winners {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(16px, 2.6vw, 26px);
-    margin-bottom: clamp(16px, 2.6vw, 26px);
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
   }
-
-  .gd-prize-card,
-  .gd-info-card {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--gd-border);
-    border-radius: 8px;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 18%),
-      radial-gradient(
-        circle at 50% 0%,
-        rgba(255, 221, 90, 0.16),
-        transparent 44%
-      ),
-      linear-gradient(180deg, rgba(9, 32, 19, 0.88), rgba(2, 10, 6, 0.9));
-    box-shadow:
-      0 18px 42px rgba(0, 0, 0, 0.34),
-      0 0 28px rgba(67, 255, 119, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.16);
-    backdrop-filter: blur(14px);
-  }
-
-  .gd-prize-card::before,
-  .gd-info-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background:
-      linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.18),
-        transparent 24%,
-        transparent 70%,
-        rgba(133, 255, 97, 0.08)
-      ),
-      repeating-linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.04) 0 1px,
-        transparent 1px 58px
-      );
-    opacity: 0.5;
-    pointer-events: none;
-  }
-
-  .gd-prize-card::after,
-  .gd-info-card::after {
-    content: "";
-    position: absolute;
-    inset: -40% auto -40% -65%;
-    z-index: 0;
-    width: 46%;
-    transform: skewX(-18deg);
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.18),
-      transparent
-    );
-    opacity: 0;
-    animation: gd-card-sheen 7s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  .gd-prize-card:nth-child(2)::after {
-    animation-delay: -3.4s;
-  }
-
   .gd-prize-card {
-    min-height: 300px;
-    padding: clamp(28px, 4vw, 42px) clamp(20px, 3vw, 34px)
-      clamp(26px, 3.5vw, 36px);
+    background: linear-gradient(180deg, #ffffff 0%, #fbfffa 100%);
+    border: 1px solid rgba(229, 244, 224, 0.95);
+    border-radius: 18px;
+    padding: 34px 28px 28px;
+    position: relative;
     text-align: center;
+    overflow: hidden;
+    box-shadow:
+      0 18px 42px rgba(0, 0, 0, 0.18),
+      0 2px 8px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    transition:
+      transform 0.24s ease,
+      box-shadow 0.24s ease,
+      border-color 0.24s ease;
   }
-
-  .gd-prize-card > *,
-  .gd-info-card > * {
+  .gd-prize-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 5px;
+    background: linear-gradient(90deg, #43ff77, #ffda55, #43ff77);
+  }
+  .gd-prize-card::after {
+    content: "";
+    position: absolute;
+    inset: auto -18% -34% -18%;
+    height: 54%;
+    background: radial-gradient(circle at 50% 0%, rgba(67, 255, 119, 0.13), transparent 62%);
+    pointer-events: none;
+  }
+  .gd-prize-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(67, 255, 119, 0.35);
+    box-shadow:
+      0 22px 54px rgba(0, 0, 0, 0.22),
+      0 0 24px rgba(67, 255, 119, 0.16);
+  }
+  .gd-prize-badge {
+    display: inline-block;
     position: relative;
     z-index: 1;
-  }
-
-  .gd-prize-badge,
-  .gd-info-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 32px;
-    margin-bottom: 18px;
-    padding: 7px 16px;
-    border: 1px solid rgba(255, 226, 120, 0.44);
-    border-radius: 999px;
-    background:
-      linear-gradient(180deg, rgba(255, 230, 132, 0.16), transparent),
-      rgba(1, 9, 5, 0.58);
-    color: #fff4bd;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 1.8px;
-    line-height: 1;
-    text-transform: uppercase;
-    box-shadow:
-      0 0 18px rgba(255, 218, 85, 0.12),
-      inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  }
-
-  .gd-prize-headline {
-    margin: 0 0 8px;
-    color: var(--gd-green);
-    font-size: clamp(44px, 6vw, 72px);
-    font-weight: 950;
-    line-height: 0.92;
-    letter-spacing: 0;
-    white-space: nowrap;
-    text-shadow:
-      0 0 14px rgba(133, 255, 97, 0.34),
-      0 0 34px rgba(67, 255, 119, 0.22),
-      0 4px 12px rgba(0, 0, 0, 0.48);
-  }
-
-  .gd-prize-sub {
-    margin: 0 0 28px;
-    color: rgba(255, 255, 255, 0.82);
-    font-size: 13px;
+    background: #073b1d;
+    color: #f2ffe9;
     font-weight: 800;
-    letter-spacing: 0.9px;
-    line-height: 1.25;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    padding: 8px 18px;
+    border: 1px solid rgba(67, 255, 119, 0.28);
+    border-radius: 999px;
+    margin-bottom: 20px;
+    box-shadow:
+      0 8px 18px rgba(7, 59, 29, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+  .gd-prize-headline {
+    position: relative;
+    z-index: 1;
+    font-size: 58px;
+    font-weight: 900;
+    color: #06180f;
+    line-height: 1;
+    letter-spacing: 0;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  .gd-prize-sub {
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    font-weight: 900;
+    color: #12723b;
+    letter-spacing: 0.8px;
+    margin-bottom: 24px;
     text-transform: uppercase;
   }
-
   .gd-prize-divider {
     position: relative;
+    z-index: 1;
     height: 1px;
-    margin: 0 0 27px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 218, 85, 0.52),
-      rgba(133, 255, 97, 0.36),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, #dbe9d6 24%, #dbe9d6 76%, transparent);
+    margin: 0 0 24px 0;
   }
-
   .gd-prize-divider span {
     position: absolute;
     top: 50%;
     left: 50%;
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
     transform: translate(-50%, -50%);
-    border: 1px solid rgba(255, 228, 130, 0.45);
-    border-radius: 999px;
-    background:
-      radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.2), transparent),
-      linear-gradient(180deg, #15381f, #061108);
-    color: #fff0b0;
+    background: #ffffff;
+    color: #0c3a20;
+    font-weight: 900;
     font-size: 12px;
-    font-weight: 950;
     letter-spacing: 1.6px;
-    box-shadow:
-      0 0 18px rgba(255, 218, 85, 0.14),
-      0 8px 16px rgba(0, 0, 0, 0.24);
+    padding: 4px 14px;
+    border: 1px solid #e3efdf;
+    border-radius: 999px;
   }
-
   .gd-prize-alt {
-    color: #fff8d7;
-    font-size: clamp(16px, 1.9vw, 20px);
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    width: 100%;
+    padding: 13px 16px;
+    background: #f7fbf4;
+    border: 1px solid #e1efdc;
+    border-radius: 12px;
+    font-size: 17px;
     font-weight: 850;
-    line-height: 1.3;
+    color: #092414;
     letter-spacing: 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
   }
-
+  .gd-choice-note {
+    position: relative;
+    z-index: 1;
+    margin-top: 14px;
+    color: #637267;
+    font-size: 13px;
+    font-weight: 750;
+  }
+  /* ===== INFO CARDS ===== */
   .gd-info-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(14px, 2.3vw, 22px);
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
   }
-
   .gd-info-card {
-    min-height: 184px;
-    padding: clamp(24px, 3.5vw, 34px) clamp(18px, 3vw, 30px);
+    background: linear-gradient(180deg, #ffffff 0%, #fbfffa 100%);
+    border: 1px solid rgba(229, 244, 224, 0.95);
+    border-radius: 18px;
+    padding: 30px 28px;
+    position: relative;
+    overflow: hidden;
     text-align: center;
-  }
-
-  .gd-info-pill {
-    min-height: 30px;
-    margin-bottom: 17px;
-    color: #101307;
-    background:
-      linear-gradient(180deg, #fff5bd, #ffd95a 56%, #ca941a),
-      #ffd95a;
-    border-color: rgba(255, 246, 190, 0.8);
     box-shadow:
-      0 8px 20px rgba(0, 0, 0, 0.22),
-      0 0 20px rgba(255, 218, 85, 0.18);
+      0 16px 36px rgba(0, 0, 0, 0.15),
+      0 2px 8px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
   }
-
+  .gd-info-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, #ffda55, #43ff77);
+  }
+  .gd-info-pill {
+    display: inline-block;
+    background: #eef9ea;
+    color: #07401f;
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 1.4px;
+    padding: 8px 18px;
+    border: 1px solid #d8ecd2;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
   .gd-info-headline {
-    margin: 0 0 6px;
-    color: #ffffff;
-    font-size: clamp(30px, 4vw, 44px);
-    font-weight: 950;
-    line-height: 1;
-    letter-spacing: 0;
-    text-shadow:
-      0 0 18px rgba(255, 218, 85, 0.16),
-      0 3px 12px rgba(0, 0, 0, 0.36);
-  }
-
-  .gd-info-detail {
-    margin: 0 0 18px;
-    color: var(--gd-green);
-    font-size: clamp(15px, 1.8vw, 19px);
+    font-size: 38px;
     font-weight: 900;
-    line-height: 1.22;
-    text-shadow: 0 0 14px rgba(133, 255, 97, 0.2);
+    color: #06180f;
+    line-height: 1.05;
+    letter-spacing: 0;
+    margin-bottom: 6px;
   }
-
+  .gd-info-detail {
+    font-size: 18px;
+    font-weight: 850;
+    color: #12723b;
+    margin-bottom: 16px;
+  }
   .gd-info-meta {
+    font-size: 12px;
+    font-weight: 700;
+    color: #637267;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 7px;
-    max-width: 100%;
-    color: rgba(255, 255, 255, 0.72);
-    font-size: 12px;
-    font-weight: 650;
-    line-height: 1.35;
-    letter-spacing: 0;
+    letter-spacing: 0.2px;
+    line-height: 1.4;
   }
-
   .gd-ch7-mark {
-    width: 19px;
-    height: 19px;
-    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
     display: inline-block;
     vertical-align: middle;
-    filter: drop-shadow(0 0 8px rgba(230, 57, 70, 0.35));
+    flex-shrink: 0;
   }
-
+  /* ===== LINKS RESET ===== */
   .gd-section a {
     text-decoration: none !important;
   }
-
   /* ===== FALLING CASH ANIMATION ===== */
   .gd-cash-particle {
     position: absolute;
@@ -585,11 +321,10 @@
     pointer-events: none;
     will-change: transform, opacity;
   }
-
   .gd-cash-dollar {
     width: var(--size, 56px);
     height: calc(var(--size, 56px) * 0.58);
-    opacity: var(--opacity, 0.54);
+    opacity: var(--opacity, 0.7);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -597,226 +332,214 @@
     animation: gd-cash-fall var(--duration, 7s) linear infinite;
     animation-delay: var(--delay, 0s);
     z-index: 1;
-    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.22));
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.18));
     background-image: url('data:image/svg+xml,%3Csvg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"%3E%3Cg%3E%3Cg%3E%3Cpath style="fill:%2374D24F;" d="M496,112H16c-8.82,0-16,7.18-16,16v256c0,8.82,7.18,16,16,16h480c8.82,0,16-7.18,16-16V128 C512,119.18,504.82,112,496,112z"/%3E%3C/g%3E%3Cg%3E%3Cpath style="fill:%23FFEFBC;" d="M472,192c-22.055,0-40-17.945-40-40c0-4.422-3.578-8-8-8H88c-4.422,0-8,3.578-8,8 c0,22.055-17.945,40-40,40c-4.422,0-8,3.578-8,8v112c0,4.422,3.578,8,8,8c22.055,0,40,17.945,40,40c0,4.422,3.578,8,8,8h336 c4.422,0,8-3.578,8-8c0-22.055,17.945-40,40-40c4.422,0,8-3.578,8-8V200C480,195.578,476.422,192,472,192z"/%3E%3C/g%3E%3Cg%3E%3Cpath style="fill:%23869B55;" d="M128,256c0,48.221,26.691,90.175,66.081,112h123.839C357.309,346.175,384,304.221,384,256 s-26.691-90.175-66.081-112H194.08C154.691,165.825,128,207.779,128,256z"/%3E%3C/g%3E%3Cg%3E%3Cpath style="fill:%23FFEFBC;" d="M256,244c-16.023,0-28-8.445-28-16c0-7.555,11.977-16,28-16s28,8.445,28,16c0,6.625,5.375,12,12,12 s12-5.375,12-12c0-19.236-16.824-34.862-40-38.932V184c0-6.625-5.375-12-12-12s-12,5.375-12,12v5.068 c-23.176,4.07-40,19.695-40,38.932c0,22.43,22.844,40,52,40c16.023,0,28,8.445,28,16c0,7.555-11.977,16-28,16s-28-8.445-28-16 c0-6.625-5.375-12-12-12s-12,5.375-12,12c0,19.236,16.824,34.862,40,38.932V328c0,6.625,5.375,12,12,12s12-5.375,12-12v-5.068 c23.176-4.07,40-19.695,40-38.932C308,261.57,285.156,244,256,244z"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%2374D24F;" cx="80" cy="256" r="24"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%2374D24F;" cx="432" cy="256" r="24"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%23869B55;" cx="40" cy="152" r="16"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%23869B55;" cx="472" cy="152" r="16"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%23869B55;" cx="40" cy="360" r="16"/%3E%3C/g%3E%3Cg%3E%3Ccircle style="fill:%23869B55;" cx="472" cy="360" r="16"/%3E%3C/g%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3Cg%3E%3C/g%3E%3C/svg%3E%0A');
   }
-
   .gd-cash-coin {
     width: var(--size, 26px);
     height: var(--size, 26px);
     border-radius: 50%;
-    opacity: var(--opacity, 0.72);
+    opacity: var(--opacity, 0.8);
     background: radial-gradient(
       circle at 35% 35%,
-      #fff6bd 0%,
-      #ffd95a 36%,
-      #d9a51b 72%,
-      #805a00 100%
+      #fff3a6 0%,
+      #ffd700 38%,
+      #d4a514 72%,
+      #9b7400 100%
     );
     box-shadow:
-      inset 0 2px 3px rgba(255, 255, 255, 0.5),
-      inset 0 -2px 3px rgba(0, 0, 0, 0.2),
-      0 5px 12px rgba(0, 0, 0, 0.24),
-      0 0 16px rgba(255, 218, 85, 0.16);
+      inset 0 2px 3px rgba(255, 255, 255, 0.45),
+      inset 0 -2px 3px rgba(0, 0, 0, 0.18),
+      0 4px 10px rgba(0, 0, 0, 0.18);
     animation: gd-cash-fall-spin var(--duration, 5s) ease-in infinite;
     animation-delay: var(--delay, 0s);
     z-index: 2;
   }
-
   .gd-cash-coin::before {
     content: "$";
     position: absolute;
     inset: 0;
     display: grid;
     place-items: center;
-    color: rgba(78, 54, 0, 0.92);
     font-size: calc(var(--size, 26px) * 0.55);
-    font-weight: 950;
+    font-weight: 900;
+    color: rgba(80, 55, 0, 0.9);
   }
-
   .gd-cash-confetti {
     width: var(--w, 10px);
     height: var(--h, 4px);
-    border-radius: 999px;
-    opacity: var(--opacity, 0.78);
-    background: var(--color, #fff4bd);
+    opacity: var(--opacity, 0.9);
+    background: var(--color, #ffffff);
+    border-radius: 2px;
     transform: rotate(var(--rot, 0deg));
     animation: gd-confetti-fall var(--duration, 4.8s) ease-out infinite;
     animation-delay: var(--delay, 0s);
-    box-shadow: 0 0 12px rgba(255, 218, 85, 0.16);
     z-index: 0;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.16);
   }
-
   @keyframes gd-cash-fall {
     0% {
       transform: translate3d(0, -120px, 0) rotate(0deg);
     }
     100% {
-      transform: translate3d(var(--drift, 30px), 108vh, 0)
+      transform: translate3d(var(--drift, 30px), 110vh, 0)
         rotate(var(--spin, 360deg));
     }
   }
-
   @keyframes gd-cash-fall-spin {
     0% {
       transform: translate3d(0, -120px, 0) rotateY(0deg) rotate(0deg);
     }
     100% {
-      transform: translate3d(var(--drift, 12px), 108vh, 0) rotateY(720deg)
+      transform: translate3d(var(--drift, 12px), 110vh, 0) rotateY(720deg)
         rotate(var(--spin, 300deg));
     }
   }
-
   @keyframes gd-confetti-fall {
     0% {
       transform: translate3d(0, -100px, 0) rotate(var(--rot, 0deg));
     }
     100% {
-      transform: translate3d(var(--drift, 45px), 108vh, 0)
+      transform: translate3d(var(--drift, 45px), 110vh, 0)
         rotate(calc(var(--rot, 0deg) + 360deg));
     }
   }
-
-  @keyframes gd-aura-drift {
-    0% {
-      transform: translate3d(-2%, 0, 0) scale(1);
-      opacity: 0.78;
-    }
-    100% {
-      transform: translate3d(2.5%, -2%, 0) scale(1.04);
-      opacity: 1;
-    }
-  }
-
-  @keyframes gd-halo-turn {
-    to {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-
-  @keyframes gd-beam-breathe {
-    0%,
-    100% {
-      opacity: 0.18;
-      transform: translateY(-2%) rotate(var(--gd-beam-rotate, 0deg)) scaleY(1);
-    }
-    50% {
-      opacity: 0.42;
-      transform: translateY(2%)
-        rotate(calc(var(--gd-beam-rotate, 0deg) + 2deg)) scaleY(1.05);
-    }
-  }
-
-  @keyframes gd-card-sheen {
-    0%,
-    24% {
-      opacity: 0;
-      transform: translateX(0) skewX(-18deg);
-    }
-    36% {
-      opacity: 0.78;
-    }
-    58%,
-    100% {
-      opacity: 0;
-      transform: translateX(390%) skewX(-18deg);
-    }
-  }
-
-  @media (max-width: 860px) {
+  /* ============================================
+   MOBILE BREAKPOINTS
+   ============================================ */
+  @media (max-width: 768px) {
     .gd-section {
+      padding: 40px 24px;
       border-radius: 18px;
     }
-
-    .gd-winners {
-      grid-template-columns: 1fr;
+    .gd-section::after {
+      inset: 12px;
+      border-radius: 14px;
     }
-
-    .gd-prize-card {
-      min-height: 0;
+    .gd-header {
+      margin-bottom: 28px;
     }
-  }
-
-  @media (max-width: 620px) {
-    .gd-section {
-      padding: 36px 14px 30px;
-      border-radius: 16px;
-    }
-
     .gd-title {
-      font-size: clamp(32px, 12vw, 46px);
-      margin-bottom: 32px;
+      font-size: 38px;
+      letter-spacing: 0;
+      margin-bottom: 10px;
     }
-
-    .gd-info-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .gd-prize-card,
-    .gd-info-card {
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-
-    .gd-prize-headline {
-      font-size: clamp(40px, 13vw, 54px);
-    }
-
-    .gd-info-meta {
-      font-size: 11px;
-    }
-
-    .gd-stage-beam {
-      opacity: 0.2;
-      width: 46vw;
-    }
-
-    .gd-stage-floor {
-      width: 96%;
-      bottom: -120px;
-    }
-
-    .gd-cash-dollar {
-      opacity: 0.36;
-    }
-
-    .gd-cash-coin,
-    .gd-cash-confetti {
-      opacity: 0.48;
-    }
-  }
-
-  @media (max-width: 380px) {
-    .gd-section {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
-
-    .gd-prize-card,
-    .gd-info-card {
-      padding-left: 12px;
-      padding-right: 12px;
-    }
-
-    .gd-prize-badge,
-    .gd-info-pill {
-      font-size: 10px;
-      letter-spacing: 1.35px;
-      padding-left: 12px;
-      padding-right: 12px;
-    }
-
-    .gd-prize-alt {
+    .gd-subtitle {
       font-size: 15px;
     }
+    .gd-winners {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .gd-info-grid {
+      gap: 16px;
+    }
+    .gd-prize-card,
+    .gd-info-card {
+      padding: 28px 22px;
+      border-radius: 16px;
+    }
+    .gd-prize-headline {
+      font-size: 48px;
+      letter-spacing: 0;
+    }
+    .gd-info-headline {
+      font-size: 30px;
+    }
   }
-
+  @media (max-width: 520px) {
+    .gd-section {
+      padding: 32px 18px;
+      border-radius: 16px;
+      box-shadow: 0 0 10px rgba(95, 255, 9, 0.5);
+    }
+    .gd-title {
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+    .gd-winners {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .gd-info-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .gd-prize-card {
+      padding: 26px 20px;
+      border-radius: 14px;
+    }
+    .gd-info-card {
+      padding: 22px 18px;
+      border-radius: 14px;
+    }
+    .gd-prize-badge {
+      font-size: 11px;
+      padding: 7px 14px;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+    }
+    .gd-info-pill {
+      font-size: 10px;
+      padding: 6px 10px;
+      letter-spacing: 1.2px;
+      margin-bottom: 14px;
+    }
+    .gd-prize-headline {
+      font-size: 42px;
+      letter-spacing: 0;
+    }
+    .gd-prize-sub {
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .gd-prize-divider {
+      margin-bottom: 20px;
+    }
+    .gd-prize-alt {
+      font-size: 16px;
+    }
+    .gd-info-headline {
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .gd-info-detail {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    .gd-info-meta {
+      font-size: 10px;
+      gap: 5px;
+      letter-spacing: 0.1px;
+    }
+    .gd-cash-dollar {
+      opacity: 0.45;
+    }
+    .gd-cash-confetti {
+      opacity: 0.45;
+    }
+    .gd-ch7-mark {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  @media (max-width: 360px) {
+    .gd-info-card {
+      padding: 20px 14px;
+    }
+    .gd-info-headline {
+      font-size: 24px;
+    }
+    .gd-info-detail {
+      font-size: 14px;
+    }
+    .gd-info-meta {
+      font-size: 10px;
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
-    .gd-section::before,
-    .gd-stage-halo,
-    .gd-stage-beam,
-    .gd-prize-card::after,
-    .gd-info-card::after,
     .gd-cash-dollar,
     .gd-cash-coin,
     .gd-cash-confetti {
@@ -824,20 +547,15 @@
     }
   }
 </style>
-
 <div class="gd-section" id="gdSection">
-  <div class="gd-stage" aria-hidden="true">
-    <span class="gd-stage-line"></span>
-    <span class="gd-stage-halo"></span>
-    <span class="gd-stage-beam gd-stage-beam-1"></span>
-    <span class="gd-stage-beam gd-stage-beam-2"></span>
-    <span class="gd-stage-floor"></span>
-  </div>
-  <div class="gd-cash-rain-layer" aria-hidden="true"></div>
-
+  <div class="gd-cash-rain-layer" id="gdCashRainLayer" aria-hidden="true"></div>
   <div class="gd-wrap">
-    <h2 class="gd-title">GIVEAWAY DETAILS</h2>
-
+    <div class="gd-header">
+      <h2 class="gd-title">Giveaway Details</h2>
+      <p class="gd-subtitle">
+        Two winners. Each winner can choose $2,000,000 tax-free cash or a luxury home worth $2.5M.
+      </p>
+    </div>
     <div class="gd-winners">
       <div class="gd-prize-card">
         <div class="gd-prize-badge">WINNER 1</div>
@@ -845,17 +563,17 @@
         <div class="gd-prize-sub">Tax-Free Cash</div>
         <div class="gd-prize-divider"><span>OR</span></div>
         <div class="gd-prize-alt">A luxury home worth $2.5M</div>
+        <div class="gd-choice-note">Winner's choice</div>
       </div>
-
       <div class="gd-prize-card">
         <div class="gd-prize-badge">WINNER 2</div>
         <div class="gd-prize-headline">$2,000,000</div>
         <div class="gd-prize-sub">Tax-Free Cash</div>
         <div class="gd-prize-divider"><span>OR</span></div>
         <div class="gd-prize-alt">A luxury home worth $2.5M</div>
+        <div class="gd-choice-note">Winner's choice</div>
       </div>
     </div>
-
     <div class="gd-info-grid">
       <div class="gd-info-card">
         <div class="gd-info-pill">ENTRIES CLOSE</div>
@@ -865,7 +583,6 @@
           *AEST &mdash; Australian Eastern Standard Time
         </div>
       </div>
-
       <div class="gd-info-card">
         <div class="gd-info-pill">LIVE DRAW</div>
         <div class="gd-info-headline">June 2nd</div>
@@ -896,20 +613,20 @@
     </div>
   </div>
 </div>
-
 <script>
   (function () {
-    var layers = document.querySelectorAll(".gd-cash-rain-layer");
-    if (!layers.length) return;
+    var layer = document.getElementById("gdCashRainLayer");
+    if (!layer) return;
 
-    var dollarNum = 24;
-    var coinNum = 12;
-    var confettiNum = 32;
+    var dollarNum = 26;
+    var coinNum = 14;
+    var confettiNum = 70;
     var confettiColors = [
-      "#fff4bd",
-      "#ffd95a",
-      "#85ff61",
-      "#43ff77",
+      "#00ff27",
+      "#16a34a",
+      "#22c55e",
+      "#86efac",
+      "#facc15",
       "#ffffff",
     ];
 
@@ -922,47 +639,45 @@
       el.className = "gd-cash-particle " + type;
 
       el.style.left = rand(0, 100) + "%";
-      el.style.setProperty("--delay", "-" + rand(0, 7).toFixed(2) + "s");
-      el.style.setProperty("--drift", rand(-70, 70).toFixed(0) + "px");
-      el.style.setProperty("--spin", rand(180, 760).toFixed(0) + "deg");
-      el.style.setProperty("--opacity", rand(0.28, 0.78).toFixed(2));
+      el.style.setProperty("--delay", rand(0, 6).toFixed(2) + "s");
+      el.style.setProperty("--drift", rand(-60, 60).toFixed(0) + "px");
+      el.style.setProperty("--spin", rand(180, 720).toFixed(0) + "deg");
+      el.style.setProperty("--opacity", rand(0.35, 0.9).toFixed(2));
 
       if (type === "gd-cash-dollar") {
-        el.style.setProperty("--size", rand(38, 72).toFixed(0) + "px");
-        el.style.setProperty("--duration", rand(6.2, 10).toFixed(2) + "s");
+        el.style.setProperty("--size", rand(42, 74).toFixed(0) + "px");
+        el.style.setProperty("--duration", rand(5.5, 9).toFixed(2) + "s");
       }
 
       if (type === "gd-cash-coin") {
-        el.style.setProperty("--size", rand(16, 32).toFixed(0) + "px");
-        el.style.setProperty("--duration", rand(4.2, 7).toFixed(2) + "s");
+        el.style.setProperty("--size", rand(18, 34).toFixed(0) + "px");
+        el.style.setProperty("--duration", rand(3.5, 6).toFixed(2) + "s");
       }
 
       if (type === "gd-cash-confetti") {
         el.style.setProperty("--w", rand(6, 14).toFixed(0) + "px");
         el.style.setProperty("--h", rand(3, 6).toFixed(0) + "px");
         el.style.setProperty("--rot", rand(0, 360).toFixed(0) + "deg");
-        el.style.setProperty("--duration", rand(4.4, 7).toFixed(2) + "s");
+        el.style.setProperty("--duration", rand(3.8, 6.2).toFixed(2) + "s");
         el.style.setProperty(
           "--color",
-          confettiColors[Math.floor(Math.random() * confettiColors.length)],
+          confettiColors[Math.floor(Math.random() * confettiColors.length)]
         );
       }
 
       return el;
     }
 
-    layers.forEach(function (layer) {
-      for (var i = 0; i < dollarNum; i++) {
-        layer.appendChild(makeParticle("gd-cash-dollar"));
-      }
+    for (var i = 0; i < dollarNum; i++) {
+      layer.appendChild(makeParticle("gd-cash-dollar"));
+    }
 
-      for (var j = 0; j < coinNum; j++) {
-        layer.appendChild(makeParticle("gd-cash-coin"));
-      }
+    for (var j = 0; j < coinNum; j++) {
+      layer.appendChild(makeParticle("gd-cash-coin"));
+    }
 
-      for (var k = 0; k < confettiNum; k++) {
-        layer.appendChild(makeParticle("gd-cash-confetti"));
-      }
-    });
+    for (var k = 0; k < confettiNum; k++) {
+      layer.appendChild(makeParticle("gd-cash-confetti"));
+    }
   })();
 </script>

@@ -1,12 +1,9 @@
 <!-- ============================================================
      LMCT+ PETROL HERO - Integrated ClickFunnels Classic block
      ============================================================ -->
-
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-  /* =========================
-     Hero styles
-     ========================= */
+
   .lmctHero,
   .lmctHero *,
   .lmctHero *::before,
@@ -51,88 +48,9 @@
     min-width: 0;
   }
 
-  .lmctHero__toggleWrap {
-    display: flex;
-    justify-content: flex-start;
-    margin: 0 0 18px 0;
-  }
-
-  .lmctHero__toggle {
-    position: relative;
-    display: inline-flex;
-    align-items: stretch;
-    width: 100%;
-    max-width: 430px;
-    min-height: 48px;
-    padding: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 999px;
-    background: rgba(6, 27, 53, 0.34);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-    overflow: hidden;
-  }
-
-  .lmctHero__toggleIndicator {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    height: calc(100% - 8px);
-    width: 120px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #32b7f3 0%, #087cf0 100%);
-    box-shadow: 0 8px 18px rgba(8, 124, 240, 0.26);
-    transition:
-      left 0.28s ease,
-      width 0.28s ease;
-    z-index: 0;
-  }
-
-  .lmctHero__toggleIndicator--instant {
-    transition: none !important;
-  }
-
-  .lmctHero .sus-toggle-btn {
-    position: relative;
-    z-index: 1;
-    flex: 0 1 auto;
-    min-width: 0;
-    min-height: 44px;
-    padding: 0 18px;
-    border: 0;
-    border-radius: 999px;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.72);
-    font: inherit;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0;
-    line-height: 1.15;
-    cursor: pointer;
-    white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .lmctHero .sus-toggle-btn:hover {
-    color: #ffffff;
-  }
-
-  .lmctHero .sus-toggle-btn[aria-selected="true"] {
-    color: #ffffff;
-  }
-
-  .lmctHero .sus-toggle-btn:focus-visible {
-    outline: 3px solid rgba(255, 255, 255, 0.74);
-    outline-offset: 3px;
-  }
-
-  .lmctHero__tier[hidden] {
-    display: none;
-  }
-
   .lmctHero__badge {
     display: inline-flex;
     align-items: center;
-
     gap: 8px;
     margin: 0 0 14px 0;
     padding: 8px 12px;
@@ -739,16 +657,6 @@
       padding-right: 12px;
     }
 
-    .lmctHero__toggle {
-      max-width: 100%;
-    }
-
-    .lmctHero .sus-toggle-btn {
-      padding-left: 11px;
-      padding-right: 11px;
-      font-size: 11px;
-    }
-
     .lmctHero__headline {
       font-size: 32px;
     }
@@ -780,237 +688,244 @@
       transition: none !important;
     }
   }
-</style>
 
+  /* Adelaide launch slide */
+  #lmctHeroSlideAdelaide .lmctHero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(3, 26, 55, 0.12) 0%, rgba(3, 26, 55, 0) 44%),
+      linear-gradient(0deg, rgba(3, 20, 43, 0.26) 0%, rgba(3, 20, 43, 0) 45%);
+  }
+
+  #lmctHeroSlideAdelaide .lmctHero__status,
+  #lmctHeroSlideAdelaide .lmctHero__place,
+  #lmctHeroSlideAdelaide .lmctHero__proofCard {
+    z-index: 3;
+  }
+
+  #lmctHeroSlideAdelaide .lmctHero__locationInfo {
+    border-top: 3px solid #19b95b;
+  }
+
+  #lmctHeroSlideAdelaide .lmctHero__proofEyebrow {
+    color: #65d7ff;
+  }
+
+  #lmctHeroSlideAdelaide .lmctHero__proofAmount {
+    font-size: 20px;
+  }
+
+  @media (max-width: 767px) {
+    #lmctHeroSlideAdelaide .lmctHero__locationName {
+      font-size: 13px;
+    }
+
+    #lmctHeroSlideAdelaide .lmctHero__address {
+      font-size: 11.5px;
+    }
+  }
+</style>
 <section
+  aria-labelledby="lmctHeroTitleFuel"
   class="lmctHero"
   id="susTier"
-  data-tier="fuel"
   role="region"
-  aria-labelledby="lmctHeroTitleFuel"
 >
   <div class="lmctHero__inner">
     <div class="lmctHero__left">
       <!-- =========================
-           Membership tier markup
+           Fuel tier markup (only)
            ========================= -->
-
-      <div
-        class="lmctHero__tier lmctHero__tier--fuel"
-        id="lmctHeroPanelFuel"
-        role="tabpanel"
-      >
-        <span class="lmctHero__badge">
-          <span class="lmctHero__badgeIcon" aria-hidden="true">
-            <svg class="lmctHero__badgeIconSvg" viewBox="0 0 24 24">
+      <div class="lmctHero__tier" id="lmctHeroPanelFuel">
+        <span class="lmctHero__badge"
+          ><span aria-hidden="true" class="lmctHero__badgeIcon">
+            <svg class="lmctHero__badgeIconSvg" viewbox="0 0 24 24">
               <path d="M20 6 9 17l-5-5"></path>
             </svg>
           </span>
-          MEMBERS-ONLY EVERYDAY PRICING
-        </span>
-
+          ADELAIDE OPENING SOON • WIN $100K</span
+        >
         <h1 class="lmctHero__headline" id="lmctHeroTitleFuel">
-          Pay less for fuel and groceries &mdash; All year.
+          Save on fuel. Win $100K.
         </h1>
-
-        <div class="lmctHero__price" aria-label="$49 per year">
+        <div aria-label="$49 per year" class="lmctHero__price">
           <span class="lmctHero__priceAmount">$49</span>
           <span class="lmctHero__priceUnit">/ year</span>
         </div>
-
         <p class="lmctHero__copy">
-          One simple annual membership gives you access to member-only pricing
-          on eligible fuel and groceries.
+          Join for $49/year for member pricing at our new Edwardstown station,
+          plus an eligible entry into the $100K draw.
         </p>
-
-        <ul class="lmctHero__benefits" aria-label="Fuel membership benefits">
+        <ul aria-label="Fuel membership benefits" class="lmctHero__benefits">
           <li class="lmctHero__benefit">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="2em"
               height="2em"
-              viewBox="0 0 24 24"
+              viewbox="0 0 24 24"
+              width="2em"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M0 0h24v24H0z" fill="none"></path>
               <path
+                d="M5 14.5s1.5 0 3.5 3.5c0 0 5.559-9.167 10.5-11"
                 fill="none"
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="1.5"
-                d="M5 14.5s1.5 0 3.5 3.5c0 0 5.559-9.167 10.5-11"
-              />
+              ></path>
             </svg>
-
             Cancel anytime
           </li>
           <li class="lmctHero__benefit">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="2em"
               height="2em"
-              viewBox="0 0 24 24"
+              viewbox="0 0 24 24"
+              width="2em"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M0 0h24v24H0z" fill="none"></path>
               <g fill="none">
                 <path
                   d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
-                />
+                ></path>
                 <path
-                  fill="currentColor"
                   d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 4a1 1 0 0 0-1 1v5a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V7a1 1 0 0 0-1-1"
-                />
+                  fill="currentColor"
+                ></path>
               </g>
             </svg>
-
             Instant access
           </li>
           <li class="lmctHero__benefit">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="2em"
               height="2em"
-              viewBox="0 0 24 24"
+              viewbox="0 0 24 24"
+              width="2em"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M0 0h24v24H0z" fill="none"></path>
               <path
-                fill="currentColor"
                 d="M3 2h3c.28 0 .53.11.71.29l2.08 2.09l.8-.79C10 3.2 10.5 3 11 3h6c.5 0 1 .2 1.41.59l1 1C19.8 5 20 5.5 20 6v13a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8c0-.5.2-1 .59-1.41l.79-.8L5.59 4H3zm8 3v2h6V5zm.41 6l-2-2H8v1.41l2 2v3.18l-2 2V19h1.41l2-2h3.18l2 2H18v-1.41l-2-2v-3.18l2-2V9h-1.41l-2 2zm.59 2h2v2h-2z"
-              />
+                fill="currentColor"
+              ></path>
             </svg>
-
             Fuel savings
           </li>
         </ul>
       </div>
-
-      <div
-        class="lmctHero__tier lmctHero__tier--full"
-        id="lmctHeroPanelFull"
-        role="tabpanel"
-        hidden
-      >
-        <span class="lmctHero__badge">
-          <span class="lmctHero__badgeIcon" aria-hidden="true">
-            <svg class="lmctHero__badgeIconSvg" viewBox="0 0 24 24">
-              <path
-                d="M12 3 14.8 8.8 21 9.7 16.5 14.1 17.6 20.3 12 17.3 6.4 20.3 7.5 14.1 3 9.7 9.2 8.8 12 3Z"
-              ></path>
-            </svg>
-          </span>
-          EVERYDAY SAVINGS + GIVEAWAY ENTRY
-        </span>
-
-        <h1 class="lmctHero__headline" id="lmctHeroTitleFull">
-          Save every day. Enter every giveaway.
-        </h1>
-
-        <div class="lmctHero__price" aria-label="$199 per year">
-          <span class="lmctHero__priceAmount">$199</span>
-          <span class="lmctHero__priceUnit">/ year</span>
-        </div>
-
-        <p class="lmctHero__copy">
-          Get everyday member savings plus automatic entry into eligible LMCT+
-          giveaways.
-        </p>
-
-        <ul
-          class="lmctHero__benefits"
-          aria-label="Save and Win membership benefits"
-        >
-          <li class="lmctHero__benefit">
-            <svg
-              class="lmctHero__benefitIcon"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M4 12h16"></path>
-              <path d="M12 4v16"></path>
-              <path d="m7 7 10 10"></path>
-              <path d="m17 7-10 10"></path>
-            </svg>
-            Everyday savings
-          </li>
-          <li class="lmctHero__benefit">
-            <svg
-              class="lmctHero__benefitIcon"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                d="M12 3 14.8 8.8 21 9.7 16.5 14.1 17.6 20.3 12 17.3 6.4 20.3 7.5 14.1 3 9.7 9.2 8.8 12 3Z"
-              ></path>
-            </svg>
-            Giveaway entry
-          </li>
-          <li class="lmctHero__benefit">
-            <svg
-              class="lmctHero__benefitIcon"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M20 6 9 17l-5-5"></path>
-            </svg>
-            Cancel anytime
-          </li>
-        </ul>
-      </div>
-
       <!-- =========================
            CTA
            ========================= -->
       <div class="lmctHero__ctaWrap">
         <a
+          aria-label="Join and enter for $49 per year"
           class="lmctHero__cta"
-          id="lmctaBtn"
           href="#row--30567"
-          aria-label="Start Saving - $49/year - jump to signup"
+          id="lmctaBtn"
         >
-          <span class="lmctHero__ctaSheen" aria-hidden="true"></span>
-          <span class="lmctHero__ctaLabel" id="lmctHeroCtaLabel"
-            >Start Saving &mdash; $49/year</span
-          >
-          <svg class="lmctHero__ctaIcon" viewBox="0 0 24 24" aria-hidden="true">
+          <span aria-hidden="true" class="lmctHero__ctaSheen"></span>
+          <span class="lmctHero__ctaLabel">Join &amp; Enter — $49/year</span>
+          <svg aria-hidden="true" class="lmctHero__ctaIcon" viewbox="0 0 24 24">
             <path d="M5 12h14"></path>
             <path d="m13 5 7 7-7 7"></path>
           </svg>
         </a>
         <p class="lmctHero__reassurance">
-          No lock-in contract &bull; 60-second signup &bull; Immediate access
+          60-second signup • Immediate access • Terms apply
         </p>
       </div>
     </div>
-
     <div class="lmctHero__right">
       <!-- =========================
            Location slider
            ========================= -->
-      <div class="lmctHero__location" aria-label="LMCT+ Petrol locations">
+      <div aria-label="LMCT+ Petrol locations" class="lmctHero__location">
         <div class="lmctHero__viewport">
-          <div class="lmctHero__track" data-lmct-hero-track>
+          <div class="lmctHero__track" data-lmct-hero-track="">
             <article
+              aria-label="Edwardstown SA location"
               class="lmctHero__slide"
-              id="lmctHeroSlidePreston"
-              aria-label="Preston VIC location"
+              id="lmctHeroSlideAdelaide"
             >
               <div class="lmctHero__media">
                 <img
+                  alt="New LMCT+ Petrol Edwardstown Adelaide location opening soon"
                   class="lmctHero__locationImage"
-                  src="https://images.clickfunnels.com/42/42e157f7ff4414a2f039a6699f21b3/LMCTFUEL14_enhanced_16x9.png"
-                  alt="LMCT+ Petrol Preston station with members-only fuel pricing"
-                  loading="eager"
                   fetchpriority="high"
+                  loading="eager"
+                  src="https://images.clickfunnels.com/e8/4b749cc5ee491ab5813e4cc21a8c9a/Adelaide-new-Petrol-Staion.png"
+                />
+                <span class="lmctHero__status lmctHero__status--soon">
+                  <span aria-hidden="true" class="lmctHero__statusDot"></span>
+                  Opening Soon
+                </span>
+                <span class="lmctHero__place">
+                  <svg
+                    aria-hidden="true"
+                    class="lmctHero__pin"
+                    viewbox="0 0 24 24"
+                  >
+                    <path
+                      d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Edwardstown SA
+                </span>
+                <span class="lmctHero__proofCard">
+                  <span class="lmctHero__proofEyebrow"
+                    >GRAND OPENING OFFER</span
+                  >
+                  <span class="lmctHero__proofAmount">Win $100K Cash</span>
+                  <span class="lmctHero__proofNote">
+                    Eligible $49 membership includes an entry
+                  </span>
+                </span>
+              </div>
+              <div class="lmctHero__locationInfo">
+                <span aria-hidden="true" class="lmctHero__locationIcon">
+                  <svg class="lmctHero__locationIconSvg" viewbox="0 0 24 24">
+                    <path
+                      d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
+                    ></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </span>
+                <span>
+                  <span class="lmctHero__locationName">
+                    New Adelaide Petrol Station
+                  </span>
+                  <span class="lmctHero__address">
+                    1112 South Rd &amp; Daws Rd, Edwardstown SA
+                  </span>
+                </span>
+              </div>
+            </article>
+            <article
+              aria-label="Preston VIC location"
+              class="lmctHero__slide"
+              id="lmctHeroSlidePreston"
+            >
+              <div class="lmctHero__media">
+                <img
+                  alt="LMCT+ Petrol Preston station with members-only fuel pricing"
+                  class="lmctHero__locationImage"
+                  loading="lazy"
+                  src="https://images.clickfunnels.com/42/42e157f7ff4414a2f039a6699f21b3/LMCTFUEL14_enhanced_16x9.png"
                 />
                 <span class="lmctHero__status lmctHero__status--open"
-                  ><span class="lmctHero__statusDot" aria-hidden="true"></span
+                  ><span aria-hidden="true" class="lmctHero__statusDot"></span
                   >Open Now</span
                 >
                 <span class="lmctHero__place">
                   <svg
-                    class="lmctHero__pin"
-                    viewBox="0 0 24 24"
                     aria-hidden="true"
+                    class="lmctHero__pin"
+                    viewbox="0 0 24 24"
                   >
                     <path
                       d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
@@ -1019,7 +934,6 @@
                   </svg>
                   Preston VIC
                 </span>
-                <!-- Placeholder savings proof: replace Marco saved $18.40 with verified customer savings data when available. -->
                 <span class="lmctHero__proofCard">
                   <span class="lmctHero__proofEyebrow">MEMBER SAVING</span>
                   <span class="lmctHero__proofAmount">Marco saved $18.40</span>
@@ -1027,8 +941,8 @@
                 </span>
               </div>
               <div class="lmctHero__locationInfo">
-                <span class="lmctHero__locationIcon" aria-hidden="true">
-                  <svg class="lmctHero__locationIconSvg" viewBox="0 0 24 24">
+                <span aria-hidden="true" class="lmctHero__locationIcon">
+                  <svg class="lmctHero__locationIconSvg" viewbox="0 0 24 24">
                     <path
                       d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
                     ></path>
@@ -1043,28 +957,27 @@
                 </span>
               </div>
             </article>
-
             <article
+              aria-label="Tarneit VIC location"
               class="lmctHero__slide"
               id="lmctHeroSlideTarneit"
-              aria-label="Tarneit VIC location"
             >
               <div class="lmctHero__media">
                 <img
-                  class="lmctHero__locationImage"
-                  src="https://images.clickfunnels.com/1e/0501f2c6814bd2af4a9c8a9e36b969/Location-2-Under-Construction-1.jpg"
                   alt="LMCT+ Petrol Tarneit location under construction"
+                  class="lmctHero__locationImage"
                   loading="lazy"
+                  src="https://images.clickfunnels.com/1e/0501f2c6814bd2af4a9c8a9e36b969/Location-2-Under-Construction-1.jpg"
                 />
                 <span class="lmctHero__status lmctHero__status--soon"
-                  ><span class="lmctHero__statusDot" aria-hidden="true"></span
+                  ><span aria-hidden="true" class="lmctHero__statusDot"></span
                   >Coming Soon</span
                 >
                 <span class="lmctHero__place">
                   <svg
-                    class="lmctHero__pin"
-                    viewBox="0 0 24 24"
                     aria-hidden="true"
+                    class="lmctHero__pin"
+                    viewbox="0 0 24 24"
                   >
                     <path
                       d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
@@ -1075,8 +988,8 @@
                 </span>
               </div>
               <div class="lmctHero__locationInfo">
-                <span class="lmctHero__locationIcon" aria-hidden="true">
-                  <svg class="lmctHero__locationIconSvg" viewBox="0 0 24 24">
+                <span aria-hidden="true" class="lmctHero__locationIcon">
+                  <svg class="lmctHero__locationIconSvg" viewbox="0 0 24 24">
                     <path
                       d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
                     ></path>
@@ -1093,28 +1006,27 @@
                 </span>
               </div>
             </article>
-
             <article
+              aria-label="Deer Park VIC location"
               class="lmctHero__slide"
               id="lmctHeroSlideDeerPark"
-              aria-label="Deer Park VIC location"
             >
               <div class="lmctHero__media">
                 <img
-                  class="lmctHero__locationImage"
-                  src="https://images.clickfunnels.com/3a/dafa142ee549569ab54abe67d82d5d/DEER-PARK-LMCT-MARKETS.jpg"
                   alt="LMCT+ Markets Deer Park coming soon"
+                  class="lmctHero__locationImage"
                   loading="lazy"
+                  src="https://images.clickfunnels.com/3a/dafa142ee549569ab54abe67d82d5d/DEER-PARK-LMCT-MARKETS.jpg"
                 />
                 <span class="lmctHero__status lmctHero__status--soon"
-                  ><span class="lmctHero__statusDot" aria-hidden="true"></span
+                  ><span aria-hidden="true" class="lmctHero__statusDot"></span
                   >Coming Soon</span
                 >
                 <span class="lmctHero__place">
                   <svg
-                    class="lmctHero__pin"
-                    viewBox="0 0 24 24"
                     aria-hidden="true"
+                    class="lmctHero__pin"
+                    viewbox="0 0 24 24"
                   >
                     <path
                       d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
@@ -1125,8 +1037,8 @@
                 </span>
               </div>
               <div class="lmctHero__locationInfo">
-                <span class="lmctHero__locationIcon" aria-hidden="true">
-                  <svg class="lmctHero__locationIconSvg" viewBox="0 0 24 24">
+                <span aria-hidden="true" class="lmctHero__locationIcon">
+                  <svg class="lmctHero__locationIconSvg" viewbox="0 0 24 24">
                     <path
                       d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0Z"
                     ></path>
@@ -1143,67 +1055,73 @@
             </article>
           </div>
         </div>
-
-        <div class="lmctHero__nav" aria-label="Location slider controls">
+        <div aria-label="Location slider controls" class="lmctHero__nav">
           <button
-            class="lmctHero__arrow"
-            type="button"
-            data-lmct-hero-prev
             aria-label="Previous location"
+            class="lmctHero__arrow"
+            data-lmct-hero-prev=""
+            type="button"
           >
             <svg
-              class="lmctHero__arrowIcon"
-              viewBox="0 0 24 24"
               aria-hidden="true"
+              class="lmctHero__arrowIcon"
+              viewbox="0 0 24 24"
             >
               <path d="m15 18-6-6 6-6"></path>
             </svg>
           </button>
-
           <div
+            aria-label="Choose location"
             class="lmctHero__dots"
             role="tablist"
-            aria-label="Choose location"
           >
             <button
-              class="lmctHero__locationDot"
-              type="button"
-              role="tab"
-              aria-label="Show Preston VIC location"
-              aria-controls="lmctHeroSlidePreston"
+              aria-controls="lmctHeroSlideAdelaide"
+              aria-label="Show Edwardstown SA location"
               aria-selected="true"
+              class="lmctHero__locationDot"
               data-lmct-hero-dot="0"
-            ></button>
-            <button
-              class="lmctHero__locationDot"
-              type="button"
               role="tab"
-              aria-label="Show Tarneit VIC location"
-              aria-controls="lmctHeroSlideTarneit"
+              type="button"
+            ></button
+            ><button
+              aria-controls="lmctHeroSlidePreston"
+              aria-label="Show Preston VIC location"
               aria-selected="false"
+              class="lmctHero__locationDot"
               data-lmct-hero-dot="1"
-            ></button>
-            <button
-              class="lmctHero__locationDot"
-              type="button"
               role="tab"
-              aria-label="Show Deer Park VIC location"
-              aria-controls="lmctHeroSlideDeerPark"
+              type="button"
+            ></button
+            ><button
+              aria-controls="lmctHeroSlideTarneit"
+              aria-label="Show Tarneit VIC location"
               aria-selected="false"
+              class="lmctHero__locationDot"
               data-lmct-hero-dot="2"
+              role="tab"
+              type="button"
+            ></button
+            ><button
+              aria-controls="lmctHeroSlideDeerPark"
+              aria-label="Show Deer Park VIC location"
+              aria-selected="false"
+              class="lmctHero__locationDot"
+              data-lmct-hero-dot="3"
+              role="tab"
+              type="button"
             ></button>
           </div>
-
           <button
-            class="lmctHero__arrow"
-            type="button"
-            data-lmct-hero-next
             aria-label="Next location"
+            class="lmctHero__arrow"
+            data-lmct-hero-next=""
+            type="button"
           >
             <svg
-              class="lmctHero__arrowIcon"
-              viewBox="0 0 24 24"
               aria-hidden="true"
+              class="lmctHero__arrowIcon"
+              viewbox="0 0 24 24"
             >
               <path d="m9 18 6-6-6-6"></path>
             </svg>
@@ -1213,7 +1131,6 @@
     </div>
   </div>
 </section>
-
 <script>
   (function () {
     "use strict";
@@ -1244,194 +1161,9 @@
     }
 
     /* =========================
-       Membership tier JavaScript
+       CTA scroll to form
        ========================= */
-    var tierButtons = qsa(".sus-toggle-btn", root);
-    var toggleIndicator = qs(".lmctHero__toggleIndicator", root);
     var cta = document.getElementById("lmctaBtn");
-    var ctaLabel = document.getElementById("lmctHeroCtaLabel");
-
-    var tierCopy = {
-      fuel: {
-        cta: "Start Saving \u2014 $49/year",
-        titleId: "lmctHeroTitleFuel",
-        panelId: "lmctHeroPanelFuel",
-      },
-      full: {
-        cta: "Save + Win \u2014 $199/year",
-        titleId: "lmctHeroTitleFull",
-        panelId: "lmctHeroPanelFull",
-      },
-    };
-
-    function normalizeTier(tier) {
-      return tier === "full" ? "full" : "fuel";
-    }
-
-    function positionToggle(animate) {
-      var active =
-        qs('.sus-toggle-btn[aria-selected="true"]', root) || tierButtons[0];
-      if (!toggleIndicator || !active) return;
-
-      if (!animate)
-        toggleIndicator.classList.add("lmctHero__toggleIndicator--instant");
-      toggleIndicator.style.left = active.offsetLeft + "px";
-      toggleIndicator.style.width = active.offsetWidth + "px";
-
-      if (!animate) {
-        toggleIndicator.offsetWidth;
-        toggleIndicator.classList.remove("lmctHero__toggleIndicator--instant");
-      }
-    }
-
-    function dispatchTierChange(tier) {
-      var eventObject;
-      if (typeof window.CustomEvent === "function") {
-        eventObject = new CustomEvent("tierchange", { detail: { tier: tier } });
-      } else {
-        eventObject = document.createEvent("CustomEvent");
-        eventObject.initCustomEvent("tierchange", false, false, { tier: tier });
-      }
-      root.dispatchEvent(eventObject);
-    }
-
-    function applyTier(tier, options) {
-      var selectedTier = normalizeTier(tier);
-      var config = tierCopy[selectedTier];
-      var i;
-      var proof = document.getElementById("susProof");
-      var panels = qsa(".lmctHero__tier", root);
-
-      options = options || {};
-      root.setAttribute("data-tier", selectedTier);
-      root.setAttribute("aria-labelledby", config.titleId);
-
-      for (i = 0; i < tierButtons.length; i += 1) {
-        var isActive =
-          tierButtons[i].getAttribute("data-tier-target") === selectedTier;
-        tierButtons[i].setAttribute(
-          "aria-selected",
-          isActive ? "true" : "false",
-        );
-        tierButtons[i].setAttribute("tabindex", isActive ? "0" : "-1");
-      }
-
-      for (i = 0; i < panels.length; i += 1) {
-        panels[i].hidden = panels[i].id !== config.panelId;
-      }
-
-      if (ctaLabel) ctaLabel.textContent = config.cta;
-      if (cta) cta.setAttribute("aria-label", config.cta + " - jump to signup");
-
-      if (proof) proof.setAttribute("data-tier", selectedTier);
-
-      if (options.persist !== false) {
-        try {
-          sessionStorage.setItem("sus-tier", selectedTier);
-        } catch (e) {}
-      }
-
-      positionToggle(options.animate !== false);
-
-      if (options.emit !== false) {
-        dispatchTierChange(selectedTier);
-      }
-    }
-
-    function getUrlTier() {
-      var match;
-      try {
-        if (window.URLSearchParams) {
-          return new URLSearchParams(window.location.search).get("tier");
-        }
-      } catch (e) {}
-
-      match = window.location.search.match(/[?&]tier=(fuel|full)(?:&|$)/);
-      return match ? match[1] : null;
-    }
-
-    function getInitialTier() {
-      var urlTier = getUrlTier();
-      var savedTier = null;
-
-      if (urlTier === "fuel" || urlTier === "full") return urlTier;
-
-      try {
-        savedTier = sessionStorage.getItem("sus-tier");
-      } catch (e) {}
-
-      if (savedTier === "fuel" || savedTier === "full") return savedTier;
-      return normalizeTier(root.getAttribute("data-tier"));
-    }
-
-    for (var tb = 0; tb < tierButtons.length; tb += 1) {
-      tierButtons[tb].addEventListener("click", function () {
-        applyTier(this.getAttribute("data-tier-target"), {
-          animate: true,
-          emit: true,
-          persist: true,
-        });
-      });
-
-      tierButtons[tb].addEventListener("keydown", function (event) {
-        var key = event.key || event.keyCode;
-        var currentIndex = tierButtons.indexOf ? tierButtons.indexOf(this) : -1;
-        var nextIndex = currentIndex;
-
-        if (key === "ArrowRight" || key === 39) nextIndex = currentIndex + 1;
-        if (key === "ArrowLeft" || key === 37) nextIndex = currentIndex - 1;
-        if (key === "Home" || key === 36) nextIndex = 0;
-        if (key === "End" || key === 35) nextIndex = tierButtons.length - 1;
-
-        if (nextIndex !== currentIndex && nextIndex >= 0) {
-          event.preventDefault();
-          nextIndex = clamp(nextIndex, 0, tierButtons.length - 1);
-          tierButtons[nextIndex].focus();
-          applyTier(tierButtons[nextIndex].getAttribute("data-tier-target"), {
-            animate: true,
-            emit: true,
-            persist: true,
-          });
-        }
-      });
-    }
-
-    root.addEventListener("tierchange", function (event) {
-      if (!event.detail || !event.detail.tier) return;
-      if (
-        normalizeTier(root.getAttribute("data-tier")) ===
-        normalizeTier(event.detail.tier)
-      ) {
-        positionToggle(false);
-        return;
-      }
-      applyTier(event.detail.tier, {
-        animate: true,
-        emit: false,
-        persist: true,
-      });
-    });
-
-    applyTier(getInitialTier(), { animate: false, emit: true, persist: true });
-
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () {
-        positionToggle(false);
-      });
-    }
-
-    window.addEventListener("load", function () {
-      positionToggle(false);
-    });
-
-    var resizeTimer;
-    window.addEventListener("resize", function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () {
-        positionToggle(false);
-        keepLocationAligned();
-      }, 120);
-    });
 
     if (cta) {
       cta.addEventListener("click", function (event) {
@@ -1594,5 +1326,16 @@
         }
       });
     }
+
+    /* =========================
+       Handle resize
+       ========================= */
+    var resizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        keepLocationAligned();
+      }, 120);
+    });
   })();
 </script>

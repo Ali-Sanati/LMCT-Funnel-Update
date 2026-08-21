@@ -302,118 +302,235 @@
       transition: none;
     }
   }
+
+  /* Adelaide launch offer refinements */
+  .lmctHowSteps__card--giveaway {
+    background:
+      radial-gradient(
+        circle at 82% 12%,
+        rgba(255, 213, 92, 0.22),
+        rgba(255, 213, 92, 0) 35%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 246, 205, 0.45) 0%,
+        rgba(255, 255, 255, 0) 42%
+      ),
+      var(--lmct-hs-card);
+    border-color: rgba(255, 209, 76, 0.46);
+  }
+
+  .lmctHowSteps__card--giveaway .lmctHowSteps__iconBlock {
+    background: linear-gradient(135deg, #ffd75e 0%, #f4a900 100%);
+    box-shadow: 0 14px 28px rgba(231, 161, 0, 0.24);
+  }
+
+  .lmctHowSteps__card--giveaway .lmctHowSteps__stepLabel {
+    color: #d78c00;
+  }
+
+  .lmctHowSteps__card--giveaway .lmctHowSteps__watermark {
+    color: rgba(221, 149, 0, 0.09);
+  }
+
+  .lmctHowSteps__locationNote {
+    max-width: 350px;
+    margin: 24px auto 0;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    border: 1px solid rgba(8, 124, 240, 0.16);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.74);
+    color: var(--lmct-hs-navy);
+    box-shadow: 0 12px 28px rgba(0, 49, 103, 0.08);
+    text-align: left;
+  }
+
+  .lmctHowSteps__locationIcon {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: rgba(8, 124, 240, 0.1);
+    color: #087cf0;
+  }
+
+  .lmctHowSteps__locationIcon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .lmctHowSteps__locationNote strong,
+  .lmctHowSteps__locationNote span span {
+    display: block;
+  }
+
+  .lmctHowSteps__locationNote strong {
+    margin-bottom: 3px;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.2;
+  }
+
+  .lmctHowSteps__locationNote span span {
+    color: var(--lmct-hs-muted);
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 560px) {
+    .lmctHowSteps__locationNote {
+      margin-top: 18px;
+      padding: 12px 13px;
+      justify-content: flex-start;
+    }
+
+    .lmctHowSteps__locationIcon {
+      width: 35px;
+      height: 35px;
+      border-radius: 10px;
+    }
+  }
 </style>
-<section class="lmctHowSteps" aria-labelledby="lmctHowStepsTitle">
+<section
+  aria-labelledby="lmctHowStepsTitle"
+  id="how-it-works"
+  class="lmctHowSteps"
+>
   <div class="lmctHowSteps__inner">
     <header class="lmctHowSteps__header">
       <div class="lmctHowSteps__eyebrow">
-        <span class="lmctHowSteps__eyebrowDot" aria-hidden="true"></span>
-        How it works
+        <span aria-hidden="true" class="lmctHowSteps__eyebrowDot"></span>
+        Adelaide launch offer
       </div>
       <h2 class="lmctHowSteps__title" id="lmctHowStepsTitle">
-        Join online, open the app, start using member pricing.
+        Join. Enter. Save at Adelaide’s new petrol station.
       </h2>
     </header>
     <div class="lmctHowSteps__grid">
       <article
-        class="lmctHowSteps__card"
         aria-labelledby="lmctHowStepsCardOneTitle"
+        class="lmctHowSteps__card"
       >
-        <span class="lmctHowSteps__watermark" aria-hidden="true">01</span>
-        <div class="lmctHowSteps__iconBlock" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
+        <span aria-hidden="true" class="lmctHowSteps__watermark">01</span>
+        <div aria-hidden="true" class="lmctHowSteps__iconBlock">
+          <svg fill="none" viewbox="0 0 24 24">
             <path
               d="M12 3.25A4.25 4.25 0 1 0 12 11.75A4.25 4.25 0 0 0 12 3.25Z"
               stroke="currentColor"
               stroke-width="1.8"
-            />
+            ></path>
             <path
               d="M4.75 20.25C5.18 16.97 7.86 14.75 12 14.75C16.14 14.75 18.82 16.97 19.25 20.25"
               stroke="currentColor"
-              stroke-width="1.8"
               stroke-linecap="round"
-            />
+              stroke-width="1.8"
+            ></path>
             <path
               d="M17.25 5.75H21M19.125 3.875V7.625"
               stroke="currentColor"
-              stroke-width="1.8"
               stroke-linecap="round"
-            />
+              stroke-width="1.8"
+            ></path>
           </svg>
         </div>
         <span class="lmctHowSteps__stepLabel">Step 01</span>
         <h3 class="lmctHowSteps__cardTitle" id="lmctHowStepsCardOneTitle">
-          Join online
+          Join for $49/year
         </h3>
-        <p class="lmctHowSteps__text">
-          Create your membership in about 60 seconds.
-        </p>
+        <p class="lmctHowSteps__text">Sign up online in about 60 seconds.</p>
       </article>
       <article
-        class="lmctHowSteps__card"
         aria-labelledby="lmctHowStepsCardTwoTitle"
+        class="lmctHowSteps__card lmctHowSteps__card--giveaway"
       >
-        <span class="lmctHowSteps__watermark" aria-hidden="true">02</span>
-        <div class="lmctHowSteps__iconBlock" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <rect
-              x="6.4"
-              y="2.75"
-              width="11.2"
-              height="18.5"
-              rx="2.2"
-              stroke="currentColor"
-              stroke-width="1.8"
-            />
+        <span aria-hidden="true" class="lmctHowSteps__watermark">02</span>
+        <div aria-hidden="true" class="lmctHowSteps__iconBlock">
+          <svg fill="none" viewbox="0 0 24 24">
             <path
-              d="M9.5 5.75H14.5M10.75 18.25H13.25"
+              d="M12 3 14.8 8.7 21 9.6l-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2 7.5 14 3 9.6l6.2-.9Z"
               stroke="currentColor"
+              stroke-linejoin="round"
               stroke-width="1.8"
+            ></path>
+            <path
+              d="M9.25 12h5.5M12 9.25v5.5"
+              stroke="currentColor"
               stroke-linecap="round"
-            />
+              stroke-width="1.8"
+            ></path>
           </svg>
         </div>
         <span class="lmctHowSteps__stepLabel">Step 02</span>
         <h3 class="lmctHowSteps__cardTitle" id="lmctHowStepsCardTwoTitle">
-          Access the LMCT+ app
+          Enter to win $100K
         </h3>
         <p class="lmctHowSteps__text">
-          View your membership and participating locations.
+          Eligible membership includes an entry into the cash draw.
         </p>
       </article>
       <article
-        class="lmctHowSteps__card"
         aria-labelledby="lmctHowStepsCardThreeTitle"
+        class="lmctHowSteps__card"
       >
-        <span class="lmctHowSteps__watermark" aria-hidden="true">03</span>
-        <div class="lmctHowSteps__iconBlock" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
+        <span aria-hidden="true" class="lmctHowSteps__watermark">03</span>
+        <div aria-hidden="true" class="lmctHowSteps__iconBlock">
+          <svg fill="none" viewbox="0 0 24 24">
             <path
               d="M4 7.25H20V18.75C20 19.58 19.33 20.25 18.5 20.25H5.5C4.67 20.25 4 19.58 4 18.75V7.25Z"
               stroke="currentColor"
               stroke-width="1.8"
-            />
+            ></path>
             <path
               d="M7.25 7.25V5.25C7.25 4.42 7.92 3.75 8.75 3.75H15.25C16.08 3.75 16.75 4.42 16.75 5.25V7.25"
               stroke="currentColor"
               stroke-width="1.8"
-            />
+            ></path>
             <path
               d="M4 11.25H20M9.25 14.75H14.75"
               stroke="currentColor"
-              stroke-width="1.8"
               stroke-linecap="round"
-            />
+              stroke-width="1.8"
+            ></path>
           </svg>
         </div>
         <span class="lmctHowSteps__stepLabel">Step 03</span>
         <h3 class="lmctHowSteps__cardTitle" id="lmctHowStepsCardThreeTitle">
-          Start saving
+          Save when we open
         </h3>
         <p class="lmctHowSteps__text">
-          Use your membership at participating locations and offers.
+          Use the LMCT+ app for member pricing at Edwardstown.
         </p>
       </article>
+    </div>
+    <div class="lmctHowSteps__locationNote" role="note">
+      <span aria-hidden="true" class="lmctHowSteps__locationIcon">
+        <svg fill="none" viewbox="0 0 24 24">
+          <path
+            d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"
+            stroke="currentColor"
+            stroke-width="1.8"
+          ></path>
+          <circle
+            cx="12"
+            cy="10"
+            r="2.7"
+            stroke="currentColor"
+            stroke-width="1.8"
+          ></circle>
+        </svg>
+      </span>
+      <span>
+        <strong>New Adelaide station</strong>
+        <span>1112 South Rd &amp; Daws Rd, Edwardstown SA</span>
+      </span>
     </div>
   </div>
 </section>

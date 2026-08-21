@@ -213,8 +213,7 @@
   }
   /* BLOCK 3 HERO */
   .lmctad-hero-offer {
-    padding: calc(var(--u) * 80) max(18px, calc(var(--u) * 40))
-      calc(var(--u) * 76);
+    padding: calc(var(--u) * 80) max(18px, calc(var(--u) * 40)) calc(var(--u) * 76);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -306,8 +305,7 @@
   }
   /* BLOCK 5 CHECKLIST AND PRIMARY CTA */
   .lmctad-checklist-section {
-    padding: calc(var(--u) * 70) max(18px, calc(var(--u) * 40))
-      calc(var(--u) * 64);
+    padding: calc(var(--u) * 70) max(18px, calc(var(--u) * 40)) calc(var(--u) * 64);
     background: #00071a;
   }
   .lmctad-checklist {
@@ -420,8 +418,7 @@
   }
   .lmctad-countdown-cta {
     margin-top: calc(var(--u) * 40);
-    padding: calc(var(--u) * 28) calc(var(--u) * 92) calc(var(--u) * 28)
-      calc(var(--u) * 40);
+    padding: calc(var(--u) * 28) calc(var(--u) * 92) calc(var(--u) * 28) calc(var(--u) * 40);
     border-radius: calc(var(--u) * 10);
     background: #fbcb29;
     color: #00071a;
@@ -497,6 +494,7 @@
   /* BLOCK 8 WHOLESALE PANELS */
   .lmctad-wholesale-section {
     padding-inline: max(18px, calc(var(--u) * 40));
+    padding-block: 0 max(34px, calc(var(--u) * 70));
     background: #fefefe;
   }
   .lmctad-wholesale-stack {
@@ -786,6 +784,123 @@
     font-weight: 900;
     line-height: 1.05;
   }
+  .lmctad-checkout-modal[hidden] {
+    display: none !important;
+  }
+  .lmctad-checkout-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    padding: max(14px, 2.6vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Montserrat", Arial, sans-serif;
+  }
+  .lmctad-checkout-backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: rgba(0, 7, 26, 0.76);
+    cursor: pointer;
+  }
+  .lmctad-checkout-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(94vw, 760px);
+    max-height: min(90vh, 920px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 22px 80px rgba(0, 0, 0, 0.38);
+  }
+  .lmctad-checkout-head {
+    min-height: 58px;
+    padding: 18px 58px 16px 22px;
+    border-bottom: 1px solid #e3e8ef;
+    background: #061729;
+    color: #ffffff;
+  }
+  .lmctad-checkout-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+  .lmctad-checkout-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .lmctad-checkout-close:focus-visible {
+    outline: 3px solid #0c9ffd;
+    outline-offset: 3px;
+  }
+  .lmctad-checkout-body {
+    padding: 22px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lmctad-checkout-body #row--30567,
+  .lmctad-checkout-popup-form {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    outline: none !important;
+  }
+  .lmctad-checkout-body .col-inner {
+    padding: 0 !important;
+  }
+  .lmctad-checkout-body .elInput,
+  .lmctad-checkout-body select,
+  .lmctad-checkout-body .ccInput {
+    width: 100%;
+    min-height: 42px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+  }
+  .lmctad-checkout-body .elButton {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  body.lmctad-checkout-open {
+    overflow: hidden;
+  }
+  @media (max-width: 600px) {
+    .lmctad-checkout-modal {
+      padding: 10px;
+      align-items: stretch;
+    }
+    .lmctad-checkout-dialog {
+      width: 100%;
+      margin: auto 0;
+    }
+    .lmctad-checkout-head {
+      padding: 16px 54px 14px 18px;
+    }
+    .lmctad-checkout-body {
+      padding: 16px;
+    }
+  }
   /* BLOCK 12 AS SEEN ON */
   .lmctad-seen-section {
     padding: 0 max(18px, calc(var(--u) * 40)) calc(var(--u) * 72);
@@ -872,39 +987,27 @@
       src="https://images.clickfunnels.com/9d/e689b69ee84bdba5156761d85e6bf9/LMCT-PETROL-LOGO.svg"
       alt="LMCT+ Petrol"
       loading="eager"
-      decoding="async"
-    />
+      decoding="async" />
     <div class="lmctad-location">
       <svg class="lmctad-location-icon" viewBox="0 0 48 58" aria-hidden="true">
         <path
           fill="currentColor"
-          d="M24 1C11.5 1 1.5 11.1 1.5 23.6c0 16.8 22.5 33.4 22.5 33.4s22.5-16.6 22.5-33.4C46.5 11.1 36.5 1 24 1Zm0 32.7c-5.9 0-10.7-4.8-10.7-10.7S18.1 12.3 24 12.3 34.7 17.1 34.7 23 29.9 33.7 24 33.7Z"
-        />
+          d="M24 1C11.5 1 1.5 11.1 1.5 23.6c0 16.8 22.5 33.4 22.5 33.4s22.5-16.6 22.5-33.4C46.5 11.1 36.5 1 24 1Zm0 32.7c-5.9 0-10.7-4.8-10.7-10.7S18.1 12.3 24 12.3 34.7 17.1 34.7 23 29.9 33.7 24 33.7Z" />
       </svg>
       <p class="lmctad-location-copy">
-        <span
-          class="lmctad-location-line"
-          data-lmctad-bind="locationName"
-        ></span>
-        <span
-          class="lmctad-location-line"
-          data-lmctad-bind="locationTagline"
-        ></span>
+        <span class="lmctad-location-line" data-lmctad-bind="locationName"></span>
+        <span class="lmctad-location-line" data-lmctad-bind="locationTagline"></span>
       </p>
     </div>
   </section>
   <!-- ================= BLOCK 2: OFFER STRIP ================= -->
-  <section class="lmctad-section lmctad-offer-strip">
-    INTRODUCTORY OFFER: LIMITED TIME ONLY
-  </section>
+  <section class="lmctad-section lmctad-offer-strip">INTRODUCTORY OFFER: LIMITED TIME ONLY</section>
   <!-- ================= BLOCK 3: HERO ================= -->
   <section class="lmctad-section lmctad-hero-offer">
     <p class="lmctad-hero-price">$<span data-lmctad-bind="price"></span></p>
     <p class="lmctad-hero-membership">MEMBERSHIP</p>
     <p class="lmctad-hero-year">FOR THE ENTIRE YEAR</p>
-    <p class="lmctad-hero-fuel">
-      + $<span data-lmctad-bind="freeFuel"></span> FREE FUEL
-    </p>
+    <p class="lmctad-hero-fuel">+ $<span data-lmctad-bind="freeFuel"></span> FREE FUEL</p>
     <p class="lmctad-hero-included">INCLUDED</p>
   </section>
   <!-- ================= BLOCK 4: HERO IMAGE AND STAMP ================= -->
@@ -915,16 +1018,14 @@
       src="https://images.clickfunnels.com/ec/1acfb8bc844e2f9ffb506843d1c714/LMCT-PETROL-STATION-AT-NIGHT-WITH-PRICE-BOARD.png"
       alt="LMCT+ petrol station at night with price board"
       loading="eager"
-      decoding="async"
-    />
+      decoding="async" />
     <img
       class="lmctad-stamp"
       data-img="lmctad_stamp_offer_gone"
       src="https://images.clickfunnels.com/1a/1845682d1c4f4ea0016778d4c12c46/ONCE-WE-OPEN-THIS-OFFER-IS-GONE.png"
       alt="Once we open this offer is gone"
       loading="lazy"
-      decoding="async"
-    />
+      decoding="async" />
   </section>
   <!-- ================= BLOCK 5: CHECKLIST AND PRIMARY CTA ================= -->
   <section class="lmctad-section lmctad-checklist-section">
@@ -932,14 +1033,7 @@
       <div class="lmctad-checklist-row">
         <span class="lmctad-tick-circle">
           <svg class="lmctad-tick-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="none"
-              stroke="#FFFFFF"
-              stroke-width="3.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M5 12.5 9.2 17 19 7"
-            />
+            <path fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.2 17 19 7" />
           </svg>
         </span>
         <span>This is an introductory offer</span>
@@ -947,14 +1041,7 @@
       <div class="lmctad-checklist-row">
         <span class="lmctad-tick-circle">
           <svg class="lmctad-tick-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="none"
-              stroke="#FFFFFF"
-              stroke-width="3.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M5 12.5 9.2 17 19 7"
-            />
+            <path fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.2 17 19 7" />
           </svg>
         </span>
         <span>Offer disappears as soon as we open</span>
@@ -962,14 +1049,7 @@
       <div class="lmctad-checklist-row">
         <span class="lmctad-tick-circle">
           <svg class="lmctad-tick-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="none"
-              stroke="#FFFFFF"
-              stroke-width="3.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M5 12.5 9.2 17 19 7"
-            />
+            <path fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.2 17 19 7" />
           </svg>
         </span>
         <span>Lock in your price before it's gone</span>
@@ -977,14 +1057,7 @@
       <div class="lmctad-checklist-row">
         <span class="lmctad-tick-circle">
           <svg class="lmctad-tick-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="none"
-              stroke="#FFFFFF"
-              stroke-width="3.4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M5 12.5 9.2 17 19 7"
-            />
+            <path fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.2 17 19 7" />
           </svg>
         </span>
         <span>Huge savings on fuel &amp; groceries</span>
@@ -993,22 +1066,14 @@
     <button class="lmctad-cta lmctad-primary-cta" type="button" data-lmctad-cta>
       LOCK IN THIS OFFER NOW
       <svg class="lmctad-cta-chevron" viewBox="0 0 32 32" aria-hidden="true">
-        <path
-          fill="none"
-          stroke="currentColor"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="m11 6 10 10-10 10"
-        />
+        <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="m11 6 10 10-10 10" />
       </svg>
     </button>
     <p class="lmctad-pay-later">
       <svg class="lmctad-pay-later-icon" viewBox="0 0 28 34" aria-hidden="true">
         <path
           fill="#FFFFFF"
-          d="M6 14V9a8 8 0 0 1 16 0v5h2.5A3.5 3.5 0 0 1 28 17.5v13a3.5 3.5 0 0 1-3.5 3.5h-21A3.5 3.5 0 0 1 0 30.5v-13A3.5 3.5 0 0 1 3.5 14H6Zm4 0h8V9a4 4 0 0 0-8 0v5Zm4 5a3 3 0 0 0-1.4 5.7V29h2.8v-4.3A3 3 0 0 0 14 19Z"
-        />
+          d="M6 14V9a8 8 0 0 1 16 0v5h2.5A3.5 3.5 0 0 1 28 17.5v13a3.5 3.5 0 0 1-3.5 3.5h-21A3.5 3.5 0 0 1 0 30.5v-13A3.5 3.5 0 0 1 3.5 14H6Zm4 0h8V9a4 4 0 0 0-8 0v5Zm4 5a3 3 0 0 0-1.4 5.7V29h2.8v-4.3A3 3 0 0 0 14 19Z" />
       </svg>
       <span>Pay later. Only when we open.</span>
     </p>
@@ -1016,55 +1081,30 @@
   <!-- ================= BLOCK 6: COUNTDOWN ================= -->
   <section class="lmctad-section lmctad-countdown-section">
     <div class="lmctad-countdown-card">
-      <p class="lmctad-countdown-title">
-        HURRY! INTRODUCTORY OFFER ENDING SOON
-      </p>
+      <p class="lmctad-countdown-title">HURRY! INTRODUCTORY OFFER ENDING SOON</p>
       <div class="lmctad-countdown-grid">
         <div class="lmctad-countdown-cell">
-          <div class="lmctad-countdown-digits" data-lmctad-countdown="days">
-            00
-          </div>
+          <div class="lmctad-countdown-digits" data-lmctad-countdown="days">00</div>
           <p class="lmctad-countdown-label">DAYS</p>
         </div>
         <div class="lmctad-countdown-cell">
-          <div class="lmctad-countdown-digits" data-lmctad-countdown="hours">
-            00
-          </div>
+          <div class="lmctad-countdown-digits" data-lmctad-countdown="hours">00</div>
           <p class="lmctad-countdown-label">HRS</p>
         </div>
         <div class="lmctad-countdown-cell">
-          <div class="lmctad-countdown-digits" data-lmctad-countdown="minutes">
-            00
-          </div>
+          <div class="lmctad-countdown-digits" data-lmctad-countdown="minutes">00</div>
           <p class="lmctad-countdown-label">MINS</p>
         </div>
         <div class="lmctad-countdown-cell">
-          <div class="lmctad-countdown-digits" data-lmctad-countdown="seconds">
-            00
-          </div>
+          <div class="lmctad-countdown-digits" data-lmctad-countdown="seconds">00</div>
           <p class="lmctad-countdown-label">SECS</p>
         </div>
       </div>
-      <button
-        class="lmctad-cta lmctad-countdown-cta"
-        type="button"
-        data-lmctad-cta
-      >
-        <span class="lmctad-countdown-cta-main"
-          >LOCK IN FOR $<span data-lmctad-bind="price"></span
-        ></span>
-        <span class="lmctad-countdown-cta-sub"
-          >+ $<span data-lmctad-bind="freeFuel"></span> FREE FUEL</span
-        >
+      <button class="lmctad-cta lmctad-countdown-cta" type="button" data-lmctad-cta>
+        <span class="lmctad-countdown-cta-main">LOCK IN FOR $<span data-lmctad-bind="price"></span></span>
+        <span class="lmctad-countdown-cta-sub">+ $<span data-lmctad-bind="freeFuel"></span> FREE FUEL</span>
         <svg class="lmctad-cta-chevron" viewBox="0 0 32 32" aria-hidden="true">
-          <path
-            fill="none"
-            stroke="currentColor"
-            stroke-width="4"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m11 6 10 10-10 10"
-          />
+          <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="m11 6 10 10-10 10" />
         </svg>
       </button>
     </div>
@@ -1076,55 +1116,35 @@
       <div class="lmctad-why-row">
         <div class="lmctad-why-icon-circle">
           <svg class="lmctad-why-icon" viewBox="0 0 64 64" aria-hidden="true">
-            <path
-              fill="#FFFFFF"
-              d="M13 8h25a5 5 0 0 1 5 5v43H8V13a5 5 0 0 1 5-5Zm4 8v13h17V16H17Zm0 21v12h6V37h-6Zm26-18h5l8 8v20a4 4 0 0 1-8 0V33h-5v-5h8l-5-5h-3v-4Z"
-            />
+            <path fill="#FFFFFF" d="M13 8h25a5 5 0 0 1 5 5v43H8V13a5 5 0 0 1 5-5Zm4 8v13h17V16H17Zm0 21v12h6V37h-6Zm26-18h5l8 8v20a4 4 0 0 1-8 0V33h-5v-5h8l-5-5h-3v-4Z" />
             <path fill="#FFFFFF" d="M50 37h4v9a2 2 0 1 1-4 0v-9Z" />
           </svg>
         </div>
         <div>
-          <h3 class="lmctad-why-title">
-            $<span data-lmctad-bind="freeFuel"></span> FREE FUEL
-          </h3>
-          <p class="lmctad-why-body">
-            Get $<span data-lmctad-bind="freeFuel"></span> free fuel when you
-            sign up today!
-          </p>
+          <h3 class="lmctad-why-title">$<span data-lmctad-bind="freeFuel"></span> FREE FUEL</h3>
+          <p class="lmctad-why-body">Get $<span data-lmctad-bind="freeFuel"></span> free fuel when you sign up today!</p>
         </div>
       </div>
       <div class="lmctad-why-row">
         <div class="lmctad-why-icon-circle">
           <svg class="lmctad-why-icon" viewBox="0 0 64 64" aria-hidden="true">
-            <path
-              fill="#FFFFFF"
-              d="M7 15a8 8 0 0 1 8-8h19l23 23a7 7 0 0 1 0 10L40 57a7 7 0 0 1-10 0L7 34V15Zm15 1a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"
-            />
+            <path fill="#FFFFFF" d="M7 15a8 8 0 0 1 8-8h19l23 23a7 7 0 0 1 0 10L40 57a7 7 0 0 1-10 0L7 34V15Zm15 1a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z" />
           </svg>
         </div>
         <div>
-          <h3 class="lmctad-why-title">
-            ONLY $<span data-lmctad-bind="price"></span>
-          </h3>
-          <p class="lmctad-why-body">
-            One payment. 12 months. Massive savings.
-          </p>
+          <h3 class="lmctad-why-title">ONLY $<span data-lmctad-bind="price"></span></h3>
+          <p class="lmctad-why-body">One payment. 12 months. Massive savings.</p>
         </div>
       </div>
       <div class="lmctad-why-row">
         <div class="lmctad-why-icon-circle">
           <svg class="lmctad-why-icon" viewBox="0 0 64 64" aria-hidden="true">
-            <path
-              fill="#FFFFFF"
-              d="M13 9h5V4h6v5h16V4h6v5h5a7 7 0 0 1 7 7v35a7 7 0 0 1-7 7H13a7 7 0 0 1-7-7V16a7 7 0 0 1 7-7Zm0 17v25h38V26H13Zm7 7h8v8h-8v-8Zm16 0h8v8h-8v-8Zm-16 12h8v4h-8v-4Z"
-            />
+            <path fill="#FFFFFF" d="M13 9h5V4h6v5h16V4h6v5h5a7 7 0 0 1 7 7v35a7 7 0 0 1-7 7H13a7 7 0 0 1-7-7V16a7 7 0 0 1 7-7Zm0 17v25h38V26H13Zm7 7h8v8h-8v-8Zm16 0h8v8h-8v-8Zm-16 12h8v4h-8v-4Z" />
           </svg>
         </div>
         <div>
           <h3 class="lmctad-why-title">PAY LATER</h3>
-          <p class="lmctad-why-body">
-            No payment today. Only when we officially open.
-          </p>
+          <p class="lmctad-why-body">No payment today. Only when we officially open.</p>
         </div>
       </div>
       <div class="lmctad-why-row">
@@ -1132,8 +1152,7 @@
           <svg class="lmctad-why-icon" viewBox="0 0 64 64" aria-hidden="true">
             <path
               fill="#FFFFFF"
-              d="M14 27V18C14 8.1 22.1 0 32 0s18 8.1 18 18v9h4a6 6 0 0 1 6 6v25a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6V33a6 6 0 0 1 6-6h4Zm8 0h20v-9c0-5.5-4.5-10-10-10s-10 4.5-10 10v9Zm10 10a6 6 0 0 0-3 11.2V56h6v-7.8A6 6 0 0 0 32 37Z"
-            />
+              d="M14 27V18C14 8.1 22.1 0 32 0s18 8.1 18 18v9h4a6 6 0 0 1 6 6v25a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6V33a6 6 0 0 1 6-6h4Zm8 0h20v-9c0-5.5-4.5-10-10-10s-10 4.5-10 10v9Zm10 10a6 6 0 0 0-3 11.2V56h6v-7.8A6 6 0 0 0 32 37Z" />
           </svg>
         </div>
         <div>
@@ -1152,14 +1171,9 @@
         src="https://images.clickfunnels.com/46/3e96b91f4347c993c387fd74bd7070/WHOLESALE-FUEL-PANEL.svg"
         alt="Wholesale fuel available soon"
         loading="lazy"
-        decoding="async"
-      />
+        decoding="async" />
       <div class="lmctad-wholesale-plus">
-        <svg
-          class="lmctad-wholesale-plus-icon"
-          viewBox="0 0 64 64"
-          aria-hidden="true"
-        >
+        <svg class="lmctad-wholesale-plus-icon" viewBox="0 0 64 64" aria-hidden="true">
           <path fill="#0041D8" d="M27 5h10v22h22v10H37v22H27V37H5V27h22V5Z" />
         </svg>
       </div>
@@ -1169,8 +1183,7 @@
         src="https://images.clickfunnels.com/8f/7a8c97bfbd41328e9b36ae7bf78954/WHOLESALE-GROCERIES.svg"
         alt="Wholesale groceries available soon"
         loading="lazy"
-        decoding="async"
-      />
+        decoding="async" />
     </div>
   </section>
   <!-- ================= BLOCK 9: NUMBERS ================= -->
@@ -1200,51 +1213,27 @@
     <h2 class="lmctad-proof-heading">LOVED BY THOUSANDS OF MEMBERS</h2>
     <div class="lmctad-proof-row">
       <div class="lmctad-rating-card">
-        <img
-          class="lmctad-google-logo"
-          data-img="lmctad_google_logo"
-          src="https://images.clickfunnels.com/c4/1715a2d2bd404fae87688cad6c8174/google.png"
-          alt="Google"
-          loading="lazy"
-          decoding="async"
-        />
+        <img class="lmctad-google-logo" data-img="lmctad_google_logo" src="https://images.clickfunnels.com/c4/1715a2d2bd404fae87688cad6c8174/google.png" alt="Google" loading="lazy" decoding="async" />
         <p class="lmctad-google-label">Google Reviews</p>
         <div class="lmctad-stars" aria-label="Five stars">
           <svg class="lmctad-star" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="#FBBC04"
-              d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z"
-            />
+            <path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z" />
           </svg>
           <svg class="lmctad-star" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="#FBBC04"
-              d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z"
-            />
+            <path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z" />
           </svg>
           <svg class="lmctad-star" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="#FBBC04"
-              d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z"
-            />
+            <path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z" />
           </svg>
           <svg class="lmctad-star" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="#FBBC04"
-              d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z"
-            />
+            <path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z" />
           </svg>
           <svg class="lmctad-star" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="#FBBC04"
-              d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z"
-            />
+            <path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z" />
           </svg>
         </div>
         <p class="lmctad-rating-value" data-lmctad-bind="googleRating"></p>
-        <p class="lmctad-review-count">
-          From <span data-lmctad-bind="googleReviewCount"></span> reviews
-        </p>
+        <p class="lmctad-review-count">From <span data-lmctad-bind="googleReviewCount"></span> reviews</p>
       </div>
       <div class="lmctad-review-viewport" data-lmctad-review-viewport>
         <div class="lmctad-review-track" data-lmctad-review-track></div>
@@ -1259,17 +1248,11 @@
       <span class="lmctad-final-heading-line">THIS OFFER WON'T LAST!</span>
     </h2>
     <div class="lmctad-final-price-row">
-      <span class="lmctad-final-price"
-        >$<span data-lmctad-bind="price"></span
-      ></span>
+      <span class="lmctad-final-price">$<span data-lmctad-bind="price"></span></span>
       <span class="lmctad-final-year">FOR THE ENTIRE YEAR</span>
     </div>
-    <p class="lmctad-final-fuel">
-      + $<span data-lmctad-bind="freeFuel"></span> FREE FUEL
-    </p>
-    <button class="lmctad-cta lmctad-final-cta" type="button" data-lmctad-cta>
-      LOCK IN THIS OFFER NOW
-    </button>
+    <p class="lmctad-final-fuel">+ $<span data-lmctad-bind="freeFuel"></span> FREE FUEL</p>
+    <button class="lmctad-cta lmctad-final-cta" type="button" data-lmctad-cta>LOCK IN THIS OFFER NOW</button>
   </section>
   <!-- ================= BLOCK 12: AS SEEN ON ================= -->
   <section class="lmctad-section lmctad-seen-section">
@@ -1282,56 +1265,49 @@
           src="https://images.clickfunnels.com/b1/0f1ff621c64cbfb148737a8f88d290/AS-SEEN-ON-LOGO-4.svg"
           alt="As seen on media logo 1"
           loading="lazy"
-          decoding="async"
-        />
+          decoding="async" />
         <img
           class="lmctad-seen-logo"
           data-img="lmctad_as_seen_on_logo_2"
           src="https://images.clickfunnels.com/0a/848b49699c49b1bc06893afb9211b8/AS-SEEN-ON-LOGO-2.svg"
           alt="As seen on media logo 2"
           loading="lazy"
-          decoding="async"
-        />
+          decoding="async" />
         <img
           class="lmctad-seen-logo"
           data-img="lmctad_as_seen_on_logo_3"
           src="https://images.clickfunnels.com/45/d30bd840e348cdba7886b52eae6668/AS-SEEN-ON-LOGO-5.svg"
           alt="As seen on media logo 3"
           loading="lazy"
-          decoding="async"
-        />
+          decoding="async" />
         <img
           class="lmctad-seen-logo"
           data-img="lmctad_as_seen_on_logo_4"
           src="https://images.clickfunnels.com/6f/48f0fd74bd40f79807fdfc090bd769/AS-SEEN-ON-LOGO-3.svg"
           alt="As seen on media logo 4"
           loading="lazy"
-          decoding="async"
-        />
+          decoding="async" />
         <img
           class="lmctad-seen-logo"
           data-img="lmctad_as_seen_on_logo_5"
           src="https://images.clickfunnels.com/63/697b4523884a32a2130c99aca8b2c9/AS-SEEN-ON-LOGO-1.svg"
           alt="As seen on media logo 5"
           loading="lazy"
-          decoding="async"
-        />
+          decoding="async" />
         <img
           class="lmctad-seen-logo"
           data-img="lmctad_as_seen_on_logo_6"
           src="https://images.clickfunnels.com/d9/9a3e3cb6224222a462e158f92a84de/AS-SEEN-ON-LOGO-6.svg"
           alt="As seen on media logo 6"
           loading="lazy"
-          decoding="async"
-        />
+          decoding="async" />
         <img
           class="lmctad-seen-logo"
           data-img="lmctad_as_seen_on_logo_7"
           src="https://images.clickfunnels.com/71/bbca2335b64dfcbbe9514d3a435a52/AS-SEEN-ON-LOGO-7.svg"
           alt="As seen on media logo 7"
           loading="lazy"
-          decoding="async"
-        />
+          decoding="async" />
       </div>
     </div>
   </section>
@@ -1343,10 +1319,19 @@
       src="https://images.clickfunnels.com/bb/9b6251c9364f02bf730844e8782601/LMCT-PETROL-LOGO-FOOTER.svg"
       alt="LMCT+ Petrol"
       loading="lazy"
-      decoding="async"
-    />
+      decoding="async" />
     <p class="lmctad-copyright">Copyright 2026. LMCT PLUS</p>
   </footer>
+</div>
+<div class="lmctad-checkout-modal" data-lmctad-checkout-modal hidden aria-hidden="true">
+  <button class="lmctad-checkout-backdrop" type="button" data-lmctad-checkout-close aria-label="Close checkout"></button>
+  <section class="lmctad-checkout-dialog" role="dialog" aria-modal="true" aria-labelledby="lmctad-checkout-title" tabindex="-1" data-lmctad-checkout-dialog>
+    <div class="lmctad-checkout-head">
+      <h2 class="lmctad-checkout-title" id="lmctad-checkout-title">Secure Checkout</h2>
+      <button class="lmctad-checkout-close" type="button" data-lmctad-checkout-close aria-label="Close checkout">&times;</button>
+    </div>
+    <div class="lmctad-checkout-body" data-lmctad-checkout-body></div>
+  </section>
 </div>
 <script>
   window.addEventListener("load", function () {
@@ -1363,7 +1348,8 @@
       statLitres: "1.6M+",
       statMembers: "3,000+",
       statCars: "1,000+",
-      ctaTarget: "[data-title='checkout-form']",
+      checkoutPopupTarget: "#row--30567",
+      ctaTarget: "#row--30567",
       ctaUrl: "",
       reviews: [
         {
@@ -1416,11 +1402,7 @@
       window.addEventListener("resize", lmctadWriteRailWidth);
     }
     var lmctadBindNodes = lmctadRail.querySelectorAll("[data-lmctad-bind]");
-    for (
-      var lmctadBindIndex = 0;
-      lmctadBindIndex < lmctadBindNodes.length;
-      lmctadBindIndex += 1
-    ) {
+    for (var lmctadBindIndex = 0; lmctadBindIndex < lmctadBindNodes.length; lmctadBindIndex += 1) {
       var lmctadBindNode = lmctadBindNodes[lmctadBindIndex];
       var lmctadBindKey = lmctadBindNode.getAttribute("data-lmctad-bind");
       if (Object.prototype.hasOwnProperty.call(lmctadConfig, lmctadBindKey)) {
@@ -1429,26 +1411,95 @@
     }
     var lmctadReducedMotion = false;
     try {
-      lmctadReducedMotion =
-        window.matchMedia &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      lmctadReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     } catch (lmctadMotionError) {
       lmctadReducedMotion = false;
     }
-    var lmctadCtaHandler = function () {
+    var lmctadCheckoutModal = document.querySelector("[data-lmctad-checkout-modal]");
+    var lmctadCheckoutDialog = document.querySelector("[data-lmctad-checkout-dialog]");
+    var lmctadCheckoutBody = document.querySelector("[data-lmctad-checkout-body]");
+    var lmctadCheckoutLastTrigger = null;
+    var lmctadGetCheckoutTarget = function () {
+      var lmctadCheckoutSelector = lmctadConfig.checkoutPopupTarget || lmctadConfig.ctaTarget;
+      if (typeof lmctadCheckoutSelector !== "string" || !lmctadCheckoutSelector.trim()) {
+        return null;
+      }
       try {
-        if (
-          typeof lmctadConfig.ctaUrl === "string" &&
-          lmctadConfig.ctaUrl.trim()
-        ) {
+        return document.querySelector(lmctadCheckoutSelector.trim());
+      } catch (lmctadCheckoutSelectorError) {
+        return null;
+      }
+    };
+    var lmctadOpenCheckoutModal = function (lmctadTrigger) {
+      var lmctadCheckoutTarget = lmctadGetCheckoutTarget();
+      if (!lmctadCheckoutModal || !lmctadCheckoutDialog || !lmctadCheckoutBody || !lmctadCheckoutTarget) {
+        return false;
+      }
+      lmctadCheckoutLastTrigger = lmctadTrigger && typeof lmctadTrigger.focus === "function" ? lmctadTrigger : null;
+      lmctadCheckoutTarget.classList.add("lmctad-checkout-popup-form");
+      lmctadCheckoutTarget.style.setProperty("display", "block", "important");
+      lmctadCheckoutTarget.style.setProperty("width", "100%", "important");
+      lmctadCheckoutTarget.style.setProperty("max-width", "100%", "important");
+      lmctadCheckoutTarget.style.setProperty("margin", "0 auto", "important");
+      lmctadCheckoutTarget.style.setProperty("padding", "0", "important");
+      if (lmctadCheckoutTarget.parentNode !== lmctadCheckoutBody) {
+        lmctadCheckoutBody.appendChild(lmctadCheckoutTarget);
+      }
+      lmctadCheckoutModal.hidden = false;
+      lmctadCheckoutModal.setAttribute("aria-hidden", "false");
+      if (document.body) {
+        document.body.classList.add("lmctad-checkout-open");
+      }
+      window.setTimeout(function () {
+        try {
+          lmctadCheckoutDialog.focus({ preventScroll: true });
+        } catch (lmctadFocusError) {
+          lmctadCheckoutDialog.focus();
+        }
+      }, 0);
+      return true;
+    };
+    var lmctadCloseCheckoutModal = function () {
+      if (!lmctadCheckoutModal) {
+        return;
+      }
+      lmctadCheckoutModal.hidden = true;
+      lmctadCheckoutModal.setAttribute("aria-hidden", "true");
+      if (document.body) {
+        document.body.classList.remove("lmctad-checkout-open");
+      }
+      if (lmctadCheckoutLastTrigger) {
+        try {
+          lmctadCheckoutLastTrigger.focus({ preventScroll: true });
+        } catch (lmctadFocusError) {
+          lmctadCheckoutLastTrigger.focus();
+        }
+      }
+    };
+    if (lmctadCheckoutModal) {
+      lmctadCheckoutModal.addEventListener("click", function (lmctadEvent) {
+        var lmctadCloseTarget = lmctadEvent.target && lmctadEvent.target.closest && lmctadEvent.target.closest("[data-lmctad-checkout-close]");
+        if (lmctadCloseTarget) {
+          lmctadCloseCheckoutModal();
+        }
+      });
+      document.addEventListener("keydown", function (lmctadEvent) {
+        if (lmctadEvent.key === "Escape" && !lmctadCheckoutModal.hidden) {
+          lmctadCloseCheckoutModal();
+        }
+      });
+    }
+    var lmctadCtaHandler = function (lmctadEvent) {
+      try {
+        if (lmctadOpenCheckoutModal(lmctadEvent ? lmctadEvent.currentTarget : null)) {
+          return;
+        }
+        if (typeof lmctadConfig.ctaUrl === "string" && lmctadConfig.ctaUrl.trim()) {
           window.location.href = lmctadConfig.ctaUrl.trim();
           return;
         }
         var lmctadTarget = null;
-        if (
-          typeof lmctadConfig.ctaTarget === "string" &&
-          lmctadConfig.ctaTarget.trim()
-        ) {
+        if (typeof lmctadConfig.ctaTarget === "string" && lmctadConfig.ctaTarget.trim()) {
           lmctadTarget = document.querySelector(lmctadConfig.ctaTarget.trim());
         }
         if (lmctadTarget && typeof lmctadTarget.scrollIntoView === "function") {
@@ -1471,15 +1522,8 @@
       }
     };
     var lmctadCtaButtons = lmctadRail.querySelectorAll("[data-lmctad-cta]");
-    for (
-      var lmctadCtaIndex = 0;
-      lmctadCtaIndex < lmctadCtaButtons.length;
-      lmctadCtaIndex += 1
-    ) {
-      lmctadCtaButtons[lmctadCtaIndex].addEventListener(
-        "click",
-        lmctadCtaHandler,
-      );
+    for (var lmctadCtaIndex = 0; lmctadCtaIndex < lmctadCtaButtons.length; lmctadCtaIndex += 1) {
+      lmctadCtaButtons[lmctadCtaIndex].addEventListener("click", lmctadCtaHandler);
     }
     var lmctadCountdownNodes = {
       days: lmctadRail.querySelector('[data-lmctad-countdown="days"]'),
@@ -1540,22 +1584,12 @@
         return;
       }
       if (lmctadOptions.cloneItems) {
-        var lmctadOriginalItems = Array.prototype.slice.call(
-          lmctadTrack.children,
-          0,
-          lmctadOriginalCount,
-        );
+        var lmctadOriginalItems = Array.prototype.slice.call(lmctadTrack.children, 0, lmctadOriginalCount);
         var lmctadBeforeFragment = document.createDocumentFragment();
         var lmctadAfterFragment = document.createDocumentFragment();
-        for (
-          var lmctadLoopItemIndex = 0;
-          lmctadLoopItemIndex < lmctadOriginalItems.length;
-          lmctadLoopItemIndex += 1
-        ) {
-          var lmctadBeforeClone =
-            lmctadOriginalItems[lmctadLoopItemIndex].cloneNode(true);
-          var lmctadAfterClone =
-            lmctadOriginalItems[lmctadLoopItemIndex].cloneNode(true);
+        for (var lmctadLoopItemIndex = 0; lmctadLoopItemIndex < lmctadOriginalItems.length; lmctadLoopItemIndex += 1) {
+          var lmctadBeforeClone = lmctadOriginalItems[lmctadLoopItemIndex].cloneNode(true);
+          var lmctadAfterClone = lmctadOriginalItems[lmctadLoopItemIndex].cloneNode(true);
           lmctadBeforeClone.setAttribute("aria-hidden", "true");
           lmctadAfterClone.setAttribute("aria-hidden", "true");
           lmctadBeforeFragment.appendChild(lmctadBeforeClone);
@@ -1595,15 +1629,12 @@
         var lmctadItems = lmctadTrack.children;
         if (lmctadItems.length > lmctadOriginalCount * 2) {
           var lmctadCurrentOffset = lmctadItems[lmctadOriginalCount].offsetLeft;
-          var lmctadNextOffset =
-            lmctadItems[lmctadOriginalCount * 2].offsetLeft;
+          var lmctadNextOffset = lmctadItems[lmctadOriginalCount * 2].offsetLeft;
           lmctadOriginalWidth = lmctadNextOffset - lmctadCurrentOffset;
           lmctadLowerBound = lmctadCurrentOffset;
           lmctadUpperBound = lmctadNextOffset;
           if (lmctadOriginalWidth > 0) {
-            lmctadViewport.scrollLeft = lmctadPositioned
-              ? lmctadWrapScroll(lmctadViewport.scrollLeft)
-              : lmctadLowerBound;
+            lmctadViewport.scrollLeft = lmctadPositioned ? lmctadWrapScroll(lmctadViewport.scrollLeft) : lmctadLowerBound;
             lmctadPositioned = true;
           }
         }
@@ -1639,12 +1670,7 @@
         }
         var lmctadDelta = Math.min(40, lmctadTime - lmctadLastFrame);
         lmctadLastFrame = lmctadTime;
-        if (
-          !lmctadPaused &&
-          !lmctadDragging &&
-          !lmctadReducedMotion &&
-          lmctadOriginalWidth > 0
-        ) {
+        if (!lmctadPaused && !lmctadDragging && !lmctadReducedMotion && lmctadOriginalWidth > 0) {
           lmctadViewport.scrollLeft += (lmctadSpeed * lmctadDelta) / 1000;
           lmctadNormaliseScroll();
         }
@@ -1691,17 +1717,12 @@
         }
         var lmctadDeltaX = lmctadEvent.clientX - lmctadPointerStartX;
         var lmctadDeltaY = lmctadEvent.clientY - lmctadPointerStartY;
-        if (
-          !lmctadHorizontalDrag &&
-          Math.abs(lmctadDeltaX) > Math.abs(lmctadDeltaY) + 4
-        ) {
+        if (!lmctadHorizontalDrag && Math.abs(lmctadDeltaX) > Math.abs(lmctadDeltaY) + 4) {
           lmctadHorizontalDrag = true;
         }
         if (lmctadHorizontalDrag) {
           lmctadEvent.preventDefault();
-          lmctadViewport.scrollLeft = lmctadWrapScroll(
-            lmctadScrollStart - lmctadDeltaX,
-          );
+          lmctadViewport.scrollLeft = lmctadWrapScroll(lmctadScrollStart - lmctadDeltaX);
         }
       });
       var lmctadReleaseDrag = function (lmctadEvent) {
@@ -1738,12 +1759,8 @@
         window.requestAnimationFrame(lmctadLoopFrame);
       }
     };
-    var lmctadReviewTrack = lmctadRail.querySelector(
-      "[data-lmctad-review-track]",
-    );
-    var lmctadReviewViewport = lmctadRail.querySelector(
-      "[data-lmctad-review-viewport]",
-    );
+    var lmctadReviewTrack = lmctadRail.querySelector("[data-lmctad-review-track]");
+    var lmctadReviewViewport = lmctadRail.querySelector("[data-lmctad-review-viewport]");
     var lmctadStarMarkup =
       '<svg class="lmctad-review-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z"></path></svg>';
     var lmctadBuildReviewCard = function (lmctadReview, lmctadClone) {
@@ -1754,12 +1771,7 @@
       }
       var lmctadStars = document.createElement("div");
       lmctadStars.className = "lmctad-review-stars";
-      lmctadStars.innerHTML =
-        lmctadStarMarkup +
-        lmctadStarMarkup +
-        lmctadStarMarkup +
-        lmctadStarMarkup +
-        lmctadStarMarkup;
+      lmctadStars.innerHTML = lmctadStarMarkup + lmctadStarMarkup + lmctadStarMarkup + lmctadStarMarkup + lmctadStarMarkup;
       var lmctadText = document.createElement("p");
       lmctadText.className = "lmctad-review-text";
       lmctadText.textContent = lmctadReview.text;
@@ -1771,42 +1783,16 @@
       lmctadCard.appendChild(lmctadName);
       return lmctadCard;
     };
-    if (
-      lmctadReviewTrack &&
-      lmctadReviewViewport &&
-      Array.isArray(lmctadConfig.reviews) &&
-      lmctadConfig.reviews.length
-    ) {
+    if (lmctadReviewTrack && lmctadReviewViewport && Array.isArray(lmctadConfig.reviews) && lmctadConfig.reviews.length) {
       var lmctadReviewFragment = document.createDocumentFragment();
-      for (
-        var lmctadBeforeCloneIndex = 0;
-        lmctadBeforeCloneIndex < lmctadConfig.reviews.length;
-        lmctadBeforeCloneIndex += 1
-      ) {
-        lmctadReviewFragment.appendChild(
-          lmctadBuildReviewCard(
-            lmctadConfig.reviews[lmctadBeforeCloneIndex],
-            true,
-          ),
-        );
+      for (var lmctadBeforeCloneIndex = 0; lmctadBeforeCloneIndex < lmctadConfig.reviews.length; lmctadBeforeCloneIndex += 1) {
+        lmctadReviewFragment.appendChild(lmctadBuildReviewCard(lmctadConfig.reviews[lmctadBeforeCloneIndex], true));
       }
-      for (
-        var lmctadReviewIndex = 0;
-        lmctadReviewIndex < lmctadConfig.reviews.length;
-        lmctadReviewIndex += 1
-      ) {
-        lmctadReviewFragment.appendChild(
-          lmctadBuildReviewCard(lmctadConfig.reviews[lmctadReviewIndex], false),
-        );
+      for (var lmctadReviewIndex = 0; lmctadReviewIndex < lmctadConfig.reviews.length; lmctadReviewIndex += 1) {
+        lmctadReviewFragment.appendChild(lmctadBuildReviewCard(lmctadConfig.reviews[lmctadReviewIndex], false));
       }
-      for (
-        var lmctadCloneIndex = 0;
-        lmctadCloneIndex < lmctadConfig.reviews.length;
-        lmctadCloneIndex += 1
-      ) {
-        lmctadReviewFragment.appendChild(
-          lmctadBuildReviewCard(lmctadConfig.reviews[lmctadCloneIndex], true),
-        );
+      for (var lmctadCloneIndex = 0; lmctadCloneIndex < lmctadConfig.reviews.length; lmctadCloneIndex += 1) {
+        lmctadReviewFragment.appendChild(lmctadBuildReviewCard(lmctadConfig.reviews[lmctadCloneIndex], true));
       }
       lmctadReviewTrack.appendChild(lmctadReviewFragment);
       lmctadInitSwipeLoop({
@@ -1817,14 +1803,8 @@
       });
     }
     var lmctadSeenTrack = lmctadRail.querySelector("[data-lmctad-seen-track]");
-    var lmctadSeenViewport = lmctadRail.querySelector(
-      "[data-lmctad-seen-viewport]",
-    );
-    if (
-      lmctadSeenTrack &&
-      lmctadSeenViewport &&
-      lmctadSeenTrack.children.length
-    ) {
+    var lmctadSeenViewport = lmctadRail.querySelector("[data-lmctad-seen-viewport]");
+    if (lmctadSeenTrack && lmctadSeenViewport && lmctadSeenTrack.children.length) {
       lmctadInitSwipeLoop({
         viewport: lmctadSeenViewport,
         track: lmctadSeenTrack,

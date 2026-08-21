@@ -1,462 +1,555 @@
-<!-- ============================================================
-     LMCT+ TESTIMONIALS BLOCK
-     Paste-ready ClickFunnels 1.0 Custom HTML/Code block.
-     Ripped from lmctpetrol.com — exact design, namespaced as
-     .lmtest-* to avoid collisions with anything else on the funnel.
-     Behaviour:
-       - Desktop (>720px): seamless auto-scrolling marquee (60s loop)
-       - Mobile (≤720px): horizontal swipe carousel with snap
-       - Pauses on hover, respects prefers-reduced-motion
-       - Images hosted on lmctpetrol.com — no extra upload needed
-     ============================================================ -->
+<!-- LMCT+ FAQ SECTION START -->
 <style>
-  .lmtest *,
-  .lmtest *::before,
-  .lmtest *::after {
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap");
+  .lmctFaq,
+  .lmctFaq *,
+  .lmctFaq *::before,
+  .lmctFaq *::after {
     box-sizing: border-box;
   }
-  .lmtest {
-    margin: 0px auto;
-    max-width: 1180px;
+  .lmctFaq {
+    --lmct-faq-bg: #eef8ff;
+    --lmct-faq-card: #ffffff;
+    --lmct-faq-navy: #061d3a;
+    --lmct-faq-blue: #1268ff;
+    --lmct-faq-muted: #5d7089;
+    --lmct-faq-green: #22c55e;
+    --lmct-faq-border: #d7e6f3;
+    width: 100%;
     padding: 56px 16px;
-    font-family:
-      "Montserrat",
-      system-ui,
-      -apple-system,
-      sans-serif;
-    color: #0a1d3a;
+    background:
+      radial-gradient(
+        circle at 78% 8%,
+        rgba(132, 205, 255, 0.18) 0,
+        rgba(132, 205, 255, 0.06) 32%,
+        rgba(132, 205, 255, 0) 58%
+      ),
+      linear-gradient(180deg, #f2faff 0%, var(--lmct-faq-bg) 100%);
+    color: var(--lmct-faq-navy);
+    font-family: "Montserrat", Arial, sans-serif;
   }
-  /* ============ HEAD ============
-     Styled for the funnel's blue/dark background.
-     Headline goes white, subtitle goes light blue. */
-  .lmtest-head {
+  .lmctFaq__inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .lmctFaq__header {
+    max-width: 760px;
+    margin: 0 auto 30px;
     text-align: center;
-    margin-bottom: 18px;
   }
-  .lmtest-eyebrow {
+  .lmctFaq__eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #16c93a 0%, #0fa10b 100%);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    padding: 7px 14px;
-    border-radius: 999px;
-    font-size: 11px;
+    gap: 9px;
+    margin: 0 auto 16px;
+    color: var(--lmct-faq-blue);
+    font-size: 12px;
     font-weight: 900;
-    letter-spacing: 1.8px;
+    letter-spacing: 0.12em;
+    line-height: 1;
     text-transform: uppercase;
-    margin-bottom: 12px;
-    box-shadow:
-      0 6px 18px rgba(15, 161, 11, 0.45),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
   }
-  .lmtest-eyebrow-dot {
-    width: 7px;
-    height: 7px;
+  .lmctFaq__eyebrowDot {
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
+    background: var(--lmct-faq-green);
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.16);
+    animation: lmctFaqDotPulse 1.8s ease-in-out infinite;
+  }
+  .lmctFaq__title {
+    max-width: 760px;
+    margin: 0 auto !important;
+    color: var(--lmct-faq-navy) !important;
+    font-family: "Montserrat", Arial, sans-serif !important;
+    font-size: clamp(34px, 4.4vw, 52px);
+    font-weight: 900 !important;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+  .lmctFaq__list {
+    overflow: hidden;
+    border: 1px solid var(--lmct-faq-border);
+    border-radius: 9px;
+    background: var(--lmct-faq-card);
+    box-shadow: 0 16px 44px rgba(5, 37, 74, 0.08);
+  }
+  .lmctFaq__item {
+    border-bottom: 1px solid var(--lmct-faq-border);
     background: #ffffff;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
-    animation: lmtest-pulse 1.8s infinite;
   }
-  @keyframes lmtest-pulse {
-    0% {
-      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
-    }
-    70% {
-      box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-    }
+  .lmctFaq__item:last-child {
+    border-bottom: 0;
   }
-  .lmtest-head h2 {
-    margin: 0 0 6px;
-    font-size: 26px;
+  .lmctFaq__question {
+    position: relative;
+    width: 100%;
+    min-height: 68px;
+    padding: 20px 68px 20px 22px;
+    border: 0;
+    background: transparent;
+    color: var(--lmct-faq-navy);
+    font: inherit;
+    font-size: 16px;
     font-weight: 900;
-    color: #001a3d;
-    letter-spacing: -0.4px;
-    line-height: 1.15;
-    /* text-shadow: 0 2px 12px rgba(5, 22, 42, 0.32); */
+    line-height: 1.35;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      color 180ms ease,
+      background 180ms ease;
   }
-  .lmtest-head p {
-    margin: 0;
-    color: rgba(0, 0, 0, 0.82);
-    font-size: 13.5px;
+  .lmctFaq__question:hover {
+    background: rgba(18, 104, 255, 0.025);
+    color: #0b55c9;
+  }
+  .lmctFaq__question:focus-visible {
+    z-index: 2;
+    outline: 3px solid rgba(18, 104, 255, 0.3);
+    outline-offset: -3px;
+  }
+  .lmctFaq__icon {
+    position: absolute;
+    top: 50%;
+    right: 23px;
+    width: 20px;
+    height: 20px;
+    transform: translateY(-50%);
+    color: var(--lmct-faq-blue);
+  }
+  .lmctFaq__icon::before,
+  .lmctFaq__icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 999px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    transition:
+      transform 220ms ease,
+      opacity 180ms ease;
+  }
+  .lmctFaq__icon::before {
+    width: 14px;
+    height: 3px;
+  }
+  .lmctFaq__icon::after {
+    width: 3px;
+    height: 14px;
+  }
+  .lmctFaq__item.is-open .lmctFaq__icon::after {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .lmctFaq__answer {
+    height: 0;
+    overflow: hidden;
+    transition: height 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .lmctFaq__answerInner {
+    padding: 0 68px 21px 22px;
+  }
+  .lmctFaq__answer p {
+    max-width: 900px;
+    margin: 0 !important;
+    color: var(--lmct-faq-muted) !important;
+    font-family: "Montserrat", Arial, sans-serif !important;
+    font-size: 14px;
     font-weight: 500;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.5;
+    line-height: 1.62;
   }
-  @media (min-width: 640px) {
-    .lmtest {
-      padding: 42px 12px;
+  .lmctFaq__item.is-open {
+    background:
+      linear-gradient(90deg, rgba(18, 104, 255, 0.035), rgba(18, 104, 255, 0)),
+      #ffffff;
+  }
+  .lmctFaq__item.is-open .lmctFaq__question {
+    color: #0b55c9;
+  }
+  @keyframes lmctFaqDotPulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.16);
     }
-    .lmtest-head h2 {
-      font-size: 30px;
+    50% {
+      box-shadow: 0 0 0 7px rgba(34, 197, 94, 0.04);
     }
-    .lmtest-head p {
+  }
+  @media (max-width: 720px) {
+    .lmctFaq {
+      padding: 58px 12px 64px;
+    }
+    .lmctFaq__header {
+      margin-bottom: 27px;
+      padding: 0 8px;
+    }
+    .lmctFaq__eyebrow {
+      margin-bottom: 13px;
+      font-size: 11px;
+    }
+    .lmctFaq__title {
+      font-size: clamp(31px, 10vw, 40px);
+      line-height: 1.06;
+    }
+    .lmctFaq__question {
+      min-height: 66px;
+      padding: 19px 54px 19px 18px;
       font-size: 14px;
     }
-  }
-  /* ============ DESKTOP MARQUEE ============ */
-  .lmtest-grid {
-    position: relative;
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(
-      90deg,
-      transparent 0,
-      #000 6%,
-      #000 94%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      90deg,
-      transparent 0,
-      #000 6%,
-      #000 94%,
-      transparent 100%
-    );
-  }
-  .lmtest-track {
-    display: flex;
-    gap: 14px;
-    width: max-content;
-    animation: lmtest-marquee 60s linear infinite;
-    will-change: transform;
-  }
-  .lmtest-track:hover {
-    animation-play-state: paused;
-  }
-  .lmtest-card {
-    flex: 0 0 240px;
-  }
-  @keyframes lmtest-marquee {
-    from {
-      transform: translateX(0);
+    .lmctFaq__icon {
+      right: 18px;
     }
-    to {
-      transform: translateX(calc(-50% - 7px));
+    .lmctFaq__answerInner {
+      padding: 0 54px 21px 18px;
+    }
+    .lmctFaq__answer p {
+      font-size: 13.5px;
+      line-height: 1.65;
     }
   }
-  /* ============ MOBILE CAROUSEL ============ */
-  @media (max-width: 720px) {
-    .lmtest-grid {
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scroll-padding-left: 16px;
-      scroll-padding-right: 16px;
-      margin-left: -16px;
-      margin-right: -16px;
-      padding: 6px 16px 14px;
-      -webkit-mask-image: none;
-      mask-image: none;
+  @media (max-width: 420px) {
+    .lmctFaq {
+      padding-inline: 10px;
     }
-    .lmtest-grid::-webkit-scrollbar {
-      display: none;
+    .lmctFaq__question {
+      padding-right: 48px;
+      font-size: 14px;
     }
-    .lmtest-grid {
-      scrollbar-width: none;
+    .lmctFaq__answerInner {
+      padding-right: 20px;
     }
-    .lmtest-track {
-      animation: none;
-      width: auto;
-      gap: 12px;
-    }
-    .lmtest-card {
-      flex: 0 0 78%;
-      max-width: 320px;
-      scroll-snap-align: center;
-      scroll-snap-stop: always;
-    }
-    .lmtest-card.is-clone {
-      display: none;
+    .lmctFaq__icon {
+      right: 15px;
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .lmtest-track {
-      animation: none;
-    }
-  }
-  /* ============ CARDS ============ */
-  .lmtest-card {
-    background: #ffffff;
-    border: 1px solid #e6ebf2;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 8px 22px rgba(5, 22, 42, 0.08);
-    display: flex;
-    flex-direction: column;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-  }
-  .lmtest-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 30px rgba(5, 22, 42, 0.12);
-  }
-  .lmtest-photo {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
-    background: #eef2f7;
-    position: relative;
-  }
-  .lmtest-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .lmtest-body {
-    padding: 12px 14px 14px;
-    text-align: center;
-  }
-  .lmtest-name {
-    font-weight: 800;
-    font-size: 13px;
-    color: #05162a;
-    margin: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(12, 159, 253, 0.08);
-    border: 1px solid rgba(12, 159, 253, 0.2);
-    padding: 5px 11px;
-    border-radius: 999px;
-    letter-spacing: 0.3px;
-  }
-  .lmtest-name .lmtest-verified {
-    color: #0c9ffd;
-    font-size: 12px;
-  }
-  /* ============ MOBILE SWIPE HINT ============ */
-  .lmtest-hint {
-    display: none;
-  }
-  @media (max-width: 720px) {
-    .lmtest-hint {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      margin: 8px 0 0;
-      font-size: 11px;
-      font-weight: 700;
-      color: #5b6065;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    .lmtest-hint .arr {
-      display: inline-block;
-      animation: lmtest-swipe 1.4s ease-in-out infinite;
-      color: #0c9ffd;
-      font-weight: 900;
-      font-size: 14px;
-    }
-    @keyframes lmtest-swipe {
-      0%,
-      100% {
-        transform: translateX(0);
-        opacity: 0.6;
-      }
-      50% {
-        transform: translateX(4px);
-        opacity: 1;
-      }
+    .lmctFaq__eyebrowDot,
+    .lmctFaq__answer,
+    .lmctFaq__icon::before,
+    .lmctFaq__icon::after {
+      animation: none !important;
+      transition: none !important;
     }
   }
 </style>
-<section
-  class="lmtest"
-  id="member-stories"
-  aria-label="LMCT+ Petrol member testimonials"
->
-  <div class="lmtest-head">
-    <div class="lmtest-eyebrow">
-      <span class="lmtest-eyebrow-dot"></span>
-      Real Members · Real Savings
+<section aria-labelledby="lmctFaqTitle" class="lmctFaq" id="faqs">
+  <div class="lmctFaq__inner">
+    <header class="lmctFaq__header">
+      <span class="lmctFaq__eyebrow"
+        ><span aria-hidden="true" class="lmctFaq__eyebrowDot"></span> Adelaide
+        FAQs</span
+      >
+      <h2 class="lmctFaq__title" id="lmctFaqTitle">
+        Questions about the Adelaide launch offer.
+      </h2>
+    </header>
+    <div class="lmctFaq__list">
+      <article class="lmctFaq__item">
+        <h3>
+          <button
+            aria-controls="lmctFaqAnswer1"
+            aria-expanded="false"
+            class="lmctFaq__question"
+            type="button"
+          >
+            What is included in the $49.99 membership?<span
+              aria-hidden="true"
+              class="lmctFaq__icon"
+            ></span>
+          </button>
+        </h3>
+        <div class="lmctFaq__answer" id="lmctFaqAnswer1">
+          <div class="lmctFaq__answerInner">
+            <p>
+              You receive LMCT+ app access, member pricing on eligible fuel and
+              supermarket products, plus an eligible entry into the $100K
+              Adelaide launch draw.
+            </p>
+          </div>
+        </div>
+      </article>
+      <article class="lmctFaq__item">
+        <h3>
+          <button
+            aria-controls="lmctFaqAnswer2"
+            aria-expanded="false"
+            class="lmctFaq__question"
+            type="button"
+          >
+            Where is the new Adelaide location?<span
+              aria-hidden="true"
+              class="lmctFaq__icon"
+            ></span>
+          </button>
+        </h3>
+        <div class="lmctFaq__answer" id="lmctFaqAnswer2">
+          <div class="lmctFaq__answerInner">
+            <p>
+              The new station is at 1112 South Rd &amp; Daws Rd, Edwardstown SA.
+            </p>
+          </div>
+        </div>
+      </article>
+      <article class="lmctFaq__item">
+        <h3>
+          <button
+            aria-controls="lmctFaqAnswer3"
+            aria-expanded="false"
+            class="lmctFaq__question"
+            type="button"
+          >
+            When will the Edwardstown station open?<span
+              aria-hidden="true"
+              class="lmctFaq__icon"
+            ></span>
+          </button>
+        </h3>
+        <div class="lmctFaq__answer" id="lmctFaqAnswer3">
+          <div class="lmctFaq__answerInner">
+            <p>
+              The station is opening soon. Final opening details will be
+              announced through LMCT+ channels.
+            </p>
+          </div>
+        </div>
+      </article>
+      <article class="lmctFaq__item">
+        <h3>
+          <button
+            aria-controls="lmctFaqAnswer4"
+            aria-expanded="false"
+            class="lmctFaq__question"
+            type="button"
+          >
+            How do the fuel savings work?<span
+              aria-hidden="true"
+              class="lmctFaq__icon"
+            ></span>
+          </button>
+        </h3>
+        <div class="lmctFaq__answer" id="lmctFaqAnswer4">
+          <div class="lmctFaq__answerInner">
+            <p>
+              Show or use your LMCT+ membership at participating locations to
+              access the available member fuel price. Prices and savings may
+              vary.
+            </p>
+          </div>
+        </div>
+      </article>
+      <article class="lmctFaq__item">
+        <h3>
+          <button
+            aria-controls="lmctFaqAnswer5"
+            aria-expanded="false"
+            class="lmctFaq__question"
+            type="button"
+          >
+            What supermarket savings are included?<span
+              aria-hidden="true"
+              class="lmctFaq__icon"
+            ></span>
+          </button>
+        </h3>
+        <div class="lmctFaq__answer" id="lmctFaqAnswer5">
+          <div class="lmctFaq__answerInner">
+            <p>
+              Members can access eligible pricing on groceries, snacks and
+              everyday items at participating LMCT+ supermarket locations.
+            </p>
+          </div>
+        </div>
+      </article>
+      <article class="lmctFaq__item">
+        <h3>
+          <button
+            aria-controls="lmctFaqAnswer6"
+            aria-expanded="false"
+            class="lmctFaq__question"
+            type="button"
+          >
+            How do I enter the $100K giveaway?<span
+              aria-hidden="true"
+              class="lmctFaq__icon"
+            ></span>
+          </button>
+        </h3>
+        <div class="lmctFaq__answer" id="lmctFaqAnswer6">
+          <div class="lmctFaq__answerInner">
+            <p>
+              Purchase an eligible $49.99 annual membership during the promotion
+              period. Entry eligibility and allocation are subject to the
+              official Terms &amp; Conditions.
+            </p>
+          </div>
+        </div>
+      </article>
+      <article class="lmctFaq__item">
+        <h3>
+          <button
+            aria-controls="lmctFaqAnswer7"
+            aria-expanded="false"
+            class="lmctFaq__question"
+            type="button"
+          >
+            Is everyone who joins guaranteed to win?<span
+              aria-hidden="true"
+              class="lmctFaq__icon"
+            ></span>
+          </button>
+        </h3>
+        <div class="lmctFaq__answer" id="lmctFaqAnswer7">
+          <div class="lmctFaq__answerInner">
+            <p>
+              No. Eligible members receive an entry into the draw. The $100K
+              prize is awarded to the selected winner under the promotion Terms
+              &amp; Conditions.
+            </p>
+          </div>
+        </div>
+      </article>
+      <article class="lmctFaq__item">
+        <h3>
+          <button
+            aria-controls="lmctFaqAnswer8"
+            aria-expanded="false"
+            class="lmctFaq__question"
+            type="button"
+          >
+            When does my membership activate?<span
+              aria-hidden="true"
+              class="lmctFaq__icon"
+            ></span>
+          </button>
+        </h3>
+        <div class="lmctFaq__answer" id="lmctFaqAnswer8">
+          <div class="lmctFaq__answerInner">
+            <p>
+              Your membership access begins after signup and account setup in
+              the LMCT+ app.
+            </p>
+          </div>
+        </div>
+      </article>
+      <article class="lmctFaq__item">
+        <h3>
+          <button
+            aria-controls="lmctFaqAnswer9"
+            aria-expanded="false"
+            class="lmctFaq__question"
+            type="button"
+          >
+            Is the $49.99 membership recurring?<span
+              aria-hidden="true"
+              class="lmctFaq__icon"
+            ></span>
+          </button>
+        </h3>
+        <div class="lmctFaq__answer" id="lmctFaqAnswer9">
+          <div class="lmctFaq__answerInner">
+            <p>
+              It is presented as an annual membership. Review the checkout and
+              membership Terms &amp; Conditions for the current renewal rules
+              before purchasing.
+            </p>
+          </div>
+        </div>
+      </article>
+      <article class="lmctFaq__item">
+        <h3>
+          <button
+            aria-controls="lmctFaqAnswer10"
+            aria-expanded="false"
+            class="lmctFaq__question"
+            type="button"
+          >
+            What happens after signup?<span
+              aria-hidden="true"
+              class="lmctFaq__icon"
+            ></span>
+          </button>
+        </h3>
+        <div class="lmctFaq__answer" id="lmctFaqAnswer10">
+          <div class="lmctFaq__answerInner">
+            <p>
+              Set up the LMCT+ app, access your membership, and use it for
+              eligible member pricing when participating Adelaide locations are
+              available.
+            </p>
+          </div>
+        </div>
+      </article>
     </div>
-    <h2>Already saving at LMCT+ Petrol</h2>
-    <p>
-      Real members from our Preston site — savings tracked in their LMCT+ app.
-    </p>
-  </div>
-  <div class="lmtest-grid">
-    <div class="lmtest-track">
-      <div class="lmtest-card">
-        <div class="lmtest-photo">
-          <img
-            src="https://www.lmctpetrol.com/testimonial-mary.jpg"
-            alt="Verified LMCT+ Petrol member showing app savings"
-            loading="lazy"
-          />
-        </div>
-        <div class="lmtest-body">
-          <div class="lmtest-name">
-            Verified Member
-            <span class="lmtest-verified" title="Verified member">✓</span>
-          </div>
-        </div>
-      </div>
-      <div class="lmtest-card">
-        <div class="lmtest-photo">
-          <img
-            src="https://www.lmctpetrol.com/testimonial-shayne.jpg"
-            alt="Verified LMCT+ Petrol member showing app savings"
-            loading="lazy"
-          />
-        </div>
-        <div class="lmtest-body">
-          <div class="lmtest-name">
-            Verified Member
-            <span class="lmtest-verified" title="Verified member">✓</span>
-          </div>
-        </div>
-      </div>
-      <div class="lmtest-card">
-        <div class="lmtest-photo">
-          <img
-            src="https://www.lmctpetrol.com/testimonial-receipt.jpg"
-            alt="Verified LMCT+ Petrol member with fuel receipt"
-            loading="lazy"
-          />
-        </div>
-        <div class="lmtest-body">
-          <div class="lmtest-name">
-            Verified Member
-            <span class="lmtest-verified" title="Verified member">✓</span>
-          </div>
-        </div>
-      </div>
-      <div class="lmtest-card">
-        <div class="lmtest-photo">
-          <img
-            src="https://www.lmctpetrol.com/testimonial-0947.jpg"
-            alt="Verified LMCT+ Petrol member showing app savings"
-            loading="lazy"
-          />
-        </div>
-        <div class="lmtest-body">
-          <div class="lmtest-name">
-            Verified Member
-            <span class="lmtest-verified" title="Verified member">✓</span>
-          </div>
-        </div>
-      </div>
-      <div class="lmtest-card">
-        <div class="lmtest-photo">
-          <img
-            src="https://www.lmctpetrol.com/testimonial-0952.jpg"
-            alt="Verified LMCT+ Petrol members showing app savings"
-            loading="lazy"
-          />
-        </div>
-        <div class="lmtest-body">
-          <div class="lmtest-name">
-            Verified Member
-            <span class="lmtest-verified" title="Verified member">✓</span>
-          </div>
-        </div>
-      </div>
-      <div class="lmtest-card">
-        <div class="lmtest-photo">
-          <img
-            src="https://www.lmctpetrol.com/testimonial-0957.jpg"
-            alt="Verified LMCT+ Petrol member at the Preston site"
-            loading="lazy"
-          />
-        </div>
-        <div class="lmtest-body">
-          <div class="lmtest-name">
-            Verified Member
-            <span class="lmtest-verified" title="Verified member">✓</span>
-          </div>
-        </div>
-      </div>
-      <div class="lmtest-card">
-        <div class="lmtest-photo">
-          <img
-            src="https://www.lmctpetrol.com/testimonial-0958.jpg"
-            alt="Verified LMCT+ Petrol member at the Preston site"
-            loading="lazy"
-          />
-        </div>
-        <div class="lmtest-body">
-          <div class="lmtest-name">
-            Verified Member
-            <span class="lmtest-verified" title="Verified member">✓</span>
-          </div>
-        </div>
-      </div>
-      <div class="lmtest-card">
-        <div class="lmtest-photo">
-          <img
-            src="https://www.lmctpetrol.com/testimonial-0965.jpg"
-            alt="Verified LMCT+ Petrol member at the Preston site"
-            loading="lazy"
-          />
-        </div>
-        <div class="lmtest-body">
-          <div class="lmtest-name">
-            Verified Member
-            <span class="lmtest-verified" title="Verified member">✓</span>
-          </div>
-        </div>
-      </div>
-      <div class="lmtest-card">
-        <div class="lmtest-photo">
-          <img
-            src="https://www.lmctpetrol.com/testimonial-0972.jpg"
-            alt="Verified LMCT+ Petrol member at the Preston site"
-            loading="lazy"
-          />
-        </div>
-        <div class="lmtest-body">
-          <div class="lmtest-name">
-            Verified Member
-            <span class="lmtest-verified" title="Verified member">✓</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.lmtest-track -->
-  </div>
-  <!-- /.lmtest-grid -->
-  <div class="lmtest-hint">
-    <span class="arr">‹</span> Swipe <span class="arr">›</span>
   </div>
 </section>
 <script>
   (function () {
-    /* ============================================================
-     Clone the 9 cards once so the desktop marquee loops
-     seamlessly. Clones are hidden on mobile via .is-clone CSS,
-     so the swipe carousel keeps its real count of 9.
-     ============================================================ */
-    function setupMarquee() {
-      const track = document.querySelector(".lmtest-track");
-      if (!track) return;
-      // Don't double-clone if script runs twice
-      if (track.querySelector(".is-clone")) return;
-      const originals = Array.from(track.children);
-      originals.forEach((card) => {
-        const clone = card.cloneNode(true);
-        clone.classList.add("is-clone");
-        clone.setAttribute("aria-hidden", "true");
-        clone
-          .querySelectorAll("img[loading]")
-          .forEach((img) => img.removeAttribute("loading"));
-        track.appendChild(clone);
+    "use strict";
+    var root = document.querySelector(".lmctFaq");
+    if (!root || root.getAttribute("data-ready") === "true") return;
+    root.setAttribute("data-ready", "true");
+    var items = Array.prototype.slice.call(
+      root.querySelectorAll(".lmctFaq__item"),
+    );
+    var reducedMotion = false;
+    try {
+      reducedMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (error) {}
+    function setAnswerHeight(item, open) {
+      var answer = item.querySelector(".lmctFaq__answer");
+      var button = item.querySelector(".lmctFaq__question");
+      if (!answer || !button) return;
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+      item.classList.toggle("is-open", open);
+      if (reducedMotion) {
+        answer.style.height = open ? "auto" : "0px";
+        return;
+      }
+      if (open) {
+        answer.style.height = answer.scrollHeight + "px";
+        var onOpenEnd = function (event) {
+          if (event.propertyName !== "height") return;
+          answer.style.height = "auto";
+          answer.removeEventListener("transitionend", onOpenEnd);
+        };
+        answer.addEventListener("transitionend", onOpenEnd);
+      } else {
+        if (answer.style.height === "auto") {
+          answer.style.height = answer.scrollHeight + "px";
+          answer.offsetHeight;
+        }
+        answer.style.height = "0px";
+      }
+    }
+    function closeOtherItems(activeItem) {
+      items.forEach(function (item) {
+        if (item !== activeItem && item.classList.contains("is-open")) {
+          setAnswerHeight(item, false);
+        }
       });
     }
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", setupMarquee);
-    } else {
-      setupMarquee();
-    }
+    items.forEach(function (item) {
+      var button = item.querySelector(".lmctFaq__question");
+      if (!button) return;
+      button.addEventListener("click", function () {
+        var willOpen = !item.classList.contains("is-open");
+        closeOtherItems(item);
+        setAnswerHeight(item, willOpen);
+      });
+    });
+    window.addEventListener("resize", function () {
+      items.forEach(function (item) {
+        if (!item.classList.contains("is-open")) return;
+        var answer = item.querySelector(".lmctFaq__answer");
+        if (!answer) return;
+        answer.style.height = "auto";
+      });
+    });
   })();
 </script>
+<!-- LMCT+ FAQ SECTION END -->

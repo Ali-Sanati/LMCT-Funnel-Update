@@ -1,0 +1,196 @@
+<!-- IMAGE ONLY CAROUSEL -->
+<style>
+  .imageOnlyCarouselWrap {
+    width: 100%;
+    background: #fff;
+    padding: 20px 0;
+    box-sizing: border-box;
+    max-width: 1000px;
+    padding: 0 10px;
+    margin: 20px auto 0 !important;
+  }
+
+  .imageOnlyCarouselFrame {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+    box-sizing: border-box;
+  }
+
+  .imageOnlyCarouselFrame:active {
+    cursor: grabbing;
+  }
+
+  .imageOnlyCarouselFrame img {
+    width: 100%;
+    height: auto;
+    /* aspect-ratio: 16 / 9;
+    object-fit: cover; */
+    /* border-radius: 10px; */
+    display: block;
+    pointer-events: none;
+  }
+
+  /* @media (max-width: 770px) {
+    .imageOnlyCarouselFrame img {
+      aspect-ratio: 4 / 3;
+    }
+  } */
+</style>
+
+<div class="imageOnlyCarouselWrap">
+  <div class="imageOnlyCarouselFrame" id="imageOnlyCarouselFrame">
+    <img id="imageOnlyCarouselImg" alt="HSV" />
+  </div>
+</div>
+
+<script>
+  window.addEventListener("load", function () {
+    var imageOnlyCarouselSlides = [
+      "https://images.clickfunnels.com/b1/c83d331f5f4903b4294c42b18f957c/1.png",
+      "https://images.clickfunnels.com/e9/61be21a42b4fe3a6dfd4f1366170cf/2.png",
+      "https://images.clickfunnels.com/b3/e7c50596ab4f72b30a0389aec7cc9a/3.png",
+      "https://images.clickfunnels.com/70/56b43787124b6e907adf3ab232349a/4.png",
+      "https://images.clickfunnels.com/e5/62eff0047744beacf3ca5474e35a90/5.png",
+      "https://images.clickfunnels.com/fe/10f9e7c06d42fd95af9f2b79498d7d/6.png",
+      "https://images.clickfunnels.com/d1/a24cb202e04f8bbe5c1e8c29af4a36/7.png",
+      "https://images.clickfunnels.com/56/88431ccdb6447dbafa0158b85e481e/8.png",
+    ];
+
+    var imageOnlyCarouselAutoMs = 900;
+    var imageOnlyCarouselResumeMs = 4000;
+    var imageOnlyCarouselCount = imageOnlyCarouselSlides.length;
+    var imageOnlyCarouselIndex = 0;
+    var imageOnlyCarouselImgEl = document.getElementById(
+      "imageOnlyCarouselImg",
+    );
+    var imageOnlyCarouselFrameEl = document.getElementById(
+      "imageOnlyCarouselFrame",
+    );
+    var imageOnlyCarouselTimer = null;
+    var imageOnlyCarouselResumeTimer = null;
+
+    for (var i = 0; i < imageOnlyCarouselCount; i++) {
+      var imageOnlyCarouselPreload = new Image();
+      imageOnlyCarouselPreload.src = imageOnlyCarouselSlides[i];
+    }
+
+    function imageOnlyCarouselGoTo(target) {
+      imageOnlyCarouselIndex =
+        ((target % imageOnlyCarouselCount) + imageOnlyCarouselCount) %
+        imageOnlyCarouselCount;
+      imageOnlyCarouselImgEl.src =
+        imageOnlyCarouselSlides[imageOnlyCarouselIndex];
+    }
+
+    function imageOnlyCarouselStart() {
+      imageOnlyCarouselStop();
+      imageOnlyCarouselTimer = setInterval(function () {
+        imageOnlyCarouselGoTo(imageOnlyCarouselIndex + 1);
+      }, imageOnlyCarouselAutoMs);
+    }
+
+    function imageOnlyCarouselStop() {
+      if (imageOnlyCarouselTimer) {
+        clearInterval(imageOnlyCarouselTimer);
+        imageOnlyCarouselTimer = null;
+      }
+    }
+
+    function imageOnlyCarouselPauseThenResume() {
+      imageOnlyCarouselStop();
+      if (imageOnlyCarouselResumeTimer) {
+        clearTimeout(imageOnlyCarouselResumeTimer);
+      }
+      imageOnlyCarouselResumeTimer = setTimeout(
+        imageOnlyCarouselStart,
+        imageOnlyCarouselResumeMs,
+      );
+    }
+
+    imageOnlyCarouselGoTo(0);
+    imageOnlyCarouselStart();
+
+    imageOnlyCarouselFrameEl.addEventListener(
+      "mouseenter",
+      imageOnlyCarouselStop,
+    );
+    imageOnlyCarouselFrameEl.addEventListener(
+      "mouseleave",
+      imageOnlyCarouselStart,
+    );
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        imageOnlyCarouselStop();
+      } else {
+        imageOnlyCarouselStart();
+      }
+    });
+
+    var imageOnlyCarouselStartX = 0;
+    var imageOnlyCarouselDragging = false;
+
+    imageOnlyCarouselFrameEl.addEventListener("mousedown", function (e) {
+      e.preventDefault();
+      imageOnlyCarouselStartX = e.clientX;
+      imageOnlyCarouselDragging = true;
+      imageOnlyCarouselStop();
+    });
+
+    window.addEventListener("mousemove", function (e) {
+      if (!imageOnlyCarouselDragging) return;
+      var dist = e.clientX - imageOnlyCarouselStartX;
+      if (Math.abs(dist) > 40) {
+        imageOnlyCarouselGoTo(
+          dist < 0 ? imageOnlyCarouselIndex + 1 : imageOnlyCarouselIndex - 1,
+        );
+        imageOnlyCarouselStartX = e.clientX;
+      }
+    });
+
+    window.addEventListener("mouseup", function () {
+      if (imageOnlyCarouselDragging) {
+        imageOnlyCarouselDragging = false;
+        imageOnlyCarouselPauseThenResume();
+      }
+    });
+
+    imageOnlyCarouselFrameEl.addEventListener(
+      "touchstart",
+      function (e) {
+        imageOnlyCarouselStartX = e.touches[0].clientX;
+        imageOnlyCarouselDragging = true;
+        imageOnlyCarouselStop();
+      },
+      { passive: true },
+    );
+
+    imageOnlyCarouselFrameEl.addEventListener(
+      "touchmove",
+      function (e) {
+        if (!imageOnlyCarouselDragging) return;
+        var dist = e.touches[0].clientX - imageOnlyCarouselStartX;
+        if (Math.abs(dist) > 40) {
+          imageOnlyCarouselGoTo(
+            dist < 0 ? imageOnlyCarouselIndex + 1 : imageOnlyCarouselIndex - 1,
+          );
+          imageOnlyCarouselStartX = e.touches[0].clientX;
+        }
+      },
+      { passive: true },
+    );
+
+    imageOnlyCarouselFrameEl.addEventListener("touchend", function () {
+      if (imageOnlyCarouselDragging) {
+        imageOnlyCarouselDragging = false;
+        imageOnlyCarouselPauseThenResume();
+      }
+    });
+  });
+</script>
+<!-- IMAGE ONLY CAROUSEL - END -->

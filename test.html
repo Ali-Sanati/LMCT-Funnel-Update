@@ -1,640 +1,1420 @@
-<!-- ============================================
-     BLOCK A — Toggle + Hero + Entries Hook
-     Paste ABOVE the checkout form row
-     ============================================ -->
+<!-- =========================================================
+     LMCT+ FIELD SALES — CLICKFUNNELS CLASSIC TRACKING
+     ========================================================= -->
+
+<script>
+  /**************************
+   * Copyright 2023 FunnelCare LLC, All Rights Reserved
+   * Do not share, or distribute this code without author's consent.
+   * This copyright notice must remain in place whenever using
+   * this code - DO NOT REMOVE
+   * Author - Tareq Mahmud
+   * Website: https://www.funnelcare.net
+   **************************/
+
+  (function ($) {
+    "use strict";
+
+    /* =========================================================
+     1. CENTRAL CONFIGURATION
+     ========================================================= */
+
+    var LMCT_FIELD_SALES = {
+      products: {
+        package99: {
+          key: "package99",
+          id: "5114181",
+          name: "LMCT+ Elite Monthly",
+          price: 99.99,
+        },
+
+        package199: {
+          key: "package199",
+          id: "5114182",
+          name: "LMCT+ Entry Yearly",
+          price: 199.0,
+        },
+      },
+
+      klaviyo: {
+        companyId: "S9SGLM",
+        listId: "SSnNm7",
+        source: "CF1 Physical Sales Funnel",
+      },
+
+      productRetryDelays: [0, 150, 350, 700],
+    };
+
+    window.LMCT_FIELD_SALES = LMCT_FIELD_SALES;
+
+    /* =========================================================
+     2. SAFE SESSION STORAGE
+     ========================================================= */
+
+    function sessionSet(key, value) {
+      try {
+        sessionStorage.setItem(key, value);
+      } catch (err) {}
+    }
+
+    function sessionGet(key) {
+      try {
+        return sessionStorage.getItem(key) || "";
+      } catch (err) {
+        return "";
+      }
+    }
+
+    /* =========================================================
+     3. SALES REPRESENTATIVE TRACKING
+     ========================================================= */
+
+    var queryParams = new URLSearchParams(window.location.search);
+
+    function sanitizeSalesCode(value) {
+      return String(value || "")
+        .replace(/[^A-Za-z0-9_-]/g, "")
+        .slice(0, 40);
+    }
+
+    function getRepFromUrl() {
+      return sanitizeSalesCode(queryParams.get("rep") || queryParams.get("utm_content") || queryParams.get("sales_code") || "");
+    }
+
+    function getSalesRep() {
+      var stored = sanitizeSalesCode(sessionGet("lmctFieldSalesRep"));
+
+      if (stored) {
+        return stored;
+      }
+
+      return getRepFromUrl();
+    }
+
+    function saveSalesRep(rep) {
+      rep = sanitizeSalesCode(rep);
+
+      if (!rep) return;
+
+      sessionSet("lmctFieldSalesRep", rep);
+    }
+
+    /* =========================================================
+     4. OPTIONAL SALES REP DISPLAY ON CUSTOM PAGE
+
+     Supports markup containing:
+
+     data-lmct-rep-row
+     data-lmct-rep-badge
+     data-lmct-rep-code
+     data-lmct-rep-manual
+     data-lmct-sales-code-input
+     ========================================================= */
+
+    function updateRepDisplay() {
+      var rep = getSalesRep();
+
+      var $row = $("[data-lmct-rep-row]");
+      var $badge = $("[data-lmct-rep-badge]");
+      var $code = $("[data-lmct-rep-code]");
+      var $manual = $("[data-lmct-rep-manual]");
+      var $input = $("[data-lmct-sales-code-input]");
+
+      if (!$row.length) return;
+
+      $row.addClass("lmctFS__repRow--visible");
+
+      if (rep) {
+        $code.text(rep);
+
+        $badge.addClass("lmctFS__repBadge--visible");
+
+        $manual.removeClass("lmctFS__repManual--visible");
+
+        if ($input.length) {
+          $input.val(rep);
+        }
+
+        return;
+      }
+
+      $badge.removeClass("lmctFS__repBadge--visible");
+
+      $manual.addClass("lmctFS__repManual--visible");
+    }
+
+    function initRepTracking() {
+      var urlRep = getRepFromUrl();
+
+      if (urlRep) {
+        saveSalesRep(urlRep);
+      }
+
+      updateRepDisplay();
+
+      $(document).on("input change", "[data-lmct-sales-code-input]", function () {
+        var clean = sanitizeSalesCode($(this).val());
+
+        $(this).val(clean);
+
+        if (clean) {
+          saveSalesRep(clean);
+        }
+
+        updateRepDisplay();
+      });
+    }
+
+    /* =========================================================
+     5. PACKAGE HELPERS
+     ========================================================= */
+
+    function getProduct(packageKey) {
+      return LMCT_FIELD_SALES.products[packageKey] || null;
+    }
+
+    function getSelectedPackageKey() {
+      var stored = sessionGet("lmctFieldSalesPackage");
+
+      if (stored && LMCT_FIELD_SALES.products[stored]) {
+        return stored;
+      }
+
+      return "";
+    }
+
+    function markSelectedPackage(packageKey) {
+      $("[data-lmct-plan]").each(function () {
+        var selected = $(this).attr("data-lmct-plan") === packageKey;
+
+        $(this).toggleClass("lmctFS__plan--selected", selected);
+      });
+    }
+
+    /* =========================================================
+     6. HIDE/SHOW CORRECT CF PRODUCT
+     ========================================================= */
+
+    function showOnlyProduct(productId) {
+      $('#modalPopup input[name="purchase[product_id]"], ' + '.o2step_step2 input[name="purchase[product_id]"]').each(function () {
+        var $input = $(this);
+
+        var $productRow = $input.closest('[data-cf-product-template="true"]');
+
+        if (!$productRow.length) return;
+
+        if (String($input.val()) === String(productId)) {
+          $productRow.show();
+        } else {
+          $productRow.hide();
+        }
+      });
+    }
+
+    /* =========================================================
+     7. SELECT CLICKFUNNELS PRODUCT
+     ========================================================= */
+
+    function selectClickFunnelsProduct(productId) {
+      var $radio = $("#modalPopup " + 'input[name="purchase[product_id]"]' + '[value="' + productId + '"]').first();
+
+      if (!$radio.length) {
+        $radio = $(".o2step_step2 " + 'input[name="purchase[product_id]"]' + '[value="' + productId + '"]').first();
+      }
+
+      if (!$radio.length) {
+        return false;
+      }
+
+      /*
+       * Use .click() rather than only changing
+       * the checked property so ClickFunnels
+       * receives its normal events.
+       */
+      if (!$radio.is(":checked")) {
+        $radio.trigger("click");
+      }
+
+      $radio.prop("checked", true);
+
+      /*
+       * Sync corresponding CF hidden cart inputs
+       * without touching unrelated bump products.
+       */
+      var baseProductIds = [LMCT_FIELD_SALES.products.package99.id, LMCT_FIELD_SALES.products.package199.id];
+
+      $('#cfAR input[name="purchase[product_ids][]"]').each(function () {
+        var value = String($(this).val());
+
+        if (baseProductIds.indexOf(value) === -1) {
+          return;
+        }
+
+        $(this).prop("checked", value === String(productId));
+      });
+
+      /*
+       * Visual selected state in popup.
+       */
+      $(".elOrderProductOptinProducts").removeClass("checked-item");
+
+      $radio.closest(".elOrderProductOptinProducts").addClass("checked-item");
+
+      if (typeof window.rebuildOrderSummary === "function") {
+        window.rebuildOrderSummary();
+      }
+
+      $(document).trigger("cfpt:cart-updated");
+
+      return true;
+    }
+
+    /* =========================================================
+     8. OPEN PACKAGE
+     ========================================================= */
+
+    function openFieldSalesPackage(packageKey) {
+      var product = getProduct(packageKey);
+
+      if (!product) {
+        console.warn("Unknown LMCT package:", packageKey);
+
+        return;
+      }
+
+      sessionSet("lmctFieldSalesPackage", packageKey);
+
+      localStorage.setItem("selected_package", packageKey);
+
+      window.lmctSelectedFieldSalesPackage = {
+        key: packageKey,
+        id: product.id,
+        name: product.name,
+        price: product.price,
+      };
+
+      markSelectedPackage(packageKey);
+
+      /*
+       * Hide non-selected CF products.
+       */
+      showOnlyProduct(product.id);
+
+      /*
+       * Open native ClickFunnels popup.
+       */
+      var $popupTrigger = $('[data-title*="open-popup"] a').first();
+
+      if ($popupTrigger.length) {
+        $popupTrigger.trigger("click");
+      }
+
+      /*
+       * CF may finish rendering after popup
+       * is opened, so retry selection a few
+       * times.
+       */
+      LMCT_FIELD_SALES.productRetryDelays.forEach(function (delay) {
+        setTimeout(function () {
+          showOnlyProduct(product.id);
+          selectClickFunnelsProduct(product.id);
+        }, delay);
+      });
+    }
+
+    window.openFieldSalesPackage = openFieldSalesPackage;
+
+    /* =========================================================
+     9. CUSTOM PACKAGE BUTTONS
+
+     Expected markup:
+
+     data-lmct-package="package99"
+
+     or
+
+     data-lmct-package="package199"
+     ========================================================= */
+
+    function initPackageButtons() {
+      $(document).on("click.lmctFieldSales", ".lmctFS__select[data-lmct-package]", function (event) {
+        /*
+         * We open the real CF popup ourselves,
+         * so prevent href="#open-popup" from
+         * firing separately.
+         */
+        event.preventDefault();
+
+        var packageKey = $(this).attr("data-lmct-package");
+
+        openFieldSalesPackage(packageKey);
+      });
+    }
+
+    /* =========================================================
+     10. POPUP DISPLAY/STYLING
+     ========================================================= */
+
+    function initialisePopupStyles() {
+      $(".elOS1Shipping").hide();
+
+      var $walletPay = $("#tmp_oapap-21334-170-131");
+
+      var $cardForm = $(".elCreditCardForm");
+
+      if ($walletPay.length && $cardForm.length) {
+        $walletPay.insertBefore($cardForm.first());
+      }
+
+      $('[name="purchase[product_id]"]').each(function () {
+        $(this).closest(".elOrderProductOptinProducts").css({
+          "margin-top": "10px",
+          padding: "5px",
+          border: "1px solid rgba(0,0,0,0.2)",
+          "border-radius": "20px",
+          cursor: "pointer",
+        });
+      });
+
+      $(".elOrderProductOptinProducts").each(function () {
+        if ($(this).find('input[name="purchase[product_id]"]').is(":checked")) {
+          $(this).addClass("checked-item");
+        }
+      });
+
+      $(document).on("change", '.elOrderProductOptinProductName input[name="purchase[product_id]"]', function () {
+        if (!$(this).is(":checked")) {
+          return;
+        }
+
+        $(".elOrderProductOptinProducts").removeClass("checked-item");
+
+        $(this).closest(".elOrderProductOptinProducts").addClass("checked-item");
+      });
+    }
+
+    /* =========================================================
+     11. NAME VALIDATION
+     ========================================================= */
+
+    var invalidName = false;
+
+    function validateNameField(input) {
+      var $input = $(input);
+
+      var value = $.trim($input.val() || "");
+
+      /*
+       * Allows letters from international
+       * alphabets plus:
+       *
+       * spaces
+       * apostrophes
+       * hyphens
+       * periods
+       */
+
+      var validCharacters;
+
+      try {
+        validCharacters = /^[\p{L}\p{M}\s.'-]+$/u.test(value);
+      } catch (err) {
+        validCharacters = /^[A-Za-z\s.'-]+$/.test(value);
+      }
+
+      /*
+       * Empty field is left to ClickFunnels'
+       * native required validation.
+       */
+      if (!value) {
+        invalidName = false;
+
+        $input
+          .css({
+            "border-color": "",
+            "border-width": "",
+          })
+          .removeAttr("aria-invalid");
+
+        $("#error-msg-name").addClass("hide").text("");
+
+        return;
+      }
+
+      invalidName = !validCharacters;
+
+      if (invalidName) {
+        $input
+          .css({
+            "border-color": "#b91517",
+            "border-width": "3px",
+          })
+          .attr("aria-invalid", "true");
+
+        $("#error-msg-name").text("Please enter a valid name.").removeClass("hide").addClass("errorMsgName");
+
+        $("#valid-msg-name").addClass("hide");
+
+        return;
+      }
+
+      $input
+        .css({
+          "border-color": "#4a8920",
+          "border-width": "3px",
+        })
+        .attr("aria-invalid", "false");
+
+      $("#error-msg-name").addClass("hide").removeClass("errorMsgName").text("");
+
+      $("#valid-msg-name").removeClass("hide").addClass("validMsgName");
+    }
+
+    function initNameValidation() {
+      var $name = $('#modalPopup input[name="name"]');
+
+      if (!$name.length) {
+        $name = $('input[name="name"]');
+      }
+
+      if (!$name.length) return;
+
+      if (!$("#error-msg-name").length) {
+        $name.after('<div id="valid-msg-name" class="hide"></div>' + '<div id="error-msg-name" class="hide"></div>');
+      }
+
+      $name.attr("data-storage", "false");
+
+      $(document).on("input", '#modalPopup input[name="name"]', function () {
+        validateNameField(this);
+      });
+
+      /*
+       * Anchors do not actually respect
+       * .prop("disabled", true), therefore
+       * explicitly prevent navigation if
+       * the name is invalid.
+       */
+      $(document).on("click", '[href="#submit-form-2step"], ' + '[href="#submit-form-2step-order"]', function (event) {
+        var $field = $('#modalPopup input[name="name"]');
+
+        if ($field.length) {
+          validateNameField($field[0]);
+        }
+
+        if (!invalidName) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        $field.trigger("focus");
+      });
+    }
+
+    /* =========================================================
+     12. KLAVIYO CUSTOMER HELPERS
+     ========================================================= */
+
+    function getPopupValue(selector) {
+      var $input = $("#modalPopup " + selector).first();
+
+      if (!$input.length) {
+        $input = $(selector).first();
+      }
+
+      return $input.length ? $.trim($input.val() || "") : "";
+    }
+
+    function splitFullName(fullName) {
+      fullName = $.trim(fullName || "");
+
+      if (!fullName) {
+        return {
+          firstName: "",
+          lastName: "",
+        };
+      }
+
+      var parts = fullName.split(/\s+/);
+
+      return {
+        firstName: parts.shift() || "",
+        lastName: parts.join(" "),
+      };
+    }
+
+    function getFormattedPhone() {
+      var input = document.querySelector('#modalPopup input[name="phone"]');
+
+      if (!input) return "";
+
+      /*
+       * Prefer intl-tel-input's E.164 number
+       * where available.
+       */
+      try {
+        if (window.intlTelInputGlobals && typeof window.intlTelInputGlobals.getInstance === "function") {
+          var instance = window.intlTelInputGlobals.getInstance(input);
+
+          if (instance) {
+            var formatted = instance.getNumber();
+
+            if (formatted && formatted.charAt(0) === "+") {
+              return formatted;
+            }
+          }
+        }
+      } catch (err) {}
+
+      /*
+       * Don't send an unknown local-format
+       * number as Klaviyo phone_number.
+       */
+      return "";
+    }
+
+    /* =========================================================
+     13. BUILD KLAVIYO PAYLOAD
+     ========================================================= */
+
+    function buildKlaviyoPayload(email) {
+      var fullName = getPopupValue('input[name="name"]');
+
+      var rawPhone = getPopupValue('input[name="phone"]');
+
+      var name = splitFullName(fullName);
+
+      var rep = getSalesRep();
+
+      var selectedPackage = getSelectedPackageKey();
+
+      var attributes = {
+        email: email,
+
+        properties: {
+          signup_source: "physical_sales",
+
+          sales_rep: rep || "",
+
+          selected_package: selectedPackage || "",
+
+          full_name: fullName || "",
+
+          phone_entered: rawPhone || "",
+
+          utm_source: queryParams.get("utm_source") || "",
+
+          utm_medium: queryParams.get("utm_medium") || "",
+
+          utm_campaign: queryParams.get("utm_campaign") || "",
+
+          utm_content: queryParams.get("utm_content") || "",
+        },
+
+        subscriptions: {
+          email: {
+            marketing: {
+              consent: "SUBSCRIBED",
+            },
+          },
+        },
+      };
+
+      if (name.firstName) {
+        attributes.first_name = name.firstName;
+      }
+
+      if (name.lastName) {
+        attributes.last_name = name.lastName;
+      }
+
+      var formattedPhone = getFormattedPhone();
+
+      if (formattedPhone) {
+        attributes.phone_number = formattedPhone;
+      }
+
+      return {
+        data: {
+          type: "subscription",
+
+          attributes: {
+            custom_source: LMCT_FIELD_SALES.klaviyo.source,
+
+            profile: {
+              data: {
+                type: "profile",
+                attributes: attributes,
+              },
+            },
+          },
+
+          relationships: {
+            list: {
+              data: {
+                type: "list",
+                id: LMCT_FIELD_SALES.klaviyo.listId,
+              },
+            },
+          },
+        },
+      };
+    }
+
+    /* =========================================================
+     14. SEND TO KLAVIYO
+     ========================================================= */
+
+    function sendCustomerToKlaviyo() {
+      var $email = $('#modalPopup input[name="email"]').first();
+
+      if (!$email.length) {
+        $email = $('input[name="email"]').first();
+      }
+
+      if (!$email.length) return;
+
+      var email = $.trim($email.val() || "");
+
+      var validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!validEmail.test(email)) {
+        return;
+      }
+
+      var normalizedEmail = email.toLowerCase();
+
+      var sentKey = "lmctKlaviyoSent:" + normalizedEmail;
+
+      if ($email.attr("data-kl-sent") === normalizedEmail) {
+        return;
+      }
+
+      if (sessionGet(sentKey) === "1") {
+        return;
+      }
+
+      $email.attr("data-kl-sent", normalizedEmail);
+
+      sessionSet(sentKey, "1");
+
+      if (!window.fetch) return;
+
+      try {
+        fetch("https://a.klaviyo.com/client/subscriptions/" + "?company_id=" + encodeURIComponent(LMCT_FIELD_SALES.klaviyo.companyId), {
+          method: "POST",
+
+          keepalive: true,
+
+          headers: {
+            "Content-Type": "application/json",
+
+            revision: "2025-07-15",
+          },
+
+          body: JSON.stringify(buildKlaviyoPayload(email)),
+        }).catch(function () {
+          /*
+           * Never allow Klaviyo failure
+           * to interrupt CF checkout.
+           */
+        });
+      } catch (err) {}
+    }
+
+    /* =========================================================
+     15. KLAVIYO CHECKOUT TRIGGER
+     ========================================================= */
+
+    function initKlaviyo() {
+      /*
+       * Actual FINAL ClickFunnels checkout
+       * button from this funnel:
+       *
+       * #submit-form-2step-order
+       */
+
+      $(document).on("click", '[href="#submit-form-2step-order"]', function () {
+        sendCustomerToKlaviyo();
+      });
+    }
+
+    /* =========================================================
+     16. INITIALISE
+     ========================================================= */
+
+    $(function () {
+      initRepTracking();
+      initPackageButtons();
+      initialisePopupStyles();
+      initNameValidation();
+      initKlaviyo();
+    });
+  })(jQuery);
+</script>
+
+<!-- =========================================================
+     CLICKFUNNELS PRODUCT / POPUP STYLING
+     ========================================================= -->
+
 <style>
-  .sus *,
-  .sus *::before,
-  .sus *::after {
-    box-sizing: border-box;
+  .activeRadioProduct {
+    background: none !important;
   }
-  .sus {
+
+  .elOrderProductOptinProducts label {
+    font-weight: 700 !important;
+    font-size: 10px !important;
+  }
+
+  .checked-item {
+    display: block !important;
+    border: 2px solid rgba(0, 0, 0, 0.2) !important;
+    border-image-slice: 1 !important;
+    box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .errorMsgName {
+    display: block !important;
+    color: red;
     position: relative;
-    width: 100%;
-    padding: 44px 24px 28px 24px;
-    font-family:
-      "Montserrat",
-      system-ui,
-      -apple-system,
-      sans-serif;
-    background: transparent;
-    color: #ffffff;
-    text-align: center;
-  }
-  .sus-inner {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  /* ===== TIER TOGGLE ===== */
-  .sus-toggle-wrap {
-    display: flex;
-    justify-content: center;
-    margin: 0 0 26px 0;
-    animation: sus-fade-up 0.6s ease-out both;
-  }
-  .sus-toggle {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 999px;
-    padding: 5px;
-    box-shadow:
-      0 4px 16px rgba(5, 22, 42, 0.22),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-  .sus-toggle-slider {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    height: calc(100% - 10px);
-    width: calc(50% - 5px);
-    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
-    border-radius: 999px;
-    box-shadow:
-      0 3px 10px rgba(12, 99, 253, 0.45),
-      inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    transition: transform 0.32s cubic-bezier(0.34, 1.3, 0.5, 1);
-    z-index: 0;
-  }
-  .sus[data-tier="full"] .sus-toggle-slider {
-    transform: translateX(100%);
-  }
-  .sus-toggle-btn {
-    position: relative;
-    z-index: 1;
-    background: transparent;
-    border: 0;
-    padding: 11px 22px;
-    font-family: inherit;
-    font-weight: 800;
+    margin-top: 6px;
     font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    line-height: 1;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.65);
-    transition: color 0.25s ease;
-    white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
+    font-weight: 600;
   }
-  .sus-toggle-btn:hover {
-    color: rgba(255, 255, 255, 0.9);
-  }
-  .sus-toggle-btn[aria-selected="true"] {
-    color: #ffffff;
-  }
-  .sus-toggle-btn:focus-visible {
-    outline: 2px solid #5cc6f7;
-    outline-offset: 3px;
-    border-radius: 999px;
-  }
-  /* ===== TIER PANEL VISIBILITY ===== */
-  .sus-tier {
-    display: none;
-  }
-  .sus[data-tier="fuel"] .sus-tier--fuel {
-    display: block;
-    animation: sus-tier-in 0.45s ease-out both;
-  }
-  .sus[data-tier="full"] .sus-tier--full {
-    display: block;
-    animation: sus-tier-in 0.45s ease-out both;
-  }
-  @keyframes sus-tier-in {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  /* ===== SHARED HERO ===== */
-  .sus-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 14px 7px 10px;
-    background: #ffffff;
-    border-radius: 999px;
-    color: #0a1d3a;
-    font-weight: 800;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    line-height: 1;
-    margin: 0 0 18px 0;
-    box-shadow: 0 4px 14px rgba(5, 22, 42, 0.15);
-  }
-  .sus-badge-icon {
-    width: 18px;
-    height: 18px;
-    background: linear-gradient(135deg, #0c9ffd 0%, #0c63fd 100%);
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .sus-badge-icon svg {
-    width: 10px;
-    height: 10px;
-  }
-  .sus-title {
-    color: #ffffff;
-    font-weight: 800;
-    font-size: 32px;
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    margin: 0 0 10px 0;
-    text-shadow: 0 2px 10px rgba(5, 22, 42, 0.2);
-  }
-  .sus-hero-price {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 6px;
-    margin: 6px 0 14px 0;
-    line-height: 1;
-  }
-  .sus-hero-price-amount {
-    color: #ffffff;
-    font-weight: 900;
-    font-size: 56px;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    text-shadow: 0 4px 20px rgba(5, 22, 42, 0.3);
-  }
-  .sus-hero-price-slash {
-    color: rgba(255, 255, 255, 0.55);
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: -0.01em;
-  }
-  .sus-hero-price-unit {
-    color: rgba(255, 255, 255, 0.75);
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-  .sus-sub {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 1.5;
-    margin: 0 auto 22px auto;
-    max-width: 540px;
-    text-shadow: 0 1px 3px rgba(5, 22, 42, 0.15);
-  }
-  .sus-sub strong {
-    color: #ffffff;
-    font-weight: 800;
-  }
-  .sus-benefits {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px 12px;
-    margin-top: 4px;
-  }
-  .sus-benefit {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 9px 14px;
-    background: #ffffff;
-    border-radius: 999px;
-    color: #0a1d3a;
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.02em;
-    line-height: 1;
-    box-shadow: 0 3px 10px rgba(5, 22, 42, 0.12);
-  }
-  .sus-benefit svg {
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-    stroke: #1a7cc4;
-  }
-  /* ===== ENTRIES HOOK CARD (slim) ===== */
-  .sus-hook {
-    margin: 24px auto 0 auto;
-    max-width: 580px;
-    padding: 18px 20px 16px 20px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 14px;
-    box-shadow: 0 6px 22px rgba(5, 22, 42, 0.22);
-  }
-  .sus-hook-eyebrow {
-    display: inline-block;
-    color: #5cc6f7;
-    font-weight: 800;
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    line-height: 1;
-    margin: 0 0 8px 0;
-  }
-  .sus-hook-title {
-    color: #ffffff;
-    font-weight: 800;
-    font-size: 19px;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    margin: 0 0 12px 0;
-  }
-  .sus-hook-title em {
-    font-style: normal;
-    color: #5cc6f7;
-  }
-  .sus-hook-stack {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 14px;
-    background: linear-gradient(
-      135deg,
-      rgba(12, 159, 253, 0.18) 0%,
-      rgba(12, 99, 253, 0.18) 100%
-    );
-    border: 1px solid rgba(92, 198, 247, 0.35);
-    border-radius: 999px;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.02em;
-    line-height: 1.2;
-  }
-  .sus-hook-stack-num {
-    color: #5cc6f7;
-    font-weight: 900;
-    font-size: 15px;
-    letter-spacing: -0.01em;
-  }
-  /* ===== RESPONSIVE ===== */
-  @media (min-width: 768px) {
-    .sus {
-      padding: 52px 32px 32px 32px;
-    }
-    .sus-toggle-btn {
-      font-size: 13px;
-      padding: 12px 26px;
-    }
-    .sus-badge {
-      font-size: 12px;
-      padding: 8px 16px 8px 12px;
-    }
-    .sus-badge-icon {
-      width: 20px;
-      height: 20px;
-    }
-    .sus-badge-icon svg {
-      width: 11px;
-      height: 11px;
-    }
-    .sus-title {
-      font-size: 44px;
-      margin-bottom: 12px;
-    }
-    .sus-hero-price-amount {
-      font-size: 78px;
-    }
-    .sus-hero-price-slash {
-      font-size: 24px;
-    }
-    .sus-hero-price-unit {
-      font-size: 17px;
-    }
-    .sus-sub {
-      font-size: 17px;
-      margin-bottom: 24px;
-    }
-    .sus-benefits {
-      gap: 12px 16px;
-    }
-    .sus-benefit {
-      font-size: 13px;
-      padding: 10px 16px;
-      gap: 8px;
-    }
-    .sus-benefit svg {
-      width: 15px;
-      height: 15px;
-    }
-    .sus-hook-title {
-      font-size: 22px;
-    }
-    .sus-hook {
-      padding: 20px 22px 18px 22px;
-    }
-  }
-  @media (min-width: 1200px) {
-    .sus-title {
-      font-size: 50px;
-    }
-    .sus-hero-price-amount {
-      font-size: 90px;
-    }
-  }
-  @keyframes sus-fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes sus-price-scale {
-    from {
-      opacity: 0;
-      transform: scale(0.85);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  .sus-tier .sus-badge {
-    animation: sus-fade-up 0.5s ease-out both;
-    animation-delay: 0.1s;
-  }
-  .sus-tier .sus-title {
-    animation: sus-fade-up 0.55s ease-out both;
-    animation-delay: 0.18s;
-  }
-  .sus-tier .sus-hero-price {
-    animation: sus-price-scale 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-    animation-delay: 0.26s;
-  }
-  .sus-tier .sus-sub {
-    animation: sus-fade-up 0.55s ease-out both;
-    animation-delay: 0.34s;
-  }
-  .sus-tier .sus-benefits {
-    animation: sus-fade-up 0.55s ease-out both;
-    animation-delay: 0.42s;
-  }
-  .sus-tier .sus-hook {
-    animation: sus-fade-up 0.6s ease-out both;
-    animation-delay: 0.5s;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .sus-tier *,
-    .sus-toggle-slider,
-    .sus-toggle-wrap {
-      animation: none !important;
-      transition: none !important;
+
+  @media only screen and (max-width: 770px) and (min-width: 0px) {
+    [data-title*="smart-product-"] .elHeadline {
+      text-align: left !important;
     }
   }
 </style>
-<section
-  class="sus"
-  id="susTier"
-  data-tier="fuel"
-  role="region"
-  aria-label="Choose your LMCT+ membership tier"
->
-  <div class="sus-inner">
-    <!-- ===== TOGGLE ===== -->
-    <div class="sus-toggle-wrap">
-      <div class="sus-toggle" role="tablist" aria-label="Membership tier">
-        <span class="sus-toggle-slider" aria-hidden="true"></span>
-        <button
-          class="sus-toggle-btn"
-          type="button"
-          role="tab"
-          data-tier-target="fuel"
-          aria-selected="true"
-          aria-controls="susPanelFuel"
-        >
-          Save On Fuel
-        </button>
-        <button
-          class="sus-toggle-btn"
-          type="button"
-          role="tab"
-          data-tier-target="full"
-          aria-selected="false"
-          aria-controls="susPanelFull"
-        >
-          Save + Win
-        </button>
-      </div>
-    </div>
-    <!-- ===== FUEL TIER ($99) ===== -->
-    <div class="sus-tier sus-tier--fuel" id="susPanelFuel" role="tabpanel">
-      <span class="sus-badge">
-        <span class="sus-badge-icon">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#ffffff"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        </span>
-        Members-Only Wholesale Pricing
-      </span>
-      <h2 class="sus-title">Pay wholesale at the pump — every time.</h2>
-      <div class="sus-hero-price">
-        <span class="sus-hero-price-amount">$99</span>
-        <span class="sus-hero-price-slash">/</span>
-        <span class="sus-hero-price-unit">year</span>
-      </div>
-      <p class="sus-sub">
-        One flat fee. <strong>Unlimited savings</strong> on every fill-up, all
-        year long.
-      </p>
-      <div class="sus-benefits">
-        <span class="sus-benefit">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-width="2.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          Cancel anytime
-        </span>
-        <span class="sus-benefit">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-width="2.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
-          Instant access
-        </span>
-        <span class="sus-benefit">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-width="2.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-          </svg>
-          No hidden fees
-        </span>
-      </div>
-    </div>
-    <!-- ===== FULL TIER ($199) ===== -->
-    <div class="sus-tier sus-tier--full" id="susPanelFull" role="tabpanel">
-      <span class="sus-badge">
-        <span class="sus-badge-icon">
-          <svg
-            viewBox="0 0 24 24"
-            fill="#ffffff"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.27 5.79 22l2.39-8.15L2 9.36h7.61z"
-            />
-          </svg>
-        </span>
-        Save On Fuel + Win Every Giveaway
-      </span>
-      <h2 class="sus-title">Wholesale fuel. Every prize. Every draw.</h2>
-      <div class="sus-hero-price">
-        <span class="sus-hero-price-amount">$199</span>
-        <span class="sus-hero-price-slash">/</span>
-        <span class="sus-hero-price-unit">year</span>
-      </div>
-      <p class="sus-sub">
-        Everything in Fuel Only —
-        <strong>plus your name in every LMCT+ giveaway, automatically.</strong>
-      </p>
-      <div class="sus-benefits">
-        <span class="sus-benefit">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-width="2.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          Wholesale fuel
-        </span>
-        <span class="sus-benefit">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-width="2.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-            />
-          </svg>
-          Every giveaway entry
-        </span>
-        <span class="sus-benefit">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-width="2.2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-          Cancel anytime
-        </span>
-      </div>
-      <!-- Slim entries hook -->
-      <div class="sus-hook">
-        <span class="sus-hook-eyebrow">Your Entries Stack Up</span>
-        <h3 class="sus-hook-title">
-          The longer you stay, <em>the more you win.</em>
-        </h3>
-        <span class="sus-hook-stack">
-          <span class="sus-hook-stack-num">6 months</span>
-          <span>=</span>
-          <span
-            ><span class="sus-hook-stack-num">6 entries</span> in every
-            draw</span
-          >
-        </span>
-      </div>
-    </div>
-  </div>
-</section>
+
+<!-- =========================================================
+     CF PRO TOOLS — PRODUCT PRICE CONFIGURATION
+     ========================================================= -->
+
 <script>
-  (function () {
-    var section = document.getElementById("susTier");
-    if (!section) return;
-    var buttons = section.querySelectorAll(".sus-toggle-btn");
-    function setTier(tier) {
-      // Update Block A
-      section.setAttribute("data-tier", tier);
-      buttons.forEach(function (btn) {
-        var isActive = btn.getAttribute("data-tier-target") === tier;
-        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+  /*
+   * IMPORTANT:
+   *
+   * These IDs now match the ACTUAL products
+   * inside this ClickFunnels popup.
+   */
+
+  window.CFPT = window.CFPT || {};
+
+  CFPT.prodPrices = {
+    5114181: 99.99,
+    5114182: 199.0,
+  };
+
+  CFPT.freePriceDisplay = "FREE";
+  CFPT.orderTotalLabel = "Order Total:";
+</script>
+
+<!-- =========================================================
+     CF PRO TOOLS ORDER SUMMARY
+     ========================================================= -->
+
+<script>
+  /**************************
+   * Copyright 2019 CF Pro Tools, All Rights Reserved
+   * Do not share, or distribute this code without author's consent.
+   * This copyright notice must remain in place whenever using
+   * this code - DO NOT REMOVE
+   * Author: Jaime Smith
+   * Website: https://cfprotools.com
+   * Add-on: CF Order Summary
+   * Version: 2.0
+   * Last Updated: 10/28/2019
+   **************************/
+
+  var $summTemplate = null;
+
+  $(function () {
+    window.cfpe = window.cfpe || {};
+
+    window.cfpe.orderTotal = window.cfpe.orderTotal || 0;
+
+    window.cfptOrderTotal = null;
+
+    setSummaryTemplate();
+
+    $("#bump-offer").off();
+
+    rebuildOrderSummary();
+
+    $(document).on("change", ".qty_select," + '.o2step_step2 [name="purchase[product_id]"],' + '[data-de-type="orpo"] [name="purchase[product_id]"],' + "#bump-offer", function () {
+      $("#bump-offer, " + '[id*="bump_offer_"]').each(function () {
+        var bumpId = $(this).val();
+
+        var $hidden = $("#cfAR " + '[name="purchase[product_ids][]"]' + '[value="' + bumpId + '"]');
+
+        $hidden.prop("checked", $(this).is(":checked"));
       });
-      // Update Block B if present
-      var blockB = document.getElementById("susProof");
-      if (blockB) blockB.setAttribute("data-tier", tier);
-      // Replay entrance anims for visible panel
-      var panel = section.querySelector(".sus-tier--" + tier);
-      if (panel) {
-        panel.style.animation = "none";
-        void panel.offsetWidth;
-        panel.style.animation = "";
+
+      rebuildOrderSummary();
+    });
+
+    $(document).on("cfpt:cart-updated", function () {
+      rebuildOrderSummary();
+    });
+  });
+
+  function setSummaryTemplate() {
+    $('[data-de-type="ors"], ' + ".elOrderProductOptions:not(:has(input,select))")
+      .first()
+      .attr("data-title", "cf-order-summary");
+
+    $summTemplate = $('[data-title="cf-order-summary"] ' + ".elOrderProductOptinProducts")
+      .first()
+      .clone();
+  }
+
+  function rebuildOrderSummary() {
+    var cfpt = window.CFPT || {};
+
+    var prodPrices = cfpt.prodPrices || {};
+
+    var freePriceDisplay = cfpt.freePriceDisplay || null;
+
+    var orderTotalLabel = cfpt.orderTotalLabel || null;
+
+    var prodSelParent = '[data-de-type="orpo"]';
+
+    var appendTo = '[data-title="cf-order-summary"] ' + ".elOrderProductOptions";
+
+    if ($(".o2step_wrapper").length > 0) {
+      prodSelParent = ".o2step_step2";
+
+      appendTo = '[data-title="cf-order-summary"]';
+    }
+
+    if (!$summTemplate) {
+      setSummaryTemplate();
+    }
+
+    var $summary = $('[data-title="cf-order-summary"]');
+
+    $summary.hide();
+
+    $summary.find(".elOrderProductOptinProducts").remove();
+
+    window.cfptCartProds = {};
+
+    $("#cfAR " + '[name="purchase[product_ids][]"]:checked').each(function () {
+      var productId = String($(this).val());
+
+      if (window.cfptCartProds[productId]) {
+        window.cfptCartProds[productId].qty++;
+      } else {
+        window.cfptCartProds[productId] = {
+          qty: 1,
+        };
+      }
+    });
+
+    var orderTotal = 0;
+    var orderCurrency = "AUD";
+
+    $.each(window.cfptCartProds, function (productId, item) {
+      var qty = item.qty;
+
+      var $productInput = $(prodSelParent + ' [name="' + productId + '_qty"]');
+
+      if (!$productInput.length) {
+        $productInput = $(prodSelParent + ' [name="purchase[product_id]"]' + '[value="' + productId + '"]');
+      }
+
+      if (!$productInput.length) {
+        return;
+      }
+
+      var $product = $productInput.closest("[data-cf-product-template]");
+
+      if (!$product.length) {
+        return;
+      }
+
+      var productName = $product.find("[data-cf-product-name]").html() || "";
+
+      var $priceElement = $product.find("[data-cf-product-price]");
+
+      var productPrice;
+
+      /*
+       * First use our explicit price map.
+       */
+      if (Object.prototype.hasOwnProperty.call(prodPrices, productId)) {
+        productPrice = Number(prodPrices[productId]);
+      }
+
+      /*
+       * If product is not configured,
+       * prefer CF's numeric data-product-amount.
+       *
+       * This avoids turning:
+       *
+       * $199 (2 month free)
+       *
+       * into:
+       *
+       * 1992
+       */
+      if (!Number.isFinite(productPrice)) {
+        productPrice = parseFloat($productInput.attr("data-product-amount"));
+      }
+
+      /*
+       * Last-resort fallback:
+       * take ONLY the first monetary number.
+       */
+      if (!Number.isFinite(productPrice)) {
+        var priceText = $priceElement.text() || "";
+
+        var match = priceText.match(/[\d,]+(?:\.\d+)?/);
+
+        if (match) {
+          productPrice = parseFloat(match[0].replace(/,/g, ""));
+        }
+      }
+
+      if (!Number.isFinite(productPrice)) {
+        return;
+      }
+
+      var subtotal = qty * productPrice;
+
+      var currency = $priceElement.attr("taxamo-currency") || "AUD";
+
+      orderCurrency = currency;
+
+      var $row = $summTemplate.clone();
+
+      $row.attr("data-product_id", productId);
+
+      $row.attr("data-quantity", qty);
+
+      $row.find(".product-name").html(productName);
+
+      if (freePriceDisplay && subtotal === 0) {
+        $row.find(".product-price").attr("taxamo-currency", currency).html(freePriceDisplay);
+      } else {
+        var formatted = subtotal.toLocaleString(undefined, {
+          style: "currency",
+          currency: currency,
+        });
+
+        $row.find(".product-price").attr("taxamo-currency", currency).html(formatted);
+      }
+
+      $row.appendTo($(appendTo));
+
+      orderTotal += subtotal;
+    });
+
+    if (orderTotal > 0) {
+      var $total = $summTemplate.clone();
+
+      $total.addClass("cf-order-total-row").css({
+        "border-top": "1px solid #DDD",
+
+        "margin-top": ".5em",
+      });
+
+      $total.find(".product-name").html(orderTotalLabel);
+
+      $total
+        .find(".product-price")
+        .attr("taxamo-currency", orderCurrency)
+        .html(
+          orderTotal.toLocaleString(undefined, {
+            style: "currency",
+
+            currency: orderCurrency,
+          }),
+        );
+
+      $total.appendTo($(appendTo));
+
+      $summary.show();
+
+      window.cfptOrderTotal = orderTotal;
+    } else {
+      $summary.hide();
+
+      window.cfptOrderTotal = null;
+    }
+  }
+</script>
+
+<style>
+  .cf-order-total-row {
+    border-top: 1px solid #ddd;
+
+    margin-top: 0.5em;
+  }
+
+  .cf-order-total-row .product-name,
+  .cf-order-total-row .product-price {
+    font-weight: bold;
+  }
+
+  [data-title="cf-order-summary"] .qty-head {
+    display: inline-block;
+
+    font-weight: bold;
+
+    width: 3em;
+  }
+
+  .prodQty {
+    display: inline-block;
+
+    width: 3em;
+  }
+</style>
+
+<!-- ============================================================
+     SECTION 05 — PHONE VALIDATION (intl-tel-input v29.1.2, AU)   [REQUIRED]
+     Replaces the v19 script. No CSS class names changed.
+     ============================================================ -->
+
+<!-- [VENDOR] intl-tel-input -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@29.1.2/dist/css/intlTelInput.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@29.1.2/dist/js/intlTelInput.min.js"></script>
+
+<script>
+  (function ($) {
+    "use strict";
+
+    /* ------------------------------------------------------------
+     CONFIG
+     ------------------------------------------------------------ */
+
+    var ITI_VERSION = "29.1.2";
+    var UTILS_URL = "https://cdn.jsdelivr.net/npm/intl-tel-input@" + ITI_VERSION + "/dist/js/utils.js";
+
+    var PHONE_SELECTOR = 'input[name="phone"]';
+    var SUBMIT_SELECTOR = '[href="#submit-form"], [href="#submit-form-2step"], [href="#submit-form-2step-order"]';
+
+    var BLOCK_INVALID_SUBMIT = true; /* stop the click when the number is invalid */
+    var SUBMIT_AS_E164 = true; /* rewrite the field to +614xxxxxxxx just before submit */
+
+    /* Length alone cannot separate a mobile from a landline here, because both
+     are nine significant digits. Every Australian mobile in service is 04
+     followed by eight digits, and ACMA only allocates new mobile prefixes
+     inside that block, so this rule holds as new prefixes are released.
+     ACMA has reserved 05 as the overflow range for when 04 runs out, but
+     nothing has been issued in it. If that changes, add '5' below. */
+    var AU_MOBILE_ONLY = true;
+    var AU_MOBILE_LEADING = "4";
+    var AU_MOBILE_RE = new RegExp("^\\+61[" + AU_MOBILE_LEADING + "]\\d{8}$");
+    var AU_MOBILE_MSG = "Enter an Australian mobile number";
+
+    var OK_COLOUR = "#4a8920";
+    var BAD_COLOUR = "#b91517";
+
+    /* ------------------------------------------------------------
+     STATE
+     ------------------------------------------------------------ */
+
+    var fields = [];
+    var utilsLoaded = false;
+    var gateBound = false;
+
+    /* ------------------------------------------------------------
+     HELPERS
+     ------------------------------------------------------------ */
+
+    function value(f) {
+      return (f.input.value || "").trim();
+    }
+
+    function isVisible(f) {
+      return !!(f.input.offsetWidth || f.input.offsetHeight || f.input.getClientRects().length);
+    }
+
+    function lengthValid(f) {
+      try {
+        return f.iti.isValidNumber();
+      } catch (err) {
+        return false;
+      }
+    }
+
+    function mobileValid(f) {
+      if (!AU_MOBILE_ONLY) {
+        return true;
       }
       try {
-        sessionStorage.setItem("sus-tier", tier);
-      } catch (e) {}
-      section.dispatchEvent(
-        new CustomEvent("tierchange", { detail: { tier: tier } }),
-      );
-    }
-    buttons.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        setTier(btn.getAttribute("data-tier-target"));
-      });
-    });
-    // URL params: ?tier=full
-    try {
-      var params = new URLSearchParams(window.location.search);
-      var urlTier = params.get("tier");
-      if (urlTier === "fuel" || urlTier === "full") {
-        setTier(urlTier);
-      } else {
-        var saved = sessionStorage.getItem("sus-tier");
-        if (saved === "fuel" || saved === "full") setTier(saved);
+        return AU_MOBILE_RE.test(f.iti.getNumber() || "");
+      } catch (err) {
+        return false;
       }
-    } catch (e) {}
-  })();
+    }
+
+    function isValid(f) {
+      if (!utilsLoaded) {
+        return true;
+      }
+      return lengthValid(f) && mobileValid(f);
+    }
+
+    function messageFor(f) {
+      if (!value(f)) {
+        return "Please enter a number";
+      }
+
+      /* Correct length but wrong shape means a landline, a service number,
+       or filler like 555555555. */
+      if (lengthValid(f)) {
+        return AU_MOBILE_MSG;
+      }
+
+      var codes = window.intlTelInput.VALIDATION_ERROR || {};
+      var code;
+      try {
+        code = f.iti.getValidationError();
+      } catch (err) {
+        code = null;
+      }
+      if (code === codes.INVALID_COUNTRY_CODE) {
+        return AU_MOBILE_MSG;
+      }
+      if (code === codes.TOO_SHORT) {
+        return "Too short";
+      }
+      if (code === codes.TOO_LONG) {
+        return "Too long";
+      }
+      return "Invalid number";
+    }
+
+    function paintNeutral(f) {
+      f.$error.text("").addClass("hide").removeClass("errorMsg");
+      f.$valid.addClass("hide").removeClass("validMsg");
+      f.$input.css({ "border-color": "", "border-width": "" });
+    }
+
+    function paintValid(f) {
+      f.$error.text("").addClass("hide").removeClass("errorMsg");
+      f.$valid.removeClass("hide").addClass("validMsg");
+      f.$input.css({ "border-color": OK_COLOUR, "border-width": "3px" });
+    }
+
+    function paintInvalid(f) {
+      f.$valid.addClass("hide").removeClass("validMsg");
+      f.$error.text(messageFor(f)).removeClass("hide").addClass("errorMsg");
+      f.$input.css({ "border-color": BAD_COLOUR, "border-width": "3px" });
+    }
+
+    /* Empty returns true so CF1 handles its own required message.
+     Errors are only painted once the field has been left or a submit
+     was attempted, so the user is not shouted at mid typing. */
+    function evaluate(f, forceErrors) {
+      if (!value(f)) {
+        paintNeutral(f);
+        return true;
+      }
+      if (isValid(f)) {
+        paintValid(f);
+        return true;
+      }
+      if (forceErrors || f.touched) {
+        f.touched = true;
+        paintInvalid(f);
+      } else {
+        paintNeutral(f);
+      }
+      return false;
+    }
+
+    function firstInvalid() {
+      for (var i = 0; i < fields.length; i++) {
+        var f = fields[i];
+        if (!isVisible(f)) {
+          continue;
+        }
+        if (!value(f)) {
+          continue;
+        }
+        if (!isValid(f)) {
+          return f;
+        }
+      }
+      return null;
+    }
+
+    function writeE164() {
+      if (!SUBMIT_AS_E164 || !utilsLoaded) {
+        return;
+      }
+      for (var i = 0; i < fields.length; i++) {
+        var f = fields[i];
+        if (!value(f) || !isValid(f)) {
+          continue;
+        }
+        try {
+          var full = f.iti.getNumber();
+          if (full) {
+            f.input.value = full;
+          }
+        } catch (err) {}
+      }
+    }
+
+    /* ------------------------------------------------------------
+     SUBMIT GATE
+     CF1 submit buttons are anchors, so the disabled property does
+     nothing. Capture phase runs before the CF1 handlers, which lets
+     stopImmediatePropagation actually hold the click.
+     ------------------------------------------------------------ */
+
+    function onSubmitClick(e) {
+      var button = e.target && e.target.closest ? e.target.closest(SUBMIT_SELECTOR) : null;
+      if (!button) {
+        return;
+      }
+
+      var bad = firstInvalid();
+      if (!bad) {
+        writeE164();
+        return;
+      }
+      if (!BLOCK_INVALID_SUBMIT) {
+        return;
+      }
+
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      bad.touched = true;
+      paintInvalid(bad);
+      try {
+        bad.input.focus();
+      } catch (err) {}
+    }
+
+    /* ------------------------------------------------------------
+     SETUP
+     ------------------------------------------------------------ */
+
+    function setup(input) {
+      if (window.intlTelInput.getInstance(input)) {
+        return;
+      }
+
+      var $input = $(input);
+
+      var iti = window.intlTelInput(input, {
+        initialCountry: "au",
+        onlyCountries: ["au"],
+        countrySelectorMode: "OFF",
+        separateDialCode: false,
+        numberDisplayFormat: "NATIONAL",
+        allowedNumberTypes: ["MOBILE"],
+        formatAsYouType: true,
+        strictMode: true,
+        strictRejectAnimation: true,
+        placeholderNumberPolicy: "AGGRESSIVE",
+        customPlaceholder: function (exampleNumber) {
+          return exampleNumber ? "Number Here... " + exampleNumber : "Number Here...";
+        },
+        loadUtils: function () {
+          return import(UTILS_URL);
+        },
+      });
+
+      var $wrap = $input.closest(".iti");
+      var isFirst = fields.length === 0;
+
+      var $valid = $('<div class="hide">\u2713 Valid</div>');
+      var $error = $('<div class="hide"></div>');
+      if (isFirst) {
+        $valid.attr("id", "valid-msg");
+        $error.attr("id", "error-msg");
+      }
+      $wrap.after($error);
+      $wrap.after($valid);
+
+      var f = {
+        input: input,
+        $input: $input,
+        iti: iti,
+        $valid: $valid,
+        $error: $error,
+        touched: false,
+      };
+      fields.push(f);
+
+      $input.on("input change countrychange", function () {
+        evaluate(f, false);
+      });
+      $input.on("blur", function () {
+        evaluate(f, true);
+      });
+
+      /* Utils carry the validation rules and load after the page does.
+       Until then nothing is blocked, and every field is re checked
+       once they arrive so autofilled numbers get their tick. */
+      if (iti.promise && iti.promise.then) {
+        iti.promise.then(
+          function () {
+            utilsLoaded = true;
+            for (var i = 0; i < fields.length; i++) {
+              if (value(fields[i])) {
+                evaluate(fields[i], false);
+              }
+            }
+          },
+          function () {
+            utilsLoaded = false;
+          },
+        );
+      }
+    }
+
+    function scan() {
+      if (!window.intlTelInput) {
+        return;
+      }
+      $(PHONE_SELECTOR).each(function () {
+        setup(this);
+      });
+      if (!gateBound && fields.length) {
+        document.addEventListener("click", onSubmitClick, true);
+        gateBound = true;
+      }
+    }
+
+    $(function () {
+      $("#valid-msg, #error-msg").remove();
+      scan();
+    });
+
+    window.addEventListener("load", scan);
+  })(window.jQuery);
 </script>
+
+<style>
+  .iti {
+    display: block !important;
+    margin-top: 2em !important;
+  }
+  [data-associated-to=".elS1Phone"] {
+    top: -5.2em !important;
+  }
+  .errorMsg {
+    display: block !important;
+    color: red;
+    position: absolute;
+  }
+  .validMsg {
+    display: block !important;
+    color: #00c900;
+    position: absolute;
+  }
+</style>

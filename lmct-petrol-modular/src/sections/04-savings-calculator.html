@@ -1,0 +1,266 @@
+<section
+  aria-labelledby="savingsTitle"
+  class="section section--sky"
+  id="savings"
+>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Savings calculator</span>
+      <h2 class="section-title" id="savingsTitle">
+        Estimate what member pricing could be worth for your car.
+      </h2>
+      <p class="section-copy">
+        The calculator keeps the existing formula: estimated saving per litre x
+        tank size x fill frequency, less your annual membership fee for net
+        benefit.
+      </p>
+    </div>
+    <div class="calculator-layout">
+      <div class="calc-panel">
+        <h3>Your driving details</h3>
+        <section
+          aria-label="LMCT+ Savings Calculator"
+          class="lmcalc"
+          id="lmcalc"
+          role="region"
+        >
+          <div class="lmcalc-field">
+            <label class="lmcalc-label" for="lmcalcSearch"
+              >Choose a common vehicle or enter your own</label
+            >
+            <input
+              aria-describedby="lmcalcCarSectionLabel"
+              autocomplete="off"
+              class="lmcalc-input"
+              id="lmcalcSearch"
+              placeholder="Search Ranger, RAV4, Hilux..."
+              spellcheck="false"
+              type="text"
+            />
+          </div>
+          <p class="lmcalc-label" id="lmcalcCarSectionLabel">
+            Popular vehicles
+          </p>
+          <div
+            aria-label="Popular vehicle presets"
+            class="lmcalc-car-grid"
+            id="lmcalcCarGrid"
+            role="listbox"
+          ></div>
+          <div class="lmcalc-manual" id="lmcalcManual">
+            <div class="lmcalc-manual-row">
+              <div class="lmcalc-field">
+                <span class="lmcalc-label">Fuel type</span>
+                <div
+                  aria-label="Fuel type"
+                  class="lmcalc-fuel-toggle"
+                  id="lmcalcFuelToggle"
+                  role="tablist"
+                >
+                  <button
+                    aria-selected="true"
+                    class="lmcalc-fuel-btn is-active"
+                    data-fuel="petrol"
+                    role="tab"
+                    type="button"
+                  >
+                    Petrol
+                  </button>
+                  <button
+                    aria-selected="false"
+                    class="lmcalc-fuel-btn"
+                    data-fuel="diesel"
+                    role="tab"
+                    type="button"
+                  >
+                    Diesel
+                  </button>
+                </div>
+              </div>
+              <div class="lmcalc-field">
+                <label class="lmcalc-label" for="lmcalcTankInput"
+                  >Tank size (L)</label
+                >
+                <input
+                  class="lmcalc-input"
+                  id="lmcalcTankInput"
+                  inputmode="numeric"
+                  max="200"
+                  min="20"
+                  step="1"
+                  type="number"
+                  value="55"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="lmcalc-field">
+            <span class="lmcalc-label">How often do you fill up?</span>
+            <div class="lmcalc-freq-grid">
+              <button class="lmcalc-freq" data-fpw="0.5" type="button">
+                Fortnightly<span>Every 2 weeks</span>
+              </button>
+              <button class="lmcalc-freq is-active" data-fpw="1" type="button">
+                Weekly<span>Once a week</span>
+              </button>
+              <button class="lmcalc-freq" data-fpw="2" type="button">
+                Twice weekly<span>2 fills / week</span>
+              </button>
+              <button class="lmcalc-freq" data-fpw="3" type="button">
+                Heavy driver<span>3 fills / week</span>
+              </button>
+            </div>
+          </div>
+          <button class="lmcalc-foot-btn" id="lmcalcOtherBtn" type="button">
+            Use manual vehicle details
+          </button>
+          <button class="lmcalc-foot-btn" data-toggle="prices" type="button">
+            Use my own fuel prices
+          </button>
+          <div class="lmcalc-expand" id="lmcalcPrices">
+            <div class="lmcalc-price-row">
+              <div class="lmcalc-field">
+                <label class="lmcalc-label" for="lmcalcPriceLmct"
+                  >LMCT+ price (c/L)</label
+                >
+                <input
+                  class="lmcalc-input"
+                  id="lmcalcPriceLmct"
+                  inputmode="decimal"
+                  max="400"
+                  min="50"
+                  step="0.1"
+                  type="number"
+                />
+              </div>
+              <div class="lmcalc-field">
+                <label class="lmcalc-label" for="lmcalcPriceAvg"
+                  >Local average (c/L)</label
+                >
+                <input
+                  class="lmcalc-input"
+                  id="lmcalcPriceAvg"
+                  inputmode="decimal"
+                  max="400"
+                  min="50"
+                  step="0.1"
+                  type="number"
+                />
+              </div>
+            </div>
+          </div>
+          <input
+            aria-hidden="true"
+            hidden=""
+            id="lmcalcGrocSlider"
+            max="500"
+            min="50"
+            step="10"
+            type="range"
+            value="200"
+          />
+          <span hidden="" id="lmcalcGrocReadout">$200</span>
+          <button hidden="" id="lmcalcGrocConfirm" type="button">
+            See my savings
+          </button>
+        </section>
+      </div>
+      <aside aria-live="polite" class="calc-results" id="lmcalcReveal">
+        <div class="calc-results__main">
+          <p class="calc-results__label">Estimated annual savings</p>
+          <div class="lmcalc-big" id="lmcalcBigNumber">
+            <span class="lmcalc-big-currency">$</span>743
+          </div>
+          <span class="lmcalc-big-period"
+            >before the $99 annual membership fee</span
+          >
+          <div aria-hidden="true" class="calc-meter">
+            <span id="lmcalcMeter"></span>
+          </div>
+        </div>
+        <div class="lmcalc-stats">
+          <div class="lmcalc-stat">
+            <div class="lmcalc-stat-value" id="lmcalcMonth">$62</div>
+            <div class="lmcalc-stat-label">Per month</div>
+          </div>
+          <div class="lmcalc-stat">
+            <div class="lmcalc-stat-value" id="lmcalcDay">$2.04</div>
+            <div class="lmcalc-stat-label">Per day</div>
+          </div>
+          <div class="lmcalc-stat">
+            <div class="lmcalc-stat-value" id="lmcalcFill">$14.30</div>
+            <div class="lmcalc-stat-label">Per fill</div>
+          </div>
+        </div>
+        <div class="calc-results__detail">
+          <div class="lmcalc-roi">
+            <span class="lmcalc-roi-icon">OK</span>
+            <span id="lmcalcPayback"
+              >Membership pays for itself in <strong>7 fills</strong>.</span
+            >
+          </div>
+          <div class="lmcalc-roi">
+            <span class="lmcalc-roi-icon">OK</span>
+            <span id="lmcalcRoi"
+              >Estimated net benefit: <strong>$644</strong> after the $99 yearly
+              fee.</span
+            >
+          </div>
+          <a
+            class="btn btn--green"
+            href="https://lmctgiveaway.com/order-639460901777617719067?el=calculator&amp;utm_source=calculator"
+            id="lmcalcCta"
+            role="button"
+          >
+            Get My $99 Membership
+          </a>
+          <div class="lmcalc-foot">
+            <button
+              class="lmcalc-foot-btn"
+              data-toggle="breakdown"
+              type="button"
+            >
+              Show breakdown
+            </button>
+            <button class="lmcalc-foot-btn" data-toggle="restart" type="button">
+              Reset
+            </button>
+          </div>
+          <div class="lmcalc-expand" id="lmcalcBreakdown">
+            <table class="lmcalc-bd-table">
+              <tbody>
+                <tr>
+                  <th>One fill</th>
+                  <td id="lmcalcBdTank">55 L</td>
+                </tr>
+                <tr>
+                  <th>Pump average x tank</th>
+                  <td id="lmcalcBdAvg">$101.75</td>
+                </tr>
+                <tr>
+                  <th>LMCT+ pricing x tank</th>
+                  <td id="lmcalcBdLmct">$87.45</td>
+                </tr>
+                <tr>
+                  <th>Saved per fill</th>
+                  <td id="lmcalcBdPerFill">$14.30</td>
+                </tr>
+                <tr>
+                  <th>Per year</th>
+                  <td id="lmcalcBdFills">52 fills</td>
+                </tr>
+                <tr>
+                  <th>Total annual saving</th>
+                  <td id="lmcalcBdYear">$743</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="form-note">
+            Estimates only. Fuel prices vary daily and actual savings will vary.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

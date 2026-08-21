@@ -1,0 +1,282 @@
+<!-- HT Monaro GTS or $150K previous winner proof section -->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap");
+
+  .monaroCashProof,
+  .monaroCashProof * {
+    box-sizing: border-box;
+  }
+
+  .monaroCashProof {
+    width: 100%;
+    padding: clamp(34px, 5vw, 68px) 16px;
+    background:
+      linear-gradient(135deg, rgba(14, 161, 253, 0.08) 0 25%, transparent 25% 50%),
+      linear-gradient(180deg, #ffffff 0%, #f4f8fb 100%);
+    background-size: 18px 18px, auto;
+    color: #08111d;
+    font-family: "Montserrat", Arial, sans-serif;
+    overflow: hidden;
+  }
+
+  .monaroCashProof__inner {
+    width: min(100%, 1120px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.82fr);
+    align-items: center;
+    gap: clamp(26px, 5vw, 58px);
+  }
+
+  .monaroCashProof__copy {
+    min-width: 0;
+  }
+
+  .monaroCashProof__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    width: fit-content;
+    margin-bottom: 16px;
+    padding: 9px 14px;
+    border: 1px solid rgba(14, 161, 253, 0.28);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.86);
+    color: #047ec6;
+    font-size: clamp(10px, 1.7vw, 12px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 10px 30px rgba(8, 17, 29, 0.06);
+  }
+
+  .monaroCashProof__badgeDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0ea1fd;
+    box-shadow: 0 0 0 5px rgba(14, 161, 253, 0.14);
+    flex: 0 0 auto;
+  }
+
+  .monaroCashProof__title {
+    margin: 0;
+    max-width: 760px;
+    color: #08111d;
+    font-size: clamp(32px, 6vw, 70px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .monaroCashProof__title span {
+    color: #0ea1fd;
+  }
+
+  .monaroCashProof__text {
+    max-width: 650px;
+    margin: 20px 0 0;
+    color: #334155;
+    font-size: clamp(16px, 2.4vw, 22px);
+    font-weight: 700;
+    line-height: 1.42;
+  }
+
+  .monaroCashProof__text strong {
+    color: #08111d;
+    font-weight: 900;
+  }
+
+  .monaroCashProof__choice {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .monaroCashProof__choiceItem {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #08111d;
+    color: #ffffff;
+    font-size: clamp(12px, 2vw, 15px);
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+    box-shadow: 0 12px 26px rgba(8, 17, 29, 0.16);
+  }
+
+  .monaroCashProof__choiceItem--cash {
+    background: #0ea1fd;
+    color: #ffffff;
+  }
+
+  .monaroCashProof__choiceJoin {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .monaroCashProof__note {
+    margin: 18px 0 0;
+    color: #64748b;
+    font-size: clamp(12px, 1.9vw, 14px);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .monaroCashProof__media {
+    position: relative;
+    width: min(100%, 430px);
+    justify-self: center;
+    margin: 0;
+  }
+
+  .monaroCashProof__media::before {
+    content: "";
+    position: absolute;
+    inset: 18px -14px -14px 18px;
+    border-radius: 18px;
+    background: #08111d;
+    transform: rotate(2deg);
+    z-index: 0;
+  }
+
+  .monaroCashProof__image {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 720px;
+    object-fit: contain;
+    border: 6px solid #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 24px 60px rgba(8, 17, 29, 0.24);
+  }
+
+  .monaroCashProof__caption {
+    position: relative;
+    z-index: 2;
+    width: calc(100% - 28px);
+    margin: -34px auto 0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #08111d;
+    font-size: clamp(11px, 2vw, 13px);
+    font-weight: 900;
+    line-height: 1.25;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0 12px 30px rgba(8, 17, 29, 0.16);
+  }
+
+  @media (max-width: 820px) {
+    .monaroCashProof {
+      padding: 34px 14px 46px;
+    }
+
+    .monaroCashProof__inner {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+
+    .monaroCashProof__copy {
+      text-align: center;
+    }
+
+    .monaroCashProof__badge,
+    .monaroCashProof__choice {
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+
+    .monaroCashProof__text,
+    .monaroCashProof__note {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .monaroCashProof__media {
+      width: min(100%, 390px);
+    }
+  }
+
+  @media (max-width: 420px) {
+    .monaroCashProof__choice {
+      gap: 8px;
+    }
+
+    .monaroCashProof__choiceItem {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
+
+    .monaroCashProof__choiceJoin {
+      flex: 1 1 100%;
+      text-align: center;
+    }
+
+    .monaroCashProof__media::before {
+      inset: 12px -8px -10px 12px;
+    }
+
+    .monaroCashProof__image {
+      border-width: 4px;
+      border-radius: 14px;
+    }
+  }
+</style>
+
+<section class="monaroCashProof" aria-label="HT Monaro GTS or $150K previous winner">
+  <div class="monaroCashProof__inner">
+    <div class="monaroCashProof__copy">
+      <div class="monaroCashProof__badge">
+        <span class="monaroCashProof__badgeDot" aria-hidden="true"></span>
+        HT Monaro GTS or $150K is back
+      </div>
+
+      <h2 class="monaroCashProof__title">
+        Last time, he took the cash.
+        <span>Now you've got another chance.</span>
+      </h2>
+
+      <p class="monaroCashProof__text">
+        Michael T chose the <strong>$150,000 cash</strong> when this prize was
+        up for grabs. The same choice is back on the table: the HT Monaro GTS or
+        $150K cash.
+      </p>
+
+      <div class="monaroCashProof__choice" aria-label="Prize choice">
+        <span class="monaroCashProof__choiceItem">HT Monaro GTS</span>
+        <span class="monaroCashProof__choiceJoin">or</span>
+        <span class="monaroCashProof__choiceItem monaroCashProof__choiceItem--cash">$150K Cash</span>
+      </div>
+
+      <p class="monaroCashProof__note">
+        Another round, another chance to be the name on the cheque.
+      </p>
+    </div>
+
+    <figure class="monaroCashProof__media">
+      <img
+        class="monaroCashProof__image"
+        src="https://images.clickfunnels.com/2b/125fc8b657471890f33fde62fd2454/Monaro_GTS_or_24150k_Previous_Winner.jpg"
+        alt="Michael T and family holding a $150,000 LMCT+ cheque after choosing the cash prize"
+        loading="lazy"
+      />
+      <figcaption class="monaroCashProof__caption">
+        Previous winner chose the $150K cash
+      </figcaption>
+    </figure>
+  </div>
+</section>
