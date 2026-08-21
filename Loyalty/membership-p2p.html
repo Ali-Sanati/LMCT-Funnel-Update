@@ -101,7 +101,6 @@
 
   .lmctFS__secureIcon,
   .lmctFS__miniIcon,
-  .lmctFS__benefitIconSvg,
   .lmctFS__trustIconSvg,
   .lmctFS__buttonIcon {
     display: block;
@@ -252,7 +251,7 @@
   }
 
   .lmctFS__plansSection {
-    padding: 18px 0 28px;
+    padding: 18px 0 18px;
   }
 
   .lmctFS__sectionTitle {
@@ -276,7 +275,7 @@
     position: relative;
     display: flex;
     min-width: 0;
-    min-height: 310px;
+    min-height: 100%;
     flex-direction: column;
     border: 1px solid var(--lmct-border);
     border-radius: 8px;
@@ -302,9 +301,12 @@
   }
 
   .lmctFS__planTop {
-    min-height: 54px;
+    display: flex;
+    min-height: 52px;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 8px;
     padding: 14px 18px 0;
-    text-align: center;
   }
 
   .lmctFS__popular {
@@ -324,6 +326,7 @@
 
   .lmctFS__selectedMark {
     display: inline-flex;
+    flex: 0 0 auto;
     min-height: 28px;
     align-items: center;
     justify-content: center;
@@ -348,45 +351,123 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 18px 22px 24px;
-    text-align: center;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 16px 22px 24px;
+    text-align: left;
+  }
+
+  .lmctFS__planHeader {
+    min-width: 0;
+  }
+
+  .lmctFS__planName {
+    margin: 0;
+    color: var(--lmct-navy);
+    font-size: clamp(21px, 5.2vw, 28px);
+    font-weight: 900;
+    line-height: 1.12;
+    letter-spacing: 0;
   }
 
   .lmctFS__price {
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 3px;
+    margin-top: 14px;
     color: var(--lmct-navy);
     font-weight: 900;
-    line-height: 0.95;
+    line-height: 1;
     letter-spacing: 0;
   }
 
   .lmctFS__priceCurrency {
-    margin-top: 8px;
-    font-size: 24px;
+    align-self: flex-start;
+    margin-top: 7px;
+    font-size: 22px;
     line-height: 1;
   }
 
   .lmctFS__priceValue {
-    font-size: clamp(64px, 16vw, 86px);
-    line-height: 0.95;
+    font-size: clamp(52px, 14vw, 72px);
+    line-height: 0.92;
+  }
+
+  .lmctFS__pricePeriod {
+    margin: 0 0 7px 4px;
+    color: var(--lmct-muted);
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1;
   }
 
   .lmctFS__plan--featured .lmctFS__price {
     color: var(--lmct-dark-blue);
   }
 
-  .lmctFS__planName {
-    margin: 15px 0 0;
+  .lmctFS__planDescription {
+    margin: 16px 0 0;
     color: var(--lmct-navy);
     font-size: 15px;
-    font-weight: 900;
-    line-height: 1.2;
-    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1.45;
     letter-spacing: 0;
+  }
+
+  .lmctFS__planNote {
+    margin: 14px 0 0;
+    border: 1px solid rgba(12, 159, 253, 0.16);
+    border-radius: 8px;
+    background: rgba(12, 159, 253, 0.06);
+    color: var(--lmct-muted);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+    padding: 12px 13px;
+  }
+
+  .lmctFS__planBenefits {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 22px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmctFS__planBenefit {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--lmct-navy);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+
+  .lmctFS__check {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(21, 148, 71, 0.1);
+    color: var(--lmct-green);
+    flex: 0 0 auto;
+  }
+
+  .lmctFS__checkSvg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .lmctFS__soon {
+    color: var(--lmct-muted);
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
   }
 
   .lmctFS__select {
@@ -396,7 +477,7 @@
     align-items: center;
     justify-content: center;
     gap: 9px;
-    margin-top: 22px;
+    margin-top: auto;
     border-radius: 8px;
     background: linear-gradient(180deg, var(--lmct-blue) 0%, var(--lmct-dark-blue) 100%);
     box-shadow: 0 14px 26px rgba(12, 159, 253, 0.24);
@@ -407,6 +488,7 @@
     text-align: center;
     text-decoration: none !important;
     text-transform: uppercase;
+    padding: 14px 16px;
     transition:
       filter 180ms ease,
       transform 180ms ease,
@@ -423,98 +505,30 @@
     outline-offset: 3px;
   }
 
-  .lmctFS__benefits {
-    padding: 18px 0 20px;
-  }
-
-  .lmctFS__benefitsTitle {
-    max-width: 740px;
-    margin: 0 auto 18px;
-    color: var(--lmct-navy);
-    font-size: clamp(22px, 4.8vw, 30px);
-    font-weight: 900;
-    line-height: 1.15;
-    text-align: center;
-    letter-spacing: 0;
-  }
-
-  .lmctFS__benefitGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .lmctFS__benefit {
-    display: flex;
-    min-width: 0;
-    align-items: center;
-    gap: 14px;
-    border: 1px solid var(--lmct-border);
-    border-radius: 8px;
-    background: var(--lmct-white);
-    padding: 16px;
-    box-shadow: 0 10px 24px rgba(5, 22, 42, 0.045);
-  }
-
-  .lmctFS__benefitIcon {
-    display: inline-flex;
-    width: 44px;
-    height: 44px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: rgba(12, 159, 253, 0.09);
-    color: var(--lmct-dark-blue);
-    flex: 0 0 auto;
-  }
-
-  .lmctFS__benefitIconSvg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .lmctFS__benefitText {
-    min-width: 0;
-  }
-
-  .lmctFS__benefitTitle {
-    margin: 0;
-    color: var(--lmct-navy);
-    font-size: 15px;
-    font-weight: 900;
-    line-height: 1.2;
-    letter-spacing: 0;
-  }
-
-  .lmctFS__benefitCopy {
-    margin: 5px 0 0;
-    color: var(--lmct-muted);
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.45;
-    letter-spacing: 0;
-  }
-
   .lmctFS__trust {
-    padding: 18px 0 18px;
+    padding: 0 0 34px;
   }
 
   .lmctFS__trustGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 12px;
     border: 1px solid var(--lmct-border);
     border-radius: 8px;
-    background: var(--lmct-white);
-    padding: 12px;
+    background: rgba(255, 255, 255, 0.86);
+    color: var(--lmct-navy);
+    padding: 12px 16px;
+    box-shadow: 0 10px 22px rgba(5, 22, 42, 0.035);
   }
 
   .lmctFS__trustItem {
     display: flex;
-    min-height: 46px;
+    min-height: 30px;
     align-items: center;
     justify-content: center;
-    gap: 9px;
+    gap: 8px;
     color: var(--lmct-navy);
     font-size: 13px;
     font-weight: 900;
@@ -525,33 +539,18 @@
     color: var(--lmct-dark-blue);
   }
 
-  .lmctFS__final {
-    padding: 24px 0 44px;
-    text-align: center;
+  .lmctFS__trustDot {
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--lmct-border);
   }
 
-  .lmctFS__finalBox {
-    border: 1px solid rgba(12, 159, 253, 0.22);
-    border-radius: 8px;
-    background: linear-gradient(180deg, rgba(12, 159, 253, 0.08) 0%, rgba(255, 255, 255, 0.92) 100%);
-    padding: 24px 18px;
-  }
-
-  .lmctFS__finalTitle {
-    margin: 0;
-    color: var(--lmct-navy);
-    font-size: 24px;
-    font-weight: 900;
-    line-height: 1.15;
-    letter-spacing: 0;
-  }
-
-  .lmctFS__finalText {
-    margin: 8px 0 0;
+  .lmctFS__trustText {
     color: var(--lmct-muted);
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1.5;
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1.2;
   }
 
   .lmctFS__footer {
@@ -653,32 +652,10 @@
     }
   }
 
-  @media (min-width: 640px) {
-    .lmctFS__benefitGrid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .lmctFS__trustGrid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .lmctFS__trustItem + .lmctFS__trustItem {
-      border-left: 1px solid var(--lmct-border);
-    }
-  }
-
   @media (min-width: 768px) {
     .lmctFS__plans {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 22px;
-    }
-
-    .lmctFS__plan--featured {
-      transform: translateY(-6px);
-    }
-
-    .lmctFS__plan--featured:hover {
-      transform: translateY(-9px);
     }
   }
 
@@ -733,20 +710,12 @@
       padding-top: 14px;
     }
 
-    .lmctFS__plan {
-      min-height: 288px;
-    }
-
     .lmctFS__priceValue {
-      font-size: 66px;
+      font-size: 58px;
     }
 
     .lmctFS__planBody {
       padding: 12px 18px 20px;
-    }
-
-    .lmctFS__benefit {
-      padding: 14px;
     }
 
     .lmctFS__footerInner {
@@ -779,7 +748,7 @@
       font-size: 30px;
     }
 
-    .lmctFS__benefit {
+    .lmctFS__planBenefit {
       align-items: flex-start;
     }
   }
@@ -875,12 +844,54 @@
             </div>
 
             <div class="lmctFS__planBody">
-              <div class="lmctFS__price" aria-label="$99">
-                <span class="lmctFS__priceCurrency">$</span>
-                <span class="lmctFS__priceValue">99</span>
+              <div class="lmctFS__planHeader">
+                <h3 class="lmctFS__planName">Save on Fuel &amp; Groceries</h3>
+                <div class="lmctFS__price" aria-label="$99 per year">
+                  <span class="lmctFS__priceCurrency">$</span>
+                  <span class="lmctFS__priceValue">99</span>
+                  <span class="lmctFS__pricePeriod">/year</span>
+                </div>
               </div>
-              <h3 class="lmctFS__planName">Membership</h3>
-              <a href="#open-popup" class="lmctFS__select lmctFS__select--quiet" data-lmct-package="package99"> Select $99 Membership </a>
+
+              <p class="lmctFS__planDescription">One flat fee. Unlimited savings on every fill-up and member pricing on groceries, all year long.</p>
+              <p class="lmctFS__planNote">Members pay wholesale pricing instead of retail. Savings can vary by location, fuel type, and daily prices.</p>
+
+              <ul class="lmctFS__planBenefits" aria-label="Save on Fuel and Groceries benefits">
+                <li class="lmctFS__planBenefit">
+                  <span class="lmctFS__check" aria-hidden="true">
+                    <svg class="lmctFS__checkSvg" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    </svg>
+                  </span>
+                  <span>Wholesale fuel pricing at every member station</span>
+                </li>
+                <li class="lmctFS__planBenefit">
+                  <span class="lmctFS__check" aria-hidden="true">
+                    <svg class="lmctFS__checkSvg" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    </svg>
+                  </span>
+                  <span>Member pricing on groceries <span class="lmctFS__soon">(coming soon)</span></span>
+                </li>
+                <li class="lmctFS__planBenefit">
+                  <span class="lmctFS__check" aria-hidden="true">
+                    <svg class="lmctFS__checkSvg" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    </svg>
+                  </span>
+                  <span>Digital member pass: Scan &amp; Save instantly</span>
+                </li>
+                <li class="lmctFS__planBenefit">
+                  <span class="lmctFS__check" aria-hidden="true">
+                    <svg class="lmctFS__checkSvg" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    </svg>
+                  </span>
+                  <span>Cancel anytime, no lock-in</span>
+                </li>
+              </ul>
+
+              <a href="#open-popup" class="lmctFS__select lmctFS__select--quiet" data-lmct-package="package99">CHOOSE $99 PLAN</a>
             </div>
           </article>
 
@@ -902,132 +913,89 @@
             </div>
 
             <div class="lmctFS__planBody">
-              <div class="lmctFS__price" aria-label="$199">
-                <span class="lmctFS__priceCurrency">$</span>
-                <span class="lmctFS__priceValue">199</span>
+              <div class="lmctFS__planHeader">
+                <h3 class="lmctFS__planName">Save &amp; Win</h3>
+                <div class="lmctFS__price" aria-label="$199 per year">
+                  <span class="lmctFS__priceCurrency">$</span>
+                  <span class="lmctFS__priceValue">199</span>
+                  <span class="lmctFS__pricePeriod">/year</span>
+                </div>
               </div>
-              <h3 class="lmctFS__planName">Membership</h3>
-              <a href="#open-popup" class="lmctFS__select" data-lmct-package="package199"> Select $199 Membership </a>
+
+              <p class="lmctFS__planDescription">Everything in Save on Fuel &amp; Groceries, plus your name in every LMCT+ giveaway, automatically.</p>
+              <p class="lmctFS__planNote">The last LMCT+ car giveaway was worth $120,000. You are entered every time, automatically.</p>
+
+              <ul class="lmctFS__planBenefits" aria-label="Save and Win benefits">
+                <li class="lmctFS__planBenefit">
+                  <span class="lmctFS__check" aria-hidden="true">
+                    <svg class="lmctFS__checkSvg" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    </svg>
+                  </span>
+                  <span>Everything in Save on Fuel &amp; Groceries</span>
+                </li>
+                <li class="lmctFS__planBenefit">
+                  <span class="lmctFS__check" aria-hidden="true">
+                    <svg class="lmctFS__checkSvg" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    </svg>
+                  </span>
+                  <span>Automatic entry into every LMCT+ giveaway</span>
+                </li>
+                <li class="lmctFS__planBenefit">
+                  <span class="lmctFS__check" aria-hidden="true">
+                    <svg class="lmctFS__checkSvg" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    </svg>
+                  </span>
+                  <span>Bonus coins on every fill</span>
+                </li>
+                <li class="lmctFS__planBenefit">
+                  <span class="lmctFS__check" aria-hidden="true">
+                    <svg class="lmctFS__checkSvg" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    </svg>
+                  </span>
+                  <span>Member-only partner discounts</span>
+                </li>
+                <li class="lmctFS__planBenefit">
+                  <span class="lmctFS__check" aria-hidden="true">
+                    <svg class="lmctFS__checkSvg" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    </svg>
+                  </span>
+                  <span>Save 5% off in-store purchases</span>
+                </li>
+                <li class="lmctFS__planBenefit">
+                  <span class="lmctFS__check" aria-hidden="true">
+                    <svg class="lmctFS__checkSvg" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    </svg>
+                  </span>
+                  <span>Priority support</span>
+                </li>
+              </ul>
+
+              <a href="#open-popup" class="lmctFS__select" data-lmct-package="package199">CHOOSE $199 PLAN</a>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="lmctFS__benefits" aria-labelledby="lmctFS__benefitsTitle">
-      <div class="lmctFS__shell">
-        <h2 class="lmctFS__benefitsTitle" id="lmctFS__benefitsTitle">Your LMCT+ Membership Gives You Access To</h2>
-
-        <div class="lmctFS__benefitGrid">
-          <article class="lmctFS__benefit">
-            <span class="lmctFS__benefitIcon" aria-hidden="true">
-              <svg class="lmctFS__benefitIconSvg" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                <path d="M0 0h24v24H0z" fill="none" />
-                <path fill="currentColor" d="M12.79 21L3 11.21v2c0 .53.21 1.04.59 1.41l7.79 7.79c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83z" />
-                <path
-                  fill="currentColor"
-                  d="M11.38 17.41c.39.39.9.59 1.41.59s1.02-.2 1.41-.59l6.21-6.21c.78-.78.78-2.05 0-2.83L12.62.58C12.25.21 11.74 0 11.21 0H5C3.9 0 3 .9 3 2v6.21c0 .53.21 1.04.59 1.41zM5 2h6.21L19 9.79L12.79 16L5 8.21z" />
-                <circle cx="7.25" cy="4.25" r="1.25" fill="currentColor" />
-              </svg>
-            </span>
-            <div class="lmctFS__benefitText">
-              <h3 class="lmctFS__benefitTitle">Member Discounts</h3>
-              <p class="lmctFS__benefitCopy">Access member offers from selected LMCT+ partners.</p>
-            </div>
-          </article>
-
-          <article class="lmctFS__benefit">
-            <span class="lmctFS__benefitIcon" aria-hidden="true">
-              <svg class="lmctFS__benefitIconSvg" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                <path d="M0 0h24v24H0z" fill="none" />
-                <path
-                  fill="currentColor"
-                  d="m19.77 7.23l.01-.01l-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33a2.5 2.5 0 0 0 2.5 2.5c.36 0 .69-.08 1-.21v7.21a1 1 0 0 1-1 1a1 1 0 0 1-1-1V14a2 2 0 0 0-2-2h-1V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v16h10v-7.5h1.5v5A2.5 2.5 0 0 0 18 21a2.5 2.5 0 0 0 2.5-2.5V9c0-.69-.28-1.32-.73-1.77M12 13.5V19H6v-7h6zm0-3.5H6V5h6zm6 0a1 1 0 0 1-1-1a1 1 0 0 1 1-1a1 1 0 0 1 1 1a1 1 0 0 1-1 1" />
-              </svg>
-            </span>
-            <div class="lmctFS__benefitText">
-              <h3 class="lmctFS__benefitTitle">Petrol Savings</h3>
-              <p class="lmctFS__benefitCopy">Use LMCT+ petrol savings where available.</p>
-            </div>
-          </article>
-
-          <article class="lmctFS__benefit">
-            <span class="lmctFS__benefitIcon" aria-hidden="true">
-              <svg class="lmctFS__benefitIconSvg" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                <path d="M0 0h24v24H0z" fill="none" />
-                <path
-                  fill="currentColor"
-                  d="M22 12v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8a1 1 0 0 1-1-1V8a2 2 0 0 1 2-2h3.17A3 3 0 0 1 6 5a3 3 0 0 1 3-3c1 0 1.88.5 2.43 1.24v-.01L12 4l.57-.77v.01C13.12 2.5 14 2 15 2a3 3 0 0 1 3 3a3 3 0 0 1-.17 1H21a2 2 0 0 1 2 2v3a1 1 0 0 1-1 1M4 20h7v-8H4zm16 0v-8h-7v8zM9 4a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1m6 0a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1M3 8v2h8V8zm10 0v2h8V8z" />
-              </svg>
-            </span>
-            <div class="lmctFS__benefitText">
-              <h3 class="lmctFS__benefitTitle">Giveaway Benefits</h3>
-              <p class="lmctFS__benefitCopy">Access giveaway benefits included with membership.</p>
-            </div>
-          </article>
-
-          <article class="lmctFS__benefit">
-            <span class="lmctFS__benefitIcon" aria-hidden="true">
-              <svg class="lmctFS__benefitIconSvg" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                <path d="M0 0h24v24H0z" fill="none" />
-                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-                  <rect width="12.5" height="18.5" x="5.75" y="2.75" rx="3" />
-                  <path d="M11 17.75h2" />
-                </g>
-              </svg>
-            </span>
-            <div class="lmctFS__benefitText">
-              <h3 class="lmctFS__benefitTitle">LMCT+ App</h3>
-              <p class="lmctFS__benefitCopy">Manage membership access through the LMCT+ app.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- <section class="lmctFS__trust" aria-label="Membership trust points">
+    <section class="lmctFS__trust" aria-label="Signup reassurance">
       <div class="lmctFS__shell">
         <div class="lmctFS__trustGrid">
           <div class="lmctFS__trustItem">
             <span class="lmctFS__trustIcon" aria-hidden="true">
               <svg class="lmctFS__trustIconSvg" viewBox="0 0 24 24">
-                <rect x="5" y="10" width="14" height="10" rx="2"></rect>
-                <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                <path fill="currentColor" d="M6 22q-.825 0-1.412-.587T4 20V10q0-.825.588-1.412T6 8h1V6q0-2.075 1.463-3.537T12 1t3.538 1.463T17 6v2h1q.825 0 1.413.588T20 10v10q0 .825-.587 1.413T18 22zm0-2h12V10H6zm7.413-3.588Q14 15.826 14 15t-.587-1.412T12 13t-1.412.588T10 15t.588 1.413T12 17t1.413-.587M9 8h6V6q0-1.25-.875-2.125T12 3t-2.125.875T9 6z" />
               </svg>
             </span>
             <span>Secure Signup</span>
           </div>
-
-          <div class="lmctFS__trustItem">
-            <span class="lmctFS__trustIcon" aria-hidden="true">
-              <svg class="lmctFS__trustIconSvg" viewBox="0 0 24 24">
-                <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"></path>
-                <path d="m9 12 2 2 4-5"></path>
-              </svg>
-            </span>
-            <span>LMCT+ Membership</span>
-          </div>
-
-          <div class="lmctFS__trustItem">
-            <span class="lmctFS__trustIcon" aria-hidden="true">
-              <svg class="lmctFS__trustIconSvg" viewBox="0 0 24 24">
-                <path d="M4 13a8 8 0 0 1 16 0"></path>
-                <path d="M4 13v3a2 2 0 0 0 2 2h1v-6H6a2 2 0 0 0-2 1Z"></path>
-                <path d="M20 13v3a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 1Z"></path>
-                <path d="M15 20h-3"></path>
-              </svg>
-            </span>
-            <span>Member Support</span>
-          </div>
-        </div>
-      </div>
-    </section> -->
-
-    <section class="lmctFS__final" aria-labelledby="lmctFS__finalTitle">
-      <div class="lmctFS__shell">
-        <div class="lmctFS__finalBox">
-          <h2 class="lmctFS__finalTitle" id="lmctFS__finalTitle">Ready to Join?</h2>
-          <p class="lmctFS__finalText">Choose your membership above to continue.</p>
+          <span class="lmctFS__trustDot" aria-hidden="true"></span>
+          <span class="lmctFS__trustText">Takes only a few moments</span>
         </div>
       </div>
     </section>
@@ -1047,207 +1015,3 @@
     </div>
   </footer>
 </section>
-
-<!--
-OPTIONAL: Tracking Code version
-
-Use this only if you move the tracking script into ClickFunnels Tracking Code.
-Do not install both this optional version and the full script above in production.
-
-<script>
-  (function () {
-    "use strict";
-
-    var COMPANY_ID = "S9SGLM";
-    var LIST_ID = "SSnNm7";
-    var SOURCE = "CF1 Physical Sales Funnel";
-    var params = new URLSearchParams(window.location.search);
-    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    function clean(value) {
-      return String(value || "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 40);
-    }
-
-    function getStore(key) {
-      try {
-        return sessionStorage.getItem(key) || "";
-      } catch (err) {
-        return "";
-      }
-    }
-
-    function setStore(key, value) {
-      try {
-        sessionStorage.setItem(key, value);
-      } catch (err) {}
-    }
-
-    function closest(el, selector) {
-      if (!el || !el.closest) return null;
-      try {
-        return el.closest(selector);
-      } catch (err) {
-        return null;
-      }
-    }
-
-    function findInput(el, selectors) {
-      var scope =
-        closest(el, "form") ||
-        closest(el, ".col-inner") ||
-        closest(el, ".row") ||
-        closest(el, ".container") ||
-        document;
-
-      for (var i = 0; i < selectors.length; i += 1) {
-        var found = scope.querySelector(selectors[i]);
-        if (found && (found.value || "").trim()) return found;
-      }
-
-      for (var j = 0; j < selectors.length; j += 1) {
-        var all = document.querySelectorAll(selectors[j]);
-        for (var k = 0; k < all.length; k += 1) {
-          if ((all[k].value || "").trim()) return all[k];
-        }
-      }
-
-      return null;
-    }
-
-    function getEmail(el) {
-      return findInput(el, ['input[name="email"]', 'input[type="email"]']);
-    }
-
-    function getValue(el, selectors) {
-      var input = findInput(el, selectors);
-      return input ? (input.value || "").trim() : "";
-    }
-
-    function getRepCode() {
-      return clean(
-        getStore("lmctFieldSalesRep") ||
-        params.get("rep") ||
-        params.get("utm_content") ||
-        params.get("sales_code") ||
-        ""
-      );
-    }
-
-    function getPackageKey() {
-      return (
-        getStore("lmctFieldSalesPackage") ||
-        (
-          window.lmctSelectedFieldSalesPackage &&
-          window.lmctSelectedFieldSalesPackage.key
-        ) ||
-        ""
-      );
-    }
-
-    function send(input, sourceElement) {
-      var email = ((input && input.value) || "").trim();
-      var emailKey = email.toLowerCase();
-      var sessionKey = "lmctKlaviyoSent:" + emailKey;
-
-      if (!re.test(email)) return;
-      if (input.dataset.klSent === emailKey) return;
-      if (getStore(sessionKey) === "1") return;
-      if (!window.fetch) return;
-
-      input.dataset.klSent = emailKey;
-      setStore(sessionKey, "1");
-
-      var firstName = getValue(sourceElement || input, ['input[name="first_name"]']);
-      var lastName = getValue(sourceElement || input, ['input[name="last_name"]']);
-      var fullName = getValue(sourceElement || input, ['input[name="name"]']);
-      var phone = getValue(sourceElement || input, ['input[name="phone"]', 'input[type="tel"]']);
-
-      if ((!firstName || !lastName) && fullName) {
-        var parts = fullName.split(/\s+/);
-        firstName = firstName || parts.shift() || "";
-        lastName = lastName || parts.join(" ");
-      }
-
-      var attributes = {
-        email: email,
-        properties: {
-          signup_source: "physical_sales",
-          sales_rep: getRepCode() || "",
-          selected_package: getPackageKey() || "",
-          utm_source: params.get("utm_source") || "",
-          utm_medium: params.get("utm_medium") || "",
-          utm_campaign: params.get("utm_campaign") || "",
-          utm_content: params.get("utm_content") || ""
-        },
-        subscriptions: {
-          email: {
-            marketing: {
-              consent: "SUBSCRIBED"
-            }
-          }
-        }
-      };
-
-      if (firstName) attributes.first_name = firstName;
-      if (lastName) attributes.last_name = lastName;
-      if (phone) attributes.phone_number = phone;
-
-      fetch("https://a.klaviyo.com/client/subscriptions/?company_id=" + COMPANY_ID, {
-        method: "POST",
-        keepalive: true,
-        headers: {
-          "Content-Type": "application/json",
-          revision: "2025-07-15"
-        },
-        body: JSON.stringify({
-          data: {
-            type: "subscription",
-            attributes: {
-              custom_source: SOURCE,
-              profile: {
-                data: {
-                  type: "profile",
-                  attributes: attributes
-                }
-              }
-            },
-            relationships: {
-              list: {
-                data: {
-                  type: "list",
-                  id: LIST_ID
-                }
-              }
-            }
-          }
-        })
-      }).catch(function () {});
-    }
-
-    document.addEventListener("click", function (e) {
-      var btn = closest(e.target, '[href="#submit-form"]');
-      var input = btn && getEmail(btn);
-      if (input) send(input, btn);
-    }, true);
-
-    document.addEventListener("submit", function (e) {
-      var input = getEmail(e.target);
-      if (input) send(input, e.target);
-    }, true);
-  })();
-</script>
-
-CLICKFUNNELS MANUAL CONFIGURATION
-
-1. Create or identify the $99 product.
-2. Copy its ClickFunnels product ID.
-3. Replace TODO_99_PRODUCT_ID.
-4. Create or identify the $199 product.
-5. Copy its ClickFunnels product ID.
-6. Replace TODO_199_PRODUCT_ID.
-7. Confirm #open-popup opens the correct ClickFunnels popup.
-8. Confirm the popup contains name, email, and phone.
-9. Confirm the checkout submit button uses or eventually triggers #submit-form.
-10. Test Klaviyo List SSnNm7.
-11. Test with a salesperson URL such as ?rep=ANTON01.
--->

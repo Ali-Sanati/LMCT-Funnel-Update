@@ -1,0 +1,2246 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
+  /* RAIL AND SCALING SYSTEM */
+  .lmctad-rail {
+    --rail: min(100vw, 1080px);
+    --u: calc(var(--rail) / 1080);
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    overflow-x: hidden;
+    background: #f2f2f2;
+    color: #061729;
+    font-family: "Montserrat", Arial, sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+  }
+  .lmctad-rail,
+  .lmctad-rail * {
+    box-sizing: border-box;
+  }
+  .lmctad-rail img {
+    display: block;
+    max-width: 100%;
+  }
+  .lmctad-top-logo,
+  .lmctad-stamp,
+  .lmctad-wholesale-panel,
+  .lmctad-google-logo,
+  .lmctad-seen-logo,
+  .lmctad-footer-logo {
+    object-fit: contain;
+  }
+  .lmctad-section {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .lmctad-placeholder {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    background: #e9edf3;
+    border: 3px dashed #9aa4b2;
+    color: #566170;
+  }
+  .lmctad-placeholder-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 86%;
+    margin: 0;
+    color: #566170;
+    font-size: calc(var(--u) * 18);
+    font-weight: 900;
+    line-height: 1.25;
+    letter-spacing: calc(var(--u) * 1);
+    text-align: center;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%);
+  }
+  .lmctad-cta {
+    appearance: none;
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: max(52px, calc(var(--u) * 92));
+    margin: 0;
+    border: 0;
+    cursor: pointer;
+    font-family: "Montserrat", Arial, sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    transform-origin: center;
+    transition:
+      transform 180ms ease,
+      filter 180ms ease,
+      box-shadow 180ms ease;
+  }
+  .lmctad-rail a.lmctad-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  .lmctad-cta:focus-visible {
+    outline: calc(var(--u) * 5) solid #0c9ffd;
+    outline-offset: calc(var(--u) * 5);
+  }
+  .lmctad-cta-chevron {
+    position: absolute;
+    top: 50%;
+    right: calc(var(--u) * 30);
+    width: calc(var(--u) * 34);
+    height: calc(var(--u) * 34);
+    transform: translateY(-50%);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .lmctad-stamp {
+      animation: lmctad-stamp-wobble 2.6s ease-in-out infinite alternate;
+    }
+    .lmctad-cta {
+      animation: lmctad-button-wobble 4s ease-in-out infinite;
+    }
+  }
+  @media (hover: hover) {
+    .lmctad-cta:hover {
+      animation-play-state: paused;
+      transform: translateY(calc(var(--u) * -2)) scale(1.01);
+      filter: brightness(1.035);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmctad-stamp,
+    .lmctad-cta {
+      animation: none !important;
+      transition: none !important;
+    }
+    .lmctad-review-viewport,
+    .lmctad-seen-viewport {
+      scroll-behavior: auto;
+    }
+  }
+  @keyframes lmctad-stamp-wobble {
+    0% {
+      transform: rotate(-7deg) scale(0.995);
+    }
+    100% {
+      transform: rotate(-3.5deg) scale(1.012);
+    }
+  }
+  @keyframes lmctad-stamp-wobble-mobile {
+    0% {
+      transform: rotate(-6.7deg) scale(0.997);
+    }
+    100% {
+      transform: rotate(-4.35deg) scale(1.008);
+    }
+  }
+  @keyframes lmctad-button-wobble {
+    0%,
+    84%,
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+    88% {
+      transform: scale(1.025) rotate(1deg);
+    }
+    91% {
+      transform: scale(1.02) rotate(-1deg);
+    }
+    94% {
+      transform: scale(1.012) rotate(0.5deg);
+    }
+    97% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+  /* BLOCK 1 TOP BAR */
+  .lmctad-topbar {
+    height: calc(var(--u) * 210);
+    padding-inline: max(18px, calc(var(--u) * 40));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--u) * 42);
+    background: #061729;
+  }
+  .lmctad-top-logo {
+    width: max(116px, calc(var(--u) * 300));
+    flex: 0 0 auto;
+    /* aspect-ratio: 300 / 90; */
+    border-radius: calc(var(--u) * 10);
+  }
+  .lmctad-location {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: calc(var(--u) * 18);
+    color: #ffffff;
+  }
+  .lmctad-location-icon {
+    width: calc(var(--u) * 50);
+    height: calc(var(--u) * 60);
+    flex: 0 0 auto;
+    color: #0c9ffd;
+  }
+  .lmctad-location-copy {
+    margin: 0;
+    color: #ffffff;
+    font-size: max(13px, calc(var(--u) * 34));
+    font-weight: 900;
+    line-height: 1.02;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .lmctad-location-line {
+    display: block;
+    white-space: nowrap;
+  }
+  /* BLOCK 2 OFFER STRIP */
+  .lmctad-offer-strip {
+    height: calc(var(--u) * 48);
+    padding-inline: max(18px, calc(var(--u) * 40));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #dd0b14;
+    color: #ffffff;
+    font-size: max(11px, calc(var(--u) * 22));
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: calc(var(--u) * 1.5);
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  /* BLOCK 3 HERO */
+  .lmctad-hero-offer {
+    padding: calc(var(--u) * 80) max(18px, calc(var(--u) * 40)) calc(var(--u) * 76);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: linear-gradient(180deg, #022065 0%, #04174b 100%);
+    text-align: center;
+  }
+  .lmctad-hero-price {
+    margin: 0;
+    color: #ffffff;
+    font-size: max(64px, calc(var(--u) * 250));
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: calc(var(--u) * -13);
+  }
+  .lmctad-hero-membership {
+    margin: calc(var(--u) * 26) 0 0;
+    color: #ffffff;
+    font-size: max(26px, calc(var(--u) * 76));
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: calc(var(--u) * -2);
+    text-transform: uppercase;
+  }
+  .lmctad-hero-year {
+    margin: calc(var(--u) * 12) 0 0;
+    color: #ffffff;
+    font-size: max(16px, calc(var(--u) * 46));
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmctad-hero-fuel {
+    margin: calc(var(--u) * 38) 0 0;
+    color: #24d845;
+    font-size: max(22px, calc(var(--u) * 62));
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmctad-hero-included {
+    margin: calc(var(--u) * 12) 0 0;
+    color: #ffffff;
+    font-size: max(19px, calc(var(--u) * 52));
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  /* BLOCK 4 HERO IMAGE AND STAMP */
+  .lmctad-hero-media {
+    position: relative;
+    background: #04174b;
+  }
+  .lmctad-hero-image {
+    width: 100%;
+    /* aspect-ratio: 1080 / 700; */
+    border-radius: 0;
+    object-fit: cover;
+  }
+  .lmctad-hero-image .lmctad-placeholder-label {
+    font-size: calc(var(--u) * 24);
+  }
+  .lmctad-stamp {
+    position: absolute;
+    left: calc(var(--u) * 54);
+    bottom: calc(var(--u) * 54);
+    z-index: 3;
+    width: calc(var(--u) * 360);
+    /* aspect-ratio: 1 / 1; */
+    border-radius: calc(var(--u) * 18);
+    box-shadow: 0 calc(var(--u) * 18) calc(var(--u) * 40) rgba(0, 0, 0, 0.24);
+    transform: rotate(-6deg);
+    transform-origin: center;
+  }
+  .lmctad-stamp .lmctad-placeholder-label {
+    font-size: calc(var(--u) * 21);
+  }
+  @media (max-width: 600px) {
+    .lmctad-stamp {
+      left: calc(var(--u) * 48);
+      bottom: calc(var(--u) * 48);
+      width: 44%;
+    }
+  }
+  @media (max-width: 600px) and (prefers-reduced-motion: no-preference) {
+    .lmctad-stamp {
+      animation-name: lmctad-stamp-wobble-mobile;
+    }
+  }
+  /* MEMBERSHIP PACKAGES */
+  .lmctad-rail .lmctad-packages-section {
+    padding: calc(var(--u) * 76) max(18px, calc(var(--u) * 40)) calc(var(--u) * 68);
+    background: #022065;
+    text-align: center;
+  }
+  .lmctad-rail .lmctad-packages-heading {
+    margin: 0;
+    color: #ffffff;
+    font-size: max(28px, calc(var(--u) * 70));
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+  .lmctad-rail .lmctad-packages-subheading {
+    max-width: calc(var(--u) * 790);
+    margin: calc(var(--u) * 20) auto 0;
+    color: #dddddd;
+    font-size: max(15px, calc(var(--u) * 24));
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .lmctad-rail .lmctad-packages-grid {
+    margin-top: calc(var(--u) * 54);
+    padding-top: calc(var(--u) * 22);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: max(18px, calc(var(--u) * 24));
+    text-align: left;
+  }
+  .lmctad-rail .lmctad-package-card {
+    position: relative;
+    min-width: 0;
+    padding: max(22px, calc(var(--u) * 34));
+    display: flex;
+    flex-direction: column;
+    border: max(2px, calc(var(--u) * 2)) solid #d5dce7;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 calc(var(--u) * 10) calc(var(--u) * 28) rgba(6, 23, 41, 0.09);
+  }
+  .lmctad-rail .lmctad-package-card-featured {
+    border-color: #0041d8;
+    box-shadow: 0 calc(var(--u) * 14) calc(var(--u) * 34) rgba(0, 65, 216, 0.18);
+  }
+  .lmctad-rail .lmctad-package-badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    min-height: max(28px, calc(var(--u) * 42));
+    padding: calc(var(--u) * 8) max(14px, calc(var(--u) * 22));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: #dd0b14;
+    color: #ffffff;
+    font-size: max(11px, calc(var(--u) * 17));
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    transform: translate(-50%, -55%);
+  }
+  .lmctad-rail .lmctad-package-name {
+    margin: 0;
+    color: #061729;
+    font-size: max(20px, calc(var(--u) * 32));
+    font-weight: 900;
+    line-height: 1.12;
+  }
+  .lmctad-rail .lmctad-package-price {
+    margin: calc(var(--u) * 24) 0 0;
+    color: #061729;
+    font-size: max(42px, calc(var(--u) * 70));
+    font-weight: 900;
+    line-height: 0.95;
+  }
+  .lmctad-rail .lmctad-package-price span {
+    font-size: max(15px, calc(var(--u) * 22));
+    font-weight: 800;
+  }
+  .lmctad-rail .lmctad-package-bonus {
+    margin: calc(var(--u) * 18) 0 0;
+    color: #168f2d;
+    font-size: max(18px, calc(var(--u) * 28));
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+  .lmctad-rail .lmctad-package-description {
+    margin: calc(var(--u) * 18) 0 0;
+    color: #465467;
+    font-size: max(14px, calc(var(--u) * 20));
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .lmctad-rail .lmctad-package-benefits {
+    margin: calc(var(--u) * 28) 0 calc(var(--u) * 34);
+    padding: 0;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: calc(var(--u) * 16);
+    list-style: none;
+  }
+  .lmctad-rail .lmctad-package-benefit {
+    position: relative;
+    min-height: max(22px, calc(var(--u) * 28));
+    padding-left: max(30px, calc(var(--u) * 38));
+    color: #061729;
+    font-size: max(14px, calc(var(--u) * 19));
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .lmctad-rail .lmctad-package-benefit::before {
+    content: "\2713";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: max(22px, calc(var(--u) * 28));
+    height: max(22px, calc(var(--u) * 28));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #24d845;
+    color: #061729;
+    font-size: max(13px, calc(var(--u) * 17));
+    font-weight: 900;
+    line-height: 1;
+  }
+  .lmctad-rail .lmctad-package-cta {
+    min-height: max(52px, calc(var(--u) * 66));
+    padding: calc(var(--u) * 14) max(14px, calc(var(--u) * 20));
+    border-radius: 7px;
+    background: #24d845;
+    color: #061729;
+    font-size: max(14px, calc(var(--u) * 21));
+    font-weight: 900;
+    line-height: 1.1;
+    box-shadow: 0 calc(var(--u) * 7) calc(var(--u) * 16) rgba(22, 143, 45, 0.24);
+  }
+  .lmctad-rail .lmctad-package-card-featured .lmctad-package-cta {
+    background: #20cf41;
+    box-shadow: 0 calc(var(--u) * 8) calc(var(--u) * 18) rgba(22, 143, 45, 0.32);
+  }
+  /* MEMBERSHIP COMPARISON */
+  .lmctad-rail .lmctad-comparison-section {
+    padding: 0 max(18px, calc(var(--u) * 40));
+    background: linear-gradient(180deg, #022065 0%, #04174b 100%);
+  }
+  .lmctad-rail .lmctad-comparison-heading {
+    margin: 0 0 calc(var(--u) * 38);
+    color: #ffffff;
+    font-size: max(26px, calc(var(--u) * 48));
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .lmctad-rail .lmctad-comparison-table {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #d5dce7;
+    border-radius: 8px;
+    box-shadow: 0 calc(var(--u) * 8) calc(var(--u) * 24) rgba(6, 23, 41, 0.08);
+  }
+  .lmctad-rail .lmctad-comparison-row {
+    min-height: max(54px, calc(var(--u) * 70));
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.9fr) minmax(0, 1.05fr);
+    align-items: stretch;
+    background: #ffffff;
+  }
+  .lmctad-rail .lmctad-comparison-row:nth-child(odd):not(.lmctad-comparison-header) {
+    background: #f8fafc;
+  }
+  .lmctad-rail .lmctad-comparison-row + .lmctad-comparison-row {
+    border-top: 1px solid #dfe5ec;
+  }
+  .lmctad-rail .lmctad-comparison-row > span {
+    min-width: 0;
+    padding: calc(var(--u) * 16) max(8px, calc(var(--u) * 20));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #061729;
+    font-size: max(12px, calc(var(--u) * 18));
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
+  .lmctad-rail .lmctad-comparison-row > span:first-child {
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .lmctad-rail .lmctad-comparison-row > span + span {
+    border-left: 1px solid #dfe5ec;
+  }
+  .lmctad-rail .lmctad-comparison-header {
+    min-height: max(64px, calc(var(--u) * 82));
+    background: #061729;
+  }
+  .lmctad-rail .lmctad-comparison-header > span {
+    color: #ffffff;
+    font-size: max(11px, calc(var(--u) * 17));
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .lmctad-rail .lmctad-comparison-header > span + span {
+    border-left-color: rgba(255, 255, 255, 0.2);
+  }
+  .lmctad-rail .lmctad-comparison-check,
+  .lmctad-rail .lmctad-comparison-cross {
+    width: max(28px, calc(var(--u) * 34));
+    height: max(28px, calc(var(--u) * 34));
+    margin: auto;
+    padding: 0 !important;
+    display: flex;
+    flex: 0 0 max(28px, calc(var(--u) * 34));
+    align-items: center;
+    justify-content: center;
+    border: 0 !important;
+    border-radius: 50%;
+    font-size: max(17px, calc(var(--u) * 22)) !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+  }
+  .lmctad-rail .lmctad-comparison-check {
+    background: #24d845;
+    color: #061729 !important;
+  }
+  .lmctad-rail .lmctad-comparison-check::before {
+    content: "\2713";
+  }
+  .lmctad-rail .lmctad-comparison-cross {
+    background: #fff0f1;
+    color: #dd0b14 !important;
+  }
+  .lmctad-rail .lmctad-comparison-cross::before {
+    content: "\00d7";
+  }
+  @media (max-width: 600px) {
+    .lmctad-rail .lmctad-packages-section {
+      padding-top: 48px;
+      padding-bottom: 44px;
+    }
+    .lmctad-rail .lmctad-packages-subheading {
+      margin-top: 14px;
+    }
+    .lmctad-rail .lmctad-packages-grid {
+      margin-top: 28px;
+      padding-top: 12px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 34px;
+    }
+    .lmctad-rail .lmctad-package-card {
+      padding: 22px;
+    }
+    .lmctad-rail .lmctad-package-benefits {
+      margin-top: 24px;
+      margin-bottom: 28px;
+      gap: 13px;
+    }
+    .lmctad-rail .lmctad-comparison-section {
+      /* padding-bottom: 48px; */
+    }
+    .lmctad-rail .lmctad-comparison-heading {
+      margin-bottom: 24px;
+    }
+    .lmctad-rail .lmctad-comparison-row {
+      grid-template-columns: minmax(0, 1.22fr) minmax(62px, 0.82fr) minmax(72px, 0.96fr);
+    }
+    .lmctad-rail .lmctad-comparison-row > span {
+      padding: 12px 6px;
+      font-size: 12px;
+    }
+    .lmctad-rail .lmctad-comparison-header > span {
+      font-size: 10px;
+    }
+  }
+  /* BLOCK 5 CHECKLIST AND PRIMARY CTA */
+  .lmctad-checklist-section {
+    padding: calc(var(--u) * 70) max(18px, calc(var(--u) * 40)) calc(var(--u) * 64);
+    background: #00071a;
+  }
+  .lmctad-checklist {
+    margin: 0 0 calc(var(--u) * 56);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 34);
+  }
+  .lmctad-checklist-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 20);
+    color: #ffffff;
+    font-size: max(15px, calc(var(--u) * 30));
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .lmctad-tick-circle {
+    width: max(20px, calc(var(--u) * 34));
+    height: max(20px, calc(var(--u) * 34));
+    flex: 0 0 max(20px, calc(var(--u) * 34));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #0041d8;
+  }
+  .lmctad-tick-icon {
+    width: 65%;
+    height: 65%;
+  }
+  .lmctad-primary-cta {
+    padding: 0 calc(var(--u) * 88) 0 calc(var(--u) * 40);
+    border-radius: calc(var(--u) * 8);
+    background: #24d845;
+    color: #00071a;
+    font-size: max(16px, calc(var(--u) * 34));
+    font-weight: 900;
+    line-height: 1.05;
+  }
+  .lmctad-pay-later {
+    margin: calc(var(--u) * 26) 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--u) * 14);
+    color: #ffffff;
+    font-size: max(13px, calc(var(--u) * 26));
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .lmctad-pay-later-icon {
+    width: calc(var(--u) * 26);
+    height: calc(var(--u) * 32);
+    flex: 0 0 auto;
+  }
+  /* BLOCK 6 COUNTDOWN */
+  .lmctad-countdown-section {
+    padding: 0 0 calc(var(--u) * 70);
+    background: #00071a;
+  }
+  .lmctad-countdown-card {
+    margin-inline: max(18px, calc(var(--u) * 40));
+    padding: calc(var(--u) * 50);
+    border-radius: calc(var(--u) * 16);
+    background: #dd0b14;
+  }
+  .lmctad-countdown-title {
+    margin: 0 auto calc(var(--u) * 36);
+    max-width: calc(var(--u) * 790);
+    color: #ffffff;
+    font-size: max(16px, calc(var(--u) * 34));
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: center;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .lmctad-countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: calc(var(--u) * 20);
+  }
+  .lmctad-countdown-cell {
+    min-width: 0;
+    text-align: center;
+  }
+  .lmctad-countdown-digits {
+    height: calc(var(--u) * 112);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(var(--u) * 10);
+    background: rgba(0, 0, 0, 0.15);
+    color: #ffffff;
+    font-size: max(30px, calc(var(--u) * 72));
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: calc(var(--u) * 1);
+  }
+  .lmctad-countdown-label {
+    margin: calc(var(--u) * 12) 0 0;
+    color: #ffffff;
+    font-size: max(11px, calc(var(--u) * 20));
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmctad-countdown-cta {
+    margin-top: calc(var(--u) * 40);
+    padding: calc(var(--u) * 28) calc(var(--u) * 92) calc(var(--u) * 28) calc(var(--u) * 40);
+    border-radius: calc(var(--u) * 10);
+    background: #fbcb29;
+    color: #00071a;
+  }
+  .lmctad-countdown-cta-main {
+    display: block;
+    font-size: max(17px, calc(var(--u) * 44));
+    font-weight: 900;
+    line-height: 1.02;
+  }
+  .lmctad-countdown-cta-sub {
+    display: block;
+    margin-top: calc(var(--u) * 6);
+    font-size: max(15px, calc(var(--u) * 40));
+    font-weight: 900;
+    line-height: 1.02;
+  }
+  /* BLOCK 7 WHY JOIN */
+  .lmctad-why-section {
+    padding: calc(var(--u) * 70) max(18px, calc(var(--u) * 40));
+    background: #fefefe;
+  }
+  .lmctad-why-heading {
+    margin: 0 0 calc(var(--u) * 66);
+    color: #0041d8;
+    font-size: max(20px, calc(var(--u) * 44));
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: center;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .lmctad-why-list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 52);
+  }
+  .lmctad-why-row {
+    display: grid;
+    grid-template-columns: max(54px, calc(var(--u) * 96)) minmax(0, 1fr);
+    align-items: center;
+    gap: calc(var(--u) * 28);
+  }
+  .lmctad-why-icon-circle {
+    width: max(54px, calc(var(--u) * 96));
+    height: max(54px, calc(var(--u) * 96));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #0044e0 0%, #0038d2 100%);
+    box-shadow: 0 calc(var(--u) * 12) calc(var(--u) * 24) rgba(0, 65, 216, 0.18);
+  }
+  .lmctad-why-icon {
+    width: 60%;
+    height: 60%;
+  }
+  .lmctad-why-title {
+    margin: 0;
+    color: #061729;
+    font-size: max(16px, calc(var(--u) * 34));
+    font-weight: 900;
+    line-height: 1.02;
+    text-transform: uppercase;
+  }
+  .lmctad-why-body {
+    margin: calc(var(--u) * 8) 0 0;
+    color: #4a4f5c;
+    font-size: max(14px, calc(var(--u) * 26));
+    font-weight: 500;
+    line-height: 1.22;
+  }
+  /* BLOCK 8 WHOLESALE PANELS */
+  .lmctad-wholesale-section {
+    padding-inline: max(18px, calc(var(--u) * 40));
+    padding-block: 0 max(34px, calc(var(--u) * 70));
+    background: #fefefe;
+  }
+  .lmctad-wholesale-stack {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 24);
+  }
+  .lmctad-wholesale-panel {
+    width: 100%;
+    /* aspect-ratio: 1000 / 620; */
+    border-radius: calc(var(--u) * 28);
+  }
+  .lmctad-wholesale-panel .lmctad-placeholder-label {
+    font-size: calc(var(--u) * 28);
+  }
+  .lmctad-wholesale-plus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    width: max(54px, calc(var(--u) * 120));
+    height: max(54px, calc(var(--u) * 120));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 calc(var(--u) * 14) calc(var(--u) * 36) rgba(6, 23, 41, 0.22);
+    transform: translate(-50%, -50%);
+  }
+  .lmctad-wholesale-plus-icon {
+    width: 48%;
+    height: 48%;
+  }
+  /* BLOCK 9 NUMBERS */
+  .lmctad-numbers-section {
+    padding: calc(var(--u) * 70) max(18px, calc(var(--u) * 40));
+    background: #f2f2f2;
+  }
+  .lmctad-numbers-heading {
+    margin: 0 0 calc(var(--u) * 76);
+    color: #0041d8;
+    font-size: max(20px, calc(var(--u) * 44));
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: center;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .lmctad-stats {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 50);
+  }
+  .lmctad-stat {
+    text-align: center;
+  }
+  .lmctad-stat-value {
+    margin: 0;
+    color: #0041d8;
+    font-size: max(38px, calc(var(--u) * 86));
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: calc(var(--u) * -3);
+  }
+  .lmctad-stat-label {
+    margin: calc(var(--u) * 12) 0 0;
+    color: #061729;
+    font-size: max(14px, calc(var(--u) * 30));
+    font-weight: 800;
+    line-height: 1.08;
+    text-transform: uppercase;
+  }
+  /* BLOCK 10 SOCIAL PROOF */
+  .lmctad-proof-section {
+    --lmctad-side: max(18px, calc(var(--u) * 40));
+    padding: calc(var(--u) * 26) 0 calc(var(--u) * 68);
+    background: #f2f2f2;
+  }
+  .lmctad-proof-heading {
+    margin: 0 auto calc(var(--u) * 46);
+    padding-inline: var(--lmctad-side);
+    max-width: calc(var(--u) * 860);
+    color: #0041d8;
+    font-size: max(20px, calc(var(--u) * 44));
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: center;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .lmctad-proof-row {
+    padding-left: var(--lmctad-side);
+    display: grid;
+    grid-template-columns: calc(var(--u) * 302) minmax(0, 1fr);
+    align-items: stretch;
+    gap: calc(var(--u) * 22);
+  }
+  .lmctad-rating-card {
+    min-width: 0;
+    padding: calc(var(--u) * 30);
+    border-radius: calc(var(--u) * 16);
+    background: #ffffff;
+    box-shadow: 0 calc(var(--u) * 4) calc(var(--u) * 20) rgba(0, 0, 0, 0.06);
+  }
+  .lmctad-google-logo {
+    width: max(86px, calc(var(--u) * 120));
+    /* aspect-ratio: 120 / 40; */
+    border-radius: calc(var(--u) * 7);
+  }
+  .lmctad-google-logo .lmctad-placeholder-label {
+    font-size: calc(var(--u) * 12);
+  }
+  .lmctad-google-label {
+    margin: calc(var(--u) * 14) 0 0;
+    color: #6b7280;
+    font-size: max(12px, calc(var(--u) * 20));
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .lmctad-stars {
+    margin-top: calc(var(--u) * 22);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 6);
+  }
+  .lmctad-star {
+    width: calc(var(--u) * 27);
+    height: calc(var(--u) * 27);
+    flex: 0 0 auto;
+  }
+  .lmctad-rating-value {
+    margin: calc(var(--u) * 14) 0 0;
+    color: #061729;
+    font-size: max(24px, calc(var(--u) * 40));
+    font-weight: 900;
+    line-height: 1;
+  }
+  .lmctad-review-count {
+    margin: calc(var(--u) * 8) 0 0;
+    color: #6b7280;
+    font-size: max(12px, calc(var(--u) * 20));
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .lmctad-review-viewport {
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    touch-action: pan-y;
+    scroll-snap-type: none;
+    scrollbar-width: none;
+    cursor: grab;
+    user-select: none;
+  }
+  .lmctad-review-viewport::-webkit-scrollbar {
+    display: none;
+  }
+  .lmctad-review-viewport:active {
+    cursor: grabbing;
+  }
+  .lmctad-review-track {
+    display: flex;
+    align-items: stretch;
+    gap: calc(var(--u) * 18);
+    width: max-content;
+  }
+  .lmctad-review-card {
+    width: max(230px, calc(var(--u) * 300));
+    flex: 0 0 max(230px, calc(var(--u) * 300));
+    padding: calc(var(--u) * 26);
+    border-radius: calc(var(--u) * 16);
+    background: #ffffff;
+    box-shadow: 0 calc(var(--u) * 4) calc(var(--u) * 20) rgba(0, 0, 0, 0.06);
+    scroll-snap-align: start;
+  }
+  .lmctad-review-stars {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 4);
+  }
+  .lmctad-review-star {
+    width: calc(var(--u) * 23);
+    height: calc(var(--u) * 23);
+    flex: 0 0 auto;
+  }
+  .lmctad-review-text {
+    margin: calc(var(--u) * 22) 0 0;
+    color: #061729;
+    font-size: max(14px, calc(var(--u) * 26));
+    font-weight: 600;
+    line-height: 1.22;
+  }
+  .lmctad-reviewer-name {
+    margin: calc(var(--u) * 26) 0 0;
+    color: #6b7280;
+    font-size: max(12px, calc(var(--u) * 22));
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  @media (max-width: 700px) {
+    .lmctad-proof-row {
+      padding-inline: var(--lmctad-side);
+      display: block;
+    }
+    .lmctad-rating-card {
+      width: 100%;
+    }
+    .lmctad-review-viewport {
+      width: auto;
+      margin-top: calc(var(--u) * 22);
+      margin-inline: calc(var(--lmctad-side) * -1);
+    }
+    .lmctad-review-track {
+      padding-left: var(--lmctad-side);
+      padding-right: var(--lmctad-side);
+    }
+  }
+  /* BLOCK 11 FINAL CTA */
+  .lmctad-final-section {
+    padding: calc(var(--u) * 80) max(18px, calc(var(--u) * 40));
+    background: #f2f2f2;
+    text-align: center;
+  }
+  .lmctad-final-eyebrow {
+    margin: 0;
+    color: #0041d8;
+    font-size: max(14px, calc(var(--u) * 30));
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmctad-final-heading {
+    margin: calc(var(--u) * 18) 0 0;
+    color: #061729;
+    font-size: max(22px, calc(var(--u) * 52));
+    font-weight: 900;
+    line-height: 1.02;
+    text-align: center;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .lmctad-final-heading-line {
+    display: block;
+  }
+  .lmctad-final-price-row {
+    margin: calc(var(--u) * 48) auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--u) * 30);
+  }
+  .lmctad-final-price {
+    flex: 0 0 auto;
+    color: #0041d8;
+    font-size: max(56px, calc(var(--u) * 150));
+    font-weight: 900;
+    line-height: 0.84;
+    letter-spacing: calc(var(--u) * -8);
+  }
+  .lmctad-final-year {
+    width: calc(var(--u) * 300);
+    max-width: 42%;
+    color: #061729;
+    font-size: max(15px, calc(var(--u) * 34));
+    font-weight: 800;
+    line-height: 1.05;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .lmctad-final-fuel {
+    margin: calc(var(--u) * 28) 0 calc(var(--u) * 44);
+    color: #24d845;
+    font-size: max(20px, calc(var(--u) * 44));
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmctad-final-cta {
+    padding-inline: calc(var(--u) * 40);
+    border-radius: calc(var(--u) * 10);
+    background: #dd0b14;
+    color: #ffffff;
+    font-size: max(16px, calc(var(--u) * 34));
+    font-weight: 900;
+    line-height: 1.05;
+  }
+  .lmctad-checkout-modal[hidden] {
+    display: none !important;
+  }
+  .lmctad-checkout-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    padding: max(14px, 2.6vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Montserrat", Arial, sans-serif;
+  }
+  .lmctad-checkout-backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: rgba(0, 7, 26, 0.76);
+    cursor: pointer;
+  }
+  .lmctad-checkout-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(94vw, 760px);
+    max-height: min(90vh, 920px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 22px 80px rgba(0, 0, 0, 0.38);
+  }
+  .lmctad-checkout-head {
+    min-height: 58px;
+    padding: 18px 58px 16px 22px;
+    border-bottom: 1px solid #e3e8ef;
+    background: #061729;
+    color: #ffffff;
+  }
+  .lmctad-checkout-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+  .lmctad-checkout-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .lmctad-checkout-close:focus-visible {
+    outline: 3px solid #0c9ffd;
+    outline-offset: 3px;
+  }
+  .lmctad-checkout-body {
+    padding: 22px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lmctad-checkout-body #row--30567,
+  .lmctad-checkout-popup-form {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    outline: none !important;
+  }
+  .lmctad-checkout-body .col-inner {
+    padding: 0 !important;
+  }
+  .lmctad-checkout-body .elInput,
+  .lmctad-checkout-body select,
+  .lmctad-checkout-body .ccInput {
+    width: 100%;
+    min-height: 42px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+  }
+  .lmctad-checkout-body .elButton {
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  body.lmctad-checkout-open {
+    overflow: hidden;
+  }
+  @media (max-width: 600px) {
+    .lmctad-checkout-modal {
+      padding: 10px;
+      align-items: stretch;
+    }
+    .lmctad-checkout-dialog {
+      width: 100%;
+      margin: auto 0;
+    }
+    .lmctad-checkout-head {
+      padding: 16px 54px 14px 18px;
+    }
+    .lmctad-checkout-body {
+      padding: 16px;
+    }
+  }
+  /* BLOCK 12 AS SEEN ON */
+  .lmctad-seen-section {
+    padding: 0 max(18px, calc(var(--u) * 40)) calc(var(--u) * 72);
+    background: #f2f2f2;
+    text-align: center;
+  }
+  .lmctad-seen-heading {
+    margin: 0 0 calc(var(--u) * 34);
+    color: #061729;
+    font-size: max(15px, calc(var(--u) * 32));
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmctad-seen-viewport {
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    touch-action: pan-y;
+    scrollbar-width: none;
+    cursor: grab;
+    user-select: none;
+  }
+  .lmctad-seen-viewport::-webkit-scrollbar {
+    display: none;
+  }
+  .lmctad-seen-viewport:active {
+    cursor: grabbing;
+  }
+  .lmctad-seen-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 24);
+    width: max-content;
+  }
+  .lmctad-seen-logo {
+    width: max(128px, calc(var(--u) * 180));
+    max-width: none;
+    flex: 0 0 max(128px, calc(var(--u) * 180));
+    margin-inline: 0;
+    aspect-ratio: 200 / 70;
+    border-radius: calc(var(--u) * 8);
+    pointer-events: none;
+  }
+  @media (max-width: 600px) {
+    .lmctad-seen-row {
+      gap: 14px;
+    }
+    .lmctad-seen-logo {
+      width: 132px;
+      flex-basis: 132px;
+    }
+  }
+  /* BLOCK 13 FOOTER */
+  .lmctad-footer {
+    padding: calc(var(--u) * 60) max(18px, calc(var(--u) * 40));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #05162a;
+    text-align: center;
+  }
+  .lmctad-footer-logo {
+    width: max(130px, calc(var(--u) * 300));
+    /* aspect-ratio: 300 / 90; */
+    border-radius: calc(var(--u) * 10);
+  }
+  .lmctad-copyright {
+    margin: calc(var(--u) * 28) 0 0;
+    color: #8a93a0;
+    font-size: max(12px, calc(var(--u) * 20));
+    font-weight: 500;
+    line-height: 1.2;
+  }
+</style>
+<div class="lmctad-rail" data-lmctad-rail>
+  <!-- ================= BLOCK 1: TOP BAR ================= -->
+  <section class="lmctad-section lmctad-topbar">
+    <img
+      class="lmctad-top-logo"
+      data-img="lmctad_petrol_logo"
+      src="https://images.clickfunnels.com/9d/e689b69ee84bdba5156761d85e6bf9/LMCT-PETROL-LOGO.svg"
+      alt="LMCT+ Petrol"
+      loading="eager"
+      decoding="async" />
+    <div class="lmctad-location">
+      <svg class="lmctad-location-icon" viewBox="0 0 48 58" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M24 1C11.5 1 1.5 11.1 1.5 23.6c0 16.8 22.5 33.4 22.5 33.4s22.5-16.6 22.5-33.4C46.5 11.1 36.5 1 24 1Zm0 32.7c-5.9 0-10.7-4.8-10.7-10.7S18.1 12.3 24 12.3 34.7 17.1 34.7 23 29.9 33.7 24 33.7Z" />
+      </svg>
+      <p class="lmctad-location-copy">
+        <span class="lmctad-location-line" data-lmctad-bind="locationName"></span>
+        <span class="lmctad-location-line" data-lmctad-bind="locationTagline"></span>
+      </p>
+    </div>
+  </section>
+  <!-- ================= BLOCK 2: OFFER STRIP ================= -->
+  <section class="lmctad-section lmctad-offer-strip">INTRODUCTORY OFFER: LIMITED TIME ONLY</section>
+  <!-- ================= BLOCK 3: HERO ================= -->
+  <!-- <section class="lmctad-section lmctad-hero-offer">
+    <p class="lmctad-hero-price">$<span data-lmctad-bind="price"></span></p>
+    <p class="lmctad-hero-membership">MEMBERSHIP</p>
+    <p class="lmctad-hero-year">FOR THE ENTIRE YEAR</p>
+    <p class="lmctad-hero-fuel">+ $<span data-lmctad-bind="freeFuel"></span> FREE FUEL</p>
+    <p class="lmctad-hero-included">INCLUDED</p>
+  </section> -->
+
+  <!-- ================= MEMBERSHIP PACKAGES ================= -->
+  <section class="lmctad-section lmctad-packages-section" id="susTier" data-tier="fuel" aria-labelledby="lmctad-packages-heading">
+    <h2 class="lmctad-packages-heading" id="lmctad-packages-heading">
+      SAVE ON FUEL.<br />
+      OR <span style="color: #00ee2c">SAVE + WIN.</span>
+    </h2>
+    <p class="lmctad-packages-subheading">Save on fuel and groceries, or unlock the full LMCT+ experience.</p>
+    <div class="lmctad-packages-grid">
+      <article class="lmctad-package-card">
+        <h3 class="lmctad-package-name">Saver Membership</h3>
+        <p class="lmctad-package-price">$99<span>/year</span></p>
+        <p class="lmctad-package-bonus">+ $50 FREE FUEL</p>
+        <p class="lmctad-package-description">Access to petrol and supermarkets only</p>
+        <ul class="lmctad-package-benefits">
+          <li class="lmctad-package-benefit">Wholesale fuel pricing at member stations</li>
+          <li class="lmctad-package-benefit">Member pricing on groceries</li>
+          <li class="lmctad-package-benefit">Digital member pass</li>
+          <li class="lmctad-package-benefit">Petrol &amp; supermarket access</li>
+          <li class="lmctad-package-benefit">12 months membership</li>
+        </ul>
+        <button class="lmctad-cta lmctad-package-cta" type="button" data-lmctad-cta data-lmctad-package="fuel">PRE-SIGN UP FOR $99</button>
+      </article>
+      <article class="lmctad-package-card lmctad-package-card-featured">
+        <span class="lmctad-package-badge">MOST POPULAR</span>
+        <h3 class="lmctad-package-name">LMCT+ Entry Membership</h3>
+        <p class="lmctad-package-price">$199<span>/year</span></p>
+        <p class="lmctad-package-bonus">+ $100 FREE FUEL</p>
+        <p class="lmctad-package-description">Full access to all LMCT+</p>
+        <ul class="lmctad-package-benefits">
+          <li class="lmctad-package-benefit">Everything in Saver Membership</li>
+          <li class="lmctad-package-benefit">Automatic entry into every LMCT+ giveaway</li>
+          <li class="lmctad-package-benefit">Bonus coins on every fill</li>
+          <li class="lmctad-package-benefit">Member-only partner discounts</li>
+          <li class="lmctad-package-benefit">5% off in-store purchases</li>
+          <li class="lmctad-package-benefit">Priority support</li>
+        </ul>
+        <button class="lmctad-cta lmctad-package-cta" type="button" data-lmctad-cta data-lmctad-package="full">PRE-SIGN UP FOR $199</button>
+      </article>
+    </div>
+  </section>
+  <!-- ================= MEMBERSHIP COMPARISON ================= -->
+  <section class="lmctad-section lmctad-comparison-section" aria-labelledby="lmctad-comparison-heading">
+    <h2 class="lmctad-comparison-heading" id="lmctad-comparison-heading">WHAT'S THE DIFFERENCE?</h2>
+    <div class="lmctad-comparison-table" role="table" aria-labelledby="lmctad-comparison-heading">
+      <div class="lmctad-comparison-row lmctad-comparison-header" role="row">
+        <span role="columnheader">Benefit</span>
+        <span role="columnheader">Saver Membership</span>
+        <span role="columnheader">LMCT+ Entry Membership</span>
+      </div>
+      <div class="lmctad-comparison-row" role="row">
+        <span role="rowheader">Fuel savings</span>
+        <span role="cell"><span class="lmctad-comparison-check" role="img" aria-label="Included"></span></span>
+        <span role="cell"><span class="lmctad-comparison-check" role="img" aria-label="Included"></span></span>
+      </div>
+      <div class="lmctad-comparison-row" role="row">
+        <span role="rowheader">Grocery savings</span>
+        <span role="cell"><span class="lmctad-comparison-check" role="img" aria-label="Included"></span></span>
+        <span role="cell"><span class="lmctad-comparison-check" role="img" aria-label="Included"></span></span>
+      </div>
+      <div class="lmctad-comparison-row" role="row">
+        <span role="rowheader">Giveaway entries</span>
+        <span role="cell"><span class="lmctad-comparison-cross" role="img" aria-label="Unavailable"></span></span>
+        <span role="cell"><span class="lmctad-comparison-check" role="img" aria-label="Included"></span></span>
+      </div>
+      <div class="lmctad-comparison-row" role="row">
+        <span role="rowheader">Full LMCT+ access</span>
+        <span role="cell"><span class="lmctad-comparison-cross" role="img" aria-label="Unavailable"></span></span>
+        <span role="cell"><span class="lmctad-comparison-check" role="img" aria-label="Included"></span></span>
+      </div>
+      <div class="lmctad-comparison-row" role="row">
+        <span role="rowheader">Bonus coins</span>
+        <span role="cell"><span class="lmctad-comparison-cross" role="img" aria-label="Unavailable"></span></span>
+        <span role="cell"><span class="lmctad-comparison-check" role="img" aria-label="Included"></span></span>
+      </div>
+      <div class="lmctad-comparison-row" role="row">
+        <span role="rowheader">Priority support</span>
+        <span role="cell"><span class="lmctad-comparison-cross" role="img" aria-label="Unavailable"></span></span>
+        <span role="cell"><span class="lmctad-comparison-check" role="img" aria-label="Included"></span></span>
+      </div>
+    </div>
+  </section>
+  <!-- ================= BLOCK 4: HERO IMAGE AND STAMP ================= -->
+  <section class="lmctad-section lmctad-hero-media">
+    <img
+      class="lmctad-hero-image"
+      data-img="lmctad_hero_petrol_station"
+      src="https://images.clickfunnels.com/ec/1acfb8bc844e2f9ffb506843d1c714/LMCT-PETROL-STATION-AT-NIGHT-WITH-PRICE-BOARD.png"
+      alt="LMCT+ petrol station at night with price board"
+      loading="eager"
+      decoding="async" />
+    <img
+      class="lmctad-stamp"
+      data-img="lmctad_stamp_offer_gone"
+      src="https://images.clickfunnels.com/1a/1845682d1c4f4ea0016778d4c12c46/ONCE-WE-OPEN-THIS-OFFER-IS-GONE.png"
+      alt="Once we open this offer is gone"
+      loading="lazy"
+      decoding="async" />
+  </section>
+  <!-- ================= BLOCK 5: CHECKLIST AND PRIMARY CTA ================= -->
+  <section class="lmctad-section lmctad-checklist-section">
+    <div class="lmctad-checklist">
+      <div class="lmctad-checklist-row">
+        <span class="lmctad-tick-circle">
+          <svg class="lmctad-tick-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.2 17 19 7" />
+          </svg>
+        </span>
+        <span>This is an introductory offer</span>
+      </div>
+      <div class="lmctad-checklist-row">
+        <span class="lmctad-tick-circle">
+          <svg class="lmctad-tick-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.2 17 19 7" />
+          </svg>
+        </span>
+        <span>Offer disappears as soon as we open</span>
+      </div>
+      <div class="lmctad-checklist-row">
+        <span class="lmctad-tick-circle">
+          <svg class="lmctad-tick-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.2 17 19 7" />
+          </svg>
+        </span>
+        <span>Lock in your price before it's gone</span>
+      </div>
+      <div class="lmctad-checklist-row">
+        <span class="lmctad-tick-circle">
+          <svg class="lmctad-tick-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5 9.2 17 19 7" />
+          </svg>
+        </span>
+        <span>Huge savings on fuel &amp; groceries</span>
+      </div>
+    </div>
+    <a class="lmctad-cta lmctad-primary-cta" href="#lmctad-packages-heading">
+      LOCK IN THIS OFFER NOW
+      <svg class="lmctad-cta-chevron" viewBox="0 0 32 32" aria-hidden="true">
+        <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="m11 6 10 10-10 10" />
+      </svg>
+    </a>
+    <p class="lmctad-pay-later">
+      <svg class="lmctad-pay-later-icon" viewBox="0 0 28 34" aria-hidden="true">
+        <path
+          fill="#FFFFFF"
+          d="M6 14V9a8 8 0 0 1 16 0v5h2.5A3.5 3.5 0 0 1 28 17.5v13a3.5 3.5 0 0 1-3.5 3.5h-21A3.5 3.5 0 0 1 0 30.5v-13A3.5 3.5 0 0 1 3.5 14H6Zm4 0h8V9a4 4 0 0 0-8 0v5Zm4 5a3 3 0 0 0-1.4 5.7V29h2.8v-4.3A3 3 0 0 0 14 19Z" />
+      </svg>
+      <span>Pay later. Only when we open.</span>
+    </p>
+  </section>
+  <!-- ================= BLOCK 6: COUNTDOWN ================= -->
+  <section class="lmctad-section lmctad-countdown-section">
+    <div class="lmctad-countdown-card">
+      <p class="lmctad-countdown-title">HURRY! INTRODUCTORY OFFER ENDING SOON</p>
+      <div class="lmctad-countdown-grid">
+        <div class="lmctad-countdown-cell">
+          <div class="lmctad-countdown-digits" data-lmctad-countdown="days">00</div>
+          <p class="lmctad-countdown-label">DAYS</p>
+        </div>
+        <div class="lmctad-countdown-cell">
+          <div class="lmctad-countdown-digits" data-lmctad-countdown="hours">00</div>
+          <p class="lmctad-countdown-label">HRS</p>
+        </div>
+        <div class="lmctad-countdown-cell">
+          <div class="lmctad-countdown-digits" data-lmctad-countdown="minutes">00</div>
+          <p class="lmctad-countdown-label">MINS</p>
+        </div>
+        <div class="lmctad-countdown-cell">
+          <div class="lmctad-countdown-digits" data-lmctad-countdown="seconds">00</div>
+          <p class="lmctad-countdown-label">SECS</p>
+        </div>
+      </div>
+      <button class="lmctad-cta lmctad-countdown-cta" type="button" data-lmctad-cta>
+        <span class="lmctad-countdown-cta-main"
+          >LOCK IN FOR
+          <!-- $<span data-lmctad-bind="price"></span></span>
+        <span class="lmctad-countdown-cta-sub">+ $<span data-lmctad-bind="freeFuel"></span> -->
+          FREE FUEL</span
+        >
+        <svg class="lmctad-cta-chevron" viewBox="0 0 32 32" aria-hidden="true">
+          <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="m11 6 10 10-10 10" />
+        </svg>
+      </button>
+    </div>
+  </section>
+  <!-- ================= BLOCK 7: WHY JOIN ================= -->
+  <section class="lmctad-section lmctad-why-section">
+    <h2 class="lmctad-why-heading">WHY JOIN LMCT+ NOW?</h2>
+    <div class="lmctad-why-list">
+      <div class="lmctad-why-row">
+        <div class="lmctad-why-icon-circle">
+          <svg class="lmctad-why-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path fill="#FFFFFF" d="M13 8h25a5 5 0 0 1 5 5v43H8V13a5 5 0 0 1 5-5Zm4 8v13h17V16H17Zm0 21v12h6V37h-6Zm26-18h5l8 8v20a4 4 0 0 1-8 0V33h-5v-5h8l-5-5h-3v-4Z" />
+            <path fill="#FFFFFF" d="M50 37h4v9a2 2 0 1 1-4 0v-9Z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="lmctad-why-title">$<span data-lmctad-bind="freeFuel"></span> FREE FUEL</h3>
+          <p class="lmctad-why-body">Get $<span data-lmctad-bind="freeFuel"></span> free fuel when you sign up today!</p>
+        </div>
+      </div>
+      <div class="lmctad-why-row">
+        <div class="lmctad-why-icon-circle">
+          <svg class="lmctad-why-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path fill="#FFFFFF" d="M7 15a8 8 0 0 1 8-8h19l23 23a7 7 0 0 1 0 10L40 57a7 7 0 0 1-10 0L7 34V15Zm15 1a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="lmctad-why-title">ONLY $<span data-lmctad-bind="price"></span></h3>
+          <p class="lmctad-why-body">One payment. 12 months. Massive savings.</p>
+        </div>
+      </div>
+      <div class="lmctad-why-row">
+        <div class="lmctad-why-icon-circle">
+          <svg class="lmctad-why-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path fill="#FFFFFF" d="M13 9h5V4h6v5h16V4h6v5h5a7 7 0 0 1 7 7v35a7 7 0 0 1-7 7H13a7 7 0 0 1-7-7V16a7 7 0 0 1 7-7Zm0 17v25h38V26H13Zm7 7h8v8h-8v-8Zm16 0h8v8h-8v-8Zm-16 12h8v4h-8v-4Z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="lmctad-why-title">PAY LATER</h3>
+          <p class="lmctad-why-body">No payment today. Only when we officially open.</p>
+        </div>
+      </div>
+      <div class="lmctad-why-row">
+        <div class="lmctad-why-icon-circle">
+          <svg class="lmctad-why-icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path
+              fill="#FFFFFF"
+              d="M14 27V18C14 8.1 22.1 0 32 0s18 8.1 18 18v9h4a6 6 0 0 1 6 6v25a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6V33a6 6 0 0 1 6-6h4Zm8 0h20v-9c0-5.5-4.5-10-10-10s-10 4.5-10 10v9Zm10 10a6 6 0 0 0-3 11.2V56h6v-7.8A6 6 0 0 0 32 37Z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="lmctad-why-title">FOUNDING MEMBER PRICING</h3>
+          <p class="lmctad-why-body">Lock in our lowest price forever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================= BLOCK 8: WHOLESALE PANELS ================= -->
+  <section class="lmctad-section lmctad-wholesale-section">
+    <div class="lmctad-wholesale-stack">
+      <img
+        class="lmctad-wholesale-panel"
+        data-img="lmctad_wholesale_fuel_panel"
+        src="https://images.clickfunnels.com/46/3e96b91f4347c993c387fd74bd7070/WHOLESALE-FUEL-PANEL.svg"
+        alt="Wholesale fuel available soon"
+        loading="lazy"
+        decoding="async" />
+      <div class="lmctad-wholesale-plus">
+        <svg class="lmctad-wholesale-plus-icon" viewBox="0 0 64 64" aria-hidden="true">
+          <path fill="#0041D8" d="M27 5h10v22h22v10H37v22H27V37H5V27h22V5Z" />
+        </svg>
+      </div>
+      <img
+        class="lmctad-wholesale-panel"
+        data-img="lmctad_wholesale_groceries_panel"
+        src="https://images.clickfunnels.com/8f/7a8c97bfbd41328e9b36ae7bf78954/WHOLESALE-GROCERIES.svg"
+        alt="Wholesale groceries available soon"
+        loading="lazy"
+        decoding="async" />
+    </div>
+  </section>
+  <!-- ================= BLOCK 9: NUMBERS ================= -->
+  <section class="lmctad-section lmctad-numbers-section">
+    <h2 class="lmctad-numbers-heading">THE NUMBERS DON'T LIE</h2>
+    <div class="lmctad-stats">
+      <div class="lmctad-stat">
+        <p class="lmctad-stat-value" data-lmctad-bind="statSaved"></p>
+        <p class="lmctad-stat-label">SAVED BY MEMBERS</p>
+      </div>
+      <div class="lmctad-stat">
+        <p class="lmctad-stat-value" data-lmctad-bind="statLitres"></p>
+        <p class="lmctad-stat-label">LITRES OF FUEL SOLD (PILOT)</p>
+      </div>
+      <div class="lmctad-stat">
+        <p class="lmctad-stat-value" data-lmctad-bind="statMembers"></p>
+        <p class="lmctad-stat-label">MEMBERS AND GROWING</p>
+      </div>
+      <div class="lmctad-stat">
+        <p class="lmctad-stat-value" data-lmctad-bind="statCars"></p>
+        <p class="lmctad-stat-label">CARS SERVED EVERYDAY (PILOT)</p>
+      </div>
+    </div>
+  </section>
+  <!-- ================= BLOCK 10: SOCIAL PROOF ================= -->
+  <section class="lmctad-section lmctad-proof-section">
+    <h2 class="lmctad-proof-heading">LOVED BY THOUSANDS OF MEMBERS</h2>
+    <div class="lmctad-proof-row">
+      <div class="lmctad-rating-card">
+        <img class="lmctad-google-logo" data-img="lmctad_google_logo" src="https://images.clickfunnels.com/c4/1715a2d2bd404fae87688cad6c8174/google.png" alt="Google" loading="lazy" decoding="async" />
+        <p class="lmctad-google-label">Google Reviews</p>
+        <div class="lmctad-stars" aria-label="Five stars">
+          <svg class="lmctad-star" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z" />
+          </svg>
+          <svg class="lmctad-star" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z" />
+          </svg>
+          <svg class="lmctad-star" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z" />
+          </svg>
+          <svg class="lmctad-star" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z" />
+          </svg>
+          <svg class="lmctad-star" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z" />
+          </svg>
+        </div>
+        <p class="lmctad-rating-value" data-lmctad-bind="googleRating"></p>
+        <p class="lmctad-review-count">From <span data-lmctad-bind="googleReviewCount"></span> reviews</p>
+      </div>
+      <div class="lmctad-review-viewport" data-lmctad-review-viewport>
+        <div class="lmctad-review-track" data-lmctad-review-track></div>
+      </div>
+    </div>
+  </section>
+  <!-- ================= BLOCK 11: FINAL CTA ================= -->
+  <section class="lmctad-section lmctad-final-section">
+    <p class="lmctad-final-eyebrow">INTRODUCTORY OFFER</p>
+    <h2 class="lmctad-final-heading">
+      <span class="lmctad-final-heading-line">DON'T MISS OUT!</span>
+      <span class="lmctad-final-heading-line">THIS OFFER WON'T LAST!</span>
+    </h2>
+    <!-- <div class="lmctad-final-price-row">
+      <span class="lmctad-final-price">$<span data-lmctad-bind="price"></span></span>
+      <span class="lmctad-final-year">FOR THE ENTIRE YEAR</span>
+    </div> -->
+    <p class="lmctad-final-fuel">+ $<span data-lmctad-bind="freeFuel"></span> FREE FUEL</p>
+    <a class="lmctad-cta lmctad-final-cta" href="#lmctad-packages-heading">LOCK IN THIS OFFER NOW</a>
+  </section>
+  <!-- ================= BLOCK 12: AS SEEN ON ================= -->
+  <section class="lmctad-section lmctad-seen-section">
+    <h2 class="lmctad-seen-heading">AS SEEN ON</h2>
+    <div class="lmctad-seen-viewport" data-lmctad-seen-viewport>
+      <div class="lmctad-seen-row" data-lmctad-seen-track>
+        <img
+          class="lmctad-seen-logo"
+          data-img="lmctad_as_seen_on_logo_1"
+          src="https://images.clickfunnels.com/b1/0f1ff621c64cbfb148737a8f88d290/AS-SEEN-ON-LOGO-4.svg"
+          alt="As seen on media logo 1"
+          loading="lazy"
+          decoding="async" />
+        <img
+          class="lmctad-seen-logo"
+          data-img="lmctad_as_seen_on_logo_2"
+          src="https://images.clickfunnels.com/0a/848b49699c49b1bc06893afb9211b8/AS-SEEN-ON-LOGO-2.svg"
+          alt="As seen on media logo 2"
+          loading="lazy"
+          decoding="async" />
+        <img
+          class="lmctad-seen-logo"
+          data-img="lmctad_as_seen_on_logo_3"
+          src="https://images.clickfunnels.com/45/d30bd840e348cdba7886b52eae6668/AS-SEEN-ON-LOGO-5.svg"
+          alt="As seen on media logo 3"
+          loading="lazy"
+          decoding="async" />
+        <img
+          class="lmctad-seen-logo"
+          data-img="lmctad_as_seen_on_logo_4"
+          src="https://images.clickfunnels.com/6f/48f0fd74bd40f79807fdfc090bd769/AS-SEEN-ON-LOGO-3.svg"
+          alt="As seen on media logo 4"
+          loading="lazy"
+          decoding="async" />
+        <img
+          class="lmctad-seen-logo"
+          data-img="lmctad_as_seen_on_logo_5"
+          src="https://images.clickfunnels.com/63/697b4523884a32a2130c99aca8b2c9/AS-SEEN-ON-LOGO-1.svg"
+          alt="As seen on media logo 5"
+          loading="lazy"
+          decoding="async" />
+        <img
+          class="lmctad-seen-logo"
+          data-img="lmctad_as_seen_on_logo_6"
+          src="https://images.clickfunnels.com/d9/9a3e3cb6224222a462e158f92a84de/AS-SEEN-ON-LOGO-6.svg"
+          alt="As seen on media logo 6"
+          loading="lazy"
+          decoding="async" />
+        <img
+          class="lmctad-seen-logo"
+          data-img="lmctad_as_seen_on_logo_7"
+          src="https://images.clickfunnels.com/71/bbca2335b64dfcbbe9514d3a435a52/AS-SEEN-ON-LOGO-7.svg"
+          alt="As seen on media logo 7"
+          loading="lazy"
+          decoding="async" />
+      </div>
+    </div>
+  </section>
+  <!-- ================= BLOCK 13: FOOTER ================= -->
+  <footer class="lmctad-section lmctad-footer">
+    <img
+      class="lmctad-footer-logo"
+      data-img="lmctad_footer_logo"
+      src="https://images.clickfunnels.com/bb/9b6251c9364f02bf730844e8782601/LMCT-PETROL-LOGO-FOOTER.svg"
+      alt="LMCT+ Petrol"
+      loading="lazy"
+      decoding="async" />
+    <p class="lmctad-copyright">Copyright 2026. LMCT PLUS</p>
+  </footer>
+</div>
+<div class="lmctad-checkout-modal" data-lmctad-checkout-modal hidden aria-hidden="true">
+  <button class="lmctad-checkout-backdrop" type="button" data-lmctad-checkout-close aria-label="Close checkout"></button>
+  <section class="lmctad-checkout-dialog" role="dialog" aria-modal="true" aria-labelledby="lmctad-checkout-title" tabindex="-1" data-lmctad-checkout-dialog>
+    <div class="lmctad-checkout-head">
+      <h2 class="lmctad-checkout-title" id="lmctad-checkout-title">Secure Checkout</h2>
+      <button class="lmctad-checkout-close" type="button" data-lmctad-checkout-close aria-label="Close checkout">&times;</button>
+    </div>
+    <div class="lmctad-checkout-body" data-lmctad-checkout-body></div>
+  </section>
+</div>
+<script>
+  window.addEventListener("load", function () {
+    var lmctadConfig = {
+      price: "99 or $199",
+      freeFuel: "50 or $100",
+      locationName: "ADELAIDE,",
+      locationTagline: "YOU'RE NEXT!",
+      countdownEndISO: "2026-08-31T23:59:59+09:30",
+      countdownFallbackHours: 72,
+      googleRating: "4.8",
+      googleReviewCount: "356",
+      statSaved: "$770,000+",
+      statLitres: "1.6M+",
+      statMembers: "3,000+",
+      statCars: "1,000+",
+      checkoutPopupTarget: "#row--30567",
+      ctaTarget: "#row--30567",
+      ctaUrl: "",
+      packages: {
+        fuel: {
+          name: "Saver Membership",
+          price: "99",
+          freeFuel: "50",
+          membershipType: "saver",
+          checkoutTier: "fuel",
+          productId: "5099035",
+          location: "adelaide",
+        },
+        full: {
+          name: "LMCT+ Entry Membership",
+          price: "199",
+          freeFuel: "100",
+          membershipType: "entry",
+          checkoutTier: "full",
+          productId: "5115096",
+          location: "adelaide",
+        },
+      },
+      reviews: [
+        {
+          text: "Great diesel prices, fast access to the pumps, and friendly staff every time.",
+          name: "Jodie M.",
+        },
+        {
+          text: "The discounted fuel is the big drawcard. Shop is clean and easy to use.",
+          name: "Daniel K.",
+        },
+        {
+          text: "Very happy with the prices. Saved me a lot and the staff are lovely.",
+          name: "Priya S.",
+        },
+        {
+          text: "Cheapest rates around and the site is clean and properly looked after.",
+          name: "Mark T.",
+        },
+        {
+          text: "I have saved so much on petrol that the membership pays for itself.",
+          name: "Samantha R.",
+        },
+      ],
+    };
+    var lmctadSelectedPackage = null;
+    window.lmctadSelectedPackage = lmctadSelectedPackage;
+    var lmctadRail = document.querySelector("[data-lmctad-rail]");
+    if (!lmctadRail) {
+      return;
+    }
+    var lmctadWriteRailWidth = function () {
+      try {
+        var lmctadMeasuredWidth = lmctadRail.getBoundingClientRect().width;
+        if (Number.isFinite(lmctadMeasuredWidth) && lmctadMeasuredWidth > 0) {
+          lmctadRail.style.setProperty("--rail", lmctadMeasuredWidth + "px");
+        }
+      } catch (lmctadRailError) {
+        return;
+      }
+    };
+    lmctadWriteRailWidth();
+    if (typeof ResizeObserver === "function") {
+      try {
+        var lmctadResizeObserver = new ResizeObserver(function () {
+          lmctadWriteRailWidth();
+        });
+        lmctadResizeObserver.observe(lmctadRail);
+      } catch (lmctadResizeError) {
+        window.addEventListener("resize", lmctadWriteRailWidth);
+      }
+    } else {
+      window.addEventListener("resize", lmctadWriteRailWidth);
+    }
+    var lmctadBindNodes = lmctadRail.querySelectorAll("[data-lmctad-bind]");
+    for (var lmctadBindIndex = 0; lmctadBindIndex < lmctadBindNodes.length; lmctadBindIndex += 1) {
+      var lmctadBindNode = lmctadBindNodes[lmctadBindIndex];
+      var lmctadBindKey = lmctadBindNode.getAttribute("data-lmctad-bind");
+      if (Object.prototype.hasOwnProperty.call(lmctadConfig, lmctadBindKey)) {
+        lmctadBindNode.textContent = String(lmctadConfig[lmctadBindKey]);
+      }
+    }
+    var lmctadReducedMotion = false;
+    try {
+      lmctadReducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (lmctadMotionError) {
+      lmctadReducedMotion = false;
+    }
+    var lmctadCheckoutModal = document.querySelector("[data-lmctad-checkout-modal]");
+    var lmctadCheckoutDialog = document.querySelector("[data-lmctad-checkout-dialog]");
+    var lmctadCheckoutBody = document.querySelector("[data-lmctad-checkout-body]");
+    var lmctadCheckoutLastTrigger = null;
+    var lmctadGetCheckoutTarget = function () {
+      var lmctadCheckoutSelector = lmctadConfig.checkoutPopupTarget || lmctadConfig.ctaTarget;
+      if (typeof lmctadCheckoutSelector !== "string" || !lmctadCheckoutSelector.trim()) {
+        return null;
+      }
+      try {
+        return document.querySelector(lmctadCheckoutSelector.trim());
+      } catch (lmctadCheckoutSelectorError) {
+        return null;
+      }
+    };
+    var lmctadOpenCheckoutModal = function (lmctadTrigger) {
+      var lmctadCheckoutTarget = lmctadGetCheckoutTarget();
+      if (!lmctadCheckoutModal || !lmctadCheckoutDialog || !lmctadCheckoutBody || !lmctadCheckoutTarget) {
+        return false;
+      }
+      lmctadCheckoutLastTrigger = lmctadTrigger && typeof lmctadTrigger.focus === "function" ? lmctadTrigger : null;
+      lmctadCheckoutTarget.classList.add("lmctad-checkout-popup-form");
+      lmctadCheckoutTarget.style.setProperty("display", "block", "important");
+      lmctadCheckoutTarget.style.setProperty("width", "100%", "important");
+      lmctadCheckoutTarget.style.setProperty("max-width", "100%", "important");
+      lmctadCheckoutTarget.style.setProperty("margin", "0 auto", "important");
+      lmctadCheckoutTarget.style.setProperty("padding", "0", "important");
+      if (lmctadCheckoutTarget.parentNode !== lmctadCheckoutBody) {
+        lmctadCheckoutBody.appendChild(lmctadCheckoutTarget);
+      }
+      lmctadCheckoutModal.hidden = false;
+      lmctadCheckoutModal.setAttribute("aria-hidden", "false");
+      if (document.body) {
+        document.body.classList.add("lmctad-checkout-open");
+      }
+      window.setTimeout(function () {
+        try {
+          lmctadCheckoutDialog.focus({ preventScroll: true });
+        } catch (lmctadFocusError) {
+          lmctadCheckoutDialog.focus();
+        }
+      }, 0);
+      return true;
+    };
+    var lmctadCloseCheckoutModal = function () {
+      if (!lmctadCheckoutModal) {
+        return;
+      }
+      lmctadCheckoutModal.hidden = true;
+      lmctadCheckoutModal.setAttribute("aria-hidden", "true");
+      if (document.body) {
+        document.body.classList.remove("lmctad-checkout-open");
+      }
+      if (lmctadCheckoutLastTrigger) {
+        try {
+          lmctadCheckoutLastTrigger.focus({ preventScroll: true });
+        } catch (lmctadFocusError) {
+          lmctadCheckoutLastTrigger.focus();
+        }
+      }
+    };
+    if (lmctadCheckoutModal) {
+      lmctadCheckoutModal.addEventListener("click", function (lmctadEvent) {
+        var lmctadCloseTarget = lmctadEvent.target && lmctadEvent.target.closest && lmctadEvent.target.closest("[data-lmctad-checkout-close]");
+        if (lmctadCloseTarget) {
+          lmctadCloseCheckoutModal();
+        }
+      });
+      document.addEventListener("keydown", function (lmctadEvent) {
+        if (lmctadEvent.key === "Escape" && !lmctadCheckoutModal.hidden) {
+          lmctadCloseCheckoutModal();
+        }
+      });
+    }
+    var lmctadSyncCheckoutTier = function (lmctadPackage) {
+      if (!lmctadPackage) {
+        return;
+      }
+      var lmctadTier = lmctadPackage.checkoutTier === "full" ? "full" : "fuel";
+      var lmctadTierSection = document.getElementById("susTier");
+      if (!lmctadTierSection) {
+        return;
+      }
+      lmctadTierSection.setAttribute("data-tier", lmctadTier);
+      try {
+        lmctadTierSection.dispatchEvent(
+          new CustomEvent("tierchange", {
+            detail: { tier: lmctadTier },
+          }),
+        );
+      } catch (lmctadTierEventError) {
+        var lmctadTierEvent = document.createEvent("CustomEvent");
+        lmctadTierEvent.initCustomEvent("tierchange", true, false, { tier: lmctadTier });
+        lmctadTierSection.dispatchEvent(lmctadTierEvent);
+      }
+    };
+    var lmctadCtaHandler = function (lmctadEvent) {
+      try {
+        var lmctadPackageKey = lmctadEvent && lmctadEvent.currentTarget ? lmctadEvent.currentTarget.getAttribute("data-lmctad-package") : "";
+        if (lmctadPackageKey && lmctadConfig.packages && Object.prototype.hasOwnProperty.call(lmctadConfig.packages, lmctadPackageKey)) {
+          lmctadSelectedPackage = lmctadConfig.packages[lmctadPackageKey];
+          window.lmctadSelectedPackage = lmctadSelectedPackage;
+          lmctadSyncCheckoutTier(lmctadSelectedPackage);
+          // ClickFunnels field mapping can be added here when matching hidden fields exist in the page DOM.
+        }
+        if (lmctadOpenCheckoutModal(lmctadEvent ? lmctadEvent.currentTarget : null)) {
+          return;
+        }
+        if (typeof lmctadConfig.ctaUrl === "string" && lmctadConfig.ctaUrl.trim()) {
+          window.location.href = lmctadConfig.ctaUrl.trim();
+          return;
+        }
+        var lmctadTarget = null;
+        if (typeof lmctadConfig.ctaTarget === "string" && lmctadConfig.ctaTarget.trim()) {
+          lmctadTarget = document.querySelector(lmctadConfig.ctaTarget.trim());
+        }
+        if (lmctadTarget && typeof lmctadTarget.scrollIntoView === "function") {
+          lmctadTarget.scrollIntoView({
+            behavior: lmctadReducedMotion ? "auto" : "smooth",
+            block: "start",
+          });
+          return;
+        }
+        window.scrollTo({
+          top: 0,
+          behavior: lmctadReducedMotion ? "auto" : "smooth",
+        });
+      } catch (lmctadCtaError) {
+        try {
+          window.scrollTo(0, 0);
+        } catch (lmctadScrollError) {
+          return;
+        }
+      }
+    };
+    var lmctadCtaButtons = lmctadRail.querySelectorAll("[data-lmctad-cta]");
+    for (var lmctadCtaIndex = 0; lmctadCtaIndex < lmctadCtaButtons.length; lmctadCtaIndex += 1) {
+      lmctadCtaButtons[lmctadCtaIndex].addEventListener("click", lmctadCtaHandler);
+    }
+    var lmctadCountdownNodes = {
+      days: lmctadRail.querySelector('[data-lmctad-countdown="days"]'),
+      hours: lmctadRail.querySelector('[data-lmctad-countdown="hours"]'),
+      minutes: lmctadRail.querySelector('[data-lmctad-countdown="minutes"]'),
+      seconds: lmctadRail.querySelector('[data-lmctad-countdown="seconds"]'),
+    };
+    var lmctadNow = Date.now();
+    var lmctadEnd = Date.parse(lmctadConfig.countdownEndISO);
+    if (!Number.isFinite(lmctadEnd) || lmctadEnd <= lmctadNow) {
+      var lmctadFallbackHours = Number(lmctadConfig.countdownFallbackHours);
+      if (!Number.isFinite(lmctadFallbackHours) || lmctadFallbackHours < 0) {
+        lmctadFallbackHours = 0;
+      }
+      lmctadEnd = lmctadNow + lmctadFallbackHours * 60 * 60 * 1000;
+    }
+    var lmctadPad = function (lmctadValue) {
+      return String(Math.max(0, Math.floor(lmctadValue))).padStart(2, "0");
+    };
+    var lmctadTick = function () {
+      var lmctadRemaining = Math.max(0, lmctadEnd - Date.now());
+      var lmctadTotalSeconds = Math.floor(lmctadRemaining / 1000);
+      var lmctadDays = Math.floor(lmctadTotalSeconds / 86400);
+      var lmctadHours = Math.floor((lmctadTotalSeconds % 86400) / 3600);
+      var lmctadMinutes = Math.floor((lmctadTotalSeconds % 3600) / 60);
+      var lmctadSeconds = lmctadTotalSeconds % 60;
+      if (lmctadCountdownNodes.days) {
+        lmctadCountdownNodes.days.textContent = lmctadPad(lmctadDays);
+      }
+      if (lmctadCountdownNodes.hours) {
+        lmctadCountdownNodes.hours.textContent = lmctadPad(lmctadHours);
+      }
+      if (lmctadCountdownNodes.minutes) {
+        lmctadCountdownNodes.minutes.textContent = lmctadPad(lmctadMinutes);
+      }
+      if (lmctadCountdownNodes.seconds) {
+        lmctadCountdownNodes.seconds.textContent = lmctadPad(lmctadSeconds);
+      }
+      return lmctadRemaining;
+    };
+    lmctadTick();
+    var lmctadCountdownTimer = window.setInterval(function () {
+      if (lmctadTick() <= 0) {
+        window.clearInterval(lmctadCountdownTimer);
+      }
+    }, 1000);
+    var lmctadInitSwipeLoop = function (lmctadOptions) {
+      var lmctadViewport = lmctadOptions && lmctadOptions.viewport;
+      var lmctadTrack = lmctadOptions && lmctadOptions.track;
+      if (!lmctadViewport || !lmctadTrack) {
+        return;
+      }
+      var lmctadOriginalCount = Number(lmctadOptions.originalCount);
+      if (!Number.isFinite(lmctadOriginalCount) || lmctadOriginalCount <= 0) {
+        lmctadOriginalCount = lmctadTrack.children.length;
+      }
+      if (lmctadOriginalCount <= 0) {
+        return;
+      }
+      if (lmctadOptions.cloneItems) {
+        var lmctadOriginalItems = Array.prototype.slice.call(lmctadTrack.children, 0, lmctadOriginalCount);
+        var lmctadBeforeFragment = document.createDocumentFragment();
+        var lmctadAfterFragment = document.createDocumentFragment();
+        for (var lmctadLoopItemIndex = 0; lmctadLoopItemIndex < lmctadOriginalItems.length; lmctadLoopItemIndex += 1) {
+          var lmctadBeforeClone = lmctadOriginalItems[lmctadLoopItemIndex].cloneNode(true);
+          var lmctadAfterClone = lmctadOriginalItems[lmctadLoopItemIndex].cloneNode(true);
+          lmctadBeforeClone.setAttribute("aria-hidden", "true");
+          lmctadAfterClone.setAttribute("aria-hidden", "true");
+          lmctadBeforeFragment.appendChild(lmctadBeforeClone);
+          lmctadAfterFragment.appendChild(lmctadAfterClone);
+        }
+        lmctadTrack.insertBefore(lmctadBeforeFragment, lmctadTrack.firstChild);
+        lmctadTrack.appendChild(lmctadAfterFragment);
+      }
+      var lmctadOriginalWidth = 0;
+      var lmctadLowerBound = 0;
+      var lmctadUpperBound = 0;
+      var lmctadPositioned = false;
+      var lmctadPaused = false;
+      var lmctadHovering = false;
+      var lmctadDragging = false;
+      var lmctadHorizontalDrag = false;
+      var lmctadPointerStartX = 0;
+      var lmctadPointerStartY = 0;
+      var lmctadScrollStart = 0;
+      var lmctadLastFrame = 0;
+      var lmctadResumeTimer = 0;
+      var lmctadSpeed = Number(lmctadOptions.speed) || 24;
+      var lmctadResumeDelay = Number(lmctadOptions.resumeDelay) || 2500;
+      var lmctadWrapScroll = function (lmctadScrollLeft) {
+        if (lmctadOriginalWidth <= 0) {
+          return lmctadScrollLeft;
+        }
+        while (lmctadScrollLeft >= lmctadUpperBound) {
+          lmctadScrollLeft -= lmctadOriginalWidth;
+        }
+        while (lmctadScrollLeft < lmctadLowerBound) {
+          lmctadScrollLeft += lmctadOriginalWidth;
+        }
+        return lmctadScrollLeft;
+      };
+      var lmctadMeasureLoop = function () {
+        var lmctadItems = lmctadTrack.children;
+        if (lmctadItems.length > lmctadOriginalCount * 2) {
+          var lmctadCurrentOffset = lmctadItems[lmctadOriginalCount].offsetLeft;
+          var lmctadNextOffset = lmctadItems[lmctadOriginalCount * 2].offsetLeft;
+          lmctadOriginalWidth = lmctadNextOffset - lmctadCurrentOffset;
+          lmctadLowerBound = lmctadCurrentOffset;
+          lmctadUpperBound = lmctadNextOffset;
+          if (lmctadOriginalWidth > 0) {
+            lmctadViewport.scrollLeft = lmctadPositioned ? lmctadWrapScroll(lmctadViewport.scrollLeft) : lmctadLowerBound;
+            lmctadPositioned = true;
+          }
+        }
+      };
+      var lmctadNormaliseScroll = function () {
+        if (lmctadOriginalWidth <= 0) {
+          return;
+        }
+        var lmctadWrappedScroll = lmctadWrapScroll(lmctadViewport.scrollLeft);
+        if (lmctadWrappedScroll !== lmctadViewport.scrollLeft) {
+          lmctadViewport.scrollLeft = lmctadWrappedScroll;
+        }
+      };
+      var lmctadPauseLoop = function () {
+        lmctadPaused = true;
+        if (lmctadResumeTimer) {
+          window.clearTimeout(lmctadResumeTimer);
+          lmctadResumeTimer = 0;
+        }
+      };
+      var lmctadScheduleResume = function () {
+        if (lmctadResumeTimer) {
+          window.clearTimeout(lmctadResumeTimer);
+        }
+        lmctadResumeTimer = window.setTimeout(function () {
+          lmctadPaused = false;
+          lmctadResumeTimer = 0;
+        }, lmctadResumeDelay);
+      };
+      var lmctadLoopFrame = function (lmctadTime) {
+        if (!lmctadLastFrame) {
+          lmctadLastFrame = lmctadTime;
+        }
+        var lmctadDelta = Math.min(40, lmctadTime - lmctadLastFrame);
+        lmctadLastFrame = lmctadTime;
+        if (!lmctadPaused && !lmctadDragging && !lmctadReducedMotion && lmctadOriginalWidth > 0) {
+          lmctadViewport.scrollLeft += (lmctadSpeed * lmctadDelta) / 1000;
+          lmctadNormaliseScroll();
+        }
+        window.requestAnimationFrame(lmctadLoopFrame);
+      };
+      lmctadMeasureLoop();
+      window.setTimeout(lmctadMeasureLoop, 250);
+      window.addEventListener("resize", lmctadMeasureLoop);
+      lmctadViewport.addEventListener("mouseenter", function () {
+        lmctadHovering = true;
+        lmctadPauseLoop();
+      });
+      lmctadViewport.addEventListener("mouseleave", function () {
+        lmctadHovering = false;
+        if (!lmctadDragging) {
+          lmctadScheduleResume();
+        }
+      });
+      lmctadViewport.addEventListener(
+        "touchstart",
+        function () {
+          lmctadPauseLoop();
+        },
+        { passive: true },
+      );
+      lmctadViewport.addEventListener("pointerdown", function (lmctadEvent) {
+        lmctadPauseLoop();
+        lmctadDragging = true;
+        lmctadHorizontalDrag = false;
+        lmctadPointerStartX = lmctadEvent.clientX;
+        lmctadPointerStartY = lmctadEvent.clientY;
+        lmctadScrollStart = lmctadViewport.scrollLeft;
+        if (lmctadViewport.setPointerCapture) {
+          try {
+            lmctadViewport.setPointerCapture(lmctadEvent.pointerId);
+          } catch (lmctadPointerError) {
+            // Pointer capture is a nicety; dragging still works without it.
+          }
+        }
+      });
+      lmctadViewport.addEventListener("pointermove", function (lmctadEvent) {
+        if (!lmctadDragging) {
+          return;
+        }
+        var lmctadDeltaX = lmctadEvent.clientX - lmctadPointerStartX;
+        var lmctadDeltaY = lmctadEvent.clientY - lmctadPointerStartY;
+        if (!lmctadHorizontalDrag && Math.abs(lmctadDeltaX) > Math.abs(lmctadDeltaY) + 4) {
+          lmctadHorizontalDrag = true;
+        }
+        if (lmctadHorizontalDrag) {
+          lmctadEvent.preventDefault();
+          lmctadViewport.scrollLeft = lmctadWrapScroll(lmctadScrollStart - lmctadDeltaX);
+        }
+      });
+      var lmctadReleaseDrag = function (lmctadEvent) {
+        if (!lmctadDragging) {
+          return;
+        }
+        if (lmctadViewport.releasePointerCapture) {
+          try {
+            lmctadViewport.releasePointerCapture(lmctadEvent.pointerId);
+          } catch (lmctadPointerError) {
+            // Some browsers release capture automatically on cancel/up.
+          }
+        }
+        lmctadDragging = false;
+        lmctadHorizontalDrag = false;
+        if (!lmctadHovering) {
+          lmctadScheduleResume();
+        }
+      };
+      lmctadViewport.addEventListener("pointerup", lmctadReleaseDrag);
+      lmctadViewport.addEventListener("pointercancel", lmctadReleaseDrag);
+      lmctadViewport.addEventListener(
+        "wheel",
+        function () {
+          lmctadPauseLoop();
+          lmctadScheduleResume();
+        },
+        { passive: true },
+      );
+      lmctadViewport.addEventListener("dragstart", function (lmctadEvent) {
+        lmctadEvent.preventDefault();
+      });
+      if (!lmctadReducedMotion) {
+        window.requestAnimationFrame(lmctadLoopFrame);
+      }
+    };
+    var lmctadReviewTrack = lmctadRail.querySelector("[data-lmctad-review-track]");
+    var lmctadReviewViewport = lmctadRail.querySelector("[data-lmctad-review-viewport]");
+    var lmctadStarMarkup =
+      '<svg class="lmctad-review-star" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="m12 1.8 3.1 6.3 7 .9-5.1 5 1.2 7-6.2-3.3L5.8 21 7 14 1.9 9l7-.9L12 1.8Z"></path></svg>';
+    var lmctadBuildReviewCard = function (lmctadReview, lmctadClone) {
+      var lmctadCard = document.createElement("article");
+      lmctadCard.className = "lmctad-review-card";
+      if (lmctadClone) {
+        lmctadCard.setAttribute("aria-hidden", "true");
+      }
+      var lmctadStars = document.createElement("div");
+      lmctadStars.className = "lmctad-review-stars";
+      lmctadStars.innerHTML = lmctadStarMarkup + lmctadStarMarkup + lmctadStarMarkup + lmctadStarMarkup + lmctadStarMarkup;
+      var lmctadText = document.createElement("p");
+      lmctadText.className = "lmctad-review-text";
+      lmctadText.textContent = lmctadReview.text;
+      var lmctadName = document.createElement("p");
+      lmctadName.className = "lmctad-reviewer-name";
+      lmctadName.textContent = lmctadReview.name;
+      lmctadCard.appendChild(lmctadStars);
+      lmctadCard.appendChild(lmctadText);
+      lmctadCard.appendChild(lmctadName);
+      return lmctadCard;
+    };
+    if (lmctadReviewTrack && lmctadReviewViewport && Array.isArray(lmctadConfig.reviews) && lmctadConfig.reviews.length) {
+      var lmctadReviewFragment = document.createDocumentFragment();
+      for (var lmctadBeforeCloneIndex = 0; lmctadBeforeCloneIndex < lmctadConfig.reviews.length; lmctadBeforeCloneIndex += 1) {
+        lmctadReviewFragment.appendChild(lmctadBuildReviewCard(lmctadConfig.reviews[lmctadBeforeCloneIndex], true));
+      }
+      for (var lmctadReviewIndex = 0; lmctadReviewIndex < lmctadConfig.reviews.length; lmctadReviewIndex += 1) {
+        lmctadReviewFragment.appendChild(lmctadBuildReviewCard(lmctadConfig.reviews[lmctadReviewIndex], false));
+      }
+      for (var lmctadCloneIndex = 0; lmctadCloneIndex < lmctadConfig.reviews.length; lmctadCloneIndex += 1) {
+        lmctadReviewFragment.appendChild(lmctadBuildReviewCard(lmctadConfig.reviews[lmctadCloneIndex], true));
+      }
+      lmctadReviewTrack.appendChild(lmctadReviewFragment);
+      lmctadInitSwipeLoop({
+        viewport: lmctadReviewViewport,
+        track: lmctadReviewTrack,
+        originalCount: lmctadConfig.reviews.length,
+        speed: 24,
+      });
+    }
+    var lmctadSeenTrack = lmctadRail.querySelector("[data-lmctad-seen-track]");
+    var lmctadSeenViewport = lmctadRail.querySelector("[data-lmctad-seen-viewport]");
+    if (lmctadSeenTrack && lmctadSeenViewport && lmctadSeenTrack.children.length) {
+      lmctadInitSwipeLoop({
+        viewport: lmctadSeenViewport,
+        track: lmctadSeenTrack,
+        originalCount: lmctadSeenTrack.children.length,
+        cloneItems: true,
+        speed: 18,
+      });
+    }
+  });
+</script>
