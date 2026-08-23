@@ -1,0 +1,834 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@400;500;600;700;800&display=swap");
+
+  .lmctAA__page {
+    --lmctAA-bg-image: url("https://images.clickfunnels.com/7c/0322869499479781dc4439fc989b1f/supermarket-2.png");
+    --lmctAA-navy: #003426;
+    --lmctAA-navy-deep: #001b14;
+    --lmctAA-blue: #087443;
+    --lmctAA-blue-bright: #24bd5e;
+    --lmctAA-cyan: #d8ff16;
+    --lmctAA-lime: #cfff00;
+    --lmctAA-lime-bright: #efff35;
+    --lmctAA-white: #ffffff;
+    --lmctAA-muted: #d9e8e1;
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lmctAA-white);
+    font-family: "Inter", Arial, sans-serif;
+    background:
+      radial-gradient(circle at 20% 26%, rgba(12, 118, 67, 0.4), transparent 27rem), radial-gradient(circle at 78% 54%, rgba(52, 151, 84, 0.16), transparent 31rem),
+      linear-gradient(145deg, #064a34 0%, var(--lmctAA-navy) 48%, var(--lmctAA-navy-deep) 100%);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .lmctAA__page,
+  .lmctAA__page * {
+    box-sizing: border-box;
+  }
+
+  .lmctAA__page::before {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    background-image:
+      linear-gradient(90deg, rgba(0, 27, 20, 0.94) 0%, rgba(0, 42, 30, 0.78) 35%, rgba(0, 62, 40, 0.24) 64%, rgba(0, 47, 32, 0.1) 100%),
+      linear-gradient(180deg, rgba(0, 27, 20, 0.05) 58%, rgba(0, 27, 20, 0.84) 100%), var(--lmctAA-bg-image);
+    background-position:
+      center,
+      center,
+      right center;
+    background-size:
+      100% 100%,
+      100% 100%,
+      cover;
+    background-repeat: no-repeat;
+  }
+
+  .lmctAA__page::after {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    opacity: 0.22;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent 75%);
+    mask-image: linear-gradient(to bottom, #000, transparent 75%);
+  }
+
+  .lmctAA__shell {
+    position: relative;
+    z-index: 1;
+    width: min(1440px, calc(100% - 64px));
+    margin: 0 auto;
+    padding: 30px 0 38px;
+  }
+
+  .lmctAA__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    margin: 0 0 42px;
+  }
+
+  .lmctAA__brandWrap {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .lmctAA__brandLogo {
+    display: block;
+    width: clamp(170px, 18vw, 250px);
+    height: auto;
+  }
+
+  .lmctAA__speedLines {
+    display: grid;
+    gap: 8px;
+    width: 92px;
+    transform: skewX(-27deg);
+  }
+
+  .lmctAA__speedLines i {
+    display: block;
+    height: 4px;
+    border-radius: 99px;
+    background: linear-gradient(90deg, transparent, var(--lmctAA-cyan));
+    box-shadow: 0 0 14px rgba(207, 255, 0, 0.48);
+  }
+
+  .lmctAA__speedLines i:last-child {
+    width: 70%;
+    margin-left: 19px;
+  }
+
+  .lmctAA__brand {
+    display: grid;
+    justify-items: center;
+    margin: 0;
+    color: var(--lmctAA-white);
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 35, 0.38));
+  }
+
+  .lmctAA__brand strong {
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(58px, 7.8vw, 98px);
+    font-weight: 900;
+    letter-spacing: -0.055em;
+    line-height: 0.72;
+  }
+
+  .lmctAA__brand span {
+    display: block;
+    min-width: 84%;
+    margin-top: 12px;
+    padding: 6px 20px 7px;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 999px;
+    font-size: clamp(16px, 2.2vw, 28px);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-align: center;
+    background: linear-gradient(180deg, #39c96c, #087443);
+    box-shadow: 0 7px 18px rgba(15, 148, 76, 0.26);
+  }
+
+  .lmctAA__exclusive {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    max-width: 370px;
+    padding: 14px 27px 15px;
+    border-radius: 999px;
+    color: #001b14;
+    background: linear-gradient(125deg, var(--lmctAA-lime-bright), #b9ff00);
+    box-shadow: 0 16px 30px rgba(120, 255, 0, 0.18);
+  }
+
+  .lmctAA__exclusive svg {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .lmctAA__exclusive strong {
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(17px, 1.65vw, 22px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.02;
+    text-transform: uppercase;
+  }
+
+  .lmctAA__exclusive strong span {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.62em;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+  }
+
+  .lmctAA__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 42px;
+    align-items: center;
+    width: min(700px, 52vw);
+  }
+
+  .lmctAA__offer {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    padding: 18px 0 24px;
+  }
+
+  .lmctAA__offer::before {
+    position: absolute;
+    z-index: -1;
+    top: -45px;
+    left: -15%;
+    width: 115%;
+    height: 110%;
+    content: "";
+    pointer-events: none;
+    background: radial-gradient(ellipse, rgba(7, 117, 67, 0.34), transparent 67%);
+    filter: blur(12px);
+  }
+
+  .lmctAA__priceBlock {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 700px);
+
+    margin: 0 auto;
+    padding: 23px clamp(22px, 3.4vw, 48px);
+    /* clip-path: polygon(3% 9%, 98% 0, 95% 91%, 0 100%, 2% 58%, 0 36%); */
+    color: var(--lmctAA-lime);
+    text-align: center;
+    background: url("https://images.clickfunnels.com/4f/7c76bc2cce4575a29070cefae7a3af/vecteezy_colorful-ink-brush-stroke-illustration-with-splash-effect-green.png");
+
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    /* box-shadow: 0 24px 60px rgba(155, 255, 0, 0.2); */
+    /* transform: rotate(-1.2deg);  */
+  }
+
+  .lmctAA__only {
+    display: block;
+    margin: 0 0 -10px;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(42px, 5.4vw, 70px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+
+  .lmctAA__price {
+    display: block;
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(190px, 25vw, 330px);
+    font-style: italic;
+    font-weight: 900;
+    /* letter-spacing: -0.06em; */
+    line-height: 0.68;
+    text-shadow: 8px 9px 0 rgba(0, 38, 27, 0.12);
+    transform: translateX(-0.035em);
+  }
+
+  .lmctAA__annual {
+    position: relative;
+    z-index: 3;
+    width: 92%;
+    margin: 40px auto 0;
+    padding: 13px 20px 15px;
+    border: 2px solid var(--lmctAA-cyan);
+    /* clip-path: polygon(3% 0, 98% 2%, 94% 100%, 0 94%); */
+    color: var(--lmctAA-white);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(38px, 5.2vw, 67px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    text-align: center;
+    text-transform: uppercase;
+    background: linear-gradient(100deg, #064a34, #00271d);
+    box-shadow:
+      0 18px 34px rgba(0, 30, 21, 0.4),
+      0 0 22px rgba(207, 255, 0, 0.2);
+    transform: rotate(0.7deg);
+  }
+
+  .lmctAA__bonus {
+    display: grid;
+    grid-template-columns: auto 2px minmax(0, 1fr);
+    gap: clamp(16px, 2.6vw, 33px);
+    align-items: center;
+    width: min(95%, 670px);
+    margin: 35px auto 0;
+  }
+
+  .lmctAA__bonusPrice {
+    color: var(--lmctAA-lime);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(94px, 14vw, 178px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 0.68;
+    text-shadow: 0 0 25px rgba(195, 255, 0, 0.18);
+    white-space: nowrap;
+  }
+
+  .lmctAA__bonusLine {
+    align-self: stretch;
+    width: 2px;
+    border-radius: 99px;
+    background: linear-gradient(transparent, var(--lmctAA-cyan) 12%, var(--lmctAA-cyan) 88%, transparent);
+    box-shadow: 0 0 14px rgba(207, 255, 0, 0.46);
+    transform: rotate(4deg);
+  }
+
+  .lmctAA__bonusCopy {
+    position: relative;
+    padding-bottom: 17px;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(38px, 5.2vw, 66px);
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 0.86;
+    text-transform: uppercase;
+  }
+
+  .lmctAA__bonusCopy span {
+    color: var(--lmctAA-lime);
+  }
+
+  .lmctAA__bonusCopy::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 8px;
+    content: "";
+    border-radius: 50%;
+    background: var(--lmctAA-lime);
+    clip-path: polygon(0 55%, 40% 20%, 74% 0, 100% 44%, 67% 55%, 28% 100%);
+    transform: rotate(-2deg);
+  }
+
+  .lmctAA__action {
+    position: relative;
+    z-index: 5;
+    width: min(92%, 700px);
+    margin: 0 auto;
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: 28px;
+    background: rgba(0, 45, 32, 0.56);
+    box-shadow:
+      0 28px 70px rgba(0, 24, 17, 0.42),
+      inset 0 0 34px rgba(207, 255, 0, 0.07);
+    backdrop-filter: blur(10px);
+  }
+
+  .lmctAA__cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    width: 100%;
+    min-height: 92px;
+    padding: 13px 15px 13px 27px;
+    border: 2px solid rgba(255, 255, 255, 0.82);
+    border-radius: 20px;
+    color: var(--lmctAA-navy-deep) !important;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(31px, 3.4vw, 45px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    background: linear-gradient(115deg, var(--lmctAA-lime-bright), var(--lmctAA-lime) 57%, #9cf600);
+    box-shadow:
+      0 0 19px rgba(179, 255, 0, 0.6),
+      inset 0 0 14px rgba(255, 255, 255, 0.42);
+    transition:
+      transform 170ms ease,
+      box-shadow 170ms ease,
+      filter 170ms ease;
+  }
+
+  .lmctAA__ctaIcon {
+    display: grid;
+    flex: 0 0 58px;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctAA-lime);
+    background: var(--lmctAA-navy-deep);
+    box-shadow: 0 8px 18px rgba(1, 7, 44, 0.24);
+    transition: transform 170ms ease;
+  }
+
+  .lmctAA__ctaIcon svg {
+    display: block;
+    width: 29px;
+    height: 29px;
+  }
+
+  .lmctAA__cta:hover {
+    color: var(--lmctAA-navy-deep) !important;
+    filter: brightness(1.04);
+    box-shadow:
+      0 0 26px rgba(179, 255, 0, 0.72),
+      inset 0 0 14px rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .lmctAA__cta:hover .lmctAA__ctaIcon {
+    transform: translate(3px, -3px) scale(1.04);
+  }
+
+  .lmctAA__cta:focus-visible {
+    outline: 3px solid var(--lmctAA-white);
+    outline-offset: 4px;
+  }
+
+  .lmctAA__trust {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    width: min(700px, 52vw);
+    margin-top: 48px;
+    padding: 4px 0;
+  }
+
+  .lmctAA__trustItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-width: 0;
+    padding: 8px 26px;
+  }
+
+  .lmctAA__trustItem + .lmctAA__trustItem::before {
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 0;
+    width: 2px;
+    content: "";
+    background: linear-gradient(transparent, var(--lmctAA-cyan) 16%, var(--lmctAA-cyan) 84%, transparent);
+  }
+
+  .lmctAA__trustIcon {
+    display: grid;
+    flex: 0 0 62px;
+    width: 62px;
+    height: 62px;
+    place-items: center;
+    border: 2px solid var(--lmctAA-cyan);
+    border-radius: 50%;
+    color: var(--lmctAA-white);
+    background: radial-gradient(circle at 35% 25%, #075239, #00271d 72%);
+    box-shadow:
+      0 0 19px rgba(207, 255, 0, 0.32),
+      inset 0 0 15px rgba(207, 255, 0, 0.09);
+  }
+
+  .lmctAA__trustIcon svg {
+    display: block;
+    width: 31px;
+    height: 31px;
+  }
+
+  .lmctAA__trustItem strong {
+    min-width: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(18px, 2.2vw, 20px);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 980px) {
+    .lmctAA__shell {
+      width: min(100% - 48px, 900px);
+    }
+
+    .lmctAA__layout,
+    .lmctAA__trust {
+      width: min(680px, 72vw);
+    }
+
+    .lmctAA__speedLines {
+      width: 60px;
+    }
+
+    .lmctAA__trustItem {
+      padding-inline: 18px;
+    }
+
+    .lmctAA__trustIcon {
+      flex-basis: 54px;
+      width: 54px;
+      height: 54px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .lmctAA__page {
+      background:
+        radial-gradient(circle at 18% 20%, rgba(8, 112, 63, 0.44), transparent 22rem), radial-gradient(circle at 82% 50%, rgba(46, 143, 79, 0.16), transparent 24rem),
+        linear-gradient(155deg, #064a34 0%, var(--lmctAA-navy) 52%, var(--lmctAA-navy-deep) 100%);
+    }
+
+    .lmctAA__page::before {
+      background-image: linear-gradient(180deg, rgba(0, 27, 20, 0.24) 0%, rgba(0, 42, 30, 0.56) 42%, rgba(0, 27, 20, 0.96) 72%, var(--lmctAA-navy-deep) 100%), var(--lmctAA-bg-image);
+      background-position:
+        center,
+        68% top;
+      background-size:
+        100% 100%,
+        auto 760px;
+      background-repeat: no-repeat;
+    }
+
+    .lmctAA__shell {
+      width: min(100% - 30px, 540px);
+      padding-top: 22px;
+    }
+
+    .lmctAA__header {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .lmctAA__brandWrap {
+      gap: 0;
+    }
+
+    .lmctAA__brandLogo {
+      width: clamp(145px, 38vw, 210px);
+    }
+
+    .lmctAA__speedLines {
+      display: none;
+    }
+
+    .lmctAA__brand strong {
+      font-size: clamp(54px, 17vw, 84px);
+    }
+
+    .lmctAA__brand span {
+      margin-top: 9px;
+      padding: 5px 15px 6px;
+      font-size: clamp(15px, 5vw, 23px);
+    }
+
+    .lmctAA__exclusive {
+      gap: 8px;
+      /* max-width: 240px; */
+      padding: 11px 15px;
+    }
+
+    .lmctAA__exclusive svg {
+      flex-basis: 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    .lmctAA__exclusive strong {
+      font-size: clamp(14px, 3.7vw, 18px);
+    }
+
+    .lmctAA__layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+      width: 100%;
+    }
+
+    .lmctAA__offer {
+      padding: 8px 0 0;
+    }
+
+    .lmctAA__priceBlock {
+      padding: 17px 20px 10px;
+    }
+
+    .lmctAA__only {
+      margin-bottom: -6px;
+      font-size: clamp(36px, 12vw, 57px);
+    }
+
+    .lmctAA__price {
+      font-size: clamp(166px, 55vw, 282px);
+    }
+
+    .lmctAA__annual {
+      width: 94%;
+      padding: 11px 13px 13px;
+      font-size: clamp(33px, 10vw, 54px);
+    }
+
+    .lmctAA__bonus {
+      gap: clamp(12px, 4vw, 22px);
+      width: 96%;
+      margin-top: 31px;
+    }
+
+    .lmctAA__bonusPrice {
+      font-size: clamp(78px, 27vw, 138px);
+    }
+
+    .lmctAA__bonusCopy {
+      font-size: clamp(29px, 9.2vw, 47px);
+    }
+
+    .lmctAA__action {
+      padding: 12px;
+      border-radius: 22px;
+    }
+
+    .lmctAA__cta {
+      min-height: 78px;
+      padding: 11px 12px 11px 21px;
+      border-radius: 16px;
+      font-size: clamp(27px, 8.4vw, 37px);
+    }
+
+    .lmctAA__ctaIcon {
+      flex-basis: 50px;
+      width: 50px;
+      height: 50px;
+    }
+
+    .lmctAA__ctaIcon svg {
+      width: 25px;
+      height: 25px;
+    }
+
+    .lmctAA__trust {
+      grid-template-columns: 1fr;
+      width: 100%;
+      margin-top: 35px;
+    }
+
+    .lmctAA__trustItem {
+      justify-content: flex-start;
+      min-height: 86px;
+      padding: 11px 8px;
+    }
+
+    .lmctAA__trustItem + .lmctAA__trustItem::before {
+      top: 0;
+      right: 8px;
+      bottom: auto;
+      left: 8px;
+      width: auto;
+      height: 1px;
+    }
+
+    .lmctAA__trustIcon {
+      flex-basis: 56px;
+      width: 56px;
+      height: 56px;
+    }
+
+    .lmctAA__trustIcon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .lmctAA__trustItem strong {
+      font-size: clamp(20px, 6.5vw, 27px);
+    }
+  }
+
+  @media (max-width: 380px) {
+    .lmctAA__shell {
+      width: calc(100% - 22px);
+    }
+
+    .lmctAA__header {
+      gap: 13px;
+    }
+
+    .lmctAA__brandLogo {
+      width: 122px;
+    }
+
+    .lmctAA__brand strong {
+      font-size: 51px;
+    }
+
+    .lmctAA__brand span {
+      font-size: 14px;
+    }
+
+    .lmctAA__exclusive {
+      max-width: 150px;
+      padding: 9px 12px;
+    }
+
+    .lmctAA__exclusive strong {
+      font-size: 13px;
+    }
+
+    .lmctAA__price {
+      font-size: clamp(142px, 52vw, 198px);
+    }
+
+    .lmctAA__annual {
+      font-size: clamp(29px, 9.8vw, 38px);
+    }
+
+    .lmctAA__bonusPrice {
+      font-size: clamp(67px, 25vw, 95px);
+    }
+
+    .lmctAA__bonusCopy {
+      font-size: clamp(25px, 8.5vw, 33px);
+    }
+
+    .lmctAA__cta {
+      min-height: 72px;
+      padding-left: 17px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctAA__page *,
+    .lmctAA__page *::before,
+    .lmctAA__page *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<section class="lmctAA__page" aria-labelledby="lmctAA__offerTitle">
+  <div class="lmctAA__shell">
+    <header class="lmctAA__header">
+      <div class="lmctAA__brandWrap" aria-label="LMCT Plus">
+        <!-- Replace this URL with the LMCT+ Markets logo when available. -->
+        <img class="lmctAA__brandLogo" src="https://lmctgiveaway.com/hosted/images/bb/676306345e499fb3ef70d9cace2c4d/Group-1618878390.svg" alt="LMCT+ Markets" />
+      </div>
+
+      <div class="lmctAA__exclusive">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+          <circle cx="12" cy="10" r="2.5" />
+        </svg>
+        <strong><span>Deer Park Market</span>8 Hatchlands Drive, Deer Park VIC 3023</strong>
+      </div>
+    </header>
+
+    <div class="lmctAA__layout">
+      <div class="lmctAA__offer">
+        <h1 class="lmctAA__priceBlock" id="lmctAA__offerTitle">
+          <span class="lmctAA__only">Only</span>
+          <strong class="lmctAA__price">$99</strong>
+        </h1>
+
+        <p class="lmctAA__annual">For the entire year!</p>
+
+        <div class="lmctAA__bonus">
+          <strong class="lmctAA__bonusPrice">+$50</strong>
+          <span class="lmctAA__bonusLine" aria-hidden="true"></span>
+          <strong class="lmctAA__bonusCopy">Free <span>groceries</span></strong>
+        </div>
+      </div>
+
+      <div class="lmctAA__action">
+        <a href="#open-popup" class="lmctAA__cta lmctFS__select" data-lmct-package="package99">
+          <span>Lock in this exclusive offer</span>
+          <span class="lmctAA__ctaIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12h16M14 6l6 6-6 6" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <footer class="lmctAA__trust" aria-label="Offer benefits">
+      <div class="lmctAA__trustItem">
+        <span class="lmctAA__trustIcon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5">
+              <path d="M3.5 21.5v-13c0-2.828 0-4.243.879-5.121C5.257 2.5 6.672 2.5 9.5 2.5s4.243 0 5.121.879c.879.878.879 2.293.879 5.121v13" />
+              <path
+                stroke-linejoin="round"
+                d="M3.5 10.5h12m-13 11h14m-1-7h1a2 2 0 0 1 2 2v.5a1.5 1.5 0 0 0 3 0v-5.5m-1-4l.414.414a2 2 0 0 1 .586 1.414V11.5m-1-4l-2-2m2 2v2.172a2 2 0 0 0 .586 1.414l.414.414" />
+            </g>
+          </svg>
+        </span>
+        <strong>Save on fuel<br />too</strong>
+      </div>
+
+      <div class="lmctAA__trustItem">
+        <span class="lmctAA__trustIcon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path
+              fill="currentColor"
+              d="M17 18a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2M1 2h3.27l.94 2H20a1 1 0 0 1 1 1c0 .17-.05.34-.12.5l-3.58 6.47c-.34.61-1 1.03-1.75 1.03H8.1l-.9 1.63l-.03.12a.25.25 0 0 0 .25.25H19v2H7a2 2 0 0 1-2-2c0-.35.09-.68.24-.96l1.36-2.45L3 4H1zm6 16a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2c0-1.11.89-2 2-2m9-7l2.78-5H6.14l2.36 5z" />
+          </svg>
+        </span>
+        <strong>Wholesale prices<br />without buying in bulk</strong>
+      </div>
+
+      <div class="lmctAA__trustItem">
+        <span class="lmctAA__trustIcon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <g fill="none" stroke="currentColor" stroke-width="1.5">
+              <path
+                d="M12.0002 16C6.24021 16 5.21983 10.2595 5.03907 5.70647C4.98879 4.43998 4.96365 3.80673 5.43937 3.22083C5.91508 2.63494 6.48445 2.53887 7.62318 2.34674C8.74724 2.15709 10.2166 2 12.0002 2C13.7837 2 15.2531 2.15709 16.3771 2.34674C17.5159 2.53887 18.0852 2.63494 18.5609 3.22083C19.0367 3.80673 19.0115 4.43998 18.9612 5.70647C18.7805 10.2595 17.7601 16 12.0002 16Z" />
+              <path
+                d="M19 5L19.9486 5.31621C20.9387 5.64623 21.4337 5.81124 21.7168 6.20408C22 6.59692 22 7.11873 21.9999 8.16234L21.9999 8.23487C21.9999 9.09561 21.9999 9.52598 21.7927 9.87809C21.5855 10.2302 21.2093 10.4392 20.4569 10.8572L17.5 12.5" />
+              <path
+                d="M4.99994 5L4.05132 5.31621C3.06126 5.64623 2.56623 5.81124 2.2831 6.20408C1.99996 6.59692 1.99997 7.11873 2 8.16234L2 8.23487C2.00003 9.09561 2.00004 9.52598 2.20723 9.87809C2.41441 10.2302 2.79063 10.4392 3.54305 10.8572L6.49994 12.5" />
+              <path stroke-linecap="round" d="M12 17V19" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.5 22H8.5L8.83922 20.3039C8.93271 19.8365 9.34312 19.5 9.8198 19.5H14.1802C14.6569 19.5 15.0673 19.8365 15.1608 20.3039L15.5 22Z" />
+              <path stroke-linecap="round" d="M18 22H6" />
+            </g>
+          </svg>
+        </span>
+        <strong>Available to<br />members only</strong>
+      </div>
+    </footer>
+  </div>
+</section>
