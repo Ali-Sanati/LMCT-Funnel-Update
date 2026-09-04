@@ -1,0 +1,826 @@
+<style>
+  .lmctUpsellHero,
+  .lmctUpsellHero *,
+  .lmctUpsellHero *::before,
+  .lmctUpsellHero *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctUpsellHero {
+    --lmct-navy: #05162a;
+    --lmct-blue: #0c9ffd;
+    --lmct-blue-dark: #0476c4;
+    --lmct-blue-light: #3fb8ff;
+    --lmct-light: #f7fafc;
+    --lmct-border: #e8eef4;
+    --lmct-muted: #64748b;
+    --lmct-green: #159447;
+    --lmct-white: #ffffff;
+    width: 100%;
+    overflow: hidden;
+    background:
+      repeating-linear-gradient(115deg, rgba(12, 159, 253, 0.055) 0, rgba(12, 159, 253, 0.055) 1px, transparent 1px, transparent 80px),
+      linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+    color: var(--lmct-navy);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+    padding: 28px 16px 42px;
+    position: relative;
+  }
+
+  .lmctUpsellHero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 38%,
+        rgba(12, 159, 253, 0.075) 48%,
+        rgba(255, 255, 255, 0.58) 50%,
+        rgba(12, 159, 253, 0.075) 52%,
+        transparent 62%,
+        transparent 100%
+      );
+    opacity: 0.7;
+    pointer-events: none;
+    transform: translateX(-68%) skewX(-12deg);
+    animation: lmctUpsellHero__sweep 14s ease-in-out infinite;
+  }
+
+  .lmctUpsellHero__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmctUpsellHero__header {
+    display: flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 34px;
+  }
+
+  .lmctUpsellHero__logo {
+    display: block;
+    width: auto;
+    height: 36px;
+  }
+
+  .lmctUpsellHero__secure {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--lmct-muted);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .lmctUpsellHero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    align-items: center;
+  }
+
+  .lmctUpsellHero__copy {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .lmctUpsellHero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(12, 159, 253, 0.24);
+    border-radius: 999px;
+    background: rgba(12, 159, 253, 0.08);
+    color: var(--lmct-blue-dark);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    padding: 9px 14px;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellHero__badgeDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--lmct-blue);
+    box-shadow: 0 0 10px rgba(12, 159, 253, 0.75);
+    flex: 0 0 auto;
+  }
+
+  .lmctUpsellHero__headline {
+    max-width: 660px;
+    margin: 18px auto 0;
+    color: var(--lmct-navy);
+    font-size: clamp(34px, 7vw, 66px);
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellHero__headlineAccent {
+    display: block;
+    margin-top: 4px;
+    background: linear-gradient(180deg, var(--lmct-blue-light) 0%, var(--lmct-blue) 44%, var(--lmct-blue-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--lmct-blue-dark);
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lmctUpsellHero__sub {
+    max-width: 540px;
+    margin: 22px auto 0;
+    color: var(--lmct-navy);
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellHero__subAccent {
+    display: inline-block;
+    color: var(--lmct-blue-dark);
+  }
+
+  .lmctUpsellHero__note {
+    max-width: 480px;
+    margin: 12px auto 0;
+    color: var(--lmct-muted);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: 0;
+  }
+
+  .lmctUpsellHero__actions {
+    margin-top: 26px;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .lmctUpsellHero__cta {
+    display: inline-flex;
+    min-height: 58px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, var(--lmct-blue) 0%, var(--lmct-blue-dark) 100%);
+    box-shadow: 0 16px 34px rgba(12, 159, 253, 0.36);
+    color: var(--lmct-white) !important;
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.1;
+    padding: 18px 26px;
+    text-align: center;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctUpsellHero__ctaIcon,
+  .lmctUpsellHero__icon {
+    display: block;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.4;
+  }
+
+  .lmctUpsellHero__ctaIcon {
+    width: 19px;
+    height: 19px;
+    stroke-width: 3;
+  }
+
+  .lmctUpsellHero__valueRow {
+    display: flex;
+    max-width: 560px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 10px;
+    margin: 16px auto 0;
+    color: var(--lmct-muted);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellHero__valueItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .lmctUpsellHero__valueCheck {
+    color: var(--lmct-green);
+    flex: 0 0 auto;
+  }
+
+  .lmctUpsellHero__valueDot {
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: #cbd5e1;
+    flex: 0 0 auto;
+  }
+
+  .lmctUpsellHero__visual {
+    min-width: 0;
+    order: 4;
+  }
+
+  .lmctUpsellHero__bonusWrap {
+    max-width: 510px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .lmctUpsellHero__ticketField {
+    position: absolute;
+    inset: -26px -18px;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(12, 159, 253, 0.16) 0 2px, transparent 3px),
+      radial-gradient(circle at 82% 34%, rgba(21, 148, 71, 0.18) 0 2px, transparent 3px),
+      radial-gradient(circle at 70% 82%, rgba(12, 159, 253, 0.14) 0 2px, transparent 3px);
+    background-size: 78px 70px, 92px 84px, 68px 74px;
+    border-radius: 28px;
+    opacity: 0.82;
+    pointer-events: none;
+  }
+
+  .lmctUpsellHero__bonusCard {
+    overflow: hidden;
+    border: 1px solid rgba(12, 159, 253, 0.22);
+    border-radius: 22px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(247, 250, 252, 0.96) 100%);
+    box-shadow:
+      0 26px 70px rgba(5, 22, 42, 0.16),
+      0 0 0 8px rgba(12, 159, 253, 0.035);
+    padding: 26px;
+    position: relative;
+    text-align: center;
+    animation: lmctUpsellHero__float 5.5s ease-in-out infinite;
+  }
+
+  .lmctUpsellHero__bonusCard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(12, 159, 253, 0.08) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(12, 159, 253, 0.08) 1px, transparent 1px);
+    background-size: 34px 34px;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+
+  .lmctUpsellHero__bonusTop,
+  .lmctUpsellHero__bonusNumber,
+  .lmctUpsellHero__bonusLabel,
+  .lmctUpsellHero__bonusText,
+  .lmctUpsellHero__entryBadge {
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmctUpsellHero__bonusTop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--lmct-navy);
+    color: var(--lmct-white);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    padding: 9px 13px;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellHero__bonusNumber {
+    margin-top: 18px;
+    background: linear-gradient(180deg, var(--lmct-blue-light) 0%, var(--lmct-blue) 42%, var(--lmct-blue-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--lmct-blue-dark);
+    font-size: clamp(88px, 18vw, 142px);
+    font-weight: 900;
+    line-height: 0.82;
+    letter-spacing: 0;
+    text-shadow: 0 22px 38px rgba(12, 159, 253, 0.16);
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lmctUpsellHero__bonusLabel {
+    margin-top: 12px;
+    color: var(--lmct-navy);
+    font-size: clamp(21px, 4vw, 34px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellHero__bonusText {
+    max-width: 310px;
+    margin: 12px auto 0;
+    color: var(--lmct-muted);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .lmctUpsellHero__entryBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    border: 1px solid rgba(21, 148, 71, 0.2);
+    border-radius: 999px;
+    background: #effbf4;
+    color: #0e7135;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    padding: 10px 13px;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellHero__progress {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .lmctUpsellHero__step {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--lmct-border);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 14px 32px rgba(5, 22, 42, 0.06);
+    padding: 13px;
+  }
+
+  .lmctUpsellHero__step--bonus {
+    border-color: rgba(12, 159, 253, 0.34);
+    background: linear-gradient(180deg, rgba(12, 159, 253, 0.1) 0%, rgba(255, 255, 255, 0.94) 100%);
+    box-shadow: 0 16px 36px rgba(12, 159, 253, 0.11);
+  }
+
+  .lmctUpsellHero__stepIcon {
+    display: inline-flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #eef8ff;
+    color: var(--lmct-blue-dark);
+  }
+
+  .lmctUpsellHero__step--purchase .lmctUpsellHero__stepIcon {
+    background: #effbf4;
+    color: var(--lmct-green);
+  }
+
+  .lmctUpsellHero__step--member .lmctUpsellHero__stepIcon {
+    background: var(--lmct-navy);
+    color: var(--lmct-white);
+  }
+
+  .lmctUpsellHero__stepText {
+    min-width: 0;
+  }
+
+  .lmctUpsellHero__stepKicker {
+    display: block;
+    color: var(--lmct-muted);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellHero__stepTitle {
+    display: block;
+    margin-top: 5px;
+    color: var(--lmct-navy);
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellHero__step--bonus .lmctUpsellHero__stepTitle {
+    color: var(--lmct-blue-dark);
+    font-size: 17px;
+  }
+
+  .lmctUpsellHero__connector {
+    display: flex;
+    min-height: 22px;
+    align-items: center;
+    justify-content: center;
+    color: var(--lmct-blue-dark);
+  }
+
+  @keyframes lmctUpsellHero__float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes lmctUpsellHero__sweep {
+    0%,
+    24% {
+      transform: translateX(-68%) skewX(-12deg);
+      opacity: 0;
+    }
+
+    42% {
+      opacity: 0.72;
+    }
+
+    62% {
+      transform: translateX(72%) skewX(-12deg);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateX(72%) skewX(-12deg);
+      opacity: 0;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lmctUpsellHero__cta:hover {
+      box-shadow: 0 22px 44px rgba(12, 159, 253, 0.46);
+      filter: brightness(1.04);
+      transform: translateY(-3px);
+    }
+  }
+
+  @media (min-width: 760px) {
+    .lmctUpsellHero {
+      padding: 34px 18px 54px;
+    }
+
+    .lmctUpsellHero__grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
+      gap: 40px;
+    }
+
+    .lmctUpsellHero__copy {
+      text-align: left;
+    }
+
+    .lmctUpsellHero__headline,
+    .lmctUpsellHero__sub,
+    .lmctUpsellHero__note {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .lmctUpsellHero__valueRow {
+      justify-content: flex-start;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .lmctUpsellHero__visual {
+      order: initial;
+    }
+
+    .lmctUpsellHero__actions {
+      grid-column: 1;
+      grid-row: 2;
+      margin-top: 0;
+      text-align: left;
+    }
+
+    .lmctUpsellHero__visual {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+    }
+
+    .lmctUpsellHero__progress {
+      grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1.12fr) 34px minmax(0, 1fr);
+      align-items: stretch;
+      gap: 8px;
+      margin-top: 34px;
+    }
+
+    .lmctUpsellHero__step {
+      grid-template-columns: 1fr;
+      align-content: center;
+      justify-items: center;
+      min-height: 118px;
+      padding: 16px 12px;
+      text-align: center;
+    }
+
+    .lmctUpsellHero__connector {
+      min-height: 0;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .lmctUpsellHero {
+      padding-top: 38px;
+    }
+
+    .lmctUpsellHero__grid {
+      grid-template-columns: minmax(0, 0.55fr) minmax(380px, 0.45fr);
+      gap: 54px;
+    }
+
+    .lmctUpsellHero__header {
+      margin-bottom: 42px;
+    }
+  }
+
+  @media (max-width: 759px) {
+    .lmctUpsellHero__visual {
+      margin-top: 4px;
+    }
+
+    .lmctUpsellHero__cta {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .lmctUpsellHero__connector .lmctUpsellHero__icon {
+      transform: rotate(90deg);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .lmctUpsellHero {
+      padding: 22px 14px 36px;
+    }
+
+    .lmctUpsellHero__header {
+      margin-bottom: 26px;
+    }
+
+    .lmctUpsellHero__logo {
+      height: 31px;
+    }
+
+    .lmctUpsellHero__secure {
+      font-size: 11px;
+    }
+
+    .lmctUpsellHero__headline {
+      font-size: clamp(33px, 10.5vw, 48px);
+    }
+
+    .lmctUpsellHero__sub {
+      margin-top: 18px;
+      font-size: clamp(19px, 6vw, 25px);
+    }
+
+    .lmctUpsellHero__note {
+      font-size: 15px;
+    }
+
+    .lmctUpsellHero__bonusCard {
+      border-radius: 18px;
+      padding: 22px 18px;
+    }
+
+    .lmctUpsellHero__bonusNumber {
+      font-size: clamp(82px, 24vw, 118px);
+    }
+
+    .lmctUpsellHero__valueRow {
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .lmctUpsellHero {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .lmctUpsellHero__header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .lmctUpsellHero__badge {
+      font-size: 10px;
+      padding: 9px 12px;
+    }
+
+    .lmctUpsellHero__headline {
+      font-size: 32px;
+    }
+
+    .lmctUpsellHero__stepTitle {
+      font-size: 14px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctUpsellHero::before,
+    .lmctUpsellHero__bonusCard {
+      animation: none !important;
+    }
+
+    .lmctUpsellHero__cta {
+      transition: none !important;
+    }
+
+    .lmctUpsellHero__cta:hover {
+      transform: none !important;
+    }
+  }
+</style>
+
+<section class="lmctUpsellHero" aria-labelledby="lmctUpsellHeroTitle">
+  <div class="lmctUpsellHero__inner">
+    <header class="lmctUpsellHero__header" aria-label="LMCT+ membership offer">
+      <img
+        class="lmctUpsellHero__logo"
+        src="https://images.clickfunnels.com/11/5808e1954343cc90744e7bcca46ae8/logo.3bf7fa51a183b716b171.png"
+        alt="LMCT+"
+      >
+
+      <div class="lmctUpsellHero__secure">
+        <svg class="lmctUpsellHero__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="5" y="10" width="14" height="10" rx="2"></rect>
+          <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+        </svg>
+        <span>Secure Membership Upgrade</span>
+      </div>
+    </header>
+
+    <div class="lmctUpsellHero__grid">
+      <div class="lmctUpsellHero__copy">
+        <div class="lmctUpsellHero__badge">
+          <span class="lmctUpsellHero__badgeDot" aria-hidden="true"></span>
+          <span>Exclusive Post-Purchase Offer</span>
+        </div>
+
+        <h1 class="lmctUpsellHero__headline" id="lmctUpsellHeroTitle">
+          You&rsquo;ve Got Your Entries.
+          <span class="lmctUpsellHero__headlineAccent">Now Get 100 More &mdash; Free.</span>
+        </h1>
+
+        <p class="lmctUpsellHero__sub">
+          Join LMCT+ Today &amp; Get
+          <span class="lmctUpsellHero__subAccent">100 Free Bonus Entries</span>
+        </p>
+
+        <p class="lmctUpsellHero__note">
+          Into the draw you just purchased entries for.
+        </p>
+      </div>
+
+      <div class="lmctUpsellHero__visual" aria-label="100 free bonus entries unlocked with Entry Membership">
+        <div class="lmctUpsellHero__bonusWrap">
+          <div class="lmctUpsellHero__ticketField" aria-hidden="true"></div>
+
+          <div class="lmctUpsellHero__bonusCard">
+            <div class="lmctUpsellHero__bonusTop">Bonus Unlocked</div>
+            <div class="lmctUpsellHero__bonusNumber">+100</div>
+            <div class="lmctUpsellHero__bonusLabel">Free Bonus Entries</div>
+            <p class="lmctUpsellHero__bonusText">
+              Into the draw you just entered.
+            </p>
+            <div class="lmctUpsellHero__entryBadge">
+              <svg class="lmctUpsellHero__icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"></path>
+                <path d="m9 12 2 2 4-5"></path>
+              </svg>
+              Entry Member Unlock
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lmctUpsellHero__actions">
+        <a class="lmctUpsellHero__cta" href="#packages" aria-label="Become an LMCT+ Entry Member">
+          Become An Entry Member
+          <svg class="lmctUpsellHero__ctaIcon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14"></path>
+            <path d="m13 6 6 6-6 6"></path>
+          </svg>
+        </a>
+
+        <div class="lmctUpsellHero__valueRow" aria-label="Membership value points">
+          <span class="lmctUpsellHero__valueItem">
+            <svg class="lmctUpsellHero__icon lmctUpsellHero__valueCheck" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            100 Bonus Entries Included
+          </span>
+          <span class="lmctUpsellHero__valueDot" aria-hidden="true"></span>
+          <span class="lmctUpsellHero__valueItem">
+            <svg class="lmctUpsellHero__icon lmctUpsellHero__valueCheck" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            Member Benefits
+          </span>
+          <span class="lmctUpsellHero__valueDot" aria-hidden="true"></span>
+          <span class="lmctUpsellHero__valueItem">
+            <svg class="lmctUpsellHero__icon lmctUpsellHero__valueCheck" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+            Entries Every Draw
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lmctUpsellHero__progress" aria-label="Purchase to bonus entry membership path">
+      <div class="lmctUpsellHero__step lmctUpsellHero__step--purchase">
+        <span class="lmctUpsellHero__stepIcon" aria-hidden="true">
+          <svg class="lmctUpsellHero__icon" viewBox="0 0 24 24">
+            <path d="M20 6 9 17l-5-5"></path>
+          </svg>
+        </span>
+        <span class="lmctUpsellHero__stepText">
+          <span class="lmctUpsellHero__stepKicker">Completed</span>
+          <span class="lmctUpsellHero__stepTitle">Your Purchase</span>
+        </span>
+      </div>
+
+      <div class="lmctUpsellHero__connector" aria-hidden="true">
+        <svg class="lmctUpsellHero__icon" viewBox="0 0 24 24">
+          <path d="M5 12h14"></path>
+          <path d="m13 6 6 6-6 6"></path>
+        </svg>
+      </div>
+
+      <div class="lmctUpsellHero__step lmctUpsellHero__step--bonus">
+        <span class="lmctUpsellHero__stepIcon" aria-hidden="true">
+          <svg class="lmctUpsellHero__icon" viewBox="0 0 24 24">
+            <path d="M12 2v20"></path>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </span>
+        <span class="lmctUpsellHero__stepText">
+          <span class="lmctUpsellHero__stepKicker">Added When You Join</span>
+          <span class="lmctUpsellHero__stepTitle">+100 Bonus Entries</span>
+        </span>
+      </div>
+
+      <div class="lmctUpsellHero__connector" aria-hidden="true">
+        <svg class="lmctUpsellHero__icon" viewBox="0 0 24 24">
+          <path d="M5 12h14"></path>
+          <path d="m13 6 6 6-6 6"></path>
+        </svg>
+      </div>
+
+      <div class="lmctUpsellHero__step lmctUpsellHero__step--member">
+        <span class="lmctUpsellHero__stepIcon" aria-hidden="true">
+          <svg class="lmctUpsellHero__icon" viewBox="0 0 24 24">
+            <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"></path>
+            <path d="m9 12 2 2 4-5"></path>
+          </svg>
+        </span>
+        <span class="lmctUpsellHero__stepText">
+          <span class="lmctUpsellHero__stepKicker">Unlocked When You Join</span>
+          <span class="lmctUpsellHero__stepTitle">LMCT+ Member</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

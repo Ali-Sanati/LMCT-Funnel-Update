@@ -1,0 +1,600 @@
+<style>
+  .lmctUpsellLast,
+  .lmctUpsellLast * {
+    box-sizing: border-box;
+  }
+
+  .lmctUpsellLast {
+    --lmct-navy: #05162a;
+    --lmct-navy-2: #071f44;
+    --lmct-blue: #0c9ffd;
+    --lmct-blue-deep: #0476c4;
+    --lmct-entry: #1fa851;
+    --lmct-ink: #12213c;
+    --lmct-muted: #64748b;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(54px, 7vw, 90px) 16px;
+    color: #ffffff;
+    background:
+      linear-gradient(135deg, rgba(12, 159, 253, 0.12) 0 1px, transparent 1px 22px),
+      linear-gradient(145deg, #030b18 0%, var(--lmct-navy) 46%, var(--lmct-navy-2) 100%);
+  }
+
+  .lmctUpsellLast::before {
+    content: "";
+    position: absolute;
+    inset: -30%;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 20%, rgba(12, 159, 253, 0.16) 48%, transparent 72%);
+    opacity: 0.7;
+    transform: translateX(-18%);
+    animation: lmctUpsellLastSweep 9s ease-in-out infinite alternate;
+  }
+
+  .lmctUpsellLast::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 5px;
+    pointer-events: none;
+    background: linear-gradient(90deg, var(--lmct-entry), var(--lmct-blue), var(--lmct-blue-deep));
+  }
+
+  .lmctUpsellLast__inner {
+    position: relative;
+    z-index: 1;
+    width: min(940px, 100%);
+    margin: 0 auto;
+  }
+
+  .lmctUpsellLast__card {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--lmct-ink);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.3);
+  }
+
+  .lmctUpsellLast__top {
+    padding: clamp(28px, 5vw, 48px) clamp(18px, 4vw, 48px) 20px;
+    text-align: center;
+  }
+
+  .lmctUpsellLast__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 0 15px;
+    padding: 8px 13px;
+    border: 1px solid rgba(12, 159, 253, 0.24);
+    border-radius: 999px;
+    color: var(--lmct-blue-deep);
+    background: rgba(12, 159, 253, 0.08);
+    font-size: 11px;
+    font-weight: 950;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellLast__eyebrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--lmct-entry);
+    box-shadow: 0 0 0 5px rgba(31, 168, 81, 0.13);
+  }
+
+  .lmctUpsellLast__title {
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--lmct-navy);
+    font-size: clamp(35px, 6vw, 68px);
+    font-weight: 950;
+    line-height: 0.92;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellLast__title span {
+    display: inline-block;
+    color: transparent;
+    background: linear-gradient(92deg, var(--lmct-blue) 0%, var(--lmct-blue-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 18px 42px rgba(12, 159, 253, 0.12);
+  }
+
+  .lmctUpsellLast__copy {
+    max-width: 670px;
+    margin: 18px auto 0;
+    color: var(--lmct-muted);
+    font-size: clamp(15px, 1.9vw, 18px);
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctUpsellLast__main {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(280px, 1fr);
+    gap: clamp(18px, 3.4vw, 34px);
+    align-items: center;
+    padding: 6px clamp(18px, 4vw, 48px) clamp(26px, 4.6vw, 44px);
+  }
+
+  .lmctUpsellLast__flow {
+    display: grid;
+    gap: 10px;
+  }
+
+  .lmctUpsellLast__flowItem {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: 12px;
+    align-items: center;
+    padding: 13px 14px;
+    border: 1px solid rgba(5, 22, 42, 0.08);
+    border-radius: 8px;
+    background: #f8fbff;
+  }
+
+  .lmctUpsellLast__flowIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--lmct-entry), #0d7939);
+    box-shadow: 0 9px 20px rgba(31, 168, 81, 0.2);
+  }
+
+  .lmctUpsellLast__flowItem--bonus .lmctUpsellLast__flowIcon {
+    background: linear-gradient(135deg, var(--lmct-blue), var(--lmct-blue-deep));
+    box-shadow: 0 9px 20px rgba(12, 159, 253, 0.22);
+  }
+
+  .lmctUpsellLast__flowIcon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .lmctUpsellLast__flowText b,
+  .lmctUpsellLast__flowText span {
+    display: block;
+  }
+
+  .lmctUpsellLast__flowText b {
+    color: var(--lmct-navy);
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellLast__flowText span {
+    margin-top: 3px;
+    color: var(--lmct-muted);
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.35;
+  }
+
+  .lmctUpsellLast__price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 12px;
+    padding: 14px;
+    border: 1px solid rgba(31, 168, 81, 0.18);
+    border-radius: 8px;
+    background: rgba(31, 168, 81, 0.07);
+  }
+
+  .lmctUpsellLast__priceText b,
+  .lmctUpsellLast__priceText span {
+    display: block;
+  }
+
+  .lmctUpsellLast__priceText b {
+    color: var(--lmct-navy);
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellLast__priceText span {
+    margin-top: 3px;
+    color: var(--lmct-muted);
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.3;
+  }
+
+  .lmctUpsellLast__priceAmount {
+    color: var(--lmct-navy);
+    font-size: clamp(26px, 3vw, 32px);
+    font-weight: 950;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .lmctUpsellLast__bonus {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 300px;
+    overflow: hidden;
+    border-radius: 8px;
+    color: #ffffff;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px 18px),
+      linear-gradient(145deg, var(--lmct-blue) 0%, var(--lmct-blue-deep) 58%, #04539a 100%);
+    box-shadow: 0 22px 52px rgba(4, 118, 196, 0.28);
+  }
+
+  .lmctUpsellLast__bonus::before,
+  .lmctUpsellLast__bonus::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: #ffffff;
+    transform: translateY(-50%);
+  }
+
+  .lmctUpsellLast__bonus::before {
+    left: -14px;
+  }
+
+  .lmctUpsellLast__bonus::after {
+    right: -14px;
+  }
+
+  .lmctUpsellLast__bonusInner {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 330px);
+    padding: clamp(24px, 4vw, 34px);
+    text-align: center;
+  }
+
+  .lmctUpsellLast__bonusKicker {
+    margin: 0 0 8px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 12px;
+    font-weight: 950;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellLast__hundred {
+    display: block;
+    color: #ffffff;
+    font-size: clamp(82px, 13vw, 132px);
+    font-weight: 950;
+    line-height: 0.82;
+    letter-spacing: 0;
+    text-shadow: 0 0 34px rgba(255, 255, 255, 0.24);
+    animation: lmctUpsellLastGlow 2.8s ease-in-out infinite;
+  }
+
+  .lmctUpsellLast__bonusLabel {
+    display: block;
+    margin-top: 11px;
+    color: #ffffff;
+    font-size: clamp(20px, 3.2vw, 28px);
+    font-weight: 950;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellLast__bonusSmall {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0 0;
+    padding: 9px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 999px;
+    color: #ffffff;
+    background: rgba(5, 22, 42, 0.22);
+    font-size: 12px;
+    font-weight: 850;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellLast__action {
+    display: grid;
+    gap: 13px;
+    justify-items: center;
+    padding: 0 clamp(18px, 4vw, 48px) clamp(28px, 5vw, 48px);
+    text-align: center;
+  }
+
+  .lmctUpsellLast__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    width: min(100%, 470px);
+    padding: 16px 22px;
+    border: 0;
+    border-radius: 8px;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--lmct-blue), var(--lmct-blue-deep));
+    box-shadow: 0 18px 38px rgba(4, 118, 196, 0.32);
+    font-size: clamp(15px, 1.8vw, 17px);
+    font-weight: 950;
+    line-height: 1.1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  }
+
+  .lmctUpsellLast__cta:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 22px 46px rgba(4, 118, 196, 0.38);
+    filter: saturate(1.08);
+  }
+
+  .lmctUpsellLast__cta:focus-visible {
+    outline: 3px solid rgba(12, 159, 253, 0.36);
+    outline-offset: 4px;
+  }
+
+  .lmctUpsellLast__reassurance {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmctUpsellLast__reassurance li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 10px;
+    border: 1px solid rgba(5, 22, 42, 0.08);
+    border-radius: 999px;
+    color: var(--lmct-muted);
+    background: #f8fbff;
+    font-size: 12px;
+    font-weight: 850;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellLast__reassurance svg {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+    color: var(--lmct-entry);
+  }
+
+  .lmctUpsellLast__note {
+    max-width: 520px;
+    margin: 0;
+    color: var(--lmct-muted);
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  @keyframes lmctUpsellLastSweep {
+    from {
+      transform: translateX(-18%);
+    }
+    to {
+      transform: translateX(18%);
+    }
+  }
+
+  @keyframes lmctUpsellLastGlow {
+    0%,
+    100% {
+      text-shadow: 0 0 28px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      text-shadow: 0 0 42px rgba(255, 255, 255, 0.36);
+    }
+  }
+
+  @media (max-width: 780px) {
+    .lmctUpsellLast {
+      padding: 42px 14px;
+    }
+
+    .lmctUpsellLast__top {
+      text-align: left;
+    }
+
+    .lmctUpsellLast__title,
+    .lmctUpsellLast__copy {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .lmctUpsellLast__main {
+      grid-template-columns: 1fr;
+      padding-top: 0;
+    }
+
+    .lmctUpsellLast__bonus {
+      order: -1;
+      min-height: 250px;
+    }
+
+    .lmctUpsellLast__flow {
+      order: 1;
+    }
+
+    .lmctUpsellLast__price {
+      order: 2;
+    }
+
+    .lmctUpsellLast__cta {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .lmctUpsellLast__price {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .lmctUpsellLast__reassurance {
+      align-items: stretch;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .lmctUpsellLast__reassurance li {
+      justify-content: center;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctUpsellLast::before,
+    .lmctUpsellLast__hundred {
+      animation: none;
+    }
+
+    .lmctUpsellLast__cta {
+      transition: none;
+    }
+
+    .lmctUpsellLast__cta:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<section class="lmctUpsellLast" aria-labelledby="lmct-upsell-last-title">
+  <div class="lmctUpsellLast__inner">
+    <div class="lmctUpsellLast__card">
+      <div class="lmctUpsellLast__top">
+        <p class="lmctUpsellLast__eyebrow">Before You Go</p>
+        <h2 class="lmctUpsellLast__title" id="lmct-upsell-last-title">
+          Don&rsquo;t Leave<br />
+          <span>100 Free Entries</span><br />
+          Behind
+        </h2>
+        <p class="lmctUpsellLast__copy">
+          You&rsquo;ve already secured your entries into the draw. Become an LMCT+ Entry Member now and we&rsquo;ll add 100 free bonus entries into that same draw. Then continue receiving automatic entries and LMCT+ member benefits while your membership remains active.
+        </p>
+      </div>
+
+      <div class="lmctUpsellLast__main">
+        <div>
+          <div class="lmctUpsellLast__flow" aria-label="Offer summary">
+            <div class="lmctUpsellLast__flowItem">
+              <span class="lmctUpsellLast__flowIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="lmctUpsellLast__flowText">
+                <b>Your purchase is complete</b>
+                <span>You already entered the draw.</span>
+              </span>
+            </div>
+            <div class="lmctUpsellLast__flowItem lmctUpsellLast__flowItem--bonus">
+              <span class="lmctUpsellLast__flowIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3v18M5 8h14a2 2 0 0 1 2 2v2H3v-2a2 2 0 0 1 2-2ZM5 12h14v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="lmctUpsellLast__flowText">
+                <b>Add 100 bonus entries</b>
+                <span>Join Entry Membership through this offer.</span>
+              </span>
+            </div>
+            <div class="lmctUpsellLast__flowItem">
+              <span class="lmctUpsellLast__flowIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3 4 7v6c0 5 3.4 7.4 8 8 4.6-.6 8-3 8-8V7l-8-4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+                  <path d="m8.5 12 2.4 2.4 4.8-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="lmctUpsellLast__flowText">
+                <b>Unlock member value</b>
+                <span>Automatic entries and LMCT+ benefits while active.</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="lmctUpsellLast__price" aria-label="Entry Membership price">
+            <span class="lmctUpsellLast__priceText">
+              <b>Entry Membership</b>
+              <span>Monthly Billing &middot; Cancel Anytime</span>
+            </span>
+            <span class="lmctUpsellLast__priceAmount">$19.99</span>
+          </div>
+        </div>
+
+        <div class="lmctUpsellLast__bonus" aria-label="100 free bonus entries into the draw you just entered">
+          <div class="lmctUpsellLast__bonusInner">
+            <p class="lmctUpsellLast__bonusKicker">Bonus unlocked</p>
+            <strong class="lmctUpsellLast__hundred">+100</strong>
+            <span class="lmctUpsellLast__bonusLabel">Free Bonus Entries</span>
+            <span class="lmctUpsellLast__bonusSmall">Into the draw you just entered</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lmctUpsellLast__action">
+        <a
+          class="lmctUpsellLast__cta css-order-bronze"
+          href="#open-popup"
+          data-title="css-order-bronze"
+          aria-label="Join Entry and claim 100 bonus entries"
+        >
+          Join Entry &amp; Claim 100 Bonus Entries
+        </a>
+        <ul class="lmctUpsellLast__reassurance" aria-label="Membership reassurance">
+          <li>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            100 Bonus Entries
+          </li>
+          <li>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Automatic Draw Entries
+          </li>
+          <li>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Member Benefits
+          </li>
+        </ul>
+        <p class="lmctUpsellLast__note">
+          Join through this offer to receive your 100 bonus entries into the draw you just entered.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,645 @@
+<style>
+  .lmctUpsellEveryday,
+  .lmctUpsellEveryday * {
+    box-sizing: border-box;
+  }
+
+  .lmctUpsellEveryday {
+    --lmct-navy: #071733;
+    --lmct-navy-soft: #10213f;
+    --lmct-blue: #00aeef;
+    --lmct-blue-deep: #0078d4;
+    --lmct-green: #1fa851;
+    --lmct-ink: #12213c;
+    --lmct-muted: #61708a;
+    --lmct-line: #dce7f4;
+    --lmct-panel: #ffffff;
+    --lmct-bg: #f4f8fd;
+    --lmct-shadow: 0 22px 58px rgba(7, 23, 51, 0.13);
+    font-family: "Inter", "Montserrat", Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+    padding: clamp(54px, 7vw, 88px) 18px;
+    color: var(--lmct-ink);
+    background:
+      linear-gradient(135deg, rgba(0, 174, 239, 0.08) 0 1px, transparent 1px 18px),
+      linear-gradient(180deg, #ffffff 0%, var(--lmct-bg) 100%);
+  }
+
+  .lmctUpsellEveryday::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(0, 174, 239, 0.12), transparent 36%, rgba(31, 168, 81, 0.08));
+    opacity: 0.55;
+  }
+
+  .lmctUpsellEveryday__inner {
+    position: relative;
+    z-index: 1;
+    width: min(1160px, 100%);
+    margin: 0 auto;
+  }
+
+  .lmctUpsellEveryday__header {
+    max-width: 760px;
+    margin: 0 auto clamp(28px, 4vw, 42px);
+    text-align: center;
+  }
+
+  .lmctUpsellEveryday__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+    padding: 8px 12px;
+    border: 1px solid rgba(0, 174, 239, 0.28);
+    border-radius: 999px;
+    color: var(--lmct-blue-deep);
+    background: rgba(0, 174, 239, 0.09);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellEveryday__eyebrow::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--lmct-green);
+    box-shadow: 0 0 0 5px rgba(31, 168, 81, 0.13);
+  }
+
+  .lmctUpsellEveryday__title {
+    margin: 0;
+    color: var(--lmct-navy);
+    font-size: clamp(34px, 5vw, 60px);
+    font-weight: 950;
+    line-height: 0.94;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellEveryday__title span {
+    display: inline-block;
+    color: transparent;
+    background: linear-gradient(92deg, var(--lmct-blue) 0%, var(--lmct-blue-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .lmctUpsellEveryday__lead {
+    max-width: 620px;
+    margin: 16px auto 0;
+    color: var(--lmct-muted);
+    font-size: clamp(16px, 2vw, 19px);
+    font-weight: 650;
+    line-height: 1.55;
+  }
+
+  .lmctUpsellEveryday__cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .lmctUpsellEveryday__card {
+    display: flex;
+    min-width: 0;
+    overflow: hidden;
+    flex-direction: column;
+    border: 1px solid rgba(7, 23, 51, 0.09);
+    border-radius: 8px;
+    background: var(--lmct-panel);
+    box-shadow: 0 14px 34px rgba(7, 23, 51, 0.09);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  }
+
+  .lmctUpsellEveryday__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: #dce7f4;
+  }
+
+  .lmctUpsellEveryday__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 220ms ease;
+  }
+
+  .lmctUpsellEveryday__mediaBadge {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    color: #ffffff;
+    background: rgba(7, 23, 51, 0.88);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellEveryday__mediaBadge svg {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+  }
+
+  .lmctUpsellEveryday__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: clamp(18px, 2.3vw, 24px);
+  }
+
+  .lmctUpsellEveryday__tag {
+    margin: 0 0 9px;
+    color: var(--lmct-blue-deep);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellEveryday__cardTitle {
+    margin: 0;
+    color: var(--lmct-navy);
+    font-size: clamp(22px, 2.25vw, 28px);
+    font-weight: 950;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellEveryday__text {
+    margin: 13px 0 0;
+    color: var(--lmct-muted);
+    font-size: 15px;
+    font-weight: 650;
+    line-height: 1.5;
+  }
+
+  .lmctUpsellEveryday__proof {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    margin: auto 0 0;
+    padding-top: 20px;
+    color: var(--lmct-navy-soft);
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellEveryday__proof svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    color: var(--lmct-green);
+  }
+
+  .lmctUpsellEveryday__logoPanel {
+    display: grid;
+    height: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 18px;
+    background:
+      linear-gradient(135deg, rgba(7, 23, 51, 0.97), rgba(16, 33, 63, 0.92)),
+      linear-gradient(90deg, rgba(0, 174, 239, 0.22), rgba(31, 168, 81, 0.16));
+  }
+
+  .lmctUpsellEveryday__logoTile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 76px;
+    padding: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .lmctUpsellEveryday__logoTile img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 42px;
+    object-fit: contain;
+    transform: none;
+  }
+
+  .lmctUpsellEveryday__card--partners .lmctUpsellEveryday__mediaBadge {
+    background: rgba(0, 120, 212, 0.92);
+  }
+
+  .lmctUpsellEveryday__summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 22px 0 0;
+    padding: 14px;
+    border: 1px solid rgba(0, 174, 239, 0.18);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 12px 28px rgba(7, 23, 51, 0.06);
+  }
+
+  .lmctUpsellEveryday__summaryLabel {
+    flex: 0 1 100%;
+    margin: 0 0 2px;
+    color: var(--lmct-navy);
+    font-size: 12px;
+    font-weight: 950;
+    line-height: 1.2;
+    text-align: center;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellEveryday__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 10px;
+    border-radius: 999px;
+    color: var(--lmct-navy-soft);
+    background: #ffffff;
+    font-size: 13px;
+    font-weight: 850;
+    line-height: 1.2;
+    box-shadow: inset 0 0 0 1px rgba(7, 23, 51, 0.08);
+  }
+
+  .lmctUpsellEveryday__pill svg {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+    color: var(--lmct-green);
+  }
+
+  .lmctUpsellEveryday__ctaWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: clamp(24px, 4vw, 34px);
+    text-align: center;
+  }
+
+  .lmctUpsellEveryday__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 54px;
+    width: min(100%, 430px);
+    padding: 16px 22px;
+    border: 0;
+    border-radius: 8px;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--lmct-blue) 0%, var(--lmct-blue-deep) 100%);
+    box-shadow: 0 16px 34px rgba(0, 120, 212, 0.28);
+    font-size: clamp(15px, 1.7vw, 17px);
+    font-weight: 950;
+    line-height: 1.1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  }
+
+  .lmctUpsellEveryday__cta:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 20px 44px rgba(0, 120, 212, 0.34);
+    filter: saturate(1.08);
+  }
+
+  .lmctUpsellEveryday__cta:focus-visible {
+    outline: 3px solid rgba(0, 174, 239, 0.34);
+    outline-offset: 4px;
+  }
+
+  .lmctUpsellEveryday__note {
+    margin: 0;
+    color: var(--lmct-muted);
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.4;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lmctUpsellEveryday__card:hover {
+      border-color: rgba(0, 174, 239, 0.24);
+      transform: translateY(-4px);
+      box-shadow: var(--lmct-shadow);
+    }
+
+    .lmctUpsellEveryday__card:hover .lmctUpsellEveryday__media img {
+      transform: scale(1.035);
+    }
+
+    .lmctUpsellEveryday__card:hover .lmctUpsellEveryday__logoTile img {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .lmctUpsellEveryday__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lmctUpsellEveryday__card--partners {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .lmctUpsellEveryday {
+      padding: 44px 14px;
+    }
+
+    .lmctUpsellEveryday__header {
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .lmctUpsellEveryday__lead {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .lmctUpsellEveryday__cards {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .lmctUpsellEveryday__card--partners {
+      grid-column: auto;
+    }
+
+    .lmctUpsellEveryday__media {
+      aspect-ratio: 16 / 9;
+    }
+
+    .lmctUpsellEveryday__logoPanel {
+      gap: 8px;
+      padding: 14px;
+    }
+
+    .lmctUpsellEveryday__logoTile {
+      min-height: 66px;
+      padding: 10px;
+    }
+
+    .lmctUpsellEveryday__summary {
+      justify-content: flex-start;
+      padding: 12px;
+    }
+
+    .lmctUpsellEveryday__summaryLabel {
+      text-align: left;
+    }
+
+    .lmctUpsellEveryday__pill {
+      flex: 1 1 calc(50% - 8px);
+      justify-content: center;
+      min-height: 38px;
+      text-align: center;
+    }
+
+    .lmctUpsellEveryday__cta {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .lmctUpsellEveryday__pill {
+      flex-basis: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctUpsellEveryday__card,
+    .lmctUpsellEveryday__media img,
+    .lmctUpsellEveryday__cta {
+      transition: none;
+    }
+
+    .lmctUpsellEveryday__cta:hover,
+    .lmctUpsellEveryday__card:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<section class="lmctUpsellEveryday" aria-labelledby="lmct-upsell-everyday-title">
+  <div class="lmctUpsellEveryday__inner">
+    <header class="lmctUpsellEveryday__header">
+      <p class="lmctUpsellEveryday__eyebrow">More Than Just Entries</p>
+      <h2 class="lmctUpsellEveryday__title" id="lmct-upsell-everyday-title">
+        Your Membership<br />
+        <span>Does More</span>
+      </h2>
+      <p class="lmctUpsellEveryday__lead">
+        Get access to everyday LMCT+ member benefits across fuel, groceries and participating partners.
+      </p>
+    </header>
+
+    <div class="lmctUpsellEveryday__cards">
+      <article class="lmctUpsellEveryday__card">
+        <div class="lmctUpsellEveryday__media">
+          <img
+            src="https://images.clickfunnels.com/58/cbd1cb2b024ec3aa6fdde4f1252df5/Untitled-2_0000_IMG_0955.jpg"
+            alt="Member saving at LMCT+ Petrol"
+            width="720"
+            height="450"
+            loading="lazy"
+          />
+          <span class="lmctUpsellEveryday__mediaBadge">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="M4 21V5.5C4 4.12 5.12 3 6.5 3h5A2.5 2.5 0 0 1 14 5.5V21" stroke="currentColor" stroke-width="2" />
+              <path d="M8 7h2M4 12h10M14 8h1.5A2.5 2.5 0 0 1 18 10.5V18a1.5 1.5 0 0 0 3 0v-5.5a2.5 2.5 0 0 0-.73-1.77L18 8.46V5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            LMCT+ Petrol
+          </span>
+        </div>
+        <div class="lmctUpsellEveryday__body">
+          <p class="lmctUpsellEveryday__tag">Fuel Benefits</p>
+          <h3 class="lmctUpsellEveryday__cardTitle">Save Big At The Pump</h3>
+          <p class="lmctUpsellEveryday__text">
+            Access LMCT+ Petrol benefits, including genuine wholesale pricing where available.
+          </p>
+          <p class="lmctUpsellEveryday__proof">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Member fuel benefit
+          </p>
+        </div>
+      </article>
+
+      <article class="lmctUpsellEveryday__card">
+        <div class="lmctUpsellEveryday__media">
+          <img
+            src="https://images.clickfunnels.com/29/a2dc4d36d34fa7bd36d001ebbf4d16/sssaaa.jpg"
+            alt="LMCT+ Supermarket, Deer Park"
+            width="720"
+            height="450"
+            loading="lazy"
+          />
+          <span class="lmctUpsellEveryday__mediaBadge">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="M5 7h14l-1.4 8.4a2 2 0 0 1-1.97 1.6H8.37a2 2 0 0 1-1.97-1.6L5 7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+              <path d="M9 7V5a3 3 0 0 1 6 0v2M9 20h.01M15 20h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            LMCT+ Supermarkets
+          </span>
+        </div>
+        <div class="lmctUpsellEveryday__body">
+          <p class="lmctUpsellEveryday__tag">Grocery Benefits</p>
+          <h3 class="lmctUpsellEveryday__cardTitle">Groceries At Wholesale Prices</h3>
+          <p class="lmctUpsellEveryday__text">
+            LMCT+ Supermarkets are on the way, giving members access to genuine wholesale pricing on everyday groceries.
+          </p>
+          <p class="lmctUpsellEveryday__proof">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Member grocery pricing
+          </p>
+        </div>
+      </article>
+
+      <article class="lmctUpsellEveryday__card lmctUpsellEveryday__card--partners">
+        <div class="lmctUpsellEveryday__media">
+          <div class="lmctUpsellEveryday__logoPanel" aria-label="Participating LMCT+ partner examples">
+            <div class="lmctUpsellEveryday__logoTile">
+              <img
+                src="https://images.clickfunnels.com/7f/c7860003e44853904ddb51e4bea948/Untitled-3_0001_UT_0005_Untitled-3_0005_lotus.png"
+                alt="Lotus Caravans"
+                width="180"
+                height="70"
+                loading="lazy"
+              />
+            </div>
+            <div class="lmctUpsellEveryday__logoTile">
+              <img
+                src="https://images.clickfunnels.com/b6/38cbd184fd49cf893b3afd374eef4c/Untitled-3_0001_UT_0001_Untitled-3_0006_betta.png"
+                alt="Betta"
+                width="180"
+                height="70"
+                loading="lazy"
+              />
+            </div>
+            <div class="lmctUpsellEveryday__logoTile">
+              <img
+                src="https://images.clickfunnels.com/48/1f3e0a011e4e53b64a3c676419fe48/Untitled-3_0001_UT_0000_Untitled-3_0003_adore.png"
+                alt="Adore Beauty"
+                width="180"
+                height="70"
+                loading="lazy"
+              />
+            </div>
+            <div class="lmctUpsellEveryday__logoTile">
+              <img
+                src="https://images.clickfunnels.com/b3/52c5a8b3254b7cba7c5646946497cb/Untitled-3_0001_UT_0002_Untitled-3_0004_flippy.png"
+                alt="LMCT+ partner brand"
+                width="180"
+                height="70"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <span class="lmctUpsellEveryday__mediaBadge">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v18M5 8h14a2 2 0 0 1 2 2v2H3v-2a2 2 0 0 1 2-2ZM5 12h14v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+              <path d="M12 8c-1.8 0-4-1.2-4-3a2 2 0 0 1 3.4-1.4C12.2 4.4 12 8 12 8Zm0 0c1.8 0 4-1.2 4-3a2 2 0 0 0-3.4-1.4C11.8 4.4 12 8 12 8Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+            Partner Offers
+          </span>
+        </div>
+        <div class="lmctUpsellEveryday__body">
+          <p class="lmctUpsellEveryday__tag">LMCT+ Benefits</p>
+          <h3 class="lmctUpsellEveryday__cardTitle">More Value From Your Membership</h3>
+          <p class="lmctUpsellEveryday__text">
+            Unlock Entry discounts at selected participating partners, member offers and LMCT+ app access.
+          </p>
+          <p class="lmctUpsellEveryday__proof">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Entry member benefits
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <div class="lmctUpsellEveryday__summary" aria-label="Entry membership benefit summary">
+      <p class="lmctUpsellEveryday__summaryLabel">Your Entry Membership Includes</p>
+      <span class="lmctUpsellEveryday__pill">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Automatic Draw Entries
+      </span>
+      <span class="lmctUpsellEveryday__pill">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Fuel Benefits
+      </span>
+      <span class="lmctUpsellEveryday__pill">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Grocery Benefits
+      </span>
+      <span class="lmctUpsellEveryday__pill">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Partner Offers
+      </span>
+      <span class="lmctUpsellEveryday__pill">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        LMCT+ App Access
+      </span>
+    </div>
+
+    <div class="lmctUpsellEveryday__ctaWrap">
+      <a
+        class="lmctUpsellEveryday__cta css-order-bronze"
+        href="#open-popup"
+        data-title="css-order-bronze"
+        aria-label="Join Entry and claim 100 bonus entries"
+      >
+        Join Entry &amp; Claim 100 Bonus Entries
+      </a>
+      <p class="lmctUpsellEveryday__note">
+        Get your 100 bonus entries and unlock your LMCT+ member benefits.
+      </p>
+    </div>
+  </div>
+</section>

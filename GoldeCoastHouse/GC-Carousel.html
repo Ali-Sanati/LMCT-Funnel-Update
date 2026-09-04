@@ -1,0 +1,815 @@
+<!-- GOLD COAST WATERFRONT HOUSE SHOWCASE -->
+<style>
+  .gcHouseShowcase,
+  .gcHouseShowcase * {
+    box-sizing: border-box;
+  }
+
+  .gcHouseShowcase {
+    --gc-ink: #182321;
+    --gc-muted: #64706d;
+    --gc-line: #dce5e2;
+    --gc-paper: #ffffff;
+    --gc-sea: #0e7180;
+    --gc-sea-dark: #095360;
+    --gc-sun: #d9a441;
+    width: 100%;
+    /* padding: clamp(12px, 2.5vw, 30px);
+    background: linear-gradient(135deg, #eaf7f7 0%, #f3f7f4 48%, #f8f3e8 100%); */
+    color: var(--gc-ink);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .gcHouseShell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.16fr) minmax(340px, 0.84fr);
+    max-width: 1220px;
+    min-height: 590px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: var(--gc-paper);
+    border: 1px solid rgba(24, 35, 33, 0.08);
+    border-radius: 8px;
+    box-shadow: 0 22px 60px rgba(31, 67, 65, 0.14);
+  }
+
+  .gcHouseMedia {
+    position: relative;
+    min-width: 0;
+    min-height: 590px;
+    overflow: hidden;
+    background: #dce7e4;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .gcHouseMedia:active {
+    cursor: grabbing;
+  }
+
+  .gcHouseImage {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition:
+      opacity 180ms ease,
+      transform 650ms ease;
+  }
+
+  .gcHouseMedia:hover .gcHouseImage {
+    transform: scale(1.015);
+  }
+  .gcHouseMedia.gcHousePlanMode {
+    background: #f6f6f3;
+  }
+
+  .gcHouseMedia.gcHousePlanMode .gcHouseImage {
+    object-fit: contain;
+    padding: clamp(14px, 2.2vw, 28px);
+  }
+
+  .gcHouseMedia.gcHousePlanMode:hover .gcHouseImage {
+    transform: none;
+  }
+
+  .gcHouseMedia::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(7, 26, 27, 0.2), transparent 24%, transparent 70%, rgba(7, 26, 27, 0.35));
+  }
+
+  .gcHouseMedia.gcHousePlanMode::after {
+    display: none;
+  }
+  .gcHouseImage.isChanging {
+    opacity: 0.35;
+  }
+
+  .gcHouseMediaTop,
+  .gcHouseMediaBottom {
+    position: absolute;
+    z-index: 3;
+    left: clamp(16px, 2.5vw, 28px);
+    right: clamp(16px, 2.5vw, 28px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    pointer-events: none;
+  }
+
+  .gcHouseMediaTop {
+    top: clamp(16px, 2.5vw, 28px);
+  }
+  .gcHouseMediaBottom {
+    bottom: clamp(16px, 2.5vw, 28px);
+  }
+
+  .gcHouseBadge,
+  .gcHouseCounter {
+    display: inline-flex;
+    min-height: 36px;
+    align-items: center;
+    padding: 8px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 4px;
+    background: rgba(13, 39, 39, 0.78);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .gcHouseMedia.gcHousePlanMode .gcHouseBadge,
+  .gcHouseMedia.gcHousePlanMode .gcHouseCounter {
+    border-color: rgba(14, 113, 128, 0.15);
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--gc-sea-dark);
+  }
+
+  .gcHouseNav {
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    transform: translateY(-50%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--gc-ink);
+    box-shadow: 0 7px 22px rgba(8, 27, 27, 0.16);
+    cursor: pointer;
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .gcHouseNav:hover {
+    background: var(--gc-sea);
+    color: #ffffff;
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .gcHouseNav:focus-visible,
+  .gcHouseThumb:focus-visible {
+    outline: 3px solid rgba(217, 164, 65, 0.75);
+    outline-offset: 3px;
+  }
+
+  .gcHouseNavPrev {
+    left: clamp(12px, 2vw, 22px);
+  }
+  .gcHouseNavNext {
+    right: clamp(12px, 2vw, 22px);
+  }
+
+  .gcHouseNav svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .gcHouseInfo {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(28px, 4vw, 48px) clamp(24px, 3.6vw, 44px) 26px;
+  }
+
+  .gcHouseEyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 11px;
+    color: var(--gc-sea-dark);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.4;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .gcHouseEyebrow::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    flex: 0 0 auto;
+    background: var(--gc-sun);
+  }
+
+  .gcHouseTitle {
+    max-width: 520px;
+    margin: 0;
+    color: var(--gc-ink);
+    font-size: clamp(30px, 3.5vw, 48px);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: 0;
+  }
+
+  .gcHouseSlideTitle {
+    margin: 20px 0 7px;
+    color: var(--gc-ink);
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .gcHouseSlideText {
+    min-height: 60px;
+    margin: 0;
+    color: var(--gc-muted);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.55;
+  }
+
+  .gcHouseSpecGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 24px 0 0;
+    border-top: 1px solid var(--gc-line);
+    border-left: 1px solid var(--gc-line);
+  }
+
+  .gcHouseSpec {
+    min-width: 0;
+    min-height: 82px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px 10px;
+    border-right: 1px solid var(--gc-line);
+    border-bottom: 1px solid var(--gc-line);
+  }
+
+  .gcHouseSpec strong {
+    color: var(--gc-ink);
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .gcHouseSpec span {
+    margin-top: 5px;
+    overflow-wrap: anywhere;
+    color: var(--gc-muted);
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .gcHouseFeatureRow {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .gcHouseFeature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    color: #3f4e4b;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .gcHouseFeatureIcon {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #eaf4f2;
+    color: var(--gc-sea);
+  }
+
+  .gcHouseFeatureIcon svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .gcHouseThumbRail {
+    margin-top: auto;
+    padding-top: 24px;
+  }
+
+  .gcHouseThumbHeading {
+    margin: 0 0 10px;
+    color: var(--gc-muted);
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .gcHouseThumbs {
+    display: flex;
+    gap: 9px;
+    max-width: 100%;
+    padding: 3px 3px 8px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #aebbb8 transparent;
+    scroll-snap-type: x proximity;
+  }
+
+  .gcHouseThumb {
+    position: relative;
+    width: 86px;
+    height: 64px;
+    flex: 0 0 86px;
+    padding: 0;
+    overflow: hidden;
+    scroll-snap-align: start;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background: #eef1ef;
+    cursor: pointer;
+    opacity: 0.65;
+    transition:
+      border-color 180ms ease,
+      opacity 180ms ease,
+      transform 180ms ease;
+  }
+
+  .gcHouseThumb:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+  .gcHouseThumb.isActive {
+    border-color: var(--gc-sea);
+    opacity: 1;
+  }
+
+  .gcHouseThumb img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .gcHouseThumb[data-kind="plan"] img {
+    object-fit: contain;
+    padding: 3px;
+    background: #ffffff;
+  }
+
+  .gcHouseThumb span {
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    left: 3px;
+    overflow: hidden;
+    padding: 3px 4px;
+    border-radius: 2px;
+    background: rgba(12, 32, 32, 0.76);
+    color: #ffffff;
+    font-size: 8px;
+    font-weight: 800;
+    line-height: 1;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 960px) {
+    .gcHouseShell {
+      grid-template-columns: minmax(0, 1.05fr) minmax(315px, 0.95fr);
+    }
+    .gcHouseInfo {
+      padding-right: 26px;
+      padding-left: 26px;
+    }
+    .gcHouseSpecGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .gcHouseFeatureRow {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .gcHouseShowcase {
+      padding: 10px;
+    }
+    .gcHouseShell {
+      display: block;
+      min-height: 0;
+    }
+    .gcHouseMedia {
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+    }
+    .gcHouseInfo {
+      padding: 28px 20px 22px;
+    }
+    .gcHouseTitle {
+      font-size: clamp(29px, 9vw, 40px);
+    }
+    .gcHouseSlideText {
+      min-height: 0;
+    }
+    .gcHouseFeatureRow {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .gcHouseThumbRail {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 470px) {
+    .gcHouseNav {
+      width: 40px;
+      height: 40px;
+    }
+    .gcHouseBadge,
+    .gcHouseCounter {
+      min-height: 32px;
+      padding: 7px 9px;
+      font-size: 9px;
+    }
+    .gcHouseFeatureRow {
+      grid-template-columns: 1fr;
+    }
+    .gcHouseFeature {
+      font-size: 12px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gcHouseImage,
+    .gcHouseNav,
+    .gcHouseThumb {
+      transition: none;
+    }
+  }
+</style>
+
+<section class="gcHouseShowcase" id="gcHouseShowcase" aria-label="Gold Coast waterfront house gallery">
+  <div class="gcHouseShell">
+    <div class="gcHouseMedia" id="gcHouseMedia">
+      <img class="gcHouseImage" id="gcHouseImage" alt="Gold Coast waterfront house" draggable="false" />
+      <div class="gcHouseMediaTop">
+        <span class="gcHouseBadge" id="gcHouseLabel">Waterfront exterior</span>
+      </div>
+      <button class="gcHouseNav gcHouseNavPrev" id="gcHousePrev" type="button" aria-label="Previous property image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+      </button>
+      <button class="gcHouseNav gcHouseNavNext" id="gcHouseNext" type="button" aria-label="Next property image">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+      </button>
+      <div class="gcHouseMediaBottom">
+        <span></span>
+        <span class="gcHouseCounter" id="gcHouseCounter" aria-live="polite">1 / 10</span>
+      </div>
+    </div>
+
+    <div class="gcHouseInfo">
+      <!-- <p class="gcHouseEyebrow">Helensvale, Gold Coast</p> -->
+      <p class="gcHouseEyebrow">First Prize</p>
+      <h2 class="gcHouseTitle">Gold Coast Waterfront House</h2>
+      <h3 class="gcHouseSlideTitle" id="gcHouseSlideTitle">Modern waterfront living</h3>
+      <p class="gcHouseSlideText" id="gcHouseSlideText">A substantial two-storey home with a north-facing waterfront aspect, private pontoon and resort-style pool.</p>
+
+      <!-- <div class="gcHouseSpecGrid" aria-label="Property specifications">
+        <div class="gcHouseSpec"><strong>5</strong><span>Bedrooms</span></div>
+        <div class="gcHouseSpec"><strong>4</strong><span>Bathrooms</span></div>
+        <div class="gcHouseSpec"><strong>2</strong><span>Car garage</span></div>
+        <div class="gcHouseSpec"><strong>2020</strong><span>Built</span></div>
+        <div class="gcHouseSpec"><strong>480 m&sup2;</strong><span>Land</span></div>
+        <div class="gcHouseSpec"><strong>~353 m&sup2;</strong><span>Floor area</span></div>
+        <div class="gcHouseSpec"><strong>Yes</strong><span>Office</span></div>
+        <div class="gcHouseSpec"><strong>None</strong><span>Body corporate</span></div>
+      </div> -->
+
+      <div class="gcHouseFeatureRow" aria-label="Property highlights">
+        <div class="gcHouseFeature">
+          <span class="gcHouseFeatureIcon" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <path d="M4 15c2-2 4-2 6 0s4 2 6 0 4-2 4-2"></path>
+              <path d="M4 20c2-2 4-2 6 0s4 2 6 0 4-2 4-2"></path>
+              <path d="M12 3v9"></path>
+              <path d="m8 7 4-4 4 4"></path></svg
+          ></span>
+          <span>Powered pontoon</span>
+        </div>
+        <div class="gcHouseFeature">
+          <span class="gcHouseFeatureIcon" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <path d="M2 12h20"></path>
+              <path d="M5 12v7"></path>
+              <path d="M19 12v7"></path>
+              <path d="M5 7h14a3 3 0 0 1 3 3v2H2v-2a3 3 0 0 1 3-3Z"></path></svg
+          ></span>
+          <span>Large in-ground pool</span>
+        </div>
+        <div class="gcHouseFeature">
+          <span class="gcHouseFeatureIcon" aria-hidden="true"
+            ><svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.42 1.42"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path></svg
+          ></span>
+          <span>20 kW solar</span>
+        </div>
+      </div>
+
+      <div class="gcHouseThumbRail">
+        <p class="gcHouseThumbHeading">Explore the property</p>
+        <div class="gcHouseThumbs" id="gcHouseThumbs" aria-label="Property image thumbnails"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    function gcHouseReady(callback) {
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", callback);
+      else callback();
+    }
+
+    gcHouseReady(function () {
+      var slides = [
+        {
+          src: "https://images.clickfunnels.com/4d/fe0207674e40eeb0fe3e30a7ca74b3/Modern-waterfront-living.jpg",
+          label: "Waterfront exterior",
+          title: "Modern waterfront living",
+          text: "A substantial two-storey home with a north-facing waterfront aspect, private pontoon and resort-style pool.",
+          kind: "photo",
+        },
+        {
+          src: "https://images.clickfunnels.com/da/2b094e4ac5417bb86de12610bd60e7/2D-Floorplan-old.png",
+          label: "Floor plan",
+          title: "Space planned for family life",
+          text: "Approximately 353 m2 of internal space across five bedrooms, four bathrooms, a dedicated office and generous living zones.",
+          kind: "plan",
+        },
+        {
+          src: "https://images.clickfunnels.com/4e/bc5686c11445c689577c694e879822/Kitchen.jpg",
+          label: "Kitchen",
+          title: "A kitchen made for entertaining",
+          text: "Open living spaces connect the kitchen, dining and outdoor areas for relaxed everyday living and larger gatherings.",
+          kind: "photo",
+        },
+        {
+          src: "https://images.clickfunnels.com/83/b03e606ffa429ba36bd663ee6caa52/Living.jpg",
+          label: "Living",
+          title: "Generous light-filled interiors",
+          text: "Multiple living areas give the household room to come together or find a quiet corner, all kept comfortable by ducted air-conditioning.",
+          kind: "photo",
+        },
+        {
+          src: "https://images.clickfunnels.com/67/8adfed65dc4f6a8d9d29df22d6482e/Main-suite.jpg",
+          label: "Main suite",
+          title: "A private main bedroom retreat",
+          text: "The five-bedroom layout provides substantial accommodation, supported by four bathrooms and a dedicated home office.",
+          kind: "photo",
+        },
+        {
+          src: "https://images.clickfunnels.com/8c/8d5e76895047d689cd97420b5f6ee6/Bathroom.jpg",
+          label: "Bathroom",
+          title: "Contemporary finishes throughout",
+          text: "Completed in 2020, the home pairs a modern material palette with practical spaces designed for everyday family use.",
+          kind: "photo",
+        },
+        {
+          src: "https://images.clickfunnels.com/ab/1e52d9d6aa4c41ad7d5f60d46779a1/Alfresco.jpg",
+          label: "Alfresco",
+          title: "North-facing outdoor living",
+          text: "The rear of the home opens toward the water, creating an inviting setting for long lunches, pool days and sunset entertaining.",
+          kind: "photo",
+        },
+        {
+          src: "https://images.clickfunnels.com/66/122408c9964d8e8c36d0003c11b958/Pool.jpg",
+          label: "Pool",
+          title: "A resort-style waterfront edge",
+          text: "A large in-ground swimming pool anchors the outdoor area and makes the most of the Gold Coast climate.",
+          kind: "photo",
+        },
+        {
+          src: "https://images.clickfunnels.com/91/55e9ec0f0c42818917827dd0757c89/Pontoon.jpg",
+          label: "Pontoon",
+          title: "Direct access to the water",
+          text: "The private pontoon includes both power and water, giving the home a genuinely functional waterfront connection.",
+          kind: "photo",
+        },
+        {
+          src: "https://images.clickfunnels.com/9c/d6735a1e7e4d49ba11aaf1abcac716/Aerial-view.jpg",
+          label: "Aerial view",
+          title: "A complete Gold Coast lifestyle",
+          text: "Five bedrooms, pool, pontoon, 20 kW solar and no body corporate come together on a 480 m2 waterfront parcel.",
+          kind: "photo",
+        },
+      ];
+
+      var root = document.getElementById("gcHouseShowcase");
+      var media = document.getElementById("gcHouseMedia");
+      var image = document.getElementById("gcHouseImage");
+      var label = document.getElementById("gcHouseLabel");
+      var counter = document.getElementById("gcHouseCounter");
+      var title = document.getElementById("gcHouseSlideTitle");
+      var text = document.getElementById("gcHouseSlideText");
+      var thumbs = document.getElementById("gcHouseThumbs");
+      var prev = document.getElementById("gcHousePrev");
+      var next = document.getElementById("gcHouseNext");
+      var index = 0;
+      var autoTimer = null;
+      var resumeTimer = null;
+      var changeTimer = null;
+      var dragStartX = 0;
+      var dragging = false;
+      var autoMs = 6500;
+      var resumeMs = 9000;
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!root || !media || !image || !thumbs || !slides.length) return;
+
+      slides.forEach(function (slide, slideIndex) {
+        var preload = new Image();
+        var button = document.createElement("button");
+        var thumbImage = document.createElement("img");
+        var thumbLabel = document.createElement("span");
+        preload.src = slide.src;
+        button.type = "button";
+        button.className = "gcHouseThumb";
+        button.dataset.kind = slide.kind;
+        button.setAttribute("aria-label", "Show " + slide.label);
+        button.setAttribute("aria-current", slideIndex === 0 ? "true" : "false");
+        thumbImage.src = slide.src;
+        thumbImage.alt = "";
+        thumbImage.loading = slideIndex < 4 ? "eager" : "lazy";
+        thumbImage.draggable = false;
+        thumbLabel.textContent = slide.label;
+        button.appendChild(thumbImage);
+        button.appendChild(thumbLabel);
+        button.addEventListener("click", function () {
+          goTo(slideIndex, true);
+        });
+        thumbs.appendChild(button);
+      });
+
+      function updateThumbs() {
+        var buttons = thumbs.querySelectorAll(".gcHouseThumb");
+        buttons.forEach(function (button, buttonIndex) {
+          var active = buttonIndex === index;
+          button.classList.toggle("isActive", active);
+          button.setAttribute("aria-current", active ? "true" : "false");
+          if (active) {
+            var railBox = thumbs.getBoundingClientRect();
+            var buttonBox = button.getBoundingClientRect();
+            if (buttonBox.left < railBox.left || buttonBox.right > railBox.right) {
+              thumbs.scrollBy({
+                left: buttonBox.left < railBox.left ? buttonBox.left - railBox.left - 6 : buttonBox.right - railBox.right + 6,
+                behavior: reduceMotion ? "auto" : "smooth",
+              });
+            }
+          }
+        });
+      }
+
+      function render() {
+        var slide = slides[index];
+        image.classList.add("isChanging");
+        clearTimeout(changeTimer);
+        changeTimer = setTimeout(
+          function () {
+            image.src = slide.src;
+            image.alt = slide.title + ". " + slide.label + ".";
+            label.textContent = slide.label;
+            counter.textContent = index + 1 + " / " + slides.length;
+            title.textContent = slide.title;
+            text.textContent = slide.text;
+            media.classList.toggle("gcHousePlanMode", slide.kind === "plan");
+            image.classList.remove("isChanging");
+            updateThumbs();
+          },
+          reduceMotion ? 0 : 90,
+        );
+      }
+
+      function goTo(target, userInitiated) {
+        index = ((target % slides.length) + slides.length) % slides.length;
+        render();
+        if (userInitiated) pauseThenResume();
+      }
+
+      function stopAuto() {
+        if (autoTimer) {
+          clearInterval(autoTimer);
+          autoTimer = null;
+        }
+      }
+
+      function startAuto() {
+        stopAuto();
+        if (reduceMotion || document.hidden) return;
+        autoTimer = setInterval(function () {
+          goTo(index + 1, false);
+        }, autoMs);
+      }
+
+      function pauseThenResume() {
+        stopAuto();
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(startAuto, resumeMs);
+      }
+
+      prev.addEventListener("click", function () {
+        goTo(index - 1, true);
+      });
+      next.addEventListener("click", function () {
+        goTo(index + 1, true);
+      });
+
+      root.setAttribute("tabindex", "0");
+      root.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          goTo(index - 1, true);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          goTo(index + 1, true);
+        }
+      });
+
+      root.addEventListener("mouseenter", stopAuto);
+      root.addEventListener("mouseleave", startAuto);
+      root.addEventListener("focusin", stopAuto);
+      root.addEventListener("focusout", function (event) {
+        if (!root.contains(event.relatedTarget)) startAuto();
+      });
+
+      media.addEventListener("pointerdown", function (event) {
+        if (event.target.closest("button")) return;
+        dragStartX = event.clientX;
+        dragging = true;
+        stopAuto();
+        if (media.setPointerCapture) media.setPointerCapture(event.pointerId);
+      });
+
+      media.addEventListener("pointerup", function (event) {
+        if (!dragging) return;
+        var distance = event.clientX - dragStartX;
+        dragging = false;
+        if (Math.abs(distance) > 45) goTo(distance < 0 ? index + 1 : index - 1, true);
+        else pauseThenResume();
+      });
+
+      media.addEventListener("pointercancel", function () {
+        dragging = false;
+        pauseThenResume();
+      });
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) stopAuto();
+        else startAuto();
+      });
+
+      image.addEventListener("error", function () {
+        image.alt = "Property image unavailable";
+      });
+      render();
+      startAuto();
+    });
+  })();
+</script>
+<!-- GOLD COAST WATERFRONT HOUSE SHOWCASE - END -->

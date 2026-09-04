@@ -1,1420 +1,403 @@
-<!-- =========================================================
-     LMCT+ FIELD SALES — CLICKFUNNELS CLASSIC TRACKING
-     ========================================================= -->
-
-<script>
-  /**************************
-   * Copyright 2023 FunnelCare LLC, All Rights Reserved
-   * Do not share, or distribute this code without author's consent.
-   * This copyright notice must remain in place whenever using
-   * this code - DO NOT REMOVE
-   * Author - Tareq Mahmud
-   * Website: https://www.funnelcare.net
-   **************************/
-
-  (function ($) {
-    "use strict";
-
-    /* =========================================================
-     1. CENTRAL CONFIGURATION
-     ========================================================= */
-
-    var LMCT_FIELD_SALES = {
-      products: {
-        package99: {
-          key: "package99",
-          id: "5114181",
-          name: "LMCT+ Elite Monthly",
-          price: 99.99,
-        },
-
-        package199: {
-          key: "package199",
-          id: "5114182",
-          name: "LMCT+ Entry Yearly",
-          price: 199.0,
-        },
-      },
-
-      klaviyo: {
-        companyId: "S9SGLM",
-        listId: "SSnNm7",
-        source: "CF1 Physical Sales Funnel",
-      },
-
-      productRetryDelays: [0, 150, 350, 700],
-    };
-
-    window.LMCT_FIELD_SALES = LMCT_FIELD_SALES;
-
-    /* =========================================================
-     2. SAFE SESSION STORAGE
-     ========================================================= */
-
-    function sessionSet(key, value) {
-      try {
-        sessionStorage.setItem(key, value);
-      } catch (err) {}
-    }
-
-    function sessionGet(key) {
-      try {
-        return sessionStorage.getItem(key) || "";
-      } catch (err) {
-        return "";
-      }
-    }
-
-    /* =========================================================
-     3. SALES REPRESENTATIVE TRACKING
-     ========================================================= */
-
-    var queryParams = new URLSearchParams(window.location.search);
-
-    function sanitizeSalesCode(value) {
-      return String(value || "")
-        .replace(/[^A-Za-z0-9_-]/g, "")
-        .slice(0, 40);
-    }
-
-    function getRepFromUrl() {
-      return sanitizeSalesCode(queryParams.get("rep") || queryParams.get("utm_content") || queryParams.get("sales_code") || "");
-    }
-
-    function getSalesRep() {
-      var stored = sanitizeSalesCode(sessionGet("lmctFieldSalesRep"));
-
-      if (stored) {
-        return stored;
-      }
-
-      return getRepFromUrl();
-    }
-
-    function saveSalesRep(rep) {
-      rep = sanitizeSalesCode(rep);
-
-      if (!rep) return;
-
-      sessionSet("lmctFieldSalesRep", rep);
-    }
-
-    /* =========================================================
-     4. OPTIONAL SALES REP DISPLAY ON CUSTOM PAGE
-
-     Supports markup containing:
-
-     data-lmct-rep-row
-     data-lmct-rep-badge
-     data-lmct-rep-code
-     data-lmct-rep-manual
-     data-lmct-sales-code-input
-     ========================================================= */
-
-    function updateRepDisplay() {
-      var rep = getSalesRep();
-
-      var $row = $("[data-lmct-rep-row]");
-      var $badge = $("[data-lmct-rep-badge]");
-      var $code = $("[data-lmct-rep-code]");
-      var $manual = $("[data-lmct-rep-manual]");
-      var $input = $("[data-lmct-sales-code-input]");
-
-      if (!$row.length) return;
-
-      $row.addClass("lmctFS__repRow--visible");
-
-      if (rep) {
-        $code.text(rep);
-
-        $badge.addClass("lmctFS__repBadge--visible");
-
-        $manual.removeClass("lmctFS__repManual--visible");
-
-        if ($input.length) {
-          $input.val(rep);
-        }
-
-        return;
-      }
-
-      $badge.removeClass("lmctFS__repBadge--visible");
-
-      $manual.addClass("lmctFS__repManual--visible");
-    }
-
-    function initRepTracking() {
-      var urlRep = getRepFromUrl();
-
-      if (urlRep) {
-        saveSalesRep(urlRep);
-      }
-
-      updateRepDisplay();
-
-      $(document).on("input change", "[data-lmct-sales-code-input]", function () {
-        var clean = sanitizeSalesCode($(this).val());
-
-        $(this).val(clean);
-
-        if (clean) {
-          saveSalesRep(clean);
-        }
-
-        updateRepDisplay();
-      });
-    }
-
-    /* =========================================================
-     5. PACKAGE HELPERS
-     ========================================================= */
-
-    function getProduct(packageKey) {
-      return LMCT_FIELD_SALES.products[packageKey] || null;
-    }
-
-    function getSelectedPackageKey() {
-      var stored = sessionGet("lmctFieldSalesPackage");
-
-      if (stored && LMCT_FIELD_SALES.products[stored]) {
-        return stored;
-      }
-
-      return "";
-    }
-
-    function markSelectedPackage(packageKey) {
-      $("[data-lmct-plan]").each(function () {
-        var selected = $(this).attr("data-lmct-plan") === packageKey;
-
-        $(this).toggleClass("lmctFS__plan--selected", selected);
-      });
-    }
-
-    /* =========================================================
-     6. HIDE/SHOW CORRECT CF PRODUCT
-     ========================================================= */
-
-    function showOnlyProduct(productId) {
-      $('#modalPopup input[name="purchase[product_id]"], ' + '.o2step_step2 input[name="purchase[product_id]"]').each(function () {
-        var $input = $(this);
-
-        var $productRow = $input.closest('[data-cf-product-template="true"]');
-
-        if (!$productRow.length) return;
-
-        if (String($input.val()) === String(productId)) {
-          $productRow.show();
-        } else {
-          $productRow.hide();
-        }
-      });
-    }
-
-    /* =========================================================
-     7. SELECT CLICKFUNNELS PRODUCT
-     ========================================================= */
-
-    function selectClickFunnelsProduct(productId) {
-      var $radio = $("#modalPopup " + 'input[name="purchase[product_id]"]' + '[value="' + productId + '"]').first();
-
-      if (!$radio.length) {
-        $radio = $(".o2step_step2 " + 'input[name="purchase[product_id]"]' + '[value="' + productId + '"]').first();
-      }
-
-      if (!$radio.length) {
-        return false;
-      }
-
-      /*
-       * Use .click() rather than only changing
-       * the checked property so ClickFunnels
-       * receives its normal events.
-       */
-      if (!$radio.is(":checked")) {
-        $radio.trigger("click");
-      }
-
-      $radio.prop("checked", true);
-
-      /*
-       * Sync corresponding CF hidden cart inputs
-       * without touching unrelated bump products.
-       */
-      var baseProductIds = [LMCT_FIELD_SALES.products.package99.id, LMCT_FIELD_SALES.products.package199.id];
-
-      $('#cfAR input[name="purchase[product_ids][]"]').each(function () {
-        var value = String($(this).val());
-
-        if (baseProductIds.indexOf(value) === -1) {
-          return;
-        }
-
-        $(this).prop("checked", value === String(productId));
-      });
-
-      /*
-       * Visual selected state in popup.
-       */
-      $(".elOrderProductOptinProducts").removeClass("checked-item");
-
-      $radio.closest(".elOrderProductOptinProducts").addClass("checked-item");
-
-      if (typeof window.rebuildOrderSummary === "function") {
-        window.rebuildOrderSummary();
-      }
-
-      $(document).trigger("cfpt:cart-updated");
-
-      return true;
-    }
-
-    /* =========================================================
-     8. OPEN PACKAGE
-     ========================================================= */
-
-    function openFieldSalesPackage(packageKey) {
-      var product = getProduct(packageKey);
-
-      if (!product) {
-        console.warn("Unknown LMCT package:", packageKey);
-
-        return;
-      }
-
-      sessionSet("lmctFieldSalesPackage", packageKey);
-
-      localStorage.setItem("selected_package", packageKey);
-
-      window.lmctSelectedFieldSalesPackage = {
-        key: packageKey,
-        id: product.id,
-        name: product.name,
-        price: product.price,
-      };
-
-      markSelectedPackage(packageKey);
-
-      /*
-       * Hide non-selected CF products.
-       */
-      showOnlyProduct(product.id);
-
-      /*
-       * Open native ClickFunnels popup.
-       */
-      var $popupTrigger = $('[data-title*="open-popup"] a').first();
-
-      if ($popupTrigger.length) {
-        $popupTrigger.trigger("click");
-      }
-
-      /*
-       * CF may finish rendering after popup
-       * is opened, so retry selection a few
-       * times.
-       */
-      LMCT_FIELD_SALES.productRetryDelays.forEach(function (delay) {
-        setTimeout(function () {
-          showOnlyProduct(product.id);
-          selectClickFunnelsProduct(product.id);
-        }, delay);
-      });
-    }
-
-    window.openFieldSalesPackage = openFieldSalesPackage;
-
-    /* =========================================================
-     9. CUSTOM PACKAGE BUTTONS
-
-     Expected markup:
-
-     data-lmct-package="package99"
-
-     or
-
-     data-lmct-package="package199"
-     ========================================================= */
-
-    function initPackageButtons() {
-      $(document).on("click.lmctFieldSales", ".lmctFS__select[data-lmct-package]", function (event) {
-        /*
-         * We open the real CF popup ourselves,
-         * so prevent href="#open-popup" from
-         * firing separately.
-         */
-        event.preventDefault();
-
-        var packageKey = $(this).attr("data-lmct-package");
-
-        openFieldSalesPackage(packageKey);
-      });
-    }
-
-    /* =========================================================
-     10. POPUP DISPLAY/STYLING
-     ========================================================= */
-
-    function initialisePopupStyles() {
-      $(".elOS1Shipping").hide();
-
-      var $walletPay = $("#tmp_oapap-21334-170-131");
-
-      var $cardForm = $(".elCreditCardForm");
-
-      if ($walletPay.length && $cardForm.length) {
-        $walletPay.insertBefore($cardForm.first());
-      }
-
-      $('[name="purchase[product_id]"]').each(function () {
-        $(this).closest(".elOrderProductOptinProducts").css({
-          "margin-top": "10px",
-          padding: "5px",
-          border: "1px solid rgba(0,0,0,0.2)",
-          "border-radius": "20px",
-          cursor: "pointer",
-        });
-      });
-
-      $(".elOrderProductOptinProducts").each(function () {
-        if ($(this).find('input[name="purchase[product_id]"]').is(":checked")) {
-          $(this).addClass("checked-item");
-        }
-      });
-
-      $(document).on("change", '.elOrderProductOptinProductName input[name="purchase[product_id]"]', function () {
-        if (!$(this).is(":checked")) {
-          return;
-        }
-
-        $(".elOrderProductOptinProducts").removeClass("checked-item");
-
-        $(this).closest(".elOrderProductOptinProducts").addClass("checked-item");
-      });
-    }
-
-    /* =========================================================
-     11. NAME VALIDATION
-     ========================================================= */
-
-    var invalidName = false;
-
-    function validateNameField(input) {
-      var $input = $(input);
-
-      var value = $.trim($input.val() || "");
-
-      /*
-       * Allows letters from international
-       * alphabets plus:
-       *
-       * spaces
-       * apostrophes
-       * hyphens
-       * periods
-       */
-
-      var validCharacters;
-
-      try {
-        validCharacters = /^[\p{L}\p{M}\s.'-]+$/u.test(value);
-      } catch (err) {
-        validCharacters = /^[A-Za-z\s.'-]+$/.test(value);
-      }
-
-      /*
-       * Empty field is left to ClickFunnels'
-       * native required validation.
-       */
-      if (!value) {
-        invalidName = false;
-
-        $input
-          .css({
-            "border-color": "",
-            "border-width": "",
-          })
-          .removeAttr("aria-invalid");
-
-        $("#error-msg-name").addClass("hide").text("");
-
-        return;
-      }
-
-      invalidName = !validCharacters;
-
-      if (invalidName) {
-        $input
-          .css({
-            "border-color": "#b91517",
-            "border-width": "3px",
-          })
-          .attr("aria-invalid", "true");
-
-        $("#error-msg-name").text("Please enter a valid name.").removeClass("hide").addClass("errorMsgName");
-
-        $("#valid-msg-name").addClass("hide");
-
-        return;
-      }
-
-      $input
-        .css({
-          "border-color": "#4a8920",
-          "border-width": "3px",
-        })
-        .attr("aria-invalid", "false");
-
-      $("#error-msg-name").addClass("hide").removeClass("errorMsgName").text("");
-
-      $("#valid-msg-name").removeClass("hide").addClass("validMsgName");
-    }
-
-    function initNameValidation() {
-      var $name = $('#modalPopup input[name="name"]');
-
-      if (!$name.length) {
-        $name = $('input[name="name"]');
-      }
-
-      if (!$name.length) return;
-
-      if (!$("#error-msg-name").length) {
-        $name.after('<div id="valid-msg-name" class="hide"></div>' + '<div id="error-msg-name" class="hide"></div>');
-      }
-
-      $name.attr("data-storage", "false");
-
-      $(document).on("input", '#modalPopup input[name="name"]', function () {
-        validateNameField(this);
-      });
-
-      /*
-       * Anchors do not actually respect
-       * .prop("disabled", true), therefore
-       * explicitly prevent navigation if
-       * the name is invalid.
-       */
-      $(document).on("click", '[href="#submit-form-2step"], ' + '[href="#submit-form-2step-order"]', function (event) {
-        var $field = $('#modalPopup input[name="name"]');
-
-        if ($field.length) {
-          validateNameField($field[0]);
-        }
-
-        if (!invalidName) {
-          return;
-        }
-
-        event.preventDefault();
-        event.stopImmediatePropagation();
-
-        $field.trigger("focus");
-      });
-    }
-
-    /* =========================================================
-     12. KLAVIYO CUSTOMER HELPERS
-     ========================================================= */
-
-    function getPopupValue(selector) {
-      var $input = $("#modalPopup " + selector).first();
-
-      if (!$input.length) {
-        $input = $(selector).first();
-      }
-
-      return $input.length ? $.trim($input.val() || "") : "";
-    }
-
-    function splitFullName(fullName) {
-      fullName = $.trim(fullName || "");
-
-      if (!fullName) {
-        return {
-          firstName: "",
-          lastName: "",
-        };
-      }
-
-      var parts = fullName.split(/\s+/);
-
-      return {
-        firstName: parts.shift() || "",
-        lastName: parts.join(" "),
-      };
-    }
-
-    function getFormattedPhone() {
-      var input = document.querySelector('#modalPopup input[name="phone"]');
-
-      if (!input) return "";
-
-      /*
-       * Prefer intl-tel-input's E.164 number
-       * where available.
-       */
-      try {
-        if (window.intlTelInputGlobals && typeof window.intlTelInputGlobals.getInstance === "function") {
-          var instance = window.intlTelInputGlobals.getInstance(input);
-
-          if (instance) {
-            var formatted = instance.getNumber();
-
-            if (formatted && formatted.charAt(0) === "+") {
-              return formatted;
-            }
-          }
-        }
-      } catch (err) {}
-
-      /*
-       * Don't send an unknown local-format
-       * number as Klaviyo phone_number.
-       */
-      return "";
-    }
-
-    /* =========================================================
-     13. BUILD KLAVIYO PAYLOAD
-     ========================================================= */
-
-    function buildKlaviyoPayload(email) {
-      var fullName = getPopupValue('input[name="name"]');
-
-      var rawPhone = getPopupValue('input[name="phone"]');
-
-      var name = splitFullName(fullName);
-
-      var rep = getSalesRep();
-
-      var selectedPackage = getSelectedPackageKey();
-
-      var attributes = {
-        email: email,
-
-        properties: {
-          signup_source: "physical_sales",
-
-          sales_rep: rep || "",
-
-          selected_package: selectedPackage || "",
-
-          full_name: fullName || "",
-
-          phone_entered: rawPhone || "",
-
-          utm_source: queryParams.get("utm_source") || "",
-
-          utm_medium: queryParams.get("utm_medium") || "",
-
-          utm_campaign: queryParams.get("utm_campaign") || "",
-
-          utm_content: queryParams.get("utm_content") || "",
-        },
-
-        subscriptions: {
-          email: {
-            marketing: {
-              consent: "SUBSCRIBED",
-            },
-          },
-        },
-      };
-
-      if (name.firstName) {
-        attributes.first_name = name.firstName;
-      }
-
-      if (name.lastName) {
-        attributes.last_name = name.lastName;
-      }
-
-      var formattedPhone = getFormattedPhone();
-
-      if (formattedPhone) {
-        attributes.phone_number = formattedPhone;
-      }
-
-      return {
-        data: {
-          type: "subscription",
-
-          attributes: {
-            custom_source: LMCT_FIELD_SALES.klaviyo.source,
-
-            profile: {
-              data: {
-                type: "profile",
-                attributes: attributes,
-              },
-            },
-          },
-
-          relationships: {
-            list: {
-              data: {
-                type: "list",
-                id: LMCT_FIELD_SALES.klaviyo.listId,
-              },
-            },
-          },
-        },
-      };
-    }
-
-    /* =========================================================
-     14. SEND TO KLAVIYO
-     ========================================================= */
-
-    function sendCustomerToKlaviyo() {
-      var $email = $('#modalPopup input[name="email"]').first();
-
-      if (!$email.length) {
-        $email = $('input[name="email"]').first();
-      }
-
-      if (!$email.length) return;
-
-      var email = $.trim($email.val() || "");
-
-      var validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      if (!validEmail.test(email)) {
-        return;
-      }
-
-      var normalizedEmail = email.toLowerCase();
-
-      var sentKey = "lmctKlaviyoSent:" + normalizedEmail;
-
-      if ($email.attr("data-kl-sent") === normalizedEmail) {
-        return;
-      }
-
-      if (sessionGet(sentKey) === "1") {
-        return;
-      }
-
-      $email.attr("data-kl-sent", normalizedEmail);
-
-      sessionSet(sentKey, "1");
-
-      if (!window.fetch) return;
-
-      try {
-        fetch("https://a.klaviyo.com/client/subscriptions/" + "?company_id=" + encodeURIComponent(LMCT_FIELD_SALES.klaviyo.companyId), {
-          method: "POST",
-
-          keepalive: true,
-
-          headers: {
-            "Content-Type": "application/json",
-
-            revision: "2025-07-15",
-          },
-
-          body: JSON.stringify(buildKlaviyoPayload(email)),
-        }).catch(function () {
-          /*
-           * Never allow Klaviyo failure
-           * to interrupt CF checkout.
-           */
-        });
-      } catch (err) {}
-    }
-
-    /* =========================================================
-     15. KLAVIYO CHECKOUT TRIGGER
-     ========================================================= */
-
-    function initKlaviyo() {
-      /*
-       * Actual FINAL ClickFunnels checkout
-       * button from this funnel:
-       *
-       * #submit-form-2step-order
-       */
-
-      $(document).on("click", '[href="#submit-form-2step-order"]', function () {
-        sendCustomerToKlaviyo();
-      });
-    }
-
-    /* =========================================================
-     16. INITIALISE
-     ========================================================= */
-
-    $(function () {
-      initRepTracking();
-      initPackageButtons();
-      initialisePopupStyles();
-      initNameValidation();
-      initKlaviyo();
-    });
-  })(jQuery);
-</script>
-
-<!-- =========================================================
-     CLICKFUNNELS PRODUCT / POPUP STYLING
-     ========================================================= -->
-
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  .activeRadioProduct {
-    background: none !important;
+  /* ============================================
+     LMCT+ Terms & Conditions — Scoped Styles
+     ============================================ */
+  .lmct-tcs {
+    font-family: "Montserrat", sans-serif;
+    color: #1a1a1a;
+    line-height: 1.65;
+    font-size: 15px;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 8px 4px;
   }
-
-  .elOrderProductOptinProducts label {
-    font-weight: 700 !important;
-    font-size: 10px !important;
+  .lmct-tcs * {
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
   }
-
-  .checked-item {
-    display: block !important;
-    border: 2px solid rgba(0, 0, 0, 0.2) !important;
-    border-image-slice: 1 !important;
-    box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.3) !important;
+  .lmct-tcs h1.doc-title {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #0f0f0f;
+    text-align: center;
+    margin: 0 0 8px 0;
+    padding-bottom: 18px;
+    border-bottom: 2px solid #1a1a1a;
+    line-height: 1.3;
   }
-
-  .errorMsgName {
-    display: block !important;
-    color: red;
-    position: relative;
-    margin-top: 6px;
-    font-size: 12px;
+  .lmct-tcs .doc-intro {
+    font-size: 14px;
+    color: #444;
+    margin: 24px 0 32px 0;
+    text-align: center;
+    line-height: 1.6;
+  }
+  .lmct-tcs h2.section {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0f0f0f;
+    margin: 44px 0 18px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d4d4d4;
+  }
+  .lmct-tcs h3.subsection {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f0f0f;
+    margin: 28px 0 14px 0;
+    letter-spacing: 0.02em;
+  }
+  .lmct-tcs h3.prize-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f0f0f;
+    margin: 24px 0 8px 0;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+  .lmct-tcs h3.prize-subtitle {
+    font-size: 15px;
     font-weight: 600;
+    color: #555;
+    margin: 0 0 24px 0;
+    text-align: center;
+    letter-spacing: 0.04em;
   }
-
-  @media only screen and (max-width: 770px) and (min-width: 0px) {
-    [data-title*="smart-product-"] .elHeadline {
-      text-align: left !important;
+  .lmct-tcs p {
+    margin: 0 0 14px 0;
+  }
+  .lmct-tcs a {
+    color: #b8112d;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(184, 17, 45, 0.25);
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+    word-break: break-word;
+  }
+  .lmct-tcs a:hover {
+    color: #8a0c21;
+    border-bottom-color: rgba(184, 17, 45, 0.7);
+  }
+  .lmct-tcs .term {
+    font-weight: 600;
+    color: #0f0f0f;
+  }
+  .lmct-tcs .permits {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid #d4d4d4;
+    font-size: 13px;
+    color: #555;
+    text-align: center;
+    line-height: 1.8;
+  }
+  .lmct-tcs .permits strong {
+    color: #0f0f0f;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 600px) {
+    .lmct-tcs {
+      font-size: 14px;
+      padding: 4px 2px;
     }
-  }
-</style>
-
-<!-- =========================================================
-     CF PRO TOOLS — PRODUCT PRICE CONFIGURATION
-     ========================================================= -->
-
-<script>
-  /*
-   * IMPORTANT:
-   *
-   * These IDs now match the ACTUAL products
-   * inside this ClickFunnels popup.
-   */
-
-  window.CFPT = window.CFPT || {};
-
-  CFPT.prodPrices = {
-    5114181: 99.99,
-    5114182: 199.0,
-  };
-
-  CFPT.freePriceDisplay = "FREE";
-  CFPT.orderTotalLabel = "Order Total:";
-</script>
-
-<!-- =========================================================
-     CF PRO TOOLS ORDER SUMMARY
-     ========================================================= -->
-
-<script>
-  /**************************
-   * Copyright 2019 CF Pro Tools, All Rights Reserved
-   * Do not share, or distribute this code without author's consent.
-   * This copyright notice must remain in place whenever using
-   * this code - DO NOT REMOVE
-   * Author: Jaime Smith
-   * Website: https://cfprotools.com
-   * Add-on: CF Order Summary
-   * Version: 2.0
-   * Last Updated: 10/28/2019
-   **************************/
-
-  var $summTemplate = null;
-
-  $(function () {
-    window.cfpe = window.cfpe || {};
-
-    window.cfpe.orderTotal = window.cfpe.orderTotal || 0;
-
-    window.cfptOrderTotal = null;
-
-    setSummaryTemplate();
-
-    $("#bump-offer").off();
-
-    rebuildOrderSummary();
-
-    $(document).on("change", ".qty_select," + '.o2step_step2 [name="purchase[product_id]"],' + '[data-de-type="orpo"] [name="purchase[product_id]"],' + "#bump-offer", function () {
-      $("#bump-offer, " + '[id*="bump_offer_"]').each(function () {
-        var bumpId = $(this).val();
-
-        var $hidden = $("#cfAR " + '[name="purchase[product_ids][]"]' + '[value="' + bumpId + '"]');
-
-        $hidden.prop("checked", $(this).is(":checked"));
-      });
-
-      rebuildOrderSummary();
-    });
-
-    $(document).on("cfpt:cart-updated", function () {
-      rebuildOrderSummary();
-    });
-  });
-
-  function setSummaryTemplate() {
-    $('[data-de-type="ors"], ' + ".elOrderProductOptions:not(:has(input,select))")
-      .first()
-      .attr("data-title", "cf-order-summary");
-
-    $summTemplate = $('[data-title="cf-order-summary"] ' + ".elOrderProductOptinProducts")
-      .first()
-      .clone();
-  }
-
-  function rebuildOrderSummary() {
-    var cfpt = window.CFPT || {};
-
-    var prodPrices = cfpt.prodPrices || {};
-
-    var freePriceDisplay = cfpt.freePriceDisplay || null;
-
-    var orderTotalLabel = cfpt.orderTotalLabel || null;
-
-    var prodSelParent = '[data-de-type="orpo"]';
-
-    var appendTo = '[data-title="cf-order-summary"] ' + ".elOrderProductOptions";
-
-    if ($(".o2step_wrapper").length > 0) {
-      prodSelParent = ".o2step_step2";
-
-      appendTo = '[data-title="cf-order-summary"]';
+    .lmct-tcs h1.doc-title {
+      font-size: 22px;
     }
-
-    if (!$summTemplate) {
-      setSummaryTemplate();
+    .lmct-tcs h2.section {
+      font-size: 14px;
     }
-
-    var $summary = $('[data-title="cf-order-summary"]');
-
-    $summary.hide();
-
-    $summary.find(".elOrderProductOptinProducts").remove();
-
-    window.cfptCartProds = {};
-
-    $("#cfAR " + '[name="purchase[product_ids][]"]:checked').each(function () {
-      var productId = String($(this).val());
-
-      if (window.cfptCartProds[productId]) {
-        window.cfptCartProds[productId].qty++;
-      } else {
-        window.cfptCartProds[productId] = {
-          qty: 1,
-        };
-      }
-    });
-
-    var orderTotal = 0;
-    var orderCurrency = "AUD";
-
-    $.each(window.cfptCartProds, function (productId, item) {
-      var qty = item.qty;
-
-      var $productInput = $(prodSelParent + ' [name="' + productId + '_qty"]');
-
-      if (!$productInput.length) {
-        $productInput = $(prodSelParent + ' [name="purchase[product_id]"]' + '[value="' + productId + '"]');
-      }
-
-      if (!$productInput.length) {
-        return;
-      }
-
-      var $product = $productInput.closest("[data-cf-product-template]");
-
-      if (!$product.length) {
-        return;
-      }
-
-      var productName = $product.find("[data-cf-product-name]").html() || "";
-
-      var $priceElement = $product.find("[data-cf-product-price]");
-
-      var productPrice;
-
-      /*
-       * First use our explicit price map.
-       */
-      if (Object.prototype.hasOwnProperty.call(prodPrices, productId)) {
-        productPrice = Number(prodPrices[productId]);
-      }
-
-      /*
-       * If product is not configured,
-       * prefer CF's numeric data-product-amount.
-       *
-       * This avoids turning:
-       *
-       * $199 (2 month free)
-       *
-       * into:
-       *
-       * 1992
-       */
-      if (!Number.isFinite(productPrice)) {
-        productPrice = parseFloat($productInput.attr("data-product-amount"));
-      }
-
-      /*
-       * Last-resort fallback:
-       * take ONLY the first monetary number.
-       */
-      if (!Number.isFinite(productPrice)) {
-        var priceText = $priceElement.text() || "";
-
-        var match = priceText.match(/[\d,]+(?:\.\d+)?/);
-
-        if (match) {
-          productPrice = parseFloat(match[0].replace(/,/g, ""));
-        }
-      }
-
-      if (!Number.isFinite(productPrice)) {
-        return;
-      }
-
-      var subtotal = qty * productPrice;
-
-      var currency = $priceElement.attr("taxamo-currency") || "AUD";
-
-      orderCurrency = currency;
-
-      var $row = $summTemplate.clone();
-
-      $row.attr("data-product_id", productId);
-
-      $row.attr("data-quantity", qty);
-
-      $row.find(".product-name").html(productName);
-
-      if (freePriceDisplay && subtotal === 0) {
-        $row.find(".product-price").attr("taxamo-currency", currency).html(freePriceDisplay);
-      } else {
-        var formatted = subtotal.toLocaleString(undefined, {
-          style: "currency",
-          currency: currency,
-        });
-
-        $row.find(".product-price").attr("taxamo-currency", currency).html(formatted);
-      }
-
-      $row.appendTo($(appendTo));
-
-      orderTotal += subtotal;
-    });
-
-    if (orderTotal > 0) {
-      var $total = $summTemplate.clone();
-
-      $total.addClass("cf-order-total-row").css({
-        "border-top": "1px solid #DDD",
-
-        "margin-top": ".5em",
-      });
-
-      $total.find(".product-name").html(orderTotalLabel);
-
-      $total
-        .find(".product-price")
-        .attr("taxamo-currency", orderCurrency)
-        .html(
-          orderTotal.toLocaleString(undefined, {
-            style: "currency",
-
-            currency: orderCurrency,
-          }),
-        );
-
-      $total.appendTo($(appendTo));
-
-      $summary.show();
-
-      window.cfptOrderTotal = orderTotal;
-    } else {
-      $summary.hide();
-
-      window.cfptOrderTotal = null;
-    }
-  }
-</script>
-
-<style>
-  .cf-order-total-row {
-    border-top: 1px solid #ddd;
-
-    margin-top: 0.5em;
-  }
-
-  .cf-order-total-row .product-name,
-  .cf-order-total-row .product-price {
-    font-weight: bold;
-  }
-
-  [data-title="cf-order-summary"] .qty-head {
-    display: inline-block;
-
-    font-weight: bold;
-
-    width: 3em;
-  }
-
-  .prodQty {
-    display: inline-block;
-
-    width: 3em;
   }
 </style>
-
-<!-- ============================================================
-     SECTION 05 — PHONE VALIDATION (intl-tel-input v29.1.2, AU)   [REQUIRED]
-     Replaces the v19 script. No CSS class names changed.
-     ============================================================ -->
-
-<!-- [VENDOR] intl-tel-input -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@29.1.2/dist/css/intlTelInput.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@29.1.2/dist/js/intlTelInput.min.js"></script>
-
-<script>
-  (function ($) {
-    "use strict";
-
-    /* ------------------------------------------------------------
-     CONFIG
-     ------------------------------------------------------------ */
-
-    var ITI_VERSION = "29.1.2";
-    var UTILS_URL = "https://cdn.jsdelivr.net/npm/intl-tel-input@" + ITI_VERSION + "/dist/js/utils.js";
-
-    var PHONE_SELECTOR = 'input[name="phone"]';
-    var SUBMIT_SELECTOR = '[href="#submit-form"], [href="#submit-form-2step"], [href="#submit-form-2step-order"]';
-
-    var BLOCK_INVALID_SUBMIT = true; /* stop the click when the number is invalid */
-    var SUBMIT_AS_E164 = true; /* rewrite the field to +614xxxxxxxx just before submit */
-
-    /* Length alone cannot separate a mobile from a landline here, because both
-     are nine significant digits. Every Australian mobile in service is 04
-     followed by eight digits, and ACMA only allocates new mobile prefixes
-     inside that block, so this rule holds as new prefixes are released.
-     ACMA has reserved 05 as the overflow range for when 04 runs out, but
-     nothing has been issued in it. If that changes, add '5' below. */
-    var AU_MOBILE_ONLY = true;
-    var AU_MOBILE_LEADING = "4";
-    var AU_MOBILE_RE = new RegExp("^\\+61[" + AU_MOBILE_LEADING + "]\\d{8}$");
-    var AU_MOBILE_MSG = "Enter an Australian mobile number";
-
-    var OK_COLOUR = "#4a8920";
-    var BAD_COLOUR = "#b91517";
-
-    /* ------------------------------------------------------------
-     STATE
-     ------------------------------------------------------------ */
-
-    var fields = [];
-    var utilsLoaded = false;
-    var gateBound = false;
-
-    /* ------------------------------------------------------------
-     HELPERS
-     ------------------------------------------------------------ */
-
-    function value(f) {
-      return (f.input.value || "").trim();
-    }
-
-    function isVisible(f) {
-      return !!(f.input.offsetWidth || f.input.offsetHeight || f.input.getClientRects().length);
-    }
-
-    function lengthValid(f) {
-      try {
-        return f.iti.isValidNumber();
-      } catch (err) {
-        return false;
-      }
-    }
-
-    function mobileValid(f) {
-      if (!AU_MOBILE_ONLY) {
-        return true;
-      }
-      try {
-        return AU_MOBILE_RE.test(f.iti.getNumber() || "");
-      } catch (err) {
-        return false;
-      }
-    }
-
-    function isValid(f) {
-      if (!utilsLoaded) {
-        return true;
-      }
-      return lengthValid(f) && mobileValid(f);
-    }
-
-    function messageFor(f) {
-      if (!value(f)) {
-        return "Please enter a number";
-      }
-
-      /* Correct length but wrong shape means a landline, a service number,
-       or filler like 555555555. */
-      if (lengthValid(f)) {
-        return AU_MOBILE_MSG;
-      }
-
-      var codes = window.intlTelInput.VALIDATION_ERROR || {};
-      var code;
-      try {
-        code = f.iti.getValidationError();
-      } catch (err) {
-        code = null;
-      }
-      if (code === codes.INVALID_COUNTRY_CODE) {
-        return AU_MOBILE_MSG;
-      }
-      if (code === codes.TOO_SHORT) {
-        return "Too short";
-      }
-      if (code === codes.TOO_LONG) {
-        return "Too long";
-      }
-      return "Invalid number";
-    }
-
-    function paintNeutral(f) {
-      f.$error.text("").addClass("hide").removeClass("errorMsg");
-      f.$valid.addClass("hide").removeClass("validMsg");
-      f.$input.css({ "border-color": "", "border-width": "" });
-    }
-
-    function paintValid(f) {
-      f.$error.text("").addClass("hide").removeClass("errorMsg");
-      f.$valid.removeClass("hide").addClass("validMsg");
-      f.$input.css({ "border-color": OK_COLOUR, "border-width": "3px" });
-    }
-
-    function paintInvalid(f) {
-      f.$valid.addClass("hide").removeClass("validMsg");
-      f.$error.text(messageFor(f)).removeClass("hide").addClass("errorMsg");
-      f.$input.css({ "border-color": BAD_COLOUR, "border-width": "3px" });
-    }
-
-    /* Empty returns true so CF1 handles its own required message.
-     Errors are only painted once the field has been left or a submit
-     was attempted, so the user is not shouted at mid typing. */
-    function evaluate(f, forceErrors) {
-      if (!value(f)) {
-        paintNeutral(f);
-        return true;
-      }
-      if (isValid(f)) {
-        paintValid(f);
-        return true;
-      }
-      if (forceErrors || f.touched) {
-        f.touched = true;
-        paintInvalid(f);
-      } else {
-        paintNeutral(f);
-      }
-      return false;
-    }
-
-    function firstInvalid() {
-      for (var i = 0; i < fields.length; i++) {
-        var f = fields[i];
-        if (!isVisible(f)) {
-          continue;
-        }
-        if (!value(f)) {
-          continue;
-        }
-        if (!isValid(f)) {
-          return f;
-        }
-      }
-      return null;
-    }
-
-    function writeE164() {
-      if (!SUBMIT_AS_E164 || !utilsLoaded) {
-        return;
-      }
-      for (var i = 0; i < fields.length; i++) {
-        var f = fields[i];
-        if (!value(f) || !isValid(f)) {
-          continue;
-        }
-        try {
-          var full = f.iti.getNumber();
-          if (full) {
-            f.input.value = full;
-          }
-        } catch (err) {}
-      }
-    }
-
-    /* ------------------------------------------------------------
-     SUBMIT GATE
-     CF1 submit buttons are anchors, so the disabled property does
-     nothing. Capture phase runs before the CF1 handlers, which lets
-     stopImmediatePropagation actually hold the click.
-     ------------------------------------------------------------ */
-
-    function onSubmitClick(e) {
-      var button = e.target && e.target.closest ? e.target.closest(SUBMIT_SELECTOR) : null;
-      if (!button) {
-        return;
-      }
-
-      var bad = firstInvalid();
-      if (!bad) {
-        writeE164();
-        return;
-      }
-      if (!BLOCK_INVALID_SUBMIT) {
-        return;
-      }
-
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      bad.touched = true;
-      paintInvalid(bad);
-      try {
-        bad.input.focus();
-      } catch (err) {}
-    }
-
-    /* ------------------------------------------------------------
-     SETUP
-     ------------------------------------------------------------ */
-
-    function setup(input) {
-      if (window.intlTelInput.getInstance(input)) {
-        return;
-      }
-
-      var $input = $(input);
-
-      var iti = window.intlTelInput(input, {
-        initialCountry: "au",
-        onlyCountries: ["au"],
-        countrySelectorMode: "OFF",
-        separateDialCode: false,
-        numberDisplayFormat: "NATIONAL",
-        allowedNumberTypes: ["MOBILE"],
-        formatAsYouType: true,
-        strictMode: true,
-        strictRejectAnimation: true,
-        placeholderNumberPolicy: "AGGRESSIVE",
-        customPlaceholder: function (exampleNumber) {
-          return exampleNumber ? "Number Here... " + exampleNumber : "Number Here...";
-        },
-        loadUtils: function () {
-          return import(UTILS_URL);
-        },
-      });
-
-      var $wrap = $input.closest(".iti");
-      var isFirst = fields.length === 0;
-
-      var $valid = $('<div class="hide">\u2713 Valid</div>');
-      var $error = $('<div class="hide"></div>');
-      if (isFirst) {
-        $valid.attr("id", "valid-msg");
-        $error.attr("id", "error-msg");
-      }
-      $wrap.after($error);
-      $wrap.after($valid);
-
-      var f = {
-        input: input,
-        $input: $input,
-        iti: iti,
-        $valid: $valid,
-        $error: $error,
-        touched: false,
-      };
-      fields.push(f);
-
-      $input.on("input change countrychange", function () {
-        evaluate(f, false);
-      });
-      $input.on("blur", function () {
-        evaluate(f, true);
-      });
-
-      /* Utils carry the validation rules and load after the page does.
-       Until then nothing is blocked, and every field is re checked
-       once they arrive so autofilled numbers get their tick. */
-      if (iti.promise && iti.promise.then) {
-        iti.promise.then(
-          function () {
-            utilsLoaded = true;
-            for (var i = 0; i < fields.length; i++) {
-              if (value(fields[i])) {
-                evaluate(fields[i], false);
-              }
-            }
-          },
-          function () {
-            utilsLoaded = false;
-          },
-        );
-      }
-    }
-
-    function scan() {
-      if (!window.intlTelInput) {
-        return;
-      }
-      $(PHONE_SELECTOR).each(function () {
-        setup(this);
-      });
-      if (!gateBound && fields.length) {
-        document.addEventListener("click", onSubmitClick, true);
-        gateBound = true;
-      }
-    }
-
-    $(function () {
-      $("#valid-msg, #error-msg").remove();
-      scan();
-    });
-
-    window.addEventListener("load", scan);
-  })(window.jQuery);
-</script>
-
-<style>
-  .iti {
-    display: block !important;
-    margin-top: 2em !important;
-  }
-  [data-associated-to=".elS1Phone"] {
-    top: -5.2em !important;
-  }
-  .errorMsg {
-    display: block !important;
-    color: red;
-    position: absolute;
-  }
-  .validMsg {
-    display: block !important;
-    color: #00c900;
-    position: absolute;
-  }
-</style>
+<div class="lmct-tcs" style="counter-reset: clause">
+  <h1 class="doc-title">LMCT+ $1,000,000 Cash Giveaway Terms and Conditions</h1>
+  <p class="doc-intro">The promoter of this promotion is Xclusive Tech Pty Ltd trading as LMCT+ (ABN 93 627 297 474) of Level 2, 161 Collins Street, Melbourne VIC 3000 (Promoter, we, us or our).</p>
+  <h2 class="section">DISCLAIMER</h2>
+  <p>This Promotion is conducted solely by the Promoter.</p>
+  <p>The promotion is not sponsored, endorsed, administered by, or otherwise associated with, Facebook, Instagram, TikTok,Google,SnapChat or related entities of those organisations.</p>
+  <p>
+    None of the entities or persons referred to in clause (2) have any responsibility for the conduct of the promotion, the selection of winners, the awarding of prizes, or any dispute arising in
+    connection with the promotion.
+  </p>
+  <h2 class="section">THE PROMOTION</h2>
+  <p>The promotion commences for the public at 9:00 PM AEST on 10 September 2026 and concludes at 8:00 PM AEST on 27 October 2026 (Promotion Period).</p>
+  <p>Information about prizes and how to enter forms part of these Terms and Conditions. Entry into the promotion is deemed to be acceptance of these Terms and Conditions.</p>
+  <h2 class="section">ELIGIBILITY</h2>
+  <p>Entry is open to Australian residents aged 18 years or over, who, during the Promotional Period, either:</p>
+  <p>hold or obtain a valid LMCT+ membership, or</p>
+  <p>purchase an LMCT+ package via the official competition page</p>
+  <p>and who are not:</p>
+  <p>residents of South Australia;</p>
+  <p>directors, officers, employees and contractors of the Promoter and its related bodies corporate; and</p>
+  <p>immediate family members of the persons referred to in paragraph (d)</p>
+  <p>(Eligible Entrant).</p>
+  <p>
+    For the purposes of clause 6(e), immediate family shall include the following: spouse, ex-spouse, de-facto spouse, child or stepchild (whether natural or by adoption), parent, step-parent,
+    grandparent, step-grandparent, niece, nephew, brother, sister, step-brother or step-sister.
+  </p>
+  <p>
+    Residents of South Australia are not eligible to enter this promotion due to regulatory requirements under South Australian law. Any entry submitted by a person, who is a resident of South
+    Australia, at the time of entry will be deemed invalid.
+  </p>
+  <p>
+    For the purposes of these Terms and Conditions, a person will be considered a resident of South Australia, if that person's principal place of residence is located in South Australia at the time
+    of entry, regardless of any temporary absence from that State at the time of entry.
+  </p>
+  <p>By entering this promotion, each entrant represents and warrants that:</p>
+  <p>the entrant is an Eligible Entrant;</p>
+  <p>the entrant is not a resident of South Australia at the time of entry; and</p>
+  <p>all information provided by the entrant to us is true and correct.</p>
+  <p>Entry into this promotion is subject to all applicable Commonwealth, State and Territory laws and regulations and is void where prohibited by law.</p>
+  <p>
+    In certain jurisdictions, applicable laws may restrict, condition or prohibit participation in the promotion or the award, transfer, registration or delivery of particular prizes within that
+    jurisdiction. Where such restrictions apply, we reserve the right to:
+  </p>
+  <p>refuse entry from residents of that jurisdiction where required by law;</p>
+  <p>substitute, at our absolute discretion, a prize with a lawful alternative of equal or greater value (including, at our discretion, a cash alternative); and/or</p>
+  <p>take any other action necessary, including but not limited to declaring an entry or entries invalid, in order to ensure compliance with applicable legislation.</p>
+  <p>
+    If we determine at any time that an entrant has breached these Terms and Conditions or has provided false or misleading information, we may cancel any prize awarded and re-award the prize in
+    accordance with these Terms and Conditions.
+  </p>
+  <p>Nothing in these Terms and Conditions is intended to permit any act or omission, which would contravene applicable laws.</p>
+  <p>
+    Membership of LMCT+ is subject to the terms and conditions applicable to LMCT+ membership, a copy of which is available at
+    <a href="https://lmctplus.com/membership-terms-conditions/" target="_blank" rel="noopener">https://lmctplus.com/membership-terms-conditions/</a> (Membership Terms), as may be amended from time to
+    time.
+  </p>
+  <h2 class="section">ENTRY BY ELIGIBLE ENTRANTS</h2>
+  <p>
+    Eligible Entrants, who hold a loyalty membership with the Promoter, will automatically receive one entry, or multiple entries, into the draw, depending on the level of loyalty membership that that
+    entrant holds and the length of time the entrant has held a loyalty membership. The number of entries awarded to any particular entrant shall be determined in accordance with the provisions of the
+    Membership Terms as in force at the time of entry. In the event of any inconsistency between these Terms and Conditions and the Membership Terms, these Terms and Conditions prevail to the extent
+    of the inconsistency.
+  </p>
+  <p>
+    Eligible Entrants, who purchase a one-off membership (i.e. a non-loyalty membership) package, will automatically receive one entry, or multiple entries, into the draw, depending on the level of
+    the one-off membership package the entrant has purchased.
+  </p>
+  <p>
+    Eligible Entrants will also receive one free bonus entry or multiple bonus free entries into the draw for every 50 litres of fuel purchased at a participating LMCT+ petrol station. These entries
+    are provided free of charge and are recorded and managed through the LMCT+ mobile application.
+  </p>
+  <h2 class="section">PRIZES</h2>
+  <p>There are three (3) prizes available, with a total prize pool value of AUD $1,003,500.</p>
+  <h3 class="prize-title">FIRST PRIZE</h3>
+  <h3 class="prize-subtitle">$1,000,000 CASH</h3>
+  <h3 class="subsection">Prize Description</h3>
+  <p>
+    The First Prize is a cash payment of AUD $1,000,000 (the First Prize). The First Prize will be paid by electronic funds transfer to an Australian bank account nominated by the winner in writing,
+    within 10 business days of the winner satisfying all prize acceptance requirements set out in these Terms and Conditions.
+  </p>
+  <h3 class="subsection">Supplementary Prize</h3>
+  <p>2nd prize consists of a $2,500 LMCT+ partner Credit and 3rd prize consists of a $1,000 partner credit to be used within 3 months of winning.</p>
+  <h3 class="subsection">Release and Indemnity</h3>
+  <p>
+    Acceptance of any prize under this promotion is conditional upon the winner providing such identification, banking details and other information as we reasonably require to verify the winner's
+    identity, age and eligibility, and to effect payment of the prize. The winner releases the Promoter, its related entities, officers, employees and agents from any claim, liability, loss or damage
+    arising in connection with the promotion, the prize or its payment, except to the extent that such claim, liability, loss or damage is caused by the negligence or wilful misconduct of the Promoter
+    or its related entities, and except to the extent that any consumer guarantee or other right cannot lawfully be excluded under the Australian Consumer Law.
+  </p>
+  <p>
+    The winner acknowledges that images, video footage, broadcasts and marketing materials relating to the prize and the promotion are produced for promotional purposes and may be used by the Promoter
+    and its related entities even after the prize has been paid.
+  </p>
+  <h2 class="section">THE DRAW</h2>
+  <p>
+    The draw will commence from 8:30 PM AEST on 27 October 2026 at Level 2, 161 Collins St, Melbourne, Victoria and also presented live on our official Facebook page.
+    <a href="https://www.facebook.com/lmctplus" target="_blank" rel="noopener">www.facebook.com/lmctplus</a>
+  </p>
+  <p>The prizes are drawn randomly from the entries received during the Promotion Period. They will be drawn in the order of 3,2,1 with the 1st prize being the last drawn.</p>
+  <p>For the avoidance of doubt, there is no limit to the number of prizes an individual can win.</p>
+  <p>
+    All winners will be published on the Promoter's Facebook page and on <a href="https://www.lmctplus.com" target="_blank" rel="noopener">www.lmctplus.com</a> (Website) for a minimum period of 28
+    days. <a href="https://www.facebook.com/LMCTPlus/" target="_blank" rel="noopener">www.facebook.com/LMCTPlus/</a>
+  </p>
+  <p>
+    If a prize is unclaimed, or has not been accepted by a winner, or if, after making all reasonable attempts, we cannot contact a winner (or a winner does not contact us) by 8:00 PM AEST on 27
+    December 2026, we will discard the relevant entry, or entries, and redraw the prize, or prizes, in descending order of value at 8:30 PM AEST on 27 December 2026 at the same location as the
+    original draw.
+  </p>
+  <p>
+    Any new winner or winners will be published online at the conclusion of the draw on 27 December 2026 on the LMCT+ Facebook, and on the Website, for a period of 28 days. Any winners will also be
+    contacted via phone and email immediately following the draw.
+  </p>
+  <p>The draw will be conducted in the presence of an independent scrutineer where required by law or where the Promoter considers it appropriate.</p>
+  <p>All valid entries will have an equal chance of winning, subject to these terms and conditions and Membership Terms or conditions of any LMCT+ Package as may be applicable.</p>
+  <h2 class="section">QUERIES / DISPUTES</h2>
+  <p>Any queries or complaints relating to the promotion must be submitted in writing to <a href="mailto:support@lmctplus.com">support@lmctplus.com</a>.</p>
+  <p>
+    Any complaint regarding the conduct of the draw, the announcement of winners or the awarding of a prize must be submitted within ten (10) days of the relevant draw or publication of the winners
+    (as applicable). Complaints received after this time will not be considered.
+  </p>
+  <p>If an Eligible Entrant raises a dispute within the applicable timeframe, we will review the matter in good faith, consider the information provided and respond within a reasonable period.</p>
+  <p>Subject to applicable laws, our decisions in relation to the promotion are final and binding.</p>
+  <p>Nothing in this clause limits, excludes or restricts any rights an Eligible Entrant may have under the Australian Consumer Law or other applicable legislation.</p>
+  <h2 class="section">GENERAL PRIZE TERMS</h2>
+  <p>
+    All prizes must be accepted and taken as offered and in accordance with these Terms and Conditions. If a winner fails to accept a prize or comply with any applicable conditions within the required
+    timeframe, the prize may be deemed forfeited and, if forfeited, no compensation will be payable.
+  </p>
+  <p>We are not responsible for any dispute between a winner and any third party with whom the winner chooses to share or transfer the benefit of a prize.</p>
+  <h2 class="section">DRAW INTERRUPTION / BROADCAST FAILURE</h2>
+  <p>
+    If for any reason beyond our reasonable control, including technical failure, power outage, network disruption, platform failure, venue inaccessibility, government directive, court order,
+    vandalism, tempests, natural disasters, acts of God, civil unrest, strike, war, act of terrorism, pandemic or epidemic or other unforeseen event, the draw or any live broadcast of the draw cannot
+    be conducted as scheduled, we may:
+  </p>
+  <p>suspend, delay or reschedule the draw;</p>
+  <p>conduct the draw at an alternative time, date or location;</p>
+  <p>conduct the draw without live broadcast and publish the results via the Website and official social media channels; or</p>
+  <p>may take any other reasonable steps necessary to ensure the draw is conducted fairly and in accordance with applicable laws.</p>
+  <p>Where a draw is rescheduled or modified, we will notify entrants by publishing updated details on the Website as soon as reasonably practicable.</p>
+  <p>For abundant clarity, any modification or rescheduling of the draw under clause 57 does not invalidate valid entries submitted prior to the interruption.</p>
+  <h2 class="section">GENERAL TERMS</h2>
+  <h3 class="subsection">Publicity &amp; Promotion</h3>
+  <p>Participation in publicity and promotional activities is a fundamental condition of entry and prize entitlement.</p>
+  <p>Each winner must:</p>
+  <p>participate in live announcements, interviews, photography, filming and promotional activities as directed by us;</p>
+  <p>attend any presentation event required by us; and</p>
+  <p>cooperate in good faith with media and promotional opportunities relating to the promotion.</p>
+  <p>Publicity activities include activities involving television, online media, social media, print, advertising and other marketing materials.</p>
+  <p>Failure or refusal to participate in publicity as directed or required by us will result in forfeiture of the prize.</p>
+  <p>
+    If the winner has already received the prize, we may, to the extent permitted by law, require the winner to do all things necessary to transfer the benefit of the prize to us. The winner shall, on
+    demand, transfer to a bank account nominated by us any sums received from us as a result of the promotion.
+  </p>
+  <p>
+    By entering the promotion and accepting a prize, the winner irrevocably grants the Promoter and its related entities a perpetual, worldwide, royalty-free licence to use, reproduce, publish, adapt
+    and communicate the winner's name, image, likeness, voice and biographical information for promotional and marketing purposes, relating to the Promoter and its goods and services, in any media now
+    known or later developed, without further compensation.
+  </p>
+  <p>
+    By entering the promotion and accepting a prize, the winner irrevocably consents to the editing, adaptation and reproduction of such materials and waive any moral rights in connection with their
+    use. We will not publish any winner's full residential address.
+  </p>
+  <h3 class="subsection">Prize Acceptance Documentation</h3>
+  <p>
+    We may require any winner to sign disclaimer and release forms in our favour. We shall provide any such forms before the winner is required to take a prize. Should a winner not execute any such
+    forms, the winner's entry will be deemed invalid, and the winner shall have no interest in or right or entitlement to the prize.
+  </p>
+  <h3 class="subsection">Disqualification</h3>
+  <p>We reserve the right to disqualify any Eligible Entrant who:</p>
+  <p>is found to be tampering with, or otherwise abusing, any aspect of the promotion;</p>
+  <p>we have reason to believe has breached any of these Terms and Conditions;</p>
+  <p>behaves in a disruptive, abusive or threatening manner;</p>
+  <p>does anything, which may diminish the good name and reputation of the Promoter or any of its related entities, or the companies or agencies associated with the promotion; or</p>
+  <p>engages in any other unlawful or inappropriate conduct, which may jeopardise the fair and proper conduct of the promotion.</p>
+  <p>
+    In the event that an Eligible Entrant is disqualified, such an entrant will be deemed not to be an Eligible Entrant and shall forfeit any interest in or right or entitlement to any prize,
+    irrespective of any rights available under or interests arising out of the entrant's LMCT+ membership, an LMCT+ package purchased by the entrant via the official competition page, or under the
+    Membership Terms. If the Eligible Entrant is a winner and has already received the prize, clause 64 shall apply.
+  </p>
+  <h3 class="subsection">Promotion Integrity</h3>
+  <p>
+    In the event that the promotion is compromised by non-authorised human intervention, tampering or other causes beyond our reasonable control, which corrupt or impair the administration, security,
+    fairness or proper operation of the promotion, we reserve the right to suspend, modify or terminate the promotion, subject to any necessary approval by the relevant gaming authorities. These
+    rights are in addition to any rights set out in clause 57.
+  </p>
+  <h3 class="subsection">Technical Issues</h3>
+  <p>
+    We are not responsible for any problems or technical malfunction of computer systems, servers, software, internet service providers, or e-mail systems; failure of any entry to be received on
+    account of technical problems, or incomplete, late, lost, damaged, illegible or misdirected electronic communications; or any combination thereof.
+  </p>
+  <h3 class="subsection">Force Majeure</h3>
+  <p>
+    In the case of the intervention of any outside act, agent or event which prevents or significantly hinders our ability to proceed with the promotion on the dates and in the manner described in
+    these Terms and Conditions, including but not limited to technical failure, power outage, network disruption, platform failure, venue inaccessibility, government directive, court order, vandalism,
+    tempests, natural disasters, acts of God, civil unrest, strike, war, act of terrorism, pandemic or epidemic or other unforeseen event, we may in our absolute discretion cancel the promotion and
+    recommence it from the start on the same conditions, subject to any necessary approval by the relevant gaming authorities.
+  </p>
+  <p>In the event that we elect to recommence the promotion from the start, valid entries received during the Promotion Period shall become entries in the draw for the recommenced promotion.</p>
+  <h3 class="subsection">Liability</h3>
+  <p>
+    To the maximum extent permitted by law, the Promoter, its related entities, officers, employees, agents and associated agencies exclude all liability for any loss, damage, expense, personal
+    injury, illness or death arising directly or indirectly out of or in connection with:
+  </p>
+  <p>the promotion;</p>
+  <p>any prize;</p>
+  <p>the acceptance, use, enjoyment, occupation or disposal of any prize;</p>
+  <p>any participation in promotional or publicity activities;</p>
+  <p>any failure to conduct the promotion as scheduled; or</p>
+  <p>any technical malfunction, delay, loss, alteration or corruption of data,</p>
+  <p>
+    including (without limitation) any indirect, special, consequential or economic loss, loss of profit, loss of opportunity or loss of goodwill, whether arising in contract, tort (including
+    negligence), statute or otherwise.
+  </p>
+  <p>Each entrant acknowledges that participation in the promotion and acceptance and receipt of a prize may involve inherent risks and voluntarily assumes all such risks.</p>
+  <p>
+    Where liability cannot be excluded but can be limited, our liability is limited to the maximum extent permitted by law and, where applicable, is capped at the value of the prize received by the
+    winner.
+  </p>
+  <p>
+    To the extent permitted by law, each entrant and winner indemnifies and holds harmless the Promoter and its related entities from and against any claim, demand, proceeding, loss or liability
+    (including legal costs on a full indemnity basis) arising from:
+  </p>
+  <p>any breach of these Terms and Conditions;</p>
+  <p>any negligent, unlawful or wrongful act or omission of the entrant or winner;</p>
+  <p>any third-party claim arising from the entrant's or winner's use, occupation or enjoyment of a prize; or</p>
+  <p>any publicity or promotional activity conducted in accordance with these Terms.</p>
+  <p>Nothing in these Terms and Conditions excludes, restricts or modifies any liability that cannot lawfully be excluded under applicable legislation.</p>
+  <h3 class="subsection">Non-transferability of prizes</h3>
+  <p>Except where expressly stated in these Terms and Conditions, prizes cannot be transferred or exchanged and are not redeemable for cash.</p>
+  <h3 class="subsection">Verification</h3>
+  <p>
+    We may, at any time, require you to produce documentation to establish to our satisfaction the validity of your entries (including documentation establishing your identity, age, place of residence
+    and place of employment). Failure by us to enforce any of our rights at any stage does not waive those rights.
+  </p>
+  <h3 class="subsection">Taxation</h3>
+  <p>
+    All taxes including but limited to GST, duties, levies and other government charges arising from or in connection with acceptance, transfer, use or disposal of a prize are the sole responsibility
+    of the winner and may arise at the time of receipt or at a later time.
+  </p>
+  <p>We make no representation regarding the tax treatment of any prize. Winners must obtain their own independent financial and taxation advice.</p>
+  <p>
+    To the extent permitted by law, the winner indemnifies the Promoter against any claim, liability or assessment arising from the winner's failure to comply with taxation obligations connected with
+    a prize.
+  </p>
+  <h3 class="subsection">Australia Only</h3>
+  <p>Any cash alternative will only be paid in Australian dollars to Australian bank accounts.</p>
+  <h3 class="subsection">Social Media</h3>
+  <p>
+    The promotion is in no way sponsored, endorsed or administered by, or associated with any social media platform and any information provided is provided to us and not to any social media platform.
+    By entering the promotion, an entrant acknowledges that the promotion is in no way sponsored, endorsed or administered by any social media platform and agrees to release completely any social
+    media platform from any and all liability.
+  </p>
+  <h3 class="subsection">Governing Law</h3>
+  <p>These Terms and Conditions are governed by the laws of Victoria, Australia. Each entrant submits to the exclusive jurisdiction of the courts of Victoria.</p>
+  <h3 class="subsection">Severability</h3>
+  <p>If any provision of these Terms and Conditions is held to be invalid or unenforceable, that provision will be severed and the remaining provisions will remain in full force and effect.</p>
+  <h3 class="subsection">Permits</h3>
+  <p>This promotion is conducted under any permits issued by the relevant gaming authorities where required. A copy of any permit details will be made available on the Website.</p>
+  <h3 class="subsection">Record Keeping</h3>
+  <p>The Promoter will keep records of all entries, winners and prize distributions for a minimum period required by applicable law.</p>
+  <h2 class="section">COLLECTION AND USE OF PERSONAL INFORMATION</h2>
+  <p>
+    We collect information about entrants, including for example names and email addresses which are provided when signing up to LMCT+ membership. We use this information to administer memberships,
+    conduct and manage the promotion, verify eligibility and identity, prevent fraud, comply with legal obligations, and promote and improve our goods and services. If an entrant does not provide us
+    with the requested information, we may not be able to provide that entrant with the goods and services that entrant requires. We may disclose information about an entrant or entrants to related
+    entities, service providers, contractors, payment processors, professional advisers, insurers and regulatory authorities where reasonably necessary to administer the promotion and/or comply with
+    legal requirements. Some of these service providers may be located outside of Australia, and by entering the promotion the entrant consents to that entrant's information being stored or processed
+    overseas.
+  </p>
+  <p>
+    By holding a membership and participating in the promotion, a entrant consents to us keeping that entrant's personal information on our database for future marketing purposes unrelated to the
+    conduct of this promotion, provided that, where required by spam laws, we include a functional unsubscribe facility in each direct marketing communication we send enabling the entrant to opt-out
+    of any further similar communications at any time. However, we may contact an entrant via email or SMS messages without any functional unsubscribe facility, if such communication relates primarily
+    to the conduct of the promotion.
+  </p>
+  <p>Opting out of marketing communications does not affect an entrant's eligibility to participate in the promotion or to win a prize.</p>
+  <p>
+    We will at all times collect and use personal information in connection with the promotion in accordance with our Privacy Policy (which can be viewed at
+    <a href="https://lmctplus.com/privacy-policy" target="_blank" rel="noopener">lmctplus.com/privacy-policy</a>) and other relevant laws and regulations.
+  </p>
+  <div class="permits">
+    <strong>NSW authority number:</strong> TP/00040<br />
+    <strong>ACT permit number:</strong> TP 26/01764
+  </div>
+</div>

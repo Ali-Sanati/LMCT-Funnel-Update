@@ -1,0 +1,2421 @@
+<!--
+  LMCT+ post-purchase membership upsell.
+  Checkout hooks intentionally preserved:
+  Entry   = css-order-bronze
+  Premium = css-order-silver
+  Elite   = css-order-gold
+-->
+
+<style>
+  .lmctCampaign,
+  .lmctCampaign *,
+  .lmctCampaign *::before,
+  .lmctCampaign *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctCampaign {
+    --lmct-navy: #05162a;
+    --lmct-blue: #0c9ffd;
+    --lmct-blue-deep: #0476c4;
+    --lmct-green: #1fa851;
+    --lmct-white: #ffffff;
+    --lmct-ink: #10233d;
+    --lmct-muted: #64748b;
+    --lmct-border: rgba(5, 22, 42, 0.12);
+    --lmct-bg: #f4f7fa;
+    --lmct-radius-sm: 8px;
+    --lmct-radius-md: 14px;
+    --lmct-radius-lg: 24px;
+    --lmct-container: 1180px;
+    overflow: visible;
+    overflow-x: clip;
+    color: var(--lmct-ink);
+    background: var(--lmct-white);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .lmctCampaign a {
+    color: inherit;
+  }
+
+  .lmctCampaign__container {
+    width: min(calc(100% - 40px), var(--lmct-container));
+    margin-inline: auto;
+  }
+
+  .lmctCampaign__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    color: var(--lmct-blue-deep);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__eyebrow::before {
+    width: 24px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctCampaign__sectionTitle {
+    max-width: 760px;
+    margin: 18px 0 0;
+    color: var(--lmct-navy);
+    font-size: clamp(38px, 5vw, 64px);
+    font-weight: 950;
+    line-height: 0.98;
+  }
+
+  .lmctCampaign__sectionTitle em {
+    color: var(--lmct-blue-deep);
+    font-style: normal;
+  }
+
+  .lmctCampaign__sectionLead {
+    max-width: 600px;
+    margin: 18px 0 0;
+    color: var(--lmct-muted);
+    font-size: clamp(15px, 1.5vw, 18px);
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctCampaign__primaryCta {
+    display: inline-flex;
+    min-height: 58px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 22px;
+    border-radius: var(--lmct-radius-sm);
+    color: var(--lmct-white) !important;
+    background: linear-gradient(135deg, var(--lmct-blue), var(--lmct-blue-deep));
+    box-shadow: 0 18px 36px rgba(4, 118, 196, 0.26);
+    font-size: 15px;
+    font-weight: 950;
+    line-height: 1.15;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctCampaign__primaryCta::after {
+    content: "\2192";
+    font-size: 20px;
+    line-height: 1;
+    transition: transform 180ms ease;
+  }
+
+  .lmctCampaign__primaryCta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 42px rgba(4, 118, 196, 0.34);
+    filter: saturate(1.08);
+  }
+
+  .lmctCampaign__primaryCta:hover::after {
+    transform: translateX(3px);
+  }
+
+  .lmctCampaign a:focus-visible {
+    outline: 3px solid rgba(12, 159, 253, 0.42);
+    outline-offset: 4px;
+  }
+
+  /* Chapter 01: Hero */
+  .lmctCampaign__hero {
+    position: relative;
+    min-height: min(880px, 100svh);
+    overflow: hidden;
+    padding: 24px 0 clamp(76px, 9vw, 132px);
+    background:
+      linear-gradient(rgba(5, 22, 42, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(5, 22, 42, 0.035) 1px, transparent 1px),
+      radial-gradient(circle at 82% 38%, rgba(12, 159, 253, 0.14), transparent 34%), #f9fbfd;
+    background-size:
+      42px 42px,
+      42px 42px,
+      auto,
+      auto;
+  }
+
+  .lmctCampaign__hero::before {
+    position: absolute;
+    top: -18%;
+    right: -16%;
+    width: min(72vw, 900px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    content: "";
+    background: radial-gradient(circle, rgba(12, 159, 253, 0.16), transparent 65%);
+    filter: blur(12px);
+    animation: lmctCampaignAmbient 9s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .lmctCampaign__brand {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: clamp(58px, 8vw, 110px);
+  }
+
+  .lmctCampaign__logo {
+    display: block;
+    width: 128px;
+    height: auto;
+  }
+
+  .lmctCampaign__purchaseState {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--lmct-muted);
+    font-size: 11px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__purchaseState::before {
+    display: grid;
+    width: 22px;
+    height: 22px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmct-white);
+    content: "\2713";
+    background: var(--lmct-green);
+    font-size: 12px;
+  }
+
+  .lmctCampaign__heroGrid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+    align-items: center;
+    gap: clamp(28px, 5vw, 76px);
+  }
+
+  .lmctCampaign__heroCopy {
+    position: relative;
+    z-index: 2;
+  }
+
+  .lmctCampaign__heroTitle {
+    max-width: 740px;
+    margin: 22px 0 0;
+    color: var(--lmct-navy);
+    font-size: clamp(46px, 13.5vw, 60px);
+    font-weight: 950;
+    line-height: 0.91;
+  }
+
+  .lmctCampaign__heroTitle span {
+    display: block;
+    margin-top: 9px;
+    color: transparent;
+    background: linear-gradient(100deg, var(--lmct-blue) 8%, var(--lmct-blue-deep) 78%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .lmctCampaign__heroLead {
+    max-width: 600px;
+    margin: 24px 0 0;
+    color: #4e6178;
+    font-size: clamp(16px, 1.6vw, 19px);
+    font-weight: 620;
+    line-height: 1.55;
+  }
+
+  .lmctCampaign__heroOffer {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 28px;
+    padding-block: 17px;
+    border-block: 1px solid var(--lmct-border);
+  }
+
+  .lmctCampaign__heroPlan span,
+  .lmctCampaign__heroPlan strong {
+    display: block;
+  }
+
+  .lmctCampaign__heroPlan span {
+    color: var(--lmct-muted);
+    font-size: 10px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__heroPlan strong {
+    margin-top: 5px;
+    color: var(--lmct-navy);
+    font-size: 15px;
+    font-weight: 950;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__heroPrice {
+    padding-left: 24px;
+    border-left: 1px solid var(--lmct-border);
+    color: var(--lmct-navy);
+    font-size: 28px;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctCampaign__heroPrice small {
+    color: var(--lmct-muted);
+    font-size: 10px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__heroActions {
+    margin-top: 26px;
+  }
+
+  .lmctCampaign__heroTrust {
+    margin: 14px 0 0;
+    color: var(--lmct-muted);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__bonusStage {
+    position: relative;
+    display: grid;
+    width: min(100%, 540px);
+    min-height: clamp(430px, 39vw, 560px);
+    place-items: center;
+    margin-right: -10vw;
+    isolation: isolate;
+  }
+
+  .lmctCampaign__bonusStage::before {
+    position: absolute;
+    z-index: -1;
+    inset: 13% -22% 5% -2%;
+    border-radius: 50%;
+    content: "";
+    background: radial-gradient(circle, rgba(12, 159, 253, 0.23), rgba(4, 118, 196, 0.08) 48%, transparent 72%);
+    filter: blur(14px);
+    animation: lmctCampaignTicketGlow 6s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  .lmctCampaign__bonusStage::after {
+    position: absolute;
+    z-index: -1;
+    right: -14%;
+    bottom: 4%;
+    left: 4%;
+    height: 22%;
+    border-radius: 50%;
+    content: "";
+    background: radial-gradient(ellipse, rgba(5, 22, 42, 0.2), transparent 68%);
+    filter: blur(16px);
+    transform: scaleY(0.42);
+    pointer-events: none;
+  }
+
+  .lmctCampaign__heroTicketImage {
+    display: block;
+    width: min(780px, 148%);
+    max-width: none;
+    height: auto;
+    margin-left: -5%;
+    filter: drop-shadow(0 34px 34px rgba(4, 76, 134, 0.2)) drop-shadow(0 10px 16px rgba(5, 22, 42, 0.12));
+    transform: rotate(1.25deg);
+    transform-origin: 50% 60%;
+    animation: lmctCampaignTicketImage 5.5s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .lmctCampaign__ticket {
+    position: relative;
+    min-height: 510px;
+    overflow: hidden;
+    padding: clamp(32px, 5vw, 56px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--lmct-radius-lg);
+    color: var(--lmct-white);
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.09) 1px, transparent 1px),
+      linear-gradient(145deg, #16adff 0%, var(--lmct-blue-deep) 54%, #053d79 100%);
+    background-size:
+      28px 28px,
+      28px 28px,
+      auto;
+    box-shadow: 0 44px 90px rgba(4, 76, 134, 0.28);
+    animation: lmctCampaignFloat 5s ease-in-out infinite;
+  }
+
+  .lmctCampaign__ticket::before,
+  .lmctCampaign__ticket::after {
+    position: absolute;
+    top: 62%;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    content: "";
+    background: #f9fbfd;
+    transform: translateY(-50%);
+  }
+
+  .lmctCampaign__ticket::before {
+    left: -20px;
+  }
+
+  .lmctCampaign__ticket::after {
+    right: -20px;
+  }
+
+  .lmctCampaign__ticketLabel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__ticketLabel::after {
+    width: 54px;
+    height: 1px;
+    content: "";
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .lmctCampaign__hundred {
+    display: block;
+    margin-top: clamp(72px, 9vw, 108px);
+    color: var(--lmct-white);
+    font-size: clamp(112px, 14vw, 186px);
+    font-weight: 950;
+    line-height: 0.72;
+  }
+
+  .lmctCampaign__ticketTitle {
+    display: block;
+    margin-top: 30px;
+    font-size: clamp(25px, 3vw, 40px);
+    font-weight: 950;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__ticketFoot {
+    position: absolute;
+    right: 42px;
+    bottom: 32px;
+    left: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 18px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 10px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  /* Chapter 02: Entry membership */
+  .lmctCampaign__entry {
+    position: relative;
+    padding: clamp(90px, 11vw, 150px) 0;
+    background: var(--lmct-bg);
+  }
+
+  .lmctCampaign__entryHeader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.5fr);
+    align-items: end;
+    gap: 32px;
+    padding-bottom: clamp(42px, 6vw, 72px);
+    border-bottom: 1px solid var(--lmct-border);
+  }
+
+  .lmctCampaign__entryPrice {
+    justify-self: end;
+    text-align: right;
+  }
+
+  .lmctCampaign__entryPrice strong {
+    display: block;
+    color: var(--lmct-navy);
+    font-size: clamp(52px, 6vw, 78px);
+    font-weight: 950;
+    line-height: 0.9;
+  }
+
+  .lmctCampaign__entryPrice span {
+    display: block;
+    margin-top: 10px;
+    color: var(--lmct-muted);
+    font-size: 11px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__entryGrid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+    align-items: start;
+    gap: clamp(32px, 6vw, 82px);
+    padding-top: clamp(42px, 6vw, 72px);
+  }
+
+  .lmctCampaign__entryFeature {
+    position: sticky;
+    z-index: 2;
+    top: clamp(16px, 2vw, 32px);
+    align-self: start;
+  }
+
+  .lmctCampaign__entryBonus {
+    position: relative;
+    overflow: hidden;
+    padding: 28px;
+    border-radius: var(--lmct-radius-lg);
+    color: var(--lmct-white);
+    background: var(--lmct-navy);
+    box-shadow: 0 26px 58px rgba(5, 22, 42, 0.18);
+  }
+
+  .lmctCampaign__entryBonus::after {
+    position: absolute;
+    right: -16%;
+    bottom: -46%;
+    width: 240px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    content: "";
+    background: rgba(12, 159, 253, 0.28);
+    filter: blur(20px);
+  }
+
+  .lmctCampaign__entryBonusLabel {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__entryBonus strong {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 22px;
+    font-size: clamp(76px, 9vw, 118px);
+    font-weight: 950;
+    line-height: 0.78;
+  }
+
+  .lmctCampaign__entryBonus b {
+    position: relative;
+    z-index: 1;
+    display: block;
+    max-width: 220px;
+    margin-top: 22px;
+    font-size: 22px;
+    font-weight: 950;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__entryCta {
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .lmctCampaign__featureIntro {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 18px;
+  }
+
+  .lmctCampaign__featureIntro h3 {
+    margin: 0;
+    color: var(--lmct-navy);
+    font-size: 16px;
+    font-weight: 950;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__featureIntro span {
+    color: var(--lmct-green);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__featureModules {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--lmct-border);
+    border-left: 1px solid var(--lmct-border);
+  }
+
+  .lmctCampaign__featureModule {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 156px;
+    padding: 22px;
+    border-right: 1px solid var(--lmct-border);
+    border-bottom: 1px solid var(--lmct-border);
+    background: rgba(255, 255, 255, 0.48);
+    transition:
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .lmctCampaign__featureModule > svg {
+    display: block;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    padding: 10px;
+    border: 1px solid rgba(4, 118, 196, 0.14);
+    border-radius: 12px;
+    color: var(--lmct-blue-deep);
+    background: rgba(12, 159, 253, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+    transition:
+      color 180ms ease,
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .lmctCampaign__featureModule--green > svg {
+    border-color: rgba(31, 168, 81, 0.16);
+    color: var(--lmct-green);
+    background: rgba(31, 168, 81, 0.09);
+  }
+
+  .lmctCampaign__featureModule > svg + .lmctCampaign__featureValue {
+    margin-top: 18px;
+  }
+
+  .lmctCampaign__featureModule:hover {
+    position: relative;
+    z-index: 1;
+    background: var(--lmct-white);
+    transform: translateY(-2px);
+  }
+
+  .lmctCampaign__featureModule:hover > svg {
+    color: var(--lmct-white);
+    background: var(--lmct-blue-deep);
+    transform: translateY(-2px);
+  }
+
+  .lmctCampaign__featureModule--green:hover > svg {
+    background: var(--lmct-green);
+  }
+
+  .lmctCampaign__featureValue {
+    display: block;
+    color: var(--lmct-blue-deep);
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctCampaign__featureModule--green .lmctCampaign__featureValue {
+    color: var(--lmct-green);
+  }
+
+  .lmctCampaign__featureName {
+    display: block;
+    margin-top: 24px;
+    color: var(--lmct-navy);
+    font-size: 12px;
+    font-weight: 950;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__entriesStory {
+    margin-top: clamp(42px, 6vw, 68px);
+    padding-top: 30px;
+    border-top: 1px solid var(--lmct-border);
+  }
+
+  .lmctCampaign__entriesHead {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .lmctCampaign__entriesHead h3 {
+    margin: 0;
+    color: var(--lmct-navy);
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctCampaign__entriesHead p {
+    max-width: 360px;
+    margin: 0;
+    color: var(--lmct-muted);
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.45;
+    text-align: right;
+  }
+
+  .lmctCampaign__timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 36px;
+  }
+
+  .lmctCampaign__timeline::before {
+    position: absolute;
+    z-index: 0;
+    top: 15px;
+    right: 10%;
+    left: 10%;
+    height: 2px;
+    content: "";
+    background: linear-gradient(90deg, var(--lmct-green), var(--lmct-blue));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 800ms ease;
+  }
+
+  .lmctCampaign__entriesStory.is-visible .lmctCampaign__timeline::before {
+    transform: scaleX(1);
+  }
+
+  .lmctCampaign__timePoint {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .lmctCampaign__timeDot {
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin: 0 auto 18px;
+    border: 5px solid var(--lmct-bg);
+    border-radius: 50%;
+    background: var(--lmct-green);
+    box-shadow: 0 0 0 1px rgba(31, 168, 81, 0.28);
+  }
+
+  .lmctCampaign__timePoint strong,
+  .lmctCampaign__timePoint span {
+    display: block;
+  }
+
+  .lmctCampaign__timePoint strong {
+    color: var(--lmct-navy);
+    font-size: clamp(25px, 3vw, 38px);
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctCampaign__timePoint span {
+    margin-top: 7px;
+    color: var(--lmct-muted);
+    font-size: 10px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  /* Chapter 03: Everyday value */
+  .lmctCampaign__everyday {
+    padding: clamp(94px, 12vw, 164px) 0;
+    background: var(--lmct-white);
+  }
+
+  .lmctCampaign__everydayHeader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.6fr);
+    align-items: end;
+    gap: 32px;
+    margin-bottom: clamp(42px, 6vw, 72px);
+  }
+
+  .lmctCampaign__everydayHeader .lmctCampaign__sectionLead {
+    justify-self: end;
+  }
+
+  .lmctCampaign__bento {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.9fr);
+    grid-template-rows: minmax(300px, 440px) minmax(180px, auto);
+    gap: 14px;
+  }
+
+  .lmctCampaign__benefitVisual {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--lmct-radius-lg);
+    background: var(--lmct-navy);
+  }
+
+  .lmctCampaign__benefitVisual--fuel {
+    grid-row: 1 / 3;
+    min-height: 660px;
+  }
+
+  .lmctCampaign__benefitVisual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms cubic-bezier(0.2, 0.75, 0.2, 1);
+  }
+
+  .lmctCampaign__benefitVisual:hover > img {
+    transform: scale(1.025);
+  }
+
+  .lmctCampaign__benefitVisual::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(180deg, transparent 32%, rgba(3, 13, 27, 0.86) 100%);
+    pointer-events: none;
+  }
+
+  .lmctCampaign__benefitCopy {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: clamp(24px, 4vw, 44px);
+    color: var(--lmct-white);
+  }
+
+  .lmctCampaign__benefitCopy span {
+    color: #8bd2ff;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__benefitCopy h3 {
+    max-width: 520px;
+    margin: 10px 0 0;
+    font-size: clamp(28px, 4vw, 50px);
+    font-weight: 950;
+    line-height: 0.96;
+  }
+
+  .lmctCampaign__benefitVisual--grocery .lmctCampaign__benefitCopy h3 {
+    font-size: clamp(23px, 2.6vw, 34px);
+  }
+
+  .lmctCampaign__benefitCopy p {
+    margin: 12px 0 0;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  .lmctCampaign__partners {
+    display: grid;
+    align-content: center;
+    gap: 22px;
+    padding: clamp(22px, 3vw, 34px);
+    border: 1px solid var(--lmct-border);
+    border-radius: var(--lmct-radius-lg);
+    background: #f7f9fb;
+  }
+
+  .lmctCampaign__partnersText span {
+    color: var(--lmct-blue-deep);
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__partnersText h3 {
+    margin: 8px 0 0;
+    color: var(--lmct-navy);
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctCampaign__partnersText p {
+    margin: 9px 0 0;
+    color: var(--lmct-muted);
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .lmctCampaign__partnerLogos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .lmctCampaign__partnerLogo {
+    display: grid;
+    min-width: 0;
+    min-height: 62px;
+    place-items: center;
+    padding: 10px;
+    border: 1px solid var(--lmct-border);
+    border-radius: var(--lmct-radius-sm);
+    background: var(--lmct-white);
+  }
+
+  .lmctCampaign__partnerLogo img {
+    display: block;
+    width: 100%;
+    max-width: 100px;
+    height: 34px;
+    object-fit: contain;
+  }
+
+  /* Chapter 04: Upgrades and final decision */
+  .lmctCampaign__decision {
+    background: #edf2f6;
+  }
+
+  .lmctCampaign__upgrades {
+    padding: clamp(74px, 9vw, 112px) 0;
+  }
+
+  .lmctCampaign__upgradeHeader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 360px);
+    align-items: end;
+    gap: 36px;
+    margin-bottom: clamp(32px, 5vw, 52px);
+  }
+
+  .lmctCampaign__upgradeHeader h2 {
+    margin: 11px 0 0;
+    color: var(--lmct-navy);
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctCampaign__upgradeHeader p:last-child {
+    margin: 0;
+    color: var(--lmct-muted);
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.45;
+    text-align: right;
+  }
+
+  .lmctCampaign__upgradeMap {
+    display: grid;
+    grid-template-columns: 156px 94px minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+  }
+
+  .lmctCampaign__upgradeOrigin {
+    position: relative;
+    display: flex;
+    width: 156px;
+    aspect-ratio: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid rgba(31, 168, 81, 0.35);
+    border-radius: 50%;
+    color: var(--lmct-navy);
+    background: var(--lmct-white);
+    box-shadow: 0 18px 38px rgba(5, 22, 42, 0.08);
+    text-align: center;
+  }
+
+  .lmctCampaign__upgradeOrigin::before {
+    position: absolute;
+    inset: 8px;
+    border: 1px dashed rgba(31, 168, 81, 0.35);
+    border-radius: inherit;
+    content: "";
+  }
+
+  .lmctCampaign__upgradeOrigin span,
+  .lmctCampaign__upgradeOrigin small {
+    position: relative;
+    z-index: 1;
+    display: block;
+    font-size: 9px;
+    font-weight: 850;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__upgradeOrigin span {
+    color: var(--lmct-green);
+  }
+
+  .lmctCampaign__upgradeOrigin strong {
+    position: relative;
+    z-index: 1;
+    margin: 7px 0 5px;
+    font-size: 25px;
+    font-weight: 950;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__upgradeOrigin small {
+    color: var(--lmct-muted);
+  }
+
+  .lmctCampaign__upgradeRoute {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    place-items: center;
+  }
+
+  .lmctCampaign__upgradeRoute span {
+    position: absolute;
+    bottom: calc(50% + 11px);
+    color: var(--lmct-blue-deep);
+    font-size: 8px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__upgradeRoute::before {
+    width: 100%;
+    height: 2px;
+    content: "";
+    background: linear-gradient(90deg, rgba(31, 168, 81, 0.45), var(--lmct-blue));
+  }
+
+  .lmctCampaign__upgradeRoute::after {
+    position: absolute;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid var(--lmct-blue);
+    border-right: 2px solid var(--lmct-blue);
+    content: "";
+    transform: rotate(45deg);
+  }
+
+  .lmctCampaign__upgradeCards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .lmctCampaign__upgradeCard {
+    --lmct-tier: var(--lmct-blue);
+    --lmct-tier-dark: var(--lmct-blue-deep);
+    --lmct-tier-soft: #e8f6ff;
+    --lmct-tier-border: rgba(12, 159, 253, 0.44);
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    border: 1px solid rgba(12, 159, 253, 0.22);
+    border-radius: var(--lmct-radius-md);
+    background: var(--lmct-white);
+    box-shadow: 0 18px 42px rgba(5, 22, 42, 0.08);
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .lmctCampaign__upgradeCard::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 5px;
+    content: "";
+    background: var(--lmct-tier);
+  }
+
+  .lmctCampaign__upgradeCard--elite {
+    --lmct-tier: #f5b721;
+    --lmct-tier-dark: #8b650e;
+    --lmct-tier-soft: #fff6dc;
+    --lmct-tier-border: rgba(194, 137, 12, 0.44);
+    border-color: rgba(194, 137, 12, 0.24);
+  }
+
+  .lmctCampaign__upgradeCard:hover {
+    border-color: var(--lmct-tier);
+    box-shadow: 0 24px 52px rgba(5, 22, 42, 0.12);
+    transform: translateY(-3px);
+  }
+
+  .lmctCampaign__upgradeTierHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 24px 24px 18px;
+  }
+
+  .lmctCampaign__upgradeTierIdentity {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lmctCampaign__upgradeTierIcon {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmct-tier-dark);
+    background: var(--lmct-tier-soft);
+  }
+
+  .lmctCampaign__upgradeTierIcon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .lmctCampaign__upgradeTierLabel {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--lmct-muted);
+    font-size: 8px;
+    font-weight: 850;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__upgradeTier {
+    margin: 0;
+    color: var(--lmct-navy);
+    font-size: 20px;
+    font-weight: 950;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__upgradeLevel {
+    flex: 0 0 auto;
+    color: var(--lmct-tier-dark);
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__upgradeMetrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--lmct-border);
+    border-bottom: 1px solid var(--lmct-border);
+  }
+
+  .lmctCampaign__upgradeMetric {
+    display: grid;
+    min-width: 0;
+    min-height: 134px;
+    align-content: center;
+    padding: 18px 20px;
+  }
+
+  .lmctCampaign__upgradeMetric + .lmctCampaign__upgradeMetric {
+    border-left: 1px solid var(--lmct-border);
+  }
+
+  .lmctCampaign__upgradeMetricIcon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 9px;
+    color: var(--lmct-tier-dark);
+  }
+
+  .lmctCampaign__upgradeMetric strong {
+    color: var(--lmct-navy);
+    font-size: clamp(32px, 3vw, 43px);
+    font-weight: 950;
+    line-height: 0.9;
+  }
+
+  .lmctCampaign__upgradeMetric span {
+    margin-top: 8px;
+    color: var(--lmct-muted);
+    font-size: 9px;
+    font-weight: 750;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__upgradeMetric span b {
+    display: block;
+    color: var(--lmct-ink);
+    font-weight: 900;
+  }
+
+  .lmctCampaign__upgradePerks {
+    display: flex;
+    min-height: 54px;
+    align-items: center;
+    gap: 10px 18px;
+    flex-wrap: wrap;
+    padding: 12px 24px;
+    color: #4f6278;
+    background: #f8fafc;
+    font-size: 9px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__upgradePerk {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .lmctCampaign__upgradePerk svg {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 15px;
+    color: var(--lmct-tier-dark);
+  }
+
+  .lmctCampaign__upgradeFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 24px 22px;
+  }
+
+  .lmctCampaign__upgradePrice {
+    color: var(--lmct-navy);
+    font-size: 27px;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctCampaign__upgradePrice small {
+    display: block;
+    margin-top: 6px;
+    color: var(--lmct-muted);
+    font-size: 9px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__upgradeCta {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border: 1px solid var(--lmct-tier-border);
+    border-radius: var(--lmct-radius-sm);
+    color: var(--lmct-tier-dark) !important;
+    background: var(--lmct-white);
+    font-size: 11px;
+    font-weight: 950;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      border-color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .lmctCampaign__upgradeCta::after {
+    content: "\2192";
+    font-size: 17px;
+    transition: transform 180ms ease;
+  }
+
+  .lmctCampaign__upgradeCta:hover {
+    border-color: var(--lmct-tier);
+    transform: translateY(-1px);
+  }
+
+  .lmctCampaign__upgradeCta:hover::after {
+    transform: translateX(3px);
+  }
+
+  .lmctCampaign__final {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(78px, 10vw, 136px) 0;
+    color: var(--lmct-white);
+    background: var(--lmct-navy);
+  }
+
+  .lmctCampaign__final::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: transparent;
+    content: "+100";
+    font-size: min(32vw, 450px);
+    font-weight: 950;
+    line-height: 0.7;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.075);
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .lmctCampaign__final::after {
+    position: absolute;
+    inset: -50% -30%;
+    content: "";
+    background: linear-gradient(115deg, transparent 40%, rgba(12, 159, 253, 0.11) 50%, transparent 60%);
+    animation: lmctCampaignSweep 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .lmctCampaign__finalInner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: clamp(36px, 8vw, 110px);
+  }
+
+  .lmctCampaign__finalEyebrow {
+    color: #86d1ff;
+  }
+
+  .lmctCampaign__finalTitle {
+    max-width: 760px;
+    margin: 18px 0 0;
+    color: var(--lmct-white);
+    font-size: clamp(54px, 7.2vw, 90px);
+    font-weight: 950;
+    line-height: 0.87;
+  }
+
+  .lmctCampaign__finalTitle span {
+    display: block;
+    color: #32b1ff;
+  }
+
+  .lmctCampaign__finalOffer {
+    min-width: 330px;
+    padding-left: 28px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .lmctCampaign__finalPrice {
+    margin: 0 0 18px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 11px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__finalPrice strong {
+    color: var(--lmct-white);
+    font-size: 16px;
+  }
+
+  .lmctCampaign__finalCta {
+    width: 100%;
+  }
+
+  .lmctCampaign__finalNote {
+    margin: 14px 0 0;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  /* Mobile conversion bar */
+  .lmctCampaign__sticky {
+    position: fixed;
+    z-index: 999;
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    left: 10px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--lmct-radius-md);
+    background: rgba(5, 22, 42, 0.96);
+    box-shadow: 0 18px 52px rgba(5, 22, 42, 0.35);
+    backdrop-filter: blur(14px);
+    transform: translateY(calc(100% + 28px));
+    transition: transform 260ms ease;
+  }
+
+  .lmctCampaign__sticky.is-visible {
+    transform: translateY(0);
+  }
+
+  .lmctCampaign__stickyPlan {
+    min-width: 0;
+    color: var(--lmct-white);
+  }
+
+  .lmctCampaign__stickyPlan b,
+  .lmctCampaign__stickyPlan span {
+    display: block;
+  }
+
+  .lmctCampaign__stickyPlan b {
+    font-size: 12px;
+    font-weight: 950;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__stickyPlan span {
+    margin-top: 3px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 10px;
+    font-weight: 750;
+  }
+
+  .lmctCampaign__stickyCta {
+    display: inline-flex;
+    min-height: 44px;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 15px;
+    border-radius: var(--lmct-radius-sm);
+    color: var(--lmct-white) !important;
+    background: linear-gradient(135deg, var(--lmct-blue), var(--lmct-blue-deep));
+    font-size: 11px;
+    font-weight: 950;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .lmctCampaign__reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 650ms ease,
+      transform 650ms ease;
+  }
+
+  .lmctCampaign__reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes lmctCampaignFloat {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes lmctCampaignAmbient {
+    from {
+      transform: translate3d(-2%, -2%, 0) scale(0.96);
+    }
+    to {
+      transform: translate3d(4%, 4%, 0) scale(1.05);
+    }
+  }
+
+  @keyframes lmctCampaignTicketImage {
+    0%,
+    100% {
+      transform: rotate(1.25deg) translate3d(0, 0, 0);
+    }
+    50% {
+      transform: rotate(0.7deg) translate3d(0, -6px, 0);
+    }
+  }
+
+  @keyframes lmctCampaignTicketGlow {
+    from {
+      opacity: 0.72;
+      transform: translate3d(-2%, 1%, 0) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(3%, -2%, 0) scale(1.04);
+    }
+  }
+
+  @keyframes lmctCampaignSweep {
+    from {
+      transform: translateX(-22%);
+    }
+    to {
+      transform: translateX(22%);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .lmctCampaign__hero {
+      min-height: auto;
+    }
+
+    .lmctCampaign__heroGrid {
+      grid-template-columns: minmax(0, 1fr) minmax(330px, 0.8fr);
+      gap: 28px;
+    }
+
+    .lmctCampaign__bonusStage {
+      width: min(100%, 500px);
+      min-height: 470px;
+      margin-right: -7vw;
+    }
+
+    .lmctCampaign__ticket {
+      min-height: 450px;
+    }
+
+    .lmctCampaign__featureModules {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lmctCampaign__bento {
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.9fr);
+    }
+  }
+
+  @media (max-width: 820px) {
+    .lmctCampaign__container {
+      width: min(calc(100% - 28px), var(--lmct-container));
+    }
+
+    .lmctCampaign__hero {
+      padding-bottom: 72px;
+    }
+
+    .lmctCampaign__brand {
+      padding-bottom: 52px;
+    }
+
+    .lmctCampaign__heroGrid {
+      grid-template-columns: 1fr;
+    }
+
+    .lmctCampaign__bonusStage {
+      width: min(82vw, 520px);
+      min-height: 440px;
+      margin: 8px auto 0;
+    }
+
+    .lmctCampaign__heroTicketImage {
+      width: min(720px, 136%);
+      margin-left: 0;
+    }
+
+    .lmctCampaign__heroLead {
+      margin-top: 22px;
+    }
+
+    .lmctCampaign__ticket {
+      min-height: 390px;
+    }
+
+    .lmctCampaign__hundred {
+      margin-top: 48px;
+    }
+
+    .lmctCampaign__entryHeader,
+    .lmctCampaign__entryGrid,
+    .lmctCampaign__everydayHeader,
+    .lmctCampaign__finalInner {
+      grid-template-columns: 1fr;
+    }
+
+    .lmctCampaign__entryPrice {
+      justify-self: start;
+      text-align: left;
+    }
+
+    .lmctCampaign__entryFeature {
+      position: static;
+    }
+
+    .lmctCampaign__everydayHeader .lmctCampaign__sectionLead {
+      justify-self: start;
+    }
+
+    .lmctCampaign__bento {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 470px auto;
+    }
+
+    .lmctCampaign__benefitVisual--fuel {
+      grid-row: auto;
+      min-height: 470px;
+    }
+
+    .lmctCampaign__partners {
+      grid-column: 1 / -1;
+    }
+
+    .lmctCampaign__upgradeMap {
+      grid-template-columns: 132px 62px minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .lmctCampaign__upgradeOrigin {
+      width: 132px;
+    }
+
+    .lmctCampaign__upgradeCards {
+      grid-template-columns: 1fr;
+    }
+
+    .lmctCampaign__finalOffer {
+      min-width: 0;
+      padding: 28px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-left: 0;
+    }
+
+    .lmctCampaign__sticky {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .lmctCampaign__logo {
+      width: 108px;
+    }
+
+    .lmctCampaign__purchaseState {
+      font-size: 9px;
+    }
+
+    .lmctCampaign__heroTitle {
+      font-size: clamp(46px, 13.5vw, 64px);
+    }
+
+    .lmctCampaign__heroGrid {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .lmctCampaign__heroCopy {
+      display: contents;
+    }
+
+    .lmctCampaign__heroCopy .lmctCampaign__eyebrow {
+      order: 1;
+    }
+
+    .lmctCampaign__heroTitle {
+      order: 2;
+    }
+
+    .lmctCampaign__bonusStage {
+      order: 3;
+      width: min(88vw, 430px);
+      min-height: clamp(330px, 89vw, 410px);
+      margin-top: 8px;
+    }
+
+    .lmctCampaign__heroTicketImage {
+      width: 100%;
+      margin-left: -3%;
+    }
+
+    .lmctCampaign__heroLead {
+      order: 4;
+    }
+
+    .lmctCampaign__heroOffer {
+      order: 5;
+      margin-top: 18px;
+    }
+
+    .lmctCampaign__heroActions {
+      order: 6;
+      margin-top: 20px;
+    }
+
+    .lmctCampaign__ticket {
+      min-height: 330px;
+      padding: 28px;
+    }
+
+    .lmctCampaign__hundred {
+      margin-top: 48px;
+      font-size: clamp(98px, 31vw, 140px);
+    }
+
+    .lmctCampaign__ticketTitle {
+      margin-top: 24px;
+      font-size: 25px;
+    }
+
+    .lmctCampaign__ticketFoot {
+      right: 28px;
+      bottom: 24px;
+      left: 28px;
+    }
+
+    .lmctCampaign__primaryCta {
+      width: 100%;
+    }
+
+    .lmctCampaign__featureModules {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lmctCampaign__featureModule {
+      min-height: 172px;
+      padding: 18px;
+    }
+
+    .lmctCampaign__featureModule > svg {
+      width: 40px;
+      height: 40px;
+      flex-basis: 40px;
+      padding: 9px;
+      border-radius: 10px;
+    }
+
+    .lmctCampaign__featureName {
+      margin-top: 18px;
+      font-size: 11px;
+    }
+
+    .lmctCampaign__entriesHead {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .lmctCampaign__entriesHead p {
+      text-align: left;
+    }
+
+    .lmctCampaign__timeline {
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 28px;
+      padding-left: 7px;
+    }
+
+    .lmctCampaign__timeline::before {
+      top: 8px;
+      right: auto;
+      bottom: 38px;
+      left: 15px;
+      width: 2px;
+      height: auto;
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+
+    .lmctCampaign__entriesStory.is-visible .lmctCampaign__timeline::before {
+      transform: scaleY(1);
+    }
+
+    .lmctCampaign__timePoint {
+      display: grid;
+      grid-template-columns: 18px 66px 1fr;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 18px;
+      text-align: left;
+    }
+
+    .lmctCampaign__timeDot {
+      margin: 0;
+    }
+
+    .lmctCampaign__timePoint strong {
+      font-size: 25px;
+    }
+
+    .lmctCampaign__timePoint span {
+      margin: 0;
+    }
+
+    .lmctCampaign__bento {
+      grid-template-columns: 1fr;
+      grid-template-rows: none;
+    }
+
+    .lmctCampaign__benefitVisual--fuel,
+    .lmctCampaign__benefitVisual--grocery {
+      min-height: 390px;
+    }
+
+    .lmctCampaign__partners {
+      grid-column: auto;
+    }
+
+    .lmctCampaign__partnerLogos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lmctCampaign__upgradeHeader {
+      align-items: flex-start;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .lmctCampaign__upgradeHeader p:last-child {
+      text-align: left;
+    }
+
+    .lmctCampaign__upgradeMap {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .lmctCampaign__upgradeOrigin {
+      width: 132px;
+      margin-inline: auto;
+    }
+
+    .lmctCampaign__upgradeRoute {
+      width: 100%;
+      height: 66px;
+    }
+
+    .lmctCampaign__upgradeRoute::before {
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(31, 168, 81, 0.45), var(--lmct-blue));
+    }
+
+    .lmctCampaign__upgradeRoute::after {
+      right: auto;
+      bottom: 1px;
+      transform: rotate(135deg);
+    }
+
+    .lmctCampaign__upgradeRoute span {
+      bottom: auto;
+      left: calc(50% + 16px);
+      width: 74px;
+      text-align: left;
+    }
+
+    .lmctCampaign__upgradeFooter {
+      padding-inline: 18px;
+    }
+
+    .lmctCampaign__upgradeCta {
+      min-width: 0;
+    }
+
+    .lmctCampaign__finalTitle {
+      font-size: clamp(52px, 11vw, 60px);
+    }
+
+    .lmctCampaign__final::before {
+      font-size: 50vw;
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
+  }
+
+  @media (max-width: 380px) {
+    .lmctCampaign__container {
+      width: min(calc(100% - 24px), var(--lmct-container));
+    }
+
+    .lmctCampaign__purchaseState {
+      max-width: 120px;
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    .lmctCampaign__heroOffer {
+      gap: 15px;
+    }
+
+    .lmctCampaign__heroPrice {
+      padding-left: 15px;
+      font-size: 25px;
+    }
+
+    .lmctCampaign__featureModules {
+      grid-template-columns: 1fr;
+    }
+
+    .lmctCampaign__featureModule {
+      min-height: 150px;
+    }
+
+    .lmctCampaign__stickyPlan span {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctCampaign *,
+    .lmctCampaign *::before,
+    .lmctCampaign *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .lmctCampaign__reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<main class="lmctCampaign">
+  <!-- 01 / Hero -->
+  <section class="lmctCampaign__hero" id="lmctCampaignHero" aria-labelledby="lmctCampaignHeroTitle">
+    <div class="lmctCampaign__container">
+      <header class="lmctCampaign__brand" aria-label="LMCT+ exclusive member offer">
+        <img class="lmctCampaign__logo" src="https://images.clickfunnels.com/12/27020b5aa843dcae99b04c65edbc00/lmct-black-logo.png" alt="LMCT+" width="180" height="64" />
+        <span class="lmctCampaign__purchaseState">Purchase complete</span>
+      </header>
+
+      <div class="lmctCampaign__heroGrid">
+        <div class="lmctCampaign__heroCopy">
+          <p class="lmctCampaign__eyebrow">Exclusive member offer</p>
+          <h1 class="lmctCampaign__heroTitle" id="lmctCampaignHeroTitle">
+            You&rsquo;re already in.
+            <span>Get +100 more entries.</span>
+          </h1>
+          <p class="lmctCampaign__heroLead">
+            Become an LMCT+ Entry Member and we&rsquo;ll add <br />
+            100 bonus entries to the draw you just entered.
+          </p>
+
+          <div class="lmctCampaign__heroOffer" aria-label="Entry Membership price">
+            <div class="lmctCampaign__heroPlan">
+              <span>Membership</span>
+              <strong>Entry</strong>
+            </div>
+            <div class="lmctCampaign__heroPrice">$19.99 <small>/ month</small></div>
+          </div>
+
+          <div class="lmctCampaign__heroActions">
+            <a class="lmctCampaign__primaryCta css-order-bronze" href="#open-popup" data-title="css-order-bronze" aria-label="Join Entry Membership and get 100 bonus entries">
+              Join Entry &amp; Get +100
+            </a>
+            <p class="lmctCampaign__heroTrust">Automatic entries &middot; Member benefits &middot; Cancel anytime</p>
+          </div>
+        </div>
+
+        <div class="lmctCampaign__bonusStage" aria-label="100 bonus entries into your current draw">
+          <img
+            class="lmctCampaign__heroTicketImage"
+            src="https://images.clickfunnels.com/4f/a4e1bf8e41467abefe6db61af4ba90/ChatGPT-Image-Sep-1-2026-01_58_16-PM.png"
+            alt="100 bonus entries"
+            width="1320"
+            height="1145"
+            decoding="async"
+            fetchpriority="high" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 / Entry membership and recurring value -->
+  <section class="lmctCampaign__entry" id="packages" aria-labelledby="lmctCampaignEntryTitle">
+    <div class="lmctCampaign__container">
+      <header class="lmctCampaign__entryHeader lmctCampaign__reveal">
+        <div>
+          <p class="lmctCampaign__eyebrow">Everything included</p>
+          <h2 class="lmctCampaign__sectionTitle" id="lmctCampaignEntryTitle">Entry membership.<br /><em>Value that keeps moving.</em></h2>
+        </div>
+        <div class="lmctCampaign__entryPrice">
+          <strong>$19.99</strong>
+          <span>Monthly billing &middot; Cancel anytime</span>
+        </div>
+      </header>
+
+      <div class="lmctCampaign__entryGrid">
+        <div class="lmctCampaign__entryFeature lmctCampaign__reveal">
+          <div class="lmctCampaign__entryBonus">
+            <span class="lmctCampaign__entryBonusLabel">Your joining bonus</span>
+            <strong>+100</strong>
+            <b>Bonus entries today</b>
+          </div>
+          <a class="lmctCampaign__primaryCta lmctCampaign__entryCta css-order-bronze" href="#open-popup" data-title="css-order-bronze" aria-label="Join Entry Membership and claim 100 bonus entries">
+            Join Entry &amp; Claim +100
+          </a>
+        </div>
+
+        <div class="lmctCampaign__entryDetails">
+          <div class="lmctCampaign__featureIntro">
+            <h3>While you&rsquo;re a member</h3>
+            <span>Entry plan</span>
+          </div>
+
+          <div class="lmctCampaign__featureModules lmctCampaign__reveal" aria-label="Entry Membership benefits">
+            <article class="lmctCampaign__featureModule lmctCampaign__featureModule--green">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
+                <path d="M0 0h32v32H0z" fill="none" />
+                <path
+                  fill="currentColor"
+                  d="M29 14a1 1 0 0 0 1-1V8a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v5a1 1 0 0 0 1 1a2 2 0 0 1 0 4a1 1 0 0 0-1 1v5a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1a2 2 0 0 1 0-4m-1 5.87V24h-7v-3h-2v3H4v-4.13a4 4 0 0 0 0-7.74V8h15v3h2V8h7v4.13a4 4 0 0 0 0 7.74" />
+                <path fill="currentColor" d="M19 13h2v6h-2z" />
+              </svg>
+              <span class="lmctCampaign__featureValue">+1 / mo</span>
+              <span class="lmctCampaign__featureName">Automatic entries</span>
+            </article>
+            <article class="lmctCampaign__featureModule">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+                <path d="M0 0h16v16H0z" fill="none" />
+                <g fill="currentColor">
+                  <path d="M3 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z" />
+                  <path
+                    d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1q.846-.002 1.412.336c.383.228.634.551.794.907c.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8z" />
+                </g>
+              </svg>
+
+              <span class="lmctCampaign__featureValue">Fuel</span>
+              <span class="lmctCampaign__featureName">Member savings</span>
+            </article>
+            <article class="lmctCampaign__featureModule">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path d="M5 19L19 5" />
+                  <circle cx="7" cy="7" r="3" />
+                  <circle cx="17" cy="17" r="3" />
+                </g>
+              </svg>
+
+              <span class="lmctCampaign__featureValue">5% off</span>
+              <span class="lmctCampaign__featureName">Eligible instore products</span>
+            </article>
+            <article class="lmctCampaign__featureModule">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2">
+                  <path d="M5 7h13.79a2 2 0 0 1 1.99 2.199l-.6 6A2 2 0 0 1 18.19 17H8.64a2 2 0 0 1-1.962-1.608z" />
+                  <path stroke-linecap="round" d="m5 7l-.81-3.243A1 1 0 0 0 3.22 3H2m6 18h2m6 0h2" />
+                </g>
+              </svg>
+
+              <span class="lmctCampaign__featureValue">Grocery</span>
+              <span class="lmctCampaign__featureName">Member pricing</span>
+            </article>
+            <article class="lmctCampaign__featureModule">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="1.25em" height="1em" viewBox="0 0 640 512">
+                <path d="M0 0h640v512H0z" fill="none" />
+                <path
+                  fill="currentColor"
+                  d="m272.2 64.6l-51.1 51.1c-15.3 4.2-29.5 11.9-41.5 22.5L153 161.9c-10.2 9.1-23.5 14.1-37.2 14.1H96v128c20.4.6 39.8 8.9 54.3 23.4l35.6 35.6l7 7l27 27c6.2 6.2 16.4 6.2 22.6 0c1.7-1.7 3-3.7 3.7-5.8c2.8-7.7 9.3-13.5 17.3-15.3s16.4.6 22.2 6.5l10.8 10.6c11.6 11.6 30.4 11.6 41.9 0c5.4-5.4 8.3-12.3 8.6-19.4c.4-8.8 5.6-16.6 13.6-20.4s17.3-3 24.4 2.1c9.4 6.7 22.5 5.8 30.9-2.6c9.4-9.4 9.4-24.6 0-33.9L340.1 243l-35.8 33c-27.3 25.2-69.2 25.6-97 .9c-31.7-28.2-32.4-77.4-1.6-106.5l70.1-66.2C303.2 78.4 339.4 64 377.1 64c36.1 0 71 13.3 97.9 37.2l30.1 26.8H624c8.8 0 16 7.2 16 16v208c0 17.7-14.3 32-32 32h-32c-11.8 0-22.2-6.4-27.7-16h-84.9c-3.4 6.7-7.9 13.1-13.5 18.7c-17.1 17.1-40.8 23.8-63 20.1c-3.6 7.3-8.5 14.1-14.6 20.2c-27.3 27.3-70 30-100.4 8.1c-25.1 20.8-62.5 19.5-86-4.1L159 404l-7-7l-35.6-35.6c-5.5-5.5-12.7-8.7-20.4-9.3c0 17.6-14.4 31.9-32 31.9H32c-17.7 0-32-14.3-32-32V144c0-8.8 7.2-16 16-16h99.8c2 0 3.9-.7 5.3-2l26.5-23.6C175.5 77.7 211.4 64 248.7 64H259c4.4 0 8.9.2 13.2.6M544 320V176h-48c-5.9 0-11.6-2.2-15.9-6.1l-36.9-32.8C425 120.9 401.5 112 377.1 112c-25.4 0-49.8 9.7-68.3 27.1l-70.1 66.2c-10.3 9.8-10.1 26.3.5 35.7c9.3 8.3 23.4 8.1 32.5-.3l71.9-66.4c9.7-9 24.9-8.4 33.9 1.4s8.4 24.9-1.4 33.9l-.8.8l74.4 74.4c10 10 16.5 22.3 19.4 35.1h74.8zM64 336a16 16 0 1 0-32 0a16 16 0 1 0 32 0m528 16a16 16 0 1 0 0-32a16 16 0 1 0 0 32" />
+              </svg>
+
+              <span class="lmctCampaign__featureValue">Partners</span>
+              <span class="lmctCampaign__featureName">Entry discounts</span>
+            </article>
+            <article class="lmctCampaign__featureModule">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <rect width="12" height="20" x="6" y="2" rx="2" />
+                  <path d="M11.95 18h.1" />
+                </g>
+              </svg>
+
+              <span class="lmctCampaign__featureValue">App</span>
+              <span class="lmctCampaign__featureName">Exclusive access</span>
+            </article>
+          </div>
+
+          <div class="lmctCampaign__entriesStory lmctCampaign__reveal" data-lmct-entry-story>
+            <div class="lmctCampaign__entriesHead">
+              <h3>Your entries keep building.</h3>
+              <p>One free accumulating entry into every eligible draw each month while your Entry Membership remains active.</p>
+            </div>
+            <div class="lmctCampaign__timeline" data-lmct-entry-timeline aria-label="Entry Membership accumulating entries over time"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 / Everyday member value -->
+  <section class="lmctCampaign__everyday" aria-labelledby="lmctCampaignEverydayTitle">
+    <div class="lmctCampaign__container">
+      <header class="lmctCampaign__everydayHeader lmctCampaign__reveal">
+        <div>
+          <p class="lmctCampaign__eyebrow">More than entries</p>
+          <h2 class="lmctCampaign__sectionTitle" id="lmctCampaignEverydayTitle">Membership<br /><em>for the everyday.</em></h2>
+        </div>
+        <p class="lmctCampaign__sectionLead">Fuel, groceries and participating partner benefits add practical value beyond the draw.</p>
+      </header>
+
+      <div class="lmctCampaign__bento">
+        <article class="lmctCampaign__benefitVisual lmctCampaign__benefitVisual--fuel lmctCampaign__reveal">
+          <img src="https://lmctplus.com/uploads/saver-assets/petrol-hero.webp" alt="LMCT+ member at a participating fuel location" width="720" height="900" loading="lazy" />
+          <div class="lmctCampaign__benefitCopy">
+            <span>Fuel</span>
+            <h3>Save at the pump.</h3>
+            <p>Access the LMCT+ Fuel Saver Discount.</p>
+          </div>
+        </article>
+
+        <article class="lmctCampaign__benefitVisual lmctCampaign__benefitVisual--grocery lmctCampaign__reveal">
+          <img src="https://images.clickfunnels.com/29/a2dc4d36d34fa7bd36d001ebbf4d16/sssaaa.jpg" alt="LMCT+ Supermarket in Deer Park" width="720" height="450" loading="lazy" />
+          <div class="lmctCampaign__benefitCopy">
+            <span>Groceries</span>
+            <h3>Member pricing.</h3>
+            <p>Access participating grocery offers.</p>
+          </div>
+        </article>
+
+        <article class="lmctCampaign__partners lmctCampaign__reveal">
+          <div class="lmctCampaign__partnersText">
+            <span>Participating partners</span>
+            <h3>Offers beyond the draw.</h3>
+            <p>Entry discounts and member access across selected partners.</p>
+          </div>
+          <div class="lmctCampaign__partnerLogos" aria-label="Participating LMCT+ partner examples">
+            <div class="lmctCampaign__partnerLogo">
+              <img
+                src="https://images.clickfunnels.com/7f/c7860003e44853904ddb51e4bea948/Untitled-3_0001_UT_0005_Untitled-3_0005_lotus.png"
+                alt="Lotus Caravans"
+                width="180"
+                height="70"
+                loading="lazy" />
+            </div>
+            <div class="lmctCampaign__partnerLogo">
+              <img src="https://images.clickfunnels.com/b6/38cbd184fd49cf893b3afd374eef4c/Untitled-3_0001_UT_0001_Untitled-3_0006_betta.png" alt="Betta" width="180" height="70" loading="lazy" />
+            </div>
+            <div class="lmctCampaign__partnerLogo">
+              <img
+                src="https://images.clickfunnels.com/48/1f3e0a011e4e53b64a3c676419fe48/Untitled-3_0001_UT_0000_Untitled-3_0003_adore.png"
+                alt="Adore Beauty"
+                width="180"
+                height="70"
+                loading="lazy" />
+            </div>
+            <div class="lmctCampaign__partnerLogo">
+              <img
+                src="https://images.clickfunnels.com/b3/52c5a8b3254b7cba7c5646946497cb/Untitled-3_0001_UT_0002_Untitled-3_0004_flippy.png"
+                alt="Participating LMCT+ partner"
+                width="180"
+                height="70"
+                loading="lazy" />
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 / Optional upgrades and final decision -->
+  <section class="lmctCampaign__decision" aria-label="Optional membership upgrades and final offer">
+    <div class="lmctCampaign__upgrades">
+      <div class="lmctCampaign__container">
+        <header class="lmctCampaign__upgradeHeader lmctCampaign__reveal">
+          <div>
+            <p class="lmctCampaign__eyebrow">Want more?</p>
+            <h2>Upgrade your membership.</h2>
+          </div>
+          <!-- <p>Entry remains the main offer. Premium and Elite are optional higher-tier choices.</p> -->
+        </header>
+
+        <!-- VERIFY: Confirm whether the +100 promotion applies to Premium and Elite before adding it to these plans. -->
+        <div class="lmctCampaign__upgradeMap lmctCampaign__reveal" role="group" aria-label="Entry Membership with optional Premium and Elite upgrades">
+          <div class="lmctCampaign__upgradeOrigin">
+            <span>Main offer</span>
+            <strong>Entry</strong>
+            <small>Essential membership</small>
+          </div>
+
+          <div class="lmctCampaign__upgradeRoute" aria-hidden="true">
+            <span>Optional upgrades</span>
+          </div>
+
+          <div class="lmctCampaign__upgradeCards">
+            <article class="lmctCampaign__upgradeCard">
+              <div class="lmctCampaign__upgradeTierHead">
+                <div class="lmctCampaign__upgradeTierIdentity">
+                  <span class="lmctCampaign__upgradeTierIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 3 19 6v5c0 4.6-2.9 8.7-7 10-4.1-1.3-7-5.4-7-10V6l7-3Z" />
+                      <path d="m9 12 2 2 4-4" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="lmctCampaign__upgradeTierLabel">Optional tier</span>
+                    <h3 class="lmctCampaign__upgradeTier">Premium</h3>
+                  </div>
+                </div>
+                <span class="lmctCampaign__upgradeLevel">More</span>
+              </div>
+
+              <div class="lmctCampaign__upgradeMetrics">
+                <div class="lmctCampaign__upgradeMetric">
+                  <svg class="lmctCampaign__upgradeMetricIcon" aria-hidden="true" viewBox="0 0 32 32">
+                    <path d="M0 0h32v32H0z" fill="none" />
+                    <path
+                      fill="currentColor"
+                      d="M29 14a1 1 0 0 0 1-1V8a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v5a1 1 0 0 0 1 1 2 2 0 0 1 0 4 1 1 0 0 0-1 1v5a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1 2 2 0 0 1 0-4m-1 5.87V24h-7v-3h-2v3H4v-4.13a4 4 0 0 0 0-7.74V8h15v3h2V8h7v4.13a4 4 0 0 0 0 7.74" />
+                  </svg>
+                  <strong>5</strong>
+                  <span>Free accumulating entries <b>each eligible draw / month</b></span>
+                </div>
+                <div class="lmctCampaign__upgradeMetric">
+                  <svg class="lmctCampaign__upgradeMetricIcon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M5 19 19 5" />
+                    <circle cx="7" cy="7" r="3" />
+                    <circle cx="17" cy="17" r="3" />
+                  </svg>
+                  <strong>7.5%</strong>
+                  <span>Off eligible <b>instore products</b></span>
+                </div>
+              </div>
+
+              <div class="lmctCampaign__upgradePerks" role="list" aria-label="Premium benefits">
+                <span class="lmctCampaign__upgradePerk" role="listitem">
+                  <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M3 2.5A.5.5 0 0 1 3.5 2h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z" />
+                    <path
+                      d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1q.846-.002 1.412.336c.383.228.634.551.794.907.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8z" />
+                  </svg>
+                  Fuel Saver
+                </span>
+                <span class="lmctCampaign__upgradePerk" role="listitem">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m20.6 13.4-7.2 7.2a2 2 0 0 1-2.8 0L3.4 13.4A2 2 0 0 1 3 12V4h8a2 2 0 0 1 1.4.6l8.2 8.2a.5.5 0 0 1 0 .6Z" />
+                    <circle cx="7.5" cy="8.5" r="1.5" />
+                  </svg>
+                  Premium partner discounts
+                </span>
+                <span class="lmctCampaign__upgradePerk" role="listitem">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="12" height="20" x="6" y="2" rx="2" />
+                    <path d="M11.95 18h.1" />
+                  </svg>
+                  Exclusive app access
+                </span>
+              </div>
+
+              <div class="lmctCampaign__upgradeFooter">
+                <div class="lmctCampaign__upgradePrice">
+                  $49.99
+                  <small>Monthly &middot; Cancel anytime</small>
+                </div>
+                <a class="lmctCampaign__upgradeCta css-order-silver" href="#open-popup" data-title="css-order-silver" aria-label="Choose Premium membership">Choose Premium</a>
+              </div>
+            </article>
+
+            <article class="lmctCampaign__upgradeCard lmctCampaign__upgradeCard--elite">
+              <div class="lmctCampaign__upgradeTierHead">
+                <div class="lmctCampaign__upgradeTierIdentity">
+                  <span class="lmctCampaign__upgradeTierIcon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m12 2.8 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9L6.4 20l1.1-6.2L3 9.4l6.2-.9L12 2.8Z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="lmctCampaign__upgradeTierLabel">Highest tier</span>
+                    <h3 class="lmctCampaign__upgradeTier">Elite</h3>
+                  </div>
+                </div>
+                <span class="lmctCampaign__upgradeLevel">Maximum</span>
+              </div>
+
+              <div class="lmctCampaign__upgradeMetrics">
+                <div class="lmctCampaign__upgradeMetric">
+                  <svg class="lmctCampaign__upgradeMetricIcon" aria-hidden="true" viewBox="0 0 32 32">
+                    <path d="M0 0h32v32H0z" fill="none" />
+                    <path
+                      fill="currentColor"
+                      d="M29 14a1 1 0 0 0 1-1V8a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v5a1 1 0 0 0 1 1 2 2 0 0 1 0 4 1 1 0 0 0-1 1v5a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1 2 2 0 0 1 0-4m-1 5.87V24h-7v-3h-2v3H4v-4.13a4 4 0 0 0 0-7.74V8h15v3h2V8h7v4.13a4 4 0 0 0 0 7.74" />
+                  </svg>
+                  <strong>10</strong>
+                  <span>Free accumulating entries <b>each eligible draw / month</b></span>
+                </div>
+                <div class="lmctCampaign__upgradeMetric">
+                  <svg class="lmctCampaign__upgradeMetricIcon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M5 19 19 5" />
+                    <circle cx="7" cy="7" r="3" />
+                    <circle cx="17" cy="17" r="3" />
+                  </svg>
+                  <strong>10%</strong>
+                  <span>Off eligible <b>instore products</b></span>
+                </div>
+              </div>
+
+              <div class="lmctCampaign__upgradePerks" role="list" aria-label="Elite benefits">
+                <span class="lmctCampaign__upgradePerk" role="listitem">
+                  <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M3 2.5A.5.5 0 0 1 3.5 2h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1-.5-.5z" />
+                    <path
+                      d="M1 2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8a2 2 0 0 1 2 2v.5a.5.5 0 0 0 1 0V8h-.5a.5.5 0 0 1-.5-.5V4.375a.5.5 0 0 1 .5-.5h1.495c-.011-.476-.053-.894-.201-1.222a.97.97 0 0 0-.394-.458c-.184-.11-.464-.195-.9-.195a.5.5 0 0 1 0-1q.846-.002 1.412.336c.383.228.634.551.794.907.295.655.294 1.465.294 2.081v3.175a.5.5 0 0 1-.5.501H15v4.5a1.5 1.5 0 0 1-3 0V12a1 1 0 0 0-1-1v4h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1zm9 0a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v13h8z" />
+                  </svg>
+                  Fuel Saver
+                </span>
+                <span class="lmctCampaign__upgradePerk" role="listitem">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m20.6 13.4-7.2 7.2a2 2 0 0 1-2.8 0L3.4 13.4A2 2 0 0 1 3 12V4h8a2 2 0 0 1 1.4.6l8.2 8.2a.5.5 0 0 1 0 .6Z" />
+                    <circle cx="7.5" cy="8.5" r="1.5" />
+                  </svg>
+                  Elite partner discounts
+                </span>
+                <span class="lmctCampaign__upgradePerk" role="listitem">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="12" height="20" x="6" y="2" rx="2" />
+                    <path d="M11.95 18h.1" />
+                  </svg>
+                  Exclusive app access
+                </span>
+              </div>
+
+              <div class="lmctCampaign__upgradeFooter">
+                <div class="lmctCampaign__upgradePrice">
+                  $99.99
+                  <small>Monthly &middot; Cancel anytime</small>
+                </div>
+                <a class="lmctCampaign__upgradeCta css-order-gold" href="#open-popup" data-title="css-order-gold" aria-label="Choose Elite membership">Choose Elite</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lmctCampaign__final" id="lmctCampaignFinal" aria-labelledby="lmctCampaignFinalTitle">
+      <div class="lmctCampaign__container lmctCampaign__finalInner">
+        <div>
+          <p class="lmctCampaign__eyebrow lmctCampaign__finalEyebrow">Before you go</p>
+          <h2 class="lmctCampaign__finalTitle" id="lmctCampaignFinalTitle">
+            Don&rsquo;t leave
+            <span>+100 entries</span>
+            behind.
+          </h2>
+        </div>
+        <div class="lmctCampaign__finalOffer">
+          <p class="lmctCampaign__finalPrice"><strong>Entry membership</strong> &mdash; $19.99 / month</p>
+          <a class="lmctCampaign__primaryCta lmctCampaign__finalCta css-order-bronze" href="#open-popup" data-title="css-order-bronze" aria-label="Join Entry Membership and get 100 bonus entries">
+            Join Entry &amp; Get +100
+          </a>
+          <p class="lmctCampaign__finalNote">Cancel anytime &middot; Automatic entries &middot; Member benefits included</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="lmctCampaign__sticky" data-lmct-sticky aria-label="Entry Membership quick action">
+    <div class="lmctCampaign__stickyPlan">
+      <b>Entry &middot; $19.99</b>
+      <span>Monthly &middot; Cancel anytime</span>
+    </div>
+    <a class="lmctCampaign__stickyCta css-order-bronze" href="#open-popup" data-title="css-order-bronze" aria-label="Join Entry Membership and get 100 bonus entries"> Get +100 &rarr; </a>
+  </aside>
+</main>
+
+<script>
+  (function () {
+    "use strict";
+
+    var campaign = document.querySelector(".lmctCampaign");
+    if (!campaign) return;
+
+    var ENTRY_RATE = 1;
+    var ENTRY_MONTHS = [3, 6, 9, 12, 15];
+    var timeline = campaign.querySelector("[data-lmct-entry-timeline]");
+
+    if (timeline) {
+      ENTRY_MONTHS.forEach(function (month) {
+        var point = document.createElement("div");
+        point.className = "lmctCampaign__timePoint";
+        point.innerHTML = '<span class="lmctCampaign__timeDot" aria-hidden="true"></span>' + "<strong>" + month * ENTRY_RATE + "</strong>" + "<span>Month " + month + "</span>";
+        timeline.appendChild(point);
+      });
+    }
+
+    var revealItems = campaign.querySelectorAll(".lmctCampaign__reveal");
+    var entryStory = campaign.querySelector("[data-lmct-entry-story]");
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach(function (item) {
+        item.classList.add("is-visible");
+      });
+      if (entryStory) entryStory.classList.add("is-visible");
+    } else {
+      var revealObserver = new IntersectionObserver(
+        function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.14, rootMargin: "0px 0px -7% 0px" },
+      );
+
+      revealItems.forEach(function (item) {
+        revealObserver.observe(item);
+      });
+    }
+
+    var sticky = campaign.querySelector("[data-lmct-sticky]");
+    var hero = campaign.querySelector("#lmctCampaignHero");
+    var finalSection = campaign.querySelector("#lmctCampaignFinal");
+
+    if (sticky && hero && finalSection && "IntersectionObserver" in window) {
+      var heroVisible = true;
+      var finalVisible = false;
+
+      function syncSticky() {
+        sticky.classList.toggle("is-visible", !heroVisible && !finalVisible);
+      }
+
+      var stickyObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.target === hero) heroVisible = entry.isIntersecting;
+            if (entry.target === finalSection) finalVisible = entry.isIntersecting;
+          });
+          syncSticky();
+        },
+        { threshold: 0.08 },
+      );
+
+      stickyObserver.observe(hero);
+      stickyObserver.observe(finalSection);
+    }
+  })();
+</script>

@@ -1,0 +1,1183 @@
+<!--
+  LMCT+ GENERIC OFFER-ENDED PAGE
+
+  Reuse this page for any expired promotion by editing only the data attributes
+  on #lmctOfferEndedPage:
+    data-offer-name       Name shown in the closed-offer card
+    data-ended-at         Optional ISO date/time (leave blank to hide the date)
+    data-primary-url      Destination for current offers
+    data-secondary-url    Destination for the member dashboard
+    data-support-url      Support link (mailto:, tel:, or web URL)
+-->
+<style>
+  .lmctOfferEndedPage {
+    --lmct-oe-navy-950: #020814;
+    --lmct-oe-navy-900: #061225;
+    --lmct-oe-navy-800: #0a2340;
+    --lmct-oe-blue: #159ff2;
+    --lmct-oe-blue-light: #44bdff;
+    --lmct-oe-red: #ef2024;
+    --lmct-oe-red-dark: #d90d18;
+    --lmct-oe-ink: #071827;
+    --lmct-oe-muted: #617286;
+    --lmct-oe-bg: #f2f6fb;
+    --lmct-oe-card: #ffffff;
+    --lmct-oe-line: #dce8f2;
+    --lmct-oe-shadow: 0 22px 60px rgba(7, 24, 39, 0.1);
+    background: var(--lmct-oe-bg);
+    color: var(--lmct-oe-ink);
+    font-family: "Montserrat", Arial, sans-serif;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .lmctOfferEndedPage,
+  .lmctOfferEndedPage * {
+    box-sizing: border-box;
+  }
+
+  .lmctOfferEndedPage a {
+    color: inherit;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__statusBar {
+    align-items: center;
+    background: linear-gradient(90deg, var(--lmct-oe-red-dark), var(--lmct-oe-red), #ff3438);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    min-height: 66px;
+    padding: 12px 18px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__statusInner {
+    align-items: center;
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    max-width: 1180px;
+    width: 100%;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__statusIcon {
+    display: block;
+    height: 26px;
+    width: 26px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__statusCopy {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__statusDivider {
+    background: rgba(255, 255, 255, 0.4);
+    height: 24px;
+    width: 1px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__zeroTimer {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__zeroUnit {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-width: 34px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__zeroValue {
+    font-size: 21px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__zeroLabel {
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+    opacity: 0.86;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__zeroColon {
+    font-size: 18px;
+    font-weight: 900;
+    opacity: 0.72;
+    transform: translateY(-5px);
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nav {
+    background: var(--lmct-oe-navy-950);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 14px 18px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__navInner {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1180px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__brand {
+    align-items: center;
+
+    border-radius: 10px;
+    display: inline-flex;
+    padding: 8px 11px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__brandLogo {
+    display: block;
+    height: 24px;
+    object-fit: contain;
+    width: auto;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__brandFallback {
+    color: var(--lmct-oe-ink);
+    font-size: 21px;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 24px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__navLabel {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__hero {
+    padding: 24px 18px 76px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__heroPanel {
+    background:
+      radial-gradient(circle at 86% 12%, rgba(21, 159, 242, 0.3), rgba(21, 159, 242, 0) 34%), radial-gradient(circle at 8% 88%, rgba(53, 184, 255, 0.16), rgba(53, 184, 255, 0) 32%),
+      linear-gradient(135deg, var(--lmct-oe-navy-950), var(--lmct-oe-navy-900) 48%, var(--lmct-oe-navy-800));
+    border: 1px solid rgba(53, 184, 255, 0.23);
+    border-radius: 32px;
+    box-shadow: 0 28px 80px rgba(2, 8, 20, 0.2);
+    margin: 0 auto;
+    max-width: 1180px;
+    overflow: hidden;
+    padding: clamp(34px, 6vw, 76px);
+    position: relative;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__heroPanel::before,
+  .lmctOfferEndedPage .lmctOfferEndedPage__heroPanel::after {
+    border: 1px solid rgba(53, 184, 255, 0.14);
+    border-radius: 999px;
+    content: "";
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__heroPanel::before {
+    height: 360px;
+    right: -170px;
+    top: -200px;
+    width: 360px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__heroPanel::after {
+    bottom: -210px;
+    height: 420px;
+    left: -220px;
+    width: 420px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__heroGrid {
+    align-items: center;
+    display: grid;
+    gap: clamp(36px, 6vw, 76px);
+    grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.92fr);
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__closedBadge {
+    align-items: center;
+    background: rgba(239, 32, 36, 0.13);
+    border: 1px solid rgba(255, 73, 77, 0.5);
+    border-radius: 999px;
+    color: #ff777a;
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 900;
+    gap: 9px;
+    letter-spacing: 0.08em;
+    padding: 10px 14px;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__closedBadge svg {
+    height: 17px;
+    width: 17px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__headline {
+    color: #ffffff;
+    font-size: clamp(42px, 6.2vw, 50px);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    margin: 22px 0 20px;
+    max-width: 680px;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__headlineAccent {
+    color: var(--lmct-oe-blue-light);
+    display: block;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__subheadline {
+    color: rgba(255, 255, 255, 0.74);
+    font-size: clamp(16px, 1.7vw, 20px);
+    font-weight: 500;
+    line-height: 1.62;
+    margin: 0;
+    max-width: 650px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__button {
+    align-items: center;
+    border-radius: 12px;
+    display: inline-flex;
+    font-size: 13px;
+    font-weight: 900;
+    gap: 9px;
+    justify-content: center;
+    letter-spacing: 0.03em;
+    min-height: 54px;
+    padding: 16px 22px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      box-shadow 180ms ease,
+      transform 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__button svg {
+    height: 18px;
+    width: 18px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__buttonPrimary {
+    background: linear-gradient(135deg, var(--lmct-oe-blue-light), #087de9);
+    box-shadow: 0 16px 36px rgba(21, 159, 242, 0.27);
+    color: #ffffff;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__buttonSecondary {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__button:hover,
+  .lmctOfferEndedPage .lmctOfferEndedPage__button:focus {
+    transform: translateY(-2px);
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__buttonPrimary:hover,
+  .lmctOfferEndedPage .lmctOfferEndedPage__buttonPrimary:focus {
+    box-shadow: 0 22px 44px rgba(21, 159, 242, 0.36);
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__buttonSecondary:hover,
+  .lmctOfferEndedPage .lmctOfferEndedPage__buttonSecondary:focus {
+    border-color: rgba(68, 189, 255, 0.7);
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__button:focus-visible,
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:focus-visible {
+    outline: 3px solid rgba(68, 189, 255, 0.7);
+    outline-offset: 4px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__offerCard {
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 26px;
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.28);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__offerCardTop {
+    align-items: center;
+    background: linear-gradient(135deg, #f5f9fd, #ffffff);
+    border-bottom: 1px solid var(--lmct-oe-line);
+    display: flex;
+    gap: 14px;
+    padding: 18px 20px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__offerIconTile {
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #dce9f4;
+    border-radius: 13px;
+    box-shadow: 0 8px 24px rgba(7, 24, 39, 0.08);
+    display: flex;
+    flex: 0 0 54px;
+    height: 54px;
+    justify-content: center;
+    padding: 8px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__offerIconTile img {
+    display: block;
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__offerIconFallback {
+    color: var(--lmct-oe-blue);
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.06em;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__offerCardEyebrow {
+    color: var(--lmct-oe-blue);
+    display: block;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__offerName {
+    color: var(--lmct-oe-ink);
+    display: block;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.25;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__offerCardBody {
+    padding: 28px 24px 24px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__expiredMark {
+    align-items: center;
+    background: rgba(239, 32, 36, 0.08);
+    border: 1px solid rgba(239, 32, 36, 0.22);
+    border-radius: 14px;
+    color: var(--lmct-oe-red-dark);
+    display: flex;
+    font-size: 15px;
+    font-weight: 900;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+    min-height: 52px;
+    padding: 12px 14px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__expiredMark svg {
+    flex: 0 0 20px;
+    height: 20px;
+    width: 20px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__cardTimer {
+    display: grid;
+    gap: 9px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__cardTimeBox {
+    background: #f3f7fb;
+    border: 1px solid #dce8f2;
+    border-radius: 12px;
+    padding: 12px 5px 10px;
+    text-align: center;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__cardTimeValue {
+    color: var(--lmct-oe-ink);
+    display: block;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__cardTimeLabel {
+    color: var(--lmct-oe-muted);
+    display: block;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-top: 7px;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__endedDate {
+    align-items: center;
+    color: var(--lmct-oe-muted);
+    display: flex;
+    font-size: 12px;
+    font-weight: 600;
+    gap: 7px;
+    justify-content: center;
+    line-height: 1.45;
+    margin: 17px 0 0;
+    text-align: center;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__endedDate[hidden] {
+    display: none;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__endedDate svg {
+    height: 15px;
+    width: 15px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__infoStrip {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 34px auto 0;
+    max-width: 1180px;
+    overflow: hidden;
+    padding: 0 18px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__infoItem {
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid var(--lmct-oe-line);
+    display: flex;
+    gap: 12px;
+    min-height: 78px;
+    padding: 18px 22px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__infoItem:first-child {
+    border-radius: 18px 0 0 18px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__infoItem:last-child {
+    border-radius: 0 18px 18px 0;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__infoIcon {
+    align-items: center;
+    background: #edf8ff;
+    border-radius: 999px;
+    color: var(--lmct-oe-blue);
+    display: flex;
+    flex: 0 0 38px;
+    height: 38px;
+    justify-content: center;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__infoIcon svg {
+    height: 20px;
+    width: 20px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__infoText {
+    color: var(--lmct-oe-ink);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__section {
+    padding: 68px 18px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__sectionInner {
+    margin: 0 auto;
+    max-width: 1180px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__sectionHeader {
+    margin: 0 auto 34px;
+    max-width: 720px;
+    text-align: center;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__sectionBadge {
+    background: rgba(21, 159, 242, 0.08);
+    border: 1px solid rgba(21, 159, 242, 0.3);
+    border-radius: 999px;
+    color: var(--lmct-oe-blue);
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    padding: 9px 13px;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__sectionTitle {
+    color: var(--lmct-oe-ink);
+    font-size: clamp(34px, 4.4vw, 54px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin: 17px 0 12px;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__sectionCopy {
+    color: var(--lmct-oe-muted);
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextGrid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextCard {
+    background: var(--lmct-oe-card);
+    border: 1px solid var(--lmct-oe-line);
+    border-radius: 24px;
+    box-shadow: 0 14px 38px rgba(7, 24, 39, 0.06);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 28px;
+    text-decoration: none;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:hover,
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:focus {
+    border-color: rgba(21, 159, 242, 0.55);
+    box-shadow: 0 22px 50px rgba(21, 159, 242, 0.13);
+    transform: translateY(-4px);
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextIcon {
+    align-items: center;
+    background: linear-gradient(135deg, var(--lmct-oe-blue-light), var(--lmct-oe-blue));
+    border-radius: 17px;
+    box-shadow: 0 12px 28px rgba(21, 159, 242, 0.2);
+    color: #ffffff;
+    display: flex;
+    height: 58px;
+    justify-content: center;
+    margin-bottom: 22px;
+    width: 58px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextIcon svg {
+    height: 29px;
+    width: 29px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextTitle {
+    color: var(--lmct-oe-ink);
+    font-size: 21px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin: 0 0 10px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextCopy {
+    color: var(--lmct-oe-muted);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.55;
+    margin: 0 0 24px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextLink {
+    align-items: center;
+    color: var(--lmct-oe-blue);
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 900;
+    gap: 8px;
+    letter-spacing: 0.04em;
+    margin-top: auto;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextLink svg {
+    height: 16px;
+    transition: transform 180ms ease;
+    width: 16px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:hover .lmctOfferEndedPage__nextLink svg,
+  .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:focus .lmctOfferEndedPage__nextLink svg {
+    transform: translateX(3px);
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__stayReady {
+    padding: 10px 18px 78px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__stayPanel {
+    align-items: center;
+    background: radial-gradient(circle at 90% 20%, rgba(68, 189, 255, 0.24), transparent 34%), linear-gradient(135deg, #07192e, #0a2a4a);
+    border: 1px solid rgba(53, 184, 255, 0.27);
+    border-radius: 28px;
+    box-shadow: var(--lmct-oe-shadow);
+    color: #ffffff;
+    display: grid;
+    gap: 42px;
+    grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+    margin: 0 auto;
+    max-width: 1180px;
+    overflow: hidden;
+    padding: clamp(32px, 5vw, 58px);
+    position: relative;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__stayTitle {
+    font-size: clamp(30px, 4vw, 48px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.06;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__stayTitle span {
+    color: var(--lmct-oe-blue-light);
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__stayCopy {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 650px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__benefits {
+    display: grid;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__benefit {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    gap: 11px;
+    line-height: 1.4;
+    padding: 13px 14px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__benefitCheck {
+    align-items: center;
+    background: var(--lmct-oe-blue);
+    border-radius: 999px;
+    display: flex;
+    flex: 0 0 24px;
+    height: 24px;
+    justify-content: center;
+    width: 24px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__benefitCheck svg {
+    height: 14px;
+    width: 14px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__footer {
+    background: var(--lmct-oe-navy-950);
+    color: rgba(255, 255, 255, 0.66);
+    padding: 28px 18px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__footerInner {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1180px;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__footerText {
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .lmctOfferEndedPage .lmctOfferEndedPage__footerLink {
+    color: var(--lmct-oe-blue-light);
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .lmctOfferEndedPage .lmctOfferEndedPage__heroGrid,
+    .lmctOfferEndedPage .lmctOfferEndedPage__stayPanel {
+      grid-template-columns: 1fr;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__heroContent {
+      text-align: center;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__subheadline {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__actions {
+      justify-content: center;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__offerCard {
+      margin: 0 auto;
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__nextGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .lmctOfferEndedPage .lmctOfferEndedPage__statusBar {
+      min-height: 84px;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__statusInner {
+      flex-wrap: wrap;
+      gap: 8px 12px;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__statusCopy {
+      flex: 1 0 calc(100% - 42px);
+      text-align: left;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__statusDivider {
+      display: none;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__zeroTimer {
+      flex: 0 0 100%;
+      justify-content: center;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__navLabel {
+      font-size: 10px;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__infoStrip {
+      gap: 10px;
+      grid-template-columns: 1fr;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__infoItem,
+    .lmctOfferEndedPage .lmctOfferEndedPage__infoItem:first-child,
+    .lmctOfferEndedPage .lmctOfferEndedPage__infoItem:last-child {
+      border-radius: 15px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .lmctOfferEndedPage .lmctOfferEndedPage__hero {
+      padding: 14px 12px 48px;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__heroPanel {
+      border-radius: 24px;
+      padding: 30px 20px;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__headline {
+      font-size: clamp(38px, 13vw, 50px);
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__actions {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__button {
+      width: 100%;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__offerCardBody {
+      padding: 22px 16px 18px;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__cardTimer {
+      gap: 6px;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__cardTimeValue {
+      font-size: 20px;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__section {
+      padding: 52px 14px;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__nextGrid {
+      grid-template-columns: 1fr;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:last-child {
+      grid-column: auto;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__stayReady {
+      padding: 4px 12px 54px;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__stayPanel {
+      border-radius: 22px;
+      gap: 28px;
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__benefit {
+      text-align: left;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__footerInner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctOfferEndedPage .lmctOfferEndedPage__button,
+    .lmctOfferEndedPage .lmctOfferEndedPage__nextCard,
+    .lmctOfferEndedPage .lmctOfferEndedPage__nextLink svg {
+      transition: none;
+    }
+
+    .lmctOfferEndedPage .lmctOfferEndedPage__button:hover,
+    .lmctOfferEndedPage .lmctOfferEndedPage__button:focus,
+    .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:hover,
+    .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:focus,
+    .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:hover .lmctOfferEndedPage__nextLink svg,
+    .lmctOfferEndedPage .lmctOfferEndedPage__nextCard:focus .lmctOfferEndedPage__nextLink svg {
+      transform: none;
+    }
+  }
+</style>
+
+<main
+  class="lmctOfferEndedPage"
+  id="lmctOfferEndedPage"
+  data-offer-name="Limited-Time Member Offer"
+  data-ended-at=""
+  data-primary-url="#"
+  data-secondary-url="#"
+  data-support-url="mailto:support@lmctplus.com">
+  <!-- <div class="lmctOfferEndedPage__statusBar" role="status">
+    <div class="lmctOfferEndedPage__statusInner">
+      <svg class="lmctOfferEndedPage__statusIcon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+        <path d="M12 7v5l3.4 2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+      </svg>
+      <span class="lmctOfferEndedPage__statusCopy">This offer has now ended</span>
+      <span class="lmctOfferEndedPage__statusDivider" aria-hidden="true"></span>
+      <div class="lmctOfferEndedPage__zeroTimer" aria-label="Offer timer expired">
+        <span class="lmctOfferEndedPage__zeroUnit">
+          <span class="lmctOfferEndedPage__zeroValue">00</span>
+          <span class="lmctOfferEndedPage__zeroLabel">Days</span>
+        </span>
+        <span class="lmctOfferEndedPage__zeroColon" aria-hidden="true">:</span>
+        <span class="lmctOfferEndedPage__zeroUnit">
+          <span class="lmctOfferEndedPage__zeroValue">00</span>
+          <span class="lmctOfferEndedPage__zeroLabel">Hours</span>
+        </span>
+        <span class="lmctOfferEndedPage__zeroColon" aria-hidden="true">:</span>
+        <span class="lmctOfferEndedPage__zeroUnit">
+          <span class="lmctOfferEndedPage__zeroValue">00</span>
+          <span class="lmctOfferEndedPage__zeroLabel">Mins</span>
+        </span>
+        <span class="lmctOfferEndedPage__zeroColon" aria-hidden="true">:</span>
+        <span class="lmctOfferEndedPage__zeroUnit">
+          <span class="lmctOfferEndedPage__zeroValue">00</span>
+          <span class="lmctOfferEndedPage__zeroLabel">Secs</span>
+        </span>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="lmctOfferEndedPage__nav">
+    <div class="lmctOfferEndedPage__navInner">
+      <span class="lmctOfferEndedPage__brand">
+        <img class="lmctOfferEndedPage__brandLogo" src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png" alt="LMCT+" data-lmct-brand-image />
+        <span class="lmctOfferEndedPage__brandFallback" data-lmct-image-fallback hidden aria-hidden="true">LMCT+</span>
+      </span>
+      <span class="lmctOfferEndedPage__navLabel">Member offers</span>
+    </div>
+  </div>
+
+  <section class="lmctOfferEndedPage__hero" aria-labelledby="lmctOfferEndedTitle">
+    <div class="lmctOfferEndedPage__heroPanel">
+      <div class="lmctOfferEndedPage__heroGrid">
+        <div class="lmctOfferEndedPage__heroContent">
+          <span class="lmctOfferEndedPage__closedBadge">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 10V8a5 5 0 0 1 10 0v2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+              <rect x="4.5" y="10" width="15" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+            </svg>
+            Offer closed
+          </span>
+
+          <h1 class="lmctOfferEndedPage__headline" id="lmctOfferEndedTitle">
+            This offer has
+            <span class="lmctOfferEndedPage__headlineAccent">now ended</span>
+          </h1>
+
+          <p class="lmctOfferEndedPage__subheadline">Thanks for checking it out. This promotion is no longer accepting claims, but more member offers and opportunities are always on the way.</p>
+
+          <div class="lmctOfferEndedPage__actions">
+            <a class="lmctOfferEndedPage__button lmctOfferEndedPage__buttonPrimary" href="https://lmctplus.com/giveaways/" data-lmct-primary-link>
+              View active giveaways
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h13m-5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" />
+              </svg>
+            </a>
+            <a class="lmctOfferEndedPage__button lmctOfferEndedPage__buttonSecondary" href="https://lmctplus.com/auth/login" data-lmct-secondary-link> Member dashboard </a>
+          </div>
+        </div>
+
+        <aside class="lmctOfferEndedPage__offerCard" aria-label="Closed offer summary">
+          <div class="lmctOfferEndedPage__offerCardTop">
+            <span class="lmctOfferEndedPage__offerIconTile">
+              <img src="https://images.clickfunnels.com/90/3b47f9f777411cb4e04db2a1cf9327/lmct_icon.png" alt="" data-lmct-brand-image />
+              <span class="lmctOfferEndedPage__offerIconFallback" data-lmct-image-fallback hidden aria-hidden="true">LMCT+</span>
+            </span>
+            <span>
+              <span class="lmctOfferEndedPage__offerCardEyebrow">Offer summary</span>
+              <strong class="lmctOfferEndedPage__offerName" data-lmct-offer-name>Limited-Time Member Offer</strong>
+            </span>
+          </div>
+          <div class="lmctOfferEndedPage__offerCardBody">
+            <div class="lmctOfferEndedPage__expiredMark">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="m8.5 8.5 7 7m0-7-7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+              </svg>
+              No longer available
+            </div>
+            <div class="lmctOfferEndedPage__cardTimer" aria-hidden="true">
+              <span class="lmctOfferEndedPage__cardTimeBox">
+                <span class="lmctOfferEndedPage__cardTimeValue">00</span>
+                <span class="lmctOfferEndedPage__cardTimeLabel">Days</span>
+              </span>
+              <span class="lmctOfferEndedPage__cardTimeBox">
+                <span class="lmctOfferEndedPage__cardTimeValue">00</span>
+                <span class="lmctOfferEndedPage__cardTimeLabel">Hours</span>
+              </span>
+              <span class="lmctOfferEndedPage__cardTimeBox">
+                <span class="lmctOfferEndedPage__cardTimeValue">00</span>
+                <span class="lmctOfferEndedPage__cardTimeLabel">Mins</span>
+              </span>
+              <span class="lmctOfferEndedPage__cardTimeBox">
+                <span class="lmctOfferEndedPage__cardTimeValue">00</span>
+                <span class="lmctOfferEndedPage__cardTimeLabel">Secs</span>
+              </span>
+            </div>
+            <p class="lmctOfferEndedPage__endedDate" data-lmct-ended-date hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 3v3m10-3v3M5 9h14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+                <rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2" />
+              </svg>
+              <span data-lmct-ended-date-text></span>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="lmctOfferEndedPage__infoStrip" aria-label="Offer status information">
+      <div class="lmctOfferEndedPage__infoItem">
+        <span class="lmctOfferEndedPage__infoIcon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m6 6 12 12m0-12L6 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" />
+          </svg>
+        </span>
+        <span class="lmctOfferEndedPage__infoText">This promotion is closed</span>
+      </div>
+      <div class="lmctOfferEndedPage__infoItem">
+        <span class="lmctOfferEndedPage__infoIcon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3 5 6v5c0 4.2 2.7 7.6 7 9.5 4.3-1.9 7-5.3 7-9.5V6l-7-3Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" />
+            <path d="m8.7 12 2 2 4.7-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+          </svg>
+        </span>
+        <span class="lmctOfferEndedPage__infoText">Your existing membership stays active</span>
+      </div>
+      <div class="lmctOfferEndedPage__infoItem">
+        <span class="lmctOfferEndedPage__infoIcon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M4 8.5h16v11H4zM3 8.5h18M12 8.5v11M8.5 8.5c-1.6 0-2.8-1.1-2.8-2.4S6.8 4 8.2 4c2.1 0 3.8 2.5 3.8 4.5m3.5 0c1.6 0 2.8-1.1 2.8-2.4S17.2 4 15.8 4C13.7 4 12 6.5 12 8.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.8" />
+          </svg>
+        </span>
+        <span class="lmctOfferEndedPage__infoText">More member offers are coming</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctOfferEndedPage__section" aria-labelledby="lmctOfferEndedNextTitle">
+    <div class="lmctOfferEndedPage__sectionInner">
+      <div class="lmctOfferEndedPage__sectionHeader">
+        <span class="lmctOfferEndedPage__sectionBadge">What to do next</span>
+        <h2 class="lmctOfferEndedPage__sectionTitle" id="lmctOfferEndedNextTitle">You haven't missed everything</h2>
+        <p class="lmctOfferEndedPage__sectionCopy">Keep exploring your membership and check what is currently available.</p>
+      </div>
+
+      <div class="lmctOfferEndedPage__nextGrid">
+        <a class="lmctOfferEndedPage__nextCard" href="https://lmctplus.com/giveaways/" data-lmct-primary-link>
+          <span class="lmctOfferEndedPage__nextIcon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M8 21h8m-4-4v4M7.5 4h9v5.5a4.5 4.5 0 0 1-9 0V4Zm0 2H5a2 2 0 0 0-2 2v.4A3.6 3.6 0 0 0 6.6 12h.9m9-6H19a2 2 0 0 1 2 2v.4a3.6 3.6 0 0 1-3.6 3.6h-.9"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2" />
+            </svg>
+          </span>
+          <h3 class="lmctOfferEndedPage__nextTitle">View active giveaways</h3>
+          <p class="lmctOfferEndedPage__nextCopy">See the promotions, giveaways, and member opportunities that are available now.</p>
+          <span class="lmctOfferEndedPage__nextLink">
+            Explore now
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" /></svg>
+          </span>
+        </a>
+
+        <a class="lmctOfferEndedPage__nextCard" href="https://lmctplus.com/auth/login" data-lmct-secondary-link>
+          <span class="lmctOfferEndedPage__nextIcon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+              <path d="M4.5 20c.7-4.2 3.3-6.3 7.5-6.3s6.8 2.1 7.5 6.3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+            </svg>
+          </span>
+          <h3 class="lmctOfferEndedPage__nextTitle">Member Dashboard</h3>
+          <p class="lmctOfferEndedPage__nextCopy">Manage your account and keep track of your active membership benefits.</p>
+          <span class="lmctOfferEndedPage__nextLink">
+            Open dashboard
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" /></svg>
+          </span>
+        </a>
+
+        <a class="lmctOfferEndedPage__nextCard" href="mailto:support@lmctplus.com" data-lmct-support-link>
+          <span class="lmctOfferEndedPage__nextIcon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 6.5h16v11H4z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" />
+              <path d="m5 7.5 7 5 7-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+            </svg>
+          </span>
+          <h3 class="lmctOfferEndedPage__nextTitle">Need Some Help?</h3>
+          <p class="lmctOfferEndedPage__nextCopy">If you have a question about the expired offer, our support team can help.</p>
+          <span class="lmctOfferEndedPage__nextLink">
+            Contact support
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13m-5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" /></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctOfferEndedPage__stayReady" aria-labelledby="lmctOfferEndedReadyTitle">
+    <div class="lmctOfferEndedPage__stayPanel">
+      <div>
+        <h2 class="lmctOfferEndedPage__stayTitle" id="lmctOfferEndedReadyTitle">Stay ready for the <span>next one</span></h2>
+        <p class="lmctOfferEndedPage__stayCopy">Limited-time promotions can move quickly. Keep your account details current and check in regularly so you're ready when the next offer goes live.</p>
+      </div>
+      <ul class="lmctOfferEndedPage__benefits">
+        <li class="lmctOfferEndedPage__benefit">
+          <span class="lmctOfferEndedPage__benefitCheck"
+            ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12 4 4 8-9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" /></svg
+          ></span>
+          Check current member offers
+        </li>
+        <li class="lmctOfferEndedPage__benefit">
+          <span class="lmctOfferEndedPage__benefitCheck"
+            ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12 4 4 8-9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" /></svg
+          ></span>
+          Keep your contact details up to date
+        </li>
+        <li class="lmctOfferEndedPage__benefit">
+          <span class="lmctOfferEndedPage__benefitCheck"
+            ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 12 4 4 8-9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" /></svg
+          ></span>
+          Watch for the next limited-time promotion
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="lmctOfferEndedPage__footer">
+    <div class="lmctOfferEndedPage__footerInner">
+      <p class="lmctOfferEndedPage__footerText">Offer availability, eligibility, and promotional terms may vary. See the relevant offer terms for details.</p>
+      <a class="lmctOfferEndedPage__footerLink" href="mailto:support@lmctplus.com" data-lmct-support-link>Need help?</a>
+    </div>
+  </footer>
+</main>
+<!-- LMCT+ GENERIC OFFER-ENDED PAGE END -->

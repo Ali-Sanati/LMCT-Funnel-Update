@@ -1,0 +1,880 @@
+<style>
+  .lmctUpsellRecurring,
+  .lmctUpsellRecurring *,
+  .lmctUpsellRecurring *::before,
+  .lmctUpsellRecurring *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctUpsellRecurring {
+    --lmct-navy: #05162a;
+    --lmct-blue: #0c9ffd;
+    --lmct-blue-dark: #0476c4;
+    --lmct-blue-light: #3fb8ff;
+    --lmct-light: #f7fafc;
+    --lmct-border: #e8eef4;
+    --lmct-muted: #64748b;
+    --lmct-green: #159447;
+    --lmct-green-dark: #0f6f34;
+    --lmct-white: #ffffff;
+    width: 100%;
+    overflow: hidden;
+    background: repeating-linear-gradient(115deg, rgba(12, 159, 253, 0.045) 0, rgba(12, 159, 253, 0.045) 1px, transparent 1px, transparent 84px), linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+    color: var(--lmct-navy);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+    padding: 58px 16px 66px;
+  }
+
+  .lmctUpsellRecurring__inner {
+    width: min(100%, 1160px);
+    margin: 0 auto;
+  }
+
+  .lmctUpsellRecurring__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .lmctUpsellRecurring__copy {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .lmctUpsellRecurring__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(12, 159, 253, 0.24);
+    border-radius: 999px;
+    background: rgba(12, 159, 253, 0.08);
+    color: var(--lmct-blue-dark);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    padding: 9px 14px;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellRecurring__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--lmct-blue);
+    box-shadow: 0 0 0 4px rgba(12, 159, 253, 0.12);
+    flex: 0 0 auto;
+  }
+
+  .lmctUpsellRecurring__title {
+    max-width: 600px;
+    margin: 17px auto 0;
+    color: var(--lmct-navy);
+    font-size: clamp(32px, 6vw, 54px);
+    font-weight: 900;
+    line-height: 1.02;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellRecurring__titleAccent {
+    display: block;
+    background: linear-gradient(180deg, var(--lmct-blue-light) 0%, var(--lmct-blue) 44%, var(--lmct-blue-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--lmct-blue-dark);
+    -webkit-text-fill-color: transparent;
+  }
+
+  .lmctUpsellRecurring__lead {
+    max-width: 580px;
+    margin: 15px auto 0;
+    color: var(--lmct-muted);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctUpsellRecurring__valueBridge {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .lmctUpsellRecurring__valueCard {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: 54px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    border: 1px solid var(--lmct-border);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 16px 38px rgba(5, 22, 42, 0.065);
+    padding: 16px;
+    text-align: left;
+  }
+
+  .lmctUpsellRecurring__valueCard--today {
+    border-color: rgba(12, 159, 253, 0.28);
+    background: linear-gradient(180deg, rgba(12, 159, 253, 0.1) 0%, #ffffff 100%);
+  }
+
+  .lmctUpsellRecurring__valueCard--ongoing {
+    border-color: rgba(21, 148, 71, 0.22);
+    background: linear-gradient(180deg, rgba(21, 148, 71, 0.08) 0%, #ffffff 100%);
+  }
+
+  .lmctUpsellRecurring__valueIcon {
+    display: inline-flex;
+    width: 54px;
+    height: 54px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: var(--lmct-blue);
+    color: var(--lmct-white);
+    box-shadow: 0 12px 26px rgba(12, 159, 253, 0.28);
+  }
+
+  .lmctUpsellRecurring__valueCard--ongoing .lmctUpsellRecurring__valueIcon {
+    background: var(--lmct-green);
+    box-shadow: 0 12px 26px rgba(21, 148, 71, 0.22);
+  }
+
+  .lmctUpsellRecurring__icon,
+  .lmctUpsellRecurring__ctaIcon {
+    display: block;
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.4;
+  }
+
+  .lmctUpsellRecurring__valueText {
+    min-width: 0;
+  }
+
+  .lmctUpsellRecurring__valueKicker {
+    display: block;
+    color: var(--lmct-muted);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellRecurring__valueMain {
+    display: block;
+    margin-top: 6px;
+    color: var(--lmct-navy);
+    font-size: clamp(20px, 3.5vw, 28px);
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellRecurring__valueCard--today .lmctUpsellRecurring__valueMain {
+    color: var(--lmct-blue-dark);
+  }
+
+  .lmctUpsellRecurring__valueCard--ongoing .lmctUpsellRecurring__valueMain {
+    color: var(--lmct-green-dark);
+  }
+
+  .lmctUpsellRecurring__valueSmall {
+    display: block;
+    margin-top: 7px;
+    color: var(--lmct-muted);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.38;
+  }
+
+  .lmctUpsellRecurring__connector {
+    display: flex;
+    min-height: 24px;
+    align-items: center;
+    justify-content: center;
+    color: var(--lmct-blue-dark);
+  }
+
+  .lmctUpsellRecurring__visual {
+    min-width: 0;
+  }
+
+  .lmctUpsellRecurring__chartCard {
+    overflow: hidden;
+    border: 1px solid rgba(12, 159, 253, 0.2);
+    border-radius: 24px;
+    background: var(--lmct-white);
+    box-shadow:
+      0 24px 64px rgba(5, 22, 42, 0.1),
+      0 0 0 8px rgba(12, 159, 253, 0.035);
+    padding: 22px;
+  }
+
+  .lmctUpsellRecurring__chartHead {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .lmctUpsellRecurring__chartTitle {
+    margin: 0;
+    color: var(--lmct-navy);
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellRecurring__chartSub {
+    margin: 5px 0 0;
+    color: var(--lmct-muted);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .lmctUpsellRecurring__tierPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid rgba(21, 148, 71, 0.2);
+    border-radius: 999px;
+    background: #effbf4;
+    color: var(--lmct-green-dark);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    padding: 8px 10px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .lmctUpsellRecurring__tierDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--lmct-green);
+    flex: 0 0 auto;
+  }
+
+  .lmctUpsellRecurring__chart {
+    border: 1px solid var(--lmct-border);
+    border-radius: 18px;
+    background: var(--lmct-light);
+    padding: 20px 16px 15px;
+  }
+
+  .lmctUpsellRecurring__legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 13px;
+    color: var(--lmct-muted);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellRecurring__legendDot {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    background: var(--lmct-green);
+    flex: 0 0 auto;
+  }
+
+  .lmctUpsellRecurring__chartGrid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 10px;
+    height: 246px;
+    padding-bottom: 34px;
+  }
+
+  .lmctUpsellRecurring__yAxis {
+    position: relative;
+    height: 100%;
+  }
+
+  .lmctUpsellRecurring__yLabel {
+    position: absolute;
+    right: 0;
+    transform: translateY(50%);
+    color: #94a3b8;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.1;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .lmctUpsellRecurring__yLabel strong {
+    display: block;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .lmctUpsellRecurring__bars {
+    position: relative;
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+    justify-content: space-around;
+    border-left: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0 8px;
+  }
+
+  .lmctUpsellRecurring__gl {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e9eef5;
+    pointer-events: none;
+  }
+
+  .lmctUpsellRecurring__bar {
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 5px;
+  }
+
+  .lmctUpsellRecurring__fill {
+    position: relative;
+    width: 100%;
+    max-width: 54px;
+    min-height: 4px;
+    border-radius: 8px 8px 0 0;
+    background: linear-gradient(180deg, #1fa851 0%, #0e7a3a 100%);
+    box-shadow: 0 10px 22px rgba(21, 148, 71, 0.16);
+    height: 0%;
+    transition: height 900ms cubic-bezier(0.2, 0.85, 0.3, 1);
+  }
+
+  .lmctUpsellRecurring__val {
+    position: absolute;
+    top: -23px;
+    left: 50%;
+    color: var(--lmct-navy);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: opacity 360ms ease 520ms;
+    white-space: nowrap;
+  }
+
+  .lmctUpsellRecurring__fill.is-shown .lmctUpsellRecurring__val {
+    opacity: 1;
+  }
+
+  .lmctUpsellRecurring__barLabel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    color: #94a3b8;
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .lmctUpsellRecurring__barLabel strong {
+    display: block;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  .lmctUpsellRecurring__chartFoot {
+    margin: 15px 0 0;
+    border: 1px solid rgba(12, 159, 253, 0.2);
+    border-radius: 14px;
+    background: rgba(12, 159, 253, 0.06);
+    color: var(--lmct-navy);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.45;
+    padding: 13px 14px;
+    text-align: center;
+  }
+
+  .lmctUpsellRecurring__timeline {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .lmctUpsellRecurring__timeStep {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    align-items: center;
+    gap: 11px;
+    border: 1px solid var(--lmct-border);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.96);
+    padding: 12px;
+  }
+
+  .lmctUpsellRecurring__timeIcon {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: #eef8ff;
+    color: var(--lmct-blue-dark);
+  }
+
+  .lmctUpsellRecurring__timeStep--future .lmctUpsellRecurring__timeIcon {
+    background: #effbf4;
+    color: var(--lmct-green-dark);
+  }
+
+  .lmctUpsellRecurring__timeKicker {
+    display: block;
+    color: var(--lmct-muted);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellRecurring__timeTitle {
+    display: block;
+    margin-top: 5px;
+    color: var(--lmct-navy);
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  .lmctUpsellRecurring__ctaWrap {
+    margin-top: 28px;
+    text-align: center;
+  }
+
+  .lmctUpsellRecurring__cta {
+    display: inline-flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 14px;
+    background: var(--lmct-navy);
+    box-shadow: 0 14px 30px rgba(5, 22, 42, 0.18);
+    color: var(--lmct-white) !important;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.1;
+    padding: 17px 24px;
+    text-align: center;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    transition:
+      box-shadow 180ms ease,
+      transform 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctUpsellRecurring__ctaNote {
+    margin: 10px 0 0;
+    color: var(--lmct-muted);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lmctUpsellRecurring__valueCard:hover,
+    .lmctUpsellRecurring__timeStep:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(5, 22, 42, 0.08);
+    }
+
+    .lmctUpsellRecurring__cta:hover {
+      filter: brightness(1.05);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 38px rgba(5, 22, 42, 0.24);
+    }
+  }
+
+  @media (min-width: 860px) {
+    .lmctUpsellRecurring {
+      padding: 70px 18px 82px;
+    }
+
+    .lmctUpsellRecurring__grid {
+      grid-template-columns: minmax(0, 0.46fr) minmax(430px, 0.54fr);
+      gap: 40px;
+    }
+
+    .lmctUpsellRecurring__copy {
+      text-align: left;
+    }
+
+    .lmctUpsellRecurring__title,
+    .lmctUpsellRecurring__lead {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .lmctUpsellRecurring__valueBridge {
+      grid-template-columns: 1fr 34px 1fr;
+      align-items: stretch;
+    }
+
+    .lmctUpsellRecurring__valueCard {
+      grid-template-columns: 1fr;
+      align-content: center;
+      justify-items: start;
+      min-height: 180px;
+      padding: 18px;
+    }
+
+    .lmctUpsellRecurring__connector {
+      min-height: 0;
+    }
+
+    .lmctUpsellRecurring__timeline {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 620px) {
+    .lmctUpsellRecurring {
+      padding: 46px 14px 56px;
+    }
+
+    .lmctUpsellRecurring__chartCard {
+      border-radius: 20px;
+      padding: 16px;
+    }
+
+    .lmctUpsellRecurring__chartHead {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .lmctUpsellRecurring__chart {
+      padding: 18px 10px 14px;
+    }
+
+    .lmctUpsellRecurring__chartGrid {
+      grid-template-columns: 38px minmax(0, 1fr);
+      gap: 8px;
+      height: 220px;
+    }
+
+    .lmctUpsellRecurring__bar {
+      margin: 0 3px;
+    }
+
+    .lmctUpsellRecurring__fill {
+      max-width: 42px;
+    }
+
+    .lmctUpsellRecurring__connector .lmctUpsellRecurring__icon {
+      transform: rotate(90deg);
+    }
+
+    .lmctUpsellRecurring__cta {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .lmctUpsellRecurring {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .lmctUpsellRecurring__title {
+      font-size: 31px;
+    }
+
+    .lmctUpsellRecurring__valueCard {
+      grid-template-columns: 46px minmax(0, 1fr);
+      gap: 11px;
+      padding: 14px;
+    }
+
+    .lmctUpsellRecurring__valueIcon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+    }
+
+    .lmctUpsellRecurring__chartGrid {
+      grid-template-columns: 32px minmax(0, 1fr);
+    }
+
+    .lmctUpsellRecurring__yLabel {
+      font-size: 9px;
+    }
+
+    .lmctUpsellRecurring__yLabel strong,
+    .lmctUpsellRecurring__barLabel strong {
+      font-size: 11px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctUpsellRecurring__fill,
+    .lmctUpsellRecurring__cta {
+      transition: none !important;
+    }
+
+    .lmctUpsellRecurring__cta:hover {
+      transform: none !important;
+    }
+  }
+</style>
+
+<section class="lmctUpsellRecurring" aria-labelledby="lmctUpsellRecurringTitle">
+  <div class="lmctUpsellRecurring__inner">
+    <div class="lmctUpsellRecurring__grid">
+      <div class="lmctUpsellRecurring__copy">
+        <div class="lmctUpsellRecurring__eyebrow">
+          <span class="lmctUpsellRecurring__dot" aria-hidden="true"></span>
+          <span>More Than A One-Time Bonus</span>
+        </div>
+
+        <h2 class="lmctUpsellRecurring__title" id="lmctUpsellRecurringTitle">
+          This Isn&rsquo;t Just
+          <span class="lmctUpsellRecurring__titleAccent">100 Extra Entries</span>
+        </h2>
+
+        <p class="lmctUpsellRecurring__lead">Your 100 bonus entries get you started. Your membership keeps adding automatic entries into eligible draws.</p>
+
+        <div class="lmctUpsellRecurring__valueBridge" aria-label="Immediate bonus and ongoing membership value">
+          <article class="lmctUpsellRecurring__valueCard lmctUpsellRecurring__valueCard--today">
+            <span class="lmctUpsellRecurring__valueIcon" aria-hidden="true">
+              <svg class="lmctUpsellRecurring__icon" viewBox="0 0 24 24">
+                <path d="M4 7h16v4H4z"></path>
+                <path d="M5 11v8h14v-8"></path>
+                <path d="M12 7v12"></path>
+                <path d="M12 7s-1-4-4-3 0 3 4 3Z"></path>
+                <path d="M12 7s1-4 4-3 0 3-4 3Z"></path>
+              </svg>
+            </span>
+            <span class="lmctUpsellRecurring__valueText">
+              <span class="lmctUpsellRecurring__valueKicker">Your Joining Bonus</span>
+              <span class="lmctUpsellRecurring__valueMain">+100 Free Entries</span>
+              <span class="lmctUpsellRecurring__valueSmall">Added to the draw you just entered.</span>
+            </span>
+          </article>
+
+          <div class="lmctUpsellRecurring__connector" aria-hidden="true">
+            <svg class="lmctUpsellRecurring__icon" viewBox="0 0 24 24">
+              <path d="M5 12h14"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+          </div>
+
+          <article class="lmctUpsellRecurring__valueCard lmctUpsellRecurring__valueCard--ongoing">
+            <span class="lmctUpsellRecurring__valueIcon" aria-hidden="true">
+              <svg class="lmctUpsellRecurring__icon" viewBox="0 0 24 24">
+                <path d="M7.5 4h9v5.5a4.5 4.5 0 0 1-9 0V4Z"></path>
+                <path d="M8 21h8"></path>
+                <path d="M12 17v4"></path>
+                <path d="M7.5 6H5a2 2 0 0 0-2 2v.5A3.5 3.5 0 0 0 6.5 12h1"></path>
+                <path d="M16.5 6H19a2 2 0 0 1 2 2v.5a3.5 3.5 0 0 1-3.5 3.5h-1"></path>
+              </svg>
+            </span>
+            <span class="lmctUpsellRecurring__valueText">
+              <span class="lmctUpsellRecurring__valueKicker">Your Ongoing Membership</span>
+              <span class="lmctUpsellRecurring__valueMain">Automatic Draw Entries</span>
+              <span class="lmctUpsellRecurring__valueSmall">Into eligible LMCT+ draws while active.</span>
+            </span>
+          </article>
+        </div>
+      </div>
+
+      <div class="lmctUpsellRecurring__visual">
+        <div class="lmctUpsellRecurring__chartCard">
+          <div class="lmctUpsellRecurring__chartHead">
+            <div>
+              <h3 class="lmctUpsellRecurring__chartTitle">Your Membership Keeps Working</h3>
+              <p class="lmctUpsellRecurring__chartSub">Entry Membership automatic entries over time.</p>
+            </div>
+
+            <div class="lmctUpsellRecurring__tierPill">
+              <span class="lmctUpsellRecurring__tierDot" aria-hidden="true"></span>
+              Entry
+            </div>
+          </div>
+
+          <div class="lmctUpsellRecurring__chart" aria-label="Entry Membership automatic entries over time">
+            <div class="lmctUpsellRecurring__legend">
+              <span class="lmctUpsellRecurring__legendDot" aria-hidden="true"></span>
+              <span>Entry &middot; 1 entry / month</span>
+            </div>
+
+            <div class="lmctUpsellRecurring__chartGrid">
+              <div class="lmctUpsellRecurring__yAxis" data-lmct-recurring-y-axis></div>
+              <div class="lmctUpsellRecurring__bars" data-lmct-recurring-bars></div>
+            </div>
+          </div>
+
+          <p class="lmctUpsellRecurring__chartFoot">Stay active and keep receiving automatic entries into eligible future draws.</p>
+
+          <div class="lmctUpsellRecurring__timeline" aria-label="Membership value timeline">
+            <div class="lmctUpsellRecurring__timeStep">
+              <span class="lmctUpsellRecurring__timeIcon" aria-hidden="true">
+                <svg class="lmctUpsellRecurring__icon" viewBox="0 0 24 24">
+                  <path d="M20 6 9 17l-5-5"></path>
+                </svg>
+              </span>
+              <span>
+                <span class="lmctUpsellRecurring__timeKicker">Today</span>
+                <span class="lmctUpsellRecurring__timeTitle">Join Entry</span>
+              </span>
+            </div>
+
+            <div class="lmctUpsellRecurring__timeStep">
+              <span class="lmctUpsellRecurring__timeIcon" aria-hidden="true">
+                <svg class="lmctUpsellRecurring__icon" viewBox="0 0 24 24">
+                  <path d="M4 7h16v4H4z"></path>
+                  <path d="M5 11v8h14v-8"></path>
+                  <path d="M12 7v12"></path>
+                </svg>
+              </span>
+              <span>
+                <span class="lmctUpsellRecurring__timeKicker">Bonus</span>
+                <span class="lmctUpsellRecurring__timeTitle">+100 Entries</span>
+              </span>
+            </div>
+
+            <div class="lmctUpsellRecurring__timeStep lmctUpsellRecurring__timeStep--future">
+              <span class="lmctUpsellRecurring__timeIcon" aria-hidden="true">
+                <svg class="lmctUpsellRecurring__icon" viewBox="0 0 24 24">
+                  <path d="M7.5 4h9v5.5a4.5 4.5 0 0 1-9 0V4Z"></path>
+                  <path d="M8 21h8"></path>
+                  <path d="M12 17v4"></path>
+                </svg>
+              </span>
+              <span>
+                <span class="lmctUpsellRecurring__timeKicker">Future Draws</span>
+                <span class="lmctUpsellRecurring__timeTitle">Keeps Working</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lmctUpsellRecurring__ctaWrap">
+      <a class="lmctUpsellRecurring__cta css-order-bronze" href="#open-popup" data-title="css-order-bronze" aria-label="Become an Entry Member">
+        Become An Entry Member
+        <svg class="lmctUpsellRecurring__ctaIcon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h14"></path>
+          <path d="m13 6 6 6-6 6"></path>
+        </svg>
+      </a>
+      <p class="lmctUpsellRecurring__ctaNote">100 bonus entries now. Automatic member entries going forward.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    "use strict";
+
+    var TIER = {
+      rate: 1,
+      label: "Entry",
+      color: "#1FA851",
+      desc: "1 entry / month",
+    };
+    var MONTHS = [3, 6, 9, 12, 15];
+    var Y_STEPS = 5;
+
+    function renderEntryChart() {
+      var bars = document.querySelector("[data-lmct-recurring-bars]");
+      var yAxis = document.querySelector("[data-lmct-recurring-y-axis]");
+
+      if (!bars || !yAxis) return;
+
+      var values = MONTHS.map(function (month) {
+        return month * TIER.rate;
+      });
+      var maxVal = values[values.length - 1];
+
+      yAxis.innerHTML = "";
+      for (var i = Y_STEPS; i >= 1; i -= 1) {
+        var value = Math.round((maxVal * i) / Y_STEPS);
+        var label = document.createElement("div");
+        label.className = "lmctUpsellRecurring__yLabel";
+        label.style.bottom = (i / Y_STEPS) * 100 + "%";
+        label.innerHTML = "<strong>" + value + "</strong>Entries";
+        yAxis.appendChild(label);
+      }
+
+      bars.innerHTML = "";
+      for (var grid = 1; grid <= Y_STEPS; grid += 1) {
+        var gridLine = document.createElement("div");
+        gridLine.className = "lmctUpsellRecurring__gl";
+        gridLine.style.bottom = (grid / Y_STEPS) * 100 + "%";
+        bars.appendChild(gridLine);
+      }
+
+      values.forEach(function (value, index) {
+        var pct = (value / maxVal) * 92;
+        var bar = document.createElement("div");
+        bar.className = "lmctUpsellRecurring__bar";
+        bar.innerHTML =
+          '<div class="lmctUpsellRecurring__fill" style="height:0%"><span class="lmctUpsellRecurring__val">' +
+          value +
+          '</span></div><div class="lmctUpsellRecurring__barLabel"><strong>' +
+          MONTHS[index] +
+          "</strong>M</div>";
+        bars.appendChild(bar);
+
+        window.setTimeout(function () {
+          var fill = bar.querySelector(".lmctUpsellRecurring__fill");
+          if (!fill) return;
+          fill.style.height = pct + "%";
+          fill.classList.add("is-shown");
+        }, index * 80);
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", renderEntryChart);
+    } else {
+      renderEntryChart();
+    }
+  })();
+</script>
