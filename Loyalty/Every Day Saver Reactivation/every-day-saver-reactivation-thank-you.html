@@ -1,0 +1,535 @@
+<!--
+  LMCT+ Everyday Saver reactivation thank-you page.
+  Standalone ClickFunnels custom HTML section.
+-->
+
+<style>
+  .lmctSaverThanks,
+  .lmctSaverThanks *,
+  .lmctSaverThanks *::before,
+  .lmctSaverThanks *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctSaverThanks {
+    --est-navy: #061527;
+    --est-navy-soft: #0b223a;
+    --est-blue: #0c9ffd;
+    --est-blue-deep: #0476c4;
+    --est-green: #27bd68;
+    --est-white: #ffffff;
+    --est-muted: #b7c8d8;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--est-white);
+    background: var(--est-navy);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .lmctSaverThanks__hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--est-navy);
+    background-image: url("https://images.clickfunnels.com/ec/1acfb8bc844e2f9ffb506843d1c714/LMCT-PETROL-STATION-AT-NIGHT-WITH-PRICE-BOARD.png");
+    background-position: 68% center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .lmctSaverThanks__shade,
+  .lmctSaverThanks__grid {
+    position: absolute;
+    inset: 0;
+  }
+
+  .lmctSaverThanks__shade {
+    z-index: 0;
+    background:
+      linear-gradient(90deg, rgba(3, 13, 25, 0.98) 0%, rgba(4, 18, 34, 0.94) 45%, rgba(4, 17, 31, 0.7) 74%, rgba(3, 13, 25, 0.62) 100%),
+      linear-gradient(0deg, rgba(3, 13, 25, 0.96), transparent 56%);
+  }
+
+  .lmctSaverThanks__grid {
+    z-index: 1;
+    opacity: 0.25;
+    background-image:
+      linear-gradient(rgba(86, 196, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(86, 196, 255, 0.1) 1px, transparent 1px);
+    background-size: 54px 54px;
+    -webkit-mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.35) 82%, transparent);
+    mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.35) 82%, transparent);
+    pointer-events: none;
+  }
+
+  .lmctSaverThanks__inner {
+    position: relative;
+    z-index: 2;
+    width: min(calc(100% - 40px), 1180px);
+    margin-inline: auto;
+  }
+
+  .lmctSaverThanks__header {
+    display: flex;
+    min-height: 86px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .lmctSaverThanks__logo {
+    display: block;
+    width: 146px;
+    height: auto;
+  }
+
+  .lmctSaverThanks__secure {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--est-muted);
+    font-size: 10px;
+    font-weight: 850;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverThanks__secure svg {
+    width: 15px;
+    height: 15px;
+    color: var(--est-green);
+  }
+
+  .lmctSaverThanks__content {
+    display: flex;
+    width: min(100%, 910px);
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: 68px 0 76px;
+  }
+
+  .lmctSaverThanks__check {
+    position: relative;
+    display: grid;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 25px;
+    place-items: center;
+    border: 1px solid rgba(63, 224, 134, 0.5);
+    border-radius: 50%;
+    color: #061527;
+    background: var(--est-green);
+    box-shadow: 0 0 0 10px rgba(39, 189, 104, 0.09), 0 18px 38px rgba(0, 0, 0, 0.24);
+  }
+
+  .lmctSaverThanks__check svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .lmctSaverThanks__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 16px;
+    color: #6ed0ff;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverThanks__eyebrow::before {
+    width: 28px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctSaverThanks__title {
+    max-width: 830px;
+    margin: 0;
+    color: var(--est-white);
+    font-size: 72px;
+    font-weight: 950;
+    line-height: 0.96;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverThanks__title span {
+    display: block;
+    color: #48bdff;
+  }
+
+  .lmctSaverThanks__lead {
+    max-width: 690px;
+    margin: 24px 0 0;
+    color: #c4d2df;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .lmctSaverThanks__lead strong {
+    color: var(--est-white);
+  }
+
+  .lmctSaverThanks__benefits {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: 40px;
+    overflow: hidden;
+    border: 1px solid rgba(118, 205, 255, 0.25);
+    border-radius: 8px;
+    background: rgba(118, 205, 255, 0.18);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.18);
+  }
+
+  .lmctSaverThanks__benefit {
+    display: flex;
+    min-width: 0;
+    min-height: 100px;
+    align-items: center;
+    gap: 12px;
+    padding: 19px 16px;
+    background: rgba(7, 27, 48, 0.9);
+    backdrop-filter: blur(10px);
+  }
+
+  .lmctSaverThanks__benefitIcon {
+    display: grid;
+    width: 35px;
+    height: 35px;
+    flex: 0 0 35px;
+    place-items: center;
+    border: 1px solid rgba(73, 190, 255, 0.34);
+    border-radius: 7px;
+    color: #66caff;
+    background: rgba(12, 159, 253, 0.1);
+  }
+
+  .lmctSaverThanks__benefitIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .lmctSaverThanks__benefit span:last-child {
+    min-width: 0;
+    color: var(--est-white);
+    font-size: 11px;
+    font-weight: 850;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverThanks__account {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 22px 0 0;
+    color: #9fb3c6;
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.5;
+  }
+
+  .lmctSaverThanks__account svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    color: var(--est-green);
+  }
+
+  .lmctSaverThanks__footer {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    background: rgba(2, 10, 20, 0.78);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+  }
+
+  .lmctSaverThanks__footerInner {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .lmctSaverThanks__footerLogo {
+    display: block;
+    width: 96px;
+    height: auto;
+    opacity: 0.72;
+  }
+
+  .lmctSaverThanks__footer p {
+    margin: 0;
+    color: #71879b;
+    font-size: 9px;
+    font-weight: 800;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .lmctSaverThanks__title {
+      font-size: 56px;
+    }
+
+    .lmctSaverThanks__benefits {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .lmctSaverThanks__inner {
+      width: min(calc(100% - 28px), 1180px);
+    }
+
+    .lmctSaverThanks__header {
+      min-height: 72px;
+    }
+
+    .lmctSaverThanks__logo {
+      width: 118px;
+    }
+
+    .lmctSaverThanks__secure {
+      max-width: 124px;
+      justify-content: flex-end;
+      font-size: 8px;
+      text-align: right;
+    }
+
+    .lmctSaverThanks__hero {
+      background-position: 58% center;
+    }
+
+    .lmctSaverThanks__shade {
+      background: linear-gradient(90deg, rgba(3, 13, 25, 0.97), rgba(4, 17, 31, 0.8));
+    }
+
+    .lmctSaverThanks__content {
+      padding: 54px 0 62px;
+    }
+
+    .lmctSaverThanks__check {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 23px;
+    }
+
+    .lmctSaverThanks__check svg {
+      width: 27px;
+      height: 27px;
+    }
+
+    .lmctSaverThanks__title {
+      font-size: 42px;
+    }
+
+    .lmctSaverThanks__lead {
+      font-size: 15px;
+    }
+
+    .lmctSaverThanks__benefits {
+      margin-top: 30px;
+    }
+
+    .lmctSaverThanks__benefit {
+      min-height: 86px;
+      padding: 14px 12px;
+    }
+
+    .lmctSaverThanks__benefitIcon {
+      width: 31px;
+      height: 31px;
+      flex-basis: 31px;
+    }
+
+    .lmctSaverThanks__benefit span:last-child {
+      font-size: 9px;
+    }
+
+    .lmctSaverThanks__footerInner {
+      min-height: 88px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .lmctSaverThanks__footer p {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 370px) {
+    .lmctSaverThanks__title {
+      font-size: 36px;
+    }
+
+    .lmctSaverThanks__benefits {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctSaverThanks__benefit {
+      min-height: 68px;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lmctSaverThanks__check {
+      animation: lmctSaverThanksCheckIn 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    .lmctSaverThanks__content > :not(.lmctSaverThanks__check) {
+      animation: lmctSaverThanksRise 560ms ease both;
+      animation-delay: 120ms;
+    }
+  }
+
+  @keyframes lmctSaverThanksCheckIn {
+    from {
+      opacity: 0;
+      transform: scale(0.72);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes lmctSaverThanksRise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<main class="lmctSaverThanks">
+  <section class="lmctSaverThanks__hero" aria-labelledby="lmctSaverThanks-title">
+    <div class="lmctSaverThanks__shade" aria-hidden="true"></div>
+    <div class="lmctSaverThanks__grid" aria-hidden="true"></div>
+
+    <div class="lmctSaverThanks__inner">
+      <header class="lmctSaverThanks__header" aria-label="LMCT+ Everyday Saver">
+        <img
+          class="lmctSaverThanks__logo"
+          src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png"
+          alt="LMCT+"
+          width="1366"
+          height="227"
+        />
+        <span class="lmctSaverThanks__secure">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"></path>
+            <path d="m9 12 2 2 4-5"></path>
+          </svg>
+          Secure membership reactivation
+        </span>
+      </header>
+
+      <div class="lmctSaverThanks__content">
+        <div class="lmctSaverThanks__check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m5 12 4 4L19 6"></path>
+          </svg>
+        </div>
+
+        <p class="lmctSaverThanks__eyebrow">Reactivation complete</p>
+        <h1 class="lmctSaverThanks__title" id="lmctSaverThanks-title">
+          Welcome back to <span>Everyday Saver.</span>
+        </h1>
+        <p class="lmctSaverThanks__lead">
+          Your Everyday Saver membership has been <strong>successfully reactivated.</strong> Your everyday LMCT+ access is ready again.
+        </p>
+
+        <div class="lmctSaverThanks__benefits" aria-label="Restored Everyday Saver benefits">
+          <div class="lmctSaverThanks__benefit">
+            <span class="lmctSaverThanks__benefitIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"></path>
+                <path d="M8 6h4"></path>
+                <path d="M16 8h2l2 2v8a2 2 0 0 1-4 0v-5"></path>
+              </svg>
+            </span>
+            <span>Wholesale petrol pricing</span>
+          </div>
+
+          <div class="lmctSaverThanks__benefit">
+            <span class="lmctSaverThanks__benefitIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="20" r="1"></circle>
+                <circle cx="19" cy="20" r="1"></circle>
+                <path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 8H7"></path>
+              </svg>
+            </span>
+            <span>Wholesale grocery pricing</span>
+          </div>
+
+          <div class="lmctSaverThanks__benefit">
+            <span class="lmctSaverThanks__benefitIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 12h4"></path>
+                <path d="M8 10v4"></path>
+                <path d="M15 13h.01"></path>
+                <path d="M18 11h.01"></path>
+                <path d="M6.5 6h11a4.5 4.5 0 0 1 4.2 6.1l-1.6 4.2a2.5 2.5 0 0 1-4.3.7l-1-1.3H9.2l-1 1.3a2.5 2.5 0 0 1-4.3-.7l-1.6-4.2A4.5 4.5 0 0 1 6.5 6Z"></path>
+              </svg>
+            </span>
+            <span>LMCT+ Games</span>
+          </div>
+
+          <div class="lmctSaverThanks__benefit">
+            <span class="lmctSaverThanks__benefitIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="8"></circle>
+                <path d="M12 4v8l5 5"></path>
+                <path d="m10 2 2 2 2-2"></path>
+              </svg>
+            </span>
+            <span>Bonus Wheel</span>
+          </div>
+        </div>
+
+        <p class="lmctSaverThanks__account">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 21a8 8 0 0 1 16 0"></path>
+          </svg>
+          Continue using your existing LMCT+ account details.
+        </p>
+      </div>
+    </div>
+
+    <footer class="lmctSaverThanks__footer">
+      <div class="lmctSaverThanks__inner lmctSaverThanks__footerInner">
+        <img
+          class="lmctSaverThanks__footerLogo"
+          src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png"
+          alt="LMCT+"
+          width="1366"
+          height="227"
+          loading="lazy"
+        />
+        <p>Everyday Saver membership reactivated</p>
+      </div>
+    </footer>
+  </section>
+</main>

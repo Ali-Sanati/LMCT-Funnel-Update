@@ -1,0 +1,1079 @@
+<!--
+  LMCT+ A1 cancellation winback: Section 2 only.
+
+  This section does not query the backend. It consumes the eligible membership
+  state already rendered by Section 1 and delegates its CTA to Section 1's
+  [data-lmct-reactivate] control so both sections use the same action.
+-->
+
+<style>
+  .lmctWinbackRestore,
+  .lmctWinbackRestore *,
+  .lmctWinbackRestore *::before,
+  .lmctWinbackRestore *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctWinbackRestore {
+    --lmctWR-navy: #05162a;
+    --lmctWR-navy-deep: #020b15;
+    --lmctWR-blue: #0c9ffd;
+    --lmctWR-blue-deep: #0476c4;
+    --lmctWR-green: #35d277;
+    --lmctWR-green-deep: #159447;
+    --lmctWR-white: #ffffff;
+    --lmctWR-bg: #eef3f7;
+    --lmctWR-ink: #10233d;
+    --lmctWR-muted: #64748b;
+    --lmctWR-line: rgba(5, 22, 42, 0.13);
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    padding: clamp(76px, 9vw, 118px) 0 clamp(72px, 9vw, 108px);
+    color: var(--lmctWR-ink);
+    background: linear-gradient(rgba(5, 22, 42, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(5, 22, 42, 0.035) 1px, transparent 1px), var(--lmctWR-bg);
+    background-size: 56px 56px;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .lmctWinbackRestore::before {
+    position: absolute;
+    z-index: -1;
+    top: 8%;
+    right: -18%;
+    width: 54vw;
+    height: 70%;
+    border-radius: 50%;
+    content: "";
+    background: radial-gradient(circle, rgba(12, 159, 253, 0.09), transparent 68%);
+    pointer-events: none;
+  }
+
+  .lmctWinbackRestore__inner {
+    width: min(calc(100% - 40px), 1180px);
+    margin-inline: auto;
+  }
+
+  .lmctWinbackRestore__layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.4fr) minmax(0, 0.6fr);
+    align-items: center;
+    gap: clamp(48px, 7vw, 92px);
+  }
+
+  .lmctWinbackRestore__intro {
+    min-width: 0;
+  }
+
+  .lmctWinbackRestore__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: var(--lmctWR-blue-deep);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__eyebrow::before {
+    width: 27px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctWinbackRestore__title {
+    max-width: 470px;
+    margin: 19px 0 0;
+    color: var(--lmctWR-navy);
+    font-size: clamp(48px, 5.8vw, 62px);
+    font-weight: 950;
+    line-height: 0.91;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .lmctWinbackRestore__title span {
+    display: block;
+    color: var(--lmctWR-blue-deep);
+  }
+
+  .lmctWinbackRestore__lead {
+    max-width: 470px;
+    margin: 23px 0 0;
+    color: var(--lmctWR-muted);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .lmctWinbackRestore__plan {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    margin-top: 31px;
+    padding: 16px 0;
+    border-top: 1px solid var(--lmctWR-line);
+    border-bottom: 1px solid var(--lmctWR-line);
+  }
+
+  .lmctWinbackRestore__planIcon {
+    display: grid;
+    width: 39px;
+    height: 39px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctWR-green-deep);
+    background: rgba(53, 210, 119, 0.12);
+  }
+
+  .lmctWinbackRestore__planIcon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .lmctWinbackRestore__planLabel,
+  .lmctWinbackRestore__planName {
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__planLabel {
+    color: var(--lmctWR-muted);
+    font-size: 8px;
+    font-weight: 850;
+  }
+
+  .lmctWinbackRestore__planName {
+    min-height: 19px;
+    margin-top: 5px;
+    color: var(--lmctWR-navy);
+    font-size: 15px;
+    font-weight: 950;
+  }
+
+  .lmctWinbackRestore__planSkeleton,
+  .lmctWinbackRestore__numberSkeleton {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 3px;
+    background: rgba(100, 116, 139, 0.14);
+  }
+
+  .lmctWinbackRestore__planSkeleton {
+    width: 150px;
+    height: 18px;
+    margin-top: 6px;
+  }
+
+  .lmctWinbackRestore__numberSkeleton {
+    width: 128px;
+    height: 48px;
+    margin: 14px auto 0;
+  }
+
+  .lmctWinbackRestore__planSkeleton::after,
+  .lmctWinbackRestore__numberSkeleton::after {
+    display: block;
+    width: 45%;
+    height: 100%;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+    transform: translateX(-110%);
+    animation: lmctWinbackRestore__skeleton 1.35s ease-in-out infinite;
+  }
+
+  .lmctWinbackRestore[data-state="ready"] .lmctWinbackRestore__planSkeleton,
+  .lmctWinbackRestore[data-state="ready"] .lmctWinbackRestore__numberSkeleton,
+  .lmctWinbackRestore[data-state="error"] .lmctWinbackRestore__planSkeleton,
+  .lmctWinbackRestore[data-state="error"] .lmctWinbackRestore__numberSkeleton {
+    display: none;
+  }
+
+  .lmctWinbackRestore__warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 22px;
+    padding: 13px 14px;
+    border-left: 3px solid #d48a2e;
+    color: #6b4b22;
+    background: rgba(255, 246, 227, 0.72);
+    font-size: 9px;
+    font-weight: 850;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__warning svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    color: #b86e18;
+  }
+
+  .lmctWinbackRestore__story {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) 72px minmax(0, 1.14fr);
+    align-items: stretch;
+    gap: 13px;
+    min-width: 0;
+  }
+
+  .lmctWinbackRestore__state {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 390px;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: clamp(23px, 3vw, 31px);
+    border-radius: 8px;
+  }
+
+  .lmctWinbackRestore__state--before {
+    overflow: hidden;
+    border: 1px dashed rgba(100, 116, 139, 0.45);
+    color: #607080;
+    background: repeating-linear-gradient(-45deg, rgba(100, 116, 139, 0.045) 0, rgba(100, 116, 139, 0.045) 7px, transparent 7px, transparent 14px), rgba(229, 235, 240, 0.82);
+    filter: saturate(0.45);
+  }
+
+  .lmctWinbackRestore__state--before::after {
+    position: absolute;
+    inset: auto -12% 21% -12%;
+    height: 1px;
+    content: "";
+    background: rgba(100, 116, 139, 0.34);
+    transform: rotate(-11deg);
+  }
+
+  .lmctWinbackRestore__state--after {
+    overflow: hidden;
+    border: 1px solid rgba(53, 210, 119, 0.42);
+    color: var(--lmctWR-white);
+    background: radial-gradient(circle at 80% 10%, rgba(12, 159, 253, 0.2), transparent 16rem), linear-gradient(145deg, #0a2842 0%, var(--lmctWR-navy) 55%, var(--lmctWR-navy-deep) 100%);
+    box-shadow: 0 26px 58px rgba(5, 22, 42, 0.2);
+  }
+
+  .lmctWinbackRestore__state--after::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    opacity: 0.3;
+    background-image: linear-gradient(rgba(86, 196, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(86, 196, 255, 0.1) 1px, transparent 1px);
+    background-size: 29px 29px;
+    pointer-events: none;
+  }
+
+  .lmctWinbackRestore__stateTop,
+  .lmctWinbackRestore__stateMain,
+  .lmctWinbackRestore__stateBottom {
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmctWinbackRestore__stateTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .lmctWinbackRestore__stateKicker {
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 9px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 8px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__status::before {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctWinbackRestore__state--before .lmctWinbackRestore__status {
+    color: #8b5b22;
+  }
+
+  .lmctWinbackRestore__state--after .lmctWinbackRestore__status {
+    color: var(--lmctWR-green);
+  }
+
+  .lmctWinbackRestore__stateMain {
+    text-align: center;
+  }
+
+  .lmctWinbackRestore__entryNumber {
+    display: none;
+    font-size: clamp(44px, 5vw, 66px);
+    font-weight: 950;
+    line-height: 0.85;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore[data-state="ready"] .lmctWinbackRestore__entryNumber {
+    display: block;
+  }
+
+  .lmctWinbackRestore__state--before .lmctWinbackRestore__entryNumber {
+    color: #607080;
+    opacity: 0.64;
+  }
+
+  .lmctWinbackRestore__state--after .lmctWinbackRestore__entryNumber {
+    color: var(--lmctWR-white);
+    text-shadow: 0 0 28px rgba(12, 159, 253, 0.25);
+  }
+
+  .lmctWinbackRestore__entryLabel {
+    display: block;
+    margin-top: 14px;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__state--after .lmctWinbackRestore__entryLabel {
+    color: #a9bad0;
+  }
+
+  .lmctWinbackRestore__stateBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid currentColor;
+  }
+
+  .lmctWinbackRestore__state--before .lmctWinbackRestore__stateBottom {
+    border-color: rgba(100, 116, 139, 0.24);
+  }
+
+  .lmctWinbackRestore__state--after .lmctWinbackRestore__stateBottom {
+    border-color: rgba(151, 190, 224, 0.17);
+  }
+
+  .lmctWinbackRestore__stateBottom span {
+    font-size: 8px;
+    font-weight: 850;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__bonus {
+    color: var(--lmctWR-blue);
+    font-size: 27px !important;
+    font-weight: 950 !important;
+    line-height: 0.85 !important;
+  }
+
+  .lmctWinbackRestore__connector {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    place-items: center;
+  }
+
+  .lmctWinbackRestore__connector::before {
+    width: 100%;
+    height: 2px;
+    content: "";
+    background: linear-gradient(90deg, rgba(100, 116, 139, 0.35), var(--lmctWR-blue), var(--lmctWR-green));
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .lmctWinbackRestore__connectorIcon {
+    position: absolute;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid rgba(12, 159, 253, 0.35);
+    border-radius: 50%;
+    color: var(--lmctWR-blue-deep);
+    background: var(--lmctWR-white);
+    box-shadow: 0 12px 30px rgba(5, 22, 42, 0.12);
+  }
+
+  .lmctWinbackRestore__connectorIcon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .lmctWinbackRestore__connectorLabel {
+    position: absolute;
+    top: calc(50% + 35px);
+    color: var(--lmctWR-blue-deep);
+    font-size: 8px;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__modules {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: clamp(50px, 7vw, 78px);
+    border-top: 1px solid var(--lmctWR-line);
+    border-bottom: 1px solid var(--lmctWR-line);
+  }
+
+  .lmctWinbackRestore__module {
+    position: relative;
+    min-width: 0;
+    padding: 25px clamp(19px, 3vw, 34px) 27px;
+  }
+
+  .lmctWinbackRestore__module + .lmctWinbackRestore__module {
+    border-left: 1px solid var(--lmctWR-line);
+  }
+
+  .lmctWinbackRestore__moduleNumber {
+    color: var(--lmctWR-blue-deep);
+    font-size: 9px;
+    font-weight: 900;
+  }
+
+  .lmctWinbackRestore__module h3 {
+    margin: 12px 0 0;
+    color: var(--lmctWR-navy);
+    font-size: 15px;
+    font-weight: 950;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__module:nth-child(2) h3 {
+    color: var(--lmctWR-blue-deep);
+  }
+
+  .lmctWinbackRestore__module p {
+    margin: 8px 0 0;
+    color: var(--lmctWR-muted);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .lmctWinbackRestore__footer {
+    display: flex;
+    min-height: 88px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding-top: 28px;
+  }
+
+  .lmctWinbackRestore__footerNote {
+    max-width: 430px;
+    margin: 0;
+    color: var(--lmctWR-muted);
+    font-size: 10px;
+    font-weight: 750;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__cta {
+    display: none;
+    min-width: min(100%, 330px);
+    min-height: 56px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 17px;
+    padding: 14px 16px 14px 21px;
+    border: 0;
+    border-radius: 8px;
+    color: var(--lmctWR-white);
+    background: linear-gradient(135deg, var(--lmctWR-blue), var(--lmctWR-blue-deep));
+    box-shadow: 0 17px 34px rgba(4, 118, 196, 0.24);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 950;
+    line-height: 1.15;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctWinbackRestore[data-state="ready"] .lmctWinbackRestore__cta {
+    display: inline-flex;
+  }
+
+  .lmctWinbackRestore__ctaIcon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctWR-blue-deep);
+    background: var(--lmctWR-white);
+  }
+
+  .lmctWinbackRestore__ctaIcon svg {
+    width: 17px;
+    height: 17px;
+    transition: transform 180ms ease;
+  }
+
+  .lmctWinbackRestore__cta:hover {
+    box-shadow: 0 22px 42px rgba(4, 118, 196, 0.31);
+    filter: brightness(1.05);
+    transform: translateY(-2px);
+  }
+
+  .lmctWinbackRestore__cta:hover .lmctWinbackRestore__ctaIcon svg {
+    transform: translateX(2px);
+  }
+
+  .lmctWinbackRestore__cta:focus-visible {
+    outline: 3px solid rgba(12, 159, 253, 0.4);
+    outline-offset: 4px;
+  }
+
+  .lmctWinbackRestore__error {
+    display: none;
+    margin-top: 28px;
+    padding: 16px 18px;
+    border: 1px solid var(--lmctWR-line);
+    border-radius: 8px;
+    color: var(--lmctWR-muted);
+    background: rgba(255, 255, 255, 0.56);
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.5;
+  }
+
+  .lmctWinbackRestore[data-state="error"] .lmctWinbackRestore__error {
+    display: block;
+  }
+
+  .lmctWinbackRestore[data-state="error"] .lmctWinbackRestore__plan {
+    display: none;
+  }
+
+  @keyframes lmctWinbackRestore__skeleton {
+    from {
+      transform: translateX(-110%);
+    }
+
+    to {
+      transform: translateX(245%);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lmctWinbackRestore.is-visible[data-state="ready"] .lmctWinbackRestore__connector::before {
+      animation: lmctWinbackRestore__lineIn 620ms ease-out both;
+    }
+
+    .lmctWinbackRestore.is-visible[data-state="ready"] .lmctWinbackRestore__state--after {
+      animation: lmctWinbackRestore__restoredIn 650ms ease-out 220ms both;
+    }
+
+    .lmctWinbackRestore.is-visible[data-state="ready"] .lmctWinbackRestore__bonus {
+      animation: lmctWinbackRestore__bonusIn 520ms ease-out 520ms both;
+    }
+  }
+
+  @keyframes lmctWinbackRestore__lineIn {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes lmctWinbackRestore__restoredIn {
+    from {
+      opacity: 0.28;
+      filter: grayscale(1);
+      transform: translateX(-8px);
+    }
+
+    to {
+      opacity: 1;
+      filter: grayscale(0);
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes lmctWinbackRestore__bonusIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .lmctWinbackRestore__layout {
+      grid-template-columns: minmax(250px, 0.34fr) minmax(0, 0.66fr);
+      gap: 38px;
+    }
+
+    .lmctWinbackRestore__story {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .lmctWinbackRestore__state {
+      min-height: 280px;
+    }
+
+    .lmctWinbackRestore__connector {
+      width: 100%;
+      height: 68px;
+    }
+
+    .lmctWinbackRestore__connector::before {
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(100, 116, 139, 0.35), var(--lmctWR-blue), var(--lmctWR-green));
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+
+    .lmctWinbackRestore.is-visible[data-state="ready"] .lmctWinbackRestore__connector::before {
+      animation-name: lmctWinbackRestore__lineInMobile;
+    }
+
+    .lmctWinbackRestore__connectorIcon svg {
+      transform: rotate(90deg);
+    }
+
+    .lmctWinbackRestore__connectorLabel {
+      top: auto;
+      left: calc(50% + 35px);
+      width: 75px;
+      text-align: left;
+    }
+
+    @keyframes lmctWinbackRestore__lineInMobile {
+      to {
+        transform: scaleY(1);
+      }
+    }
+  }
+
+  @media (max-width: 680px) {
+    .lmctWinbackRestore {
+      padding-top: 66px;
+    }
+
+    .lmctWinbackRestore__inner {
+      width: min(calc(100% - 28px), 560px);
+    }
+
+    .lmctWinbackRestore__layout {
+      grid-template-columns: 1fr;
+      gap: 42px;
+    }
+
+    .lmctWinbackRestore__title {
+      font-size: clamp(46px, 13vw, 62px);
+    }
+
+    .lmctWinbackRestore__warning {
+      margin-top: 20px;
+    }
+
+    .lmctWinbackRestore__state {
+      min-height: 294px;
+    }
+
+    .lmctWinbackRestore__modules {
+      grid-template-columns: 1fr;
+      margin-top: 46px;
+    }
+
+    .lmctWinbackRestore__module {
+      display: grid;
+      grid-template-columns: 25px minmax(0, 1fr);
+      gap: 4px 11px;
+      padding: 20px 5px;
+    }
+
+    .lmctWinbackRestore__module + .lmctWinbackRestore__module {
+      border-top: 1px solid var(--lmctWR-line);
+      border-left: 0;
+    }
+
+    .lmctWinbackRestore__moduleNumber {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      padding-top: 2px;
+    }
+
+    .lmctWinbackRestore__module h3,
+    .lmctWinbackRestore__module p {
+      grid-column: 2;
+    }
+
+    .lmctWinbackRestore__module h3 {
+      margin-top: 0;
+    }
+
+    .lmctWinbackRestore__module p {
+      margin-top: 5px;
+    }
+
+    .lmctWinbackRestore__footer {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 24px;
+    }
+
+    .lmctWinbackRestore__cta {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .lmctWinbackRestore__title {
+      font-size: 43px;
+    }
+
+    .lmctWinbackRestore__state {
+      min-height: 280px;
+      padding: 22px 18px;
+    }
+
+    .lmctWinbackRestore__entryNumber {
+      font-size: 45px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctWinbackRestore *,
+    .lmctWinbackRestore *::before,
+    .lmctWinbackRestore *::after {
+      animation: none !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .lmctWinbackRestore__connector::before {
+      transform: none !important;
+    }
+  }
+</style>
+
+<section class="lmctWinbackRestore" data-state="loading" aria-labelledby="lmctWinbackRestore-title" aria-busy="true">
+  <div class="lmctWinbackRestore__inner">
+    <div class="lmctWinbackRestore__layout">
+      <header class="lmctWinbackRestore__intro">
+        <p class="lmctWinbackRestore__eyebrow">Your entries are still recoverable</p>
+        <h2 class="lmctWinbackRestore__title" id="lmctWinbackRestore-title">
+          Pick up
+          <span>where you left off.</span>
+        </h2>
+        <p class="lmctWinbackRestore__lead">Reactivate your previous membership and restore the accumulated entries you had built before cancelling.</p>
+
+        <div class="lmctWinbackRestore__plan" aria-live="polite">
+          <span class="lmctWinbackRestore__planIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z" />
+              <path d="m9 12 2 2 4-5" />
+            </svg>
+          </span>
+          <span>
+            <span class="lmctWinbackRestore__planLabel">Your previous plan</span>
+            <span class="lmctWinbackRestore__planSkeleton" aria-hidden="true"></span>
+            <strong class="lmctWinbackRestore__planName" data-lmct-restore-plan></strong>
+          </span>
+        </div>
+
+        <p class="lmctWinbackRestore__warning">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.3 3.6 2.2 18a2 2 0 0 0 1.8 3h16a2 2 0 0 0 1.8-3L13.7 3.6a2 2 0 0 0-3.4 0Z" />
+            <path d="M12 9v4" />
+            <path d="M12 17h.01" />
+          </svg>
+          Reactivate before your accumulated entries are removed.
+        </p>
+      </header>
+
+      <div class="lmctWinbackRestore__story" aria-label="Cancelled membership entries restored after reactivation">
+        <article class="lmctWinbackRestore__state lmctWinbackRestore__state--before">
+          <div class="lmctWinbackRestore__stateTop">
+            <span class="lmctWinbackRestore__stateKicker">Before reactivation</span>
+            <span class="lmctWinbackRestore__status">At risk</span>
+          </div>
+
+          <div class="lmctWinbackRestore__stateMain">
+            <span class="lmctWinbackRestore__numberSkeleton" aria-hidden="true"></span>
+            <strong class="lmctWinbackRestore__entryNumber" data-lmct-risk-entries>All</strong>
+            <span class="lmctWinbackRestore__entryLabel">Accumulated entries</span>
+          </div>
+
+          <div class="lmctWinbackRestore__stateBottom">
+            <span>Membership cancelled</span>
+            <span>Recoverable</span>
+          </div>
+        </article>
+
+        <div class="lmctWinbackRestore__connector" aria-hidden="true">
+          <span class="lmctWinbackRestore__connectorIcon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12h15" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </span>
+          <span class="lmctWinbackRestore__connectorLabel">Reactivate</span>
+        </div>
+
+        <article class="lmctWinbackRestore__state lmctWinbackRestore__state--after">
+          <div class="lmctWinbackRestore__stateTop">
+            <span class="lmctWinbackRestore__stateKicker">After reactivation</span>
+            <span class="lmctWinbackRestore__status">Restored</span>
+          </div>
+
+          <div class="lmctWinbackRestore__stateMain">
+            <span class="lmctWinbackRestore__numberSkeleton" aria-hidden="true"></span>
+            <strong class="lmctWinbackRestore__entryNumber" data-lmct-restored-entries>All</strong>
+            <span class="lmctWinbackRestore__entryLabel">Accumulated entries restored</span>
+          </div>
+
+          <div class="lmctWinbackRestore__stateBottom">
+            <span>Previous entries returned</span>
+            <strong class="lmctWinbackRestore__bonus">+250</strong>
+            <span>Bonus entries</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="lmctWinbackRestore__modules" aria-label="Reactivation value">
+      <article class="lmctWinbackRestore__module">
+        <span class="lmctWinbackRestore__moduleNumber">01</span>
+        <h3>Restore everything</h3>
+        <p>Every accumulated entry built before cancellation.</p>
+      </article>
+      <article class="lmctWinbackRestore__module">
+        <span class="lmctWinbackRestore__moduleNumber">02</span>
+        <h3>+250 bonus entries</h3>
+        <p>Added for the current major draw.</p>
+      </article>
+      <article class="lmctWinbackRestore__module">
+        <span class="lmctWinbackRestore__moduleNumber">03</span>
+        <h3>Resume your membership</h3>
+        <p>Continue on your previous membership tier.</p>
+      </article>
+    </div>
+
+    <div class="lmctWinbackRestore__footer">
+      <p class="lmctWinbackRestore__footerNote">Your restored entries and membership tier are determined by your verified LMCT+ account.</p>
+      <button class="lmctWinbackRestore__cta" type="button" data-lmct-restore-cta>
+        <span data-lmct-restore-cta-label>Restore my membership</span>
+        <span class="lmctWinbackRestore__ctaIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14" />
+            <path d="m13 6 6 6-6 6" />
+          </svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="lmctWinbackRestore__error" role="status">We couldn&rsquo;t load your restoration details. Please use the personal link from your LMCT+ winback email or contact support.</div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    "use strict";
+
+    var root = document.querySelector(".lmctWinbackRestore");
+    if (!root) return;
+
+    var planName = root.querySelector("[data-lmct-restore-plan]");
+    var riskEntries = root.querySelector("[data-lmct-risk-entries]");
+    var restoredEntries = root.querySelector("[data-lmct-restored-entries]");
+    var cta = root.querySelector("[data-lmct-restore-cta]");
+    var ctaLabel = root.querySelector("[data-lmct-restore-cta-label]");
+    var hero = null;
+    var heroObserver = null;
+    var connectAttempts = 0;
+    var MAX_CONNECT_ATTEMPTS = 60;
+
+    function cleanPlanName(value) {
+      return String(value || "")
+        .replace(/\s+Membership$/i, "")
+        .trim();
+    }
+
+    function formatEntries(value) {
+      if (value === null || value === undefined || value === "") return "All";
+
+      if (typeof value === "number" && Number.isFinite(value) && value >= 0) {
+        return Math.floor(value).toLocaleString("en-AU");
+      }
+
+      var text = String(value).trim();
+      return /^\d[\d,]*$/.test(text) ? text : "All";
+    }
+
+    function publishState(state) {
+      window.LMCT_WINBACK_STATE = Object.assign({}, window.LMCT_WINBACK_STATE || {}, state);
+    }
+
+    function showReady(membershipName, accumulatedEntries) {
+      var name = cleanPlanName(membershipName);
+      if (!name) {
+        showError();
+        return;
+      }
+
+      var entries = formatEntries(accumulatedEntries);
+      planName.textContent = name;
+      riskEntries.textContent = entries;
+      restoredEntries.textContent = entries;
+      ctaLabel.textContent = "Restore my " + name + " membership";
+      root.setAttribute("data-state", "ready");
+      root.setAttribute("aria-busy", "false");
+
+      publishState({
+        status: "ready",
+        membershipName: name,
+        accumulatedEntries: entries === "All" ? null : entries,
+      });
+    }
+
+    function showError() {
+      root.setAttribute("data-state", "error");
+      root.setAttribute("aria-busy", "false");
+      publishState({ status: "error" });
+    }
+
+    function syncFromSharedState() {
+      var state = window.LMCT_WINBACK_STATE;
+      if (!state || state.status !== "ready" || !state.membershipName) return false;
+      showReady(state.membershipName, state.accumulatedEntries);
+      return true;
+    }
+
+    function syncFromHero() {
+      if (!hero) return false;
+
+      var state = hero.getAttribute("data-state");
+      if (state === "error") {
+        showError();
+        return true;
+      }
+
+      if (state !== "ready") return false;
+
+      var heroPlan = hero.querySelector("[data-lmct-tier-name]");
+      var heroEntries = hero.querySelector("[data-lmct-entry-value]");
+      if (!heroPlan || !heroPlan.textContent.trim()) {
+        showError();
+        return true;
+      }
+
+      showReady(heroPlan.textContent, heroEntries ? heroEntries.textContent : null);
+      return true;
+    }
+
+    function observeHero() {
+      if (!hero || typeof MutationObserver !== "function") return;
+
+      heroObserver = new MutationObserver(function () {
+        if (syncFromHero() && root.getAttribute("data-state") !== "loading") {
+          heroObserver.disconnect();
+        }
+      });
+
+      heroObserver.observe(hero, {
+        attributes: true,
+        attributeFilter: ["data-state"],
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    function connectToHero() {
+      if (syncFromSharedState()) return;
+
+      hero = document.querySelector(".lmctWinbackHero");
+      if (hero) {
+        if (!syncFromHero()) observeHero();
+        return;
+      }
+
+      connectAttempts += 1;
+      if (connectAttempts < MAX_CONNECT_ATTEMPTS) {
+        window.setTimeout(connectToHero, 100);
+      } else {
+        showError();
+      }
+    }
+
+    cta.addEventListener("click", function () {
+      var heroCta = document.querySelector('.lmctWinbackHero[data-state="ready"] [data-lmct-reactivate]');
+      if (heroCta) {
+        heroCta.click();
+      } else {
+        showError();
+      }
+    });
+
+    window.addEventListener("lmct:winback-state", function (event) {
+      var detail = event && event.detail;
+      if (!detail) return;
+      if (detail.status === "ready") showReady(detail.membershipName, detail.accumulatedEntries);
+      if (detail.status === "error") showError();
+    });
+
+    if (typeof IntersectionObserver === "function") {
+      var revealObserver = new IntersectionObserver(
+        function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            root.classList.add("is-visible");
+            observer.disconnect();
+          });
+        },
+        { threshold: 0.2 },
+      );
+      revealObserver.observe(root);
+    } else {
+      root.classList.add("is-visible");
+    }
+
+    connectToHero();
+  })();
+</script>

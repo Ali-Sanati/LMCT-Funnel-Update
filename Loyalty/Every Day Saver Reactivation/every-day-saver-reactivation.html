@@ -1,0 +1,1349 @@
+<!--
+  LMCT+ A2 Everyday Saver reactivation page.
+  ClickFunnels product: 5123596
+-->
+
+<style>
+  .lmctSaverReactivate,
+  .lmctSaverReactivate *,
+  .lmctSaverReactivate *::before,
+  .lmctSaverReactivate *::after,
+  .lmctSaverReactivateFooter,
+  .lmctSaverReactivateFooter *,
+  .lmctSaverReactivateSticky,
+  .lmctSaverReactivateSticky * {
+    box-sizing: border-box;
+  }
+
+  .lmctSaverReactivate {
+    --es-navy: #061527;
+    --es-navy-soft: #0b223a;
+    --es-blue: #0c9ffd;
+    --es-blue-deep: #0476c4;
+    --es-green: #27bd68;
+    --es-green-deep: #168b4a;
+    --es-amber: #f2b92f;
+    --es-ink: #10233d;
+    --es-copy: #53677d;
+    --es-line: #d8e3ec;
+    --es-surface: #f3f7fa;
+    --es-white: #ffffff;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--es-ink);
+    background: var(--es-white);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .lmctSaverReactivate a {
+    color: inherit;
+  }
+
+  .lmctSaverReactivate__inner {
+    width: min(calc(100% - 40px), 1180px);
+    margin-inline: auto;
+  }
+
+  .lmctSaverReactivate__hero {
+    position: relative;
+    isolation: isolate;
+    min-height: min(760px, 88vh);
+    color: var(--es-white);
+    background: var(--es-navy);
+  }
+
+  .lmctSaverReactivate__heroMedia,
+  .lmctSaverReactivate__heroShade,
+  .lmctSaverReactivate__heroGrid {
+    position: absolute;
+    inset: 0;
+  }
+
+  .lmctSaverReactivate__heroMedia {
+    z-index: -3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 72% center;
+  }
+
+  .lmctSaverReactivate__heroShade {
+    z-index: -2;
+    background:
+      linear-gradient(90deg, rgba(3, 13, 25, 0.98) 0%, rgba(4, 18, 34, 0.94) 42%, rgba(4, 17, 31, 0.5) 72%, rgba(3, 13, 25, 0.36) 100%), linear-gradient(0deg, rgba(3, 13, 25, 0.82), transparent 48%);
+  }
+
+  .lmctSaverReactivate__heroGrid {
+    z-index: -1;
+    opacity: 0.23;
+    background-image: linear-gradient(rgba(86, 196, 255, 0.11) 1px, transparent 1px), linear-gradient(90deg, rgba(86, 196, 255, 0.11) 1px, transparent 1px);
+    background-size: 54px 54px;
+    -webkit-mask-image: linear-gradient(90deg, #000, rgba(0, 0, 0, 0.5) 58%, transparent 94%);
+    mask-image: linear-gradient(90deg, #000, rgba(0, 0, 0, 0.5) 58%, transparent 94%);
+  }
+
+  .lmctSaverReactivate__header {
+    display: flex;
+    min-height: 86px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .lmctSaverReactivate__logo {
+    display: block;
+    width: 146px;
+    height: auto;
+  }
+
+  .lmctSaverReactivate__secure {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #b8c7d6;
+    font-size: 10px;
+    font-weight: 850;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__secure svg {
+    width: 15px;
+    height: 15px;
+    color: var(--es-green);
+  }
+
+  .lmctSaverReactivate__heroContent {
+    display: grid;
+    grid-template-columns: minmax(0, 680px) minmax(210px, 1fr);
+    align-items: end;
+    gap: clamp(40px, 7vw, 100px);
+    padding: clamp(72px, 9vw, 116px) 0 86px;
+  }
+
+  .lmctSaverReactivate__eyebrow,
+  .lmctSaverReactivate__sectionEyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 18px;
+    color: #70d0ff;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__eyebrow::before,
+  .lmctSaverReactivate__sectionEyebrow::before {
+    width: 28px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctSaverReactivate__title {
+    max-width: 760px;
+    margin: 0;
+    color: var(--es-white);
+    font-size: 75px;
+    font-weight: 950;
+    line-height: 0.94;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__title span {
+    display: block;
+    color: #48bdff;
+  }
+
+  .lmctSaverReactivate__lead {
+    max-width: 620px;
+    margin: 25px 0 0;
+    color: #c0cedb;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.62;
+  }
+
+  .lmctSaverReactivate__lead strong {
+    color: var(--es-white);
+  }
+
+  .lmctSaverReactivate__priceLine {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+    margin-top: 30px;
+  }
+
+  .lmctSaverReactivate__price {
+    color: var(--es-white);
+    font-size: 58px;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctSaverReactivate__price small {
+    font-size: 15px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__weekly {
+    padding-left: 18px;
+    border-left: 1px solid rgba(255, 255, 255, 0.24);
+    color: #9fb1c3;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__weekly strong {
+    display: block;
+    color: #8ee2b1;
+    font-size: 16px;
+  }
+
+  .lmctSaverReactivate__cta {
+    display: inline-flex;
+    width: fit-content;
+    min-width: min(100%, 350px);
+    min-height: 60px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 30px;
+    padding: 14px 16px 14px 23px;
+    border: 1px solid rgba(108, 211, 255, 0.56);
+    border-radius: 8px;
+    color: var(--es-white) !important;
+    background: linear-gradient(135deg, var(--es-blue), var(--es-blue-deep));
+    box-shadow:
+      0 20px 44px rgba(12, 159, 253, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.24);
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1.2;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctSaverReactivate__ctaIcon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--es-blue-deep);
+    background: var(--es-white);
+  }
+
+  .lmctSaverReactivate__ctaIcon svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 180ms ease;
+  }
+
+  .lmctSaverReactivate__cta:hover {
+    box-shadow:
+      0 25px 52px rgba(12, 159, 253, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.27);
+    filter: brightness(1.06);
+    transform: translateY(-2px);
+  }
+
+  .lmctSaverReactivate__cta:hover .lmctSaverReactivate__ctaIcon svg {
+    transform: translateX(2px);
+  }
+
+  .lmctSaverReactivate__cta:focus-visible {
+    outline: 3px solid rgba(98, 202, 255, 0.66);
+    outline-offset: 4px;
+  }
+
+  .lmctSaverReactivate__quickValue {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    margin: 22px 0 0;
+    padding: 0;
+    color: #aebed0;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.35;
+    list-style: none;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__quickValue li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .lmctSaverReactivate__quickValue svg {
+    width: 13px;
+    height: 13px;
+    color: var(--es-green);
+  }
+
+  .lmctSaverReactivate__heroSide {
+    align-self: center;
+    padding: 28px 0 18px 32px;
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .lmctSaverReactivate__heroSideLabel {
+    display: block;
+    margin-bottom: 18px;
+    color: #96aabd;
+    font-size: 10px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__heroSide strong {
+    display: block;
+    color: var(--es-white);
+    font-size: 34px;
+    font-weight: 950;
+    line-height: 1.06;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__heroSide span:last-child {
+    display: block;
+    margin-top: 18px;
+    color: #9fb2c5;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.55;
+  }
+
+  .lmctSaverReactivate__benefits {
+    position: relative;
+    background: linear-gradient(rgba(5, 22, 42, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(5, 22, 42, 0.035) 1px, transparent 1px), var(--es-surface);
+    background-size: 56px 56px;
+  }
+
+  .lmctSaverReactivate__benefitsInner {
+    padding: clamp(76px, 9vw, 116px) 0;
+  }
+
+  .lmctSaverReactivate__sectionHead {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.65fr);
+    align-items: end;
+    gap: 44px;
+    margin-bottom: 42px;
+  }
+
+  .lmctSaverReactivate__sectionEyebrow {
+    margin-bottom: 15px;
+    color: var(--es-blue-deep);
+  }
+
+  .lmctSaverReactivate__sectionTitle {
+    max-width: 760px;
+    margin: 0;
+    color: var(--es-ink);
+    font-size: 68px;
+    font-weight: 950;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__sectionTitle span {
+    color: var(--es-blue-deep);
+  }
+
+  .lmctSaverReactivate__sectionCopy {
+    margin: 0;
+    color: var(--es-copy);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .lmctSaverReactivate__benefitGrid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .lmctSaverReactivate__benefit {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--es-line);
+    border-radius: 8px;
+    background: var(--es-white);
+    box-shadow: 0 18px 46px rgba(15, 41, 68, 0.08);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .lmctSaverReactivate__benefit:hover {
+    box-shadow: 0 24px 58px rgba(15, 41, 68, 0.13);
+    transform: translateY(-3px);
+  }
+
+  .lmctSaverReactivate__benefit--fuel {
+    grid-column: span 7;
+  }
+
+  .lmctSaverReactivate__benefit--grocery {
+    grid-column: span 5;
+  }
+
+  .lmctSaverReactivate__benefit--games,
+  .lmctSaverReactivate__benefit--wheel {
+    grid-column: span 6;
+    min-height: 254px;
+  }
+
+  .lmctSaverReactivate__photo {
+    position: relative;
+    min-height: 390px;
+  }
+
+  .lmctSaverReactivate__photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms ease;
+  }
+
+  .lmctSaverReactivate__benefit:hover .lmctSaverReactivate__photo img {
+    transform: scale(1.025);
+  }
+
+  .lmctSaverReactivate__photo::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(0deg, rgba(4, 17, 31, 0.95) 0%, rgba(4, 17, 31, 0.7) 38%, transparent 72%);
+  }
+
+  .lmctSaverReactivate__photoContent {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 28px;
+    color: var(--es-white);
+  }
+
+  .lmctSaverReactivate__benefitKicker {
+    display: block;
+    margin-bottom: 9px;
+    color: #77d1ff;
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__benefit h3 {
+    margin: 0;
+    font-size: 35px;
+    font-weight: 950;
+    line-height: 1.03;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__benefit p {
+    max-width: 520px;
+    margin: 12px 0 0;
+    color: #c5d2df;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctSaverReactivate__benefit--games,
+  .lmctSaverReactivate__benefit--wheel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 210px;
+    align-items: center;
+    gap: 22px;
+    padding: 30px;
+    color: var(--es-white);
+    border-color: rgba(49, 142, 206, 0.36);
+    background: var(--es-navy-soft);
+  }
+
+  .lmctSaverReactivate__benefit--wheel {
+    border-color: rgba(242, 185, 47, 0.42);
+    background: #102136;
+  }
+
+  .lmctSaverReactivate__benefit--games p,
+  .lmctSaverReactivate__benefit--wheel p {
+    color: #adbed0;
+  }
+
+  .lmctSaverReactivate__gameVisual,
+  .lmctSaverReactivate__wheelVisual {
+    display: flex;
+    width: 205px;
+    align-items: center;
+    justify-self: end;
+    justify-content: center;
+  }
+
+  .lmctSaverReactivate__wheelVisual {
+    width: 190px;
+  }
+
+  .lmctSaverReactivate__benefitAsset {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.3));
+    transition:
+      transform 220ms ease,
+      filter 220ms ease;
+  }
+
+  .lmctSaverReactivate__benefit:hover .lmctSaverReactivate__benefitAsset {
+    filter: drop-shadow(0 22px 26px rgba(0, 0, 0, 0.38));
+    transform: translateY(-3px) scale(1.025);
+  }
+
+  .lmctSaverReactivate__restoreStrip {
+    display: grid;
+    grid-template-columns: auto repeat(4, minmax(0, 1fr));
+    align-items: center;
+    gap: 0;
+    margin-top: 18px;
+    border: 1px solid var(--es-line);
+    border-radius: 8px;
+    background: var(--es-white);
+    box-shadow: 0 12px 32px rgba(15, 41, 68, 0.06);
+  }
+
+  .lmctSaverReactivate__restoreStrip strong,
+  .lmctSaverReactivate__restoreStrip span {
+    min-width: 0;
+    padding: 18px;
+    font-size: 10px;
+    font-weight: 850;
+    line-height: 1.35;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__restoreStrip strong {
+    color: var(--es-white);
+    background: var(--es-blue-deep);
+  }
+
+  .lmctSaverReactivate__restoreStrip span {
+    position: relative;
+    color: var(--es-ink);
+    border-left: 1px solid var(--es-line);
+  }
+
+  .lmctSaverReactivate__restoreStrip span::before {
+    margin-right: 7px;
+    content: "\2713";
+    color: var(--es-green-deep);
+  }
+
+  .lmctSaverReactivate__close {
+    position: relative;
+    isolation: isolate;
+    color: var(--es-white);
+    background: var(--es-navy);
+  }
+
+  .lmctSaverReactivate__close::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    opacity: 0.42;
+    background-image: linear-gradient(rgba(86, 196, 255, 0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(86, 196, 255, 0.09) 1px, transparent 1px);
+    background-size: 54px 54px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 35%, #000);
+    mask-image: linear-gradient(90deg, transparent, #000 35%, #000);
+  }
+
+  .lmctSaverReactivate__closeInner {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(54px, 9vw, 120px);
+    padding: clamp(72px, 9vw, 108px) 0;
+  }
+
+  .lmctSaverReactivate__priceVisual {
+    position: relative;
+    padding: 28px 40px 28px 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.17);
+  }
+
+  .lmctSaverReactivate__priceKicker {
+    display: block;
+    margin-bottom: 14px;
+    color: #75d4ff;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__bigPrice {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    color: var(--es-white);
+  }
+
+  .lmctSaverReactivate__bigPrice strong {
+    font-size: 132px;
+    font-weight: 950;
+    line-height: 0.78;
+  }
+
+  .lmctSaverReactivate__bigPrice span {
+    padding-bottom: 4px;
+    color: #b3c2d0;
+    font-size: 15px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__weekPrice {
+    display: inline-flex;
+    margin-top: 24px;
+    padding: 9px 12px;
+    border: 1px solid rgba(48, 205, 112, 0.4);
+    border-radius: 6px;
+    color: #9be5ba;
+    background: rgba(39, 189, 104, 0.1);
+    font-size: 12px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__closeTitle {
+    max-width: 700px;
+    margin: 0;
+    color: var(--es-white);
+    font-size: 60px;
+    font-weight: 950;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivate__closeTitle span {
+    color: #48bdff;
+  }
+
+  .lmctSaverReactivate__closeCopy {
+    max-width: 610px;
+    margin: 22px 0 0;
+    color: #b4c3d2;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .lmctSaverReactivate__terms {
+    margin: 15px 0 0;
+    color: #8095a9;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .lmctSaverReactivate__error {
+    display: none;
+    margin-top: 14px;
+    color: #ffd0d0;
+    font-size: 12px;
+    font-weight: 750;
+  }
+
+  .lmctSaverReactivate__error.is-visible {
+    display: block;
+  }
+
+  .lmctSaverReactivateFooter {
+    width: 100%;
+    color: #7c8fa2;
+    background: #030c16;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .lmctSaverReactivateFooter__inner {
+    display: flex;
+    width: min(calc(100% - 40px), 1180px);
+    min-height: 92px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-inline: auto;
+  }
+
+  .lmctSaverReactivateFooter__logo {
+    width: 106px;
+    height: auto;
+    opacity: 0.8;
+  }
+
+  .lmctSaverReactivateFooter p {
+    margin: 0;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivateSticky {
+    position: fixed;
+    z-index: 999;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 10px 10px 10px 15px;
+    border: 1px solid rgba(96, 202, 255, 0.4);
+    border-radius: 8px;
+    color: #ffffff;
+    background: rgba(5, 21, 39, 0.96);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.32);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    transform: translateY(140%);
+    transition: transform 220ms ease;
+    backdrop-filter: blur(12px);
+  }
+
+  .lmctSaverReactivateSticky.is-visible {
+    transform: translateY(0);
+  }
+
+  .lmctSaverReactivateSticky__price strong,
+  .lmctSaverReactivateSticky__price span {
+    display: block;
+  }
+
+  .lmctSaverReactivateSticky__price strong {
+    font-size: 17px;
+    font-weight: 950;
+  }
+
+  .lmctSaverReactivateSticky__price span {
+    margin-top: 2px;
+    color: #9bb0c3;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctSaverReactivateSticky__cta {
+    display: inline-flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 6px;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #0c9ffd, #0476c4);
+    font-size: 10px;
+    font-weight: 950;
+    text-align: center;
+    text-decoration: none !important;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .lmctSaverReactivate__hero {
+      min-height: 0;
+    }
+
+    .lmctSaverReactivate__heroMedia {
+      object-position: 67% center;
+    }
+
+    .lmctSaverReactivate__heroContent {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+    }
+
+    .lmctSaverReactivate__title {
+      font-size: 64px;
+    }
+
+    .lmctSaverReactivate__sectionTitle {
+      font-size: 56px;
+    }
+
+    .lmctSaverReactivate__benefit h3 {
+      font-size: 30px;
+    }
+
+    .lmctSaverReactivate__heroSide {
+      max-width: 510px;
+      padding: 22px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      border-left: 0;
+    }
+
+    .lmctSaverReactivate__sectionHead {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    .lmctSaverReactivate__benefit--fuel,
+    .lmctSaverReactivate__benefit--grocery {
+      grid-column: span 6;
+    }
+
+    .lmctSaverReactivate__benefit--games,
+    .lmctSaverReactivate__benefit--wheel {
+      grid-template-columns: minmax(0, 1fr) 150px;
+      padding: 24px;
+    }
+
+    .lmctSaverReactivate__gameVisual {
+      width: 142px;
+    }
+
+    .lmctSaverReactivate__wheelVisual {
+      width: 126px;
+    }
+
+    .lmctSaverReactivate__restoreStrip {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lmctSaverReactivate__restoreStrip strong {
+      grid-column: 1 / -1;
+    }
+
+    .lmctSaverReactivate__restoreStrip span:nth-child(2n) {
+      border-left: 0;
+    }
+
+    .lmctSaverReactivate__restoreStrip span {
+      border-top: 1px solid var(--es-line);
+    }
+
+    .lmctSaverReactivate__closeInner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 44px;
+    }
+
+    .lmctSaverReactivate__priceVisual {
+      max-width: 520px;
+      padding: 0 0 32px;
+      border-right: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.17);
+    }
+
+    .lmctSaverReactivate__bigPrice strong {
+      font-size: 110px;
+    }
+
+    .lmctSaverReactivate__closeTitle {
+      font-size: 56px;
+    }
+  }
+
+  @media (max-width: 660px) {
+    .lmctSaverReactivate__inner,
+    .lmctSaverReactivateFooter__inner {
+      width: min(calc(100% - 28px), 1180px);
+    }
+
+    .lmctSaverReactivate__header {
+      min-height: 72px;
+    }
+
+    .lmctSaverReactivate__logo {
+      width: 118px;
+    }
+
+    .lmctSaverReactivate__secure {
+      max-width: 122px;
+      justify-content: flex-end;
+      font-size: 8px;
+      text-align: right;
+    }
+
+    .lmctSaverReactivate__heroMedia {
+      object-position: 62% center;
+    }
+
+    .lmctSaverReactivate__heroShade {
+      background: linear-gradient(90deg, rgba(3, 13, 25, 0.97), rgba(4, 17, 31, 0.77));
+    }
+
+    .lmctSaverReactivate__heroContent {
+      padding: 58px 0 62px;
+    }
+
+    .lmctSaverReactivate__title {
+      font-size: 50px;
+    }
+
+    .lmctSaverReactivate__lead {
+      font-size: 15px;
+    }
+
+    .lmctSaverReactivate__priceLine {
+      align-items: center;
+    }
+
+    .lmctSaverReactivate__price {
+      font-size: 40px;
+    }
+
+    .lmctSaverReactivate__cta {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .lmctSaverReactivate__quickValue {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lmctSaverReactivate__heroSide {
+      display: none;
+    }
+
+    .lmctSaverReactivate__benefitsInner {
+      padding: 68px 0;
+    }
+
+    .lmctSaverReactivate__sectionTitle {
+      font-size: 46px;
+    }
+
+    .lmctSaverReactivate__closeTitle {
+      font-size: 48px;
+    }
+
+    .lmctSaverReactivate__benefit--fuel,
+    .lmctSaverReactivate__benefit--grocery,
+    .lmctSaverReactivate__benefit--games,
+    .lmctSaverReactivate__benefit--wheel {
+      grid-column: 1 / -1;
+    }
+
+    .lmctSaverReactivate__photo {
+      min-height: 330px;
+    }
+
+    .lmctSaverReactivate__benefit--games,
+    .lmctSaverReactivate__benefit--wheel {
+      min-height: 228px;
+      grid-template-columns: minmax(0, 1fr) 116px;
+      gap: 12px;
+      padding: 22px;
+    }
+
+    .lmctSaverReactivate__benefit--games h3,
+    .lmctSaverReactivate__benefit--wheel h3 {
+      font-size: 24px;
+    }
+
+    .lmctSaverReactivate__gameVisual {
+      width: 110px;
+    }
+
+    .lmctSaverReactivate__wheelVisual {
+      width: 105px;
+    }
+
+    .lmctSaverReactivate__restoreStrip {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctSaverReactivate__restoreStrip span,
+    .lmctSaverReactivate__restoreStrip span:nth-child(2n) {
+      border-left: 0;
+    }
+
+    .lmctSaverReactivate__closeInner {
+      padding: 68px 0 86px;
+    }
+
+    .lmctSaverReactivate__bigPrice strong {
+      font-size: 82px;
+    }
+
+    .lmctSaverReactivateFooter__inner {
+      min-height: 110px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .lmctSaverReactivateFooter p {
+      text-align: center;
+    }
+
+    .lmctSaverReactivateSticky {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .lmctSaverReactivate__title {
+      font-size: 38px;
+    }
+
+    .lmctSaverReactivate__sectionTitle,
+    .lmctSaverReactivate__closeTitle {
+      font-size: 38px;
+    }
+
+    .lmctSaverReactivate__quickValue {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctSaverReactivate__benefit--games,
+    .lmctSaverReactivate__benefit--wheel {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctSaverReactivate__gameVisual,
+    .lmctSaverReactivate__wheelVisual {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctSaverReactivate *,
+    .lmctSaverReactivate *::before,
+    .lmctSaverReactivate *::after,
+    .lmctSaverReactivateSticky {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+</style>
+
+<main class="lmctSaverReactivate">
+  <section class="lmctSaverReactivate__hero" aria-labelledby="lmctSaverReactivate-title">
+    <img
+      class="lmctSaverReactivate__heroMedia"
+      src="https://images.clickfunnels.com/ec/1acfb8bc844e2f9ffb506843d1c714/LMCT-PETROL-STATION-AT-NIGHT-WITH-PRICE-BOARD.png"
+      alt=""
+      width="1080"
+      height="1015"
+      decoding="async" />
+    <div class="lmctSaverReactivate__heroShade" aria-hidden="true"></div>
+    <div class="lmctSaverReactivate__heroGrid" aria-hidden="true"></div>
+
+    <div class="lmctSaverReactivate__inner">
+      <header class="lmctSaverReactivate__header" aria-label="LMCT+ Everyday Saver reactivation">
+        <img class="lmctSaverReactivate__logo" src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png" alt="LMCT+" width="1366" height="227" />
+
+        <span class="lmctSaverReactivate__secure">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z"></path>
+            <path d="m9 12 2 2 4-5"></path>
+          </svg>
+          Secure membership reactivation
+        </span>
+      </header>
+
+      <div class="lmctSaverReactivate__heroContent">
+        <div>
+          <p class="lmctSaverReactivate__eyebrow">Your everyday access can be restored</p>
+          <h1 class="lmctSaverReactivate__title" id="lmctSaverReactivate-title">
+            Come back to
+            <span>Everyday Saver.</span>
+          </h1>
+          <p class="lmctSaverReactivate__lead">
+            Reactivate your membership and restore access to <strong>wholesale petrol pricing, wholesale grocery pricing, LMCT+ Games and the Bonus Wheel.</strong>
+          </p>
+
+          <div class="lmctSaverReactivate__priceLine" aria-label="Everyday Saver costs 99 dollars per year, approximately 1 dollar and 90 cents per week">
+            <span class="lmctSaverReactivate__price">$99 <small>/ year</small></span>
+            <span class="lmctSaverReactivate__weekly"><strong>$1.90 a week</strong>Annual equivalent</span>
+          </div>
+
+          <a class="lmctSaverReactivate__cta" href="#open-popup" data-lmct-saver-reactivate>
+            <span>Reactivate Everyday Saver</span>
+            <span class="lmctSaverReactivate__ctaIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m13 6 6 6-6 6"></path>
+              </svg>
+            </span>
+          </a>
+
+          <ul class="lmctSaverReactivate__quickValue" aria-label="Membership access restored">
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"></path></svg>
+              Petrol pricing
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"></path></svg>
+              Grocery pricing
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"></path></svg>
+              Games
+            </li>
+            <li>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"></path></svg>
+              Bonus Wheel
+            </li>
+          </ul>
+
+          <p class="lmctSaverReactivate__error" data-lmct-saver-error role="alert">We couldn&rsquo;t find the Everyday Saver checkout product. Please refresh the page or contact LMCT+ support.</p>
+        </div>
+
+        <aside class="lmctSaverReactivate__heroSide" aria-label="Everyday Saver membership summary">
+          <span class="lmctSaverReactivate__heroSideLabel">Reactivation restores</span>
+          <strong>Your everyday membership access</strong>
+          <span>One annual membership reconnects you with the practical LMCT+ benefits you used before cancelling.</span>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctSaverReactivate__benefits" aria-labelledby="lmctSaverReactivate-benefits-title">
+    <div class="lmctSaverReactivate__inner lmctSaverReactivate__benefitsInner">
+      <header class="lmctSaverReactivate__sectionHead">
+        <div>
+          <p class="lmctSaverReactivate__sectionEyebrow">What comes back</p>
+          <h2 class="lmctSaverReactivate__sectionTitle" id="lmctSaverReactivate-benefits-title">Restore the benefits you <span>use every day.</span></h2>
+        </div>
+        <p class="lmctSaverReactivate__sectionCopy">Everyday Saver keeps the focus practical: member access across fuel, groceries and LMCT+ entertainment.</p>
+      </header>
+
+      <div class="lmctSaverReactivate__benefitGrid">
+        <article class="lmctSaverReactivate__benefit lmctSaverReactivate__benefit--fuel">
+          <div class="lmctSaverReactivate__photo">
+            <img src="https://lmctplus.com/uploads/saver-assets/petrol-hero.webp" alt="LMCT+ member using an LMCT+ petrol location" width="1001" height="1334" loading="lazy" decoding="async" />
+            <div class="lmctSaverReactivate__photoContent">
+              <span class="lmctSaverReactivate__benefitKicker">At the pump</span>
+              <h3>Wholesale petrol pricing</h3>
+              <p>Restore access to Everyday Saver petrol pricing.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="lmctSaverReactivate__benefit lmctSaverReactivate__benefit--grocery">
+          <div class="lmctSaverReactivate__photo">
+            <img src="https://images.clickfunnels.com/29/a2dc4d36d34fa7bd36d001ebbf4d16/sssaaa.jpg" alt="LMCT+ Supermarket in Deer Park" width="1920" height="1080" loading="lazy" decoding="async" />
+            <div class="lmctSaverReactivate__photoContent">
+              <span class="lmctSaverReactivate__benefitKicker">At the supermarket</span>
+              <h3>Wholesale grocery pricing</h3>
+              <p>Shop at member pricing without needing to buy in bulk.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="lmctSaverReactivate__benefit lmctSaverReactivate__benefit--games">
+          <div>
+            <span class="lmctSaverReactivate__benefitKicker">Play again</span>
+            <h3>LMCT+ Games</h3>
+            <p>Reactivate your access to LMCT+ Games.</p>
+          </div>
+          <div class="lmctSaverReactivate__gameVisual" aria-hidden="true">
+            <img
+              class="lmctSaverReactivate__benefitAsset"
+              src="https://images.clickfunnels.com/8a/715b076add45d7afa30e66d50a9c34/everyday-saver-games-web.png"
+              alt=""
+              width="600"
+              height="400"
+              loading="lazy"
+              decoding="async" />
+          </div>
+        </article>
+
+        <article class="lmctSaverReactivate__benefit lmctSaverReactivate__benefit--wheel">
+          <div>
+            <span class="lmctSaverReactivate__benefitKicker">Back in your membership</span>
+            <h3>Bonus Wheel</h3>
+            <p>Restore access to the LMCT+ Bonus Wheel.</p>
+          </div>
+          <div class="lmctSaverReactivate__wheelVisual" aria-hidden="true">
+            <img
+              class="lmctSaverReactivate__benefitAsset"
+              src="https://images.clickfunnels.com/bf/e1269bcf3248caac64eed825bb4112/everyday-saver-bonus-wheel-web.png"
+              alt=""
+              width="600"
+              height="500"
+              loading="lazy"
+              decoding="async" />
+          </div>
+        </article>
+      </div>
+
+      <div class="lmctSaverReactivate__restoreStrip" aria-label="Everyday Saver restored benefits">
+        <strong>Reactivate once</strong>
+        <span>Petrol pricing</span>
+        <span>Grocery pricing</span>
+        <span>LMCT+ Games</span>
+        <span>Bonus Wheel</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctSaverReactivate__close" aria-labelledby="lmctSaverReactivate-close-title" data-lmct-saver-close>
+    <div class="lmctSaverReactivate__inner lmctSaverReactivate__closeInner">
+      <div class="lmctSaverReactivate__priceVisual" aria-label="99 dollars per year, approximately 1 dollar and 90 cents per week">
+        <span class="lmctSaverReactivate__priceKicker">Everyday Saver membership</span>
+        <div class="lmctSaverReactivate__bigPrice"><strong>$99</strong><span>/ year</span></div>
+        <span class="lmctSaverReactivate__weekPrice">Approximately $1.90 a week</span>
+      </div>
+
+      <div>
+        <p class="lmctSaverReactivate__sectionEyebrow">Ready to return?</p>
+        <h2 class="lmctSaverReactivate__closeTitle" id="lmctSaverReactivate-close-title">Put your everyday access <span>back to work.</span></h2>
+        <p class="lmctSaverReactivate__closeCopy">Reactivate Everyday Saver and restore wholesale petrol pricing, wholesale grocery pricing without buying bulk, LMCT+ Games and the Bonus Wheel.</p>
+
+        <a class="lmctSaverReactivate__cta" href="#open-popup" data-lmct-saver-reactivate>
+          <span>Reactivate for $99 / year</span>
+          <span class="lmctSaverReactivate__ctaIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14"></path>
+              <path d="m13 6 6 6-6 6"></path>
+            </svg>
+          </span>
+        </a>
+
+        <p class="lmctSaverReactivate__terms">Membership access and availability are subject to current LMCT+ terms.</p>
+        <p class="lmctSaverReactivate__error" data-lmct-saver-error role="alert">We couldn&rsquo;t find the Everyday Saver checkout product. Please refresh the page or contact LMCT+ support.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="lmctSaverReactivateFooter">
+  <div class="lmctSaverReactivateFooter__inner">
+    <img class="lmctSaverReactivateFooter__logo" src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png" alt="LMCT+" width="180" height="42" loading="lazy" />
+    <p>Everyday Saver membership reactivation</p>
+  </div>
+</footer>
+
+<div class="lmctSaverReactivateSticky" data-lmct-saver-sticky>
+  <span class="lmctSaverReactivateSticky__price"><strong>$99 / year</strong><span>Everyday Saver</span></span>
+  <a class="lmctSaverReactivateSticky__cta" href="#open-popup" data-lmct-saver-reactivate>Reactivate</a>
+</div>
+
+<script>
+  (function () {
+    "use strict";
+
+    window.LMCT_EVERYDAY_SAVER_REACTIVATION = Object.assign(
+      {
+        productId: "5123596",
+        modalSelector: "#modalPopup",
+      },
+      window.LMCT_EVERYDAY_SAVER_REACTIVATION || {},
+    );
+
+    var config = window.LMCT_EVERYDAY_SAVER_REACTIVATION;
+    var actionLinks = document.querySelectorAll("[data-lmct-saver-reactivate]");
+    var errorMessages = document.querySelectorAll("[data-lmct-saver-error]");
+    var sticky = document.querySelector("[data-lmct-saver-sticky]");
+    var closeSection = document.querySelector("[data-lmct-saver-close]");
+
+    function showCheckoutError() {
+      errorMessages.forEach(function (message) {
+        message.classList.add("is-visible");
+      });
+    }
+
+    function selectEverydaySaverProduct() {
+      var modal = document.querySelector(config.modalSelector);
+      var scope = modal || document;
+      var productInput = null;
+      var matchingInputs = scope.querySelectorAll('input[name="purchase[product_id]"][value="' + config.productId + '"]');
+
+      matchingInputs.forEach(function (input) {
+        if (!productInput && !input.closest("#cfAR")) productInput = input;
+      });
+
+      if (!productInput) return false;
+
+      var productTable = productInput.closest(".elOrderProductOptions");
+      if (productTable) {
+        productTable.querySelectorAll('[data-cf-product-template="true"]').forEach(function (row) {
+          var rowInput = row.querySelector('input[name="purchase[product_id]"]');
+          var isEverydaySaver = rowInput && rowInput.value === String(config.productId);
+          row.style.setProperty("display", isEverydaySaver ? "table-row" : "none", "important");
+          row.classList.toggle("checked-item", Boolean(isEverydaySaver));
+        });
+      }
+
+      productInput.click();
+
+      if (typeof window.rebuildOrderSummary === "function") {
+        window.rebuildOrderSummary();
+      }
+
+      return true;
+    }
+
+    actionLinks.forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        var proceed = link.dispatchEvent(
+          new CustomEvent("lmct:everyday-saver-reactivate", {
+            bubbles: true,
+            cancelable: true,
+            detail: {
+              membership: "Everyday Saver",
+              productId: config.productId,
+              price: 99,
+              billingCadence: "yearly",
+              source: "A2 Everyday Saver winback",
+            },
+          }),
+        );
+
+        if (!proceed || !selectEverydaySaverProduct()) {
+          event.preventDefault();
+          if (proceed) showCheckoutError();
+        }
+      });
+    });
+
+    if (sticky) {
+      var updateSticky = function () {
+        var show = window.scrollY > 520;
+        if (closeSection) {
+          var closeTop = closeSection.getBoundingClientRect().top;
+          show = show && closeTop > window.innerHeight * 0.68;
+        }
+        sticky.classList.toggle("is-visible", show);
+      };
+
+      updateSticky();
+      window.addEventListener("scroll", updateSticky, { passive: true });
+      window.addEventListener("resize", updateSticky);
+    }
+  })();
+</script>

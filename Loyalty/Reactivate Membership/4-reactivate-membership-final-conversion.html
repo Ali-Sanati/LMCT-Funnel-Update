@@ -1,0 +1,1065 @@
+<!--
+  LMCT+ A1 cancellation winback: Section 4, final conversion.
+
+  Integration:
+  - Reuses window.LMCT_WINBACK_STATE or the verified Section 1 hero state.
+  - Delegates the only conversion action to Section 1's
+    [data-lmct-reactivate] control.
+  - Makes no membership, product, or Klaviyo request.
+  - The shared reactivation handler may emit these window events:
+      lmct:winback-reactivation-start
+      lmct:winback-reactivation-success
+      lmct:winback-reactivation-error
+-->
+
+<style>
+  .lmctWinbackFinal,
+  .lmctWinbackFinal *,
+  .lmctWinbackFinal *::before,
+  .lmctWinbackFinal *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctWinbackFinal {
+    --lmctWBF-navy: #030a13;
+    --lmctWBF-navy-soft: #071a2d;
+    --lmctWBF-blue: #0c9ffd;
+    --lmctWBF-blue-deep: #0476c4;
+    --lmctWBF-blue-light: #61caff;
+    --lmctWBF-green: #35d277;
+    --lmctWBF-white: #ffffff;
+    --lmctWBF-muted: #a7b7c9;
+    --lmctWBF-line: rgba(142, 192, 230, 0.18);
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lmctWBF-white);
+    background:
+      radial-gradient(circle at 78% 34%, rgba(12, 159, 253, 0.18), transparent 28rem),
+      radial-gradient(circle at 20% 100%, rgba(53, 210, 119, 0.08), transparent 31rem),
+      linear-gradient(148deg, #071727 0%, var(--lmctWBF-navy) 55%, #01050a 100%);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .lmctWinbackFinal::before {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    content: "";
+    opacity: 0.3;
+    background-image:
+      linear-gradient(rgba(97, 202, 255, 0.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(97, 202, 255, 0.09) 1px, transparent 1px);
+    background-size: 54px 54px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 3%, #000 42%, #000 100%);
+    mask-image: linear-gradient(90deg, transparent 3%, #000 42%, #000 100%);
+    pointer-events: none;
+  }
+
+  .lmctWinbackFinal::after {
+    position: absolute;
+    z-index: -1;
+    top: -45%;
+    right: -12%;
+    width: 62%;
+    height: 175%;
+    border: 1px solid rgba(97, 202, 255, 0.14);
+    border-radius: 50%;
+    content: "";
+    background: radial-gradient(circle, rgba(12, 159, 253, 0.09), transparent 67%);
+    transform: rotate(-9deg);
+    pointer-events: none;
+  }
+
+  .lmctWinbackFinal__sweep {
+    position: absolute;
+    z-index: -1;
+    top: -35%;
+    bottom: -35%;
+    left: -25%;
+    width: 16%;
+    background: linear-gradient(90deg, transparent, rgba(97, 202, 255, 0.08), transparent);
+    filter: blur(15px);
+    pointer-events: none;
+    transform: rotate(14deg);
+  }
+
+  .lmctWinbackFinal__inner {
+    position: relative;
+    width: min(calc(100% - 40px), 1180px);
+    margin-inline: auto;
+    padding: clamp(80px, 9vw, 126px) 0 max(72px, env(safe-area-inset-bottom));
+  }
+
+  .lmctWinbackFinal__main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(350px, 0.92fr);
+    align-items: center;
+    gap: clamp(52px, 8vw, 100px);
+  }
+
+  .lmctWinbackFinal__copy {
+    min-width: 0;
+  }
+
+  .lmctWinbackFinal__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    margin: 0;
+    color: var(--lmctWBF-blue-light);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__eyebrow::before {
+    width: 31px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+    box-shadow: 0 0 13px rgba(97, 202, 255, 0.65);
+  }
+
+  .lmctWinbackFinal__title {
+    max-width: 740px;
+    margin: 22px 0 0;
+    color: var(--lmctWBF-white);
+    font-size: clamp(50px, 5.8vw, 78px);
+    font-weight: 950;
+    line-height: 0.9;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .lmctWinbackFinal__title span {
+    display: block;
+    margin-top: 7px;
+    color: var(--lmctWBF-blue-light);
+  }
+
+  .lmctWinbackFinal__lead {
+    max-width: 620px;
+    margin: 25px 0 0;
+    color: #cad6e3;
+    font-size: clamp(15px, 1.45vw, 18px);
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctWinbackFinal__lead strong {
+    color: var(--lmctWBF-white);
+    font-weight: 850;
+  }
+
+  .lmctWinbackFinal__visual {
+    position: relative;
+    display: grid;
+    min-height: 390px;
+    place-items: center;
+  }
+
+  .lmctWinbackFinal__visual::before,
+  .lmctWinbackFinal__visual::after {
+    position: absolute;
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+  }
+
+  .lmctWinbackFinal__visual::before {
+    inset: 2% -6%;
+    border: 1px solid rgba(97, 202, 255, 0.17);
+    transform: rotate(-14deg);
+  }
+
+  .lmctWinbackFinal__visual::after {
+    inset: 14% 3%;
+    border: 1px solid rgba(53, 210, 119, 0.1);
+    transform: rotate(18deg);
+  }
+
+  .lmctWinbackFinal__restoreVisual {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__restoreWord {
+    display: block;
+    color: transparent;
+    font-size: clamp(66px, 8.6vw, 118px);
+    font-weight: 950;
+    line-height: 0.78;
+    -webkit-text-stroke: 1px rgba(151, 216, 255, 0.38);
+  }
+
+  .lmctWinbackFinal__plus {
+    display: block;
+    margin: 15px 0 10px;
+    color: var(--lmctWBF-green);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1;
+    text-shadow: 0 0 23px rgba(53, 210, 119, 0.35);
+  }
+
+  .lmctWinbackFinal__bonus {
+    display: block;
+    color: var(--lmctWBF-white);
+    font-size: clamp(98px, 12vw, 168px);
+    font-weight: 950;
+    line-height: 0.72;
+    text-shadow:
+      0 6px 0 rgba(3, 75, 150, 0.72),
+      0 0 36px rgba(12, 159, 253, 0.25);
+  }
+
+  .lmctWinbackFinal__bonusLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    color: var(--lmctWBF-blue-light);
+    font-size: 10px;
+    font-weight: 950;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__bonusLabel::before,
+  .lmctWinbackFinal__bonusLabel::after {
+    width: 30px;
+    height: 1px;
+    content: "";
+    background: rgba(97, 202, 255, 0.5);
+  }
+
+  .lmctWinbackFinal__conversion {
+    margin-top: clamp(48px, 6vw, 72px);
+    padding-top: clamp(28px, 4vw, 42px);
+    border-top: 1px solid var(--lmctWBF-line);
+  }
+
+  .lmctWinbackFinal__tier {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 21px;
+    color: var(--lmctWBF-green);
+    font-size: 11px;
+    font-weight: 950;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal[data-state="ready"] .lmctWinbackFinal__tier,
+  .lmctWinbackFinal[data-state="submitting"] .lmctWinbackFinal__tier,
+  .lmctWinbackFinal[data-state="action-error"] .lmctWinbackFinal__tier {
+    display: flex;
+  }
+
+  .lmctWinbackFinal__tierIcon {
+    display: grid;
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+    place-items: center;
+    border: 1px solid rgba(53, 210, 119, 0.32);
+    border-radius: 50%;
+    background: rgba(53, 210, 119, 0.08);
+  }
+
+  .lmctWinbackFinal__tierIcon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .lmctWinbackFinal__actionRow {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+    align-items: center;
+    gap: clamp(32px, 6vw, 74px);
+  }
+
+  .lmctWinbackFinal__ctaWrap {
+    min-width: 0;
+  }
+
+  .lmctWinbackFinal__cta {
+    display: none;
+    width: 100%;
+    min-height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 15px 17px 15px 23px;
+    border: 1px solid rgba(97, 202, 255, 0.56);
+    border-radius: 8px;
+    color: var(--lmctWBF-white);
+    background: linear-gradient(135deg, var(--lmctWBF-blue), var(--lmctWBF-blue-deep));
+    box-shadow:
+      0 21px 46px rgba(12, 159, 253, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.24);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1.15;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  }
+
+  .lmctWinbackFinal[data-state="ready"] .lmctWinbackFinal__cta,
+  .lmctWinbackFinal[data-state="action-error"] .lmctWinbackFinal__cta,
+  .lmctWinbackFinal[data-state="submitting"] .lmctWinbackFinal__cta {
+    display: inline-flex;
+  }
+
+  .lmctWinbackFinal__ctaIcon {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctWBF-blue-deep);
+    background: var(--lmctWBF-white);
+  }
+
+  .lmctWinbackFinal__ctaIcon svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 180ms ease;
+  }
+
+  .lmctWinbackFinal__cta:hover:not(:disabled) {
+    box-shadow:
+      0 27px 54px rgba(12, 159, 253, 0.39),
+      inset 0 1px 0 rgba(255, 255, 255, 0.27);
+    filter: brightness(1.06);
+    transform: translateY(-2px);
+  }
+
+  .lmctWinbackFinal__cta:hover:not(:disabled) .lmctWinbackFinal__ctaIcon svg {
+    transform: translateX(2px);
+  }
+
+  .lmctWinbackFinal__cta:focus-visible {
+    outline: 3px solid rgba(97, 202, 255, 0.62);
+    outline-offset: 4px;
+  }
+
+  .lmctWinbackFinal__cta:disabled {
+    cursor: wait;
+    filter: saturate(0.6);
+    opacity: 0.72;
+  }
+
+  .lmctWinbackFinal__values {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmctWinbackFinal__value {
+    position: relative;
+    min-width: 0;
+    padding: 3px clamp(15px, 2.7vw, 29px);
+  }
+
+  .lmctWinbackFinal__value:first-child {
+    padding-left: 0;
+  }
+
+  .lmctWinbackFinal__value + .lmctWinbackFinal__value {
+    border-left: 1px solid var(--lmctWBF-line);
+  }
+
+  .lmctWinbackFinal__valueVerb,
+  .lmctWinbackFinal__valueObject {
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__valueVerb {
+    color: var(--lmctWBF-blue-light);
+    font-size: 9px;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctWinbackFinal__value:nth-child(3) .lmctWinbackFinal__valueVerb {
+    color: var(--lmctWBF-green);
+  }
+
+  .lmctWinbackFinal__valueObject {
+    margin-top: 8px;
+    color: var(--lmctWBF-white);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.4;
+  }
+
+  .lmctWinbackFinal__disclaimer {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 25px 0 0;
+    color: var(--lmctWBF-muted);
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.5;
+  }
+
+  .lmctWinbackFinal__disclaimer svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    color: var(--lmctWBF-blue-light);
+  }
+
+  .lmctWinbackFinal__loading,
+  .lmctWinbackFinal__lookupError,
+  .lmctWinbackFinal__actionError {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.55;
+  }
+
+  .lmctWinbackFinal__loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--lmctWBF-muted);
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__loading::before {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    content: "";
+    background: var(--lmctWBF-blue-light);
+    box-shadow: 0 0 14px rgba(97, 202, 255, 0.85);
+    animation: lmctWinbackFinal__loadingPulse 1.1s ease-in-out infinite alternate;
+  }
+
+  .lmctWinbackFinal[data-state="ready"] .lmctWinbackFinal__loading,
+  .lmctWinbackFinal[data-state="submitting"] .lmctWinbackFinal__loading,
+  .lmctWinbackFinal[data-state="action-error"] .lmctWinbackFinal__loading,
+  .lmctWinbackFinal[data-state="lookup-error"] .lmctWinbackFinal__loading,
+  .lmctWinbackFinal[data-state="success"] .lmctWinbackFinal__loading {
+    display: none;
+  }
+
+  .lmctWinbackFinal__lookupError,
+  .lmctWinbackFinal__actionError {
+    display: none;
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 138, 138, 0.28);
+    border-radius: 7px;
+    color: #ffd5d5;
+    background: rgba(141, 25, 25, 0.13);
+  }
+
+  .lmctWinbackFinal[data-state="lookup-error"] .lmctWinbackFinal__lookupError,
+  .lmctWinbackFinal[data-state="action-error"] .lmctWinbackFinal__actionError {
+    display: block;
+  }
+
+  .lmctWinbackFinal[data-state="action-error"] .lmctWinbackFinal__actionError {
+    margin-bottom: 14px;
+  }
+
+  .lmctWinbackFinal__success {
+    display: none;
+    max-width: 840px;
+    min-height: 500px;
+    align-content: center;
+    justify-items: start;
+    margin-inline: auto;
+    text-align: left;
+  }
+
+  .lmctWinbackFinal[data-state="success"] .lmctWinbackFinal__content {
+    display: none;
+  }
+
+  .lmctWinbackFinal[data-state="success"] .lmctWinbackFinal__success {
+    display: grid;
+  }
+
+  .lmctWinbackFinal__successIcon {
+    display: grid;
+    width: 66px;
+    height: 66px;
+    place-items: center;
+    border: 1px solid rgba(53, 210, 119, 0.43);
+    border-radius: 50%;
+    color: var(--lmctWBF-navy);
+    background: var(--lmctWBF-green);
+    box-shadow: 0 0 36px rgba(53, 210, 119, 0.21);
+  }
+
+  .lmctWinbackFinal__successIcon svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .lmctWinbackFinal__successEyebrow {
+    margin: 25px 0 0;
+    color: var(--lmctWBF-green);
+    font-size: 10px;
+    font-weight: 950;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__successTitle {
+    margin: 13px 0 0;
+    color: var(--lmctWBF-white);
+    font-size: clamp(45px, 6vw, 72px);
+    font-weight: 950;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__successCopy {
+    max-width: 670px;
+    margin: 23px 0 0;
+    color: #cbd8e5;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.7;
+  }
+
+  .lmctWinbackFinal__successCopy strong {
+    color: var(--lmctWBF-white);
+  }
+
+  @keyframes lmctWinbackFinal__loadingPulse {
+    to {
+      opacity: 0.3;
+      transform: scale(0.75);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lmctWinbackFinal.is-visible .lmctWinbackFinal__copy {
+      animation: lmctWinbackFinal__contentIn 650ms ease-out both;
+    }
+
+    .lmctWinbackFinal.is-visible .lmctWinbackFinal__restoreVisual {
+      animation: lmctWinbackFinal__visualIn 760ms cubic-bezier(0.2, 0.82, 0.25, 1) 120ms both;
+    }
+
+    .lmctWinbackFinal.is-visible .lmctWinbackFinal__conversion {
+      animation: lmctWinbackFinal__contentIn 610ms ease-out 230ms both;
+    }
+
+    .lmctWinbackFinal.is-visible .lmctWinbackFinal__sweep {
+      animation: lmctWinbackFinal__sweepAcross 1.5s ease-out 350ms both;
+    }
+
+    .lmctWinbackFinal[data-state="success"] .lmctWinbackFinal__success {
+      animation: lmctWinbackFinal__contentIn 520ms ease-out both;
+    }
+  }
+
+  @keyframes lmctWinbackFinal__contentIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes lmctWinbackFinal__visualIn {
+    from {
+      opacity: 0;
+      transform: scale(0.94) rotate(2deg);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0);
+    }
+  }
+
+  @keyframes lmctWinbackFinal__sweepAcross {
+    from { left: -25%; }
+    to { left: 120%; }
+  }
+
+  @media (max-width: 900px) {
+    .lmctWinbackFinal__main {
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+      gap: 35px;
+    }
+
+    .lmctWinbackFinal__visual {
+      min-height: 340px;
+    }
+
+    .lmctWinbackFinal__actionRow {
+      grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .lmctWinbackFinal::before {
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 100%);
+      mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 100%);
+    }
+
+    .lmctWinbackFinal__inner {
+      width: min(calc(100% - 28px), 560px);
+      padding: 67px 0 max(62px, env(safe-area-inset-bottom));
+    }
+
+    .lmctWinbackFinal__main {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 25px;
+    }
+
+    .lmctWinbackFinal__main,
+    .lmctWinbackFinal__conversion,
+    .lmctWinbackFinal__success {
+      width: min(100%, calc(100vw - 44px));
+      min-width: 0;
+    }
+
+    .lmctWinbackFinal__copy {
+      display: contents;
+    }
+
+    .lmctWinbackFinal__eyebrow { grid-row: 1; }
+    .lmctWinbackFinal__title {
+      grid-row: 2;
+      max-width: 100%;
+      margin-top: -5px;
+      font-size: 42px;
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+    .lmctWinbackFinal__lead {
+      grid-row: 3;
+      width: 100%;
+      max-width: 100%;
+      margin-top: -4px;
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+    .lmctWinbackFinal__visual {
+      grid-row: 4;
+      width: 100%;
+      max-width: 100%;
+      min-height: 290px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .lmctWinbackFinal__conversion {
+      margin-top: 35px;
+      padding-top: 28px;
+    }
+
+    .lmctWinbackFinal__actionRow {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 25px;
+    }
+
+    .lmctWinbackFinal__cta {
+      width: 100%;
+    }
+
+    .lmctWinbackFinal__values {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctWinbackFinal__value,
+    .lmctWinbackFinal__value:first-child {
+      display: grid;
+      grid-template-columns: 68px minmax(0, 1fr);
+      align-items: center;
+      gap: 11px;
+      padding: 13px 0;
+    }
+
+    .lmctWinbackFinal__value + .lmctWinbackFinal__value {
+      border-top: 1px solid var(--lmctWBF-line);
+      border-left: 0;
+    }
+
+    .lmctWinbackFinal__valueObject {
+      margin-top: 0;
+    }
+
+    .lmctWinbackFinal__disclaimer {
+      align-items: flex-start;
+      margin-top: 22px;
+      overflow-wrap: anywhere;
+    }
+
+    .lmctWinbackFinal__success {
+      min-height: 440px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .lmctWinbackFinal__title {
+      font-size: 33px;
+    }
+
+    .lmctWinbackFinal__visual {
+      min-height: 255px;
+    }
+
+    .lmctWinbackFinal__restoreWord {
+      font-size: 61px;
+    }
+
+    .lmctWinbackFinal__bonus {
+      font-size: 92px;
+    }
+
+    .lmctWinbackFinal__cta {
+      min-height: 60px;
+      padding-left: 18px;
+      font-size: 11px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctWinbackFinal *,
+    .lmctWinbackFinal *::before,
+    .lmctWinbackFinal *::after {
+      animation: none !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body.lmctWinbackFinal-isVisible [data-lmct-winback-sticky] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(110%) !important;
+  }
+</style>
+
+<section class="lmctWinbackFinal" data-state="loading" aria-labelledby="lmctWinbackFinal-title" aria-busy="true">
+  <span class="lmctWinbackFinal__sweep" aria-hidden="true"></span>
+
+  <div class="lmctWinbackFinal__inner">
+    <div class="lmctWinbackFinal__content">
+      <div class="lmctWinbackFinal__main">
+        <div class="lmctWinbackFinal__copy">
+          <p class="lmctWinbackFinal__eyebrow">Your entries won&rsquo;t wait forever</p>
+          <h2 class="lmctWinbackFinal__title" id="lmctWinbackFinal-title">
+            Don&rsquo;t let your
+            <span>accumulated entries disappear.</span>
+          </h2>
+          <p class="lmctWinbackFinal__lead">Reactivate your membership <strong>before your accumulated entries are removed.</strong></p>
+        </div>
+
+        <div class="lmctWinbackFinal__visual" aria-label="Restore accumulated entries and receive 250 bonus entries">
+          <div class="lmctWinbackFinal__restoreVisual" aria-hidden="true">
+            <span class="lmctWinbackFinal__restoreWord">Restore</span>
+            <span class="lmctWinbackFinal__plus">+</span>
+            <strong class="lmctWinbackFinal__bonus">250</strong>
+            <span class="lmctWinbackFinal__bonusLabel">Bonus entries</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lmctWinbackFinal__conversion">
+        <div class="lmctWinbackFinal__tier" aria-live="polite">
+          <span class="lmctWinbackFinal__tierIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z" />
+              <path d="m9 12 2 2 4-5" />
+            </svg>
+          </span>
+          <span>Reactivate your <strong data-lmct-final-plan>membership</strong></span>
+        </div>
+
+        <div class="lmctWinbackFinal__actionRow">
+          <div class="lmctWinbackFinal__ctaWrap">
+            <div class="lmctWinbackFinal__actionError" role="alert">We couldn&rsquo;t complete your reactivation. Please try again or contact LMCT+ support.</div>
+
+            <button class="lmctWinbackFinal__cta" type="button" data-lmct-final-cta>
+              <span data-lmct-final-cta-label>Reactivate &amp; restore my entries</span>
+              <span class="lmctWinbackFinal__ctaIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="m13 6 6 6-6 6" />
+                </svg>
+              </span>
+            </button>
+
+            <div class="lmctWinbackFinal__loading" role="status" aria-live="polite">Confirming your membership</div>
+            <div class="lmctWinbackFinal__lookupError" role="alert">We couldn&rsquo;t load your previous membership. Please use the personal link from your LMCT+ winback email or contact support.</div>
+          </div>
+
+          <ul class="lmctWinbackFinal__values" aria-label="Reactivation value">
+            <li class="lmctWinbackFinal__value">
+              <span class="lmctWinbackFinal__valueVerb">Restore</span>
+              <strong class="lmctWinbackFinal__valueObject">All accumulated entries</strong>
+            </li>
+            <li class="lmctWinbackFinal__value">
+              <span class="lmctWinbackFinal__valueVerb">Get</span>
+              <strong class="lmctWinbackFinal__valueObject">250 bonus entries</strong>
+            </li>
+            <li class="lmctWinbackFinal__value">
+              <span class="lmctWinbackFinal__valueVerb">Resume</span>
+              <strong class="lmctWinbackFinal__valueObject">Previous membership</strong>
+            </li>
+          </ul>
+        </div>
+
+        <p class="lmctWinbackFinal__disclaimer">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 11v5" />
+            <path d="M12 8h.01" />
+          </svg>
+          Free bonus entries are added to accounts on the day of the draw.
+        </p>
+      </div>
+    </div>
+
+    <div class="lmctWinbackFinal__success" role="status" aria-live="polite">
+      <span class="lmctWinbackFinal__successIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 12 4 4L19 6" />
+        </svg>
+      </span>
+      <p class="lmctWinbackFinal__successEyebrow">Reactivation complete</p>
+      <h2 class="lmctWinbackFinal__successTitle">Membership restored</h2>
+      <p class="lmctWinbackFinal__successCopy">
+        Your <strong data-lmct-final-success-plan>membership</strong> has been reactivated and your accumulated entries have been restored. Your 250 bonus entries will be added to your account on the day of the draw.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    "use strict";
+
+    // ====================================================
+    // CRITICAL MONTHLY MAINTENANCE
+    // UPDATE ON EVERY MAJOR DRAW DAY
+    //
+    // Klaviyo List:
+    // "250 bonus entries - cancelled members [month]"
+    // ====================================================
+    window.LMCT_WINBACK_CONFIG = window.LMCT_WINBACK_CONFIG || {};
+    if (!window.LMCT_WINBACK_CONFIG.klaviyoListId) {
+      window.LMCT_WINBACK_CONFIG.klaviyoListId = "CURRENT_MONTH_LIST_ID";
+    }
+
+    var root = document.querySelector(".lmctWinbackFinal");
+    if (!root) return;
+
+    var planName = root.querySelector("[data-lmct-final-plan]");
+    var successPlanName = root.querySelector("[data-lmct-final-success-plan]");
+    var cta = root.querySelector("[data-lmct-final-cta]");
+    var ctaLabel = root.querySelector("[data-lmct-final-cta-label]");
+    var hero = null;
+    var heroObserver = null;
+    var activePlan = "";
+    var connectAttempts = 0;
+    var MAX_CONNECT_ATTEMPTS = 60;
+
+    function cleanPlanName(value) {
+      return String(value || "")
+        .replace(/\s+Membership$/i, "")
+        .trim();
+    }
+
+    function setState(state) {
+      root.setAttribute("data-state", state);
+      root.setAttribute("aria-busy", state === "loading" || state === "submitting" ? "true" : "false");
+    }
+
+    function publishState(state) {
+      window.LMCT_WINBACK_STATE = Object.assign({}, window.LMCT_WINBACK_STATE || {}, state);
+    }
+
+    function showReady(membershipName) {
+      var name = cleanPlanName(membershipName);
+      if (!name) {
+        showLookupError();
+        return;
+      }
+
+      activePlan = name;
+      planName.textContent = name + " Membership";
+      successPlanName.textContent = name + " Membership";
+      ctaLabel.textContent = "Reactivate & restore my entries";
+      cta.disabled = false;
+      setState("ready");
+      publishState({ status: "ready", membershipName: name });
+    }
+
+    function showLookupError() {
+      setState("lookup-error");
+    }
+
+    function showSubmitting() {
+      if (!activePlan) return;
+      cta.disabled = true;
+      ctaLabel.textContent = "Reactivating membership...";
+      setState("submitting");
+    }
+
+    function showActionError() {
+      if (!activePlan) {
+        showLookupError();
+        return;
+      }
+      cta.disabled = false;
+      ctaLabel.textContent = "Try reactivation again";
+      setState("action-error");
+    }
+
+    function showSuccess(detail) {
+      var returnedPlan = cleanPlanName(detail && detail.membershipName);
+      if (returnedPlan) activePlan = returnedPlan;
+      if (activePlan) successPlanName.textContent = activePlan + " Membership";
+      setState("success");
+      publishState({ status: "success", membershipName: activePlan || returnedPlan });
+
+      var redirectUrl = detail && detail.redirectUrl;
+      if (!redirectUrl) return;
+
+      try {
+        var safeUrl = new URL(String(redirectUrl), window.location.href);
+        if (safeUrl.protocol === "https:" || safeUrl.protocol === "http:") {
+          window.location.assign(safeUrl.toString());
+        }
+      } catch (error) {
+        // The success state remains visible when no approved redirect is valid.
+      }
+    }
+
+    function syncFromSharedState() {
+      var state = window.LMCT_WINBACK_STATE;
+      if (!state || !state.membershipName) return false;
+      if (state.status === "success") {
+        activePlan = cleanPlanName(state.membershipName);
+        showSuccess(state);
+        return true;
+      }
+      if (state.status !== "ready") return false;
+      showReady(state.membershipName);
+      return true;
+    }
+
+    function syncFromHero() {
+      if (!hero) return false;
+      var state = hero.getAttribute("data-state");
+      if (state === "error") {
+        showLookupError();
+        return true;
+      }
+      if (state !== "ready") return false;
+
+      var heroPlan = hero.querySelector("[data-lmct-tier-name]");
+      if (!heroPlan || !heroPlan.textContent.trim()) {
+        showLookupError();
+        return true;
+      }
+      showReady(heroPlan.textContent);
+      return true;
+    }
+
+    function observeHero() {
+      if (!hero || typeof MutationObserver !== "function") return;
+      heroObserver = new MutationObserver(function () {
+        if (syncFromHero() && root.getAttribute("data-state") !== "loading") heroObserver.disconnect();
+      });
+      heroObserver.observe(hero, {
+        attributes: true,
+        attributeFilter: ["data-state"],
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    function connectToHero() {
+      if (syncFromSharedState()) return;
+      hero = document.querySelector(".lmctWinbackHero");
+      if (hero) {
+        if (!syncFromHero()) observeHero();
+        return;
+      }
+
+      connectAttempts += 1;
+      if (connectAttempts < MAX_CONNECT_ATTEMPTS) {
+        window.setTimeout(connectToHero, 100);
+      } else {
+        showLookupError();
+      }
+    }
+
+    cta.addEventListener("click", function () {
+      var heroCta = document.querySelector('.lmctWinbackHero[data-state="ready"] [data-lmct-reactivate]');
+      if (heroCta) heroCta.click();
+      else showActionError();
+    });
+
+    window.addEventListener("lmct:winback-state", function (event) {
+      var detail = event && event.detail;
+      if (!detail) return;
+      if (detail.status === "ready") showReady(detail.membershipName);
+      if (detail.status === "success") showSuccess(detail);
+      if (detail.status === "error") showActionError();
+    });
+
+    window.addEventListener("lmct:winback-reactivation-start", showSubmitting);
+    window.addEventListener("lmct:winback-reactivation-success", function (event) {
+      showSuccess(event && event.detail);
+    });
+    window.addEventListener("lmct:winback-reactivation-error", showActionError);
+
+    if (typeof IntersectionObserver === "function") {
+      var revealObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          root.classList.add("is-visible");
+          observer.disconnect();
+        });
+      }, { threshold: 0.17 });
+      revealObserver.observe(root);
+
+      var stickyObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          document.body.classList.toggle("lmctWinbackFinal-isVisible", entry.isIntersecting);
+        });
+      }, { threshold: 0.12 });
+      stickyObserver.observe(root);
+    } else {
+      root.classList.add("is-visible");
+    }
+
+    connectToHero();
+  })();
+</script>

@@ -54,9 +54,15 @@
     height: 100%;
     display: block;
     object-fit: cover;
+    cursor: zoom-in;
     transition:
       opacity 180ms ease,
       transform 650ms ease;
+  }
+
+  .gcHouseImage:focus-visible {
+    outline: 3px solid var(--gc-sun);
+    outline-offset: -6px;
   }
 
   .gcHouseMedia:hover .gcHouseImage {
@@ -403,6 +409,151 @@
     white-space: nowrap;
   }
 
+  .gcHouseLightbox {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    background: #071111;
+    color: #ffffff;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .gcHouseLightbox:not([open]) {
+    display: none;
+  }
+
+  .gcHouseLightbox::backdrop {
+    background: rgba(2, 10, 10, 0.96);
+  }
+
+  .gcHouseLightboxStage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  .gcHouseLightboxImage {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    padding: clamp(56px, 7vw, 86px) clamp(18px, 7vw, 100px) clamp(78px, 9vw, 108px);
+  }
+
+  .gcHouseLightbox.gcHouseLightboxPlanMode,
+  .gcHouseLightbox.gcHouseLightboxPlanMode .gcHouseLightboxStage {
+    background: #f5f5f1;
+  }
+
+  .gcHouseLightboxControl {
+    position: absolute;
+    z-index: 2;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: #182321;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .gcHouseLightboxControl:hover {
+    background: #0e7180;
+    color: #ffffff;
+  }
+
+  .gcHouseLightboxControl:focus-visible {
+    outline: 3px solid #d9a441;
+    outline-offset: 3px;
+  }
+
+  .gcHouseLightboxControl svg {
+    width: 21px;
+    height: 21px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .gcHouseLightboxClose {
+    top: clamp(14px, 2vw, 24px);
+    right: clamp(14px, 2vw, 24px);
+  }
+
+  .gcHouseLightboxPrev,
+  .gcHouseLightboxNext {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .gcHouseLightboxPrev:hover,
+  .gcHouseLightboxNext:hover {
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .gcHouseLightboxPrev {
+    left: clamp(12px, 2.5vw, 30px);
+  }
+
+  .gcHouseLightboxNext {
+    right: clamp(12px, 2.5vw, 30px);
+  }
+
+  .gcHouseLightboxDetails {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 46px clamp(22px, 5vw, 70px) clamp(18px, 3vw, 34px);
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(3, 15, 15, 0.92), transparent);
+  }
+
+  .gcHouseLightboxTitle {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(16px, 2vw, 24px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  .gcHouseLightboxCounter {
+    flex: 0 0 auto;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
   @media (max-width: 960px) {
     .gcHouseShell {
       grid-template-columns: minmax(0, 1.05fr) minmax(315px, 0.95fr);
@@ -420,9 +571,9 @@
   }
 
   @media (max-width: 760px) {
-    .gcHouseShowcase {
+    /* .gcHouseShowcase {
       padding: 10px;
-    }
+    } */
     .gcHouseShell {
       display: block;
       min-height: 0;
@@ -465,12 +616,26 @@
     .gcHouseFeature {
       font-size: 12px;
     }
+    .gcHouseLightboxControl {
+      width: 42px;
+      height: 42px;
+    }
+    .gcHouseLightboxImage {
+      padding-right: 8px;
+      padding-left: 8px;
+    }
+    .gcHouseLightboxDetails {
+      gap: 14px;
+      padding-right: 18px;
+      padding-left: 18px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .gcHouseImage,
     .gcHouseNav,
-    .gcHouseThumb {
+    .gcHouseThumb,
+    .gcHouseLightboxControl {
       transition: none;
     }
   }
@@ -558,6 +723,29 @@
     </div>
   </div>
 </section>
+
+<dialog class="gcHouseLightbox" id="gcHouseLightbox" aria-labelledby="gcHouseLightboxTitle" aria-modal="true">
+  <div class="gcHouseLightboxStage">
+    <img class="gcHouseLightboxImage" id="gcHouseLightboxImage" alt="" draggable="false" />
+
+    <button class="gcHouseLightboxControl gcHouseLightboxClose" id="gcHouseLightboxClose" type="button" aria-label="Close fullscreen image">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+    </button>
+
+    <button class="gcHouseLightboxControl gcHouseLightboxPrev" id="gcHouseLightboxPrev" type="button" aria-label="Previous fullscreen image">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+    </button>
+
+    <button class="gcHouseLightboxControl gcHouseLightboxNext" id="gcHouseLightboxNext" type="button" aria-label="Next fullscreen image">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+    </button>
+
+    <div class="gcHouseLightboxDetails">
+      <p class="gcHouseLightboxTitle" id="gcHouseLightboxTitle">Modern waterfront living</p>
+      <span class="gcHouseLightboxCounter" id="gcHouseLightboxCounter" aria-live="polite">1 / 10</span>
+    </div>
+  </div>
+</dialog>
 
 <script>
   (function () {
@@ -650,17 +838,40 @@
       var thumbs = document.getElementById("gcHouseThumbs");
       var prev = document.getElementById("gcHousePrev");
       var next = document.getElementById("gcHouseNext");
+      var lightbox = document.getElementById("gcHouseLightbox");
+      var lightboxImage = document.getElementById("gcHouseLightboxImage");
+      var lightboxTitle = document.getElementById("gcHouseLightboxTitle");
+      var lightboxCounter = document.getElementById("gcHouseLightboxCounter");
+      var lightboxClose = document.getElementById("gcHouseLightboxClose");
+      var lightboxPrev = document.getElementById("gcHouseLightboxPrev");
+      var lightboxNext = document.getElementById("gcHouseLightboxNext");
       var index = 0;
       var autoTimer = null;
       var resumeTimer = null;
       var changeTimer = null;
       var dragStartX = 0;
       var dragging = false;
+      var blockImageClickUntil = 0;
+      var previousBodyOverflow = null;
       var autoMs = 6500;
       var resumeMs = 9000;
       var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      if (!root || !media || !image || !thumbs || !slides.length) return;
+      if (
+        !root ||
+        !media ||
+        !image ||
+        !thumbs ||
+        !lightbox ||
+        !lightboxImage ||
+        !lightboxTitle ||
+        !lightboxCounter ||
+        !lightboxClose ||
+        !lightboxPrev ||
+        !lightboxNext ||
+        !slides.length
+      )
+        return;
 
       slides.forEach(function (slide, slideIndex) {
         var preload = new Image();
@@ -705,6 +916,47 @@
         });
       }
 
+      function lightboxIsOpen() {
+        return lightbox.hasAttribute("open");
+      }
+
+      function updateLightbox() {
+        var slide = slides[index];
+        lightboxImage.src = slide.src;
+        lightboxImage.alt = slide.title + ". " + slide.label + ".";
+        lightboxTitle.textContent = slide.title;
+        lightboxCounter.textContent = index + 1 + " / " + slides.length;
+        lightbox.classList.toggle("gcHouseLightboxPlanMode", slide.kind === "plan");
+      }
+
+      function restorePageAfterLightbox() {
+        if (previousBodyOverflow !== null) {
+          document.body.style.overflow = previousBodyOverflow;
+          previousBodyOverflow = null;
+        }
+        pauseThenResume();
+      }
+
+      function openLightbox() {
+        if (lightboxIsOpen()) return;
+        updateLightbox();
+        stopAuto();
+        previousBodyOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        if (typeof lightbox.showModal === "function") lightbox.showModal();
+        else lightbox.setAttribute("open", "");
+        lightboxClose.focus();
+      }
+
+      function closeLightbox() {
+        if (!lightboxIsOpen()) return;
+        if (typeof lightbox.close === "function") lightbox.close();
+        else {
+          lightbox.removeAttribute("open");
+          restorePageAfterLightbox();
+        }
+      }
+
       function render() {
         var slide = slides[index];
         image.classList.add("isChanging");
@@ -720,6 +972,7 @@
             media.classList.toggle("gcHousePlanMode", slide.kind === "plan");
             image.classList.remove("isChanging");
             updateThumbs();
+            if (lightboxIsOpen()) updateLightbox();
           },
           reduceMotion ? 0 : 90,
         );
@@ -740,7 +993,7 @@
 
       function startAuto() {
         stopAuto();
-        if (reduceMotion || document.hidden) return;
+        if (reduceMotion || document.hidden || lightboxIsOpen()) return;
         autoTimer = setInterval(function () {
           goTo(index + 1, false);
         }, autoMs);
@@ -758,6 +1011,41 @@
       next.addEventListener("click", function () {
         goTo(index + 1, true);
       });
+
+      image.setAttribute("role", "button");
+      image.setAttribute("tabindex", "0");
+      image.setAttribute("aria-label", "Open current image fullscreen");
+      image.addEventListener("click", function () {
+        if (Date.now() >= blockImageClickUntil) openLightbox();
+      });
+      image.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openLightbox();
+        }
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightboxPrev.addEventListener("click", function () {
+        goTo(index - 1, true);
+      });
+      lightboxNext.addEventListener("click", function () {
+        goTo(index + 1, true);
+      });
+      lightbox.addEventListener("click", function (event) {
+        if (event.target.classList.contains("gcHouseLightboxStage")) closeLightbox();
+      });
+      lightbox.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          goTo(index - 1, true);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          goTo(index + 1, true);
+        }
+      });
+      lightbox.addEventListener("close", restorePageAfterLightbox);
 
       root.setAttribute("tabindex", "0");
       root.addEventListener("keydown", function (event) {
@@ -790,6 +1078,7 @@
         if (!dragging) return;
         var distance = event.clientX - dragStartX;
         dragging = false;
+        if (Math.abs(distance) > 8) blockImageClickUntil = Date.now() + 400;
         if (Math.abs(distance) > 45) goTo(distance < 0 ? index + 1 : index - 1, true);
         else pauseThenResume();
       });
@@ -801,7 +1090,7 @@
 
       document.addEventListener("visibilitychange", function () {
         if (document.hidden) stopAuto();
-        else startAuto();
+        else if (!lightboxIsOpen()) startAuto();
       });
 
       image.addEventListener("error", function () {

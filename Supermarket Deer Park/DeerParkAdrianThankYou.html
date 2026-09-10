@@ -1,0 +1,923 @@
+<!--
+  LMCT+ Deer Park grocery waitlist thank-you page.
+  Built as a standalone ClickFunnels custom HTML section.
+  This confirms contact-detail submission only, not a purchase or membership.
+-->
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@400;500;600;700;800&display=swap");
+
+  .lmctDPTY,
+  .lmctDPTY *,
+  .lmctDPTY *::before,
+  .lmctDPTY *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctDPTY {
+    --lmctDPTY-navy: #003426;
+    --lmctDPTY-navy-deep: #001b14;
+    --lmctDPTY-blue: #087443;
+    --lmctDPTY-cyan: #d8ff16;
+    --lmctDPTY-lime: #cfff00;
+    --lmctDPTY-lime-bright: #efff35;
+    --lmctDPTY-white: #ffffff;
+    --lmctDPTY-ink: #10241c;
+    --lmctDPTY-muted: #5f746b;
+    --lmctDPTY-line: rgba(0, 52, 38, 0.12);
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lmctDPTY-white);
+    background: var(--lmctDPTY-navy-deep);
+    font-family: "Inter", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .lmctDPTY a {
+    color: inherit;
+  }
+
+  .lmctDPTY__hero {
+    position: relative;
+    isolation: isolate;
+    min-height: min(820px, 92vh);
+    overflow: hidden;
+    background: radial-gradient(circle at 19% 34%, rgba(12, 118, 67, 0.52), transparent 31rem), linear-gradient(145deg, #064a34 0%, var(--lmctDPTY-navy) 48%, var(--lmctDPTY-navy-deep) 100%);
+  }
+
+  .lmctDPTY__hero::before {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    content: "";
+    background-image:
+      linear-gradient(90deg, rgba(0, 27, 20, 0.96) 0%, rgba(0, 42, 30, 0.82) 43%, rgba(0, 42, 30, 0.24) 72%, rgba(0, 42, 30, 0.28) 100%),
+      linear-gradient(180deg, rgba(0, 27, 20, 0.05) 55%, rgba(0, 27, 20, 0.88) 100%), url("https://images.clickfunnels.com/7c/0322869499479781dc4439fc989b1f/supermarket-2.png");
+    background-position:
+      center,
+      center,
+      right center;
+    background-repeat: no-repeat;
+    background-size:
+      100% 100%,
+      100% 100%,
+      cover;
+  }
+
+  .lmctDPTY__hero::after {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    opacity: 0.18;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent 84%);
+    mask-image: linear-gradient(to bottom, #000, transparent 84%);
+    pointer-events: none;
+  }
+
+  .lmctDPTY__shell {
+    width: min(calc(100% - 56px), 1180px);
+    margin-inline: auto;
+  }
+
+  .lmctDPTY__header {
+    display: flex;
+    min-height: 108px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .lmctDPTY__logo {
+    display: block;
+    width: clamp(165px, 18vw, 236px);
+    height: auto;
+  }
+
+  .lmctDPTY__location {
+    display: inline-flex;
+    max-width: 390px;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 16px;
+    border: 1px solid rgba(25, 213, 255, 0.42);
+    border-radius: 8px;
+    color: var(--lmctDPTY-white);
+    background: rgba(0, 52, 38, 0.62);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.35;
+    backdrop-filter: blur(10px);
+  }
+
+  .lmctDPTY__location svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    color: var(--lmctDPTY-cyan);
+  }
+
+  .lmctDPTY__location strong {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--lmctDPTY-cyan);
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctDPTY__heroGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(350px, 0.72fr);
+    align-items: center;
+    gap: clamp(42px, 7vw, 88px);
+    min-height: 650px;
+    padding: clamp(60px, 8vw, 96px) 0 92px;
+  }
+
+  .lmctDPTY__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 22px;
+    color: var(--lmctDPTY-lime);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctDPTY__statusIcon {
+    display: grid;
+    width: 27px;
+    height: 27px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctDPTY-navy-deep);
+    background: var(--lmctDPTY-lime);
+    box-shadow: 0 0 0 7px rgba(207, 255, 0, 0.1);
+  }
+
+  .lmctDPTY__statusIcon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .lmctDPTY__title {
+    max-width: 730px;
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(30px, 12vw, 90px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.78;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .lmctDPTY__title span {
+    display: block;
+    margin-top: 16px;
+    color: var(--lmctDPTY-lime);
+    text-shadow: 0 0 32px rgba(207, 255, 0, 0.17);
+  }
+
+  .lmctDPTY__lead {
+    max-width: 610px;
+    margin: 30px 0 0;
+    color: #e1e8f8;
+    font-size: clamp(16px, 1.55vw, 20px);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .lmctDPTY__lead strong {
+    color: var(--lmctDPTY-white);
+    font-weight: 800;
+  }
+
+  .lmctDPTY__assurance {
+    display: flex;
+    gap: 12px 24px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+
+  .lmctDPTY__assurance span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--lmctDPTY-muted);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .lmctDPTY__assurance span::before {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    content: "";
+    background: var(--lmctDPTY-cyan);
+    box-shadow: 0 0 10px rgba(25, 213, 255, 0.7);
+  }
+
+  .lmctDPTY__summary {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-radius: 8px;
+    color: var(--lmctDPTY-ink);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 32px 80px rgba(0, 22, 16, 0.44);
+    backdrop-filter: blur(16px);
+  }
+
+  .lmctDPTY__summary::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 6px;
+    content: "";
+    background: linear-gradient(90deg, var(--lmctDPTY-cyan), var(--lmctDPTY-blue), var(--lmctDPTY-lime));
+  }
+
+  .lmctDPTY__summaryHead {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 27px 28px 22px;
+  }
+
+  .lmctDPTY__summaryCheck {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctDPTY-navy-deep);
+    background: var(--lmctDPTY-lime);
+    box-shadow: 0 10px 25px rgba(142, 186, 0, 0.25);
+  }
+
+  .lmctDPTY__summaryCheck svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .lmctDPTY__summaryHead span {
+    margin-bottom: 5px;
+    color: var(--lmctDPTY-blue);
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctDPTY__summaryHead h2 {
+    margin: 0;
+    color: var(--lmctDPTY-navy);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctDPTY__offerSummary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--lmctDPTY-line);
+    border-bottom: 1px solid var(--lmctDPTY-line);
+  }
+
+  .lmctDPTY__metric {
+    min-width: 0;
+    padding: 25px 26px;
+  }
+
+  .lmctDPTY__metric + .lmctDPTY__metric {
+    border-left: 1px solid var(--lmctDPTY-line);
+  }
+
+  .lmctDPTY__metric small {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--lmctDPTY-muted);
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .lmctDPTY__metric strong {
+    display: block;
+    color: var(--lmctDPTY-navy);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(42px, 5vw, 58px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.8;
+  }
+
+  .lmctDPTY__metric--bonus strong {
+    color: #5d8500;
+  }
+
+  .lmctDPTY__metric span {
+    display: block;
+    margin-top: 11px;
+    color: var(--lmctDPTY-muted);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .lmctDPTY__summaryNote {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin: 0;
+    padding: 20px 28px 24px;
+    color: var(--lmctDPTY-muted);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctDPTY__summaryNote svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    color: var(--lmctDPTY-blue);
+  }
+
+  .lmctDPTY__next {
+    color: var(--lmctDPTY-ink);
+    background: #f4f8f5;
+  }
+
+  .lmctDPTY__nextInner {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.68fr) minmax(0, 1.32fr);
+    gap: clamp(44px, 8vw, 100px);
+    padding: clamp(70px, 8vw, 106px) 0;
+  }
+
+  .lmctDPTY__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: var(--lmctDPTY-blue);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctDPTY__eyebrow::before {
+    width: 28px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctDPTY__nextTitle {
+    margin: 17px 0 0;
+    color: var(--lmctDPTY-navy);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(48px, 5.6vw, 72px);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.88;
+    text-transform: uppercase;
+  }
+
+  .lmctDPTY__nextIntro {
+    margin: 22px 0 0;
+    color: var(--lmctDPTY-muted);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .lmctDPTY__waitNotice {
+    display: flex;
+    max-width: 500px;
+    align-items: flex-start;
+    gap: 13px;
+    margin-top: 28px;
+    padding: 17px 18px;
+    border: 1px solid rgba(8, 116, 67, 0.18);
+    border-radius: 8px;
+    color: var(--lmctDPTY-muted);
+    background: var(--lmctDPTY-white);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctDPTY__waitNotice svg {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 21px;
+    color: var(--lmctDPTY-blue);
+  }
+
+  .lmctDPTY__waitNotice strong {
+    color: var(--lmctDPTY-navy);
+    font-weight: 800;
+  }
+
+  .lmctDPTY__steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    align-self: center;
+  }
+
+  .lmctDPTY__steps::before {
+    position: absolute;
+    top: 24px;
+    right: 16.66%;
+    left: 16.66%;
+    height: 2px;
+    content: "";
+    background: linear-gradient(90deg, var(--lmctDPTY-blue), var(--lmctDPTY-cyan), #76a800);
+  }
+
+  .lmctDPTY__step {
+    position: relative;
+    min-width: 0;
+    padding: 0 clamp(14px, 2vw, 25px);
+    text-align: center;
+  }
+
+  .lmctDPTY__stepNumber {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 22px;
+    place-items: center;
+    border: 5px solid #f4f8f5;
+    border-radius: 50%;
+    color: var(--lmctDPTY-white);
+    background: var(--lmctDPTY-blue);
+    box-shadow: 0 0 0 1px rgba(8, 116, 67, 0.26);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .lmctDPTY__step:nth-child(3) .lmctDPTY__stepNumber {
+    color: var(--lmctDPTY-navy-deep);
+    background: var(--lmctDPTY-lime);
+    box-shadow: 0 0 0 1px rgba(118, 168, 0, 0.28);
+  }
+
+  .lmctDPTY__step h3 {
+    margin: 0;
+    color: var(--lmctDPTY-navy);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctDPTY__step p {
+    margin: 10px 0 0;
+    color: var(--lmctDPTY-muted);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.55;
+  }
+
+  .lmctDPTY__help {
+    color: var(--lmctDPTY-white);
+    background: var(--lmctDPTY-navy);
+  }
+
+  .lmctDPTY__helpInner {
+    display: flex;
+    min-height: 90px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .lmctDPTY__helpText {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    color: #d7e1f5;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .lmctDPTY__helpText svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    color: var(--lmctDPTY-cyan);
+  }
+
+  .lmctDPTY__helpStatus {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 9px;
+    color: var(--lmctDPTY-lime);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctDPTY__helpStatus svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .lmctDPTY a:focus-visible {
+    outline: 3px solid var(--lmctDPTY-cyan);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .lmctDPTY__hero {
+      min-height: auto;
+    }
+
+    .lmctDPTY__hero::before {
+      background-image:
+        linear-gradient(180deg, rgba(0, 27, 20, 0.5) 0%, rgba(0, 27, 20, 0.9) 55%, var(--lmctDPTY-navy-deep) 100%),
+        url("https://images.clickfunnels.com/7c/0322869499479781dc4439fc989b1f/supermarket-2.png");
+      background-position:
+        center,
+        70% top;
+      background-size:
+        100% 100%,
+        auto 760px;
+    }
+
+    .lmctDPTY__heroGrid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      min-height: 0;
+      padding-bottom: 78px;
+    }
+
+    .lmctDPTY__copy {
+      max-width: 690px;
+    }
+
+    .lmctDPTY__summary {
+      width: min(100%, 600px);
+    }
+
+    .lmctDPTY__nextInner {
+      grid-template-columns: 1fr;
+      gap: 55px;
+    }
+
+    .lmctDPTY__nextIntro {
+      max-width: 580px;
+    }
+
+    .lmctDPTY__waitNotice {
+      max-width: 430px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .lmctDPTY__shell {
+      width: min(calc(100% - 28px), 560px);
+    }
+
+    .lmctDPTY__header {
+      min-height: 92px;
+    }
+
+    .lmctDPTY__logo {
+      width: 154px;
+    }
+
+    .lmctDPTY__location {
+      max-width: 180px;
+      padding: 9px 10px;
+      font-size: 9px;
+    }
+
+    .lmctDPTY__location strong {
+      font-size: 8px;
+    }
+
+    .lmctDPTY__heroGrid {
+      gap: 38px;
+      padding: 56px 0 62px;
+    }
+
+    /* .lmctDPTY__title {
+      font-size: clamp(64px, 20vw, 88px);
+    } */
+
+    .lmctDPTY__lead {
+      margin-top: 25px;
+      font-size: 15px;
+    }
+
+    .lmctDPTY__assurance {
+      gap: 10px 18px;
+      margin-top: 24px;
+    }
+
+    .lmctDPTY__summaryHead {
+      padding: 24px 20px 19px;
+    }
+
+    .lmctDPTY__offerSummary {
+      grid-template-columns: 1fr;
+    }
+
+    .lmctDPTY__metric {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 2px 18px;
+      padding: 19px 20px;
+    }
+
+    .lmctDPTY__metric + .lmctDPTY__metric {
+      border-top: 1px solid var(--lmctDPTY-line);
+      border-left: 0;
+    }
+
+    .lmctDPTY__metric small,
+    .lmctDPTY__metric span {
+      grid-column: 1;
+    }
+
+    .lmctDPTY__metric strong {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      font-size: 48px;
+    }
+
+    .lmctDPTY__metric span {
+      margin-top: 3px;
+    }
+
+    .lmctDPTY__summaryNote {
+      padding: 18px 20px 22px;
+    }
+
+    .lmctDPTY__nextInner {
+      gap: 42px;
+      padding: 62px 0;
+    }
+
+    .lmctDPTY__steps {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding-left: 7px;
+    }
+
+    .lmctDPTY__steps::before {
+      top: 25px;
+      right: auto;
+      bottom: 58px;
+      left: 31px;
+      width: 2px;
+      height: auto;
+      background: linear-gradient(180deg, var(--lmctDPTY-blue), var(--lmctDPTY-cyan), #76a800);
+    }
+
+    .lmctDPTY__step {
+      display: grid;
+      grid-template-columns: 50px minmax(0, 1fr);
+      gap: 4px 18px;
+      padding: 0 0 30px;
+      text-align: left;
+    }
+
+    .lmctDPTY__stepNumber {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      margin: 0;
+    }
+
+    .lmctDPTY__step h3,
+    .lmctDPTY__step p {
+      grid-column: 2;
+    }
+
+    .lmctDPTY__step h3 {
+      align-self: end;
+    }
+
+    .lmctDPTY__step p {
+      margin-top: 4px;
+    }
+
+    .lmctDPTY__helpInner {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+      padding: 22px 0;
+    }
+  }
+
+  @media (max-width: 410px) {
+    .lmctDPTY__header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 16px;
+      padding: 21px 0;
+    }
+
+    .lmctDPTY__location {
+      max-width: none;
+    }
+
+    .lmctDPTY__title {
+      font-size: 61px;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lmctDPTY__statusIcon,
+    .lmctDPTY__summaryCheck {
+      animation: lmctDPTYConfirm 700ms cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+    }
+
+    .lmctDPTY__summary {
+      animation: lmctDPTYCardIn 650ms ease-out 120ms both;
+    }
+  }
+
+  @keyframes lmctDPTYConfirm {
+    from {
+      opacity: 0;
+      transform: scale(0.65);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes lmctDPTYCardIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<main class="lmctDPTY">
+  <section class="lmctDPTY__hero" aria-labelledby="lmctDPTY-title">
+    <div class="lmctDPTY__shell">
+      <header class="lmctDPTY__header">
+        <img class="lmctDPTY__logo" src="https://lmctgiveaway.com/hosted/images/bb/676306345e499fb3ef70d9cace2c4d/Group-1618878390.svg" alt="LMCT+ Markets" width="250" height="82" />
+
+        <div class="lmctDPTY__location">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+            <circle cx="12" cy="10" r="2.5" />
+          </svg>
+          <span><strong>Deer Park Market</strong>8 Hatchlands Drive, Deer Park VIC 3023</span>
+        </div>
+      </header>
+
+      <div class="lmctDPTY__heroGrid">
+        <div class="lmctDPTY__copy">
+          <p class="lmctDPTY__status">
+            <span class="lmctDPTY__statusIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 12 4 4L19 6" />
+              </svg>
+            </span>
+            Waitlist spot secured
+          </p>
+
+          <h1 class="lmctDPTY__title" id="lmctDPTY-title">
+            Congratulations.
+            <span>You&rsquo;re on the waiting list.</span>
+          </h1>
+
+          <p class="lmctDPTY__lead">You&rsquo;ve locked your spot on the waiting list. <strong>We will let you know as soon as you can purchase your membership.</strong></p>
+
+          <div class="lmctDPTY__assurance" aria-label="Waitlist registration status">
+            <span>Registration received</span>
+            <span>No payment taken</span>
+            <span>Updates by email or phone</span>
+          </div>
+        </div>
+
+        <aside class="lmctDPTY__summary" aria-labelledby="lmctDPTY-summary-title">
+          <div class="lmctDPTY__summaryHead">
+            <span class="lmctDPTY__summaryCheck" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 12 4 4L19 6" />
+              </svg>
+            </span>
+            <div>
+              <span>Registration complete</span>
+              <h2 id="lmctDPTY-summary-title">Deer Park waitlist</h2>
+            </div>
+          </div>
+
+          <div class="lmctDPTY__offerSummary">
+            <div class="lmctDPTY__metric">
+              <small>Offer registered</small>
+              <strong>$99</strong>
+              <span>Yearly LMCT+ offer</span>
+            </div>
+            <div class="lmctDPTY__metric lmctDPTY__metric--bonus">
+              <small>Offer registered</small>
+              <strong>+$50</strong>
+              <span>Free groceries offer</span>
+            </div>
+          </div>
+
+          <p class="lmctDPTY__summaryNote">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+            This confirms your waitlist registration only. No membership has been activated and no payment has been processed.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctDPTY__next" aria-labelledby="lmctDPTY-next-title">
+    <div class="lmctDPTY__shell lmctDPTY__nextInner">
+      <div>
+        <p class="lmctDPTY__eyebrow">What happens next</p>
+        <h2 class="lmctDPTY__nextTitle" id="lmctDPTY-next-title">Keep an eye out.</h2>
+        <p class="lmctDPTY__nextIntro">The LMCT+ team will use the email address or phone number you submitted to share updates about the Deer Park waitlist and tell you how to continue.</p>
+
+        <div class="lmctDPTY__waitNotice">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 8v4" />
+            <path d="M12 16h.01" />
+          </svg>
+          <span><strong>Nothing else is required right now.</strong> You do not need to download the app, create an account, or make a payment to hold this waitlist registration.</span>
+        </div>
+      </div>
+
+      <div class="lmctDPTY__steps" aria-label="Deer Park LMCT+ waitlist next steps">
+        <article class="lmctDPTY__step">
+          <span class="lmctDPTY__stepNumber" aria-hidden="true">1</span>
+          <h3>Details received</h3>
+          <p>Your name, email address and phone number have been submitted to the Deer Park waitlist.</p>
+        </article>
+
+        <article class="lmctDPTY__step">
+          <span class="lmctDPTY__stepNumber" aria-hidden="true">2</span>
+          <h3>Watch for an update</h3>
+          <p>Keep an eye on the email inbox and phone number provided with your registration.</p>
+        </article>
+
+        <article class="lmctDPTY__step">
+          <span class="lmctDPTY__stepNumber" aria-hidden="true">3</span>
+          <h3>Follow the next steps</h3>
+          <p>When LMCT+ contacts you, the message will explain the next step for joining or accessing the offer.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="lmctDPTY__help">
+    <div class="lmctDPTY__shell lmctDPTY__helpInner">
+      <p class="lmctDPTY__helpText">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+        Your interest in the Deer Park LMCT+ offer has been registered.
+      </p>
+      <span class="lmctDPTY__helpStatus">
+        No payment taken
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="m8 12 3 3 5-6" />
+        </svg>
+      </span>
+    </div>
+  </footer>
+</main>

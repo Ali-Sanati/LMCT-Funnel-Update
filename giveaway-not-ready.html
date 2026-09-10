@@ -1,0 +1,132 @@
+<style>
+  .lmctNotReady {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    background: #f7f7f7;
+    font-family: "Montserrat", Arial, sans-serif;
+    box-sizing: border-box;
+  }
+
+  .lmctNotReady * {
+    box-sizing: border-box;
+  }
+
+  .lmctNotReady__card {
+    width: 100%;
+    max-width: 520px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 20px;
+    padding: 48px 32px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+  }
+
+  .lmctNotReady__icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: #60acdf2f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lmctNotReady__icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: #007fd4;
+  }
+
+  .lmctNotReady__eyebrow {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #007fd4;
+    margin-bottom: 10px;
+  }
+
+  .lmctNotReady__title {
+    margin: 0;
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 900;
+    color: #111;
+  }
+
+  .lmctNotReady__text {
+    margin: 16px auto 0;
+    max-width: 390px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #666;
+  }
+
+  .lmctNotReady__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 28px;
+    min-height: 52px;
+    padding: 0 28px;
+    background: #007fd4;
+    color: #fff !important;
+    border-radius: 12px;
+    text-decoration: none !important;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    transition: 0.2s ease;
+  }
+
+  .lmctNotReady__button:hover {
+    transform: translateY(-1px);
+    background: #007fd4;
+  }
+
+  .lmctNotReady__note {
+    margin-top: 18px;
+    font-size: 12px;
+    color: #999;
+  }
+
+  @media (max-width: 600px) {
+    .lmctNotReady__card {
+      padding: 38px 22px;
+      border-radius: 16px;
+    }
+
+    .lmctNotReady__title {
+      font-size: 27px;
+    }
+
+    .lmctNotReady__button {
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="lmctNotReady">
+  <div class="lmctNotReady__card">
+    <div class="lmctNotReady__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"></path>
+      </svg>
+    </div>
+
+    <div class="lmctNotReady__eyebrow">GIVEAWAY OPENING SOON</div>
+
+    <h1 class="lmctNotReady__title">This Giveaway Isn't Live Yet</h1>
+
+    <p class="lmctNotReady__text">Please check back once this giveaway officially opens to members.</p>
+
+    <a href="https://lmctplus.com/" class="lmctNotReady__button"> BACK TO LMCT+ </a>
+
+    <div class="lmctNotReady__note">LMCT+ Member Giveaways</div>
+  </div>
+</div>

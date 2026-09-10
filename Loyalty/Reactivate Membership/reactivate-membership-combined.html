@@ -1,0 +1,4234 @@
+<!--
+  LMCT+ A1 cancellation winback funnel.
+  Combined Sections 1-4 with one variable-driven controller and no API lookup.
+
+  Configure window.LMCT_WINBACK_MEMBER near the bottom of this file.
+  Known plan/package product IDs:
+  Entry monthly 5123045 | Entry yearly 5123048
+  Premium monthly 5123046 | Premium yearly 5123049
+  Elite monthly 5123047 | Elite yearly 5123050
+  Saver + Win modal row 5123051 is marked "Plan Does Not Exist" and remains
+  display-only until an approved checkout product is supplied.
+-->
+
+<style>
+  .lmctWinbackHero,
+  .lmctWinbackHero *,
+  .lmctWinbackHero *::before,
+  .lmctWinbackHero *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctWinbackHero {
+    --lmctWB-navy: #040d1a;
+    --lmctWB-navy-soft: #071a30;
+    --lmctWB-panel: #0a2038;
+    --lmctWB-blue: #0c9ffd;
+    --lmctWB-blue-light: #56c4ff;
+    --lmctWB-green: #35d277;
+    --lmctWB-green-dark: #159447;
+    --lmctWB-white: #ffffff;
+    --lmctWB-muted: #9cafc4;
+    --lmctWB-line: rgba(151, 190, 224, 0.17);
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lmctWB-white);
+    background:
+      radial-gradient(circle at 76% 32%, rgba(12, 159, 253, 0.16), transparent 31rem), radial-gradient(circle at 24% 85%, rgba(53, 210, 119, 0.07), transparent 28rem),
+      linear-gradient(145deg, #071727 0%, var(--lmctWB-navy) 52%, #02070e 100%);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .lmctWinbackHero::before {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    content: "";
+    opacity: 0.34;
+    background-image: linear-gradient(rgba(86, 196, 255, 0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(86, 196, 255, 0.09) 1px, transparent 1px);
+    background-size: 58px 58px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 35%, #000 100%);
+    mask-image: linear-gradient(90deg, transparent, #000 35%, #000 100%);
+    pointer-events: none;
+  }
+
+  .lmctWinbackHero::after {
+    position: absolute;
+    z-index: -1;
+    top: -42%;
+    right: -12%;
+    width: 58vw;
+    height: 120%;
+    border: 1px solid rgba(12, 159, 253, 0.12);
+    border-radius: 50%;
+    content: "";
+    background: radial-gradient(circle, rgba(12, 159, 253, 0.09), transparent 67%);
+    filter: blur(2px);
+    pointer-events: none;
+  }
+
+  .lmctWinbackHero__inner {
+    position: relative;
+    z-index: 1;
+    width: min(calc(100% - 40px), 1180px);
+    margin-inline: auto;
+    padding: 28px 0 clamp(54px, 7vw, 88px);
+  }
+
+  .lmctWinbackHero__header {
+    display: flex;
+    min-height: 54px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--lmctWB-line);
+  }
+
+  .lmctWinbackHero__logo {
+    display: block;
+    width: auto;
+    height: 36px;
+    /* filter: brightness(0) invert(1); */
+  }
+
+  .lmctWinbackHero__secure {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--lmctWB-muted);
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero__secure svg {
+    width: 17px;
+    height: 17px;
+    color: var(--lmctWB-green);
+  }
+
+  .lmctWinbackHero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.55fr) minmax(390px, 0.45fr);
+    grid-template-areas:
+      "copy visual"
+      "conversion visual";
+    align-items: center;
+    gap: 32px clamp(42px, 6vw, 74px);
+    min-height: 690px;
+    padding-top: clamp(58px, 8vw, 94px);
+  }
+
+  .lmctWinbackHero__copy {
+    grid-area: copy;
+    min-width: 0;
+    align-self: end;
+  }
+
+  .lmctWinbackHero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    margin: 0;
+    color: var(--lmctWB-blue-light);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero__eyebrow::before {
+    width: 30px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+    box-shadow: 0 0 12px rgba(86, 196, 255, 0.58);
+  }
+
+  .lmctWinbackHero__headline {
+    max-width: 690px;
+    margin: 22px 0 0;
+    font-size: clamp(50px, 6vw, 75px);
+    font-weight: 950;
+    line-height: 0.91;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .lmctWinbackHero__headline span {
+    display: block;
+    margin-top: 7px;
+    color: var(--lmctWB-blue-light);
+  }
+
+  .lmctWinbackHero__lead {
+    max-width: 620px;
+    margin: 26px 0 0;
+    color: #c7d4e3;
+    font-size: clamp(15px, 1.45vw, 18px);
+    font-weight: 550;
+    line-height: 1.65;
+  }
+
+  .lmctWinbackHero__lead strong {
+    color: var(--lmctWB-white);
+    font-weight: 800;
+  }
+
+  .lmctWinbackHero__conversion {
+    grid-area: conversion;
+    min-width: 0;
+    align-self: start;
+  }
+
+  .lmctWinbackHero__personalized {
+    min-height: 74px;
+    padding-left: 17px;
+    border-left: 3px solid var(--lmctWB-green);
+  }
+
+  .lmctWinbackHero__personalizedLabel {
+    display: block;
+    color: var(--lmctWB-green);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero__tierName {
+    display: block;
+    margin-top: 8px;
+    color: var(--lmctWB-white);
+    font-size: clamp(22px, 2.5vw, 33px);
+    font-weight: 950;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero__tierSkeleton {
+    display: block;
+    width: min(100%, 390px);
+    height: 31px;
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: rgba(151, 190, 224, 0.13);
+  }
+
+  .lmctWinbackHero__tierSkeleton::after {
+    display: block;
+    width: 45%;
+    height: 100%;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+    transform: translateX(-110%);
+    animation: lmctWinbackHero__skeleton 1.45s ease-in-out infinite;
+  }
+
+  .lmctWinbackHero[data-state="ready"] .lmctWinbackHero__tierSkeleton,
+  .lmctWinbackHero[data-state="error"] .lmctWinbackHero__tierSkeleton {
+    display: none;
+  }
+
+  .lmctWinbackHero__cta {
+    display: none;
+    width: fit-content;
+    min-width: min(100%, 330px);
+    min-height: 58px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 23px;
+    padding: 16px 19px 16px 23px;
+    border: 1px solid rgba(86, 196, 255, 0.55);
+    border-radius: 8px;
+    color: var(--lmctWB-white);
+    background: linear-gradient(135deg, var(--lmctWB-blue), #0476c4);
+    box-shadow:
+      0 18px 38px rgba(12, 159, 253, 0.26),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1.15;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctWinbackHero[data-state="ready"] .lmctWinbackHero__cta {
+    display: inline-flex;
+  }
+
+  .lmctWinbackHero__ctaIcon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctWB-blue);
+    background: var(--lmctWB-white);
+  }
+
+  .lmctWinbackHero__ctaIcon svg {
+    width: 17px;
+    height: 17px;
+    transition: transform 180ms ease;
+  }
+
+  .lmctWinbackHero__cta:hover {
+    box-shadow:
+      0 23px 46px rgba(12, 159, 253, 0.34),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    filter: brightness(1.06);
+    transform: translateY(-2px);
+  }
+
+  .lmctWinbackHero__cta:hover .lmctWinbackHero__ctaIcon svg {
+    transform: translateX(2px);
+  }
+
+  .lmctWinbackHero__cta:focus-visible {
+    outline: 3px solid rgba(86, 196, 255, 0.58);
+    outline-offset: 4px;
+  }
+
+  .lmctWinbackHero__values {
+    display: none;
+    align-items: center;
+    gap: 9px 16px;
+    flex-wrap: wrap;
+    margin-top: 17px;
+    color: var(--lmctWB-muted);
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero[data-state="ready"] .lmctWinbackHero__values {
+    display: flex;
+  }
+
+  .lmctWinbackHero__value {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .lmctWinbackHero__value svg {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+    color: var(--lmctWB-green);
+  }
+
+  .lmctWinbackHero__error {
+    display: none;
+    max-width: 560px;
+    padding: 18px 20px;
+    border: 1px solid rgba(151, 190, 224, 0.2);
+    border-radius: 8px;
+    color: #c7d4e3;
+    background: rgba(10, 32, 56, 0.72);
+  }
+
+  .lmctWinbackHero[data-state="error"] .lmctWinbackHero__personalized {
+    display: none;
+  }
+
+  .lmctWinbackHero[data-state="error"] .lmctWinbackHero__error {
+    display: block;
+  }
+
+  .lmctWinbackHero__error strong,
+  .lmctWinbackHero__error span {
+    display: block;
+  }
+
+  .lmctWinbackHero__error strong {
+    color: var(--lmctWB-white);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero__error span {
+    margin-top: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctWinbackHero__visual {
+    grid-area: visual;
+    min-width: 0;
+  }
+
+  .lmctWinbackHero__recovery {
+    position: relative;
+    overflow: hidden;
+    min-height: 546px;
+    border: 1px solid rgba(86, 196, 255, 0.26);
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(12, 159, 253, 0.09), transparent 32%), rgba(7, 26, 48, 0.88);
+    box-shadow:
+      0 40px 100px rgba(0, 5, 12, 0.54),
+      inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(16px);
+  }
+
+  .lmctWinbackHero__recovery::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    opacity: 0.35;
+    background-image: linear-gradient(rgba(86, 196, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(86, 196, 255, 0.1) 1px, transparent 1px);
+    background-size: 32px 32px;
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent 82%);
+    mask-image: linear-gradient(to bottom, #000, transparent 82%);
+    pointer-events: none;
+  }
+
+  .lmctWinbackHero__recoveryHead {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-height: 62px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 17px 21px;
+    border-bottom: 1px solid var(--lmctWB-line);
+  }
+
+  .lmctWinbackHero__protocol {
+    color: var(--lmctWB-muted);
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero__signal {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--lmctWB-green);
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero__signal::before {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    content: "";
+    background: currentColor;
+    box-shadow: 0 0 12px rgba(53, 210, 119, 0.8);
+  }
+
+  .lmctWinbackHero__recoveryBody {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    min-height: 483px;
+    grid-template-rows: 1fr auto 0.78fr;
+    align-items: center;
+    padding: 35px clamp(24px, 4vw, 42px) 38px;
+  }
+
+  .lmctWinbackHero__restoreBlock {
+    text-align: center;
+  }
+
+  .lmctWinbackHero__restoreKicker,
+  .lmctWinbackHero__restoreUnit,
+  .lmctWinbackHero__bonusLabel,
+  .lmctWinbackHero__bonusNote {
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero__restoreKicker {
+    color: var(--lmctWB-muted);
+    font-size: 10px;
+    font-weight: 850;
+  }
+
+  .lmctWinbackHero__restoreValue {
+    display: block;
+    margin-top: 15px;
+    color: var(--lmctWB-white);
+    font-size: clamp(52px, 7vw, 82px);
+    font-weight: 950;
+    line-height: 0.85;
+    text-transform: uppercase;
+    text-shadow: 0 16px 42px rgba(12, 159, 253, 0.18);
+  }
+
+  .lmctWinbackHero__restoreUnit {
+    margin-top: 13px;
+    color: var(--lmctWB-muted);
+    font-size: 12px;
+    font-weight: 850;
+  }
+
+  .lmctWinbackHero__restored {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 21px;
+    padding: 9px 13px;
+    border: 1px solid rgba(53, 210, 119, 0.35);
+    border-radius: 999px;
+    color: var(--lmctWB-green);
+    background: rgba(53, 210, 119, 0.08);
+    font-size: 11px;
+    font-weight: 950;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero__restored svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .lmctWinbackHero__plus {
+    position: relative;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    margin: 13px auto;
+    place-items: center;
+    border: 1px solid var(--lmctWB-line);
+    border-radius: 50%;
+    color: var(--lmctWB-blue-light);
+    background: var(--lmctWB-navy-soft);
+    font-size: 25px;
+    font-weight: 500;
+  }
+
+  .lmctWinbackHero__plus::before,
+  .lmctWinbackHero__plus::after {
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    height: 35px;
+    content: "";
+    background: linear-gradient(transparent, rgba(86, 196, 255, 0.45));
+  }
+
+  .lmctWinbackHero__plus::before {
+    bottom: 100%;
+  }
+
+  .lmctWinbackHero__plus::after {
+    top: 100%;
+    transform: rotate(180deg);
+  }
+
+  .lmctWinbackHero__bonusBlock {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(17px, 3vw, 29px);
+    text-align: left;
+  }
+
+  .lmctWinbackHero__bonusNumber {
+    flex: 0 0 auto;
+    color: var(--lmctWB-blue-light);
+    font-size: clamp(64px, 8vw, 92px);
+    font-weight: 950;
+    line-height: 0.8;
+    text-shadow: 0 0 28px rgba(12, 159, 253, 0.24);
+  }
+
+  .lmctWinbackHero__bonusCopy {
+    min-width: 0;
+    padding-left: 20px;
+    border-left: 1px solid rgba(86, 196, 255, 0.34);
+  }
+
+  .lmctWinbackHero__bonusLabel {
+    color: var(--lmctWB-white);
+    font-size: 17px;
+    font-weight: 950;
+    line-height: 1.05;
+  }
+
+  .lmctWinbackHero__bonusNote {
+    margin-top: 7px;
+    color: var(--lmctWB-muted);
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .lmctWinbackHero__loading,
+  .lmctWinbackHero__visualError {
+    position: absolute;
+    z-index: 4;
+    inset: 62px 0 0;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    padding: 30px;
+    color: var(--lmctWB-muted);
+    background: rgba(4, 13, 26, 0.9);
+    text-align: center;
+    backdrop-filter: blur(7px);
+    transition:
+      opacity 280ms ease,
+      visibility 280ms ease;
+  }
+
+  .lmctWinbackHero__loadingIndicator {
+    position: relative;
+    width: 62px;
+    height: 3px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    background: rgba(151, 190, 224, 0.18);
+  }
+
+  .lmctWinbackHero__loadingIndicator::after {
+    display: block;
+    width: 42%;
+    height: 100%;
+    content: "";
+    background: var(--lmctWB-blue-light);
+    box-shadow: 0 0 14px rgba(86, 196, 255, 0.8);
+    animation: lmctWinbackHero__loading 1.1s ease-in-out infinite alternate;
+  }
+
+  .lmctWinbackHero__loading strong,
+  .lmctWinbackHero__visualError strong {
+    color: var(--lmctWB-white);
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackHero__visualError {
+    display: none;
+  }
+
+  .lmctWinbackHero__visualError svg {
+    width: 31px;
+    height: 31px;
+    margin-bottom: 15px;
+    color: var(--lmctWB-muted);
+  }
+
+  .lmctWinbackHero__visualError span {
+    max-width: 300px;
+    margin-top: 9px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctWinbackHero[data-state="ready"] .lmctWinbackHero__loading {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .lmctWinbackHero[data-state="error"] .lmctWinbackHero__loading {
+    display: none;
+  }
+
+  .lmctWinbackHero[data-state="error"] .lmctWinbackHero__visualError {
+    display: grid;
+  }
+
+  @keyframes lmctWinbackHero__loading {
+    from {
+      transform: translateX(-10%);
+    }
+
+    to {
+      transform: translateX(150%);
+    }
+  }
+
+  @keyframes lmctWinbackHero__skeleton {
+    from {
+      transform: translateX(-110%);
+    }
+
+    to {
+      transform: translateX(245%);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lmctWinbackHero[data-state="ready"] .lmctWinbackHero__restored {
+      animation: lmctWinbackHero__restoreIn 650ms cubic-bezier(0.2, 0.85, 0.32, 1.18) both;
+    }
+
+    .lmctWinbackHero[data-state="ready"] .lmctWinbackHero__bonusBlock {
+      animation: lmctWinbackHero__bonusIn 620ms ease-out 140ms both;
+    }
+  }
+
+  @keyframes lmctWinbackHero__restoreIn {
+    from {
+      opacity: 0.25;
+      filter: grayscale(1);
+      transform: translateY(5px);
+    }
+
+    to {
+      opacity: 1;
+      filter: grayscale(0);
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes lmctWinbackHero__bonusIn {
+    from {
+      opacity: 0;
+      transform: translateY(9px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .lmctWinbackHero__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(330px, 0.8fr);
+      gap: 30px 38px;
+    }
+
+    .lmctWinbackHero__headline {
+      font-size: clamp(46px, 7vw, 63px);
+    }
+
+    .lmctWinbackHero__recovery {
+      min-height: 510px;
+    }
+
+    .lmctWinbackHero__recoveryBody {
+      min-height: 447px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .lmctWinbackHero::before {
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 100%);
+      mask-image: linear-gradient(to bottom, transparent, #000 25%, #000 100%);
+    }
+
+    .lmctWinbackHero__inner {
+      width: min(calc(100% - 28px), 560px);
+      padding-top: 21px;
+    }
+
+    .lmctWinbackHero__header {
+      padding-bottom: 20px;
+    }
+
+    .lmctWinbackHero__logo {
+      height: 31px;
+    }
+
+    .lmctWinbackHero__secure {
+      font-size: 9px;
+    }
+
+    .lmctWinbackHero__grid {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "copy"
+        "visual"
+        "conversion";
+      gap: 31px;
+      min-height: 0;
+      padding-top: 47px;
+    }
+
+    .lmctWinbackHero__copy,
+    .lmctWinbackHero__conversion {
+      align-self: auto;
+    }
+
+    .lmctWinbackHero__headline {
+      font-size: clamp(42px, 12vw, 61px);
+    }
+
+    .lmctWinbackHero__lead {
+      margin-top: 21px;
+      font-size: 15px;
+    }
+
+    .lmctWinbackHero__recovery {
+      min-height: 450px;
+    }
+
+    .lmctWinbackHero__recoveryBody {
+      min-height: 387px;
+      padding: 28px 21px 30px;
+    }
+
+    .lmctWinbackHero__restoreValue {
+      font-size: clamp(46px, 14vw, 66px);
+    }
+
+    .lmctWinbackHero__bonusNumber {
+      font-size: clamp(61px, 18vw, 84px);
+    }
+
+    .lmctWinbackHero__personalized {
+      min-height: 66px;
+    }
+
+    .lmctWinbackHero__cta {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .lmctWinbackHero__header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .lmctWinbackHero__headline {
+      font-size: 39px;
+    }
+
+    .lmctWinbackHero__bonusBlock {
+      gap: 14px;
+    }
+
+    .lmctWinbackHero__bonusCopy {
+      padding-left: 14px;
+    }
+
+    .lmctWinbackHero__values {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctWinbackHero *,
+    .lmctWinbackHero *::before,
+    .lmctWinbackHero *::after {
+      animation: none !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<style>
+  .lmctWinbackRestore,
+  .lmctWinbackRestore *,
+  .lmctWinbackRestore *::before,
+  .lmctWinbackRestore *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctWinbackRestore {
+    --lmctWR-navy: #05162a;
+    --lmctWR-navy-deep: #020b15;
+    --lmctWR-blue: #0c9ffd;
+    --lmctWR-blue-deep: #0476c4;
+    --lmctWR-green: #35d277;
+    --lmctWR-green-deep: #159447;
+    --lmctWR-white: #ffffff;
+    --lmctWR-bg: #eef3f7;
+    --lmctWR-ink: #10233d;
+    --lmctWR-muted: #64748b;
+    --lmctWR-line: rgba(5, 22, 42, 0.13);
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    padding: clamp(76px, 9vw, 118px) 0 clamp(72px, 9vw, 108px);
+    color: var(--lmctWR-ink);
+    background: linear-gradient(rgba(5, 22, 42, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(5, 22, 42, 0.035) 1px, transparent 1px), var(--lmctWR-bg);
+    background-size: 56px 56px;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .lmctWinbackRestore::before {
+    position: absolute;
+    z-index: -1;
+    top: 8%;
+    right: -18%;
+    width: 54vw;
+    height: 70%;
+    border-radius: 50%;
+    content: "";
+    background: radial-gradient(circle, rgba(12, 159, 253, 0.09), transparent 68%);
+    pointer-events: none;
+  }
+
+  .lmctWinbackRestore__inner {
+    width: min(calc(100% - 40px), 1180px);
+    margin-inline: auto;
+  }
+
+  .lmctWinbackRestore__layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.4fr) minmax(0, 0.6fr);
+    align-items: center;
+    gap: clamp(48px, 7vw, 92px);
+  }
+
+  .lmctWinbackRestore__intro {
+    min-width: 0;
+  }
+
+  .lmctWinbackRestore__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: var(--lmctWR-blue-deep);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__eyebrow::before {
+    width: 27px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctWinbackRestore__title {
+    max-width: 470px;
+    margin: 19px 0 0;
+    color: var(--lmctWR-navy);
+    font-size: clamp(48px, 5.8vw, 62px);
+    font-weight: 950;
+    line-height: 0.91;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .lmctWinbackRestore__title span {
+    display: block;
+    color: var(--lmctWR-blue-deep);
+  }
+
+  .lmctWinbackRestore__lead {
+    max-width: 470px;
+    margin: 23px 0 0;
+    color: var(--lmctWR-muted);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .lmctWinbackRestore__plan {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    margin-top: 31px;
+    padding: 16px 0;
+    border-top: 1px solid var(--lmctWR-line);
+    border-bottom: 1px solid var(--lmctWR-line);
+  }
+
+  .lmctWinbackRestore__planIcon {
+    display: grid;
+    width: 39px;
+    height: 39px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctWR-green-deep);
+    background: rgba(53, 210, 119, 0.12);
+  }
+
+  .lmctWinbackRestore__planIcon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .lmctWinbackRestore__planLabel,
+  .lmctWinbackRestore__planName {
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__planLabel {
+    color: var(--lmctWR-muted);
+    font-size: 8px;
+    font-weight: 850;
+  }
+
+  .lmctWinbackRestore__planName {
+    min-height: 19px;
+    margin-top: 5px;
+    color: var(--lmctWR-navy);
+    font-size: 15px;
+    font-weight: 950;
+  }
+
+  .lmctWinbackRestore__planSkeleton,
+  .lmctWinbackRestore__numberSkeleton {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 3px;
+    background: rgba(100, 116, 139, 0.14);
+  }
+
+  .lmctWinbackRestore__planSkeleton {
+    width: 150px;
+    height: 18px;
+    margin-top: 6px;
+  }
+
+  .lmctWinbackRestore__numberSkeleton {
+    width: 128px;
+    height: 48px;
+    margin: 14px auto 0;
+  }
+
+  .lmctWinbackRestore__planSkeleton::after,
+  .lmctWinbackRestore__numberSkeleton::after {
+    display: block;
+    width: 45%;
+    height: 100%;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+    transform: translateX(-110%);
+    animation: lmctWinbackRestore__skeleton 1.35s ease-in-out infinite;
+  }
+
+  .lmctWinbackRestore[data-state="ready"] .lmctWinbackRestore__planSkeleton,
+  .lmctWinbackRestore[data-state="ready"] .lmctWinbackRestore__numberSkeleton,
+  .lmctWinbackRestore[data-state="error"] .lmctWinbackRestore__planSkeleton,
+  .lmctWinbackRestore[data-state="error"] .lmctWinbackRestore__numberSkeleton {
+    display: none;
+  }
+
+  .lmctWinbackRestore__warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 22px;
+    padding: 13px 14px;
+    border-left: 3px solid #d48a2e;
+    color: #6b4b22;
+    background: rgba(255, 246, 227, 0.72);
+    font-size: 9px;
+    font-weight: 850;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__warning svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    color: #b86e18;
+  }
+
+  .lmctWinbackRestore__story {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) 72px minmax(0, 1.14fr);
+    align-items: stretch;
+    gap: 13px;
+    min-width: 0;
+  }
+
+  .lmctWinbackRestore__state {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 390px;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: clamp(23px, 3vw, 31px);
+    border-radius: 8px;
+  }
+
+  .lmctWinbackRestore__state--before {
+    overflow: hidden;
+    border: 1px dashed rgba(100, 116, 139, 0.45);
+    color: #607080;
+    background: repeating-linear-gradient(-45deg, rgba(100, 116, 139, 0.045) 0, rgba(100, 116, 139, 0.045) 7px, transparent 7px, transparent 14px), rgba(229, 235, 240, 0.82);
+    filter: saturate(0.45);
+  }
+
+  .lmctWinbackRestore__state--before::after {
+    position: absolute;
+    inset: auto -12% 21% -12%;
+    height: 1px;
+    content: "";
+    /* background: rgba(100, 116, 139, 0.34); */
+    transform: rotate(-11deg);
+  }
+
+  .lmctWinbackRestore__state--after {
+    overflow: hidden;
+    border: 1px solid rgba(53, 210, 119, 0.42);
+    color: var(--lmctWR-white);
+    background: radial-gradient(circle at 80% 10%, rgba(12, 159, 253, 0.2), transparent 16rem), linear-gradient(145deg, #0a2842 0%, var(--lmctWR-navy) 55%, var(--lmctWR-navy-deep) 100%);
+    box-shadow: 0 26px 58px rgba(5, 22, 42, 0.2);
+  }
+
+  .lmctWinbackRestore__state--after::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    opacity: 0.3;
+    background-image: linear-gradient(rgba(86, 196, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(86, 196, 255, 0.1) 1px, transparent 1px);
+    background-size: 29px 29px;
+    pointer-events: none;
+  }
+
+  .lmctWinbackRestore__stateTop,
+  .lmctWinbackRestore__stateMain,
+  .lmctWinbackRestore__stateBottom {
+    position: relative;
+    z-index: 1;
+  }
+
+  .lmctWinbackRestore__stateTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .lmctWinbackRestore__stateKicker {
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 9px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 8px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__status::before {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctWinbackRestore__state--before .lmctWinbackRestore__status {
+    white-space: nowrap;
+    color: #8b5b22;
+  }
+
+  .lmctWinbackRestore__state--after .lmctWinbackRestore__status {
+    color: var(--lmctWR-green);
+  }
+
+  .lmctWinbackRestore__stateMain {
+    text-align: center;
+  }
+
+  .lmctWinbackRestore__entryNumber {
+    display: none;
+    font-size: clamp(44px, 5vw, 66px);
+    font-weight: 950;
+    line-height: 0.85;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore[data-state="ready"] .lmctWinbackRestore__entryNumber {
+    display: block;
+  }
+
+  .lmctWinbackRestore__state--before .lmctWinbackRestore__entryNumber {
+    color: #607080;
+    opacity: 0.64;
+  }
+
+  .lmctWinbackRestore__state--after .lmctWinbackRestore__entryNumber {
+    color: var(--lmctWR-white);
+    text-shadow: 0 0 28px rgba(12, 159, 253, 0.25);
+  }
+
+  .lmctWinbackRestore__entryLabel {
+    display: block;
+    margin-top: 14px;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__state--after .lmctWinbackRestore__entryLabel {
+    color: #a9bad0;
+  }
+
+  .lmctWinbackRestore__stateBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid currentColor;
+  }
+
+  .lmctWinbackRestore__state--before .lmctWinbackRestore__stateBottom {
+    border-color: rgba(100, 116, 139, 0.24);
+  }
+
+  .lmctWinbackRestore__state--after .lmctWinbackRestore__stateBottom {
+    border-color: rgba(151, 190, 224, 0.17);
+  }
+
+  .lmctWinbackRestore__stateBottom span {
+    font-size: 8px;
+    font-weight: 850;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__bonus {
+    color: var(--lmctWR-blue);
+    font-size: 27px !important;
+    font-weight: 950 !important;
+    line-height: 0.85 !important;
+  }
+
+  .lmctWinbackRestore__connector {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    place-items: center;
+  }
+
+  .lmctWinbackRestore__connector::before {
+    width: 100%;
+    height: 2px;
+    content: "";
+    background: linear-gradient(90deg, rgba(100, 116, 139, 0.35), var(--lmctWR-blue), var(--lmctWR-green));
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .lmctWinbackRestore__connectorIcon {
+    position: absolute;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid rgba(12, 159, 253, 0.35);
+    border-radius: 50%;
+    color: var(--lmctWR-blue-deep);
+    background: var(--lmctWR-white);
+    box-shadow: 0 12px 30px rgba(5, 22, 42, 0.12);
+  }
+
+  .lmctWinbackRestore__connectorIcon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .lmctWinbackRestore__connectorLabel {
+    position: absolute;
+    top: calc(50% + 35px);
+    color: var(--lmctWR-blue-deep);
+    font-size: 8px;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__modules {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: clamp(50px, 7vw, 78px);
+    border-top: 1px solid var(--lmctWR-line);
+    border-bottom: 1px solid var(--lmctWR-line);
+  }
+
+  .lmctWinbackRestore__module {
+    position: relative;
+    min-width: 0;
+    padding: 25px clamp(19px, 3vw, 34px) 27px;
+  }
+
+  .lmctWinbackRestore__module + .lmctWinbackRestore__module {
+    border-left: 1px solid var(--lmctWR-line);
+  }
+
+  .lmctWinbackRestore__moduleNumber {
+    color: var(--lmctWR-blue-deep);
+    font-size: 9px;
+    font-weight: 900;
+  }
+
+  .lmctWinbackRestore__module h3 {
+    margin: 12px 0 0;
+    color: var(--lmctWR-navy);
+    font-size: 15px;
+    font-weight: 950;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__module:nth-child(2) h3 {
+    color: var(--lmctWR-blue-deep);
+  }
+
+  .lmctWinbackRestore__module p {
+    margin: 8px 0 0;
+    color: var(--lmctWR-muted);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .lmctWinbackRestore__footer {
+    display: flex;
+    min-height: 88px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding-top: 28px;
+  }
+
+  .lmctWinbackRestore__footerNote {
+    max-width: 430px;
+    margin: 0;
+    color: var(--lmctWR-muted);
+    font-size: 10px;
+    font-weight: 750;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackRestore__cta {
+    display: none;
+    min-width: min(100%, 330px);
+    min-height: 56px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 17px;
+    padding: 14px 16px 14px 21px;
+    border: 0;
+    border-radius: 8px;
+    color: var(--lmctWR-white);
+    background: linear-gradient(135deg, var(--lmctWR-blue), var(--lmctWR-blue-deep));
+    box-shadow: 0 17px 34px rgba(4, 118, 196, 0.24);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 950;
+    line-height: 1.15;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctWinbackRestore[data-state="ready"] .lmctWinbackRestore__cta {
+    display: inline-flex;
+  }
+
+  .lmctWinbackRestore__ctaIcon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctWR-blue-deep);
+    background: var(--lmctWR-white);
+  }
+
+  .lmctWinbackRestore__ctaIcon svg {
+    width: 17px;
+    height: 17px;
+    transition: transform 180ms ease;
+  }
+
+  .lmctWinbackRestore__cta:hover {
+    box-shadow: 0 22px 42px rgba(4, 118, 196, 0.31);
+    filter: brightness(1.05);
+    transform: translateY(-2px);
+  }
+
+  .lmctWinbackRestore__cta:hover .lmctWinbackRestore__ctaIcon svg {
+    transform: translateX(2px);
+  }
+
+  .lmctWinbackRestore__cta:focus-visible {
+    outline: 3px solid rgba(12, 159, 253, 0.4);
+    outline-offset: 4px;
+  }
+
+  .lmctWinbackRestore__error {
+    display: none;
+    margin-top: 28px;
+    padding: 16px 18px;
+    border: 1px solid var(--lmctWR-line);
+    border-radius: 8px;
+    color: var(--lmctWR-muted);
+    background: rgba(255, 255, 255, 0.56);
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.5;
+  }
+
+  .lmctWinbackRestore[data-state="error"] .lmctWinbackRestore__error {
+    display: block;
+  }
+
+  .lmctWinbackRestore[data-state="error"] .lmctWinbackRestore__plan {
+    display: none;
+  }
+
+  @keyframes lmctWinbackRestore__skeleton {
+    from {
+      transform: translateX(-110%);
+    }
+
+    to {
+      transform: translateX(245%);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lmctWinbackRestore.is-visible[data-state="ready"] .lmctWinbackRestore__connector::before {
+      animation: lmctWinbackRestore__lineIn 620ms ease-out both;
+    }
+
+    .lmctWinbackRestore.is-visible[data-state="ready"] .lmctWinbackRestore__state--after {
+      animation: lmctWinbackRestore__restoredIn 650ms ease-out 220ms both;
+    }
+
+    .lmctWinbackRestore.is-visible[data-state="ready"] .lmctWinbackRestore__bonus {
+      animation: lmctWinbackRestore__bonusIn 520ms ease-out 520ms both;
+    }
+  }
+
+  @keyframes lmctWinbackRestore__lineIn {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @keyframes lmctWinbackRestore__restoredIn {
+    from {
+      opacity: 0.28;
+      filter: grayscale(1);
+      transform: translateX(-8px);
+    }
+
+    to {
+      opacity: 1;
+      filter: grayscale(0);
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes lmctWinbackRestore__bonusIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .lmctWinbackRestore__layout {
+      grid-template-columns: minmax(250px, 0.34fr) minmax(0, 0.66fr);
+      gap: 38px;
+    }
+
+    .lmctWinbackRestore__story {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .lmctWinbackRestore__state {
+      min-height: 280px;
+    }
+
+    .lmctWinbackRestore__connector {
+      width: 100%;
+      height: 68px;
+    }
+
+    .lmctWinbackRestore__connector::before {
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(100, 116, 139, 0.35), var(--lmctWR-blue), var(--lmctWR-green));
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+
+    .lmctWinbackRestore.is-visible[data-state="ready"] .lmctWinbackRestore__connector::before {
+      animation-name: lmctWinbackRestore__lineInMobile;
+    }
+
+    .lmctWinbackRestore__connectorIcon svg {
+      transform: rotate(90deg);
+    }
+
+    .lmctWinbackRestore__connectorLabel {
+      top: auto;
+      left: calc(50% + 35px);
+      width: 75px;
+      text-align: left;
+    }
+
+    @keyframes lmctWinbackRestore__lineInMobile {
+      to {
+        transform: scaleY(1);
+      }
+    }
+  }
+
+  @media (max-width: 680px) {
+    .lmctWinbackRestore {
+      padding-top: 66px;
+    }
+
+    .lmctWinbackRestore__inner {
+      width: min(calc(100% - 28px), 560px);
+    }
+
+    .lmctWinbackRestore__layout {
+      grid-template-columns: 1fr;
+      gap: 42px;
+    }
+
+    .lmctWinbackRestore__title {
+      font-size: clamp(46px, 13vw, 62px);
+    }
+
+    .lmctWinbackRestore__warning {
+      margin-top: 20px;
+    }
+
+    .lmctWinbackRestore__state {
+      min-height: 294px;
+    }
+
+    .lmctWinbackRestore__modules {
+      grid-template-columns: 1fr;
+      margin-top: 46px;
+    }
+
+    .lmctWinbackRestore__module {
+      display: grid;
+      grid-template-columns: 25px minmax(0, 1fr);
+      gap: 4px 11px;
+      padding: 20px 5px;
+    }
+
+    .lmctWinbackRestore__module + .lmctWinbackRestore__module {
+      border-top: 1px solid var(--lmctWR-line);
+      border-left: 0;
+    }
+
+    .lmctWinbackRestore__moduleNumber {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      padding-top: 2px;
+    }
+
+    .lmctWinbackRestore__module h3,
+    .lmctWinbackRestore__module p {
+      grid-column: 2;
+    }
+
+    .lmctWinbackRestore__module h3 {
+      margin-top: 0;
+    }
+
+    .lmctWinbackRestore__module p {
+      margin-top: 5px;
+    }
+
+    .lmctWinbackRestore__footer {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 20px;
+      padding-top: 24px;
+    }
+
+    .lmctWinbackRestore__cta {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .lmctWinbackRestore__title {
+      font-size: 43px;
+    }
+
+    .lmctWinbackRestore__state {
+      min-height: 280px;
+      padding: 22px 18px;
+    }
+
+    .lmctWinbackRestore__entryNumber {
+      font-size: 45px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctWinbackRestore *,
+    .lmctWinbackRestore *::before,
+    .lmctWinbackRestore *::after {
+      animation: none !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .lmctWinbackRestore__connector::before {
+      transform: none !important;
+    }
+  }
+</style>
+
+<style>
+  .lmctWinbackBonus,
+  .lmctWinbackBonus *,
+  .lmctWinbackBonus *::before,
+  .lmctWinbackBonus *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctWinbackBonus {
+    --lmctWBB-navy: #040d1a;
+    --lmctWBB-blue: #0c9ffd;
+    --lmctWBB-blue-deep: #046fc0;
+    --lmctWBB-blue-light: #62caff;
+    --lmctWBB-green: #35d277;
+    --lmctWBB-white: #ffffff;
+    --lmctWBB-muted: #aebdd0;
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lmctWBB-white);
+    background:
+      radial-gradient(circle at 16% 18%, rgba(12, 159, 253, 0.2), transparent 29rem), radial-gradient(circle at 88% 86%, rgba(53, 210, 119, 0.07), transparent 25rem),
+      linear-gradient(143deg, #07182b 0%, var(--lmctWBB-navy) 51%, #020810 100%);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .lmctWinbackBonus::before {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    content: "";
+    opacity: 0.38;
+    background-image: linear-gradient(rgba(98, 202, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(98, 202, 255, 0.1) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: linear-gradient(90deg, #000, rgba(0, 0, 0, 0.68) 56%, transparent 95%);
+    mask-image: linear-gradient(90deg, #000, rgba(0, 0, 0, 0.68) 56%, transparent 95%);
+    pointer-events: none;
+  }
+
+  .lmctWinbackBonus::after {
+    position: absolute;
+    z-index: -1;
+    top: 18%;
+    left: -15%;
+    width: 65%;
+    height: 60%;
+    border: 1px solid rgba(98, 202, 255, 0.14);
+    border-radius: 50%;
+    content: "";
+    background: radial-gradient(circle, rgba(12, 159, 253, 0.11), transparent 66%);
+    transform: rotate(-8deg);
+    pointer-events: none;
+  }
+
+  .lmctWinbackBonus__inner {
+    width: min(calc(100% - 40px), 1180px);
+    margin-inline: auto;
+    padding: clamp(72px, 8vw, 108px) 0;
+  }
+
+  .lmctWinbackBonus__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.88fr);
+    grid-template-areas: "visual copy";
+    align-items: center;
+    gap: clamp(46px, 7vw, 92px);
+  }
+
+  .lmctWinbackBonus__copy {
+    grid-area: copy;
+    min-width: 0;
+  }
+
+  .lmctWinbackBonus__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    margin: 0;
+    color: var(--lmctWBB-blue-light);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackBonus__eyebrow::before {
+    width: 30px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+    box-shadow: 0 0 12px rgba(98, 202, 255, 0.55);
+  }
+
+  .lmctWinbackBonus__title {
+    max-width: 540px;
+    margin: 20px 0 0;
+    color: var(--lmctWBB-white);
+    font-size: clamp(45px, 5vw, 68px);
+    font-weight: 950;
+    line-height: 0.92;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .lmctWinbackBonus__title span {
+    display: block;
+    margin-top: 7px;
+    color: var(--lmctWBB-blue-light);
+  }
+
+  .lmctWinbackBonus__plan {
+    display: none;
+    align-items: center;
+    gap: 9px;
+    width: fit-content;
+    margin-top: 24px;
+    padding: 8px 11px;
+    border: 1px solid rgba(53, 210, 119, 0.26);
+    border-radius: 4px;
+    color: #9de7bd;
+    background: rgba(53, 210, 119, 0.07);
+    font-size: 9px;
+    font-weight: 900;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackBonus[data-state="ready"] .lmctWinbackBonus__plan {
+    display: inline-flex;
+  }
+
+  .lmctWinbackBonus__plan svg {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+  }
+
+  .lmctWinbackBonus__lead {
+    max-width: 510px;
+    margin: 18px 0 0;
+    color: #c8d5e4;
+    font-size: clamp(14px, 1.4vw, 17px);
+    font-weight: 570;
+    line-height: 1.62;
+  }
+
+  .lmctWinbackBonus__lead strong {
+    color: var(--lmctWBB-white);
+    font-weight: 850;
+  }
+
+  .lmctWinbackBonus__notice {
+    display: flex;
+    max-width: 520px;
+    align-items: flex-start;
+    gap: 13px;
+    margin-top: 24px;
+    padding: 15px 16px;
+    border: 1px solid rgba(98, 202, 255, 0.3);
+    border-radius: 7px;
+    color: #dcecf9;
+    background: rgba(12, 159, 253, 0.1);
+    box-shadow: inset 3px 0 0 var(--lmctWBB-blue);
+  }
+
+  .lmctWinbackBonus__noticeIcon {
+    display: grid;
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctWBB-navy);
+    background: var(--lmctWBB-blue-light);
+  }
+
+  .lmctWinbackBonus__noticeIcon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .lmctWinbackBonus__notice strong,
+  .lmctWinbackBonus__notice span {
+    display: block;
+  }
+
+  .lmctWinbackBonus__notice strong {
+    color: var(--lmctWBB-blue-light);
+    font-size: 9px;
+    font-weight: 950;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackBonus__notice span {
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .lmctWinbackBonus__cta {
+    display: none;
+    width: fit-content;
+    min-width: min(100%, 315px);
+    min-height: 57px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 25px;
+    padding: 14px 16px 14px 21px;
+    border: 1px solid rgba(98, 202, 255, 0.46);
+    border-radius: 8px;
+    color: var(--lmctWBB-white);
+    background: linear-gradient(135deg, var(--lmctWBB-blue), var(--lmctWBB-blue-deep));
+    box-shadow:
+      0 18px 38px rgba(12, 159, 253, 0.27),
+      inset 0 1px 0 rgba(255, 255, 255, 0.21);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 950;
+    line-height: 1.15;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctWinbackBonus[data-state="ready"] .lmctWinbackBonus__cta {
+    display: inline-flex;
+  }
+
+  .lmctWinbackBonus__ctaIcon {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctWBB-blue-deep);
+    background: var(--lmctWBB-white);
+  }
+
+  .lmctWinbackBonus__ctaIcon svg {
+    width: 17px;
+    height: 17px;
+    transition: transform 180ms ease;
+  }
+
+  .lmctWinbackBonus__cta:hover {
+    box-shadow:
+      0 23px 46px rgba(12, 159, 253, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    filter: brightness(1.06);
+    transform: translateY(-2px);
+  }
+
+  .lmctWinbackBonus__cta:hover .lmctWinbackBonus__ctaIcon svg {
+    transform: translateX(2px);
+  }
+
+  .lmctWinbackBonus__cta:focus-visible {
+    outline: 3px solid rgba(98, 202, 255, 0.58);
+    outline-offset: 4px;
+  }
+
+  .lmctWinbackBonus__loading,
+  .lmctWinbackBonus__error {
+    margin-top: 22px;
+    color: var(--lmctWBB-muted);
+    font-size: 10px;
+    font-weight: 850;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackBonus__loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .lmctWinbackBonus__loading::before {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    content: "";
+    background: var(--lmctWBB-blue-light);
+    box-shadow: 0 0 14px rgba(98, 202, 255, 0.8);
+    animation: lmctWinbackBonus__loadingPulse 1.1s ease-in-out infinite alternate;
+  }
+
+  .lmctWinbackBonus[data-state="ready"] .lmctWinbackBonus__loading,
+  .lmctWinbackBonus[data-state="error"] .lmctWinbackBonus__loading {
+    display: none;
+  }
+
+  .lmctWinbackBonus__error {
+    display: none;
+    max-width: 500px;
+    padding-left: 13px;
+    border-left: 2px solid var(--lmctWBB-muted);
+    text-transform: none;
+  }
+
+  .lmctWinbackBonus[data-state="error"] .lmctWinbackBonus__error {
+    display: block;
+  }
+
+  .lmctWinbackBonus__visual {
+    position: relative;
+    grid-area: visual;
+    min-width: 0;
+    min-height: 510px;
+    perspective: 1200px;
+  }
+
+  .lmctWinbackBonus__visual::before {
+    position: absolute;
+    right: 6%;
+    bottom: 4%;
+    left: 3%;
+    height: 20%;
+    border-radius: 50%;
+    content: "";
+    background: rgba(0, 0, 0, 0.55);
+    filter: blur(34px);
+    transform: rotate(-3deg);
+  }
+
+  .lmctWinbackBonus__orbit {
+    position: absolute;
+    inset: 3% 4% 2% 0;
+    border: 1px solid rgba(98, 202, 255, 0.14);
+    border-radius: 50%;
+    transform: rotate(-13deg);
+    pointer-events: none;
+  }
+
+  .lmctWinbackBonus__orbit::before,
+  .lmctWinbackBonus__orbit::after {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    content: "";
+    background: var(--lmctWBB-blue-light);
+    box-shadow: 0 0 17px rgba(98, 202, 255, 0.9);
+  }
+
+  .lmctWinbackBonus__orbit::before {
+    top: 20%;
+    right: 5%;
+  }
+
+  .lmctWinbackBonus__orbit::after {
+    bottom: 13%;
+    left: 12%;
+  }
+
+  .lmctWinbackBonus__ticketWrap {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: -5%;
+    width: min(104%, 690px);
+    transform: translateY(-50%);
+    transform-style: preserve-3d;
+  }
+
+  .lmctWinbackBonus__ticketImage {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    filter: drop-shadow(18px 30px 20px rgba(0, 4, 14, 0.46)) drop-shadow(0 0 24px rgba(12, 159, 253, 0.2));
+    transform: translateZ(0);
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .lmctWinbackBonus__ticketShadow {
+    position: absolute;
+    z-index: -1;
+    inset: 7% -2% -4% 4%;
+    border-radius: 9px;
+    background: #001735;
+    box-shadow: 0 34px 70px rgba(0, 4, 12, 0.62);
+    transform: translateZ(-25px) translate(13px, 14px);
+  }
+
+  .lmctWinbackBonus__ticket {
+    position: relative;
+    display: grid;
+    min-height: 344px;
+    grid-template-columns: minmax(0, 1fr) 98px;
+    overflow: hidden;
+    border: 1px solid rgba(170, 226, 255, 0.67);
+    border-radius: 9px;
+    background:
+      linear-gradient(rgba(139, 217, 255, 0.13) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 217, 255, 0.13) 1px, transparent 1px),
+      radial-gradient(circle at 43% 30%, rgba(65, 188, 255, 0.76), transparent 38%), linear-gradient(145deg, #109ff5 0%, #0765d6 48%, #03368c 100%);
+    background-size:
+      25px 25px,
+      25px 25px,
+      auto,
+      auto;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.72),
+      inset 0 -20px 50px rgba(0, 21, 77, 0.45),
+      0 0 58px rgba(12, 159, 253, 0.25);
+  }
+
+  .lmctWinbackBonus__ticket::before,
+  .lmctWinbackBonus__ticket::after {
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    width: 46px;
+    height: 76px;
+    border: 1px solid rgba(170, 226, 255, 0.67);
+    border-radius: 50%;
+    content: "";
+    background: var(--lmctWBB-navy);
+    transform: translateY(-50%);
+  }
+
+  .lmctWinbackBonus__ticket::before {
+    left: -28px;
+  }
+
+  .lmctWinbackBonus__ticket::after {
+    right: -28px;
+  }
+
+  .lmctWinbackBonus__ticketMain {
+    position: relative;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    min-width: 0;
+    padding: 42px 25px 38px;
+    text-align: center;
+  }
+
+  .lmctWinbackBonus__ticketMain::before {
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(211, 241, 255, 0.45);
+    border-radius: 4px;
+    content: "";
+    clip-path: polygon(0 0, 31% 0, 34% 4px, 66% 4px, 69% 0, 100% 0, 100% 100%, 0 100%);
+    pointer-events: none;
+  }
+
+  .lmctWinbackBonus__ticketKicker {
+    position: relative;
+    color: #d6f3ff;
+    font-size: 9px;
+    font-weight: 950;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackBonus__ticketNumber {
+    position: relative;
+    display: block;
+    margin-top: 12px;
+    color: var(--lmctWBB-white);
+    font-size: clamp(108px, 13vw, 166px);
+    font-weight: 950;
+    line-height: 0.72;
+    text-shadow:
+      0 5px 0 rgba(0, 43, 132, 0.78),
+      0 10px 22px rgba(0, 17, 64, 0.43);
+  }
+
+  .lmctWinbackBonus__ticketLabel {
+    position: relative;
+    display: flex;
+    width: min(100%, 360px);
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+    color: var(--lmctWBB-white);
+    font-size: clamp(14px, 1.7vw, 20px);
+    font-weight: 950;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .lmctWinbackBonus__ticketLabel::before,
+  .lmctWinbackBonus__ticketLabel::after {
+    height: 1px;
+    flex: 1;
+    content: "";
+    background: rgba(255, 255, 255, 0.65);
+  }
+
+  .lmctWinbackBonus__ticketStub {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-left: 1px dashed rgba(220, 246, 255, 0.72);
+  }
+
+  .lmctWinbackBonus__ticketStub::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(90deg, rgba(1, 45, 119, 0.08), rgba(1, 27, 76, 0.38));
+  }
+
+  .lmctWinbackBonus__stubText {
+    position: relative;
+    color: #d9f3ff;
+    font-size: 10px;
+    font-weight: 950;
+    line-height: 1.45;
+    text-align: center;
+    text-transform: uppercase;
+    transform: rotate(90deg);
+    white-space: nowrap;
+  }
+
+  .lmctWinbackBonus__sweep {
+    position: absolute;
+    z-index: 3;
+    top: -50%;
+    bottom: -50%;
+    left: -45%;
+    width: 20%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+    filter: blur(3px);
+    pointer-events: none;
+    transform: rotate(16deg);
+  }
+
+  @keyframes lmctWinbackBonus__loadingPulse {
+    to {
+      opacity: 0.3;
+      transform: scale(0.75);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lmctWinbackBonus.is-visible .lmctWinbackBonus__ticketWrap {
+      animation:
+        lmctWinbackBonus__ticketIn 760ms cubic-bezier(0.2, 0.82, 0.25, 1) both,
+        lmctWinbackBonus__ticketFloat 5.5s ease-in-out 900ms infinite;
+    }
+
+    .lmctWinbackBonus.is-visible .lmctWinbackBonus__ticketNumber {
+      animation: lmctWinbackBonus__numberIn 620ms ease-out 310ms both;
+    }
+
+    .lmctWinbackBonus.is-visible .lmctWinbackBonus__sweep {
+      animation: lmctWinbackBonus__sweepAcross 1.35s ease-in-out 720ms both;
+    }
+  }
+
+  @keyframes lmctWinbackBonus__ticketIn {
+    from {
+      opacity: 0;
+      transform: translateY(-45%) rotate(-2deg) rotateX(8deg) scale(0.94);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(-50%) rotate(0) rotateX(0) scale(1);
+    }
+  }
+
+  @keyframes lmctWinbackBonus__ticketFloat {
+    0%,
+    100% {
+      transform: translateY(-50%);
+    }
+
+    50% {
+      transform: translateY(calc(-50% - 4px)) rotate(0.2deg);
+    }
+  }
+
+  @keyframes lmctWinbackBonus__numberIn {
+    from {
+      opacity: 0;
+      transform: translateY(9px) scale(0.96);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes lmctWinbackBonus__sweepAcross {
+    from {
+      left: -45%;
+    }
+    to {
+      left: 125%;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .lmctWinbackBonus__layout {
+      grid-template-columns: minmax(0, 1fr) minmax(310px, 0.85fr);
+      gap: 38px;
+    }
+
+    .lmctWinbackBonus__visual {
+      min-height: 450px;
+    }
+    .lmctWinbackBonus__ticket {
+      min-height: 300px;
+      grid-template-columns: minmax(0, 1fr) 76px;
+    }
+    .lmctWinbackBonus__ticketNumber {
+      font-size: clamp(92px, 14vw, 126px);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .lmctWinbackBonus::before {
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), #000 64%, transparent);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), #000 64%, transparent);
+    }
+
+    .lmctWinbackBonus__inner {
+      width: min(calc(100% - 28px), 560px);
+      padding: 65px 0 70px;
+    }
+
+    .lmctWinbackBonus__layout {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: none;
+      gap: 25px;
+    }
+
+    .lmctWinbackBonus__copy {
+      display: contents;
+    }
+    .lmctWinbackBonus__eyebrow,
+    .lmctWinbackBonus__title,
+    .lmctWinbackBonus__plan,
+    .lmctWinbackBonus__lead,
+    .lmctWinbackBonus__notice,
+    .lmctWinbackBonus__cta,
+    .lmctWinbackBonus__loading,
+    .lmctWinbackBonus__error {
+      min-width: 0;
+      max-width: 100%;
+    }
+    .lmctWinbackBonus__eyebrow {
+      grid-row: 1;
+    }
+    .lmctWinbackBonus__title {
+      grid-row: 2;
+      margin-top: -7px;
+      font-size: clamp(43px, 12vw, 59px);
+    }
+    .lmctWinbackBonus__visual {
+      grid-area: auto;
+      grid-row: 3;
+      min-height: clamp(315px, 83vw, 420px);
+      margin-top: 2px;
+    }
+    .lmctWinbackBonus__plan {
+      grid-row: 4;
+      margin-top: -4px;
+    }
+    .lmctWinbackBonus__lead {
+      grid-row: 5;
+      width: min(100%, calc(100vw - 44px));
+      margin-top: -6px;
+      white-space: normal;
+    }
+    .lmctWinbackBonus__notice {
+      grid-row: 6;
+      width: min(100%, calc(100vw - 44px));
+      margin-top: -5px;
+    }
+    .lmctWinbackBonus__notice > span:last-child {
+      width: 0;
+      min-width: 0;
+      flex: 1 1 0;
+    }
+    .lmctWinbackBonus__cta {
+      grid-row: 7;
+      width: 100%;
+      min-width: 0;
+      margin-top: -3px;
+    }
+    .lmctWinbackBonus__loading,
+    .lmctWinbackBonus__error {
+      grid-row: 7;
+      margin-top: 0;
+    }
+
+    .lmctWinbackBonus__ticketWrap {
+      left: 0;
+      width: 100%;
+    }
+
+    .lmctWinbackBonus__ticket {
+      min-height: clamp(245px, 65vw, 325px);
+      grid-template-columns: minmax(0, 1fr) clamp(58px, 16vw, 82px);
+    }
+
+    .lmctWinbackBonus__ticketMain {
+      padding: 34px 18px 30px;
+    }
+    .lmctWinbackBonus__ticketNumber {
+      font-size: clamp(83px, 27vw, 132px);
+    }
+    .lmctWinbackBonus__ticketLabel {
+      width: min(100%, 285px);
+      gap: 9px;
+      margin-top: 20px;
+      font-size: clamp(12px, 4vw, 17px);
+    }
+  }
+
+  @media (max-width: 390px) {
+    .lmctWinbackBonus__title {
+      font-size: 36px;
+    }
+    .lmctWinbackBonus__visual {
+      min-height: 302px;
+    }
+    .lmctWinbackBonus__ticket {
+      min-height: 236px;
+      grid-template-columns: minmax(0, 1fr) 55px;
+    }
+    .lmctWinbackBonus__ticketMain {
+      padding-inline: 14px;
+    }
+    .lmctWinbackBonus__ticketNumber {
+      font-size: 79px;
+    }
+    .lmctWinbackBonus__ticketLabel {
+      font-size: 11px;
+    }
+    .lmctWinbackBonus__lead,
+    .lmctWinbackBonus__notice span {
+      overflow-wrap: anywhere;
+    }
+    .lmctWinbackBonus__notice span {
+      font-size: 11px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctWinbackBonus *,
+    .lmctWinbackBonus *::before,
+    .lmctWinbackBonus *::after {
+      animation: none !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<style>
+  .lmctWinbackFinal,
+  .lmctWinbackFinal *,
+  .lmctWinbackFinal *::before,
+  .lmctWinbackFinal *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctWinbackFinal {
+    --lmctWBF-navy: #030a13;
+    --lmctWBF-navy-soft: #071a2d;
+    --lmctWBF-blue: #0c9ffd;
+    --lmctWBF-blue-deep: #0476c4;
+    --lmctWBF-blue-light: #61caff;
+    --lmctWBF-green: #35d277;
+    --lmctWBF-white: #ffffff;
+    --lmctWBF-muted: #a7b7c9;
+    --lmctWBF-line: rgba(142, 192, 230, 0.18);
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lmctWBF-white);
+    background:
+      radial-gradient(circle at 78% 34%, rgba(12, 159, 253, 0.18), transparent 28rem), radial-gradient(circle at 20% 100%, rgba(53, 210, 119, 0.08), transparent 31rem),
+      linear-gradient(148deg, #071727 0%, var(--lmctWBF-navy) 55%, #01050a 100%);
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .lmctWinbackFinal::before {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    content: "";
+    opacity: 0.3;
+    background-image: linear-gradient(rgba(97, 202, 255, 0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(97, 202, 255, 0.09) 1px, transparent 1px);
+    background-size: 54px 54px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 3%, #000 42%, #000 100%);
+    mask-image: linear-gradient(90deg, transparent 3%, #000 42%, #000 100%);
+    pointer-events: none;
+  }
+
+  .lmctWinbackFinal::after {
+    position: absolute;
+    z-index: -1;
+    top: -45%;
+    right: -12%;
+    width: 62%;
+    height: 175%;
+    border: 1px solid rgba(97, 202, 255, 0.14);
+    border-radius: 50%;
+    content: "";
+    background: radial-gradient(circle, rgba(12, 159, 253, 0.09), transparent 67%);
+    transform: rotate(-9deg);
+    pointer-events: none;
+  }
+
+  .lmctWinbackFinal__sweep {
+    position: absolute;
+    z-index: -1;
+    top: -35%;
+    bottom: -35%;
+    left: -25%;
+    width: 16%;
+    background: linear-gradient(90deg, transparent, rgba(97, 202, 255, 0.08), transparent);
+    filter: blur(15px);
+    pointer-events: none;
+    transform: rotate(14deg);
+  }
+
+  .lmctWinbackFinal__inner {
+    position: relative;
+    width: min(calc(100% - 40px), 1180px);
+    margin-inline: auto;
+    padding: clamp(80px, 9vw, 126px) 0 max(72px, env(safe-area-inset-bottom));
+  }
+
+  .lmctWinbackFinal__main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(350px, 0.92fr);
+    align-items: center;
+    gap: clamp(52px, 8vw, 100px);
+  }
+
+  .lmctWinbackFinal__copy {
+    min-width: 0;
+  }
+
+  .lmctWinbackFinal__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    margin: 0;
+    color: var(--lmctWBF-blue-light);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__eyebrow::before {
+    width: 31px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+    box-shadow: 0 0 13px rgba(97, 202, 255, 0.65);
+  }
+
+  .lmctWinbackFinal__title {
+    max-width: 740px;
+    margin: 22px 0 0;
+    color: var(--lmctWBF-white);
+    font-size: clamp(50px, 5.8vw, 78px);
+    font-weight: 950;
+    line-height: 0.9;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .lmctWinbackFinal__title span {
+    display: block;
+    margin-top: 7px;
+    color: var(--lmctWBF-blue-light);
+  }
+
+  .lmctWinbackFinal__lead {
+    max-width: 620px;
+    margin: 25px 0 0;
+    color: #cad6e3;
+    font-size: clamp(15px, 1.45vw, 18px);
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctWinbackFinal__lead strong {
+    color: var(--lmctWBF-white);
+    font-weight: 850;
+  }
+
+  .lmctWinbackFinal__visual {
+    position: relative;
+    display: grid;
+    min-height: 390px;
+    place-items: center;
+  }
+
+  .lmctWinbackFinal__visual::before,
+  .lmctWinbackFinal__visual::after {
+    position: absolute;
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+  }
+
+  .lmctWinbackFinal__visual::before {
+    inset: 2% -6%;
+    border: 1px solid rgba(97, 202, 255, 0.17);
+    transform: rotate(-14deg);
+  }
+
+  .lmctWinbackFinal__visual::after {
+    inset: 14% 3%;
+    border: 1px solid rgba(53, 210, 119, 0.1);
+    transform: rotate(18deg);
+  }
+
+  .lmctWinbackFinal__restoreVisual {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__restoreWord {
+    display: block;
+    color: transparent;
+    font-size: clamp(66px, 8.6vw, 118px);
+    font-weight: 950;
+    line-height: 0.78;
+    -webkit-text-stroke: 1px rgba(151, 216, 255, 0.38);
+  }
+
+  .lmctWinbackFinal__plus {
+    display: block;
+    margin: 15px 0 10px;
+    color: var(--lmctWBF-green);
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 1;
+    text-shadow: 0 0 23px rgba(53, 210, 119, 0.35);
+  }
+
+  .lmctWinbackFinal__bonus {
+    display: block;
+    color: var(--lmctWBF-white);
+    font-size: clamp(98px, 12vw, 168px);
+    font-weight: 950;
+    line-height: 0.72;
+    text-shadow:
+      0 6px 0 rgba(3, 75, 150, 0.72),
+      0 0 36px rgba(12, 159, 253, 0.25);
+  }
+
+  .lmctWinbackFinal__bonusLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    color: var(--lmctWBF-blue-light);
+    font-size: 10px;
+    font-weight: 950;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__bonusLabel::before,
+  .lmctWinbackFinal__bonusLabel::after {
+    width: 30px;
+    height: 1px;
+    content: "";
+    background: rgba(97, 202, 255, 0.5);
+  }
+
+  .lmctWinbackFinal__conversion {
+    margin-top: clamp(48px, 6vw, 72px);
+    padding-top: clamp(28px, 4vw, 42px);
+    border-top: 1px solid var(--lmctWBF-line);
+  }
+
+  .lmctWinbackFinal__tier {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 21px;
+    color: var(--lmctWBF-green);
+    font-size: 11px;
+    font-weight: 950;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal[data-state="ready"] .lmctWinbackFinal__tier,
+  .lmctWinbackFinal[data-state="submitting"] .lmctWinbackFinal__tier,
+  .lmctWinbackFinal[data-state="action-error"] .lmctWinbackFinal__tier {
+    display: flex;
+  }
+
+  .lmctWinbackFinal__tierIcon {
+    display: grid;
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+    place-items: center;
+    border: 1px solid rgba(53, 210, 119, 0.32);
+    border-radius: 50%;
+    background: rgba(53, 210, 119, 0.08);
+  }
+
+  .lmctWinbackFinal__tierIcon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .lmctWinbackFinal__actionRow {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+    align-items: center;
+    gap: clamp(32px, 6vw, 74px);
+  }
+
+  .lmctWinbackFinal__ctaWrap {
+    min-width: 0;
+  }
+
+  .lmctWinbackFinal__cta {
+    display: none;
+    width: 100%;
+    min-height: 64px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 15px 17px 15px 23px;
+    border: 1px solid rgba(97, 202, 255, 0.56);
+    border-radius: 8px;
+    color: var(--lmctWBF-white);
+    background: linear-gradient(135deg, var(--lmctWBF-blue), var(--lmctWBF-blue-deep));
+    box-shadow:
+      0 21px 46px rgba(12, 159, 253, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.24);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1.15;
+    text-align: left;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctWinbackFinal[data-state="ready"] .lmctWinbackFinal__cta,
+  .lmctWinbackFinal[data-state="action-error"] .lmctWinbackFinal__cta,
+  .lmctWinbackFinal[data-state="submitting"] .lmctWinbackFinal__cta {
+    display: inline-flex;
+  }
+
+  .lmctWinbackFinal__ctaIcon {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctWBF-blue-deep);
+    background: var(--lmctWBF-white);
+  }
+
+  .lmctWinbackFinal__ctaIcon svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 180ms ease;
+  }
+
+  .lmctWinbackFinal__cta:hover:not([aria-disabled="true"]) {
+    box-shadow:
+      0 27px 54px rgba(12, 159, 253, 0.39),
+      inset 0 1px 0 rgba(255, 255, 255, 0.27);
+    filter: brightness(1.06);
+    transform: translateY(-2px);
+  }
+
+  .lmctWinbackFinal__cta:hover:not([aria-disabled="true"]) .lmctWinbackFinal__ctaIcon svg {
+    transform: translateX(2px);
+  }
+
+  .lmctWinbackFinal__cta:focus-visible {
+    outline: 3px solid rgba(97, 202, 255, 0.62);
+    outline-offset: 4px;
+  }
+
+  .lmctWinbackFinal__cta[aria-disabled="true"] {
+    cursor: wait;
+    filter: saturate(0.6);
+    opacity: 0.72;
+  }
+
+  .lmctWinbackFinal__values {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmctWinbackFinal__value {
+    position: relative;
+    min-width: 0;
+    padding: 3px clamp(15px, 2.7vw, 29px);
+  }
+
+  .lmctWinbackFinal__value:first-child {
+    padding-left: 0;
+  }
+
+  .lmctWinbackFinal__value + .lmctWinbackFinal__value {
+    border-left: 1px solid var(--lmctWBF-line);
+  }
+
+  .lmctWinbackFinal__valueVerb,
+  .lmctWinbackFinal__valueObject {
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__valueVerb {
+    color: var(--lmctWBF-blue-light);
+    font-size: 9px;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctWinbackFinal__value:nth-child(3) .lmctWinbackFinal__valueVerb {
+    color: var(--lmctWBF-green);
+  }
+
+  .lmctWinbackFinal__valueObject {
+    margin-top: 8px;
+    color: var(--lmctWBF-white);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.4;
+  }
+
+  .lmctWinbackFinal__disclaimer {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 25px 0 0;
+    color: var(--lmctWBF-muted);
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.5;
+  }
+
+  .lmctWinbackFinal__disclaimer svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    color: var(--lmctWBF-blue-light);
+  }
+
+  .lmctWinbackFinal__loading,
+  .lmctWinbackFinal__lookupError,
+  .lmctWinbackFinal__actionError {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.55;
+  }
+
+  .lmctWinbackFinal__loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--lmctWBF-muted);
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__loading::before {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    content: "";
+    background: var(--lmctWBF-blue-light);
+    box-shadow: 0 0 14px rgba(97, 202, 255, 0.85);
+    animation: lmctWinbackFinal__loadingPulse 1.1s ease-in-out infinite alternate;
+  }
+
+  .lmctWinbackFinal[data-state="ready"] .lmctWinbackFinal__loading,
+  .lmctWinbackFinal[data-state="submitting"] .lmctWinbackFinal__loading,
+  .lmctWinbackFinal[data-state="action-error"] .lmctWinbackFinal__loading,
+  .lmctWinbackFinal[data-state="lookup-error"] .lmctWinbackFinal__loading,
+  .lmctWinbackFinal[data-state="success"] .lmctWinbackFinal__loading {
+    display: none;
+  }
+
+  .lmctWinbackFinal__lookupError,
+  .lmctWinbackFinal__actionError {
+    display: none;
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 138, 138, 0.28);
+    border-radius: 7px;
+    color: #ffd5d5;
+    background: rgba(141, 25, 25, 0.13);
+  }
+
+  .lmctWinbackFinal[data-state="lookup-error"] .lmctWinbackFinal__lookupError,
+  .lmctWinbackFinal[data-state="action-error"] .lmctWinbackFinal__actionError {
+    display: block;
+  }
+
+  .lmctWinbackFinal[data-state="action-error"] .lmctWinbackFinal__actionError {
+    margin-bottom: 14px;
+  }
+
+  .lmctWinbackFinal__success {
+    display: none;
+    max-width: 840px;
+    min-height: 500px;
+    align-content: center;
+    justify-items: start;
+    margin-inline: auto;
+    text-align: left;
+  }
+
+  .lmctWinbackFinal[data-state="success"] .lmctWinbackFinal__content {
+    display: none;
+  }
+
+  .lmctWinbackFinal[data-state="success"] .lmctWinbackFinal__success {
+    display: grid;
+  }
+
+  .lmctWinbackFinal__successIcon {
+    display: grid;
+    width: 66px;
+    height: 66px;
+    place-items: center;
+    border: 1px solid rgba(53, 210, 119, 0.43);
+    border-radius: 50%;
+    color: var(--lmctWBF-navy);
+    background: var(--lmctWBF-green);
+    box-shadow: 0 0 36px rgba(53, 210, 119, 0.21);
+  }
+
+  .lmctWinbackFinal__successIcon svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .lmctWinbackFinal__successEyebrow {
+    margin: 25px 0 0;
+    color: var(--lmctWBF-green);
+    font-size: 10px;
+    font-weight: 950;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__successTitle {
+    margin: 13px 0 0;
+    color: var(--lmctWBF-white);
+    font-size: clamp(45px, 6vw, 72px);
+    font-weight: 950;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .lmctWinbackFinal__successCopy {
+    max-width: 670px;
+    margin: 23px 0 0;
+    color: #cbd8e5;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.7;
+  }
+
+  .lmctWinbackFinal__successCopy strong {
+    color: var(--lmctWBF-white);
+  }
+
+  @keyframes lmctWinbackFinal__loadingPulse {
+    to {
+      opacity: 0.3;
+      transform: scale(0.75);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lmctWinbackFinal.is-visible .lmctWinbackFinal__copy {
+      animation: lmctWinbackFinal__contentIn 650ms ease-out both;
+    }
+
+    .lmctWinbackFinal.is-visible .lmctWinbackFinal__restoreVisual {
+      animation: lmctWinbackFinal__visualIn 760ms cubic-bezier(0.2, 0.82, 0.25, 1) 120ms both;
+    }
+
+    .lmctWinbackFinal.is-visible .lmctWinbackFinal__conversion {
+      animation: lmctWinbackFinal__contentIn 610ms ease-out 230ms both;
+    }
+
+    .lmctWinbackFinal.is-visible .lmctWinbackFinal__sweep {
+      animation: lmctWinbackFinal__sweepAcross 1.5s ease-out 350ms both;
+    }
+
+    .lmctWinbackFinal[data-state="success"] .lmctWinbackFinal__success {
+      animation: lmctWinbackFinal__contentIn 520ms ease-out both;
+    }
+  }
+
+  @keyframes lmctWinbackFinal__contentIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes lmctWinbackFinal__visualIn {
+    from {
+      opacity: 0;
+      transform: scale(0.94) rotate(2deg);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0);
+    }
+  }
+
+  @keyframes lmctWinbackFinal__sweepAcross {
+    from {
+      left: -25%;
+    }
+    to {
+      left: 120%;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .lmctWinbackFinal__main {
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+      gap: 35px;
+    }
+
+    .lmctWinbackFinal__visual {
+      min-height: 340px;
+    }
+
+    .lmctWinbackFinal__actionRow {
+      grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .lmctWinbackFinal::before {
+      -webkit-mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 100%);
+      mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 100%);
+    }
+
+    .lmctWinbackFinal__inner {
+      width: min(calc(100% - 28px), 560px);
+      padding: 67px 0 max(62px, env(safe-area-inset-bottom));
+    }
+
+    .lmctWinbackFinal__main {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 25px;
+    }
+
+    .lmctWinbackFinal__main,
+    .lmctWinbackFinal__conversion,
+    .lmctWinbackFinal__success {
+      width: min(100%, calc(100vw - 44px));
+      min-width: 0;
+    }
+
+    .lmctWinbackFinal__copy {
+      display: contents;
+    }
+
+    .lmctWinbackFinal__eyebrow {
+      grid-row: 1;
+    }
+    .lmctWinbackFinal__title {
+      grid-row: 2;
+      max-width: 100%;
+      margin-top: -5px;
+      font-size: 42px;
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+    .lmctWinbackFinal__lead {
+      grid-row: 3;
+      width: 100%;
+      max-width: 100%;
+      margin-top: -4px;
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+    .lmctWinbackFinal__visual {
+      grid-row: 4;
+      width: 100%;
+      max-width: 100%;
+      min-height: 290px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .lmctWinbackFinal__conversion {
+      margin-top: 35px;
+      padding-top: 28px;
+    }
+
+    .lmctWinbackFinal__actionRow {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 25px;
+    }
+
+    .lmctWinbackFinal__cta {
+      width: 100%;
+    }
+
+    .lmctWinbackFinal__values {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctWinbackFinal__value,
+    .lmctWinbackFinal__value:first-child {
+      display: grid;
+      grid-template-columns: 68px minmax(0, 1fr);
+      align-items: center;
+      gap: 11px;
+      padding: 13px 0;
+    }
+
+    .lmctWinbackFinal__value + .lmctWinbackFinal__value {
+      border-top: 1px solid var(--lmctWBF-line);
+      border-left: 0;
+    }
+
+    .lmctWinbackFinal__valueObject {
+      margin-top: 0;
+    }
+
+    .lmctWinbackFinal__disclaimer {
+      align-items: flex-start;
+      margin-top: 22px;
+      overflow-wrap: anywhere;
+    }
+
+    .lmctWinbackFinal__success {
+      min-height: 440px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .lmctWinbackFinal__title {
+      font-size: 33px;
+    }
+
+    .lmctWinbackFinal__visual {
+      min-height: 255px;
+    }
+
+    .lmctWinbackFinal__restoreWord {
+      font-size: 61px;
+    }
+
+    .lmctWinbackFinal__bonus {
+      font-size: 92px;
+    }
+
+    .lmctWinbackFinal__cta {
+      min-height: 60px;
+      padding-left: 18px;
+      font-size: 11px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctWinbackFinal *,
+    .lmctWinbackFinal *::before,
+    .lmctWinbackFinal *::after {
+      animation: none !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body.lmctWinbackFinal-isVisible [data-lmct-winback-sticky] {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(110%) !important;
+  }
+</style>
+
+<style>
+  /* Combined-funnel UX refinements. */
+  .lmctWinbackHero__cta,
+  .lmctWinbackRestore__cta,
+  .lmctWinbackBonus__cta,
+  .lmctWinbackFinal__cta {
+    text-decoration: none;
+  }
+
+  .lmctWinbackHero__cta[aria-disabled="true"],
+  .lmctWinbackRestore__cta[aria-disabled="true"],
+  .lmctWinbackBonus__cta[aria-disabled="true"],
+  .lmctWinbackFinal__cta[aria-disabled="true"] {
+    cursor: wait;
+    filter: saturate(0.6);
+    opacity: 0.72;
+    transform: none;
+  }
+
+  .lmctWinbackShared__planTerms {
+    display: block;
+    margin: 8px 0 0;
+    color: #aebdd0;
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.4;
+  }
+
+  .lmctWinbackHero__personalized .lmctWinbackShared__planTerms {
+    color: #b9c9d9;
+  }
+
+  .lmctWinbackRestore__plan .lmctWinbackShared__planTerms {
+    color: #64748b;
+    font-size: 11px;
+  }
+
+  .lmctWinbackBonus__copy > .lmctWinbackShared__planTerms {
+    margin-top: 13px;
+    color: #64748b;
+  }
+
+  /* Keep the bonus section in the same light technical system as restoration. */
+  .lmctWinbackBonus {
+    color: #10233d;
+    border-top: 1px solid rgba(5, 22, 42, 0.08);
+    border-bottom: 1px solid rgba(5, 22, 42, 0.08);
+    background:
+      radial-gradient(circle at 19% 30%, rgba(12, 159, 253, 0.09), transparent 31rem), linear-gradient(rgba(5, 22, 42, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(5, 22, 42, 0.035) 1px, transparent 1px), #f7fafc;
+    background-size:
+      auto,
+      56px 56px,
+      56px 56px,
+      auto;
+  }
+
+  .lmctWinbackBonus::before {
+    opacity: 0;
+  }
+
+  .lmctWinbackBonus::after {
+    border-color: rgba(4, 118, 196, 0.14);
+    background: radial-gradient(circle, rgba(12, 159, 253, 0.07), transparent 67%);
+  }
+
+  .lmctWinbackBonus__orbit {
+    border-color: rgba(4, 118, 196, 0.15);
+  }
+
+  .lmctWinbackBonus__eyebrow,
+  .lmctWinbackBonus__title span,
+  .lmctWinbackBonus__notice strong {
+    color: #0476c4;
+  }
+
+  .lmctWinbackBonus__title,
+  .lmctWinbackBonus__lead strong {
+    color: #10233d;
+  }
+
+  .lmctWinbackBonus__lead,
+  .lmctWinbackBonus__loading,
+  .lmctWinbackBonus__error {
+    color: #52667d;
+  }
+
+  .lmctWinbackBonus__plan {
+    color: #137f40;
+    border-color: rgba(19, 127, 64, 0.25);
+    background: rgba(53, 210, 119, 0.09);
+  }
+
+  .lmctWinbackBonus__notice {
+    color: #294760;
+    border-color: rgba(4, 118, 196, 0.22);
+    background: rgba(12, 159, 253, 0.07);
+    box-shadow: inset 3px 0 0 #0c9ffd;
+  }
+
+  .lmctWinbackBonus__noticeIcon {
+    color: #ffffff;
+    background: #087fcf;
+  }
+
+  .lmctWinbackBonus__visual::before {
+    background: rgba(5, 22, 42, 0.15);
+  }
+
+  .lmctWinbackBonus__loading::before {
+    background: #087fcf;
+  }
+
+  .lmctWinbackBonus__error {
+    border-left-color: #64748b;
+  }
+
+  .lmctWinbackFinal__conversion > .lmctWinbackShared__planTerms {
+    margin: -11px 0 20px 37px;
+  }
+
+  .lmctWinbackRestore__layout + .lmctWinbackRestore__footer {
+    margin-top: clamp(38px, 5vw, 56px);
+    border-top: 1px solid var(--lmctWR-line);
+  }
+
+  .lmctWinbackHero__secure,
+  .lmctWinbackHero__personalizedLabel,
+  .lmctWinbackHero__values,
+  .lmctWinbackHero__protocol,
+  .lmctWinbackHero__signal,
+  .lmctWinbackHero__restoreKicker,
+  .lmctWinbackHero__bonusNote,
+  .lmctWinbackRestore__planLabel,
+  .lmctWinbackRestore__warning,
+  .lmctWinbackRestore__stateKicker,
+  .lmctWinbackRestore__status,
+  .lmctWinbackRestore__entryLabel,
+  .lmctWinbackRestore__stateBottom,
+  .lmctWinbackRestore__connectorLabel,
+  .lmctWinbackRestore__footerNote,
+  .lmctWinbackBonus__eyebrow,
+  .lmctWinbackBonus__plan,
+  .lmctWinbackBonus__notice strong,
+  .lmctWinbackBonus__loading,
+  .lmctWinbackFinal__eyebrow,
+  .lmctWinbackFinal__bonusLabel,
+  .lmctWinbackFinal__valueVerb,
+  .lmctWinbackFinal__successEyebrow {
+    font-size: 11px;
+  }
+
+  .lmctWinbackFinal__disclaimer,
+  .lmctWinbackBonus__notice span {
+    font-size: 12px;
+  }
+
+  @media (max-width: 720px) {
+    .lmctWinbackFinal__conversion > .lmctWinbackShared__planTerms {
+      margin: -10px 0 20px;
+    }
+
+    .lmctWinbackRestore__layout + .lmctWinbackRestore__footer {
+      margin-top: 34px;
+    }
+
+    .lmctWinbackBonus__copy > .lmctWinbackShared__planTerms {
+      grid-row: 5;
+      margin-top: -12px;
+    }
+
+    .lmctWinbackBonus__lead {
+      grid-row: 6;
+    }
+
+    .lmctWinbackBonus__notice {
+      grid-row: 7;
+    }
+
+    .lmctWinbackBonus__cta,
+    .lmctWinbackBonus__loading,
+    .lmctWinbackBonus__error {
+      grid-row: 8;
+    }
+  }
+</style>
+
+<section class="lmctWinbackHero" data-state="loading" aria-labelledby="lmctWinbackHero-title">
+  <div class="lmctWinbackHero__inner">
+    <header class="lmctWinbackHero__header" aria-label="LMCT+ membership reactivation">
+      <img class="lmctWinbackHero__logo" src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png" alt="LMCT+" width="180" height="42" />
+
+      <div class="lmctWinbackHero__secure">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z" />
+          <path d="m9 12 2 2 4-5" />
+        </svg>
+        Secure membership recovery
+      </div>
+    </header>
+
+    <div class="lmctWinbackHero__grid">
+      <div class="lmctWinbackHero__copy">
+        <p class="lmctWinbackHero__eyebrow">Cancelled recently?</p>
+        <h1 class="lmctWinbackHero__headline" id="lmctWinbackHero-title">
+          Don&rsquo;t lose
+          <span>the entries you already built.</span>
+        </h1>
+        <p class="lmctWinbackHero__lead">
+          Reactivate your membership and we&rsquo;ll <strong>restore every accumulated entry</strong> you had built up, plus add 250 bonus entries into the current major draw.
+        </p>
+      </div>
+
+      <div class="lmctWinbackHero__visual" aria-label="Accumulated entries restored plus 250 bonus entries">
+        <div class="lmctWinbackHero__recovery">
+          <div class="lmctWinbackHero__recoveryHead">
+            <span class="lmctWinbackHero__protocol">Entry recovery protocol</span>
+            <span class="lmctWinbackHero__signal">Restoration ready</span>
+          </div>
+
+          <div class="lmctWinbackHero__recoveryBody">
+            <div class="lmctWinbackHero__restoreBlock">
+              <span class="lmctWinbackHero__restoreKicker">Restore</span>
+              <strong class="lmctWinbackHero__restoreValue" data-lmct-entry-value>All your</strong>
+              <span class="lmctWinbackHero__restoreUnit">Accumulated entries</span>
+              <span class="lmctWinbackHero__restored">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m5 12 4 4L19 6" />
+                </svg>
+                Restored when you reactivate
+              </span>
+            </div>
+
+            <span class="lmctWinbackHero__plus" aria-hidden="true">+</span>
+
+            <div class="lmctWinbackHero__bonusBlock">
+              <strong class="lmctWinbackHero__bonusNumber">+250</strong>
+              <div class="lmctWinbackHero__bonusCopy">
+                <span class="lmctWinbackHero__bonusLabel">Bonus entries</span>
+                <span class="lmctWinbackHero__bonusNote">Into the current major draw</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lmctWinbackHero__loading" role="status" aria-live="polite">
+            <span class="lmctWinbackHero__loadingIndicator" aria-hidden="true"></span>
+            <strong>Checking your membership...</strong>
+          </div>
+
+          <div class="lmctWinbackHero__visualError" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v4" />
+              <path d="M12 16h.01" />
+            </svg>
+            <strong>Membership unavailable</strong>
+            <span>Use the personal link from your LMCT+ winback email.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lmctWinbackHero__conversion" aria-live="polite">
+        <div class="lmctWinbackHero__personalized">
+          <span class="lmctWinbackHero__personalizedLabel">Reactivate your</span>
+          <span class="lmctWinbackHero__tierSkeleton" aria-hidden="true"></span>
+          <strong class="lmctWinbackHero__tierName" data-lmct-tier-name></strong>
+          <span class="lmctWinbackShared__planTerms" data-lmct-plan-summary></span>
+        </div>
+
+        <a class="lmctWinbackHero__cta" href="#open-popup" data-lmct-reactivate aria-describedby="lmctWinbackHero-values">
+          <span data-lmct-cta-label data-lmct-shared-cta-label>Reactivate &amp; restore my entries</span>
+          <span class="lmctWinbackHero__ctaIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </span>
+        </a>
+
+        <div class="lmctWinbackHero__values" id="lmctWinbackHero-values">
+          <span class="lmctWinbackHero__value">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6" /></svg>
+            Restore accumulated entries
+          </span>
+          <span class="lmctWinbackHero__value">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6" /></svg>
+            +250 bonus entries
+          </span>
+          <span class="lmctWinbackHero__value">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6" /></svg>
+            Resume your membership
+          </span>
+        </div>
+
+        <div class="lmctWinbackHero__error" role="alert">
+          <strong>We couldn&rsquo;t load your previous membership</strong>
+          <span>Please use the link from your LMCT+ winback email or contact support.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lmctWinbackRestore" data-state="loading" aria-labelledby="lmctWinbackRestore-title" aria-busy="true">
+  <div class="lmctWinbackRestore__inner">
+    <div class="lmctWinbackRestore__layout">
+      <header class="lmctWinbackRestore__intro">
+        <p class="lmctWinbackRestore__eyebrow">Your entries are still recoverable</p>
+        <h2 class="lmctWinbackRestore__title" id="lmctWinbackRestore-title">
+          Pick up
+          <span>where you left off.</span>
+        </h2>
+        <p class="lmctWinbackRestore__lead">Reactivate your previous membership and restore the accumulated entries you had built before cancelling.</p>
+
+        <div class="lmctWinbackRestore__plan" aria-live="polite">
+          <span class="lmctWinbackRestore__planIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z" />
+              <path d="m9 12 2 2 4-5" />
+            </svg>
+          </span>
+          <span>
+            <span class="lmctWinbackRestore__planLabel">Your previous plan</span>
+            <span class="lmctWinbackRestore__planSkeleton" aria-hidden="true"></span>
+            <strong class="lmctWinbackRestore__planName" data-lmct-restore-plan></strong>
+            <span class="lmctWinbackShared__planTerms" data-lmct-plan-summary></span>
+          </span>
+        </div>
+
+        <p class="lmctWinbackRestore__warning">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.3 3.6 2.2 18a2 2 0 0 0 1.8 3h16a2 2 0 0 0 1.8-3L13.7 3.6a2 2 0 0 0-3.4 0Z" />
+            <path d="M12 9v4" />
+            <path d="M12 17h.01" />
+          </svg>
+          Reactivate before your accumulated entries are removed.
+        </p>
+      </header>
+
+      <div class="lmctWinbackRestore__story" aria-label="Cancelled membership entries restored after reactivation">
+        <article class="lmctWinbackRestore__state lmctWinbackRestore__state--before">
+          <div class="lmctWinbackRestore__stateTop">
+            <span class="lmctWinbackRestore__stateKicker">Before reactivation</span>
+            <span class="lmctWinbackRestore__status">At risk</span>
+          </div>
+
+          <div class="lmctWinbackRestore__stateMain">
+            <span class="lmctWinbackRestore__numberSkeleton" aria-hidden="true"></span>
+            <strong class="lmctWinbackRestore__entryNumber" data-lmct-risk-entries>All</strong>
+            <span class="lmctWinbackRestore__entryLabel">Accumulated entries</span>
+          </div>
+
+          <div class="lmctWinbackRestore__stateBottom">
+            <span>Membership cancelled</span>
+            <span>Recoverable</span>
+          </div>
+        </article>
+
+        <div class="lmctWinbackRestore__connector" aria-hidden="true">
+          <span class="lmctWinbackRestore__connectorIcon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12h15" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </span>
+          <span class="lmctWinbackRestore__connectorLabel">Reactivate</span>
+        </div>
+
+        <article class="lmctWinbackRestore__state lmctWinbackRestore__state--after">
+          <div class="lmctWinbackRestore__stateTop">
+            <span class="lmctWinbackRestore__stateKicker">After reactivation</span>
+            <span class="lmctWinbackRestore__status">Restored</span>
+          </div>
+
+          <div class="lmctWinbackRestore__stateMain">
+            <span class="lmctWinbackRestore__numberSkeleton" aria-hidden="true"></span>
+            <strong class="lmctWinbackRestore__entryNumber" data-lmct-restored-entries>All</strong>
+            <span class="lmctWinbackRestore__entryLabel">Accumulated entries restored</span>
+          </div>
+
+          <div class="lmctWinbackRestore__stateBottom">
+            <span>Previous entries returned</span>
+            <strong class="lmctWinbackRestore__bonus">+250</strong>
+            <span>Bonus entries</span>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="lmctWinbackRestore__footer">
+      <p class="lmctWinbackRestore__footerNote">Your restored entries and membership tier are determined by your verified LMCT+ account.</p>
+      <a class="lmctWinbackRestore__cta" href="#open-popup" data-lmct-restore-cta>
+        <span data-lmct-restore-cta-label data-lmct-shared-cta-label>Reactivate &amp; restore my entries</span>
+        <span class="lmctWinbackRestore__ctaIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14" />
+            <path d="m13 6 6 6-6 6" />
+          </svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="lmctWinbackRestore__error" role="status">We couldn&rsquo;t load your restoration details. Please use the personal link from your LMCT+ winback email or contact support.</div>
+  </div>
+</section>
+
+<section class="lmctWinbackBonus" data-state="loading" aria-labelledby="lmctWinbackBonus-title" aria-busy="true">
+  <div class="lmctWinbackBonus__inner">
+    <div class="lmctWinbackBonus__layout">
+      <div class="lmctWinbackBonus__visual" aria-label="250 bonus entries into the current major draw">
+        <span class="lmctWinbackBonus__orbit" aria-hidden="true"></span>
+        <div class="lmctWinbackBonus__ticketWrap">
+          <img
+            class="lmctWinbackBonus__ticketImage"
+            src="https://images.clickfunnels.com/25/3d4e92906f4e7a8ab1161bc0b95f5c/250-2.png"
+            alt="250 bonus entries into the current major draw"
+            width="1394"
+            height="770"
+            loading="lazy"
+            decoding="async" />
+        </div>
+      </div>
+
+      <div class="lmctWinbackBonus__copy">
+        <p class="lmctWinbackBonus__eyebrow">Welcome-back bonus</p>
+        <h2 class="lmctWinbackBonus__title" id="lmctWinbackBonus-title">Come back with<span>250 extra entries.</span></h2>
+
+        <div class="lmctWinbackBonus__plan" aria-live="polite">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z" />
+            <path d="m9 12 2 2 4-5" />
+          </svg>
+          <span>Your <strong data-lmct-bonus-plan>membership</strong> + 250 bonus entries</span>
+        </div>
+
+        <span class="lmctWinbackShared__planTerms" data-lmct-plan-summary></span>
+
+        <p class="lmctWinbackBonus__lead">Reactivate your membership and we&rsquo;ll add <strong>250 bonus entries</strong> for <span data-lmct-bonus-draw-copy>the current major draw</span>.</p>
+
+        <aside class="lmctWinbackBonus__notice" aria-label="Bonus entry timing">
+          <div class="lmctWinbackBonus__noticeIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 11v5" />
+              <path d="M12 8h.01" />
+            </svg>
+          </div>
+          <span>
+            <strong>Bonus entry timing</strong>
+            <span>Free bonus entries are added to accounts on the day of the draw.</span>
+          </span>
+        </aside>
+
+        <a class="lmctWinbackBonus__cta" href="#open-popup" data-lmct-bonus-cta aria-label="Reactivate membership and receive 250 bonus entries">
+          <span data-lmct-shared-cta-label>Reactivate &amp; restore my entries</span>
+          <span class="lmctWinbackBonus__ctaIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </span>
+        </a>
+
+        <div class="lmctWinbackBonus__loading" role="status" aria-live="polite">Confirming your membership</div>
+        <div class="lmctWinbackBonus__error" role="status">We couldn&rsquo;t confirm your previous membership. Please use the personal link from your LMCT+ winback email or contact support.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lmctWinbackFinal" data-state="loading" aria-labelledby="lmctWinbackFinal-title" aria-busy="true">
+  <span class="lmctWinbackFinal__sweep" aria-hidden="true"></span>
+
+  <div class="lmctWinbackFinal__inner">
+    <div class="lmctWinbackFinal__content">
+      <div class="lmctWinbackFinal__main">
+        <div class="lmctWinbackFinal__copy">
+          <p class="lmctWinbackFinal__eyebrow">Your entries won&rsquo;t wait forever</p>
+          <h2 class="lmctWinbackFinal__title" id="lmctWinbackFinal-title">
+            Don&rsquo;t let your
+            <span>accumulated entries disappear.</span>
+          </h2>
+          <p class="lmctWinbackFinal__lead">Reactivate your membership <strong>before your accumulated entries are removed.</strong></p>
+        </div>
+
+        <div class="lmctWinbackFinal__visual" aria-label="Restore accumulated entries and receive 250 bonus entries">
+          <div class="lmctWinbackFinal__restoreVisual" aria-hidden="true">
+            <span class="lmctWinbackFinal__restoreWord">Restore</span>
+            <span class="lmctWinbackFinal__plus">+</span>
+            <strong class="lmctWinbackFinal__bonus">250</strong>
+            <span class="lmctWinbackFinal__bonusLabel">Bonus entries</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lmctWinbackFinal__conversion">
+        <div class="lmctWinbackFinal__tier" aria-live="polite">
+          <span class="lmctWinbackFinal__tierIcon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3 4 7v6c0 5 3.5 7.5 8 8 4.5-.5 8-3 8-8V7l-8-4Z" />
+              <path d="m9 12 2 2 4-5" />
+            </svg>
+          </span>
+          <span>Reactivate your <strong data-lmct-final-plan>membership</strong></span>
+        </div>
+
+        <span class="lmctWinbackShared__planTerms" data-lmct-plan-summary></span>
+
+        <div class="lmctWinbackFinal__actionRow">
+          <div class="lmctWinbackFinal__ctaWrap">
+            <div class="lmctWinbackFinal__actionError" role="alert">We couldn&rsquo;t complete your reactivation. Please try again or contact LMCT+ support.</div>
+
+            <a class="lmctWinbackFinal__cta" href="#open-popup" data-lmct-final-cta>
+              <span data-lmct-final-cta-label data-lmct-shared-cta-label>Reactivate &amp; restore my entries</span>
+              <span class="lmctWinbackFinal__ctaIcon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="m13 6 6 6-6 6" />
+                </svg>
+              </span>
+            </a>
+
+            <div class="lmctWinbackFinal__loading" role="status" aria-live="polite">Confirming your membership</div>
+            <div class="lmctWinbackFinal__lookupError" role="alert">
+              We couldn&rsquo;t load your previous membership. Please use the personal link from your LMCT+ winback email or contact support.
+            </div>
+          </div>
+
+          <ul class="lmctWinbackFinal__values" aria-label="Reactivation value">
+            <li class="lmctWinbackFinal__value">
+              <span class="lmctWinbackFinal__valueVerb">Restore</span>
+              <strong class="lmctWinbackFinal__valueObject">All accumulated entries</strong>
+            </li>
+            <li class="lmctWinbackFinal__value">
+              <span class="lmctWinbackFinal__valueVerb">Get</span>
+              <strong class="lmctWinbackFinal__valueObject">250 bonus entries</strong>
+            </li>
+            <li class="lmctWinbackFinal__value">
+              <span class="lmctWinbackFinal__valueVerb">Resume</span>
+              <strong class="lmctWinbackFinal__valueObject">Previous membership</strong>
+            </li>
+          </ul>
+        </div>
+
+        <p class="lmctWinbackFinal__disclaimer">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 11v5" />
+            <path d="M12 8h.01" />
+          </svg>
+          Free bonus entries are added to accounts on the day of the draw.
+        </p>
+      </div>
+    </div>
+
+    <div class="lmctWinbackFinal__success" role="status" aria-live="polite">
+      <span class="lmctWinbackFinal__successIcon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 12 4 4L19 6" />
+        </svg>
+      </span>
+      <p class="lmctWinbackFinal__successEyebrow">Reactivation complete</p>
+      <h2 class="lmctWinbackFinal__successTitle">Membership restored</h2>
+      <p class="lmctWinbackFinal__successCopy">
+        Your <strong data-lmct-final-success-plan>membership</strong> has been reactivated and your accumulated entries have been restored. Your 250 bonus entries will be added to your account on the
+        day of the draw.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    "use strict";
+
+    /*
+      EDIT THIS ONE VARIABLE TO SHOW THE RELATED PREVIOUS PLAN/PACKAGE.
+
+      Production links must also include a matching plan access token:
+        ?plan=entry&token=YOUR_ENTRY_TOKEN
+
+      The query-string plan overrides the plan below only after its token hash
+      is verified. The package remains controlled by this member variable.
+
+      plan:
+        "entry", "premium", "elite", or "saver-win"
+
+      package:
+        "monthly" or "yearly"
+        Saver + Win currently supports "yearly" only because no monthly
+        package data was supplied.
+
+      accumulatedEntries:
+        Set the member's verified count whenever available. Use null only
+        when the exact count is unavailable; the UI will display "All your".
+
+      reactivationUrl:
+        Optional approved ClickFunnels/checkout URL. Leave blank when an
+        existing lmct:winback-reactivate event handler owns the action.
+    */
+    window.LMCT_WINBACK_MEMBER = window.LMCT_WINBACK_MEMBER || {
+      email: "",
+      plan: "Elite",
+      package: "monthly",
+      accumulatedEntries: null,
+      currentDrawName: "",
+      reactivationUrl: "",
+    };
+
+    // ====================================================
+    // CRITICAL MONTHLY MAINTENANCE
+    // UPDATE ON EVERY MAJOR DRAW DAY
+    //
+    // Klaviyo List:
+    // "250 bonus entries - cancelled members [month]"
+    //
+    // The backend/shared success handler is the single
+    // authority that adds the member to this list.
+    // ====================================================
+    window.LMCT_WINBACK_CONFIG = window.LMCT_WINBACK_CONFIG || {};
+    if (!window.LMCT_WINBACK_CONFIG.klaviyoListId) {
+      window.LMCT_WINBACK_CONFIG.klaviyoListId = "XC9vCQ";
+    }
+    if (!window.LMCT_WINBACK_CONFIG.checkoutModalSelector) {
+      window.LMCT_WINBACK_CONFIG.checkoutModalSelector = "#modalPopup";
+    }
+    if (typeof window.LMCT_WINBACK_CONFIG.requirePlanToken !== "boolean") {
+      window.LMCT_WINBACK_CONFIG.requirePlanToken = true;
+    }
+
+    var PLAN_CATALOG = {
+      entry: {
+        key: "entry",
+        name: "Entry",
+        packages: {
+          monthly: { productId: "5123045", label: "Entry Monthly", price: "$19.99", cadence: "/ month", billingNote: "Cancel anytime" },
+          yearly: { productId: "5123048", label: "Entry Yearly", price: "$199", cadence: "/ year", billingNote: "Billed annually" },
+        },
+      },
+      premium: {
+        key: "premium",
+        name: "Premium",
+        packages: {
+          monthly: { productId: "5123046", label: "Premium Monthly", price: "$49.99", cadence: "/ month", billingNote: "Cancel anytime" },
+          yearly: { productId: "5123049", label: "Premium Yearly", price: "$499", cadence: "/ year", billingNote: "Billed annually" },
+        },
+      },
+      elite: {
+        key: "elite",
+        name: "Elite",
+        packages: {
+          monthly: { productId: "5123047", label: "Elite Monthly", price: "$99.99", cadence: "/ month", billingNote: "Cancel anytime" },
+          yearly: { productId: "5123050", label: "Elite Yearly", price: "$999", cadence: "/ year", billingNote: "Billed annually" },
+        },
+      },
+      "saver-win": {
+        key: "saver-win",
+        name: "Saver + Win",
+        packages: {
+          yearly: { productId: null, label: "Saver + Win Yearly", price: "$199", cadence: "/ year", billingNote: "Billed annually" },
+        },
+      },
+    };
+
+    /* Plan tokens used in the matching Klaviyo/email reactivation links. */
+    var PLAN_TOKENS = {
+      entry: "vCgn42K0ZjeRNepLz1v-C7bSu7Wo8Q59pDRrVMvdSNk",
+      premium: "nlCrx4xTxFvL9gjuWeLqBPjTV6OLaMXv1Rq8_P6OpUM",
+      elite: "EA_FacLPpSKqbVJj5XugRnPaeI9SnHumMcJpjWsWmJs",
+      "saver-win": "3DCke_W5mimCcOi9UJkbzyQTxQBSoMsYeQ5AoUaDrLg",
+    };
+
+    var member = window.LMCT_WINBACK_MEMBER;
+    var hero = document.querySelector(".lmctWinbackHero");
+    var restoration = document.querySelector(".lmctWinbackRestore");
+    var bonus = document.querySelector(".lmctWinbackBonus");
+    var finalSection = document.querySelector(".lmctWinbackFinal");
+    var actionButtons = document.querySelectorAll("[data-lmct-reactivate], [data-lmct-restore-cta], [data-lmct-bonus-cta], [data-lmct-final-cta]");
+    var selectedPlan = null;
+    var selectedPackage = null;
+    var sharedState = null;
+
+    function normalizePlan(value) {
+      var key = String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[_\s+]+/g, "-")
+        .replace(/-+/g, "-");
+
+      if (key === "saver-and-win" || key === "saverwin") return "saver-win";
+      if (key === "bronze") return "entry";
+      if (key === "silver") return "premium";
+      if (key === "gold") return "elite";
+      return key;
+    }
+
+    function normalizePackage(value) {
+      var key = String(value || "")
+        .trim()
+        .toLowerCase();
+      if (key === "annual" || key === "annually") return "yearly";
+      if (key === "month") return "monthly";
+      if (key === "year") return "yearly";
+      return key;
+    }
+
+    function applyQueryPlanAccess() {
+      var params = new URLSearchParams(window.location.search);
+      var hasPlan = params.has("plan");
+      var hasToken = params.has("token");
+
+      if (!hasPlan && !hasToken && !window.LMCT_WINBACK_CONFIG.requirePlanToken) {
+        return true;
+      }
+
+      var requestedPlan = normalizePlan(params.get("plan"));
+      var suppliedToken = String(params.get("token") || "").trim();
+      var expectedToken = PLAN_TOKENS[requestedPlan];
+
+      if (!hasPlan || !hasToken || !PLAN_CATALOG[requestedPlan] || !expectedToken || !suppliedToken) {
+        return false;
+      }
+
+      if (suppliedToken !== expectedToken) return false;
+      member.plan = requestedPlan;
+      if (requestedPlan === "saver-win") member.package = "yearly";
+      return true;
+    }
+
+    function formatEntries(value) {
+      if (value === null || value === undefined || value === "") {
+        return { hero: "All your", section: "All", raw: null };
+      }
+
+      var number = Number(value);
+      if (!Number.isFinite(number) || number < 0) {
+        return { hero: "All your", section: "All", raw: null };
+      }
+
+      var rounded = Math.floor(number);
+      var formatted = rounded.toLocaleString("en-AU");
+      return { hero: formatted, section: formatted, raw: rounded };
+    }
+
+    function safeUrl(value) {
+      if (!value) return null;
+      try {
+        var url = new URL(String(value), window.location.href);
+        return url.protocol === "https:" || url.protocol === "http:" ? url.toString() : null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function cleanDrawName(value) {
+      var name = String(value || "").trim();
+      if (!name || name.length > 100) return null;
+      return name.replace(/\s+draw$/i, "").trim();
+    }
+
+    function setText(selector, value, scope) {
+      var element = (scope || document).querySelector(selector);
+      if (element) element.textContent = value;
+    }
+
+    function setAllText(selector, value) {
+      document.querySelectorAll(selector).forEach(function (element) {
+        element.textContent = value;
+      });
+    }
+
+    function getPackageSummary(packageData) {
+      return packageData.price + " " + packageData.cadence + " \u2022 " + packageData.billingNote;
+    }
+
+    function setState(element, state) {
+      if (!element) return;
+      element.setAttribute("data-state", state);
+      if (element.hasAttribute("aria-busy")) {
+        element.setAttribute("aria-busy", state === "loading" || state === "submitting" ? "true" : "false");
+      }
+    }
+
+    function publishState(status, extra) {
+      sharedState = Object.assign({}, sharedState || {}, extra || {}, { status: status });
+      window.LMCT_WINBACK_STATE = sharedState;
+      window.dispatchEvent(
+        new CustomEvent("lmct:winback-state", {
+          detail: Object.assign({}, sharedState),
+        }),
+      );
+    }
+
+    function showConfigurationError() {
+      setState(hero, "error");
+      setState(restoration, "error");
+      setState(bonus, "error");
+      setState(finalSection, "lookup-error");
+    }
+
+    function setDrawCopy(drawName) {
+      var name = cleanDrawName(drawName);
+      var display = name ? name + " Draw" : "Current Major Draw";
+      var sentence = name ? "the " + name + " draw" : "the current major draw";
+      var labels = document.querySelectorAll("[data-lmct-bonus-draw], [data-lmct-bonus-draw-stub]");
+
+      labels.forEach(function (label) {
+        label.textContent = display;
+      });
+      setText("[data-lmct-bonus-draw-copy]", sentence, bonus);
+
+      var visual = bonus && bonus.querySelector(".lmctWinbackBonus__visual");
+      if (visual) visual.setAttribute("aria-label", "250 bonus entries into " + sentence);
+    }
+
+    function renderMember() {
+      var planKey = normalizePlan(member.plan);
+      var packageKey = normalizePackage(member.package);
+      selectedPlan = PLAN_CATALOG[planKey] || null;
+      selectedPackage = selectedPlan && selectedPlan.packages[packageKey];
+
+      if (!selectedPlan || !selectedPackage) {
+        showConfigurationError();
+        return;
+      }
+
+      var entries = formatEntries(member.accumulatedEntries);
+      var fullPlanName = selectedPlan.name + " Membership";
+      var packageSummary = getPackageSummary(selectedPackage);
+      var sharedCtaLabel = "Reactivate & restore my entries";
+
+      setText("[data-lmct-tier-name]", fullPlanName, hero);
+      setText("[data-lmct-entry-value]", entries.hero, hero);
+
+      setText("[data-lmct-restore-plan]", selectedPlan.name, restoration);
+      setText("[data-lmct-risk-entries]", entries.section, restoration);
+      setText("[data-lmct-restored-entries]", entries.section, restoration);
+
+      setText("[data-lmct-bonus-plan]", fullPlanName, bonus);
+      setDrawCopy(member.currentDrawName);
+
+      setText("[data-lmct-final-plan]", fullPlanName, finalSection);
+      setText("[data-lmct-final-success-plan]", fullPlanName, finalSection);
+      setAllText("[data-lmct-plan-summary]", packageSummary);
+      setAllText("[data-lmct-shared-cta-label]", sharedCtaLabel);
+
+      setState(hero, "ready");
+      setState(restoration, "ready");
+      setState(bonus, "ready");
+      setState(finalSection, "ready");
+
+      sharedState = {
+        status: "ready",
+        email: String(member.email || "").trim() || null,
+        tier: selectedPlan.key,
+        membershipName: selectedPlan.name,
+        package: packageKey,
+        packageLabel: selectedPackage.label,
+        productId: selectedPackage.productId,
+        price: selectedPackage.price,
+        cadence: selectedPackage.cadence,
+        billingNote: selectedPackage.billingNote,
+        accumulatedEntries: entries.raw,
+        currentDrawName: cleanDrawName(member.currentDrawName),
+        reactivationUrl: safeUrl(member.reactivationUrl),
+      };
+
+      publishState("ready");
+    }
+
+    function setButtonsDisabled(disabled) {
+      actionButtons.forEach(function (button) {
+        button.setAttribute("aria-disabled", disabled ? "true" : "false");
+        if (disabled) {
+          button.setAttribute("tabindex", "-1");
+        } else {
+          button.removeAttribute("tabindex");
+        }
+      });
+    }
+
+    function showSubmitting() {
+      if (!sharedState) return;
+      setButtonsDisabled(true);
+      setState(finalSection, "submitting");
+      setText("[data-lmct-final-cta-label]", "Reactivating membership...", finalSection);
+    }
+
+    function showActionError() {
+      setButtonsDisabled(false);
+      setState(finalSection, "action-error");
+      setText("[data-lmct-final-cta-label]", "Try reactivation again", finalSection);
+      publishState("ready");
+    }
+
+    function showSuccess(detail) {
+      var result = detail || {};
+      var returnedName = String(result.membershipName || selectedPlan.name)
+        .replace(/\s+Membership$/i, "")
+        .trim();
+      setButtonsDisabled(true);
+      setText("[data-lmct-final-success-plan]", returnedName + " Membership", finalSection);
+      setState(finalSection, "success");
+      publishState("success", { membershipName: returnedName });
+
+      var redirectUrl = safeUrl(result.redirectUrl);
+      if (redirectUrl) window.location.assign(redirectUrl);
+    }
+
+    function actionDetail() {
+      return Object.assign({}, sharedState, {
+        klaviyoListId: window.LMCT_WINBACK_CONFIG.klaviyoListId,
+      });
+    }
+
+    function selectClickFunnelsProduct(productId) {
+      if (!productId) return false;
+
+      var modal = document.querySelector(window.LMCT_WINBACK_CONFIG.checkoutModalSelector);
+      var productScope = modal || document;
+      var matchingInputs = productScope.querySelectorAll('input[name="purchase[product_id]"][value="' + productId + '"]');
+      var productInput = null;
+      matchingInputs.forEach(function (input) {
+        if (!productInput && !input.closest("#cfAR")) productInput = input;
+      });
+      if (!productInput) return false;
+
+      var productTable = productInput.closest(".elOrderProductOptions");
+      if (productTable) {
+        productTable.querySelectorAll('[data-cf-product-template="true"]').forEach(function (row) {
+          var rowInput = row.querySelector('input[name="purchase[product_id]"]');
+          var isSelectedProduct = rowInput && rowInput.value === String(productId);
+          row.style.setProperty("display", isSelectedProduct ? "table-row" : "none", "important");
+          row.classList.toggle("checked-item", Boolean(isSelectedProduct));
+        });
+      }
+
+      productInput.click();
+
+      if (typeof window.rebuildOrderSummary === "function") {
+        window.rebuildOrderSummary();
+      }
+
+      return true;
+    }
+
+    function reactivateMembership(clickEvent) {
+      if (!clickEvent) {
+        var primaryPopupLink = Array.prototype.find.call(actionButtons, function (button) {
+          return button.getAttribute("aria-disabled") !== "true";
+        });
+        if (primaryPopupLink) primaryPopupLink.click();
+        return;
+      }
+
+      if (clickEvent.currentTarget.getAttribute("aria-disabled") === "true") {
+        clickEvent.preventDefault();
+        return;
+      }
+
+      if (!sharedState || !selectedPlan || !selectedPackage) {
+        clickEvent.preventDefault();
+        showConfigurationError();
+        return;
+      }
+
+      var detail = actionDetail();
+      var eventTarget = hero || document;
+      var proceed = eventTarget.dispatchEvent(
+        new CustomEvent("lmct:winback-reactivate", {
+          bubbles: true,
+          cancelable: true,
+          detail: detail,
+        }),
+      );
+
+      if (!proceed) {
+        clickEvent.preventDefault();
+        return;
+      }
+
+      if (typeof window.LMCT_WINBACK_REACTIVATE_HANDLER === "function") {
+        clickEvent.preventDefault();
+        var result;
+        try {
+          result = window.LMCT_WINBACK_REACTIVATE_HANDLER(detail);
+        } catch (error) {
+          showActionError();
+          return;
+        }
+
+        if (result && typeof result.then === "function") {
+          showSubmitting();
+          Promise.resolve(result).then(showSuccess).catch(showActionError);
+        }
+        return;
+      }
+
+      if (sharedState.reactivationUrl) {
+        clickEvent.preventDefault();
+        window.location.assign(sharedState.reactivationUrl);
+        return;
+      }
+
+      if (selectClickFunnelsProduct(sharedState.productId)) return;
+      clickEvent.preventDefault();
+      showActionError();
+    }
+
+    actionButtons.forEach(function (button) {
+      button.addEventListener("click", function (event) {
+        reactivateMembership(event);
+      });
+    });
+
+    window.addEventListener("lmct:winback-reactivation-start", showSubmitting);
+    window.addEventListener("lmct:winback-reactivation-success", function (event) {
+      showSuccess(event && event.detail);
+    });
+    window.addEventListener("lmct:winback-reactivation-error", showActionError);
+
+    window.LMCT_WINBACK = {
+      reactivate: reactivateMembership,
+      success: showSuccess,
+      error: showActionError,
+      getState: function () {
+        return Object.assign({}, sharedState || {});
+      },
+    };
+
+    var revealSections = [restoration, bonus, finalSection].filter(Boolean);
+    if (typeof IntersectionObserver === "function") {
+      var revealObserver = new IntersectionObserver(
+        function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.16 },
+      );
+
+      revealSections.forEach(function (section) {
+        revealObserver.observe(section);
+      });
+
+      if (finalSection) {
+        var stickyObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              document.body.classList.toggle("lmctWinbackFinal-isVisible", entry.isIntersecting);
+            });
+          },
+          { threshold: 0.12 },
+        );
+        stickyObserver.observe(finalSection);
+      }
+    } else {
+      revealSections.forEach(function (section) {
+        section.classList.add("is-visible");
+      });
+    }
+
+    if (applyQueryPlanAccess()) {
+      renderMember();
+    } else {
+      showConfigurationError();
+    }
+  })();
+</script>

@@ -1,0 +1,923 @@
+<!--
+  LMCT+ Adelaide petrol waitlist thank-you page.
+  Built as a standalone ClickFunnels custom HTML section.
+  This confirms contact-detail submission only, not a purchase or membership.
+-->
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@400;500;600;700;800&display=swap");
+
+  .lmctAATY,
+  .lmctAATY *,
+  .lmctAATY *::before,
+  .lmctAATY *::after {
+    box-sizing: border-box;
+  }
+
+  .lmctAATY {
+    --lmctAATY-navy: #020d48;
+    --lmctAATY-navy-deep: #01072c;
+    --lmctAATY-blue: #075ee6;
+    --lmctAATY-cyan: #19d5ff;
+    --lmctAATY-lime: #cfff00;
+    --lmctAATY-lime-bright: #ecff28;
+    --lmctAATY-white: #ffffff;
+    --lmctAATY-ink: #101a3b;
+    --lmctAATY-muted: #60708f;
+    --lmctAATY-line: rgba(2, 13, 72, 0.12);
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lmctAATY-white);
+    background: var(--lmctAATY-navy-deep);
+    font-family: "Inter", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .lmctAATY a {
+    color: inherit;
+  }
+
+  .lmctAATY__hero {
+    position: relative;
+    isolation: isolate;
+    min-height: min(820px, 92vh);
+    overflow: hidden;
+    background: radial-gradient(circle at 19% 34%, rgba(0, 122, 255, 0.52), transparent 31rem), linear-gradient(145deg, #062378 0%, var(--lmctAATY-navy) 48%, var(--lmctAATY-navy-deep) 100%);
+  }
+
+  .lmctAATY__hero::before {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    content: "";
+    background-image:
+      linear-gradient(90deg, rgba(1, 7, 44, 0.96) 0%, rgba(1, 8, 45, 0.82) 43%, rgba(1, 8, 45, 0.24) 72%, rgba(1, 8, 45, 0.28) 100%),
+      linear-gradient(180deg, rgba(1, 7, 44, 0.05) 55%, rgba(1, 7, 44, 0.88) 100%), url("https://images.clickfunnels.com/e4/70cda36bd345caa0a3ca2dd6524c22/Adelaide-Petrol-Hero-Image.png");
+    background-position:
+      center,
+      center,
+      right center;
+    background-repeat: no-repeat;
+    background-size:
+      100% 100%,
+      100% 100%,
+      cover;
+  }
+
+  .lmctAATY__hero::after {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    opacity: 0.18;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent 84%);
+    mask-image: linear-gradient(to bottom, #000, transparent 84%);
+    pointer-events: none;
+  }
+
+  .lmctAATY__shell {
+    width: min(calc(100% - 56px), 1180px);
+    margin-inline: auto;
+  }
+
+  .lmctAATY__header {
+    display: flex;
+    min-height: 108px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .lmctAATY__logo {
+    display: block;
+    width: clamp(165px, 18vw, 236px);
+    height: auto;
+  }
+
+  .lmctAATY__location {
+    display: inline-flex;
+    max-width: 390px;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 16px;
+    border: 1px solid rgba(25, 213, 255, 0.42);
+    border-radius: 8px;
+    color: var(--lmctAATY-white);
+    background: rgba(2, 13, 72, 0.62);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.35;
+    backdrop-filter: blur(10px);
+  }
+
+  .lmctAATY__location svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    color: var(--lmctAATY-cyan);
+  }
+
+  .lmctAATY__location strong {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--lmctAATY-cyan);
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctAATY__heroGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(350px, 0.72fr);
+    align-items: center;
+    gap: clamp(42px, 7vw, 88px);
+    min-height: 650px;
+    padding: clamp(60px, 8vw, 96px) 0 92px;
+  }
+
+  .lmctAATY__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 22px;
+    color: var(--lmctAATY-lime);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctAATY__statusIcon {
+    display: grid;
+    width: 27px;
+    height: 27px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctAATY-navy-deep);
+    background: var(--lmctAATY-lime);
+    box-shadow: 0 0 0 7px rgba(207, 255, 0, 0.1);
+  }
+
+  .lmctAATY__statusIcon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .lmctAATY__title {
+    max-width: 730px;
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(30px, 12vw, 90px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.78;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .lmctAATY__title span {
+    display: block;
+    margin-top: 16px;
+    color: var(--lmctAATY-lime);
+    text-shadow: 0 0 32px rgba(207, 255, 0, 0.17);
+  }
+
+  .lmctAATY__lead {
+    max-width: 610px;
+    margin: 30px 0 0;
+    color: #e1e8f8;
+    font-size: clamp(16px, 1.55vw, 20px);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .lmctAATY__lead strong {
+    color: var(--lmctAATY-white);
+    font-weight: 800;
+  }
+
+  .lmctAATY__assurance {
+    display: flex;
+    gap: 12px 24px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+
+  .lmctAATY__assurance span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--lmctAATY-muted);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .lmctAATY__assurance span::before {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    content: "";
+    background: var(--lmctAATY-cyan);
+    box-shadow: 0 0 10px rgba(25, 213, 255, 0.7);
+  }
+
+  .lmctAATY__summary {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-radius: 8px;
+    color: var(--lmctAATY-ink);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 32px 80px rgba(0, 5, 48, 0.44);
+    backdrop-filter: blur(16px);
+  }
+
+  .lmctAATY__summary::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 6px;
+    content: "";
+    background: linear-gradient(90deg, var(--lmctAATY-cyan), var(--lmctAATY-blue), var(--lmctAATY-lime));
+  }
+
+  .lmctAATY__summaryHead {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 27px 28px 22px;
+  }
+
+  .lmctAATY__summaryCheck {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctAATY-navy-deep);
+    background: var(--lmctAATY-lime);
+    box-shadow: 0 10px 25px rgba(142, 186, 0, 0.25);
+  }
+
+  .lmctAATY__summaryCheck svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .lmctAATY__summaryHead span {
+    margin-bottom: 5px;
+    color: var(--lmctAATY-blue);
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctAATY__summaryHead h2 {
+    margin: 0;
+    color: var(--lmctAATY-navy);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 29px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctAATY__offerSummary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--lmctAATY-line);
+    border-bottom: 1px solid var(--lmctAATY-line);
+  }
+
+  .lmctAATY__metric {
+    min-width: 0;
+    padding: 25px 26px;
+  }
+
+  .lmctAATY__metric + .lmctAATY__metric {
+    border-left: 1px solid var(--lmctAATY-line);
+  }
+
+  .lmctAATY__metric small {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--lmctAATY-muted);
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .lmctAATY__metric strong {
+    display: block;
+    color: var(--lmctAATY-navy);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(42px, 5vw, 58px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.8;
+  }
+
+  .lmctAATY__metric--bonus strong {
+    color: #609100;
+  }
+
+  .lmctAATY__metric span {
+    display: block;
+    margin-top: 11px;
+    color: var(--lmctAATY-muted);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .lmctAATY__summaryNote {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin: 0;
+    padding: 20px 28px 24px;
+    color: var(--lmctAATY-muted);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctAATY__summaryNote svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    color: var(--lmctAATY-blue);
+  }
+
+  .lmctAATY__next {
+    color: var(--lmctAATY-ink);
+    background: #f4f7fb;
+  }
+
+  .lmctAATY__nextInner {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.68fr) minmax(0, 1.32fr);
+    gap: clamp(44px, 8vw, 100px);
+    padding: clamp(70px, 8vw, 106px) 0;
+  }
+
+  .lmctAATY__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: var(--lmctAATY-blue);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctAATY__eyebrow::before {
+    width: 28px;
+    height: 2px;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctAATY__nextTitle {
+    margin: 17px 0 0;
+    color: var(--lmctAATY-navy);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(48px, 5.6vw, 72px);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 0.88;
+    text-transform: uppercase;
+  }
+
+  .lmctAATY__nextIntro {
+    margin: 22px 0 0;
+    color: var(--lmctAATY-muted);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .lmctAATY__waitNotice {
+    display: flex;
+    max-width: 500px;
+    align-items: flex-start;
+    gap: 13px;
+    margin-top: 28px;
+    padding: 17px 18px;
+    border: 1px solid rgba(7, 94, 230, 0.18);
+    border-radius: 8px;
+    color: var(--lmctAATY-muted);
+    background: var(--lmctAATY-white);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctAATY__waitNotice svg {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 21px;
+    color: var(--lmctAATY-blue);
+  }
+
+  .lmctAATY__waitNotice strong {
+    color: var(--lmctAATY-navy);
+    font-weight: 800;
+  }
+
+  .lmctAATY__steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    align-self: center;
+  }
+
+  .lmctAATY__steps::before {
+    position: absolute;
+    top: 24px;
+    right: 16.66%;
+    left: 16.66%;
+    height: 2px;
+    content: "";
+    background: linear-gradient(90deg, var(--lmctAATY-blue), var(--lmctAATY-cyan), #76a800);
+  }
+
+  .lmctAATY__step {
+    position: relative;
+    min-width: 0;
+    padding: 0 clamp(14px, 2vw, 25px);
+    text-align: center;
+  }
+
+  .lmctAATY__stepNumber {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 22px;
+    place-items: center;
+    border: 5px solid #f4f7fb;
+    border-radius: 50%;
+    color: var(--lmctAATY-white);
+    background: var(--lmctAATY-blue);
+    box-shadow: 0 0 0 1px rgba(7, 94, 230, 0.26);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .lmctAATY__step:nth-child(3) .lmctAATY__stepNumber {
+    color: var(--lmctAATY-navy-deep);
+    background: var(--lmctAATY-lime);
+    box-shadow: 0 0 0 1px rgba(118, 168, 0, 0.28);
+  }
+
+  .lmctAATY__step h3 {
+    margin: 0;
+    color: var(--lmctAATY-navy);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAATY__step p {
+    margin: 10px 0 0;
+    color: var(--lmctAATY-muted);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.55;
+  }
+
+  .lmctAATY__help {
+    color: var(--lmctAATY-white);
+    background: var(--lmctAATY-navy);
+  }
+
+  .lmctAATY__helpInner {
+    display: flex;
+    min-height: 90px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .lmctAATY__helpText {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    color: #d7e1f5;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .lmctAATY__helpText svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    color: var(--lmctAATY-cyan);
+  }
+
+  .lmctAATY__helpStatus {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 9px;
+    color: var(--lmctAATY-lime);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .lmctAATY__helpStatus svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .lmctAATY a:focus-visible {
+    outline: 3px solid var(--lmctAATY-cyan);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .lmctAATY__hero {
+      min-height: auto;
+    }
+
+    .lmctAATY__hero::before {
+      background-image:
+        linear-gradient(180deg, rgba(1, 7, 44, 0.5) 0%, rgba(1, 7, 44, 0.9) 55%, var(--lmctAATY-navy-deep) 100%),
+        url("https://images.clickfunnels.com/e4/70cda36bd345caa0a3ca2dd6524c22/Adelaide-Petrol-Hero-Image.png");
+      background-position:
+        center,
+        70% top;
+      background-size:
+        100% 100%,
+        auto 760px;
+    }
+
+    .lmctAATY__heroGrid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      min-height: 0;
+      padding-bottom: 78px;
+    }
+
+    .lmctAATY__copy {
+      max-width: 690px;
+    }
+
+    .lmctAATY__summary {
+      width: min(100%, 600px);
+    }
+
+    .lmctAATY__nextInner {
+      grid-template-columns: 1fr;
+      gap: 55px;
+    }
+
+    .lmctAATY__nextIntro {
+      max-width: 580px;
+    }
+
+    .lmctAATY__waitNotice {
+      max-width: 430px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .lmctAATY__shell {
+      width: min(calc(100% - 28px), 560px);
+    }
+
+    .lmctAATY__header {
+      min-height: 92px;
+    }
+
+    .lmctAATY__logo {
+      width: 154px;
+    }
+
+    .lmctAATY__location {
+      max-width: 180px;
+      padding: 9px 10px;
+      font-size: 9px;
+    }
+
+    .lmctAATY__location strong {
+      font-size: 8px;
+    }
+
+    .lmctAATY__heroGrid {
+      gap: 38px;
+      padding: 56px 0 62px;
+    }
+
+    /* .lmctAATY__title {
+      font-size: clamp(64px, 20vw, 88px);
+    } */
+
+    .lmctAATY__lead {
+      margin-top: 25px;
+      font-size: 15px;
+    }
+
+    .lmctAATY__assurance {
+      gap: 10px 18px;
+      margin-top: 24px;
+    }
+
+    .lmctAATY__summaryHead {
+      padding: 24px 20px 19px;
+    }
+
+    .lmctAATY__offerSummary {
+      grid-template-columns: 1fr;
+    }
+
+    .lmctAATY__metric {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 2px 18px;
+      padding: 19px 20px;
+    }
+
+    .lmctAATY__metric + .lmctAATY__metric {
+      border-top: 1px solid var(--lmctAATY-line);
+      border-left: 0;
+    }
+
+    .lmctAATY__metric small,
+    .lmctAATY__metric span {
+      grid-column: 1;
+    }
+
+    .lmctAATY__metric strong {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      font-size: 48px;
+    }
+
+    .lmctAATY__metric span {
+      margin-top: 3px;
+    }
+
+    .lmctAATY__summaryNote {
+      padding: 18px 20px 22px;
+    }
+
+    .lmctAATY__nextInner {
+      gap: 42px;
+      padding: 62px 0;
+    }
+
+    .lmctAATY__steps {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding-left: 7px;
+    }
+
+    .lmctAATY__steps::before {
+      top: 25px;
+      right: auto;
+      bottom: 58px;
+      left: 31px;
+      width: 2px;
+      height: auto;
+      background: linear-gradient(180deg, var(--lmctAATY-blue), var(--lmctAATY-cyan), #76a800);
+    }
+
+    .lmctAATY__step {
+      display: grid;
+      grid-template-columns: 50px minmax(0, 1fr);
+      gap: 4px 18px;
+      padding: 0 0 30px;
+      text-align: left;
+    }
+
+    .lmctAATY__stepNumber {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      margin: 0;
+    }
+
+    .lmctAATY__step h3,
+    .lmctAATY__step p {
+      grid-column: 2;
+    }
+
+    .lmctAATY__step h3 {
+      align-self: end;
+    }
+
+    .lmctAATY__step p {
+      margin-top: 4px;
+    }
+
+    .lmctAATY__helpInner {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+      padding: 22px 0;
+    }
+  }
+
+  @media (max-width: 410px) {
+    .lmctAATY__header {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 16px;
+      padding: 21px 0;
+    }
+
+    .lmctAATY__location {
+      max-width: none;
+    }
+
+    .lmctAATY__title {
+      font-size: 61px;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lmctAATY__statusIcon,
+    .lmctAATY__summaryCheck {
+      animation: lmctAATYConfirm 700ms cubic-bezier(0.2, 0.9, 0.3, 1.25) both;
+    }
+
+    .lmctAATY__summary {
+      animation: lmctAATYCardIn 650ms ease-out 120ms both;
+    }
+  }
+
+  @keyframes lmctAATYConfirm {
+    from {
+      opacity: 0;
+      transform: scale(0.65);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes lmctAATYCardIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<main class="lmctAATY">
+  <section class="lmctAATY__hero" aria-labelledby="lmctAATY-title">
+    <div class="lmctAATY__shell">
+      <header class="lmctAATY__header">
+        <img class="lmctAATY__logo" src="https://lmctgiveaway.com/hosted/images/9d/e689b69ee84bdba5156761d85e6bf9/LMCT-PETROL-LOGO.svg" alt="LMCT+ Petrol" width="250" height="82" />
+
+        <div class="lmctAATY__location">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+            <circle cx="12" cy="10" r="2.5" />
+          </svg>
+          <span><strong>Adelaide location</strong>1112 South Rd &amp; Daws Rd, Edwardstown SA</span>
+        </div>
+      </header>
+
+      <div class="lmctAATY__heroGrid">
+        <div class="lmctAATY__copy">
+          <p class="lmctAATY__status">
+            <span class="lmctAATY__statusIcon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 12 4 4L19 6" />
+              </svg>
+            </span>
+            Waitlist spot secured
+          </p>
+
+          <h1 class="lmctAATY__title" id="lmctAATY-title">
+            Congratulations.
+            <span>You&rsquo;re on the waiting list.</span>
+          </h1>
+
+          <p class="lmctAATY__lead">You&rsquo;ve locked your spot on the waiting list. <strong>We will let you know as soon as you can purchase your membership.</strong></p>
+
+          <div class="lmctAATY__assurance" aria-label="Waitlist registration status">
+            <span>Registration received</span>
+            <span>No payment taken</span>
+            <span>Updates by email or phone</span>
+          </div>
+        </div>
+
+        <aside class="lmctAATY__summary" aria-labelledby="lmctAATY-summary-title">
+          <div class="lmctAATY__summaryHead">
+            <span class="lmctAATY__summaryCheck" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m5 12 4 4L19 6" />
+              </svg>
+            </span>
+            <div>
+              <span>Registration complete</span>
+              <h2 id="lmctAATY-summary-title">Adelaide waitlist</h2>
+            </div>
+          </div>
+
+          <div class="lmctAATY__offerSummary">
+            <div class="lmctAATY__metric">
+              <small>Offer registered</small>
+              <strong>$99</strong>
+              <span>Yearly LMCT+ offer</span>
+            </div>
+            <div class="lmctAATY__metric lmctAATY__metric--bonus">
+              <small>Offer registered</small>
+              <strong>+$50</strong>
+              <span>Free petrol offer</span>
+            </div>
+          </div>
+
+          <p class="lmctAATY__summaryNote">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+            This confirms your waitlist registration only. No membership has been activated and no payment has been processed.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctAATY__next" aria-labelledby="lmctAATY-next-title">
+    <div class="lmctAATY__shell lmctAATY__nextInner">
+      <div>
+        <p class="lmctAATY__eyebrow">What happens next</p>
+        <h2 class="lmctAATY__nextTitle" id="lmctAATY-next-title">Keep an eye out.</h2>
+        <p class="lmctAATY__nextIntro">The LMCT+ team will use the email address or phone number you submitted to share updates about the Adelaide waitlist and tell you how to continue.</p>
+
+        <div class="lmctAATY__waitNotice">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 8v4" />
+            <path d="M12 16h.01" />
+          </svg>
+          <span><strong>Nothing else is required right now.</strong> You do not need to download the app, create an account, or make a payment to hold this waitlist registration.</span>
+        </div>
+      </div>
+
+      <div class="lmctAATY__steps" aria-label="Adelaide LMCT+ waitlist next steps">
+        <article class="lmctAATY__step">
+          <span class="lmctAATY__stepNumber" aria-hidden="true">1</span>
+          <h3>Details received</h3>
+          <p>Your name, email address and phone number have been submitted to the Adelaide waitlist.</p>
+        </article>
+
+        <article class="lmctAATY__step">
+          <span class="lmctAATY__stepNumber" aria-hidden="true">2</span>
+          <h3>Watch for an update</h3>
+          <p>Keep an eye on the email inbox and phone number provided with your registration.</p>
+        </article>
+
+        <article class="lmctAATY__step">
+          <span class="lmctAATY__stepNumber" aria-hidden="true">3</span>
+          <h3>Follow the next steps</h3>
+          <p>When LMCT+ contacts you, the message will explain the next step for joining or accessing the offer.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="lmctAATY__help">
+    <div class="lmctAATY__shell lmctAATY__helpInner">
+      <p class="lmctAATY__helpText">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+        Your interest in the Adelaide LMCT+ offer has been registered.
+      </p>
+      <span class="lmctAATY__helpStatus">
+        No payment taken
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="m8 12 3 3 5-6" />
+        </svg>
+      </span>
+    </div>
+  </footer>
+</main>
