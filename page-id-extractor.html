@@ -1,0 +1,11 @@
+<script>
+  function extractPageId() {
+    for (var e = [], t = location.search.substr(1).split("&"), a = 0; a < t.length; a++) "page_id" === (e = t[a].split("="))[0] && (pageId = decodeURIComponent(e[1]));
+    return pageId;
+  }
+  var pageid = document.getElementById("page-id").value ? document.getElementById("page-id").value : extractPageId(),
+    PowerScripts = document.createElement("script"),
+    PageHead = document.getElementsByTagName("head"),
+    url = PageHead[0].hasAttribute("data-this-url") ? new URL(PageHead[0].getAttribute("data-this-url")) : new URL(document.URL);
+  ((PowerScripts.src = "https://ps.boaa.it/powerscripts.js?url=" + url.hostname + "&pageid=" + pageid), document.getElementsByTagName("body")[0].appendChild(PowerScripts));
+</script>

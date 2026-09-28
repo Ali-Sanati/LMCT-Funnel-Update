@@ -1,0 +1,1905 @@
+<!--
+  LMCT+ A6 annual billing page.
+
+  Configure the member's current tier before this block runs:
+
+  window.LMCT_ANNUAL_BILLING_CONFIG = {
+    currentTier: "entry", // "entry", "premium" or "elite"
+    productIds: {
+      entry: "5112721",
+      premium: "5112722",
+      elite: "5112723"
+    },
+    modalSelector: "#modalPopup",
+    allowQueryPreview: false
+  };
+
+  When allowQueryPreview is true, ?tier=entry, ?tier=premium and ?tier=elite
+  can be used for visual QA. Query-string values are not authorization.
+-->
+
+<style>
+  .lmctAnnualBilling,
+  .lmctAnnualBilling *,
+  .lmctAnnualBilling *::before,
+  .lmctAnnualBilling *::after,
+  .lmctAnnualBillingFooter,
+  .lmctAnnualBillingFooter * {
+    box-sizing: border-box;
+  }
+
+  .lmctAnnualBilling {
+    --ab-navy: #071b38;
+    --ab-navy-deep: #031225;
+    --ab-ink: #102b49;
+    --ab-copy: #596f87;
+    --ab-muted: #8ca0b4;
+    --ab-line: #d8e5ef;
+    --ab-surface: #f2f7fb;
+    --ab-white: #ffffff;
+    --ab-blue: #0b7df1;
+    --ab-green: #159447;
+    --ab-gold: #e5a516;
+    --ab-tier: #159447;
+    --ab-tier-dark: #0c7b3b;
+    --ab-tier-deep: #08652f;
+    --ab-tier-soft: #eef9f2;
+    --ab-tier-rgb: 21, 148, 71;
+    width: 100%;
+    overflow: hidden;
+    color: var(--ab-ink);
+    background: var(--ab-white);
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .lmctAnnualBilling svg {
+    display: block;
+  }
+
+  .lmctAnnualBilling a {
+    text-decoration: none;
+  }
+
+  .lmctAnnualBilling__container {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+  }
+
+  .lmctAnnualBilling__hero {
+    position: relative;
+    isolation: isolate;
+    /* min-height: 720px; */
+    color: var(--ab-white);
+    background: linear-gradient(105deg, rgba(var(--ab-tier-rgb), 0.09), transparent 44%), linear-gradient(135deg, var(--ab-navy), var(--ab-navy-deep));
+  }
+
+  .lmctAnnualBilling__hero::before,
+  .lmctAnnualBilling__final::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: "";
+    pointer-events: none;
+    opacity: 0.34;
+    background-image: linear-gradient(rgba(77, 164, 234, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(77, 164, 234, 0.08) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: linear-gradient(to bottom, #000, transparent 94%);
+  }
+
+  .lmctAnnualBilling__hero::after {
+    position: absolute;
+    z-index: -1;
+    top: 14%;
+    right: -13%;
+    width: 52%;
+    aspect-ratio: 1;
+    border: 1px solid rgba(var(--ab-tier-rgb), 0.2);
+    border-radius: 50%;
+    content: "";
+    box-shadow:
+      0 0 0 84px rgba(var(--ab-tier-rgb), 0.035),
+      0 0 0 168px rgba(var(--ab-tier-rgb), 0.02);
+    animation: lmctAnnualOrbit 14s linear infinite;
+  }
+
+  @keyframes lmctAnnualOrbit {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .lmctAnnualBilling__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 84px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .lmctAnnualBilling__logo {
+    display: block;
+    width: 142px;
+    height: auto;
+  }
+
+  .lmctAnnualBilling__secure {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    color: #dbe8f5;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__secure svg {
+    width: 16px;
+    height: 16px;
+    color: #33d68b;
+  }
+
+  .lmctAnnualBilling__heroGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.98fr) minmax(420px, 1.02fr);
+    gap: 76px;
+    align-items: center;
+    min-height: 636px;
+    padding: 68px 0 78px;
+  }
+
+  .lmctAnnualBilling__eyebrow,
+  .lmctAnnualBilling__sectionEyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 17px;
+    color: var(--ab-tier);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__eyebrow::before,
+  .lmctAnnualBilling__sectionEyebrow::before {
+    width: 30px;
+    height: 2px;
+    flex: 0 0 auto;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctAnnualBilling__title,
+  .lmctAnnualBilling__sectionTitle,
+  .lmctAnnualBilling__finalTitle {
+    margin: 0;
+    color: inherit;
+    font-size: 53px;
+    font-weight: 950;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__title em,
+  .lmctAnnualBilling__sectionTitle em,
+  .lmctAnnualBilling__finalTitle em {
+    color: var(--ab-tier);
+    font-style: normal;
+  }
+
+  .lmctAnnualBilling__lead {
+    max-width: 610px;
+    margin: 24px 0 0;
+    color: #c7d7e6;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .lmctAnnualBilling__lead strong {
+    color: var(--ab-white);
+  }
+
+  .lmctAnnualBilling__offerRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+  }
+
+  .lmctAnnualBilling__offerPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+    padding: 7px 12px;
+    border: 1px solid rgba(var(--ab-tier-rgb), 0.42);
+    border-radius: 999px;
+    color: #e8f4ff;
+    background: rgba(var(--ab-tier-rgb), 0.12);
+    font-size: 11px;
+    font-weight: 850;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__offerPill svg {
+    width: 15px;
+    height: 15px;
+    color: var(--ab-tier);
+  }
+
+  .lmctAnnualBilling__cta,
+  .lmctAnnualBilling__finalCta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-width: 320px;
+    min-height: 62px;
+    margin-top: 29px;
+    padding: 12px 14px 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 7px;
+    color: var(--ab-white);
+    background: linear-gradient(135deg, var(--ab-tier), var(--ab-tier-dark));
+    box-shadow: 0 14px 30px rgba(var(--ab-tier-rgb), 0.24);
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1.2;
+    text-transform: uppercase;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      filter 180ms ease;
+  }
+
+  .lmctAnnualBilling__ctaIcon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--ab-tier-dark);
+    background: var(--ab-white);
+  }
+
+  .lmctAnnualBilling__ctaIcon svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 180ms ease;
+  }
+
+  .lmctAnnualBilling__cta:hover,
+  .lmctAnnualBilling__finalCta:hover {
+    color: var(--ab-white);
+    filter: brightness(1.05);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 36px rgba(var(--ab-tier-rgb), 0.32);
+  }
+
+  .lmctAnnualBilling__cta:hover .lmctAnnualBilling__ctaIcon svg,
+  .lmctAnnualBilling__finalCta:hover .lmctAnnualBilling__ctaIcon svg {
+    transform: translateX(3px);
+  }
+
+  .lmctAnnualBilling__cta:focus-visible,
+  .lmctAnnualBilling__finalCta:focus-visible {
+    outline: 3px solid var(--ab-white);
+    outline-offset: 4px;
+  }
+
+  .lmctAnnualBilling__micro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px 18px;
+    margin: 15px 0 0;
+    color: #9eb3c8;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__micro span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .lmctAnnualBilling__micro svg {
+    width: 13px;
+    height: 13px;
+    color: #33d68b;
+  }
+
+  .lmctAnnualBilling__heroVisual {
+    position: relative;
+    min-width: 0;
+    padding: 22px 0;
+  }
+
+  .lmctAnnualBilling__visualTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+
+  .lmctAnnualBilling__planIdentity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lmctAnnualBilling__planMark {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid rgba(var(--ab-tier-rgb), 0.48);
+    border-radius: 8px;
+    background: rgba(var(--ab-tier-rgb), 0.14);
+  }
+
+  .lmctAnnualBilling__planMark img {
+    display: block;
+    width: 27px;
+    height: auto;
+  }
+
+  .lmctAnnualBilling__planIdentity small,
+  .lmctAnnualBilling__planIdentity strong {
+    display: block;
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__planIdentity small {
+    margin-bottom: 5px;
+    color: #8fa7bd;
+    font-size: 9px;
+    font-weight: 800;
+  }
+
+  .lmctAnnualBilling__planIdentity strong {
+    color: var(--ab-white);
+    font-size: 20px;
+    font-weight: 950;
+  }
+
+  .lmctAnnualBilling__freeBadge {
+    display: inline-flex;
+    min-height: 31px;
+    align-items: center;
+    padding: 7px 11px;
+    border-radius: 999px;
+    color: var(--ab-white);
+    background: var(--ab-tier);
+    font-size: 10px;
+    font-weight: 950;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__annualPanel {
+    position: relative;
+    overflow: hidden;
+    padding: 31px;
+    border: 1px solid rgba(var(--ab-tier-rgb), 0.62);
+    border-radius: 8px;
+    background: rgba(7, 30, 58, 0.9);
+    box-shadow: 0 28px 56px rgba(0, 0, 0, 0.26);
+  }
+
+  .lmctAnnualBilling__annualPanel::after {
+    position: absolute;
+    top: -86px;
+    right: -76px;
+    width: 190px;
+    height: 190px;
+    border: 1px solid rgba(var(--ab-tier-rgb), 0.28);
+    border-radius: 50%;
+    content: "";
+    box-shadow: 0 0 0 32px rgba(var(--ab-tier-rgb), 0.05);
+  }
+
+  .lmctAnnualBilling__dayOneLabel {
+    margin: 0;
+    color: var(--ab-tier);
+    font-size: 10px;
+    font-weight: 950;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__entryNumber {
+    margin: 4px 0 0;
+    color: var(--ab-white);
+    font-size: 92px;
+    font-weight: 950;
+    line-height: 0.95;
+  }
+
+  .lmctAnnualBilling__entryLabel {
+    display: block;
+    margin-top: 6px;
+    color: #dce9f5;
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__annualNote {
+    max-width: 360px;
+    margin: 13px 0 0;
+    color: #9fb4c8;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .lmctAnnualBilling__allocationStrip {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 5px;
+    margin-top: 26px;
+  }
+
+  .lmctAnnualBilling__allocationStrip span {
+    position: relative;
+    height: 36px;
+    border: 1px solid rgba(var(--ab-tier-rgb), 0.62);
+    border-radius: 4px;
+    background: rgba(var(--ab-tier-rgb), 0.2);
+    animation: lmctAnnualUnlock 520ms ease both;
+  }
+
+  .lmctAnnualBilling__allocationStrip span::after {
+    position: absolute;
+    inset: 6px;
+    border-radius: 2px;
+    content: "";
+    background: var(--ab-tier);
+    opacity: 0.72;
+  }
+
+  .lmctAnnualBilling__allocationStrip span:nth-child(2) {
+    animation-delay: 40ms;
+  }
+  .lmctAnnualBilling__allocationStrip span:nth-child(3) {
+    animation-delay: 80ms;
+  }
+  .lmctAnnualBilling__allocationStrip span:nth-child(4) {
+    animation-delay: 120ms;
+  }
+  .lmctAnnualBilling__allocationStrip span:nth-child(5) {
+    animation-delay: 160ms;
+  }
+  .lmctAnnualBilling__allocationStrip span:nth-child(6) {
+    animation-delay: 200ms;
+  }
+  .lmctAnnualBilling__allocationStrip span:nth-child(7) {
+    animation-delay: 240ms;
+  }
+  .lmctAnnualBilling__allocationStrip span:nth-child(8) {
+    animation-delay: 280ms;
+  }
+  .lmctAnnualBilling__allocationStrip span:nth-child(9) {
+    animation-delay: 320ms;
+  }
+  .lmctAnnualBilling__allocationStrip span:nth-child(10) {
+    animation-delay: 360ms;
+  }
+  .lmctAnnualBilling__allocationStrip span:nth-child(11) {
+    animation-delay: 400ms;
+  }
+  .lmctAnnualBilling__allocationStrip span:nth-child(12) {
+    animation-delay: 440ms;
+  }
+
+  @keyframes lmctAnnualUnlock {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .lmctAnnualBilling__stripLabels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    color: #8097ad;
+    font-size: 8px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__priceRail {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 18px;
+    align-items: center;
+    margin-top: 17px;
+    padding: 15px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .lmctAnnualBilling__priceRailItem small,
+  .lmctAnnualBilling__priceRailItem strong {
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__priceRailItem small {
+    margin-bottom: 4px;
+    color: #8097ad;
+    font-size: 8px;
+    font-weight: 800;
+  }
+
+  .lmctAnnualBilling__priceRailItem strong {
+    color: var(--ab-white);
+    font-size: 19px;
+    font-weight: 950;
+  }
+
+  .lmctAnnualBilling__priceRailItem:last-child {
+    text-align: right;
+  }
+
+  .lmctAnnualBilling__priceArrow {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border: 1px solid rgba(var(--ab-tier-rgb), 0.54);
+    border-radius: 50%;
+    color: var(--ab-tier);
+  }
+
+  .lmctAnnualBilling__priceArrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .lmctAnnualBilling__timing {
+    position: relative;
+    padding: 106px 0 112px;
+    background: var(--ab-surface);
+  }
+
+  .lmctAnnualBilling__timing::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    opacity: 0.45;
+    background-image: linear-gradient(#dfeaf2 1px, transparent 1px), linear-gradient(90deg, #dfeaf2 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .lmctAnnualBilling__timing .lmctAnnualBilling__container,
+  .lmctAnnualBilling__same .lmctAnnualBilling__container {
+    position: relative;
+  }
+
+  .lmctAnnualBilling__sectionHead {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.62fr);
+    gap: 58px;
+    align-items: end;
+    margin-bottom: 47px;
+  }
+
+  .lmctAnnualBilling__sectionTitle {
+    color: var(--ab-navy);
+    font-size: 50px;
+  }
+
+  .lmctAnnualBilling__sectionCopy {
+    margin: 0 0 4px;
+    color: var(--ab-copy);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .lmctAnnualBilling__timingGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr);
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .lmctAnnualBilling__timelineCard {
+    min-width: 0;
+    padding: 28px;
+    border: 1px solid var(--ab-line);
+    border-radius: 8px;
+    background: var(--ab-white);
+    box-shadow: 0 16px 36px rgba(8, 36, 65, 0.08);
+  }
+
+  .lmctAnnualBilling__timelineCard--annual {
+    color: var(--ab-white);
+    border-color: var(--ab-tier);
+    background: var(--ab-navy);
+    box-shadow: 0 18px 42px rgba(var(--ab-tier-rgb), 0.18);
+  }
+
+  .lmctAnnualBilling__timelineTag {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 23px;
+  }
+
+  .lmctAnnualBilling__timelineTag span {
+    color: var(--ab-tier);
+    font-size: 10px;
+    font-weight: 950;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__timelineTag b {
+    color: var(--ab-ink);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.2;
+  }
+
+  .lmctAnnualBilling__timelineCard--annual .lmctAnnualBilling__timelineTag b {
+    color: var(--ab-white);
+  }
+
+  .lmctAnnualBilling__months {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .lmctAnnualBilling__month {
+    display: grid;
+    min-width: 0;
+    aspect-ratio: 1;
+    place-items: center;
+    padding: 5px;
+    border: 1px solid #dce8f2;
+    border-radius: 5px;
+    text-align: center;
+    background: #f8fbfd;
+  }
+
+  .lmctAnnualBilling__month small,
+  .lmctAnnualBilling__month strong {
+    display: block;
+    line-height: 1.05;
+  }
+
+  .lmctAnnualBilling__month small {
+    color: var(--ab-muted);
+    font-size: 7px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__month strong {
+    margin-top: 4px;
+    color: var(--ab-ink);
+    font-size: 12px;
+    font-weight: 950;
+  }
+
+  .lmctAnnualBilling__timelineCard--monthly .lmctAnnualBilling__month {
+    opacity: 0.44;
+  }
+
+  .lmctAnnualBilling__timelineCard--monthly .lmctAnnualBilling__month:nth-child(1),
+  .lmctAnnualBilling__timelineCard--monthly .lmctAnnualBilling__month:nth-child(6),
+  .lmctAnnualBilling__timelineCard--monthly .lmctAnnualBilling__month:nth-child(12) {
+    opacity: 1;
+    border-color: rgba(var(--ab-tier-rgb), 0.42);
+    background: var(--ab-tier-soft);
+  }
+
+  .lmctAnnualBilling__timelineCard--annual .lmctAnnualBilling__month {
+    border-color: rgba(var(--ab-tier-rgb), 0.54);
+    background: rgba(var(--ab-tier-rgb), 0.18);
+  }
+
+  .lmctAnnualBilling__timelineCard--annual .lmctAnnualBilling__month small {
+    color: #a7bcd0;
+  }
+
+  .lmctAnnualBilling__timelineCard--annual .lmctAnnualBilling__month strong {
+    color: var(--ab-white);
+  }
+
+  .lmctAnnualBilling__timelineFoot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--ab-line);
+  }
+
+  .lmctAnnualBilling__timelineCard--annual .lmctAnnualBilling__timelineFoot {
+    border-color: rgba(255, 255, 255, 0.13);
+  }
+
+  .lmctAnnualBilling__timelineFoot p {
+    max-width: 240px;
+    margin: 0;
+    color: var(--ab-copy);
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  .lmctAnnualBilling__timelineCard--annual .lmctAnnualBilling__timelineFoot p {
+    color: #a9bdcf;
+  }
+
+  .lmctAnnualBilling__timelineTotal {
+    color: var(--ab-ink);
+    font-size: 27px;
+    font-weight: 950;
+    line-height: 1;
+    text-align: right;
+  }
+
+  .lmctAnnualBilling__timelineCard--annual .lmctAnnualBilling__timelineTotal {
+    color: var(--ab-tier);
+  }
+
+  .lmctAnnualBilling__timingVs {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 8px;
+    color: var(--ab-copy);
+    font-size: 8px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__timingVs span {
+    display: grid;
+    width: 45px;
+    height: 45px;
+    place-items: center;
+    border: 1px solid rgba(var(--ab-tier-rgb), 0.45);
+    border-radius: 50%;
+    color: var(--ab-tier);
+    background: var(--ab-white);
+    box-shadow: 0 10px 24px rgba(7, 28, 52, 0.1);
+  }
+
+  .lmctAnnualBilling__timingVs svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lmctAnnualBilling__clarifier {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    max-width: 850px;
+    min-height: 50px;
+    margin: 34px auto 0;
+    padding: 12px 18px;
+    border: 1px solid rgba(var(--ab-tier-rgb), 0.34);
+    border-radius: 7px;
+    color: var(--ab-ink);
+    background: var(--ab-tier-soft);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  .lmctAnnualBilling__clarifier svg {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    color: var(--ab-tier);
+  }
+
+  .lmctAnnualBilling__same {
+    padding: 105px 0;
+    background: var(--ab-white);
+  }
+
+  .lmctAnnualBilling__sameGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(480px, 1.18fr);
+    gap: 88px;
+    align-items: center;
+  }
+
+  .lmctAnnualBilling__same .lmctAnnualBilling__sectionTitle {
+    font-size: 48px;
+  }
+
+  .lmctAnnualBilling__sameLead {
+    margin: 22px 0 0;
+    color: var(--ab-copy);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .lmctAnnualBilling__sameLead strong {
+    color: var(--ab-ink);
+  }
+
+  .lmctAnnualBilling__sameList {
+    display: grid;
+    margin-top: 30px;
+    border-top: 1px solid var(--ab-line);
+  }
+
+  .lmctAnnualBilling__sameItem {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: 13px;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--ab-line);
+  }
+
+  .lmctAnnualBilling__sameIcon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 1px solid rgba(var(--ab-tier-rgb), 0.3);
+    border-radius: 7px;
+    color: var(--ab-tier);
+    background: var(--ab-tier-soft);
+  }
+
+  .lmctAnnualBilling__sameIcon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .lmctAnnualBilling__sameItem strong,
+  .lmctAnnualBilling__sameItem span {
+    display: block;
+  }
+
+  .lmctAnnualBilling__sameItem strong {
+    color: var(--ab-ink);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__sameItem span {
+    margin-top: 3px;
+    color: var(--ab-copy);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .lmctAnnualBilling__changeBoard {
+    overflow: hidden;
+    border: 1px solid var(--ab-line);
+    border-radius: 8px;
+    background: var(--ab-surface);
+    box-shadow: 0 20px 48px rgba(7, 34, 61, 0.1);
+  }
+
+  .lmctAnnualBilling__changeHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 24px;
+    color: var(--ab-white);
+    background: var(--ab-navy);
+  }
+
+  .lmctAnnualBilling__changeHead span {
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__changeHead b {
+    color: var(--ab-tier);
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__changeRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    min-height: 91px;
+    padding: 17px 24px;
+    border-bottom: 1px solid var(--ab-line);
+  }
+
+  .lmctAnnualBilling__changeRow:last-child {
+    border-bottom: 0;
+  }
+
+  .lmctAnnualBilling__changeValue small,
+  .lmctAnnualBilling__changeValue strong {
+    display: block;
+  }
+
+  .lmctAnnualBilling__changeValue small {
+    margin-bottom: 5px;
+    color: var(--ab-muted);
+    font-size: 8px;
+    font-weight: 850;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__changeValue strong {
+    color: var(--ab-ink);
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 1.3;
+  }
+
+  .lmctAnnualBilling__changeValue:last-child {
+    text-align: right;
+  }
+
+  .lmctAnnualBilling__changeValue:last-child strong {
+    color: var(--ab-tier-dark);
+  }
+
+  .lmctAnnualBilling__changeArrow {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--ab-tier);
+    background: var(--ab-white);
+    box-shadow: 0 7px 18px rgba(8, 34, 60, 0.1);
+  }
+
+  .lmctAnnualBilling__changeArrow svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .lmctAnnualBilling__final {
+    position: relative;
+    isolation: isolate;
+    padding: 94px 0;
+    color: var(--ab-white);
+    background: var(--ab-navy-deep);
+  }
+
+  .lmctAnnualBilling__finalGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(430px, 1.14fr);
+    gap: 90px;
+    align-items: center;
+  }
+
+  .lmctAnnualBilling__priceSummary {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 26px;
+    align-items: center;
+  }
+
+  .lmctAnnualBilling__summaryDivider {
+    width: 1px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .lmctAnnualBilling__priceSummary small,
+  .lmctAnnualBilling__priceSummary strong,
+  .lmctAnnualBilling__priceSummary span {
+    display: block;
+  }
+
+  .lmctAnnualBilling__priceSummary small {
+    margin-bottom: 9px;
+    color: #829bb2;
+    font-size: 9px;
+    font-weight: 850;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctAnnualBilling__priceSummary strong {
+    color: var(--ab-white);
+    font-size: 38px;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctAnnualBilling__priceSummary span {
+    margin-top: 8px;
+    color: #9ab0c4;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .lmctAnnualBilling__priceSummaryItem--annual strong {
+    color: var(--ab-tier);
+  }
+
+  .lmctAnnualBilling__finalTitle {
+    font-size: 48px;
+  }
+
+  .lmctAnnualBilling__finalCopy {
+    margin: 20px 0 0;
+    color: #b4c6d7;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .lmctAnnualBilling__finalCta {
+    margin-top: 26px;
+  }
+
+  .lmctAnnualBilling__error {
+    display: none;
+    margin: 14px 0 0;
+    color: #ffb7b7;
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.45;
+  }
+
+  .lmctAnnualBilling__error.is-visible {
+    display: block;
+  }
+
+  .lmctAnnualBillingFooter {
+    color: #7790a8;
+    background: #020c18;
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+  }
+
+  .lmctAnnualBillingFooter__inner {
+    display: flex;
+    width: min(1180px, calc(100% - 48px));
+    min-height: 90px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .lmctAnnualBillingFooter__logo {
+    display: block;
+    width: 96px;
+    height: auto;
+    opacity: 0.74;
+  }
+
+  .lmctAnnualBillingFooter p {
+    margin: 0;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 980px) {
+    .lmctAnnualBilling__container {
+      width: min(100% - 38px, 900px);
+    }
+
+    .lmctAnnualBilling__heroGrid,
+    .lmctAnnualBilling__sameGrid,
+    .lmctAnnualBilling__finalGrid {
+      grid-template-columns: 1fr;
+      gap: 54px;
+    }
+
+    .lmctAnnualBilling__heroGrid {
+      padding-top: 62px;
+    }
+
+    .lmctAnnualBilling__heroCopy {
+      max-width: 680px;
+    }
+
+    .lmctAnnualBilling__heroVisual {
+      display: none;
+      max-width: 680px;
+    }
+
+    .lmctAnnualBilling__sectionHead {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .lmctAnnualBilling__sameGrid {
+      gap: 48px;
+    }
+
+    .lmctAnnualBilling__finalGrid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 44px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .lmctAnnualBilling__container {
+      width: calc(100% - 30px);
+    }
+
+    .lmctAnnualBilling__nav {
+      min-height: 72px;
+    }
+
+    .lmctAnnualBilling__logo {
+      width: 116px;
+    }
+
+    .lmctAnnualBilling__secure {
+      max-width: 145px;
+      justify-content: flex-end;
+      font-size: 8px;
+      text-align: right;
+    }
+
+    .lmctAnnualBilling__heroGrid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 42px;
+      min-height: 0;
+      padding: 50px 0 65px;
+    }
+
+    .lmctAnnualBilling__title {
+      font-size: 43px;
+    }
+
+    .lmctAnnualBilling__lead {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .lmctAnnualBilling__cta,
+    .lmctAnnualBilling__finalCta {
+      width: 100%;
+      min-width: 0;
+      min-height: 58px;
+      padding-left: 18px;
+      font-size: 11px;
+    }
+
+    .lmctAnnualBilling__annualPanel {
+      padding: 24px 20px;
+    }
+
+    .lmctAnnualBilling__entryNumber {
+      font-size: 72px;
+    }
+
+    .lmctAnnualBilling__allocationStrip {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .lmctAnnualBilling__allocationStrip span {
+      height: 30px;
+    }
+
+    .lmctAnnualBilling__stripLabels {
+      display: none;
+    }
+
+    .lmctAnnualBilling__timing,
+    .lmctAnnualBilling__same {
+      padding: 74px 0;
+    }
+
+    .lmctAnnualBilling__sectionTitle,
+    .lmctAnnualBilling__same .lmctAnnualBilling__sectionTitle,
+    .lmctAnnualBilling__finalTitle {
+      font-size: 38px;
+      line-height: 1.02;
+    }
+
+    .lmctAnnualBilling__sectionCopy,
+    .lmctAnnualBilling__sameLead {
+      font-size: 14px;
+    }
+
+    .lmctAnnualBilling__timingGrid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .lmctAnnualBilling__timingVs {
+      min-height: 58px;
+    }
+
+    .lmctAnnualBilling__timingVs span {
+      transform: rotate(90deg);
+    }
+
+    .lmctAnnualBilling__timelineCard {
+      padding: 21px 18px;
+    }
+
+    .lmctAnnualBilling__months {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .lmctAnnualBilling__month {
+      aspect-ratio: auto;
+      min-height: 58px;
+    }
+
+    .lmctAnnualBilling__clarifier {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .lmctAnnualBilling__sameGrid,
+    .lmctAnnualBilling__finalGrid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctAnnualBilling__changeRow {
+      grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr);
+      padding: 15px;
+    }
+
+    .lmctAnnualBilling__changeValue strong {
+      font-size: 12px;
+    }
+
+    .lmctAnnualBilling__final {
+      padding: 70px 0;
+    }
+
+    .lmctAnnualBilling__priceSummary {
+      gap: 18px;
+    }
+
+    .lmctAnnualBilling__priceSummary strong {
+      font-size: 30px;
+    }
+
+    .lmctAnnualBillingFooter__inner {
+      width: calc(100% - 30px);
+      min-height: 78px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .lmctAnnualBilling__title {
+      font-size: 36px;
+    }
+
+    .lmctAnnualBilling__sectionTitle,
+    .lmctAnnualBilling__same .lmctAnnualBilling__sectionTitle,
+    .lmctAnnualBilling__finalTitle {
+      font-size: 33px;
+    }
+
+    .lmctAnnualBilling__visualTop {
+      align-items: flex-start;
+    }
+
+    .lmctAnnualBilling__planIdentity strong {
+      font-size: 17px;
+    }
+
+    .lmctAnnualBilling__freeBadge {
+      max-width: 106px;
+      text-align: center;
+    }
+
+    .lmctAnnualBilling__priceRail {
+      gap: 10px;
+    }
+
+    .lmctAnnualBilling__priceRailItem strong {
+      font-size: 15px;
+    }
+
+    .lmctAnnualBilling__timelineFoot {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .lmctAnnualBilling__timelineTotal {
+      text-align: left;
+    }
+
+    .lmctAnnualBilling__changeRow {
+      grid-template-columns: 1fr;
+      gap: 9px;
+    }
+
+    .lmctAnnualBilling__changeArrow {
+      width: 28px;
+      height: 28px;
+      transform: rotate(90deg);
+    }
+
+    .lmctAnnualBilling__changeValue:last-child {
+      text-align: left;
+    }
+
+    .lmctAnnualBilling__priceSummary {
+      grid-template-columns: 1fr;
+      gap: 23px;
+    }
+
+    .lmctAnnualBilling__summaryDivider {
+      width: 100%;
+      height: 1px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctAnnualBilling__hero::after,
+    .lmctAnnualBilling__allocationStrip span {
+      animation: none !important;
+    }
+
+    .lmctAnnualBilling__cta,
+    .lmctAnnualBilling__finalCta,
+    .lmctAnnualBilling__ctaIcon svg {
+      transition: none !important;
+    }
+  }
+</style>
+
+<main class="lmctAnnualBilling" id="lmctAnnualBilling" data-lmct-annual-billing data-current-tier="entry">
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position: absolute">
+    <symbol id="lmctAnnualIconArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14"></path>
+      <path d="m13 6 6 6-6 6"></path>
+    </symbol>
+    <symbol id="lmctAnnualIconShield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8Z"></path>
+      <path d="m9 12 2 2 4-4"></path>
+    </symbol>
+    <symbol id="lmctAnnualIconCheck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m5 12 4 4L19 6"></path>
+    </symbol>
+    <symbol id="lmctAnnualIconClock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M12 7v5l3 2"></path>
+    </symbol>
+    <symbol id="lmctAnnualIconCalendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="16" rx="2"></rect>
+      <path d="M16 3v4M8 3v4M3 10h18"></path>
+    </symbol>
+    <symbol id="lmctAnnualIconEqual" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+      <path d="M5 9h14M5 15h14"></path>
+    </symbol>
+    <symbol id="lmctAnnualIconInfo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M12 11v5M12 8h.01"></path>
+    </symbol>
+    <symbol id="lmctAnnualIconWallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 7V5a2 2 0 0 0-2-2H5a3 3 0 0 0 0 6h15v10a2 2 0 0 1-2 2H5a3 3 0 0 1-3-3V6"></path>
+      <path d="M16 13h.01"></path>
+    </symbol>
+  </svg>
+
+  <section class="lmctAnnualBilling__hero" aria-labelledby="lmctAnnualBillingTitle">
+    <div class="lmctAnnualBilling__container">
+      <header class="lmctAnnualBilling__nav">
+        <img class="lmctAnnualBilling__logo" src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png" alt="LMCT+" width="1366" height="227" />
+        <p class="lmctAnnualBilling__secure">
+          <svg aria-hidden="true"><use href="#lmctAnnualIconShield"></use></svg> Secure billing switch
+        </p>
+      </header>
+
+      <div class="lmctAnnualBilling__heroGrid">
+        <div class="lmctAnnualBilling__heroCopy">
+          <p class="lmctAnnualBilling__eyebrow">Annual <span data-ab-tier>Entry</span> membership</p>
+          <h1 class="lmctAnnualBilling__title" id="lmctAnnualBillingTitle">Get your full year of entries <em>from day one.</em></h1>
+          <p class="lmctAnnualBilling__lead">
+            Switch your <strong data-ab-tier>Entry</strong> membership to annual and receive all <strong><span data-ab-annual-entries>12</span> entries</strong> at the start of the billing cycle,
+            instead of accumulating them month by month.
+          </p>
+
+          <div class="lmctAnnualBilling__offerRow" aria-label="Annual billing highlights">
+            <span class="lmctAnnualBilling__offerPill"
+              ><svg aria-hidden="true"><use href="#lmctAnnualIconCalendar"></use></svg> 2 months free</span
+            >
+            <span class="lmctAnnualBilling__offerPill"
+              ><svg aria-hidden="true"><use href="#lmctAnnualIconEqual"></use></svg> Same annual allocation</span
+            >
+          </div>
+
+          <a class="lmctAnnualBilling__cta" href="#open-popup" data-ab-annual-cta>
+            <span data-ab-cta>Switch Entry to annual</span>
+            <span class="lmctAnnualBilling__ctaIcon" aria-hidden="true"
+              ><svg><use href="#lmctAnnualIconArrow"></use></svg
+            ></span>
+          </a>
+          <div class="lmctAnnualBilling__micro">
+            <span
+              ><svg aria-hidden="true"><use href="#lmctAnnualIconCheck"></use></svg> Same membership benefits</span
+            >
+            <span
+              ><svg aria-hidden="true"><use href="#lmctAnnualIconCheck"></use></svg> Full allocation upfront</span
+            >
+          </div>
+          <p class="lmctAnnualBilling__error" data-ab-error role="alert"></p>
+        </div>
+
+        <div class="lmctAnnualBilling__heroVisual" role="img" data-ab-hero-visual aria-label="Entry Annual membership delivers all 12 annual entries at the start of the billing cycle">
+          <div class="lmctAnnualBilling__visualTop">
+            <div class="lmctAnnualBilling__planIdentity">
+              <span class="lmctAnnualBilling__planMark" aria-hidden="true"
+                ><img src="https://images.clickfunnels.com/a2/31e493a15b4d098c8e0d5e29bfb712/White-plus.png" alt="" width="80" height="54"
+              /></span>
+              <span
+                ><small>Your annual option</small><strong><span data-ab-tier>Entry</span> annual</strong></span
+              >
+            </div>
+            <span class="lmctAnnualBilling__freeBadge">2 months free</span>
+          </div>
+
+          <div class="lmctAnnualBilling__annualPanel">
+            <p class="lmctAnnualBilling__dayOneLabel">Delivered at the start of your billing cycle</p>
+            <p class="lmctAnnualBilling__entryNumber" data-ab-annual-entries>12</p>
+            <span class="lmctAnnualBilling__entryLabel">Annual entries upfront</span>
+            <p class="lmctAnnualBilling__annualNote">The same annual entry allocation, made available sooner.</p>
+            <div class="lmctAnnualBilling__allocationStrip" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span> <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="lmctAnnualBilling__stripLabels" aria-hidden="true"><span>Month 1 allocation</span><span>Month 12 allocation</span></div>
+            <div class="lmctAnnualBilling__priceRail">
+              <div class="lmctAnnualBilling__priceRailItem"><small>12 monthly payments</small><strong data-ab-monthly-total>$239.88</strong></div>
+              <span class="lmctAnnualBilling__priceArrow" aria-hidden="true"
+                ><svg><use href="#lmctAnnualIconArrow"></use></svg
+              ></span>
+              <div class="lmctAnnualBilling__priceRailItem">
+                <small>One annual payment</small><strong><span data-ab-annual-price>$199</span>/year</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctAnnualBilling__timing" aria-labelledby="lmctAnnualTimingTitle">
+    <div class="lmctAnnualBilling__container">
+      <div class="lmctAnnualBilling__sectionHead">
+        <div>
+          <p class="lmctAnnualBilling__sectionEyebrow">The timing advantage</p>
+          <h2 class="lmctAnnualBilling__sectionTitle" id="lmctAnnualTimingTitle">Same allocation. <em>Earlier delivery.</em></h2>
+        </div>
+        <p class="lmctAnnualBilling__sectionCopy">Monthly builds your annual position gradually. Annual delivers all twelve monthly allocations at the beginning of the billing cycle.</p>
+      </div>
+
+      <div class="lmctAnnualBilling__timingGrid">
+        <article class="lmctAnnualBilling__timelineCard lmctAnnualBilling__timelineCard--monthly">
+          <div class="lmctAnnualBilling__timelineTag">
+            <span>Monthly billing</span><b><span data-ab-monthly-entries>1</span> per month</b>
+          </div>
+          <div class="lmctAnnualBilling__months" data-ab-monthly-months aria-label="Monthly accumulation over twelve months"></div>
+          <div class="lmctAnnualBilling__timelineFoot">
+            <p>Your allocation arrives gradually across the year.</p>
+            <strong class="lmctAnnualBilling__timelineTotal"><span data-ab-annual-entries>12</span> by month 12</strong>
+          </div>
+        </article>
+
+        <div class="lmctAnnualBilling__timingVs" aria-hidden="true">
+          <span
+            ><svg><use href="#lmctAnnualIconArrow"></use></svg></span
+          >switch
+        </div>
+
+        <article class="lmctAnnualBilling__timelineCard lmctAnnualBilling__timelineCard--annual">
+          <div class="lmctAnnualBilling__timelineTag"><span>Annual billing</span><b>Available from day one</b></div>
+          <div class="lmctAnnualBilling__months" data-ab-annual-months aria-label="Twelve monthly allocations delivered upfront"></div>
+          <div class="lmctAnnualBilling__timelineFoot">
+            <p>All twelve monthly allocations arrive together at the start.</p>
+            <strong class="lmctAnnualBilling__timelineTotal"><span data-ab-annual-entries>12</span> upfront</strong>
+          </div>
+        </article>
+      </div>
+
+      <div class="lmctAnnualBilling__clarifier">
+        <svg aria-hidden="true"><use href="#lmctAnnualIconInfo"></use></svg>
+        <span
+          >Annual billing does not increase your yearly allocation. You receive the same <strong><span data-ab-annual-entries>12</span> entries</strong>, sooner.</span
+        >
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctAnnualBilling__same" aria-labelledby="lmctAnnualSameTitle">
+    <div class="lmctAnnualBilling__container lmctAnnualBilling__sameGrid">
+      <div>
+        <p class="lmctAnnualBilling__sectionEyebrow">What changes</p>
+        <h2 class="lmctAnnualBilling__sectionTitle" id="lmctAnnualSameTitle">Your benefits stay <em>exactly the same.</em></h2>
+        <p class="lmctAnnualBilling__sameLead">You remain a <strong data-ab-tier>Entry</strong> member. Only your billing schedule and the timing of your annual entries change.</p>
+
+        <div class="lmctAnnualBilling__sameList" aria-label="What stays the same">
+          <div class="lmctAnnualBilling__sameItem">
+            <div class="lmctAnnualBilling__sameIcon" aria-hidden="true">
+              <svg><use href="#lmctAnnualIconCheck"></use></svg>
+            </div>
+            <span
+              ><strong>Same membership tier</strong><span>Your <span data-ab-tier>Entry</span> membership does not change.</span></span
+            >
+          </div>
+          <div class="lmctAnnualBilling__sameItem">
+            <div class="lmctAnnualBilling__sameIcon" aria-hidden="true">
+              <svg><use href="#lmctAnnualIconCheck"></use></svg>
+            </div>
+            <span><strong>Same LMCT+ benefits</strong><span>Your existing tier benefits continue.</span></span>
+          </div>
+          <div class="lmctAnnualBilling__sameItem">
+            <div class="lmctAnnualBilling__sameIcon" aria-hidden="true">
+              <svg><use href="#lmctAnnualIconEqual"></use></svg>
+            </div>
+            <span
+              ><strong>Same annual entry allocation</strong><span><span data-ab-annual-entries>12</span> total entries, delivered at a different time.</span></span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="lmctAnnualBilling__changeBoard" aria-label="Monthly and annual billing comparison">
+        <div class="lmctAnnualBilling__changeHead">
+          <span>Your <span data-ab-tier>Entry</span> membership</span><b>2 months free</b>
+        </div>
+        <div class="lmctAnnualBilling__changeRow">
+          <div class="lmctAnnualBilling__changeValue"><small>Monthly</small><strong>12 payments</strong></div>
+          <span class="lmctAnnualBilling__changeArrow" aria-hidden="true"
+            ><svg><use href="#lmctAnnualIconArrow"></use></svg
+          ></span>
+          <div class="lmctAnnualBilling__changeValue"><small>Annual</small><strong>1 yearly payment</strong></div>
+        </div>
+        <div class="lmctAnnualBilling__changeRow">
+          <div class="lmctAnnualBilling__changeValue">
+            <small>Entry timing</small><strong><span data-ab-monthly-entries>1</span> each month</strong>
+          </div>
+          <span class="lmctAnnualBilling__changeArrow" aria-hidden="true"
+            ><svg><use href="#lmctAnnualIconArrow"></use></svg
+          ></span>
+          <div class="lmctAnnualBilling__changeValue">
+            <small>Entry timing</small><strong><span data-ab-annual-entries>12</span> upfront</strong>
+          </div>
+        </div>
+        <div class="lmctAnnualBilling__changeRow">
+          <div class="lmctAnnualBilling__changeValue"><small>12-month total</small><strong data-ab-monthly-total>$239.88</strong></div>
+          <span class="lmctAnnualBilling__changeArrow" aria-hidden="true"
+            ><svg><use href="#lmctAnnualIconArrow"></use></svg
+          ></span>
+          <div class="lmctAnnualBilling__changeValue"><small>Annual total</small><strong data-ab-annual-price>$199</strong></div>
+        </div>
+        <div class="lmctAnnualBilling__changeRow">
+          <div class="lmctAnnualBilling__changeValue"><small>Member benefits</small><strong>Current benefits</strong></div>
+          <span class="lmctAnnualBilling__changeArrow" aria-hidden="true"
+            ><svg><use href="#lmctAnnualIconEqual"></use></svg
+          ></span>
+          <div class="lmctAnnualBilling__changeValue"><small>Member benefits</small><strong>Identical benefits</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctAnnualBilling__final" aria-labelledby="lmctAnnualFinalTitle">
+    <div class="lmctAnnualBilling__container lmctAnnualBilling__finalGrid">
+      <div class="lmctAnnualBilling__priceSummary" aria-label="Annual price comparison">
+        <div>
+          <small>Monthly over 12 months</small>
+          <strong data-ab-monthly-total>$239.88</strong>
+          <span>12 x <span data-ab-monthly-price>$19.99</span></span>
+        </div>
+        <span class="lmctAnnualBilling__summaryDivider" aria-hidden="true"></span>
+        <div class="lmctAnnualBilling__priceSummaryItem--annual">
+          <small>Annual billing</small>
+          <strong data-ab-annual-price>$199</strong>
+          <span><span data-ab-monthly-equivalent>$16.58</span>/month equivalent</span>
+        </div>
+      </div>
+
+      <div>
+        <p class="lmctAnnualBilling__eyebrow">Ready from the start</p>
+        <h2 class="lmctAnnualBilling__finalTitle" id="lmctAnnualFinalTitle">Switch <span data-ab-tier>Entry</span> to <em>annual.</em></h2>
+        <p class="lmctAnnualBilling__finalCopy">
+          Get two months free and receive your full <span data-ab-annual-entries>12</span>-entry annual allocation at the start of the billing cycle. Your membership benefits remain unchanged.
+        </p>
+        <a class="lmctAnnualBilling__finalCta" href="#open-popup" data-ab-annual-cta>
+          <span data-ab-cta>Switch Entry to annual</span>
+          <span class="lmctAnnualBilling__ctaIcon" aria-hidden="true"
+            ><svg><use href="#lmctAnnualIconArrow"></use></svg
+          ></span>
+        </a>
+        <div class="lmctAnnualBilling__micro">
+          <span
+            ><svg aria-hidden="true"><use href="#lmctAnnualIconShield"></use></svg> Secure billing switch</span
+          >
+          <span
+            ><svg aria-hidden="true"><use href="#lmctAnnualIconCheck"></use></svg> Same tier and benefits</span
+          >
+        </div>
+        <p class="lmctAnnualBilling__error" data-ab-error role="alert"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="lmctAnnualBillingFooter">
+  <div class="lmctAnnualBillingFooter__inner">
+    <img class="lmctAnnualBillingFooter__logo" src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png" alt="LMCT+" width="1366" height="227" loading="lazy" />
+    <p>LMCT+ annual billing</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    "use strict";
+
+    var supplied = window.LMCT_ANNUAL_BILLING_CONFIG || {};
+    var defaultProductIds = {
+      entry: "5123617",
+      premium: "5123618",
+      elite: "5123619",
+    };
+    var config = {
+      currentTier: supplied.currentTier || "premium",
+      productIds: Object.assign({}, defaultProductIds, supplied.productIds || {}),
+      modalSelector: supplied.modalSelector || "#modalPopup",
+      allowQueryPreview: supplied.allowQueryPreview === true,
+    };
+
+    window.LMCT_ANNUAL_BILLING_CONFIG = config;
+
+    var root = document.querySelector("[data-lmct-annual-billing]");
+    if (!root) return;
+
+    var catalog = {
+      entry: {
+        name: "Entry",
+        color: "#159447",
+        dark: "#0c7b3b",
+        deep: "#08652f",
+        soft: "#eef9f2",
+        rgb: "21, 148, 71",
+        monthlyPrice: "$19.99",
+        monthlyTotal: "$239.88",
+        annualPrice: "$199",
+        monthlyEquivalent: "$16.58",
+        monthlyEntries: 1,
+        annualEntries: 12,
+      },
+      premium: {
+        name: "Premium",
+        color: "#0b7df1",
+        dark: "#075fd4",
+        deep: "#064bb5",
+        soft: "#eef6ff",
+        rgb: "11, 125, 241",
+        monthlyPrice: "$49.99",
+        monthlyTotal: "$599.88",
+        annualPrice: "$499",
+        monthlyEquivalent: "$41.58",
+        monthlyEntries: 5,
+        annualEntries: 60,
+      },
+      elite: {
+        name: "Elite",
+        color: "#e5a516",
+        dark: "#b97800",
+        deep: "#945600",
+        soft: "#fff7df",
+        rgb: "229, 165, 22",
+        monthlyPrice: "$99.99",
+        monthlyTotal: "$1,199.88",
+        annualPrice: "$999",
+        monthlyEquivalent: "$83.25",
+        monthlyEntries: 10,
+        annualEntries: 120,
+      },
+    };
+
+    var tierKey = String(config.currentTier || "entry").toLowerCase();
+    if (config.allowQueryPreview) {
+      var previewTier = new URLSearchParams(window.location.search).get("tier");
+      if (previewTier && catalog[previewTier.toLowerCase()]) tierKey = previewTier.toLowerCase();
+    }
+    if (!catalog[tierKey]) tierKey = "entry";
+
+    var tier = catalog[tierKey];
+    var productId = String(config.productIds[tierKey] || "");
+    var aliases = { entry: "bronze", premium: "silver", elite: "gold" };
+
+    root.setAttribute("data-current-tier", tierKey);
+    root.style.setProperty("--ab-tier", tier.color);
+    root.style.setProperty("--ab-tier-dark", tier.dark);
+    root.style.setProperty("--ab-tier-deep", tier.deep);
+    root.style.setProperty("--ab-tier-soft", tier.soft);
+    root.style.setProperty("--ab-tier-rgb", tier.rgb);
+
+    function setText(selector, value) {
+      root.querySelectorAll(selector).forEach(function (node) {
+        node.textContent = value;
+      });
+    }
+
+    setText("[data-ab-tier]", tier.name);
+    setText("[data-ab-monthly-price]", tier.monthlyPrice);
+    setText("[data-ab-monthly-total]", tier.monthlyTotal);
+    setText("[data-ab-annual-price]", tier.annualPrice);
+    setText("[data-ab-monthly-equivalent]", tier.monthlyEquivalent);
+    setText("[data-ab-monthly-entries]", String(tier.monthlyEntries));
+    setText("[data-ab-annual-entries]", String(tier.annualEntries));
+    setText("[data-ab-cta]", "Switch " + tier.name + " to annual");
+
+    var heroVisual = root.querySelector("[data-ab-hero-visual]");
+    if (heroVisual) {
+      heroVisual.setAttribute("aria-label", tier.name + " Annual membership delivers all " + tier.annualEntries + " annual entries at the start of the billing cycle");
+    }
+
+    function buildMonths(selector, annual) {
+      var container = root.querySelector(selector);
+      if (!container) return;
+      var html = "";
+      for (var month = 1; month <= 12; month += 1) {
+        var label = annual ? "Block " + month : "Month " + month;
+        var value = annual ? "+" + tier.monthlyEntries : String(month * tier.monthlyEntries);
+        html += '<span class="lmctAnnualBilling__month"><span><small>' + label + "</small><strong>" + value + "</strong></span></span>";
+      }
+      container.innerHTML = html;
+    }
+
+    buildMonths("[data-ab-monthly-months]", false);
+    buildMonths("[data-ab-annual-months]", true);
+
+    var actionLinks = root.querySelectorAll("[data-ab-annual-cta]");
+    var errorNodes = root.querySelectorAll("[data-ab-error]");
+
+    function showError(message) {
+      errorNodes.forEach(function (node) {
+        node.textContent = message;
+        node.classList.add("is-visible");
+      });
+    }
+
+    function clearError() {
+      errorNodes.forEach(function (node) {
+        node.textContent = "";
+        node.classList.remove("is-visible");
+      });
+    }
+
+    function getProductInputs() {
+      return document.querySelectorAll('.o2step_step2 input[name="purchase[product_id]"], [data-de-type="orpo"] input[name="purchase[product_id]"]');
+    }
+
+    function selectAnnualProduct() {
+      var targetInput = null;
+
+      getProductInputs().forEach(function (input) {
+        if (input.closest("#cfAR")) return;
+        var isTarget = input.value === productId;
+        var row = input.closest(".elOrderProductOptinProducts");
+        var template = input.closest('[data-cf-product-template="true"]');
+
+        if (row) {
+          row.style.setProperty("display", isTarget ? "table-row" : "none", "important");
+          row.classList.toggle("checked-item", isTarget);
+        }
+        if (template && template !== row) {
+          template.style.setProperty("display", isTarget ? "block" : "none", "important");
+        }
+        if (isTarget) targetInput = input;
+      });
+
+      if (!targetInput) return false;
+
+      targetInput.checked = true;
+      targetInput.dispatchEvent(new Event("change", { bubbles: true }));
+      targetInput.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+      document.querySelectorAll('#cfAR input[name="purchase[product_ids][]"]').forEach(function (input) {
+        input.checked = input.value === productId;
+      });
+
+      document.body.setAttribute("data-lmct-annual-tier", tierKey);
+      window.localStorage.setItem("selected_billing", "yearly");
+      window.localStorage.setItem("selected_package", aliases[tierKey]);
+      window.lmctAnnualBillingSelection = {
+        tier: tierKey,
+        productId: productId,
+        price: Number(tier.annualPrice.replace(/[$,]/g, "")),
+        annualEntries: tier.annualEntries,
+      };
+
+      if (typeof window.rebuildOrderSummary === "function") window.rebuildOrderSummary();
+      if (window.jQuery) window.jQuery(document).trigger("cfpt:cart-updated");
+      return true;
+    }
+
+    actionLinks.forEach(function (link) {
+      link.setAttribute("aria-label", "Switch " + tier.name + " membership to annual billing for " + tier.annualPrice + " per year");
+      link.setAttribute("data-ab-tier", tierKey);
+      link.setAttribute("data-ab-product-id", productId);
+
+      link.addEventListener("click", function (event) {
+        clearError();
+
+        if (!productId || productId === "TO_DO") {
+          event.preventDefault();
+          showError("Add the " + tier.name + " annual product ID to LMCT_ANNUAL_BILLING_CONFIG before publishing.");
+          return;
+        }
+
+        var proceed = link.dispatchEvent(
+          new CustomEvent("lmct:annual-billing", {
+            bubbles: true,
+            cancelable: true,
+            detail: {
+              tier: tierKey,
+              productId: productId,
+              annualPrice: tier.annualPrice,
+              annualEntries: tier.annualEntries,
+            },
+          }),
+        );
+
+        if (!proceed) {
+          event.preventDefault();
+          return;
+        }
+
+        if (selectAnnualProduct()) return;
+
+        var attempts = 0;
+        var retry = window.setInterval(function () {
+          attempts += 1;
+          if (selectAnnualProduct()) {
+            window.clearInterval(retry);
+          } else if (attempts >= 12) {
+            window.clearInterval(retry);
+            showError("The " + tier.name + " annual checkout product could not be found in this popup.");
+          }
+        }, 150);
+      });
+    });
+  })();
+</script>

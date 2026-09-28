@@ -1,0 +1,1720 @@
+<!--
+  LMCT+ A5 Luxe upsell page.
+
+  Add the ClickFunnels Stylist Membership product ID before publishing:
+
+  window.LMCT_LUXE_UPSELL_CONFIG = {
+    productId: "TO_DO",
+    modalSelector: "#modalPopup"
+  };
+-->
+
+<style>
+  .lmctLuxeUpsell,
+  .lmctLuxeUpsell *,
+  .lmctLuxeUpsell *::before,
+  .lmctLuxeUpsell *::after,
+  .lmctLuxeUpsellFooter,
+  .lmctLuxeUpsellFooter * {
+    box-sizing: border-box;
+  }
+
+  .lmctLuxeUpsell {
+    --lx-navy: #07192f;
+    --lx-navy-deep: #030e1d;
+    --lx-ink: #17283b;
+    --lx-copy: #5f6d7c;
+    --lx-line: #dfe5e9;
+    --lx-surface: #f6f3f2;
+    --lx-blush: #f3dfdc;
+    --lx-rose: #e78e7d;
+    --lx-rose-dark: #c96961;
+    --lx-taupe: #967c72;
+    --lx-blue: #0b91ee;
+    --lx-green: #2bc980;
+    --lx-gold: #d7a74f;
+    --lx-white: #ffffff;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lx-ink);
+    background: var(--lx-white);
+    font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .lmctLuxeUpsell a {
+    text-decoration: none;
+  }
+
+  .lmctLuxeUpsell img,
+  .lmctLuxeUpsell video,
+  .lmctLuxeUpsell svg {
+    display: block;
+  }
+
+  .lmctLuxeUpsell__container {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+  }
+
+  .lmctLuxeUpsell__hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 780px;
+    overflow: hidden;
+    color: var(--lx-white);
+    background: var(--lx-navy-deep);
+  }
+
+  .lmctLuxeUpsell__heroVideo,
+  .lmctLuxeUpsell__heroShade,
+  .lmctLuxeUpsell__heroTexture {
+    position: absolute;
+    inset: 0;
+  }
+
+  .lmctLuxeUpsell__heroVideo {
+    z-index: -3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 32%;
+  }
+
+  .lmctLuxeUpsell__heroShade {
+    z-index: -2;
+    background:
+      linear-gradient(90deg, rgba(3, 13, 27, 0.94) 0%, rgba(5, 18, 35, 0.82) 48%, rgba(5, 18, 35, 0.34) 77%, rgba(3, 13, 27, 0.5) 100%),
+      linear-gradient(0deg, rgba(3, 13, 27, 0.78), transparent 48%);
+  }
+
+  .lmctLuxeUpsell__heroTexture {
+    z-index: -1;
+    opacity: 0.24;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: linear-gradient(to bottom, #000, transparent 90%);
+  }
+
+  .lmctLuxeUpsell__nav {
+    display: flex;
+    min-height: 86px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .lmctLuxeUpsell__luxeLogo {
+    width: 118px;
+    height: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .lmctLuxeUpsell__memberBrand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #d7e2ec;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__memberBrand img {
+    width: 102px;
+    height: auto;
+  }
+
+  .lmctLuxeUpsell__heroInner {
+    display: flex;
+    min-height: 694px;
+    align-items: center;
+    padding: 72px 0 84px;
+  }
+
+  .lmctLuxeUpsell__heroCopy {
+    width: min(100%, 720px);
+  }
+
+  .lmctLuxeUpsell__eyebrow,
+  .lmctLuxeUpsell__sectionEyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 17px;
+    color: var(--lx-rose);
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__eyebrow::before,
+  .lmctLuxeUpsell__sectionEyebrow::before {
+    width: 30px;
+    height: 2px;
+    flex: 0 0 auto;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctLuxeUpsell__title,
+  .lmctLuxeUpsell__sectionTitle,
+  .lmctLuxeUpsell__finalTitle {
+    margin: 0;
+    color: inherit;
+    font-size: 66px;
+    font-weight: 950;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__title em,
+  .lmctLuxeUpsell__sectionTitle em,
+  .lmctLuxeUpsell__finalTitle em {
+    color: var(--lx-rose);
+    font-style: normal;
+  }
+
+  .lmctLuxeUpsell__lead {
+    max-width: 670px;
+    margin: 24px 0 0;
+    color: #d5e0e9;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .lmctLuxeUpsell__lead strong {
+    color: var(--lx-white);
+  }
+
+  .lmctLuxeUpsell__priceLine {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-top: 29px;
+  }
+
+  .lmctLuxeUpsell__memberPrice {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 7px;
+    color: var(--lx-white);
+    font-size: 44px;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctLuxeUpsell__memberPrice small {
+    color: #b9cad8;
+    font-size: 12px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__priceNote {
+    padding-left: 16px;
+    border-left: 1px solid rgba(255, 255, 255, 0.23);
+    color: #a9bdce;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .lmctLuxeUpsell__priceNote strong {
+    display: block;
+    color: var(--lx-rose);
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__cta,
+  .lmctLuxeUpsell__planCta,
+  .lmctLuxeUpsell__finalCta {
+    display: inline-flex;
+    min-width: 340px;
+    min-height: 62px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 28px;
+    padding: 12px 14px 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 7px;
+    color: var(--lx-white);
+    background: linear-gradient(135deg, var(--lx-rose), var(--lx-rose-dark));
+    box-shadow: 0 16px 34px rgba(201, 105, 97, 0.3);
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1.2;
+    text-transform: uppercase;
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  }
+
+  .lmctLuxeUpsell__ctaIcon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lx-rose-dark);
+    background: var(--lx-white);
+  }
+
+  .lmctLuxeUpsell__ctaIcon svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 180ms ease;
+  }
+
+  .lmctLuxeUpsell__cta:hover,
+  .lmctLuxeUpsell__planCta:hover,
+  .lmctLuxeUpsell__finalCta:hover {
+    color: var(--lx-white);
+    filter: brightness(1.04);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 42px rgba(201, 105, 97, 0.38);
+  }
+
+  .lmctLuxeUpsell__cta:hover .lmctLuxeUpsell__ctaIcon svg,
+  .lmctLuxeUpsell__planCta:hover .lmctLuxeUpsell__ctaIcon svg,
+  .lmctLuxeUpsell__finalCta:hover .lmctLuxeUpsell__ctaIcon svg {
+    transform: translateX(3px);
+  }
+
+  .lmctLuxeUpsell__cta:focus-visible,
+  .lmctLuxeUpsell__planCta:focus-visible,
+  .lmctLuxeUpsell__finalCta:focus-visible {
+    outline: 3px solid var(--lx-white);
+    outline-offset: 4px;
+  }
+
+  .lmctLuxeUpsell__terms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px 19px;
+    margin: 15px 0 0;
+    color: #a8bac9;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__terms span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .lmctLuxeUpsell__terms svg {
+    width: 13px;
+    height: 13px;
+    color: var(--lx-green);
+  }
+
+  .lmctLuxeUpsell__error {
+    display: none;
+    margin: 13px 0 0;
+    color: #ffd0cb;
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.45;
+  }
+
+  .lmctLuxeUpsell__error.is-visible {
+    display: block;
+  }
+
+  .lmctLuxeUpsell__categories {
+    padding: 104px 0 110px;
+    background: var(--lx-white);
+  }
+
+  .lmctLuxeUpsell__sectionHead {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.62fr);
+    gap: 66px;
+    align-items: end;
+    margin-bottom: 45px;
+  }
+
+  .lmctLuxeUpsell__sectionEyebrow {
+    color: var(--lx-rose-dark);
+  }
+
+  .lmctLuxeUpsell__sectionTitle {
+    color: var(--lx-ink);
+    font-size: 50px;
+  }
+
+  .lmctLuxeUpsell__sectionCopy {
+    margin: 0 0 4px;
+    color: var(--lx-copy);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .lmctLuxeUpsell__categoryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .lmctLuxeUpsell__categoryCard {
+    position: relative;
+    min-height: 390px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #d9c9c5;
+  }
+
+  .lmctLuxeUpsell__categoryCard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 320ms ease;
+  }
+
+  .lmctLuxeUpsell__categoryCard:hover img {
+    transform: scale(1.035);
+  }
+
+  .lmctLuxeUpsell__categoryCard::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(to top, rgba(6, 19, 34, 0.86), rgba(6, 19, 34, 0.02) 60%);
+  }
+
+  .lmctLuxeUpsell__categoryLabel {
+    position: absolute;
+    z-index: 1;
+    right: 24px;
+    bottom: 23px;
+    left: 24px;
+  }
+
+  .lmctLuxeUpsell__categoryLabel small,
+  .lmctLuxeUpsell__categoryLabel strong {
+    display: block;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__categoryLabel small {
+    margin-bottom: 6px;
+    color: #f3bbb0;
+    font-size: 9px;
+    font-weight: 900;
+  }
+
+  .lmctLuxeUpsell__categoryLabel strong {
+    color: var(--lx-white);
+    font-size: 24px;
+    font-weight: 950;
+  }
+
+  .lmctLuxeUpsell__categoryStrip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 17px;
+    border-top: 1px solid var(--lx-line);
+    border-bottom: 1px solid var(--lx-line);
+  }
+
+  .lmctLuxeUpsell__categoryStripItem {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 14px;
+    align-items: center;
+    min-height: 105px;
+    padding: 19px 25px;
+    border-right: 1px solid var(--lx-line);
+  }
+
+  .lmctLuxeUpsell__categoryStripItem:last-child {
+    border-right: 0;
+  }
+
+  .lmctLuxeUpsell__categoryStripIcon {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid #edc5be;
+    border-radius: 7px;
+    color: var(--lx-rose-dark);
+    background: #fff6f4;
+  }
+
+  .lmctLuxeUpsell__categoryStripIcon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .lmctLuxeUpsell__categoryStripItem strong,
+  .lmctLuxeUpsell__categoryStripItem span:last-child {
+    display: block;
+  }
+
+  .lmctLuxeUpsell__categoryStripItem strong {
+    color: var(--lx-ink);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__categoryStripItem span:last-child {
+    margin-top: 4px;
+    color: var(--lx-copy);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .lmctLuxeUpsell__proof {
+    padding: 84px 0;
+    color: var(--lx-white);
+    background: var(--lx-navy);
+  }
+
+  .lmctLuxeUpsell__proofGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(520px, 1.28fr);
+    gap: 78px;
+    align-items: center;
+  }
+
+  .lmctLuxeUpsell__proofTitle {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 950;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__proofTitle span {
+    display: block;
+    color: var(--lx-rose);
+  }
+
+  .lmctLuxeUpsell__proofCopy {
+    max-width: 470px;
+    margin: 17px 0 0;
+    color: #afc0cf;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .lmctLuxeUpsell__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .lmctLuxeUpsell__stat {
+    min-width: 0;
+    padding: 25px 24px;
+    border-right: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .lmctLuxeUpsell__stat:last-child {
+    border-right: 0;
+  }
+
+  .lmctLuxeUpsell__stat strong,
+  .lmctLuxeUpsell__stat span {
+    display: block;
+  }
+
+  .lmctLuxeUpsell__stat strong {
+    color: var(--lx-white);
+    font-size: 34px;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctLuxeUpsell__stat span {
+    margin-top: 7px;
+    color: #9fb2c2;
+    font-size: 9px;
+    font-weight: 850;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__offer {
+    position: relative;
+    padding: 108px 0 116px;
+    background: var(--lx-surface);
+  }
+
+  .lmctLuxeUpsell__offer::before {
+    position: absolute;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    opacity: 0.5;
+    background-image:
+      linear-gradient(#ece5e2 1px, transparent 1px),
+      linear-gradient(90deg, #ece5e2 1px, transparent 1px);
+    background-size: 58px 58px;
+  }
+
+  .lmctLuxeUpsell__offer .lmctLuxeUpsell__container {
+    position: relative;
+  }
+
+  .lmctLuxeUpsell__offerCard {
+    overflow: hidden;
+    border: 1px solid #ded7d4;
+    border-radius: 8px;
+    background: var(--lx-white);
+    box-shadow: 0 24px 58px rgba(57, 38, 31, 0.11);
+  }
+
+  .lmctLuxeUpsell__offerTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 21px 28px;
+    color: var(--lx-white);
+    background: var(--lx-taupe);
+  }
+
+  .lmctLuxeUpsell__offerTop span,
+  .lmctLuxeUpsell__offerTop strong {
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__offerTop span {
+    font-size: 10px;
+    font-weight: 850;
+  }
+
+  .lmctLuxeUpsell__offerTop strong {
+    font-size: 13px;
+    font-weight: 950;
+  }
+
+  .lmctLuxeUpsell__planGrid {
+    display: grid;
+    grid-template-columns: minmax(340px, 0.84fr) minmax(0, 1.16fr);
+  }
+
+  .lmctLuxeUpsell__planIntro {
+    padding: 42px;
+    border-right: 1px solid var(--lx-line);
+  }
+
+  .lmctLuxeUpsell__planName {
+    margin: 0;
+    color: var(--lx-ink);
+    font-size: 34px;
+    font-weight: 950;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__planName span {
+    display: block;
+    margin-top: 7px;
+    color: var(--lx-rose-dark);
+    font-size: 13px;
+  }
+
+  .lmctLuxeUpsell__planPrice {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 29px;
+    color: var(--lx-ink);
+  }
+
+  .lmctLuxeUpsell__planPrice strong {
+    font-size: 58px;
+    font-weight: 950;
+    line-height: 0.95;
+  }
+
+  .lmctLuxeUpsell__planPrice span {
+    color: var(--lx-copy);
+    font-size: 12px;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__publicPrice {
+    margin: 11px 0 0;
+    color: var(--lx-copy);
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  .lmctLuxeUpsell__publicPrice strong {
+    color: var(--lx-ink);
+  }
+
+  .lmctLuxeUpsell__billing {
+    display: grid;
+    gap: 8px;
+    margin-top: 25px;
+    padding-top: 22px;
+    border-top: 1px solid var(--lx-line);
+    color: var(--lx-copy);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .lmctLuxeUpsell__billing span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lmctLuxeUpsell__billing svg {
+    width: 14px;
+    height: 14px;
+    color: var(--lx-green);
+  }
+
+  .lmctLuxeUpsell__planCta {
+    width: 100%;
+    min-width: 0;
+    margin-top: 28px;
+  }
+
+  .lmctLuxeUpsell__benefits {
+    padding: 39px 42px;
+  }
+
+  .lmctLuxeUpsell__benefitsTitle {
+    margin: 0 0 20px;
+    color: var(--lx-copy);
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__benefitList {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmctLuxeUpsell__benefit {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: 13px;
+    align-items: center;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--lx-line);
+  }
+
+  .lmctLuxeUpsell__benefit:last-child {
+    border-bottom: 0;
+  }
+
+  .lmctLuxeUpsell__benefitIcon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 1px solid #edc7c0;
+    border-radius: 7px;
+    color: var(--lx-rose-dark);
+    background: #fff6f4;
+  }
+
+  .lmctLuxeUpsell__benefitIcon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .lmctLuxeUpsell__benefit strong,
+  .lmctLuxeUpsell__benefit span:last-child {
+    display: block;
+  }
+
+  .lmctLuxeUpsell__benefit strong {
+    color: var(--lx-ink);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__benefit span:last-child {
+    margin-top: 3px;
+    color: var(--lx-copy);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .lmctLuxeUpsell__entryFlow {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 24px 42px;
+    border-top: 1px solid var(--lx-line);
+    background: #fbf8f7;
+  }
+
+  .lmctLuxeUpsell__entryNode {
+    min-width: 112px;
+  }
+
+  .lmctLuxeUpsell__entryNode small,
+  .lmctLuxeUpsell__entryNode strong {
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__entryNode small {
+    color: #8d7c76;
+    font-size: 8px;
+    font-weight: 850;
+  }
+
+  .lmctLuxeUpsell__entryNode strong {
+    margin-top: 5px;
+    color: var(--lx-ink);
+    font-size: 21px;
+    font-weight: 950;
+  }
+
+  .lmctLuxeUpsell__entryNode:last-child strong {
+    color: var(--lx-rose-dark);
+  }
+
+  .lmctLuxeUpsell__entryLine {
+    position: relative;
+    height: 1px;
+    background: #d9c9c4;
+  }
+
+  .lmctLuxeUpsell__entryLine::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 7px;
+    height: 7px;
+    border-top: 1px solid var(--lx-rose-dark);
+    border-right: 1px solid var(--lx-rose-dark);
+    content: "";
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .lmctLuxeUpsell__entryFlowNote {
+    grid-column: 1 / -1;
+    margin: 2px 0 0;
+    color: var(--lx-copy);
+    font-size: 10px;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  .lmctLuxeUpsell__story {
+    padding: 100px 0;
+    background: var(--lx-white);
+  }
+
+  .lmctLuxeUpsell__storyGrid {
+    display: grid;
+    grid-template-columns: minmax(340px, 0.82fr) minmax(0, 1.18fr);
+    gap: 82px;
+    align-items: center;
+  }
+
+  .lmctLuxeUpsell__founderImage {
+    position: relative;
+    min-height: 500px;
+  }
+
+  .lmctLuxeUpsell__founderImage::before {
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 72%;
+    height: 72%;
+    border: 1px solid #e9b9af;
+    content: "";
+  }
+
+  .lmctLuxeUpsell__founderImage img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 22px 48px rgba(42, 30, 26, 0.16);
+  }
+
+  .lmctLuxeUpsell__story .lmctLuxeUpsell__sectionTitle {
+    max-width: 650px;
+  }
+
+  .lmctLuxeUpsell__storyCopy {
+    max-width: 640px;
+    margin: 23px 0 0;
+    color: var(--lx-copy);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.7;
+  }
+
+  .lmctLuxeUpsell__storyCopy strong {
+    color: var(--lx-ink);
+  }
+
+  .lmctLuxeUpsell__founder {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 27px;
+    padding-top: 21px;
+    border-top: 1px solid var(--lx-line);
+  }
+
+  .lmctLuxeUpsell__founderMark {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lx-white);
+    background: var(--lx-taupe);
+    font-size: 11px;
+    font-weight: 950;
+  }
+
+  .lmctLuxeUpsell__founder strong,
+  .lmctLuxeUpsell__founder span {
+    display: block;
+  }
+
+  .lmctLuxeUpsell__founder strong {
+    color: var(--lx-ink);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__founder span {
+    margin-top: 3px;
+    color: var(--lx-copy);
+    font-size: 10px;
+    font-weight: 650;
+  }
+
+  .lmctLuxeUpsell__final {
+    position: relative;
+    isolation: isolate;
+    padding: 96px 0;
+    overflow: hidden;
+    color: var(--lx-white);
+    background: var(--lx-navy-deep);
+  }
+
+  .lmctLuxeUpsell__final::before {
+    position: absolute;
+    z-index: -1;
+    top: -180px;
+    right: -80px;
+    width: 520px;
+    height: 520px;
+    border: 1px solid rgba(231, 142, 125, 0.24);
+    border-radius: 50%;
+    content: "";
+    box-shadow: 0 0 0 90px rgba(231, 142, 125, 0.035);
+  }
+
+  .lmctLuxeUpsell__finalGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(400px, 0.76fr);
+    gap: 80px;
+    align-items: center;
+  }
+
+  .lmctLuxeUpsell__finalTitle {
+    font-size: 48px;
+  }
+
+  .lmctLuxeUpsell__finalCopy {
+    max-width: 680px;
+    margin: 20px 0 0;
+    color: #b5c6d5;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .lmctLuxeUpsell__finalPrice {
+    padding-left: 38px;
+    border-left: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .lmctLuxeUpsell__finalPrice small,
+  .lmctLuxeUpsell__finalPrice strong,
+  .lmctLuxeUpsell__finalPrice span {
+    display: block;
+  }
+
+  .lmctLuxeUpsell__finalPrice small {
+    color: var(--lx-rose);
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__finalPrice strong {
+    margin-top: 8px;
+    color: var(--lx-white);
+    font-size: 48px;
+    font-weight: 950;
+    line-height: 1;
+  }
+
+  .lmctLuxeUpsell__finalPrice span {
+    margin-top: 8px;
+    color: #9cb1c3;
+    font-size: 10px;
+    font-weight: 750;
+    text-transform: uppercase;
+  }
+
+  .lmctLuxeUpsell__finalCta {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .lmctLuxeUpsellFooter {
+    color: #7f94a7;
+    background: #010914;
+    font-family: Montserrat, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .lmctLuxeUpsellFooter__inner {
+    display: flex;
+    width: min(1180px, calc(100% - 48px));
+    min-height: 92px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .lmctLuxeUpsellFooter__brands {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .lmctLuxeUpsellFooter__brands img:first-child {
+    width: 83px;
+    height: auto;
+  }
+
+  .lmctLuxeUpsellFooter__brands img:last-child {
+    width: 72px;
+    height: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.76;
+  }
+
+  .lmctLuxeUpsellFooter__divider {
+    width: 1px;
+    height: 23px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .lmctLuxeUpsellFooter p {
+    margin: 0;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 980px) {
+    .lmctLuxeUpsell__hero {
+      min-height: 720px;
+    }
+
+    .lmctLuxeUpsell__heroInner {
+      min-height: 634px;
+    }
+
+    .lmctLuxeUpsell__sectionHead,
+    .lmctLuxeUpsell__proofGrid,
+    .lmctLuxeUpsell__storyGrid,
+    .lmctLuxeUpsell__finalGrid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 38px;
+    }
+
+    .lmctLuxeUpsell__sectionHead {
+      margin-bottom: 36px;
+    }
+
+    .lmctLuxeUpsell__categoryCard {
+      min-height: 320px;
+    }
+
+    .lmctLuxeUpsell__proofGrid {
+      gap: 35px;
+    }
+
+    .lmctLuxeUpsell__planGrid {
+      grid-template-columns: minmax(310px, 0.82fr) minmax(0, 1.18fr);
+    }
+
+    .lmctLuxeUpsell__storyGrid {
+      grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+      gap: 54px;
+    }
+
+    .lmctLuxeUpsell__founderImage {
+      min-height: 430px;
+    }
+
+    .lmctLuxeUpsell__finalGrid {
+      grid-template-columns: minmax(0, 1fr) minmax(330px, 0.62fr);
+      gap: 48px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .lmctLuxeUpsell__container {
+      width: calc(100% - 30px);
+    }
+
+    .lmctLuxeUpsell__hero {
+      min-height: 760px;
+    }
+
+    .lmctLuxeUpsell__heroVideo {
+      object-position: 62% center;
+    }
+
+    .lmctLuxeUpsell__heroShade {
+      background: linear-gradient(90deg, rgba(3, 13, 27, 0.95), rgba(3, 13, 27, 0.58));
+    }
+
+    .lmctLuxeUpsell__nav {
+      min-height: 72px;
+    }
+
+    .lmctLuxeUpsell__luxeLogo {
+      width: 92px;
+    }
+
+    .lmctLuxeUpsell__memberBrand span {
+      display: none;
+    }
+
+    .lmctLuxeUpsell__memberBrand img {
+      width: 88px;
+    }
+
+    .lmctLuxeUpsell__heroInner {
+      min-height: 688px;
+      padding: 55px 0 67px;
+    }
+
+    .lmctLuxeUpsell__title {
+      font-size: 43px;
+    }
+
+    .lmctLuxeUpsell__lead {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .lmctLuxeUpsell__memberPrice {
+      font-size: 38px;
+    }
+
+    .lmctLuxeUpsell__cta,
+    .lmctLuxeUpsell__planCta,
+    .lmctLuxeUpsell__finalCta {
+      width: 100%;
+      min-width: 0;
+      min-height: 58px;
+      padding-left: 18px;
+      font-size: 11px;
+    }
+
+    .lmctLuxeUpsell__categories,
+    .lmctLuxeUpsell__offer,
+    .lmctLuxeUpsell__story {
+      padding: 74px 0;
+    }
+
+    .lmctLuxeUpsell__sectionTitle,
+    .lmctLuxeUpsell__finalTitle {
+      font-size: 38px;
+      line-height: 1.02;
+    }
+
+    .lmctLuxeUpsell__sectionCopy,
+    .lmctLuxeUpsell__storyCopy {
+      font-size: 14px;
+    }
+
+    .lmctLuxeUpsell__categoryGrid,
+    .lmctLuxeUpsell__categoryStrip,
+    .lmctLuxeUpsell__stats,
+    .lmctLuxeUpsell__planGrid,
+    .lmctLuxeUpsell__storyGrid,
+    .lmctLuxeUpsell__finalGrid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .lmctLuxeUpsell__categoryCard {
+      min-height: 360px;
+    }
+
+    .lmctLuxeUpsell__categoryStripItem,
+    .lmctLuxeUpsell__stat {
+      border-right: 0;
+      border-bottom: 1px solid var(--lx-line);
+    }
+
+    .lmctLuxeUpsell__categoryStripItem:last-child,
+    .lmctLuxeUpsell__stat:last-child {
+      border-bottom: 0;
+    }
+
+    .lmctLuxeUpsell__stats {
+      border-bottom: 0;
+    }
+
+    .lmctLuxeUpsell__stat {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .lmctLuxeUpsell__planIntro {
+      padding: 31px 24px;
+      border-right: 0;
+      border-bottom: 1px solid var(--lx-line);
+    }
+
+    .lmctLuxeUpsell__benefits {
+      padding: 30px 24px;
+    }
+
+    .lmctLuxeUpsell__entryFlow {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+      padding: 24px;
+    }
+
+    .lmctLuxeUpsell__entryNode {
+      min-width: 0;
+      padding: 5px 0;
+    }
+
+    .lmctLuxeUpsell__entryLine {
+      width: 1px;
+      height: 24px;
+      margin-left: 18px;
+    }
+
+    .lmctLuxeUpsell__entryLine::after {
+      top: auto;
+      right: auto;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) rotate(135deg);
+    }
+
+    .lmctLuxeUpsell__entryFlowNote {
+      grid-column: auto;
+    }
+
+    .lmctLuxeUpsell__founderImage {
+      min-height: 430px;
+      margin-right: 12px;
+    }
+
+    .lmctLuxeUpsell__finalPrice {
+      padding: 27px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+      border-left: 0;
+    }
+
+    .lmctLuxeUpsellFooter__inner {
+      width: calc(100% - 30px);
+      min-height: 92px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .lmctLuxeUpsell__title {
+      font-size: 37px;
+    }
+
+    .lmctLuxeUpsell__sectionTitle,
+    .lmctLuxeUpsell__finalTitle {
+      font-size: 33px;
+    }
+
+    .lmctLuxeUpsell__priceLine {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .lmctLuxeUpsell__priceNote {
+      padding: 0;
+      border-left: 0;
+    }
+
+    .lmctLuxeUpsell__categoryCard {
+      min-height: 330px;
+    }
+
+    .lmctLuxeUpsell__offerTop {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 6px;
+      padding: 18px 20px;
+    }
+
+    .lmctLuxeUpsell__planName {
+      font-size: 29px;
+    }
+
+    .lmctLuxeUpsell__planPrice strong {
+      font-size: 49px;
+    }
+
+    .lmctLuxeUpsellFooter__inner {
+      flex-direction: column;
+      justify-content: center;
+      gap: 9px;
+    }
+
+    .lmctLuxeUpsellFooter p {
+      text-align: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctLuxeUpsell__categoryCard img,
+    .lmctLuxeUpsell__cta,
+    .lmctLuxeUpsell__planCta,
+    .lmctLuxeUpsell__finalCta,
+    .lmctLuxeUpsell__ctaIcon svg {
+      transition: none !important;
+    }
+  }
+</style>
+
+<main class="lmctLuxeUpsell" data-lmct-luxe-upsell>
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <symbol id="lmctLuxeIconArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path>
+    </symbol>
+    <symbol id="lmctLuxeIconCheck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m5 12 4 4L19 6"></path>
+    </symbol>
+    <symbol id="lmctLuxeIconTicket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 9a3 3 0 0 0 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 0 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2M13 17v2M13 11v2"></path>
+    </symbol>
+    <symbol id="lmctLuxeIconStore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m3 9 2-5h14l2 5"></path><path d="M5 13v7h14v-7"></path><path d="M9 20v-5h6v5"></path><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"></path>
+    </symbol>
+    <symbol id="lmctLuxeIconMail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path>
+    </symbol>
+    <symbol id="lmctLuxeIconCalendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path>
+    </symbol>
+    <symbol id="lmctLuxeIconHome" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m3 11 9-8 9 8"></path><path d="M5 10v10h14V10M9 20v-6h6v6"></path>
+    </symbol>
+    <symbol id="lmctLuxeIconPlane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 2 9 15"></path><path d="m22 2-7 20-4-9-9-4Z"></path>
+    </symbol>
+    <symbol id="lmctLuxeIconActivity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12h4l2-7 4 14 2-7h6"></path>
+    </symbol>
+    <symbol id="lmctLuxeIconSparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m12 3-1.8 4.7L5.5 9.5l4.7 1.8L12 16l1.8-4.7 4.7-1.8-4.7-1.8Z"></path><path d="m5 16-.8 2.2L2 19l2.2.8L5 22l.8-2.2L8 19l-2.2-.8Z"></path>
+    </symbol>
+  </svg>
+
+  <section class="lmctLuxeUpsell__hero" aria-labelledby="lmctLuxeUpsellTitle">
+    <video class="lmctLuxeUpsell__heroVideo" autoplay muted loop playsinline preload="metadata" poster="https://luxeplus.com.au/wp-content/uploads/2023/03/Rectangle-3.png" aria-hidden="true" data-luxe-video>
+      <source src="https://luxeplus.com.au/wp-content/uploads/2022/09/luxe-5-days.mp4" type="video/mp4" />
+    </video>
+    <div class="lmctLuxeUpsell__heroShade" aria-hidden="true"></div>
+    <div class="lmctLuxeUpsell__heroTexture" aria-hidden="true"></div>
+
+    <div class="lmctLuxeUpsell__container">
+      <header class="lmctLuxeUpsell__nav">
+        <img class="lmctLuxeUpsell__luxeLogo" src="https://luxeplus.com.au/wp-content/uploads/2022/09/logo-luxe-new.png" alt="LUXE+" width="399" height="122" />
+        <span class="lmctLuxeUpsell__memberBrand"><span>Exclusive member offer for</span><img src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png" alt="LMCT+" width="1366" height="227" /></span>
+      </header>
+
+      <div class="lmctLuxeUpsell__heroInner">
+        <div class="lmctLuxeUpsell__heroCopy">
+          <p class="lmctLuxeUpsell__eyebrow">Exclusive for existing LMCT+ members</p>
+          <h1 class="lmctLuxeUpsell__title" id="lmctLuxeUpsellTitle">Add LUXE+ for <em>$1.25 a week.</em></h1>
+          <p class="lmctLuxeUpsell__lead">Your LMCT+ membership has the cars covered. Add <strong>LUXE+ Stylist Membership</strong> for fashion, apparel, homewares, travel, health, fitness and more.</p>
+
+          <div class="lmctLuxeUpsell__priceLine" aria-label="LUXE Plus LMCT Plus member price is 1 dollar and 25 cents a week">
+            <span class="lmctLuxeUpsell__memberPrice">$1.25 <small>/ week</small></span>
+            <span class="lmctLuxeUpsell__priceNote"><strong>LMCT+ member price</strong>Public price $9.99 per month</span>
+          </div>
+
+          <a class="lmctLuxeUpsell__cta" href="#open-popup" data-luxe-cta>
+            <span>Add LUXE+ to my membership</span>
+            <span class="lmctLuxeUpsell__ctaIcon" aria-hidden="true"><svg><use href="#lmctLuxeIconArrow"></use></svg></span>
+          </a>
+          <div class="lmctLuxeUpsell__terms" aria-label="Stylist membership billing details">
+            <span><svg aria-hidden="true"><use href="#lmctLuxeIconCheck"></use></svg>Billed monthly</span>
+            <span><svg aria-hidden="true"><use href="#lmctLuxeIconCheck"></use></svg>No setup fee</span>
+            <span><svg aria-hidden="true"><use href="#lmctLuxeIconCheck"></use></svg>Opt out anytime</span>
+          </div>
+          <p class="lmctLuxeUpsell__error" data-luxe-error role="alert"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctLuxeUpsell__categories" aria-labelledby="lmctLuxeCategoriesTitle">
+    <div class="lmctLuxeUpsell__container">
+      <div class="lmctLuxeUpsell__sectionHead">
+        <div>
+          <p class="lmctLuxeUpsell__sectionEyebrow">The everyday side of rewards</p>
+          <h2 class="lmctLuxeUpsell__sectionTitle" id="lmctLuxeCategoriesTitle">Your rewards go <em>beyond cars.</em></h2>
+        </div>
+        <p class="lmctLuxeUpsell__sectionCopy">LUXE+ is the sister brand to LMCT+, opening a wider rewards world across style, home, travel and wellbeing.</p>
+      </div>
+
+      <div class="lmctLuxeUpsell__categoryGrid">
+        <article class="lmctLuxeUpsell__categoryCard">
+          <img src="https://luxeplus.com.au/wp-content/uploads/2023/03/Rectangle-4.png" alt="Luxury handbag representing LUXE+ fashion and apparel rewards" width="312" height="568" loading="lazy" />
+          <span class="lmctLuxeUpsell__categoryLabel"><small>Style your everyday</small><strong>Fashion &amp; apparel</strong></span>
+        </article>
+        <article class="lmctLuxeUpsell__categoryCard">
+          <img src="https://luxeplus.com.au/wp-content/uploads/2023/03/Rectangle-6.png" alt="Luxury watch representing LUXE+ accessories rewards" width="372" height="464" loading="lazy" />
+          <span class="lmctLuxeUpsell__categoryLabel"><small>Details that matter</small><strong>Watches &amp; accessories</strong></span>
+        </article>
+        <article class="lmctLuxeUpsell__categoryCard">
+          <img src="https://luxeplus.com.au/wp-content/uploads/2023/03/Rectangle-5.png" alt="Jewellery representing LUXE+ beauty and style rewards" width="200" height="200" loading="lazy" />
+          <span class="lmctLuxeUpsell__categoryLabel"><small>More ways to discover</small><strong>Beauty &amp; style</strong></span>
+        </article>
+      </div>
+
+      <div class="lmctLuxeUpsell__categoryStrip" aria-label="More LUXE Plus reward categories">
+        <div class="lmctLuxeUpsell__categoryStripItem">
+          <span class="lmctLuxeUpsell__categoryStripIcon" aria-hidden="true"><svg><use href="#lmctLuxeIconHome"></use></svg></span>
+          <span><strong>Homewares</strong><span>Rewards for the space you live in.</span></span>
+        </div>
+        <div class="lmctLuxeUpsell__categoryStripItem">
+          <span class="lmctLuxeUpsell__categoryStripIcon" aria-hidden="true"><svg><use href="#lmctLuxeIconPlane"></use></svg></span>
+          <span><strong>Travel</strong><span>Explore more from the LUXE+ network.</span></span>
+        </div>
+        <div class="lmctLuxeUpsell__categoryStripItem">
+          <span class="lmctLuxeUpsell__categoryStripIcon" aria-hidden="true"><svg><use href="#lmctLuxeIconActivity"></use></svg></span>
+          <span><strong>Health &amp; fitness</strong><span>Offers across wellbeing and fitness.</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctLuxeUpsell__proof" aria-labelledby="lmctLuxeProofTitle">
+    <div class="lmctLuxeUpsell__container lmctLuxeUpsell__proofGrid">
+      <div>
+        <h2 class="lmctLuxeUpsell__proofTitle" id="lmctLuxeProofTitle">LUXE+ runs its <span>own giveaways.</span></h2>
+        <p class="lmctLuxeUpsell__proofCopy">A separate rewards world with its own prizes, winners and participating stores.</p>
+      </div>
+      <div class="lmctLuxeUpsell__stats" aria-label="LUXE Plus highlights">
+        <div class="lmctLuxeUpsell__stat"><strong>$300K</strong><span>In prizes given away</span></div>
+        <div class="lmctLuxeUpsell__stat"><strong>100+</strong><span>Lucky winners</span></div>
+        <div class="lmctLuxeUpsell__stat"><strong>1,000+</strong><span>Stores with discounts</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctLuxeUpsell__offer" aria-labelledby="lmctLuxeOfferTitle">
+    <div class="lmctLuxeUpsell__container">
+      <div class="lmctLuxeUpsell__sectionHead">
+        <div>
+          <p class="lmctLuxeUpsell__sectionEyebrow">Your member-only add-on</p>
+          <h2 class="lmctLuxeUpsell__sectionTitle" id="lmctLuxeOfferTitle">Meet the <em>Stylist Membership.</em></h2>
+        </div>
+        <p class="lmctLuxeUpsell__sectionCopy">Everything you need to start exploring LUXE+ rewards and giveaways alongside your LMCT+ membership.</p>
+      </div>
+
+      <article class="lmctLuxeUpsell__offerCard" aria-label="LUXE Plus Stylist Membership offer">
+        <div class="lmctLuxeUpsell__offerTop"><span>Exclusive LMCT+ member offer</span><strong>Add LUXE+. Keep LMCT+.</strong></div>
+        <div class="lmctLuxeUpsell__planGrid">
+          <div class="lmctLuxeUpsell__planIntro">
+            <h3 class="lmctLuxeUpsell__planName">Stylist <span>Membership</span></h3>
+            <div class="lmctLuxeUpsell__planPrice"><strong>$1.25</strong><span>/ week</span></div>
+            <p class="lmctLuxeUpsell__publicPrice">Exclusive existing-member price. <strong>Public price $9.99/month.</strong></p>
+            <div class="lmctLuxeUpsell__billing">
+              <span><svg aria-hidden="true"><use href="#lmctLuxeIconCalendar"></use></svg>Billed monthly</span>
+              <span><svg aria-hidden="true"><use href="#lmctLuxeIconCheck"></use></svg>No setup fee</span>
+              <span><svg aria-hidden="true"><use href="#lmctLuxeIconCheck"></use></svg>Opt out anytime</span>
+            </div>
+            <a class="lmctLuxeUpsell__planCta" href="#open-popup" data-luxe-cta>
+              <span>Add Stylist Membership</span>
+              <span class="lmctLuxeUpsell__ctaIcon" aria-hidden="true"><svg><use href="#lmctLuxeIconArrow"></use></svg></span>
+            </a>
+            <p class="lmctLuxeUpsell__error" data-luxe-error role="alert"></p>
+          </div>
+
+          <div class="lmctLuxeUpsell__benefits">
+            <p class="lmctLuxeUpsell__benefitsTitle">Your Stylist Membership includes</p>
+            <ul class="lmctLuxeUpsell__benefitList">
+              <li class="lmctLuxeUpsell__benefit">
+                <span class="lmctLuxeUpsell__benefitIcon" aria-hidden="true"><svg><use href="#lmctLuxeIconTicket"></use></svg></span>
+                <span><strong>1 accumulating entry every month</strong><span>Valid for every LUXE+ giveaway.</span></span>
+              </li>
+              <li class="lmctLuxeUpsell__benefit">
+                <span class="lmctLuxeUpsell__benefitIcon" aria-hidden="true"><svg><use href="#lmctLuxeIconStore"></use></svg></span>
+                <span><strong>Discount access at 1,000+ stores</strong><span>Explore participating LUXE+ stores and offers.</span></span>
+              </li>
+              <li class="lmctLuxeUpsell__benefit">
+                <span class="lmctLuxeUpsell__benefitIcon" aria-hidden="true"><svg><use href="#lmctLuxeIconSparkle"></use></svg></span>
+                <span><strong>Invites to LUXE events</strong><span>Across Australia.</span></span>
+              </li>
+              <li class="lmctLuxeUpsell__benefit">
+                <span class="lmctLuxeUpsell__benefitIcon" aria-hidden="true"><svg><use href="#lmctLuxeIconMail"></use></svg></span>
+                <span><strong>LUXE early-bird emails</strong><span>Receive promotional updates by email.</span></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="lmctLuxeUpsell__entryFlow" aria-label="LUXE Plus Stylist entries accumulate each month">
+          <span class="lmctLuxeUpsell__entryNode"><small>Month 1</small><strong>1 entry</strong></span>
+          <span class="lmctLuxeUpsell__entryLine" aria-hidden="true"></span>
+          <span class="lmctLuxeUpsell__entryNode"><small>Month 3</small><strong>3 entries</strong></span>
+          <span class="lmctLuxeUpsell__entryLine" aria-hidden="true"></span>
+          <span class="lmctLuxeUpsell__entryNode"><small>Month 6</small><strong>6 entries</strong></span>
+          <p class="lmctLuxeUpsell__entryFlowNote">One accumulating entry is added each month, valid for every LUXE+ giveaway.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="lmctLuxeUpsell__story" aria-labelledby="lmctLuxeStoryTitle">
+    <div class="lmctLuxeUpsell__container lmctLuxeUpsell__storyGrid">
+      <div class="lmctLuxeUpsell__founderImage">
+        <img src="https://luxeplus.com.au/wp-content/uploads/2023/03/Rectangle-10.png" alt="Adrian Portelli, founder of LMCT+ and LUXE+" width="384" height="441" loading="lazy" />
+      </div>
+      <div>
+        <p class="lmctLuxeUpsell__sectionEyebrow">A sister brand with a different lane</p>
+        <h2 class="lmctLuxeUpsell__sectionTitle" id="lmctLuxeStoryTitle">Same founder. <em>A wider rewards world.</em></h2>
+        <p class="lmctLuxeUpsell__storyCopy"><strong>LMCT+ is the car-focused big brother.</strong> LUXE+ extends the rewards experience into apparel, fashion, homewares, travel, health and fitness, with its own giveaways and member offers.</p>
+        <div class="lmctLuxeUpsell__founder">
+          <div class="lmctLuxeUpsell__founderMark" aria-hidden="true">AP</div>
+          <span><strong>Adrian Portelli</strong><span>Founder, LMCT+ / LUXE+</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmctLuxeUpsell__final" aria-labelledby="lmctLuxeFinalTitle">
+    <div class="lmctLuxeUpsell__container lmctLuxeUpsell__finalGrid">
+      <div>
+        <p class="lmctLuxeUpsell__eyebrow">More than cars</p>
+        <h2 class="lmctLuxeUpsell__finalTitle" id="lmctLuxeFinalTitle">Add LUXE+ to the membership <em>you already have.</em></h2>
+        <p class="lmctLuxeUpsell__finalCopy">Keep your LMCT+ membership and add the everyday world of LUXE+ rewards, giveaways and member access.</p>
+      </div>
+      <div class="lmctLuxeUpsell__finalPrice">
+        <small>Exclusive LMCT+ member price</small>
+        <strong>$1.25/week</strong>
+        <span>Billed monthly &bull; No setup fee &bull; Opt out anytime</span>
+        <a class="lmctLuxeUpsell__finalCta" href="#open-popup" data-luxe-cta>
+          <div>Add LUXE+ now</div>
+          <div class="lmctLuxeUpsell__ctaIcon" aria-hidden="true"><svg><use href="#lmctLuxeIconArrow"></use></svg></div>
+        </a>
+        <p class="lmctLuxeUpsell__error" data-luxe-error role="alert"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="lmctLuxeUpsellFooter">
+  <div class="lmctLuxeUpsellFooter__inner">
+    <div class="lmctLuxeUpsellFooter__brands">
+      <img src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png" alt="LMCT+" width="1366" height="227" loading="lazy" />
+      <span class="lmctLuxeUpsellFooter__divider" aria-hidden="true"></span>
+      <img src="https://luxeplus.com.au/wp-content/uploads/2022/09/logo-luxe-new.png" alt="LUXE+" width="399" height="122" loading="lazy" />
+    </div>
+    <p>Exclusive LMCT+ member add-on</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    "use strict";
+
+    var supplied = window.LMCT_LUXE_UPSELL_CONFIG || {};
+    var config = {
+      productId: String(supplied.productId || "TO_DO"),
+      modalSelector: supplied.modalSelector || "#modalPopup",
+    };
+    window.LMCT_LUXE_UPSELL_CONFIG = config;
+
+    var root = document.querySelector("[data-lmct-luxe-upsell]");
+    if (!root) return;
+
+    var actionLinks = root.querySelectorAll("[data-luxe-cta]");
+    var errorNodes = root.querySelectorAll("[data-luxe-error]");
+    var heroVideo = root.querySelector("[data-luxe-video]");
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function showError(message) {
+      errorNodes.forEach(function (node) {
+        node.textContent = message;
+        node.classList.add("is-visible");
+      });
+    }
+
+    function clearError() {
+      errorNodes.forEach(function (node) {
+        node.textContent = "";
+        node.classList.remove("is-visible");
+      });
+    }
+
+    function getProductInputs() {
+      return document.querySelectorAll('.o2step_step2 input[name="purchase[product_id]"], [data-de-type="orpo"] input[name="purchase[product_id]"]');
+    }
+
+    function selectLuxeProduct() {
+      var targetInput = null;
+
+      getProductInputs().forEach(function (input) {
+        if (input.closest("#cfAR")) return;
+        var isTarget = input.value === config.productId;
+        var row = input.closest(".elOrderProductOptinProducts");
+        var template = input.closest('[data-cf-product-template="true"]');
+
+        if (row) {
+          row.style.setProperty("display", isTarget ? "table-row" : "none", "important");
+          row.classList.toggle("checked-item", isTarget);
+        }
+        if (template && template !== row) {
+          template.style.setProperty("display", isTarget ? "block" : "none", "important");
+        }
+        if (isTarget) targetInput = input;
+      });
+
+      if (!targetInput) return false;
+
+      targetInput.checked = true;
+      targetInput.dispatchEvent(new Event("change", { bubbles: true }));
+      targetInput.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+      document.querySelectorAll('#cfAR input[name="purchase[product_ids][]"]').forEach(function (input) {
+        input.checked = input.value === config.productId;
+      });
+
+      document.body.setAttribute("data-lmct-luxe-product", config.productId);
+      window.localStorage.setItem("selected_package", "luxe-stylist");
+      window.lmctLuxeUpsellSelection = {
+        plan: "stylist",
+        productId: config.productId,
+        memberPricePerWeek: 1.25,
+      };
+
+      if (typeof window.rebuildOrderSummary === "function") window.rebuildOrderSummary();
+      if (window.jQuery) window.jQuery(document).trigger("cfpt:cart-updated");
+      return true;
+    }
+
+    actionLinks.forEach(function (link) {
+      link.setAttribute("aria-label", "Add LUXE Plus Stylist Membership for 1 dollar and 25 cents a week");
+      link.setAttribute("data-luxe-product-id", config.productId);
+
+      link.addEventListener("click", function (event) {
+        clearError();
+
+        if (!config.productId || config.productId === "TO_DO") {
+          event.preventDefault();
+          showError("Add the LUXE+ Stylist Membership product ID to LMCT_LUXE_UPSELL_CONFIG before publishing.");
+          return;
+        }
+
+        var proceed = link.dispatchEvent(new CustomEvent("lmct:luxe-upsell", {
+          bubbles: true,
+          cancelable: true,
+          detail: {
+            plan: "stylist",
+            productId: config.productId,
+            memberPricePerWeek: 1.25,
+          },
+        }));
+
+        if (!proceed) {
+          event.preventDefault();
+          return;
+        }
+
+        if (selectLuxeProduct()) return;
+
+        var attempts = 0;
+        var retry = window.setInterval(function () {
+          attempts += 1;
+          if (selectLuxeProduct()) {
+            window.clearInterval(retry);
+          } else if (attempts >= 12) {
+            window.clearInterval(retry);
+            showError("The LUXE+ Stylist Membership product could not be found in this popup.");
+          }
+        }, 150);
+      });
+    });
+
+    if (heroVideo) {
+      if (reduceMotion) {
+        heroVideo.pause();
+        heroVideo.removeAttribute("autoplay");
+      } else if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var playAttempt = heroVideo.play();
+              if (playAttempt && typeof playAttempt.catch === "function") playAttempt.catch(function () {});
+            } else {
+              heroVideo.pause();
+            }
+          });
+        }, { threshold: 0.05 }).observe(heroVideo);
+      }
+    }
+  })();
+</script>
