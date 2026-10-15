@@ -1,0 +1,510 @@
+<!--
+╔══════════════════════════════════════════════════════════════════╗
+║  LMCT+ COUNTDOWN BANNER                                          ║
+║  SINGLE COUNTDOWN SOURCE                                         ║
+║                                                                  ║
+║  Controls: LMCT+ Countdown Banner + LMCT+ 3HR Timer              ║
+║                                                                  ║
+║  TO EDIT:                                                        ║
+║  1. Banner text                                                  ║
+║  2. LMCT_TARGET_DATE                                             ║
+║  3. LMCT_TIMEZONE                                                ║
+║  4. LMCT_ROTATE / LMCT_TEXT_SECONDS / LMCT_COUNT_SECONDS         ║
+╚══════════════════════════════════════════════════════════════════╝
+-->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+<style>
+  .lmctBannerRoot,
+  .lmctBannerRoot * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .lmctBannerRoot {
+    width: 100%;
+    background: #ff0000;
+    font-family: "Montserrat", sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+  .lmctBannerInner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px clamp(10px, 5vw, 60px);
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: nowrap;
+    gap: clamp(10px, 4vw, 48px);
+  }
+  .lmctBannerRoot::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.05) 60%, transparent 100%);
+  }
+  .lmctLogoWrap {
+    flex: 0 0 auto;
+    width: clamp(28px, 6vw, 64px);
+    display: flex;
+    align-items: center;
+    animation: lmctLogoGlow 2.5s ease-in-out infinite;
+  }
+  .lmctLogoWrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.18));
+  }
+  @keyframes lmctLogoGlow {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.12));
+    }
+    50% {
+      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+    }
+  }
+  .lmctTextBlock {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .lmctTextLine1,
+  .lmctTextLine2 {
+    font-weight: 800;
+    font-size: clamp(8px, 2.4vw, 20px);
+    color: #fff;
+    letter-spacing: 0.04em;
+    line-height: 1.25;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+  @media (max-width: 520px) {
+    .lmctTextLine1,
+    .lmctTextLine2 {
+      font-size: clamp(11px, 3.6vw, 18px);
+    }
+  }
+
+  /* ---------- Countdown digits ---------- */
+  .lmctCountdownWrap {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 1.4vw, 16px);
+    flex: 0 0 auto;
+  }
+  .lmctDigitGroup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .lmctDigitValue {
+    font-weight: 900;
+    font-size: clamp(20px, 5.8vw, 48px);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  }
+  .lmctDigitLabel {
+    font-weight: 700;
+    font-size: clamp(5px, 1.1vw, 9px);
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .lmctSeparator {
+    font-weight: 900;
+    font-size: clamp(14px, 4.2vw, 36px);
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1;
+    margin-top: clamp(-3px, -0.8vw, -8px);
+    animation: lmctColonBlink 1s ease-in-out infinite;
+  }
+  @keyframes lmctColonBlink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+  .lmctDigitFlip {
+    animation: lmctFlipIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @keyframes lmctFlipIn {
+    0% {
+      transform: translateY(-6px) scale(1.06);
+      opacity: 0.35;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+  .lmctBannerRoot.lmctUrgent .lmctDigitValue {
+    animation: lmctUrgentPulse 0.8s ease-in-out infinite;
+  }
+  @keyframes lmctUrgentPulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.04);
+    }
+  }
+
+  /* ---------- Message ("4 DAYS LEFT" / "ENDS TONIGHT") ---------- */
+  /* Both views sit in the same grid cell so they crossfade in place
+     (no layout jump). The wrapper is as wide as the wider of the two. */
+  .lmctSwap {
+    flex: 0 0 auto;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+  }
+  .lmctSwap > .lmctMessage,
+  .lmctSwap > .lmctCountdownWrap {
+    grid-area: 1 / 1;
+    transition:
+      opacity 0.7s ease,
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.7s ease;
+    will-change: opacity, transform, filter;
+  }
+  .lmctMessage {
+    flex: 0 0 auto;
+    opacity: 0;
+    transform: translateY(-18px) scale(0.96);
+    filter: blur(4px);
+    pointer-events: none;
+    font-weight: 900;
+    font-size: clamp(18px, 5vw, 42px);
+    color: #fff;
+    line-height: 1;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  }
+  /* Mode switching (class set by JS on the root element) */
+  .lmctBannerRoot.lmctShowMessage .lmctMessage {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    pointer-events: auto;
+  }
+  .lmctBannerRoot.lmctShowMessage .lmctCountdownWrap {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+    filter: blur(4px);
+    pointer-events: none;
+  }
+
+  /* "OFFER ENDS IN:" line folds away smoothly while the message shows */
+  .lmctTextLine2 {
+    max-height: 2em;
+    overflow: hidden;
+    transition:
+      max-height 0.7s ease,
+      opacity 0.6s ease;
+  }
+  .lmctBannerRoot.lmctShowMessage .lmctTextLine2 {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  .lmctNoAnim .lmctSwap > *,
+  .lmctNoAnim .lmctTextLine2 {
+    transition: none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctSwap > .lmctMessage,
+    .lmctSwap > .lmctCountdownWrap,
+    .lmctTextLine2 {
+      transition: opacity 0.3s ease;
+    }
+  }
+</style>
+
+<div class="lmctBannerRoot lmctNoAnim" id="lmctBannerRoot">
+  <div class="lmctBannerInner">
+    <div class="lmctLogoWrap">
+      <img src="https://images.clickfunnels.com/c4/269d96f2134bfaafe914ba39e9906b/lmct_icon_White.png" alt="LMCT+" />
+    </div>
+
+    <!-- EDIT BANNER TEXT HERE -->
+    <div class="lmctTextBlock">
+      <div class="lmctTextLine1">HURRY!</div>
+      <div class="lmctTextLine2">OFFER ENDS IN:</div>
+    </div>
+
+    <div class="lmctSwap">
+      <!-- Message shown instead of the countdown -->
+      <div class="lmctMessage" id="lmctMessage"></div>
+
+      <!-- Live countdown -->
+      <div class="lmctCountdownWrap" id="lmctCountdownWrap">
+        <div class="lmctDigitGroup">
+          <div class="lmctDigitValue" id="lmctHours">00</div>
+          <div class="lmctDigitLabel">Hours</div>
+        </div>
+        <div class="lmctSeparator">:</div>
+        <div class="lmctDigitGroup">
+          <div class="lmctDigitValue" id="lmctMins">00</div>
+          <div class="lmctDigitLabel">Mins</div>
+        </div>
+        <div class="lmctSeparator">:</div>
+        <div class="lmctDigitGroup">
+          <div class="lmctDigitValue" id="lmctSecs">00</div>
+          <div class="lmctDigitLabel">Secs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ==================================================
+     LMCT+ MASTER COUNTDOWN SETTINGS
+     CHANGE THE DATE HERE ONLY.
+     Both the Countdown Banner and the 3HR Timer
+     use this target.
+  ================================================== */
+  var LMCT_TARGET_DATE = "2026-10-16 00:00:00";
+  var LMCT_TIMEZONE = "Australia/Sydney";
+
+  /* ==================================================
+     MESSAGE SETTINGS
+     More than 24 hours left  -> "X DAYS LEFT"
+     24 hours or less         -> "ENDS TONIGHT"
+
+     LMCT_ROTATE = true
+       Banner shows the message for a few seconds, flips to
+       the live countdown for a few seconds, then back to
+       the message again.
+     LMCT_ROTATE = false
+       Banner shows ONLY the message (no countdown digits).
+  ================================================== */
+  var LMCT_ROTATE = true;
+  var LMCT_TEXT_SECONDS = 5; // how long the message shows
+  var LMCT_COUNT_SECONDS = 3; // how long the countdown shows
+  var LMCT_ENDING_TEXT = "ENDS TONIGHT";
+  var LMCT_ENDED_TEXT = "OFFER ENDED";
+
+  (function () {
+    /* Prevent ClickFunnels from starting the timer twice. */
+    if (window.LMCT_COUNTDOWN_RUNNING) {
+      return;
+    }
+    window.LMCT_COUNTDOWN_RUNNING = true;
+
+    /* ================================================
+       CONVERT WALL CLOCK IN TIMEZONE TO REAL UTC TIMESTAMP
+    ================================================ */
+    function getTargetTimestamp(dateString, timeZone) {
+      var p = dateString.match(/(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})/);
+      if (!p) {
+        console.error("Invalid LMCT_TARGET_DATE");
+        return Date.now();
+      }
+      var year = +p[1];
+      var month = +p[2];
+      var day = +p[3];
+      var hour = +p[4];
+      var minute = +p[5];
+      var second = +p[6];
+
+      var guess = Date.UTC(year, month - 1, day, hour, minute, second);
+
+      function getParts(timestamp) {
+        var formatter = new Intl.DateTimeFormat("en-AU", {
+          timeZone: timeZone,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hourCycle: "h23",
+        });
+        var parts = formatter.formatToParts(new Date(timestamp));
+        var result = {};
+        parts.forEach(function (part) {
+          if (part.type !== "literal") {
+            result[part.type] = Number(part.value);
+          }
+        });
+        return result;
+      }
+
+      /* Two passes help handle DST transitions correctly. */
+      for (var i = 0; i < 2; i++) {
+        var actual = getParts(guess);
+        var actualAsUTC = Date.UTC(actual.year, actual.month - 1, actual.day, actual.hour, actual.minute, actual.second);
+        var desiredAsUTC = Date.UTC(year, month - 1, day, hour, minute, second);
+        guess += desiredAsUTC - actualAsUTC;
+      }
+      return guess;
+    }
+
+    var target = getTargetTimestamp(LMCT_TARGET_DATE, LMCT_TIMEZONE);
+
+    /* ================================================
+       HELPERS
+    ================================================ */
+    function pad(n) {
+      return n < 10 ? "0" + n : "" + n;
+    }
+
+    function flip(el) {
+      if (!el) {
+        return;
+      }
+      el.classList.remove("lmctDigitFlip");
+      void el.offsetWidth;
+      el.classList.add("lmctDigitFlip");
+    }
+
+    var previousHours = "";
+    var previousMins = "";
+    var previousSecs = "";
+    var previousMode = ""; // "message" or "countdown"
+    var previousMessage = "";
+
+    /* ================================================
+       MASTER TICK
+       ONE countdown calculation updates everything.
+    ================================================ */
+    function tick() {
+      var remaining = Math.max(0, Math.floor((target - Date.now()) / 1000));
+      var hours = Math.floor(remaining / 3600);
+      var mins = Math.floor((remaining % 3600) / 60);
+      var secs = remaining % 60;
+
+      var hoursString = pad(hours);
+      var minsString = pad(mins);
+      var secsString = pad(secs);
+
+      /* Extra LMCT timer displays (data attributes) */
+      document.querySelectorAll("[data-lmct-hours]").forEach(function (el) {
+        el.textContent = hoursString;
+      });
+      document.querySelectorAll("[data-lmct-minutes]").forEach(function (el) {
+        el.textContent = minsString;
+      });
+      document.querySelectorAll("[data-lmct-seconds]").forEach(function (el) {
+        el.textContent = secsString;
+      });
+
+      /* LMCT+ 3HR Timer receives the SAME values */
+      var timerHours = document.getElementById("lmct3hrHrs");
+      var timerMins = document.getElementById("lmct3hrMins");
+      var timerSecs = document.getElementById("lmct3hrSecs");
+      if (timerHours) {
+        timerHours.textContent = hoursString;
+      }
+      if (timerMins) {
+        timerMins.textContent = minsString;
+      }
+      if (timerSecs) {
+        timerSecs.textContent = secsString;
+      }
+
+      /* ==============================================
+         COUNTDOWN BANNER
+      ============================================== */
+      var bannerHours = document.getElementById("lmctHours");
+      var bannerMins = document.getElementById("lmctMins");
+      var bannerSecs = document.getElementById("lmctSecs");
+      var bannerRoot = document.getElementById("lmctBannerRoot");
+      var messageEl = document.getElementById("lmctMessage");
+
+      if (bannerHours && hoursString !== previousHours) {
+        bannerHours.textContent = hoursString;
+        flip(bannerHours);
+        previousHours = hoursString;
+      }
+      if (bannerMins && minsString !== previousMins) {
+        bannerMins.textContent = minsString;
+        flip(bannerMins);
+        previousMins = minsString;
+      }
+      if (bannerSecs && secsString !== previousSecs) {
+        bannerSecs.textContent = secsString;
+        flip(bannerSecs);
+        previousSecs = secsString;
+      }
+
+      if (!bannerRoot || !messageEl) {
+        return;
+      }
+
+      /* ---- Work out what the message should say ---- */
+      var message;
+      if (remaining <= 0) {
+        message = LMCT_ENDED_TEXT;
+      } else if (remaining <= 24 * 3600) {
+        message = LMCT_ENDING_TEXT;
+      } else {
+        var days = Math.floor(remaining / 86400);
+        message = days + (days === 1 ? " DAY LEFT" : " DAYS LEFT");
+      }
+
+      /* ---- Message or countdown right now? ---- */
+      var showMessage = true;
+      if (LMCT_ROTATE && remaining > 0) {
+        var textMs = LMCT_TEXT_SECONDS * 2000;
+        var cycleMs = textMs + LMCT_COUNT_SECONDS * 2000;
+        showMessage = Date.now() % cycleMs < textMs;
+      }
+
+      var mode = showMessage ? "message" : "countdown";
+
+      if (message !== previousMessage) {
+        messageEl.textContent = message;
+        previousMessage = message;
+      }
+
+      if (mode !== previousMode) {
+        if (showMessage) {
+          bannerRoot.classList.add("lmctShowMessage");
+        } else {
+          bannerRoot.classList.remove("lmctShowMessage");
+        }
+        previousMode = mode;
+      }
+
+      /* ==============================================
+         URGENCY STATE (last hour only)
+      ============================================== */
+      if (hours === 0 && (mins > 0 || secs > 0)) {
+        bannerRoot.classList.add("lmctUrgent");
+      } else {
+        bannerRoot.classList.remove("lmctUrgent");
+      }
+    }
+
+    /* Initial render (no transition on first paint) */
+    tick();
+    setTimeout(function () {
+      var r = document.getElementById("lmctBannerRoot");
+      if (r) {
+        r.classList.remove("lmctNoAnim");
+      }
+    }, 50);
+
+    /* ONLY timer interval on the page. */
+    window.LMCT_COUNTDOWN_INTERVAL = setInterval(tick, 1000);
+  })();
+</script>

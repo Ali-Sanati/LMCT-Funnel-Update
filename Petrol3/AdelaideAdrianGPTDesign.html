@@ -1,0 +1,1590 @@
+<!--
+  LMCT+ Petrol Adelaide launch offer.
+  Responsive ClickFunnels custom HTML section with an inline CF Order 2 Step mount.
+-->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+  .lmctAG {
+    --lmctAG-navy: #020c2e;
+    --lmctAG-navy-2: #04194f;
+    --lmctAG-blue: #007df2;
+    --lmctAG-cyan: #16d8ff;
+    --lmctAG-white: #ffffff;
+    --lmctAG-lime: #a8ff00;
+    --lmctAG-lime-2: #dfff00;
+    --lmctAG-muted: #b9cce9;
+    --lmctAG-line: rgba(29, 215, 255, 0.38);
+    --lmctAG-hero: url("https://images.clickfunnels.com/4d/11b7863beb42fcaeb7a7a8ef917612/adelaide-petrol-station-background.png");
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lmctAG-white);
+    font-family: "Inter", Arial, sans-serif;
+    background: var(--lmctAG-navy);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .lmctAG,
+  .lmctAG * {
+    box-sizing: border-box;
+  }
+
+  .lmctAG::before {
+    position: absolute;
+    z-index: -3;
+    inset: 0;
+    content: "";
+    background-image:
+      linear-gradient(90deg, rgba(2, 12, 46, 0.94) 0%, rgba(2, 12, 46, 0.76) 42%, rgba(2, 12, 46, 0.34) 69%, rgba(2, 12, 46, 0.7) 100%),
+      linear-gradient(180deg, rgba(2, 12, 46, 0.06) 0%, rgba(2, 12, 46, 0.15) 48%, rgba(2, 12, 46, 0.98) 91%), var(--lmctAG-hero);
+    background-position:
+      center,
+      center,
+      center top;
+    background-size: cover, cover, cover;
+    background-repeat: no-repeat;
+  }
+
+  .lmctAG::after {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    background-image: linear-gradient(rgba(45, 198, 255, 0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(45, 198, 255, 0.055) 1px, transparent 1px);
+    background-size: 72px 72px;
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent 75%);
+    mask-image: linear-gradient(to bottom, #000, transparent 75%);
+  }
+
+  .lmctAG__shell {
+    position: relative;
+    z-index: 1;
+    width: min(1640px, calc(100% - 64px));
+    margin: 0 auto;
+    padding: 28px 0 24px;
+  }
+
+  .lmctAG__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 0 0 26px;
+    border-bottom: 1px solid rgba(57, 207, 255, 0.34);
+  }
+
+  .lmctAG__logo {
+    display: block;
+    width: clamp(205px, 18vw, 290px);
+    height: auto;
+    filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.32));
+  }
+
+  .lmctAG__tagline {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(18px, 1.65vw, 25px);
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+  }
+
+  .lmctAG__tagline::after {
+    width: 54px;
+    height: 8px;
+    content: "";
+    transform: skewX(-18deg);
+    background: linear-gradient(90deg, var(--lmctAG-cyan), var(--lmctAG-blue));
+    box-shadow: 0 0 18px rgba(22, 216, 255, 0.52);
+  }
+
+  .lmctAG__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.24fr) minmax(430px, 0.76fr);
+    gap: clamp(38px, 5vw, 86px);
+    align-items: start;
+    padding: 44px 0 36px;
+  }
+
+  .lmctAG__offer {
+    min-width: 0;
+    padding-top: 12px;
+  }
+
+  .lmctAG__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    margin: 0 0 18px;
+    padding: 0 15px;
+    border: 1px solid rgba(22, 216, 255, 0.62);
+    border-radius: 999px;
+    color: var(--lmctAG-cyan);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: rgba(1, 14, 55, 0.68);
+    box-shadow: 0 0 24px rgba(0, 135, 255, 0.18);
+  }
+
+  .lmctAG__title {
+    max-width: 900px;
+    margin: 0;
+    color: var(--lmctAG-white);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(72px, 7vw, 116px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.015em;
+    line-height: 0.77;
+    text-transform: uppercase;
+    text-shadow: 0 7px 16px rgba(0, 0, 28, 0.58);
+  }
+
+  .lmctAG__title span,
+  .lmctAG__title em {
+    display: block;
+  }
+
+  .lmctAG__title em {
+    color: var(--lmctAG-lime);
+    font-style: inherit;
+    text-shadow:
+      0 5px 0 rgba(7, 72, 0, 0.36),
+      0 0 30px rgba(168, 255, 0, 0.25);
+  }
+
+  .lmctAG__lead {
+    max-width: 760px;
+    margin: 27px 0 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: clamp(16px, 1.35vw, 20px);
+    font-weight: 600;
+    line-height: 1.55;
+    text-shadow: 0 2px 8px rgba(0, 0, 24, 0.75);
+  }
+
+  .lmctAG__lead strong {
+    color: var(--lmctAG-white);
+    font-weight: 900;
+  }
+
+  .lmctAG__priceBand {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr);
+    gap: 18px;
+    align-items: center;
+    width: min(100%, 790px);
+    margin-top: 28px;
+    padding: 16px 25px 18px;
+    border: 2px solid var(--lmctAG-cyan);
+    border-radius: 23px;
+    background: linear-gradient(125deg, rgba(2, 12, 46, 0.96), rgba(0, 35, 108, 0.92));
+    box-shadow:
+      0 0 0 3px rgba(0, 102, 255, 0.3),
+      0 0 28px rgba(22, 216, 255, 0.42),
+      inset 0 0 34px rgba(0, 82, 194, 0.28);
+  }
+
+  .lmctAG__priceBlock,
+  .lmctAG__bonusBlock {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .lmctAG__priceBlock span,
+  .lmctAG__bonusBlock span {
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(18px, 1.6vw, 25px);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctAG__priceBlock strong,
+  .lmctAG__bonusBlock strong {
+    display: block;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.015em;
+    line-height: 0.78;
+    white-space: nowrap;
+  }
+
+  .lmctAG__priceBlock strong {
+    color: var(--lmctAG-lime);
+    font-size: clamp(74px, 7.8vw, 124px);
+    text-shadow: 0 0 28px rgba(168, 255, 0, 0.3);
+  }
+
+  .lmctAG__priceBlock small,
+  .lmctAG__bonusBlock small {
+    margin-top: 5px;
+    color: var(--lmctAG-cyan);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctAG__plus {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    border: 2px solid var(--lmctAG-cyan);
+    border-radius: 50%;
+    color: var(--lmctAG-white);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 44px;
+    font-weight: 900;
+    line-height: 1;
+    background: var(--lmctAG-blue);
+    box-shadow: 0 0 24px rgba(22, 216, 255, 0.74);
+  }
+
+  .lmctAG__bonusBlock strong {
+    color: var(--lmctAG-white);
+    font-size: clamp(62px, 6.6vw, 105px);
+  }
+
+  .lmctAG__quickBenefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmctAG__quickBenefits li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid rgba(22, 216, 255, 0.38);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(2, 12, 46, 0.72);
+    backdrop-filter: blur(8px);
+  }
+
+  .lmctAG__quickBenefits li::before {
+    display: grid;
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    place-items: center;
+    content: "✓";
+    border-radius: 50%;
+    color: var(--lmctAG-navy);
+    font-size: 11px;
+    font-weight: 900;
+    background: var(--lmctAG-lime);
+  }
+
+  .lmctAG__meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    width: min(100%, 640px);
+    margin-top: 20px;
+  }
+
+  .lmctAG__metaItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 54px;
+    padding: 8px 17px;
+    border: 2px solid var(--lmctAG-cyan);
+    border-radius: 999px;
+    color: var(--lmctAG-white);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(17px, 1.4vw, 21px);
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    background: rgba(1, 20, 71, 0.86);
+    box-shadow: inset 0 0 18px rgba(0, 111, 255, 0.2);
+  }
+
+  .lmctAG__metaItem svg {
+    flex: 0 0 25px;
+    width: 25px;
+    height: 25px;
+    color: var(--lmctAG-cyan);
+  }
+
+  .lmctAG__primaryCta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    width: min(100%, 420px);
+    min-height: 64px;
+    margin-top: 22px;
+    padding: 8px 9px 8px 25px;
+    border: 1px solid var(--lmctAG-lime);
+    border-radius: 999px;
+    color: var(--lmctAG-navy) !important;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    background: linear-gradient(115deg, var(--lmctAG-lime-2), var(--lmctAG-lime));
+    box-shadow: 0 0 28px rgba(168, 255, 0, 0.25);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .lmctAG__primaryCta span:last-child {
+    display: grid;
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctAG-lime);
+    font-size: 20px;
+    background: var(--lmctAG-navy);
+  }
+
+  .lmctAG__primaryCta:hover {
+    box-shadow: 0 0 38px rgba(168, 255, 0, 0.42);
+    transform: translateY(-2px);
+  }
+
+  .lmctAG__formCard {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border: 2px solid rgba(54, 199, 255, 0.9);
+    border-radius: 28px;
+    color: var(--lmctAG-navy);
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow:
+      0 0 0 4px rgba(0, 88, 255, 0.24),
+      0 0 38px rgba(0, 179, 255, 0.42),
+      0 32px 80px rgba(0, 4, 30, 0.46);
+    backdrop-filter: blur(14px);
+  }
+
+  .lmctAG__formHead {
+    padding: 28px 30px 23px;
+    border-bottom: 1px solid rgba(3, 23, 80, 0.1);
+    background: linear-gradient(145deg, #ffffff, #edf6ff);
+  }
+
+  .lmctAG__secure {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 9px;
+    color: #087cc9;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+  }
+
+  .lmctAG__secure::before {
+    width: 7px;
+    height: 7px;
+    content: "";
+    border-radius: 50%;
+    background: var(--lmctAG-lime);
+    box-shadow: 0 0 10px rgba(125, 194, 0, 0.5);
+  }
+
+  .lmctAG__formTitle {
+    margin: 0;
+    color: #071c58;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(40px, 3.7vw, 58px);
+    font-weight: 900;
+    letter-spacing: -0.015em;
+    line-height: 0.9;
+  }
+
+  .lmctAG__formCopy {
+    margin: 12px 0 0;
+    color: #203b72;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .lmctAG__formCopy strong {
+    color: #071c58;
+    font-weight: 900;
+  }
+
+  .lmctAG__formFacts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 17px;
+  }
+
+  .lmctAG__formFacts span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 5px 8px;
+    border-radius: 9px;
+    color: #075698;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+    background: #e6f5ff;
+  }
+
+  .lmctAG__checkoutMount {
+    width: 100%;
+    min-height: 390px;
+    /* padding: 18px 20px 22px; */
+    scroll-margin-top: 20px;
+    background: var(--lmctAG-white);
+  }
+
+  .lmctAG__loading {
+    display: grid;
+    min-height: 350px;
+    place-items: center;
+    color: #627493;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  .lmctAG__checkoutMount #row--93963 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .lmctAG__checkoutMount #row--93963 > .innerContent,
+  .lmctAG__checkoutMount #row--93963 .col-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    /* padding: 0 !important; */
+  }
+
+  .lmctAG__checkoutMount #tmp_order2step-49594,
+  .lmctAG__checkoutMount [data-de-type="order2step"] {
+    width: 100% !important;
+    margin: 0 !important;
+    cursor: default !important;
+  }
+
+  .lmctAG__checkoutMount .order2StepHeader {
+    margin-bottom: 18px !important;
+  }
+
+  .lmctAG__checkoutMount .formInstructionNote {
+    margin-bottom: 14px !important;
+    color: #64748b !important;
+    font-size: 11px !important;
+  }
+
+  .lmctAG__checkoutMount .elInput {
+    width: 100% !important;
+    min-height: 52px !important;
+    border: 1px solid #cadcf0 !important;
+    border-radius: 10px !important;
+    color: #061b3a !important;
+    background: #f8fbff !important;
+    box-shadow: none !important;
+  }
+
+  .lmctAG__checkoutMount .elInput:focus {
+    border-color: #087cc9 !important;
+    box-shadow: 0 0 0 3px rgba(8, 124, 201, 0.13) !important;
+  }
+
+  .lmctAG__checkoutMount .labelUnderInput,
+  .lmctAG__checkoutMount .order2ButtonSubText,
+  .lmctAG__checkoutMount .order2ButtonSubText2 {
+    color: #667892 !important;
+  }
+
+  .lmctAG__checkoutMount .order2stepbutton .elButton,
+  .lmctAG__checkoutMount .order2stepbuttonOrder .elButton {
+    min-height: 60px !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    color: #06162e !important;
+    font-family: "Barlow Condensed", Impact, sans-serif !important;
+    font-size: 25px !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    letter-spacing: 0 !important;
+    text-transform: uppercase !important;
+    background: linear-gradient(115deg, var(--lmctAG-lime-2), var(--lmctAG-lime) 58%, #7de500) !important;
+    box-shadow: 0 10px 28px rgba(126, 197, 0, 0.27) !important;
+  }
+
+  .lmctAG__checkoutMount .iti,
+  .lmctAG__checkoutMount .elOrderProductOptions {
+    width: 100% !important;
+  }
+
+  .lmctAG__features {
+    padding: 18px 0 26px;
+  }
+
+  .lmctAG__featuresHead {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
+  }
+
+  .lmctAG__featuresTitle {
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(36px, 3.8vw, 58px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.015em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+
+  .lmctAG__featuresIntro {
+    max-width: 540px;
+    margin: 0;
+    color: var(--lmctAG-muted);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .lmctAG__featureGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .lmctAG__feature {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(22, 216, 255, 0.62);
+    border-radius: 16px;
+    color: #071c58;
+    background: var(--lmctAG-white);
+    box-shadow:
+      0 0 0 2px rgba(0, 102, 255, 0.18),
+      0 18px 38px rgba(0, 2, 28, 0.25);
+  }
+
+  .lmctAG__featureMedia {
+    position: relative;
+    aspect-ratio: 16 / 7.7;
+    overflow: hidden;
+    background: #052260;
+  }
+
+  .lmctAG__featureMedia::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(180deg, transparent 45%, rgba(3, 19, 67, 0.56));
+  }
+
+  .lmctAG__featureMedia img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 350ms ease;
+  }
+
+  .lmctAG__feature:hover .lmctAG__featureMedia img {
+    transform: scale(1.035);
+  }
+
+  .lmctAG__featureBody {
+    min-height: 126px;
+    padding: 18px 19px 20px;
+  }
+
+  .lmctAG__featureBody h3 {
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(22px, 1.8vw, 28px);
+    font-weight: 900;
+    letter-spacing: -0.015em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .lmctAG__featureBody p {
+    margin: 10px 0 0;
+    color: #34517e;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .lmctAG__soon {
+    display: inline-flex;
+    align-items: center;
+    min-height: 23px;
+    margin-top: 10px;
+    padding: 0 9px;
+    border-radius: 999px;
+    color: #006a9e;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #dff8ff;
+  }
+
+  .lmctAG__faq {
+    margin-top: clamp(38px, 4vw, 58px);
+    padding: clamp(28px, 3vw, 44px);
+    border: 1px solid rgba(22, 216, 255, 0.42);
+    border-radius: 24px;
+    background: radial-gradient(circle at 100% 0%, rgba(0, 125, 242, 0.28), transparent 36%), linear-gradient(145deg, rgba(0, 39, 111, 0.9), rgba(1, 13, 49, 0.96));
+    box-shadow:
+      inset 0 0 36px rgba(0, 102, 255, 0.16),
+      0 24px 54px rgba(0, 3, 30, 0.24);
+  }
+
+  .lmctAG__faqHead {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.55fr);
+    gap: 42px;
+    align-items: end;
+    margin-bottom: 25px;
+  }
+
+  .lmctAG__faqEyebrow {
+    margin: 0 0 10px;
+    color: var(--lmctAG-lime);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .lmctAG__faqTitle {
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(40px, 4.2vw, 64px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+
+  .lmctAG__faqIntro {
+    margin: 0;
+    color: var(--lmctAG-muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .lmctAG__faqList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    align-items: start;
+  }
+
+  .lmctAG__faqItem {
+    overflow: hidden;
+    border: 1px solid rgba(22, 216, 255, 0.31);
+    border-radius: 14px;
+    background: rgba(2, 19, 66, 0.78);
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .lmctAG__faqItem[open] {
+    border-color: rgba(22, 216, 255, 0.76);
+    background: rgba(3, 33, 96, 0.92);
+    box-shadow: inset 0 0 24px rgba(0, 115, 255, 0.13);
+  }
+
+  .lmctAG__faqQuestion {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 34px;
+    gap: 18px;
+    align-items: center;
+    min-height: 72px;
+    padding: 16px 18px 16px 20px;
+    color: var(--lmctAG-white);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(20px, 1.65vw, 25px);
+    font-weight: 800;
+    line-height: 1.08;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .lmctAG__faqQuestion::-webkit-details-marker {
+    display: none;
+  }
+
+  .lmctAG__faqQuestion::after {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    content: "+";
+    border: 1px solid var(--lmctAG-cyan);
+    border-radius: 50%;
+    color: var(--lmctAG-cyan);
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1;
+    background: rgba(0, 112, 224, 0.14);
+    transition:
+      color 180ms ease,
+      transform 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .lmctAG__faqItem[open] .lmctAG__faqQuestion::after {
+    color: var(--lmctAG-navy);
+    background: var(--lmctAG-cyan);
+    transform: rotate(45deg);
+  }
+
+  .lmctAG__faqAnswer {
+    padding: 0 64px 19px 20px;
+    color: #ccdcf3;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .lmctAG__faqAnswer p {
+    margin: 0;
+  }
+
+  .lmctAG__faqAnswer strong {
+    color: var(--lmctAG-white);
+    font-weight: 800;
+  }
+
+  .lmctAG__closing {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 28px;
+    align-items: center;
+    margin-top: 22px;
+    padding: 22px 26px;
+    border: 1px solid rgba(22, 216, 255, 0.48);
+    border-radius: 18px;
+    background: linear-gradient(110deg, rgba(0, 49, 134, 0.84), rgba(1, 17, 59, 0.92));
+    box-shadow: inset 0 0 28px rgba(0, 102, 255, 0.2);
+  }
+
+  .lmctAG__closingCopy {
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(30px, 3.2vw, 48px);
+    font-style: italic;
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+
+  .lmctAG__closingCopy strong {
+    color: var(--lmctAG-lime);
+  }
+
+  .lmctAG__closingCta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 245px;
+    min-height: 58px;
+    padding: 0 24px;
+    border: 1px solid var(--lmctAG-cyan);
+    border-radius: 999px;
+    color: var(--lmctAG-white) !important;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    background: #0069dd;
+    box-shadow: 0 0 22px rgba(22, 216, 255, 0.32);
+  }
+
+  .lmctAG__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 0 2px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 9px;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .lmctAG__footer p {
+    margin: 0;
+  }
+
+  .lmctAG__footer nav {
+    display: flex;
+    gap: 24px;
+  }
+
+  .lmctAG__footer a {
+    color: var(--lmctAG-cyan);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .lmctAG__primaryCta:focus-visible,
+  .lmctAG__closingCta:focus-visible,
+  .lmctAG__faqQuestion:focus-visible,
+  .lmctAG__footer a:focus-visible {
+    outline: 3px solid var(--lmctAG-lime);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 1220px) {
+    .lmctAG__layout {
+      grid-template-columns: minmax(0, 1fr) minmax(390px, 0.78fr);
+      gap: 38px;
+    }
+
+    .lmctAG__title {
+      font-size: clamp(66px, 6.7vw, 91px);
+    }
+
+    .lmctAG__priceBand {
+      grid-template-columns: minmax(0, 1fr) 48px minmax(0, 1fr);
+      gap: 12px;
+      padding-inline: 18px;
+    }
+
+    .lmctAG__plus {
+      width: 48px;
+      height: 48px;
+      font-size: 36px;
+    }
+
+    .lmctAG__featureBody {
+      padding-inline: 16px;
+    }
+  }
+
+  @media (max-width: 920px) {
+    .lmctAG::before {
+      background-image: linear-gradient(180deg, rgba(1, 11, 46, 0.22) 0%, rgba(1, 11, 46, 0.42) 30%, rgba(1, 11, 46, 0.91) 61%, var(--lmctAG-navy) 84%), var(--lmctAG-hero);
+      background-position:
+        center,
+        63% top;
+      background-size:
+        cover,
+        auto 780px;
+    }
+
+    .lmctAG__shell {
+      width: min(100% - 40px, 720px);
+      padding-top: 22px;
+    }
+
+    .lmctAG__header {
+      justify-content: center;
+      padding-bottom: 18px;
+    }
+
+    .lmctAG__logo {
+      width: clamp(230px, 43vw, 310px);
+    }
+
+    .lmctAG__tagline {
+      display: none;
+    }
+
+    .lmctAG__layout {
+      grid-template-columns: 1fr;
+      gap: 34px;
+      padding-top: 34px;
+    }
+
+    .lmctAG__offer {
+      padding-top: 0;
+    }
+
+    .lmctAG__title {
+      max-width: 700px;
+      font-size: clamp(67px, 12.8vw, 94px);
+    }
+
+    .lmctAG__lead {
+      max-width: 650px;
+    }
+
+    .lmctAG__priceBand,
+    .lmctAG__meta {
+      width: 100%;
+    }
+
+    .lmctAG__formCard {
+      width: 100%;
+      max-width: 700px;
+      justify-self: center;
+    }
+
+    .lmctAG__featureGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lmctAG__featuresHead {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .lmctAG__faqHead {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .lmctAG__closing {
+      grid-template-columns: 1fr;
+    }
+
+    .lmctAG__closingCta {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .lmctAG::after {
+      background-size: 54px 54px;
+    }
+
+    .lmctAG__shell {
+      width: min(100% - 28px, 520px);
+      padding-top: 16px;
+    }
+
+    .lmctAG__header {
+      padding-bottom: 15px;
+    }
+
+    .lmctAG__logo {
+      width: min(72vw, 285px);
+    }
+
+    .lmctAG__layout {
+      gap: 28px;
+      padding: 28px 0 26px;
+    }
+
+    .lmctAG__eyebrow {
+      min-height: 31px;
+      margin-bottom: 15px;
+      padding-inline: 12px;
+      font-size: 8px;
+    }
+
+    .lmctAG__title {
+      font-size: clamp(55px, 17.3vw, 76px);
+      line-height: 0.8;
+    }
+
+    .lmctAG__lead {
+      margin-top: 20px;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .lmctAG__priceBand {
+      grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1fr);
+      gap: 7px;
+      margin-top: 22px;
+      padding: 15px 9px 17px;
+      border-radius: 18px;
+    }
+
+    .lmctAG__priceBlock span,
+    .lmctAG__bonusBlock span {
+      font-size: 15px;
+    }
+
+    .lmctAG__priceBlock strong {
+      font-size: clamp(65px, 20vw, 88px);
+    }
+
+    .lmctAG__bonusBlock strong {
+      font-size: clamp(54px, 17vw, 76px);
+    }
+
+    .lmctAG__priceBlock small,
+    .lmctAG__bonusBlock small {
+      font-size: 14px;
+    }
+
+    .lmctAG__plus {
+      width: 36px;
+      height: 36px;
+      font-size: 29px;
+    }
+
+    .lmctAG__quickBenefits {
+      display: none;
+    }
+    /* .lmctAG__quickBenefits {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    } */
+
+    .lmctAG__quickBenefits li {
+      width: fit-content;
+      min-height: 34px;
+      font-size: 10px;
+    }
+
+    .lmctAG__meta {
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .lmctAG__metaItem {
+      gap: 7px;
+      min-height: 48px;
+      padding-inline: 10px;
+      font-size: 15px;
+    }
+
+    .lmctAG__metaItem svg {
+      flex-basis: 21px;
+      width: 21px;
+      height: 21px;
+    }
+
+    .lmctAG__primaryCta {
+      width: 100%;
+      margin-top: 18px;
+    }
+
+    .lmctAG__formCard {
+      border-radius: 21px;
+    }
+
+    .lmctAG__formHead {
+      padding: 22px 20px 18px;
+      text-align: center;
+    }
+
+    .lmctAG__formTitle {
+      font-size: clamp(37px, 11vw, 48px);
+    }
+
+    .lmctAG__formCopy {
+      font-size: 13px;
+    }
+
+    .lmctAG__checkoutMount {
+      min-height: 360px;
+      /* padding: 15px 13px 18px; */
+    }
+
+    .lmctAG__loading {
+      min-height: 330px;
+    }
+
+    .lmctAG__features {
+      padding-top: 12px;
+    }
+
+    .lmctAG__featuresTitle {
+      font-size: 43px;
+    }
+
+    .lmctAG__featureGrid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .lmctAG__feature {
+      display: grid;
+      grid-template-columns: 42% minmax(0, 1fr);
+      min-height: 148px;
+    }
+
+    .lmctAG__featureMedia {
+      height: 100%;
+      aspect-ratio: auto;
+    }
+
+    .lmctAG__featureBody {
+      display: flex;
+      min-height: 0;
+      padding: 17px 15px;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .lmctAG__featureBody h3 {
+      font-size: 24px;
+    }
+
+    .lmctAG__featureBody p {
+      font-size: 11px;
+    }
+
+    .lmctAG__faq {
+      margin-top: 32px;
+      padding: 24px 15px 16px;
+      border-radius: 19px;
+    }
+
+    .lmctAG__faqHead {
+      margin-bottom: 18px;
+      padding-inline: 4px;
+    }
+
+    .lmctAG__faqTitle {
+      font-size: 43px;
+    }
+
+    .lmctAG__faqIntro {
+      font-size: 12px;
+    }
+
+    .lmctAG__faqList {
+      grid-template-columns: 1fr;
+      gap: 9px;
+    }
+
+    .lmctAG__faqQuestion {
+      grid-template-columns: minmax(0, 1fr) 31px;
+      gap: 13px;
+      min-height: 66px;
+      padding: 14px 13px 14px 15px;
+      font-size: 21px;
+    }
+
+    .lmctAG__faqQuestion::after {
+      width: 31px;
+      height: 31px;
+      font-size: 20px;
+    }
+
+    .lmctAG__faqAnswer {
+      padding: 0 48px 17px 15px;
+      font-size: 11px;
+    }
+
+    .lmctAG__closing {
+      gap: 18px;
+      padding: 20px;
+    }
+
+    .lmctAG__closingCopy {
+      font-size: 36px;
+    }
+
+    .lmctAG__footer {
+      align-items: flex-start;
+      flex-direction: column;
+      padding-top: 26px;
+    }
+  }
+
+  @media (max-width: 370px) {
+    .lmctAG__shell {
+      width: calc(100% - 22px);
+    }
+
+    .lmctAG__title {
+      font-size: clamp(51px, 16.3vw, 61px);
+    }
+
+    .lmctAG__priceBand {
+      grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr);
+      gap: 4px;
+    }
+
+    .lmctAG__plus {
+      width: 28px;
+      height: 28px;
+      font-size: 23px;
+    }
+
+    .lmctAG__metaItem {
+      font-size: 13px;
+    }
+
+    .lmctAG__feature {
+      grid-template-columns: 39% minmax(0, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctAG *,
+    .lmctAG *::before,
+    .lmctAG *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<section class="lmctAG" aria-labelledby="lmctAG-title">
+  <div class="lmctAG__shell">
+    <header class="lmctAG__header">
+      <img class="lmctAG__logo" src="https://lmctgiveaway.com/hosted/images/9d/e689b69ee84bdba5156761d85e6bf9/LMCT-PETROL-LOGO.svg" alt="LMCT+ Petrol" />
+      <p class="lmctAG__tagline">Fueling a better Australia</p>
+    </header>
+
+    <div class="lmctAG__layout">
+      <div class="lmctAG__offer">
+        <p class="lmctAG__eyebrow">Adelaide launch offer / Limited time</p>
+
+        <h1 class="lmctAG__title" id="lmctAG-title">
+          <span>Adelaide</span>
+          <span>fuel just got</span>
+          <em>cheaper</em>
+        </h1>
+
+        <p class="lmctAG__lead">
+          Join <strong>LMCT+ Every Day Saver</strong> for a full year of member fuel pricing and exclusive offers plus receive <strong>$50 free fuel credit</strong> when you join.
+        </p>
+
+        <div class="lmctAG__priceBand" aria-label="99 dollars per year plus 50 dollars free fuel">
+          <div class="lmctAG__priceBlock">
+            <span>Only</span>
+            <strong>$99</strong>
+            <small>Per year</small>
+          </div>
+
+          <span class="lmctAG__plus" aria-hidden="true"
+            ><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 16 16">
+              <path d="M0 0h16v16H0z" fill="none" />
+              <path fill="currentColor" d="M8 1a1 1 0 0 1 1 1v5h5a1 1 0 1 1 0 2H9v5a1 1 0 1 1-2 0V9H2a1 1 0 0 1 0-2h5V2a1 1 0 0 1 1-1" /></svg
+          ></span>
+
+          <div class="lmctAG__bonusBlock">
+            <span>Receive</span>
+            <strong>$50</strong>
+            <small>Free fuel credit</small>
+          </div>
+        </div>
+
+        <ul class="lmctAG__quickBenefits" aria-label="Membership highlights">
+          <li>12 months of member access</li>
+          <li>Fuel credit included with signup</li>
+          <li>Member only offers and rewards</li>
+        </ul>
+
+        <div class="lmctAG__meta" aria-label="Location and opening date">
+          <div class="lmctAG__metaItem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+            <span>Edwardstown, Adelaide</span>
+          </div>
+
+          <div class="lmctAG__metaItem">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 2v3M18 2v3M3 9h18M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2Z" />
+            </svg>
+            <span>Opening 3 October</span>
+          </div>
+        </div>
+
+        <!-- <a class="lmctAG__primaryCta" href="#lmctAG__checkoutMount">
+          <span>Purchase Your Membership</span>
+          <span aria-hidden="true">&#8599;</span>
+        </a> -->
+      </div>
+
+      <aside class="lmctAG__formCard" aria-labelledby="lmctAG-form-title">
+        <div class="lmctAG__formHead">
+          <span class="lmctAG__secure">Secure checkout</span>
+          <h2 class="lmctAG__formTitle" id="lmctAG-form-title">Purchase your membership</h2>
+          <p class="lmctAG__formCopy">Join today for <strong>$99/year</strong> and receive <strong>$50 free fuel credit</strong>.</p>
+          <div class="lmctAG__formFacts" aria-label="Purchase summary">
+            <span>12 month membership</span>
+            <span>$50 fuel included</span>
+          </div>
+        </div>
+
+        <div id="lmctAG__checkoutMount" class="lmctAG__checkoutMount">
+          <div class="lmctAG__loading" data-lmct-inline-checkout-loading>Loading secure checkout&hellip;</div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="lmctAG__features" aria-labelledby="lmctAG-features-title">
+      <div class="lmctAG__featuresHead">
+        <h2 class="lmctAG__featuresTitle" id="lmctAG-features-title">More value every time you stop.</h2>
+        <p class="lmctAG__featuresIntro">Your Every Day Saver membership is built around the essentials Adelaide households already buy with more member value continuing to roll out.</p>
+      </div>
+
+      <div class="lmctAG__featureGrid">
+        <article class="lmctAG__feature">
+          <div class="lmctAG__featureMedia">
+            <img src="https://images.clickfunnels.com/16/b6e226ab164e9dbea2c6341e309ab6/Save-on-Fuel.png" alt="LMCT+ petrol station" loading="lazy" decoding="async" />
+          </div>
+          <div class="lmctAG__featureBody">
+            <h3>Save on fuel</h3>
+            <p>Access member fuel pricing at LMCT+ Petrol Edwardstown throughout your membership.</p>
+          </div>
+        </article>
+
+        <article class="lmctAG__feature">
+          <div class="lmctAG__featureMedia">
+            <img src="https://images.clickfunnels.com/d4/ef2b7956ec4bdeb2da184a104f32ce/Exclusive-offers.png" alt="LMCT+ fuel offer sign" loading="lazy" decoding="async" />
+          </div>
+          <div class="lmctAG__featureBody">
+            <h3>Exclusive offers</h3>
+            <p>Unlock special member fuel offers, rewards and local promotions all year round.</p>
+          </div>
+        </article>
+
+        <article class="lmctAG__feature">
+          <div class="lmctAG__featureMedia">
+            <img src="https://images.clickfunnels.com/5e/7b21c2c50146f5b85a735cbcb1c247/members-only.jpg" alt="LMCT+ petrol station and convenience store" loading="lazy" decoding="async" />
+          </div>
+          <div class="lmctAG__featureBody">
+            <h3>Members only</h3>
+            <p>Be part of the LMCT+ community and access benefits created for Adelaide members.</p>
+          </div>
+        </article>
+
+        <article class="lmctAG__feature">
+          <div class="lmctAG__featureMedia">
+            <img src="https://images.clickfunnels.com/b7/c29f1da9a54a8a961e465b73cf14ac/supermarket-access.png" alt="LMCT+ Market grocery store" loading="lazy" decoding="async" />
+          </div>
+          <div class="lmctAG__featureBody">
+            <h3>Supermarket access</h3>
+            <p>More everyday value is on the way with access to LMCT+ Market member pricing.</p>
+            <span class="lmctAG__soon">Coming soon</span>
+          </div>
+        </article>
+      </div>
+
+      <section class="lmctAG__faq" aria-labelledby="lmctAG-faq-title">
+        <div class="lmctAG__faqHead">
+          <div>
+            <p class="lmctAG__faqEyebrow">Offer details</p>
+            <h2 class="lmctAG__faqTitle" id="lmctAG-faq-title">Frequently asked questions</h2>
+          </div>
+          <p class="lmctAG__faqIntro">Here is what you need to know about eligibility, claiming your credit and using it at LMCT+ Petrol Edwardstown.</p>
+        </div>
+
+        <div class="lmctAG__faqList">
+          <details class="lmctAG__faqItem" open>
+            <summary class="lmctAG__faqQuestion">What happens if my fill up costs more than $50?</summary>
+            <div class="lmctAG__faqAnswer">
+              <p>The system will apply your <strong>$50 fuel credit</strong> first. You can pay the remaining balance by EFTPOS or cash.</p>
+            </div>
+          </details>
+
+          <details class="lmctAG__faqItem">
+            <summary class="lmctAG__faqQuestion">Who qualifies as an existing member?</summary>
+            <div class="lmctAG__faqAnswer">
+              <p>
+                Existing member claims are limited to members who were active before <strong>1 September</strong>. Memberships started on or after that date do not qualify through the existing member
+                offer.
+              </p>
+            </div>
+          </details>
+
+          <details class="lmctAG__faqItem">
+            <summary class="lmctAG__faqQuestion">Are South Australian BCF and Save and Win members eligible?</summary>
+            <div class="lmctAG__faqAnswer">
+              <p>
+                Yes. South Australian members who previously joined through <strong>BCF or Save and Win</strong> are recognised as previous members for this offer, subject to the other eligibility
+                requirements.
+              </p>
+            </div>
+          </details>
+
+          <details class="lmctAG__faqItem">
+            <summary class="lmctAG__faqQuestion">Which membership plans qualify for the $50 fuel credit?</summary>
+            <div class="lmctAG__faqAnswer">
+              <p>The fuel credit is available with the <strong>$99 annual membership</strong>. The $20 per month and $9.99 per month plans are excluded from this offer.</p>
+            </div>
+          </details>
+
+          <details class="lmctAG__faqItem">
+            <summary class="lmctAG__faqQuestion">Can I get a refund on the $99 membership?</summary>
+            <div class="lmctAG__faqAnswer">
+              <p>No. The <strong>$99 annual membership is non refundable</strong>. Manual refunds will not be processed during the promotional window.</p>
+            </div>
+          </details>
+
+          <details class="lmctAG__faqItem">
+            <summary class="lmctAG__faqQuestion">How long do I have to claim or use the $50 fuel credit?</summary>
+            <div class="lmctAG__faqAnswer">
+              <p>Existing members have <strong>72 hours to claim</strong> the $50 fuel credit. New members have <strong>six months to use</strong> their credit.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <div class="lmctAG__closing">
+        <p class="lmctAG__closingCopy"><strong>$99/year</strong> + $50 free fuel credit. One simple membership.</p>
+        <a class="lmctAG__closingCta" href="#lmctAG__checkoutMount">Complete Secure Signup</a>
+      </div>
+    </section>
+
+    <footer class="lmctAG__footer">
+      <p>Fuel credit and membership benefits are subject to applicable terms. The $99 annual membership is non-refundable. Savings may vary.</p>
+      <nav aria-label="Legal and support">
+        <a href="https://lmctgiveaway.com/fuel-terms1790599855304">Terms</a>
+        <a href="https://lmctplus.com/privacy-policy">Privacy</a>
+        <a href="https://lmctplus.com/contact-support">Support</a>
+      </nav>
+    </footer>
+  </div>
+</section>
+
+<script>
+  (function mountAdelaideGptCheckout() {
+    "use strict";
+
+    var mountId = "lmctAG__checkoutMount";
+    var sourceRowId = "row--93963";
+    var orderFormId = "tmp_order2step-49594";
+    var observer = null;
+    var retryTimer = null;
+    var stopTimer = null;
+
+    function revealSource(source) {
+      source.removeAttribute("data-animate");
+      source.removeAttribute("data-delay");
+      source.classList.remove("hide");
+      source.style.setProperty("display", "block", "important");
+      source.style.setProperty("visibility", "visible", "important");
+      source.style.setProperty("opacity", "1", "important");
+    }
+
+    function clearWatcher() {
+      if (observer) {
+        observer.disconnect();
+        observer = null;
+      }
+      if (retryTimer) {
+        window.clearInterval(retryTimer);
+        retryTimer = null;
+      }
+      if (stopTimer) {
+        window.clearTimeout(stopTimer);
+        stopTimer = null;
+      }
+    }
+
+    function moveCheckout() {
+      var mount = document.getElementById(mountId);
+      if (!mount) return false;
+
+      var mountedRow = mount.querySelector("#" + sourceRowId);
+      var mountedForm = mount.querySelector("#" + orderFormId);
+
+      if (mountedRow || mountedForm) {
+        var existingLoader = mount.querySelector("[data-lmct-inline-checkout-loading]");
+        if (existingLoader) existingLoader.remove();
+        mount.setAttribute("data-lmct-checkout-mounted", "true");
+        return true;
+      }
+
+      var orderForm = document.getElementById(orderFormId);
+      var row = document.getElementById(sourceRowId) || (orderForm && orderForm.closest(".row"));
+      var source = row;
+
+      if (!source || source.contains(mount)) source = orderForm;
+      if (!source || source === mount || mount.contains(source) || source.contains(mount)) return false;
+
+      revealSource(source);
+
+      var loader = mount.querySelector("[data-lmct-inline-checkout-loading]");
+      if (loader) loader.remove();
+
+      mount.appendChild(source);
+      mount.setAttribute("data-lmct-checkout-mounted", "true");
+
+      window.requestAnimationFrame(function () {
+        window.dispatchEvent(new Event("resize"));
+      });
+
+      return true;
+    }
+
+    function startWatcher() {
+      if (moveCheckout()) return;
+
+      if (window.MutationObserver) {
+        observer = new MutationObserver(function () {
+          if (moveCheckout()) clearWatcher();
+        });
+
+        observer.observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
+      }
+
+      retryTimer = window.setInterval(function () {
+        if (moveCheckout()) clearWatcher();
+      }, 250);
+
+      stopTimer = window.setTimeout(function () {
+        clearWatcher();
+        var mount = document.getElementById(mountId);
+        var loader = mount && mount.querySelector("[data-lmct-inline-checkout-loading]");
+        if (loader) loader.textContent = "Secure checkout is still loading. Please refresh the page.";
+      }, 20000);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", startWatcher, { once: true });
+    } else {
+      startWatcher();
+    }
+  })();
+</script>

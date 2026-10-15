@@ -102,8 +102,8 @@
     display: block;
     height: 4px;
     border-radius: 99px;
-    background: linear-gradient(90deg, transparent, var(--lmctAA-cyan));
-    box-shadow: 0 0 14px rgba(207, 255, 0, 0.48);
+    background: linear-gradient(90deg, transparent, rgba(217, 232, 225, 0.82));
+    box-shadow: 0 0 12px rgba(36, 189, 94, 0.2);
   }
 
   .lmctAA__speedLines i:last-child {
@@ -150,15 +150,20 @@
     max-width: 370px;
     padding: 14px 27px 15px;
     border-radius: 999px;
-    color: #001b14;
-    background: linear-gradient(125deg, var(--lmctAA-lime-bright), #b9ff00);
-    box-shadow: 0 16px 30px rgba(120, 255, 0, 0.18);
+    border: 1px solid rgba(207, 255, 0, 0.52);
+    color: var(--lmctAA-white);
+    background: linear-gradient(125deg, rgba(5, 83, 57, 0.94), rgba(0, 45, 33, 0.96));
+    box-shadow:
+      0 16px 30px rgba(0, 22, 15, 0.28),
+      inset 0 0 18px rgba(36, 189, 94, 0.08);
+    backdrop-filter: blur(9px);
   }
 
   .lmctAA__exclusive svg {
     flex: 0 0 32px;
     width: 32px;
     height: 32px;
+    color: var(--lmctAA-lime);
   }
 
   .lmctAA__exclusive strong {
@@ -176,6 +181,7 @@
     font-size: 0.62em;
     font-weight: 900;
     letter-spacing: 0.13em;
+    color: #b9d5c8;
   }
 
   .lmctAA__layout {
@@ -257,7 +263,7 @@
     width: 92%;
     margin: 40px auto 0;
     padding: 13px 20px 15px;
-    border: 2px solid var(--lmctAA-cyan);
+    border: 1px solid rgba(217, 232, 225, 0.58);
     /* clip-path: polygon(3% 0, 98% 2%, 94% 100%, 0 94%); */
     color: var(--lmctAA-white);
     font-family: "Barlow Condensed", Impact, sans-serif;
@@ -271,7 +277,7 @@
     background: linear-gradient(100deg, #064a34, #00271d);
     box-shadow:
       0 18px 34px rgba(0, 30, 21, 0.4),
-      0 0 22px rgba(207, 255, 0, 0.2);
+      inset 0 0 18px rgba(217, 232, 225, 0.05);
     transform: rotate(0.7deg);
   }
 
@@ -441,7 +447,7 @@
     left: 0;
     width: 2px;
     content: "";
-    background: linear-gradient(transparent, var(--lmctAA-cyan) 16%, var(--lmctAA-cyan) 84%, transparent);
+    background: linear-gradient(transparent, rgba(217, 232, 225, 0.34) 16%, rgba(217, 232, 225, 0.34) 84%, transparent);
   }
 
   .lmctAA__trustIcon {
@@ -450,13 +456,13 @@
     width: 62px;
     height: 62px;
     place-items: center;
-    border: 2px solid var(--lmctAA-cyan);
+    border: 1px solid rgba(217, 232, 225, 0.5);
     border-radius: 50%;
-    color: var(--lmctAA-white);
+    color: #e9f6ef;
     background: radial-gradient(circle at 35% 25%, #075239, #00271d 72%);
     box-shadow:
-      0 0 19px rgba(207, 255, 0, 0.32),
-      inset 0 0 15px rgba(207, 255, 0, 0.09);
+      0 0 16px rgba(36, 189, 94, 0.14),
+      inset 0 0 15px rgba(217, 232, 225, 0.06);
   }
 
   .lmctAA__trustIcon svg {
@@ -508,7 +514,7 @@
     }
 
     .lmctAA__page::before {
-      background-image: linear-gradient(180deg, rgba(0, 27, 20, 0.24) 0%, rgba(0, 42, 30, 0.56) 42%, rgba(0, 27, 20, 0.96) 72%, var(--lmctAA-navy-deep) 100%), var(--lmctAA-bg-image);
+      background-image: linear-gradient(180deg, rgba(0, 27, 20, 0.4) 0%, rgba(0, 42, 30, 0.68) 42%, rgba(0, 27, 20, 0.98) 72%, var(--lmctAA-navy-deep) 100%), var(--lmctAA-bg-image);
       background-position:
         center,
         68% top;
@@ -734,7 +740,7 @@
   }
 
   /* ============================================
-     Deer Park — Inline ClickFunnels Checkout
+     Deer Park - Inline ClickFunnels Checkout
      The live CF Order 2 Step is MOVED here by
      Tracking Code. It is never cloned.
      ============================================ */
@@ -744,27 +750,27 @@
     width: min(100%, 700px);
     margin: 0 auto;
     overflow: hidden;
-    border: 1px solid rgba(216, 255, 22, 0.34);
+    border: 1px solid rgba(185, 213, 200, 0.68);
     border-radius: 26px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 250, 247, 0.98));
     box-shadow:
       0 30px 80px rgba(0, 22, 15, 0.38),
-      0 0 0 1px rgba(255, 255, 255, 0.18);
+      0 0 0 1px rgba(255, 255, 255, 0.24);
     color: #10241c;
     backdrop-filter: blur(12px);
   }
 
   .lmctAA__formHead {
     padding: 20px 24px 18px;
-    border-bottom: 1px solid rgba(0, 52, 38, 0.11);
+    border-bottom: 1px solid rgba(0, 52, 38, 0.13);
     text-align: center;
-    background: linear-gradient(135deg, rgba(239, 255, 53, 0.98), rgba(207, 255, 0, 0.94));
+    background: linear-gradient(135deg, #f7fbf8, #e6f2e9);
   }
 
   .lmctAA__formEyebrow {
     display: block;
     margin-bottom: 4px;
-    color: #064a34;
+    color: #16834c;
     font-family: "Inter", Arial, sans-serif;
     font-size: 11px;
     font-weight: 900;
@@ -788,7 +794,7 @@
   .lmctAA__formCopy {
     max-width: 520px;
     margin: 8px auto 0;
-    color: rgba(0, 27, 20, 0.78);
+    color: #506b5e;
     font-size: 12px;
     font-weight: 700;
     line-height: 1.45;
@@ -947,7 +953,7 @@
         <div class="lmctAA__formHead">
           <span class="lmctAA__formEyebrow">Secure signup</span>
           <h2 class="lmctAA__formTitle">Lock in this exclusive offer</h2>
-          <p class="lmctAA__formCopy">Enter your details below to secure your $99 Monthly membership and $50 grocery bonus.</p>
+          <p class="lmctAA__formCopy">Enter your details below to secure your $99 annual membership and $50 grocery bonus.</p>
         </div>
 
         <div id="lmctAA__checkoutMount" class="lmctAA__checkoutMount">

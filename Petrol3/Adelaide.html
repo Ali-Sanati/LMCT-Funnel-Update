@@ -331,11 +331,11 @@
     position: relative;
     z-index: 8;
     display: grid;
-    grid-column: 6 / span 4;
+    grid-column: 6 / span 2;
     grid-row: 3;
     align-self: center;
-    justify-self: center;
-    min-width: 230px;
+    justify-self: start;
+    min-width: 210px;
     padding: 19px 29px 20px 25px;
     clip-path: polygon(4% 0, 100% 3%, 96% 100%, 0 95%);
     color: var(--lmctAP-ink);
@@ -378,132 +378,157 @@
     line-height: 0.83;
   }
 
-  .lmctAP__fuelArt {
+  /* The live CF Order 2 Step is moved into this card by page tracking code. */
+  .lmctAP__formCard {
     position: relative;
-    z-index: 2;
-    display: grid;
+    z-index: 4;
     grid-column: 8 / span 5;
     grid-row: 1 / span 4;
-    min-height: 650px;
-    margin: -36px 0 -34px;
-    place-items: center;
-  }
-
-  .lmctAP__fuelArt::before,
-  .lmctAP__fuelArt::after {
-    position: absolute;
-    content: "";
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
-  .lmctAP__fuelArt::before {
-    width: 94%;
-    aspect-ratio: 1;
-    border: 1px solid rgba(6, 59, 120, 0.12);
+    align-self: center;
+    justify-self: end;
+    width: min(100%, 600px);
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(6, 59, 120, 0.18);
+    border-radius: 24px;
+    color: var(--lmctAP-ink);
+    background: rgba(255, 255, 255, 0.96);
     box-shadow:
-      0 0 0 54px rgba(255, 255, 255, 0.1),
-      0 0 0 108px rgba(6, 59, 120, 0.025);
+      0 30px 70px rgba(6, 59, 120, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.38);
+    backdrop-filter: blur(14px);
   }
 
-  .lmctAP__fuelArt::after {
-    bottom: 58px;
-    width: 60%;
-    height: 42px;
-    background: rgba(6, 59, 120, 0.2);
-    filter: blur(24px);
-    transform: scaleX(1.25);
+  .lmctAP__formHead {
+    padding: 20px 24px 18px;
+    border-bottom: 1px solid rgba(6, 27, 58, 0.1);
+    text-align: center;
+    background: linear-gradient(135deg, var(--lmctAP-lime-bright), var(--lmctAP-lime));
   }
 
-  .lmctAP__fuelObject {
-    position: relative;
-    z-index: 2;
+  .lmctAP__formEyebrow {
     display: block;
-    width: min(100%, 540px);
-    height: auto;
-    overflow: visible;
-    filter: drop-shadow(0 40px 52px rgba(13, 116, 201, 0.19));
-    animation: lmctAP__float 7s ease-in-out infinite;
-  }
-
-  .lmctAP__fuelBody {
-    fill: url(#lmctAP__bodyGradient);
-    stroke: rgba(255, 255, 255, 0.9);
-    stroke-width: 2;
-  }
-
-  .lmctAP__fuelBodyInner {
-    fill: rgba(255, 255, 255, 0.16);
-    stroke: rgba(6, 59, 120, 0.16);
-  }
-
-  .lmctAP__fuelEdge {
-    fill: none;
-    stroke: url(#lmctAP__edgeGradient);
-    stroke-width: 4;
-    stroke-linecap: round;
-  }
-
-  .lmctAP__fuelScreen {
-    fill: rgba(3, 39, 81, 0.9);
-    stroke: rgba(120, 212, 255, 0.7);
-    stroke-width: 2;
-  }
-
-  .lmctAP__fuelScreenLine {
-    stroke: rgba(120, 212, 255, 0.33);
-    stroke-width: 1;
-  }
-
-  .lmctAP__fuelScreenBrand {
-    fill: var(--lmctAP-white);
-    font-family: "Barlow Condensed", Impact, sans-serif;
-    font-size: 31px;
+    margin-bottom: 5px;
+    color: var(--lmctAP-blue-900);
+    font-size: 10px;
     font-weight: 900;
-    letter-spacing: -1px;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    text-transform: uppercase;
   }
 
-  .lmctAP__fuelScreenPlus {
-    fill: var(--lmctAP-lime);
+  .lmctAP__formTitle {
+    margin: 0;
+    color: var(--lmctAP-ink);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(30px, 3vw, 42px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    text-transform: uppercase;
   }
 
-  .lmctAP__fuelScreenCopy {
-    fill: var(--lmctAP-blue-300);
-    font-family: "Inter", Arial, sans-serif;
-    font-size: 9px;
+  .lmctAP__formCopy {
+    max-width: 460px;
+    margin: 8px auto 0;
+    color: rgba(6, 27, 58, 0.72);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .lmctAP__checkoutMount {
+    width: 100%;
+    min-height: 260px;
+    scroll-margin-top: 24px;
+    background: var(--lmctAP-white);
+  }
+
+  .lmctAP__formLoading {
+    display: grid;
+    min-height: 240px;
+    padding: 24px;
+    place-items: center;
+    color: var(--lmctAP-muted);
+    font-size: 12px;
     font-weight: 700;
-    letter-spacing: 2px;
+    text-align: center;
   }
 
-  .lmctAP__fuelHose {
-    fill: none;
-    stroke: url(#lmctAP__hoseGradient);
-    stroke-width: 13;
-    stroke-linecap: round;
-    filter: drop-shadow(0 10px 10px rgba(6, 59, 120, 0.16));
+  .lmctAP__checkoutMount #row--93963 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
   }
 
-  .lmctAP__fuelHoseHighlight {
-    fill: none;
-    stroke: rgba(255, 255, 255, 0.6);
-    stroke-width: 2;
-    stroke-linecap: round;
+  .lmctAP__checkoutMount #row--93963 > .innerContent,
+  .lmctAP__checkoutMount #row--93963 .col-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
   }
 
-  .lmctAP__fuelHandle {
-    fill: rgba(6, 59, 120, 0.88);
-    stroke: rgba(120, 212, 255, 0.9);
-    stroke-width: 2;
+  .lmctAP__checkoutMount #tmp_order2step-49594,
+  .lmctAP__checkoutMount [data-de-type="order2step"] {
+    width: 100% !important;
+    margin: 0 !important;
+    cursor: default !important;
   }
 
-  .lmctAP__fuelDetail {
-    fill: rgba(255, 255, 255, 0.45);
-    stroke: rgba(6, 59, 120, 0.22);
-    stroke-width: 1.5;
+  .lmctAP__checkoutMount .order2StepHeader {
+    margin-bottom: 18px;
   }
 
-  .lmctAP__fuelLime {
-    fill: var(--lmctAP-lime);
+  .lmctAP__checkoutMount .formInstructionNote {
+    margin-bottom: 14px !important;
+    color: #64748b !important;
+    font-size: 11px !important;
+  }
+
+  .lmctAP__checkoutMount .elInput {
+    width: 100% !important;
+    min-height: 52px !important;
+    border: 1px solid #dbe7f6 !important;
+    border-radius: 11px !important;
+    color: var(--lmctAP-ink) !important;
+    background: #f8fbff !important;
+    box-shadow: none !important;
+  }
+
+  .lmctAP__checkoutMount .elInput:focus {
+    border-color: var(--lmctAP-blue-700) !important;
+    box-shadow: 0 0 0 3px rgba(8, 124, 201, 0.12) !important;
+  }
+
+  .lmctAP__checkoutMount .labelUnderInput {
+    color: #5e6f87 !important;
+  }
+
+  .lmctAP__checkoutMount .order2stepbutton .elButton,
+  .lmctAP__checkoutMount .order2stepbuttonOrder .elButton {
+    min-height: 58px !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    color: var(--lmctAP-ink) !important;
+    font-family: "Barlow Condensed", Impact, sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0 !important;
+    text-transform: uppercase !important;
+    background: linear-gradient(115deg, var(--lmctAP-lime-bright), var(--lmctAP-lime) 58%, #9cf600) !important;
+    box-shadow: 0 10px 28px rgba(147, 206, 0, 0.25) !important;
+  }
+
+  .lmctAP__checkoutMount .order2ButtonSubText,
+  .lmctAP__checkoutMount .order2ButtonSubText2 {
+    color: #75839a !important;
+  }
+
+  .lmctAP__checkoutMount .iti,
+  .lmctAP__checkoutMount .elOrderProductOptions {
+    width: 100% !important;
   }
 
   .lmctAP__edgeNote {
@@ -888,17 +913,13 @@
       min-height: 730px;
     }
 
-    .lmctAP__fuelArt {
-      min-height: 590px;
-    }
-
     .lmctAP__headline {
       grid-column: 1 / span 8;
     }
 
     .lmctAP__bonus {
-      grid-column: 7 / span 3;
-      min-width: 205px;
+      grid-column: 6 / span 2;
+      min-width: 200px;
     }
 
     .lmctAP__benefitGrid {
@@ -940,13 +961,13 @@
       grid-column: 1 / span 5;
     }
 
-    .lmctAP__fuelArt {
+    .lmctAP__formCard {
       grid-column: 5 / span 4;
-      min-height: 550px;
     }
 
     .lmctAP__bonus {
-      grid-column: 5 / span 3;
+      grid-column: 3 / span 2;
+      justify-self: end;
       min-width: 190px;
       transform: translateX(5px) rotate(-1deg);
     }
@@ -1043,7 +1064,7 @@
     .lmctAP__headline,
     .lmctAP__price,
     .lmctAP__bonus,
-    .lmctAP__fuelArt,
+    .lmctAP__formCard,
     .lmctAP__heroFoot {
       grid-column: 1;
       grid-row: auto;
@@ -1080,7 +1101,7 @@
 
     .lmctAP__bonus {
       justify-self: end;
-      width: min(235px, 74vw);
+      /* width: min(235px, 74vw); */
       min-width: 0;
       margin: -2px 0 0;
       padding: 17px 26px 18px 23px;
@@ -1095,24 +1116,19 @@
       font-size: clamp(22px, 7.4vw, 29px);
     }
 
-    .lmctAP__fuelArt {
-      min-height: 430px;
-      margin: 18px auto 8px;
+    .lmctAP__formCard {
+      justify-self: stretch;
+      width: 100%;
+      margin: 28px 0 8px;
+      border-radius: 20px;
     }
 
-    .lmctAP__fuelArt::before {
-      width: 82%;
-      box-shadow:
-        0 0 0 34px rgba(255, 255, 255, 0.1),
-        0 0 0 68px rgba(6, 59, 120, 0.025);
+    .lmctAP__formHead {
+      padding: 18px 16px 16px;
     }
 
-    .lmctAP__fuelArt::after {
-      bottom: 38px;
-    }
-
-    .lmctAP__fuelObject {
-      width: min(100%, 400px);
+    .lmctAP__formCopy {
+      font-size: 11px;
     }
 
     .lmctAP__edgeNote {
@@ -1239,8 +1255,8 @@
       font-size: 18px;
     }
 
-    .lmctAP__fuelArt {
-      min-height: 360px;
+    .lmctAP__formCard {
+      border-radius: 18px;
     }
 
     .lmctAP__benefit {
@@ -1283,7 +1299,7 @@
         </address>
       </div>
 
-          <!-- <div class="lmctAP__menu" aria-hidden="true">
+      <!-- <div class="lmctAP__menu" aria-hidden="true">
             <span>MENU</span>
             <span class="lmctAP__menuLines"><i></i><i></i></span>
           </div> -->
@@ -1309,10 +1325,6 @@
           <span>Free petrol</span>
         </div>
 
-        <figure class="lmctAP__fuelArt" aria-label="Abstract futuristic LMCT+ fuel terminal">
-          <img class="lmctAP__fuelObject" src="https://images.clickfunnels.com/71/018b596e0a4c2da27b914b16415fc4/Adelaide-Petrol-Hero-Image-3.png" />
-        </figure>
-
         <p class="lmctAP__edgeNote lmctAP__edgeNote--left">01 / Waitlist access</p>
         <p class="lmctAP__edgeNote lmctAP__edgeNote--right">02 / Adelaide &nbsp; 03 / Limited offer</p>
 
@@ -1322,16 +1334,28 @@
             Get 12 months of fuel and grocery savings, plus $50 free fuel when you join.
           </p>
 
-          <div class="lmctAP__action">
-            <a href="#open-popup" class="lmctAP__cta lmctFS__select" data-lmct-package="package99">
-              <span>Claim My Offer</span>
+          <!-- <div class="lmctAP__action">
+            <a href="#lmctAA__checkoutMount" class="lmctAP__cta">
+              <span>Continue To Checkout</span>
               <span aria-hidden="true">&#8599;</span>
             </a>
             <div class="lmctAP__rep" data-lmct-rep-row hidden>
               Assisted by <span data-lmct-rep-badge><span data-lmct-rep-code></span></span>
             </div>
-          </div>
+          </div> -->
         </div>
+
+        <aside class="lmctAP__formCard" aria-label="Secure membership checkout">
+          <div class="lmctAP__formHead">
+            <span class="lmctAP__formEyebrow">Secure signup</span>
+            <h2 class="lmctAP__formTitle">Claim your waitlist offer</h2>
+            <p class="lmctAP__formCopy">Enter your details below to secure your $99 annual membership and $50 free fuel bonus.</p>
+          </div>
+
+          <div id="lmctAA__checkoutMount" class="lmctAP__checkoutMount lmctAA__checkoutMount">
+            <div class="lmctAP__formLoading" data-lmct-inline-checkout-loading>Loading secure checkout&hellip;</div>
+          </div>
+        </aside>
       </section>
 
       <section class="lmctAP__benefits" aria-labelledby="lmctAP__benefitsTitle">
@@ -1421,3 +1445,110 @@
     </main>
   </div>
 </div>
+
+<script>
+  (function mountAdelaideCheckout() {
+    "use strict";
+
+    var mountId = "lmctAA__checkoutMount";
+    var sourceRowId = "row--93963";
+    var orderFormId = "tmp_order2step-49594";
+    var observer = null;
+    var retryTimer = null;
+    var stopTimer = null;
+
+    function revealSource(source) {
+      source.removeAttribute("data-animate");
+      source.removeAttribute("data-delay");
+      source.classList.remove("hide");
+      source.style.setProperty("display", "block", "important");
+      source.style.setProperty("visibility", "visible", "important");
+      source.style.setProperty("opacity", "1", "important");
+    }
+
+    function clearWatcher() {
+      if (observer) {
+        observer.disconnect();
+        observer = null;
+      }
+      if (retryTimer) {
+        window.clearInterval(retryTimer);
+        retryTimer = null;
+      }
+      if (stopTimer) {
+        window.clearTimeout(stopTimer);
+        stopTimer = null;
+      }
+    }
+
+    function moveCheckout() {
+      var mount = document.getElementById(mountId);
+      if (!mount) return false;
+
+      var mountedRow = mount.querySelector("#" + sourceRowId);
+      var mountedForm = mount.querySelector("#" + orderFormId);
+
+      if (mountedRow || mountedForm) {
+        var existingLoader = mount.querySelector("[data-lmct-inline-checkout-loading]");
+        if (existingLoader) existingLoader.remove();
+        mount.setAttribute("data-lmct-checkout-mounted", "true");
+        return true;
+      }
+
+      var row = document.getElementById(sourceRowId);
+      var orderForm = document.getElementById(orderFormId);
+      var source = row;
+
+      /* Avoid trying to append an ancestor into its own descendant. */
+      if (!source || source.contains(mount)) source = orderForm;
+      if (!source || source === mount || mount.contains(source) || source.contains(mount)) return false;
+
+      revealSource(source);
+
+      var loader = mount.querySelector("[data-lmct-inline-checkout-loading]");
+      if (loader) loader.remove();
+
+      mount.appendChild(source);
+      mount.setAttribute("data-lmct-checkout-mounted", "true");
+
+      window.requestAnimationFrame(function () {
+        window.dispatchEvent(new Event("resize"));
+      });
+
+      return true;
+    }
+
+    function startWatcher() {
+      if (moveCheckout()) return;
+
+      if (window.MutationObserver) {
+        observer = new MutationObserver(function () {
+          if (moveCheckout()) clearWatcher();
+        });
+
+        observer.observe(document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
+      }
+
+      /* A short retry loop covers late ClickFunnels hydration without cloning the form. */
+      retryTimer = window.setInterval(function () {
+        if (moveCheckout()) clearWatcher();
+      }, 250);
+
+      stopTimer = window.setTimeout(function () {
+        clearWatcher();
+        var mount = document.getElementById(mountId);
+        var loader = mount && mount.querySelector("[data-lmct-inline-checkout-loading]");
+        if (loader) loader.textContent = "Secure checkout is still loading. Please refresh the page.";
+      }, 20000);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", startWatcher, { once: true });
+    } else {
+      startWatcher();
+    }
+  })();
+</script>

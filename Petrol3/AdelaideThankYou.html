@@ -24,8 +24,7 @@
     color: var(--lmctATY-ink);
     font-family: "Inter", Arial, sans-serif;
     background:
-      radial-gradient(circle at 81% 17%, rgba(63, 190, 255, 0.29), transparent 34%),
-      radial-gradient(circle at 10% 71%, rgba(47, 123, 230, 0.13), transparent 31%),
+      radial-gradient(circle at 81% 17%, rgba(63, 190, 255, 0.29), transparent 34%), radial-gradient(circle at 10% 71%, rgba(47, 123, 230, 0.13), transparent 31%),
       linear-gradient(135deg, #f8fcff 0%, #e4f6ff 47%, #a9e1ff 100%);
     -webkit-font-smoothing: antialiased;
   }
@@ -41,9 +40,7 @@
     inset: 0;
     content: "";
     pointer-events: none;
-    background-image:
-      linear-gradient(90deg, var(--lmctATY-line) 1px, transparent 1px),
-      linear-gradient(var(--lmctATY-line) 1px, transparent 1px);
+    background-image: linear-gradient(90deg, var(--lmctATY-line) 1px, transparent 1px), linear-gradient(var(--lmctATY-line) 1px, transparent 1px);
     background-size:
       min(8.333vw, 120px) 100%,
       100% 120px;
@@ -479,6 +476,11 @@
     line-height: 1.65;
   }
 
+  .lmctATY__step p strong {
+    color: var(--lmctATY-white);
+    font-weight: 700;
+  }
+
   .lmctATY__notice {
     display: flex;
     align-items: center;
@@ -519,7 +521,9 @@
     text-decoration: none !important;
     text-transform: uppercase;
     background: var(--lmctATY-lime);
-    transition: transform 180ms ease, box-shadow 180ms ease;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
   }
 
   .lmctATY__supportLink span:last-child {
@@ -912,7 +916,7 @@
                 <path d="M4 4h16v16H4z" />
                 <path d="m4 7 8 6 8-6" />
               </svg>
-              Your receipt and membership access instructions will be sent to the email address used at checkout.
+              Your receipt will be sent to the email address used at checkout. Follow the steps below to find your $50 petrol voucher in the LMCT+ app.
             </p>
           </div>
         </aside>
@@ -925,31 +929,31 @@
       <div class="lmctATY__nextHead">
         <p class="lmctATY__eyebrow">What happens next / 02</p>
         <h2 class="lmctATY__nextTitle" id="lmctATY-next-title">Three simple next steps.</h2>
-        <p class="lmctATY__nextCopy">Everything you need to access your membership will be sent to the inbox you used at checkout.</p>
+        <p class="lmctATY__nextCopy">Your $50 petrol voucher is accessed through the LMCT+ app. Follow these three steps to find it.</p>
       </div>
 
       <div class="lmctATY__steps">
         <article class="lmctATY__step">
           <span class="lmctATY__stepNumber" aria-hidden="true">1</span>
-          <h3>Check your inbox</h3>
-          <p>Look out for your order receipt and membership email. If it does not arrive within a few minutes, check your junk or spam folder.</p>
+          <h3>Download the LMCT+ app</h3>
+          <p>Search for LMCT+ in the Apple App Store or Google Play, then download the official LMCT+ app to your phone.</p>
         </article>
 
         <article class="lmctATY__step">
           <span class="lmctATY__stepNumber" aria-hidden="true">2</span>
-          <h3>Access your pass</h3>
-          <p>Follow the instructions in your membership email to access your digital member pass and fuel bonus details.</p>
+          <h3>Log in to your account</h3>
+          <p>Open the app and log in using the same email address connected to your membership. Follow the account setup prompts if this is your first login.</p>
         </article>
 
         <article class="lmctATY__step">
           <span class="lmctATY__stepNumber" aria-hidden="true">3</span>
-          <h3>Start saving</h3>
-          <p>Use your membership for wholesale fuel pricing at member stations and member pricing on groceries.</p>
+          <h3>Open the Petrol tab</h3>
+          <p>Tap <strong>Petrol</strong> in the app navigation. Your $50 petrol voucher will be waiting inside the Petrol tab.</p>
         </article>
       </div>
 
       <div class="lmctATY__notice">
-        <p><strong>Need a hand?</strong> If your confirmation email has not arrived or your order details look incorrect, our support team can help.</p>
+        <p><strong>Cannot see your voucher?</strong> Make sure you are logged in with the same email address used at checkout. If it is still missing, our support team can help.</p>
         <a class="lmctATY__supportLink" href="https://lmctplus.com/contact-support">
           <span>Contact support</span>
           <span aria-hidden="true">&#8599;</span>
@@ -962,7 +966,7 @@
     <footer class="lmctATY__footer">
       <p>Membership benefits and fuel bonus are subject to the applicable terms and conditions.</p>
       <nav class="lmctATY__footerLinks" aria-label="Legal and support">
-        <a href="https://lmctplus.com/terms-and-conditions">Terms</a>
+        <a href="https://lmctgiveaway.com/fuel-termsxnl6lw1p">Terms</a>
         <a href="https://lmctplus.com/privacy-policy">Privacy</a>
         <a href="https://lmctplus.com/contact-support">Contact</a>
       </nav>

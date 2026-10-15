@@ -1,403 +1,232 @@
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<!-- Replace the previous membership-notice snippet with this entire block.
+     Paste into ClickFunnels Footer Tracking Code. Keep the existing form CSS.
+     DRAFT: confirm supportEmail and eligibilityCutoffLabel before publishing.
+     The API reports current activity only; support must verify cutoff eligibility.
+     This adds deadline copy, not automatic expiry or server-side purchase enforcement. -->
 <style>
-  /* ============================================
-     LMCT+ Terms & Conditions — Scoped Styles
-     ============================================ */
-  .lmct-tcs {
-    font-family: "Montserrat", sans-serif;
-    color: #1a1a1a;
-    line-height: 1.65;
-    font-size: 15px;
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 8px 4px;
-  }
-  .lmct-tcs * {
-    font-family: "Montserrat", sans-serif;
-    box-sizing: border-box;
-  }
-  .lmct-tcs h1.doc-title {
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: #0f0f0f;
-    text-align: center;
-    margin: 0 0 8px 0;
-    padding-bottom: 18px;
-    border-bottom: 2px solid #1a1a1a;
-    line-height: 1.3;
-  }
-  .lmct-tcs .doc-intro {
-    font-size: 14px;
-    color: #444;
-    margin: 24px 0 32px 0;
-    text-align: center;
-    line-height: 1.6;
-  }
-  .lmct-tcs h2.section {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #0f0f0f;
-    margin: 44px 0 18px 0;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #d4d4d4;
-  }
-  .lmct-tcs h3.subsection {
-    font-size: 14px;
-    font-weight: 700;
-    color: #0f0f0f;
-    margin: 28px 0 14px 0;
-    letter-spacing: 0.02em;
-  }
-  .lmct-tcs h3.prize-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #0f0f0f;
-    margin: 24px 0 8px 0;
-    letter-spacing: 0.02em;
-    text-align: center;
-  }
-  .lmct-tcs h3.prize-subtitle {
-    font-size: 15px;
-    font-weight: 600;
-    color: #555;
-    margin: 0 0 24px 0;
-    text-align: center;
-    letter-spacing: 0.04em;
-  }
-  .lmct-tcs p {
-    margin: 0 0 14px 0;
-  }
-  .lmct-tcs a {
-    color: #b8112d;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(184, 17, 45, 0.25);
-    transition:
-      border-color 0.15s ease,
-      color 0.15s ease;
-    word-break: break-word;
-  }
-  .lmct-tcs a:hover {
-    color: #8a0c21;
-    border-bottom-color: rgba(184, 17, 45, 0.7);
-  }
-  .lmct-tcs .term {
-    font-weight: 600;
-    color: #0f0f0f;
-  }
-  .lmct-tcs .permits {
-    margin-top: 48px;
-    padding-top: 20px;
-    border-top: 1px solid #d4d4d4;
-    font-size: 13px;
-    color: #555;
-    text-align: center;
-    line-height: 1.8;
-  }
-  .lmct-tcs .permits strong {
-    color: #0f0f0f;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-  @media (max-width: 600px) {
-    .lmct-tcs {
-      font-size: 14px;
-      padding: 4px 2px;
-    }
-    .lmct-tcs h1.doc-title {
-      font-size: 22px;
-    }
-    .lmct-tcs h2.section {
-      font-size: 14px;
-    }
-  }
+#col-full-180 .lmctOfferNote,
+#col-full-180 .lmctMemberCheckMessage,
+#col-full-180 .lmctOfferTerms {
+  font: 500 13px/1.5 Montserrat, Arial, sans-serif;
+  color: #214563;
+}
+#col-full-180 .lmctOfferNote {
+  margin: 12px 0 0;
+  text-align: center;
+}
+#col-full-180 .lmctOfferNote strong { color: #071b3b; }
+#col-full-180 .lmctOfferExplanation {
+  margin: 20px 0 0;
+  font: 500 13px/1.5 Montserrat, Arial, sans-serif;
+  color: #214563;
+}
+#col-full-180 .lmctMemberCheckMessage {
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border: 1px solid #b9dff5;
+  border-left: 4px solid #0877cb;
+  border-radius: 10px;
+  background: #f0f9ff;
+}
+#col-full-180 .lmctMemberCheckMessage[hidden] { display: none !important; }
+#col-full-180 .lmctMemberCheckMessage strong { display: block; color: #071b3b; }
+#col-full-180 .lmctMemberCheckMessage a { color: #0877cb; text-decoration: underline; }
+#col-full-180 .lmctOfferTerms {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid #dce9f2;
+}
+#col-full-180 .lmctOfferTerms summary { cursor: pointer; font-weight: 800; }
+#col-full-180 .lmctOfferTerms p { margin: 10px 0 0; }
+#col-full-180 .lmctNoRefundNotice {
+  display: block;
+  margin-top: 8px;
+  color: #c62828 !important;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.5;
+}
 </style>
-<div class="lmct-tcs" style="counter-reset: clause">
-  <h1 class="doc-title">LMCT+ $1,000,000 Cash Giveaway Terms and Conditions</h1>
-  <p class="doc-intro">The promoter of this promotion is Xclusive Tech Pty Ltd trading as LMCT+ (ABN 93 627 297 474) of Level 2, 161 Collins Street, Melbourne VIC 3000 (Promoter, we, us or our).</p>
-  <h2 class="section">DISCLAIMER</h2>
-  <p>This Promotion is conducted solely by the Promoter.</p>
-  <p>The promotion is not sponsored, endorsed, administered by, or otherwise associated with, Facebook, Instagram, TikTok,Google,SnapChat or related entities of those organisations.</p>
-  <p>
-    None of the entities or persons referred to in clause (2) have any responsibility for the conduct of the promotion, the selection of winners, the awarding of prizes, or any dispute arising in
-    connection with the promotion.
-  </p>
-  <h2 class="section">THE PROMOTION</h2>
-  <p>The promotion commences for the public at 9:00 PM AEST on 10 September 2026 and concludes at 8:00 PM AEST on 27 October 2026 (Promotion Period).</p>
-  <p>Information about prizes and how to enter forms part of these Terms and Conditions. Entry into the promotion is deemed to be acceptance of these Terms and Conditions.</p>
-  <h2 class="section">ELIGIBILITY</h2>
-  <p>Entry is open to Australian residents aged 18 years or over, who, during the Promotional Period, either:</p>
-  <p>hold or obtain a valid LMCT+ membership, or</p>
-  <p>purchase an LMCT+ package via the official competition page</p>
-  <p>and who are not:</p>
-  <p>residents of South Australia;</p>
-  <p>directors, officers, employees and contractors of the Promoter and its related bodies corporate; and</p>
-  <p>immediate family members of the persons referred to in paragraph (d)</p>
-  <p>(Eligible Entrant).</p>
-  <p>
-    For the purposes of clause 6(e), immediate family shall include the following: spouse, ex-spouse, de-facto spouse, child or stepchild (whether natural or by adoption), parent, step-parent,
-    grandparent, step-grandparent, niece, nephew, brother, sister, step-brother or step-sister.
-  </p>
-  <p>
-    Residents of South Australia are not eligible to enter this promotion due to regulatory requirements under South Australian law. Any entry submitted by a person, who is a resident of South
-    Australia, at the time of entry will be deemed invalid.
-  </p>
-  <p>
-    For the purposes of these Terms and Conditions, a person will be considered a resident of South Australia, if that person's principal place of residence is located in South Australia at the time
-    of entry, regardless of any temporary absence from that State at the time of entry.
-  </p>
-  <p>By entering this promotion, each entrant represents and warrants that:</p>
-  <p>the entrant is an Eligible Entrant;</p>
-  <p>the entrant is not a resident of South Australia at the time of entry; and</p>
-  <p>all information provided by the entrant to us is true and correct.</p>
-  <p>Entry into this promotion is subject to all applicable Commonwealth, State and Territory laws and regulations and is void where prohibited by law.</p>
-  <p>
-    In certain jurisdictions, applicable laws may restrict, condition or prohibit participation in the promotion or the award, transfer, registration or delivery of particular prizes within that
-    jurisdiction. Where such restrictions apply, we reserve the right to:
-  </p>
-  <p>refuse entry from residents of that jurisdiction where required by law;</p>
-  <p>substitute, at our absolute discretion, a prize with a lawful alternative of equal or greater value (including, at our discretion, a cash alternative); and/or</p>
-  <p>take any other action necessary, including but not limited to declaring an entry or entries invalid, in order to ensure compliance with applicable legislation.</p>
-  <p>
-    If we determine at any time that an entrant has breached these Terms and Conditions or has provided false or misleading information, we may cancel any prize awarded and re-award the prize in
-    accordance with these Terms and Conditions.
-  </p>
-  <p>Nothing in these Terms and Conditions is intended to permit any act or omission, which would contravene applicable laws.</p>
-  <p>
-    Membership of LMCT+ is subject to the terms and conditions applicable to LMCT+ membership, a copy of which is available at
-    <a href="https://lmctplus.com/membership-terms-conditions/" target="_blank" rel="noopener">https://lmctplus.com/membership-terms-conditions/</a> (Membership Terms), as may be amended from time to
-    time.
-  </p>
-  <h2 class="section">ENTRY BY ELIGIBLE ENTRANTS</h2>
-  <p>
-    Eligible Entrants, who hold a loyalty membership with the Promoter, will automatically receive one entry, or multiple entries, into the draw, depending on the level of loyalty membership that that
-    entrant holds and the length of time the entrant has held a loyalty membership. The number of entries awarded to any particular entrant shall be determined in accordance with the provisions of the
-    Membership Terms as in force at the time of entry. In the event of any inconsistency between these Terms and Conditions and the Membership Terms, these Terms and Conditions prevail to the extent
-    of the inconsistency.
-  </p>
-  <p>
-    Eligible Entrants, who purchase a one-off membership (i.e. a non-loyalty membership) package, will automatically receive one entry, or multiple entries, into the draw, depending on the level of
-    the one-off membership package the entrant has purchased.
-  </p>
-  <p>
-    Eligible Entrants will also receive one free bonus entry or multiple bonus free entries into the draw for every 50 litres of fuel purchased at a participating LMCT+ petrol station. These entries
-    are provided free of charge and are recorded and managed through the LMCT+ mobile application.
-  </p>
-  <h2 class="section">PRIZES</h2>
-  <p>There are three (3) prizes available, with a total prize pool value of AUD $1,003,500.</p>
-  <h3 class="prize-title">FIRST PRIZE</h3>
-  <h3 class="prize-subtitle">$1,000,000 CASH</h3>
-  <h3 class="subsection">Prize Description</h3>
-  <p>
-    The First Prize is a cash payment of AUD $1,000,000 (the First Prize). The First Prize will be paid by electronic funds transfer to an Australian bank account nominated by the winner in writing,
-    within 10 business days of the winner satisfying all prize acceptance requirements set out in these Terms and Conditions.
-  </p>
-  <h3 class="subsection">Supplementary Prize</h3>
-  <p>2nd prize consists of a $2,500 LMCT+ partner Credit and 3rd prize consists of a $1,000 partner credit to be used within 3 months of winning.</p>
-  <h3 class="subsection">Release and Indemnity</h3>
-  <p>
-    Acceptance of any prize under this promotion is conditional upon the winner providing such identification, banking details and other information as we reasonably require to verify the winner's
-    identity, age and eligibility, and to effect payment of the prize. The winner releases the Promoter, its related entities, officers, employees and agents from any claim, liability, loss or damage
-    arising in connection with the promotion, the prize or its payment, except to the extent that such claim, liability, loss or damage is caused by the negligence or wilful misconduct of the Promoter
-    or its related entities, and except to the extent that any consumer guarantee or other right cannot lawfully be excluded under the Australian Consumer Law.
-  </p>
-  <p>
-    The winner acknowledges that images, video footage, broadcasts and marketing materials relating to the prize and the promotion are produced for promotional purposes and may be used by the Promoter
-    and its related entities even after the prize has been paid.
-  </p>
-  <h2 class="section">THE DRAW</h2>
-  <p>
-    The draw will commence from 8:30 PM AEST on 27 October 2026 at Level 2, 161 Collins St, Melbourne, Victoria and also presented live on our official Facebook page.
-    <a href="https://www.facebook.com/lmctplus" target="_blank" rel="noopener">www.facebook.com/lmctplus</a>
-  </p>
-  <p>The prizes are drawn randomly from the entries received during the Promotion Period. They will be drawn in the order of 3,2,1 with the 1st prize being the last drawn.</p>
-  <p>For the avoidance of doubt, there is no limit to the number of prizes an individual can win.</p>
-  <p>
-    All winners will be published on the Promoter's Facebook page and on <a href="https://www.lmctplus.com" target="_blank" rel="noopener">www.lmctplus.com</a> (Website) for a minimum period of 28
-    days. <a href="https://www.facebook.com/LMCTPlus/" target="_blank" rel="noopener">www.facebook.com/LMCTPlus/</a>
-  </p>
-  <p>
-    If a prize is unclaimed, or has not been accepted by a winner, or if, after making all reasonable attempts, we cannot contact a winner (or a winner does not contact us) by 8:00 PM AEST on 27
-    December 2026, we will discard the relevant entry, or entries, and redraw the prize, or prizes, in descending order of value at 8:30 PM AEST on 27 December 2026 at the same location as the
-    original draw.
-  </p>
-  <p>
-    Any new winner or winners will be published online at the conclusion of the draw on 27 December 2026 on the LMCT+ Facebook, and on the Website, for a period of 28 days. Any winners will also be
-    contacted via phone and email immediately following the draw.
-  </p>
-  <p>The draw will be conducted in the presence of an independent scrutineer where required by law or where the Promoter considers it appropriate.</p>
-  <p>All valid entries will have an equal chance of winning, subject to these terms and conditions and Membership Terms or conditions of any LMCT+ Package as may be applicable.</p>
-  <h2 class="section">QUERIES / DISPUTES</h2>
-  <p>Any queries or complaints relating to the promotion must be submitted in writing to <a href="mailto:support@lmctplus.com">support@lmctplus.com</a>.</p>
-  <p>
-    Any complaint regarding the conduct of the draw, the announcement of winners or the awarding of a prize must be submitted within ten (10) days of the relevant draw or publication of the winners
-    (as applicable). Complaints received after this time will not be considered.
-  </p>
-  <p>If an Eligible Entrant raises a dispute within the applicable timeframe, we will review the matter in good faith, consider the information provided and respond within a reasonable period.</p>
-  <p>Subject to applicable laws, our decisions in relation to the promotion are final and binding.</p>
-  <p>Nothing in this clause limits, excludes or restricts any rights an Eligible Entrant may have under the Australian Consumer Law or other applicable legislation.</p>
-  <h2 class="section">GENERAL PRIZE TERMS</h2>
-  <p>
-    All prizes must be accepted and taken as offered and in accordance with these Terms and Conditions. If a winner fails to accept a prize or comply with any applicable conditions within the required
-    timeframe, the prize may be deemed forfeited and, if forfeited, no compensation will be payable.
-  </p>
-  <p>We are not responsible for any dispute between a winner and any third party with whom the winner chooses to share or transfer the benefit of a prize.</p>
-  <h2 class="section">DRAW INTERRUPTION / BROADCAST FAILURE</h2>
-  <p>
-    If for any reason beyond our reasonable control, including technical failure, power outage, network disruption, platform failure, venue inaccessibility, government directive, court order,
-    vandalism, tempests, natural disasters, acts of God, civil unrest, strike, war, act of terrorism, pandemic or epidemic or other unforeseen event, the draw or any live broadcast of the draw cannot
-    be conducted as scheduled, we may:
-  </p>
-  <p>suspend, delay or reschedule the draw;</p>
-  <p>conduct the draw at an alternative time, date or location;</p>
-  <p>conduct the draw without live broadcast and publish the results via the Website and official social media channels; or</p>
-  <p>may take any other reasonable steps necessary to ensure the draw is conducted fairly and in accordance with applicable laws.</p>
-  <p>Where a draw is rescheduled or modified, we will notify entrants by publishing updated details on the Website as soon as reasonably practicable.</p>
-  <p>For abundant clarity, any modification or rescheduling of the draw under clause 57 does not invalidate valid entries submitted prior to the interruption.</p>
-  <h2 class="section">GENERAL TERMS</h2>
-  <h3 class="subsection">Publicity &amp; Promotion</h3>
-  <p>Participation in publicity and promotional activities is a fundamental condition of entry and prize entitlement.</p>
-  <p>Each winner must:</p>
-  <p>participate in live announcements, interviews, photography, filming and promotional activities as directed by us;</p>
-  <p>attend any presentation event required by us; and</p>
-  <p>cooperate in good faith with media and promotional opportunities relating to the promotion.</p>
-  <p>Publicity activities include activities involving television, online media, social media, print, advertising and other marketing materials.</p>
-  <p>Failure or refusal to participate in publicity as directed or required by us will result in forfeiture of the prize.</p>
-  <p>
-    If the winner has already received the prize, we may, to the extent permitted by law, require the winner to do all things necessary to transfer the benefit of the prize to us. The winner shall, on
-    demand, transfer to a bank account nominated by us any sums received from us as a result of the promotion.
-  </p>
-  <p>
-    By entering the promotion and accepting a prize, the winner irrevocably grants the Promoter and its related entities a perpetual, worldwide, royalty-free licence to use, reproduce, publish, adapt
-    and communicate the winner's name, image, likeness, voice and biographical information for promotional and marketing purposes, relating to the Promoter and its goods and services, in any media now
-    known or later developed, without further compensation.
-  </p>
-  <p>
-    By entering the promotion and accepting a prize, the winner irrevocably consents to the editing, adaptation and reproduction of such materials and waive any moral rights in connection with their
-    use. We will not publish any winner's full residential address.
-  </p>
-  <h3 class="subsection">Prize Acceptance Documentation</h3>
-  <p>
-    We may require any winner to sign disclaimer and release forms in our favour. We shall provide any such forms before the winner is required to take a prize. Should a winner not execute any such
-    forms, the winner's entry will be deemed invalid, and the winner shall have no interest in or right or entitlement to the prize.
-  </p>
-  <h3 class="subsection">Disqualification</h3>
-  <p>We reserve the right to disqualify any Eligible Entrant who:</p>
-  <p>is found to be tampering with, or otherwise abusing, any aspect of the promotion;</p>
-  <p>we have reason to believe has breached any of these Terms and Conditions;</p>
-  <p>behaves in a disruptive, abusive or threatening manner;</p>
-  <p>does anything, which may diminish the good name and reputation of the Promoter or any of its related entities, or the companies or agencies associated with the promotion; or</p>
-  <p>engages in any other unlawful or inappropriate conduct, which may jeopardise the fair and proper conduct of the promotion.</p>
-  <p>
-    In the event that an Eligible Entrant is disqualified, such an entrant will be deemed not to be an Eligible Entrant and shall forfeit any interest in or right or entitlement to any prize,
-    irrespective of any rights available under or interests arising out of the entrant's LMCT+ membership, an LMCT+ package purchased by the entrant via the official competition page, or under the
-    Membership Terms. If the Eligible Entrant is a winner and has already received the prize, clause 64 shall apply.
-  </p>
-  <h3 class="subsection">Promotion Integrity</h3>
-  <p>
-    In the event that the promotion is compromised by non-authorised human intervention, tampering or other causes beyond our reasonable control, which corrupt or impair the administration, security,
-    fairness or proper operation of the promotion, we reserve the right to suspend, modify or terminate the promotion, subject to any necessary approval by the relevant gaming authorities. These
-    rights are in addition to any rights set out in clause 57.
-  </p>
-  <h3 class="subsection">Technical Issues</h3>
-  <p>
-    We are not responsible for any problems or technical malfunction of computer systems, servers, software, internet service providers, or e-mail systems; failure of any entry to be received on
-    account of technical problems, or incomplete, late, lost, damaged, illegible or misdirected electronic communications; or any combination thereof.
-  </p>
-  <h3 class="subsection">Force Majeure</h3>
-  <p>
-    In the case of the intervention of any outside act, agent or event which prevents or significantly hinders our ability to proceed with the promotion on the dates and in the manner described in
-    these Terms and Conditions, including but not limited to technical failure, power outage, network disruption, platform failure, venue inaccessibility, government directive, court order, vandalism,
-    tempests, natural disasters, acts of God, civil unrest, strike, war, act of terrorism, pandemic or epidemic or other unforeseen event, we may in our absolute discretion cancel the promotion and
-    recommence it from the start on the same conditions, subject to any necessary approval by the relevant gaming authorities.
-  </p>
-  <p>In the event that we elect to recommence the promotion from the start, valid entries received during the Promotion Period shall become entries in the draw for the recommenced promotion.</p>
-  <h3 class="subsection">Liability</h3>
-  <p>
-    To the maximum extent permitted by law, the Promoter, its related entities, officers, employees, agents and associated agencies exclude all liability for any loss, damage, expense, personal
-    injury, illness or death arising directly or indirectly out of or in connection with:
-  </p>
-  <p>the promotion;</p>
-  <p>any prize;</p>
-  <p>the acceptance, use, enjoyment, occupation or disposal of any prize;</p>
-  <p>any participation in promotional or publicity activities;</p>
-  <p>any failure to conduct the promotion as scheduled; or</p>
-  <p>any technical malfunction, delay, loss, alteration or corruption of data,</p>
-  <p>
-    including (without limitation) any indirect, special, consequential or economic loss, loss of profit, loss of opportunity or loss of goodwill, whether arising in contract, tort (including
-    negligence), statute or otherwise.
-  </p>
-  <p>Each entrant acknowledges that participation in the promotion and acceptance and receipt of a prize may involve inherent risks and voluntarily assumes all such risks.</p>
-  <p>
-    Where liability cannot be excluded but can be limited, our liability is limited to the maximum extent permitted by law and, where applicable, is capped at the value of the prize received by the
-    winner.
-  </p>
-  <p>
-    To the extent permitted by law, each entrant and winner indemnifies and holds harmless the Promoter and its related entities from and against any claim, demand, proceeding, loss or liability
-    (including legal costs on a full indemnity basis) arising from:
-  </p>
-  <p>any breach of these Terms and Conditions;</p>
-  <p>any negligent, unlawful or wrongful act or omission of the entrant or winner;</p>
-  <p>any third-party claim arising from the entrant's or winner's use, occupation or enjoyment of a prize; or</p>
-  <p>any publicity or promotional activity conducted in accordance with these Terms.</p>
-  <p>Nothing in these Terms and Conditions excludes, restricts or modifies any liability that cannot lawfully be excluded under applicable legislation.</p>
-  <h3 class="subsection">Non-transferability of prizes</h3>
-  <p>Except where expressly stated in these Terms and Conditions, prizes cannot be transferred or exchanged and are not redeemable for cash.</p>
-  <h3 class="subsection">Verification</h3>
-  <p>
-    We may, at any time, require you to produce documentation to establish to our satisfaction the validity of your entries (including documentation establishing your identity, age, place of residence
-    and place of employment). Failure by us to enforce any of our rights at any stage does not waive those rights.
-  </p>
-  <h3 class="subsection">Taxation</h3>
-  <p>
-    All taxes including but limited to GST, duties, levies and other government charges arising from or in connection with acceptance, transfer, use or disposal of a prize are the sole responsibility
-    of the winner and may arise at the time of receipt or at a later time.
-  </p>
-  <p>We make no representation regarding the tax treatment of any prize. Winners must obtain their own independent financial and taxation advice.</p>
-  <p>
-    To the extent permitted by law, the winner indemnifies the Promoter against any claim, liability or assessment arising from the winner's failure to comply with taxation obligations connected with
-    a prize.
-  </p>
-  <h3 class="subsection">Australia Only</h3>
-  <p>Any cash alternative will only be paid in Australian dollars to Australian bank accounts.</p>
-  <h3 class="subsection">Social Media</h3>
-  <p>
-    The promotion is in no way sponsored, endorsed or administered by, or associated with any social media platform and any information provided is provided to us and not to any social media platform.
-    By entering the promotion, an entrant acknowledges that the promotion is in no way sponsored, endorsed or administered by any social media platform and agrees to release completely any social
-    media platform from any and all liability.
-  </p>
-  <h3 class="subsection">Governing Law</h3>
-  <p>These Terms and Conditions are governed by the laws of Victoria, Australia. Each entrant submits to the exclusive jurisdiction of the courts of Victoria.</p>
-  <h3 class="subsection">Severability</h3>
-  <p>If any provision of these Terms and Conditions is held to be invalid or unenforceable, that provision will be severed and the remaining provisions will remain in full force and effect.</p>
-  <h3 class="subsection">Permits</h3>
-  <p>This promotion is conducted under any permits issued by the relevant gaming authorities where required. A copy of any permit details will be made available on the Website.</p>
-  <h3 class="subsection">Record Keeping</h3>
-  <p>The Promoter will keep records of all entries, winners and prize distributions for a minimum period required by applicable law.</p>
-  <h2 class="section">COLLECTION AND USE OF PERSONAL INFORMATION</h2>
-  <p>
-    We collect information about entrants, including for example names and email addresses which are provided when signing up to LMCT+ membership. We use this information to administer memberships,
-    conduct and manage the promotion, verify eligibility and identity, prevent fraud, comply with legal obligations, and promote and improve our goods and services. If an entrant does not provide us
-    with the requested information, we may not be able to provide that entrant with the goods and services that entrant requires. We may disclose information about an entrant or entrants to related
-    entities, service providers, contractors, payment processors, professional advisers, insurers and regulatory authorities where reasonably necessary to administer the promotion and/or comply with
-    legal requirements. Some of these service providers may be located outside of Australia, and by entering the promotion the entrant consents to that entrant's information being stored or processed
-    overseas.
-  </p>
-  <p>
-    By holding a membership and participating in the promotion, a entrant consents to us keeping that entrant's personal information on our database for future marketing purposes unrelated to the
-    conduct of this promotion, provided that, where required by spam laws, we include a functional unsubscribe facility in each direct marketing communication we send enabling the entrant to opt-out
-    of any further similar communications at any time. However, we may contact an entrant via email or SMS messages without any functional unsubscribe facility, if such communication relates primarily
-    to the conduct of the promotion.
-  </p>
-  <p>Opting out of marketing communications does not affect an entrant's eligibility to participate in the promotion or to win a prize.</p>
-  <p>
-    We will at all times collect and use personal information in connection with the promotion in accordance with our Privacy Policy (which can be viewed at
-    <a href="https://lmctplus.com/privacy-policy" target="_blank" rel="noopener">lmctplus.com/privacy-policy</a>) and other relevant laws and regulations.
-  </p>
-  <div class="permits">
-    <strong>NSW authority number:</strong> TP/00040<br />
-    <strong>ACT permit number:</strong> TP 26/01764
-  </div>
-</div>
+<script>
+(function () {
+  'use strict';
+  const CONFIG = {
+    formSelector: '#col-full-180 #tmp_order2step-49594',
+    endpoint: 'https://lmctmembers.com/api/check-user-active',
+    supportEmail: 'support@lmctplus.com', // REQUIRED: confirmed LMCT+ support email
+    eligibilityCutoffLabel: '1 SEPTEMBER 2026',
+    deadlineLabel: 'Monday 5 October 2026',
+    timeoutMs: 12000
+  };
+
+  function init() {
+    const form = document.querySelector(CONFIG.formSelector);
+    if (!form) return false;
+    if (form.dataset.lmctMemberCheckReady === 'true') return true;
+    const step = form.querySelector('.o2step_step1');
+    const buttonWrap = step && step.querySelector('.order2stepbutton');
+    const button = buttonWrap && buttonWrap.querySelector('a[href="#submit-form-2step"]');
+    const emailInput = step && step.querySelector('input[name="email"]');
+    if (!button || !emailInput) return false;
+    form.dataset.lmctMemberCheckReady = 'true';
+
+    // Replace the earlier static notice with the updated offer logic.
+    form.querySelectorAll('.lmctExistingMemberNotice').forEach(el => el.remove());
+    const explanation = document.createElement('p');
+    explanation.className = 'lmctOfferExplanation';
+    explanation.textContent = 'Not an active LMCT+ member? Join Fuel Saver for A$99 per year to receive the $50 fuel coupon. Other new LMCT+ membership purchases do not qualify for this offer.';
+    buttonWrap.before(explanation);
+
+    const message = document.createElement('div');
+    message.className = 'lmctMemberCheckMessage';
+    message.setAttribute('role', 'status');
+    message.setAttribute('aria-live', 'polite');
+    message.tabIndex = -1;
+    message.hidden = true;
+    buttonWrap.before(message);
+
+    form.querySelectorAll('.order2stepbutton, .order2stepbuttonOrder').forEach(wrap => {
+      const note = document.createElement('p');
+      note.className = 'lmctOfferNote';
+      const location = document.createElement('strong');
+      location.textContent = 'This offer is only valid at LMCT+ Edwardstown, South Australia.';
+      note.append(location, document.createElement('br'),
+        'Fuel Saver purchases and existing member claims end ' + CONFIG.deadlineLabel + '.');
+      wrap.after(note);
+    });
+
+    const terms = document.createElement('details');
+    terms.className = 'lmctOfferTerms';
+    const summary = document.createElement('summary');
+    summary.textContent = 'Offer terms';
+    terms.append(summary);
+    [
+      'This offer is only valid at LMCT+ Edwardstown, South Australia.',
+      'For customers without an active LMCT+ membership, the $50 fuel coupon is included only with the A$99/year Fuel Saver membership purchased through this offer. Other new LMCT+ memberships do not qualify.',
+      'Existing member claims are available only to members who were active before ' + CONFIG.eligibilityCutoffLabel + '. Support will verify eligibility using your account details.',
+      'Both qualifying Fuel Saver purchases and existing member claims must be completed by ' + CONFIG.deadlineLabel + '. Existing member claim emails received after this date will not be honoured.',
+      'Fuel Saver is an annual subscription billed at A$99 per year.'
+    ].forEach(text => {
+      const p = document.createElement('p');
+      p.textContent = text;
+      terms.append(p);
+    });
+    form.append(terms);
+
+    let busy = false;
+    let replay = false;
+    let revision = 0;
+    let controller = null;
+    const buttonText = button.querySelector('.elButtonMain');
+    const originalText = buttonText ? buttonText.textContent : '';
+
+    function show(text) {
+      message.replaceChildren();
+      message.textContent = text;
+      message.hidden = false;
+    }
+
+    function showMemberMessage() {
+      message.replaceChildren();
+      const title = document.createElement('strong');
+      title.textContent = 'Already an active LMCT+ member?';
+      message.append(title);
+      if (CONFIG.supportEmail) {
+        const link = document.createElement('a');
+        link.href = 'mailto:' + CONFIG.supportEmail;
+        link.textContent = CONFIG.supportEmail;
+        message.append('Email ', link, ' with your account details and we’ll credit your $50 fuel coupon if you meet the offer eligibility criteria.');
+      } else {
+        message.append('Contact LMCT+ support with your account details to claim your $50 fuel coupon, subject to eligibility.');
+      }
+      message.append(document.createElement('br'),
+        'You don’t need to purchase Fuel Saver separately. Email your claim by ' + CONFIG.deadlineLabel + '.');
+      message.hidden = false;
+      message.focus();
+    }
+
+    emailInput.addEventListener('input', function () {
+      revision++;
+      if (controller) controller.abort();
+      message.hidden = true;
+    });
+
+    // Capture before ClickFunnels receives the click, then replay it only
+    // after a successful inactive-member result for the same email.
+    document.addEventListener('click', async function (event) {
+      if (!(event.target instanceof Element)) return;
+      if (event.target.closest('a') !== button) return;
+      if (replay) {
+        replay = false;
+        return;
+      }
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (busy) return;
+
+      const email = emailInput.value.trim();
+      if (!email || !emailInput.checkValidity()) {
+        show('Please enter a valid email address before continuing.');
+        emailInput.focus();
+        emailInput.reportValidity();
+        return;
+      }
+
+      const requestRevision = revision;
+      busy = true;
+      button.setAttribute('aria-busy', 'true');
+      if (buttonText) buttonText.textContent = 'CHECKING MEMBERSHIP…';
+      show('Checking your membership…');
+      controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), CONFIG.timeoutMs);
+      let continueCheckout = false;
+      try {
+        const url = new URL(CONFIG.endpoint);
+        url.searchParams.set('email', email);
+        const response = await fetch(url.toString(), {
+          method: 'POST',
+          cache: 'no-store',
+          credentials: 'omit',
+          signal: controller.signal
+        });
+        if (!response.ok) throw new Error('Membership check failed');
+        const result = await response.json();
+        if (typeof result.is_active !== 'boolean') throw new Error('Unexpected response');
+        if (requestRevision !== revision || emailInput.value.trim() !== email) return;
+        if (result.is_active) showMemberMessage();
+        else {
+          message.hidden = true;
+          continueCheckout = true;
+        }
+      } catch (error) {
+        if (requestRevision === revision) {
+          show('We couldn’t check your membership right now. Please press Continue to Checkout to try again.');
+        }
+      } finally {
+        clearTimeout(timer);
+        controller = null;
+        busy = false;
+        button.removeAttribute('aria-busy');
+        if (buttonText) buttonText.textContent = originalText;
+      }
+      if (continueCheckout) {
+        replay = true;
+        try { button.click(); } finally { replay = false; }
+      }
+    }, true);
+    return true;
+  }
+
+  function start() {
+    if (init()) return;
+    const observer = new MutationObserver(() => {
+      if (init()) observer.disconnect();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    setTimeout(() => observer.disconnect(), 30000);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else start();
+})();
+</script>

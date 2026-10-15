@@ -1,0 +1,1027 @@
+<!--
+  LMCT+ Supermarkets Deer Park purchase confirmation page.
+  Standalone ClickFunnels custom HTML section for successful annual membership orders.
+-->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap");
+
+  .lmctDPLTY {
+    --lmctDPLTY-deep: #001d16;
+    --lmctDPLTY-green: #003f2e;
+    --lmctDPLTY-green-2: #087443;
+    --lmctDPLTY-lime: #cfff00;
+    --lmctDPLTY-lime-soft: #efff35;
+    --lmctDPLTY-white: #ffffff;
+    --lmctDPLTY-pale: #f1f8f3;
+    --lmctDPLTY-muted: #bfd5ca;
+    --lmctDPLTY-ink: #082a20;
+    --lmctDPLTY-art: url("https://images.clickfunnels.com/7c/0322869499479781dc4439fc989b1f/supermarket-2.png");
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lmctDPLTY-white);
+    font-family: "Inter", Arial, sans-serif;
+    background: var(--lmctDPLTY-deep);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .lmctDPLTY,
+  .lmctDPLTY * {
+    box-sizing: border-box;
+  }
+
+  .lmctDPLTY [hidden] {
+    display: none !important;
+  }
+
+  .lmctDPLTY::before {
+    position: absolute;
+    z-index: -2;
+    inset: 0 0 auto;
+    height: 940px;
+    content: "";
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 78% 18%, rgba(36, 189, 94, 0.22), transparent 31%),
+      linear-gradient(90deg, rgba(0, 29, 22, 0.98) 0%, rgba(0, 38, 28, 0.92) 40%, rgba(0, 38, 28, 0.55) 72%, rgba(0, 29, 22, 0.78) 100%),
+      linear-gradient(180deg, transparent 56%, var(--lmctDPLTY-deep) 96%), var(--lmctDPLTY-art);
+    background-position:
+      center,
+      center,
+      center,
+      center right;
+    background-size:
+      cover,
+      cover,
+      cover,
+      1920px auto;
+    background-repeat: no-repeat;
+  }
+
+  .lmctDPLTY::after {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    opacity: 0.25;
+    background-image: linear-gradient(rgba(207, 255, 0, 0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(207, 255, 0, 0.055) 1px, transparent 1px);
+    background-size: 72px 72px;
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent 62%);
+    mask-image: linear-gradient(to bottom, #000, transparent 62%);
+  }
+
+  .lmctDPLTY__shell {
+    position: relative;
+    z-index: 1;
+    width: min(1380px, calc(100% - 80px));
+    margin: 0 auto;
+  }
+
+  .lmctDPLTY__header {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    align-items: center;
+    min-height: 104px;
+    border-bottom: 1px solid rgba(207, 255, 0, 0.2);
+  }
+
+  .lmctDPLTY__brand {
+    display: block;
+    grid-column: 1 / span 3;
+    width: min(230px, 100%);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .lmctDPLTY__brand img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .lmctDPLTY__edition {
+    grid-column: 5 / span 2;
+    margin: 0;
+    color: var(--lmctDPLTY-muted);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+    line-height: 1.55;
+    text-transform: uppercase;
+  }
+
+  .lmctDPLTY__location {
+    display: flex;
+    grid-column: 8 / span 5;
+    align-items: center;
+    justify-self: end;
+    gap: 12px;
+    max-width: 440px;
+    padding: 10px 17px;
+    border: 1px solid rgba(207, 255, 0, 0.36);
+    border-radius: 999px;
+    color: var(--lmctDPLTY-muted);
+    font-size: 10px;
+    line-height: 1.4;
+    background: rgba(0, 46, 33, 0.7);
+    backdrop-filter: blur(10px);
+  }
+
+  .lmctDPLTY__locationIcon {
+    display: grid;
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctDPLTY-lime);
+    background: rgba(207, 255, 0, 0.1);
+  }
+
+  .lmctDPLTY__locationIcon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .lmctDPLTY__location address {
+    margin: 0;
+    font-style: normal;
+  }
+
+  .lmctDPLTY__location strong {
+    display: block;
+    color: var(--lmctDPLTY-white);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctDPLTY__hero {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    align-items: center;
+    min-height: 690px;
+    padding: 72px 0 88px;
+  }
+
+  .lmctDPLTY__copy {
+    grid-column: 1 / span 7;
+    min-width: 0;
+  }
+
+  .lmctDPLTY__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin: 0 0 24px;
+    color: var(--lmctDPLTY-lime);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctDPLTY__eyebrow::before {
+    width: 36px;
+    height: 1px;
+    content: "";
+    background: currentColor;
+  }
+
+  .lmctDPLTY__successMark {
+    display: grid;
+    width: 62px;
+    height: 62px;
+    margin-bottom: 25px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctDPLTY-deep);
+    background: linear-gradient(135deg, var(--lmctDPLTY-lime-soft), var(--lmctDPLTY-lime));
+    box-shadow: 0 18px 38px rgba(154, 208, 0, 0.19);
+    animation: lmctDPLTY__markIn 550ms cubic-bezier(0.2, 0.78, 0.28, 1) both;
+  }
+
+  .lmctDPLTY__successMark svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .lmctDPLTY__title {
+    max-width: 780px;
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(72px, 7.5vw, 116px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.79;
+    text-transform: uppercase;
+    text-shadow: 0 8px 26px rgba(0, 20, 14, 0.35);
+  }
+
+  .lmctDPLTY__title span {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.92);
+  }
+
+  .lmctDPLTY__lead {
+    max-width: 630px;
+    margin: 32px 0 0;
+    color: var(--lmctDPLTY-muted);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .lmctDPLTY__lead strong {
+    color: var(--lmctDPLTY-white);
+    font-weight: 800;
+  }
+
+  .lmctDPLTY__assurance {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 27px;
+  }
+
+  .lmctDPLTY__assurance span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 35px;
+    padding: 0 13px;
+    border: 1px solid rgba(207, 255, 0, 0.28);
+    border-radius: 999px;
+    color: #e8f3ed;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(0, 50, 36, 0.62);
+  }
+
+  .lmctDPLTY__summary {
+    position: relative;
+    grid-column: 8 / span 5;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid rgba(207, 255, 0, 0.3);
+    border-radius: 25px;
+    color: var(--lmctDPLTY-ink);
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow:
+      0 30px 80px rgba(0, 18, 12, 0.4),
+      0 0 0 3px rgba(207, 255, 0, 0.08);
+    backdrop-filter: blur(14px);
+    animation: lmctDPLTY__cardIn 620ms 120ms ease both;
+  }
+
+  .lmctDPLTY__summaryHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 26px 28px 23px;
+    border-bottom: 1px solid rgba(0, 52, 38, 0.1);
+    background: linear-gradient(145deg, #ffffff, #ecf6ef);
+  }
+
+  .lmctDPLTY__summaryHead p {
+    margin: 0 0 5px;
+    color: var(--lmctDPLTY-green-2);
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .lmctDPLTY__summaryHead h2 {
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctDPLTY__confirmed {
+    display: inline-flex;
+    align-items: center;
+    min-height: 29px;
+    padding: 0 11px;
+    border-radius: 999px;
+    color: var(--lmctDPLTY-deep);
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--lmctDPLTY-lime);
+  }
+
+  .lmctDPLTY__summaryBody {
+    padding: 10px 28px 28px;
+  }
+
+  .lmctDPLTY__summaryRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 76px;
+    border-bottom: 1px solid rgba(0, 52, 38, 0.1);
+  }
+
+  .lmctDPLTY__summaryRow span {
+    color: #5f786c;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .lmctDPLTY__summaryRow strong {
+    color: var(--lmctDPLTY-ink);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 25px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  .lmctDPLTY__summaryRow--bonus strong {
+    color: var(--lmctDPLTY-green-2);
+    font-size: 34px;
+  }
+
+  .lmctDPLTY__receipt {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin: 22px 0 0;
+    padding: 16px;
+    border-radius: 13px;
+    color: #255943;
+    font-size: 11px;
+    line-height: 1.55;
+    background: #e7f4ea;
+  }
+
+  .lmctDPLTY__receipt svg {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+  }
+
+  .lmctDPLTY__next {
+    position: relative;
+    z-index: 2;
+    padding: 90px 0 94px;
+    color: var(--lmctDPLTY-ink);
+    background: radial-gradient(circle at 88% 0%, rgba(36, 189, 94, 0.11), transparent 27rem), var(--lmctDPLTY-pale);
+  }
+
+  .lmctDPLTY__nextHead {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    align-items: end;
+  }
+
+  .lmctDPLTY__nextHead .lmctDPLTY__eyebrow {
+    grid-column: 1 / span 3;
+    align-self: start;
+    color: var(--lmctDPLTY-green-2);
+  }
+
+  .lmctDPLTY__nextTitle {
+    grid-column: 4 / span 6;
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(52px, 5.8vw, 84px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.88;
+    text-transform: uppercase;
+  }
+
+  .lmctDPLTY__nextCopy {
+    grid-column: 10 / span 3;
+    margin: 0;
+    color: #5b7569;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .lmctDPLTY__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 58px;
+  }
+
+  .lmctDPLTY__step {
+    position: relative;
+    min-height: 262px;
+    padding: 30px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 63, 46, 0.13);
+    border-radius: 17px;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 18px 42px rgba(0, 42, 30, 0.08);
+  }
+
+  .lmctDPLTY__step::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 4px;
+    content: "";
+    background: linear-gradient(90deg, var(--lmctDPLTY-lime), #24bd5e);
+  }
+
+  .lmctDPLTY__stepNumber {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctDPLTY-deep);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 21px;
+    font-weight: 900;
+    background: var(--lmctDPLTY-lime);
+  }
+
+  .lmctDPLTY__step h3 {
+    margin: 29px 0 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 31px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmctDPLTY__step p {
+    margin: 15px 0 0;
+    color: #587166;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .lmctDPLTY__step p strong {
+    color: var(--lmctDPLTY-green);
+  }
+
+  .lmctDPLTY__notice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 28px;
+    padding: 24px 28px;
+    border: 1px solid rgba(207, 255, 0, 0.26);
+    border-radius: 17px;
+    color: var(--lmctDPLTY-muted);
+    background: linear-gradient(110deg, #00432f, var(--lmctDPLTY-deep));
+  }
+
+  .lmctDPLTY__notice p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .lmctDPLTY__notice strong {
+    color: var(--lmctDPLTY-white);
+  }
+
+  .lmctDPLTY__supportLink {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 23px;
+    min-width: 210px;
+    min-height: 54px;
+    padding: 0 10px 0 19px;
+    border-radius: 999px;
+    color: var(--lmctDPLTY-deep) !important;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    background: var(--lmctDPLTY-lime);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .lmctDPLTY__supportLink span:last-child {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctDPLTY-lime);
+    font-size: 17px;
+    background: var(--lmctDPLTY-deep);
+  }
+
+  .lmctDPLTY__supportLink:hover {
+    box-shadow: 0 13px 32px rgba(154, 208, 0, 0.17);
+    transform: translateY(-2px);
+  }
+
+  .lmctDPLTY__supportLink:focus-visible,
+  .lmctDPLTY__footer a:focus-visible {
+    outline: 3px solid var(--lmctDPLTY-lime-soft);
+    outline-offset: 3px;
+  }
+
+  .lmctDPLTY__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 104px;
+    color: #8ead9e;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    line-height: 1.55;
+    text-transform: uppercase;
+  }
+
+  .lmctDPLTY__footer p {
+    margin: 0;
+  }
+
+  .lmctDPLTY__footerLinks {
+    display: flex;
+    gap: 25px;
+  }
+
+  .lmctDPLTY__footerLinks a {
+    color: var(--lmctDPLTY-lime);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  @keyframes lmctDPLTY__markIn {
+    from {
+      opacity: 0;
+      transform: scale(0.68) rotate(-10deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0);
+    }
+  }
+
+  @keyframes lmctDPLTY__cardIn {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 960px) {
+    .lmctDPLTY::before {
+      background-image: linear-gradient(180deg, rgba(0, 29, 22, 0.72) 0%, rgba(0, 38, 28, 0.82) 39%, rgba(0, 29, 22, 0.98) 76%, var(--lmctDPLTY-deep) 100%), var(--lmctDPLTY-art);
+      background-position:
+        center,
+        68% 74px;
+      background-size:
+        cover,
+        auto 740px;
+    }
+
+    .lmctDPLTY__shell {
+      width: min(100% - 48px, 720px);
+    }
+
+    .lmctDPLTY__header {
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      padding: 19px 0;
+    }
+
+    .lmctDPLTY__brand {
+      grid-column: 1;
+    }
+
+    .lmctDPLTY__edition {
+      display: none;
+    }
+
+    .lmctDPLTY__location {
+      grid-column: 2;
+    }
+
+    .lmctDPLTY__hero {
+      grid-template-columns: 1fr;
+      min-height: 0;
+      padding: 62px 0 76px;
+    }
+
+    .lmctDPLTY__copy,
+    .lmctDPLTY__summary {
+      grid-column: 1;
+      width: 100%;
+    }
+
+    .lmctDPLTY__summary {
+      margin-top: 46px;
+    }
+
+    .lmctDPLTY__nextHead {
+      display: block;
+    }
+
+    .lmctDPLTY__nextTitle {
+      max-width: 610px;
+    }
+
+    .lmctDPLTY__nextCopy {
+      max-width: 540px;
+      margin-top: 22px;
+    }
+
+    .lmctDPLTY__steps {
+      grid-template-columns: 1fr;
+    }
+
+    .lmctDPLTY__step {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .lmctDPLTY::after {
+      background-size: 52px 52px;
+    }
+
+    .lmctDPLTY__shell {
+      width: min(100% - 34px, 560px);
+    }
+
+    .lmctDPLTY__header {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .lmctDPLTY__brand,
+    .lmctDPLTY__location {
+      grid-column: 1;
+    }
+
+    .lmctDPLTY__brand {
+      width: min(205px, 62vw);
+    }
+
+    .lmctDPLTY__location {
+      justify-self: stretch;
+      max-width: none;
+      border-radius: 15px;
+    }
+
+    .lmctDPLTY__hero {
+      padding: 45px 0 62px;
+    }
+
+    .lmctDPLTY__eyebrow {
+      margin-bottom: 22px;
+      font-size: 8px;
+    }
+
+    .lmctDPLTY__successMark {
+      width: 54px;
+      height: 54px;
+    }
+
+    .lmctDPLTY__title {
+      max-width: 100%;
+      font-size: clamp(55px, 16vw, 72px);
+      overflow-wrap: anywhere;
+    }
+
+    .lmctDPLTY__lead {
+      margin-top: 26px;
+      font-size: 15px;
+    }
+
+    .lmctDPLTY__assurance {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .lmctDPLTY__assurance span {
+      width: fit-content;
+    }
+
+    .lmctDPLTY__summary {
+      border-radius: 19px;
+    }
+
+    .lmctDPLTY__summaryHead {
+      flex-wrap: wrap;
+      align-items: flex-start;
+      padding: 22px 20px;
+    }
+
+    .lmctDPLTY__summaryHead h2 {
+      font-size: 28px;
+    }
+
+    .lmctDPLTY__summaryBody {
+      padding: 8px 20px 22px;
+    }
+
+    .lmctDPLTY__summaryRow {
+      min-height: 66px;
+    }
+
+    .lmctDPLTY__summaryRow strong {
+      font-size: 21px;
+    }
+
+    .lmctDPLTY__summaryRow--bonus strong {
+      font-size: 28px;
+    }
+
+    .lmctDPLTY__next {
+      padding: 65px 0 70px;
+    }
+
+    .lmctDPLTY__nextTitle {
+      font-size: clamp(49px, 14.5vw, 66px);
+    }
+
+    .lmctDPLTY__steps {
+      margin-top: 39px;
+    }
+
+    .lmctDPLTY__step {
+      padding: 27px 24px 30px;
+    }
+
+    .lmctDPLTY__notice {
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 22px;
+    }
+
+    .lmctDPLTY__supportLink {
+      width: 100%;
+    }
+
+    .lmctDPLTY__footer {
+      align-items: flex-start;
+      flex-direction: column;
+      min-height: 0;
+      padding: 32px 0 36px;
+    }
+
+    .lmctDPLTY__footerLinks {
+      flex-wrap: wrap;
+      gap: 18px 24px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmctDPLTY *,
+    .lmctDPLTY *::before,
+    .lmctDPLTY *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<div class="lmctDPLTY">
+  <div class="lmctDPLTY__shell">
+    <header class="lmctDPLTY__header">
+      <a class="lmctDPLTY__brand" href="https://lmctplus.com/" aria-label="LMCT+ Supermarkets home">
+        <img src="https://lmctgiveaway.com/hosted/images/bb/676306345e499fb3ef70d9cace2c4d/Group-1618878390.svg" alt="LMCT+ Supermarkets" />
+      </a>
+
+      <p class="lmctDPLTY__edition">Membership confirmed<br />Deer Park 2026</p>
+
+      <div class="lmctDPLTY__location">
+        <span class="lmctDPLTY__locationIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+            <circle cx="12" cy="10" r="2.5" />
+          </svg>
+        </span>
+        <address>
+          <strong>Deer Park Market</strong>
+          8 Hatchlands Drive, Deer Park VIC 3023
+        </address>
+      </div>
+    </header>
+
+    <main>
+      <section class="lmctDPLTY__hero" aria-labelledby="lmctDPLTY-title">
+        <div class="lmctDPLTY__copy">
+          <p class="lmctDPLTY__eyebrow">Payment successful / Membership confirmed</p>
+
+          <span class="lmctDPLTY__successMark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 12.5 4.2 4.2L19 7" />
+            </svg>
+          </span>
+
+          <h1 class="lmctDPLTY__title" id="lmctDPLTY-title">
+            Thank you.
+            <span>You&rsquo;re a member.</span>
+          </h1>
+
+          <p class="lmctDPLTY__lead" data-lmct-ty-lead>
+            Your <strong>$99 annual Save On Fuel + Groceries membership is confirmed</strong>, with <strong>$50 in free groceries included</strong>. Welcome to more value across groceries, fuel and member only offers.
+          </p>
+
+          <div class="lmctDPLTY__assurance" aria-label="Order status">
+            <span>Payment confirmed</span>
+            <span>12 months secured</span>
+            <span data-lmct-ty-assurance-bonus>$50 groceries included</span>
+            <span data-lmct-ty-assurance-giveaway hidden>Automatic giveaway entry</span>
+          </div>
+        </div>
+
+        <aside class="lmctDPLTY__summary" aria-labelledby="lmctDPLTY-summary-title">
+          <div class="lmctDPLTY__summaryHead">
+            <div>
+              <p>Order summary</p>
+              <h2 id="lmctDPLTY-summary-title" data-lmct-ty-plan-name>Save On Fuel + Groceries</h2>
+            </div>
+            <span class="lmctDPLTY__confirmed">Confirmed</span>
+          </div>
+
+          <div class="lmctDPLTY__summaryBody">
+            <div class="lmctDPLTY__summaryRow">
+              <span>Membership term</span>
+              <strong>12 months</strong>
+            </div>
+            <div class="lmctDPLTY__summaryRow">
+              <span>Membership payment</span>
+              <strong data-lmct-ty-payment>$99 paid</strong>
+            </div>
+            <div class="lmctDPLTY__summaryRow lmctDPLTY__summaryRow--bonus">
+              <span>Grocery bonus included</span>
+              <strong data-lmct-ty-bonus>+$50</strong>
+            </div>
+
+            <p class="lmctDPLTY__receipt" data-lmct-ty-receipt>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 4h16v16H4z" />
+                <path d="m4 7 8 6 8-6" />
+              </svg>
+              <span>Your receipt will be sent to the email address used at checkout. Follow the steps below to find your $50 grocery voucher in the LMCT+ app.</span>
+            </p>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <section class="lmctDPLTY__next" aria-labelledby="lmctDPLTY-next-title">
+    <div class="lmctDPLTY__shell">
+      <div class="lmctDPLTY__nextHead">
+        <p class="lmctDPLTY__eyebrow">What happens next / 02</p>
+        <h2 class="lmctDPLTY__nextTitle" id="lmctDPLTY-next-title">Three simple next steps.</h2>
+        <p class="lmctDPLTY__nextCopy" data-lmct-ty-next-copy>Your $50 grocery voucher is accessed through the LMCT+ app. Follow these steps to find it.</p>
+      </div>
+
+      <div class="lmctDPLTY__steps">
+        <article class="lmctDPLTY__step">
+          <span class="lmctDPLTY__stepNumber" aria-hidden="true">1</span>
+          <h3>Download the LMCT+ app</h3>
+          <p>Search for LMCT+ in the Apple App Store or Google Play, then download the official LMCT+ app to your phone.</p>
+        </article>
+
+        <article class="lmctDPLTY__step">
+          <span class="lmctDPLTY__stepNumber" aria-hidden="true">2</span>
+          <h3>Log in to your account</h3>
+          <p>Use the same email address connected to your purchase. Follow the account setup prompts if this is your first login.</p>
+        </article>
+
+        <article class="lmctDPLTY__step">
+          <span class="lmctDPLTY__stepNumber" aria-hidden="true">3</span>
+          <h3>Open Supermarkets</h3>
+          <p data-lmct-ty-voucher-step>Open the <strong>Essentials</strong> tab in the app to find your $50 grocery voucher and its available offer details.</p>
+        </article>
+      </div>
+
+      <div class="lmctDPLTY__notice">
+        <p><strong>Cannot see your voucher?</strong> Make sure you are logged in with the same email address used at checkout. If it is still missing, our support team can help.</p>
+        <a class="lmctDPLTY__supportLink" href="https://lmctplus.com/contact-support">
+          <span>Contact support</span>
+          <span aria-hidden="true">&#8599;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="lmctDPLTY__shell">
+    <footer class="lmctDPLTY__footer">
+      <p data-lmct-ty-footer>Membership benefits and grocery bonus are subject to applicable terms. The $99 annual membership is non refundable.</p>
+      <nav class="lmctDPLTY__footerLinks" aria-label="Legal and support">
+        <a href="https://lmctgiveaway.com/supermarket-terms">Terms</a>
+        <a href="https://lmctplus.com/privacy-policy">Privacy</a>
+        <a href="https://lmctplus.com/contact-support">Contact</a>
+      </nav>
+    </footer>
+  </div>
+</div>
+
+<script>
+  (function initialiseDeerParkThankYouPlan() {
+    "use strict";
+
+    var storageKey = "lmct_deer_park_plan";
+    var plans = {
+      "99": {
+        name: "Save On Fuel + Groceries",
+        payment: "$99 paid",
+        bonus: "+$50",
+        assuranceBonus: "$50 groceries included",
+        lead: "Your <strong>$99 annual Save On Fuel + Groceries membership is confirmed</strong>, with <strong>$50 in free groceries included</strong>. Welcome to more value across groceries, fuel and member only offers.",
+        receipt: "Your receipt will be sent to the email address used at checkout. Follow the steps below to find your $50 grocery voucher in the LMCT+ app.",
+        nextCopy: "Your $50 grocery voucher is accessed through the LMCT+ app. Follow these steps to find it.",
+        voucherStep: "Open the <strong>Essentials</strong> tab in the app to find your $50 grocery voucher and its available offer details.",
+        footer: "Membership benefits and grocery bonus are subject to applicable terms. The $99 annual membership is non refundable.",
+        giveaway: false,
+      },
+      "199": {
+        name: "Save + Win",
+        payment: "$199 paid",
+        bonus: "+$100",
+        assuranceBonus: "$100 groceries included",
+        lead: "Your <strong>$199 annual Save + Win membership is confirmed</strong>, with <strong>$100 in free groceries</strong> and <strong>automatic entry into every LMCT+ giveaway</strong>.",
+        receipt: "Your receipt will be sent to the email address used at checkout. Follow the steps below to find your $100 grocery voucher in the LMCT+ app.",
+        nextCopy: "Your $100 grocery voucher is accessed through the LMCT+ app. Follow these steps to find it.",
+        voucherStep: "Open the <strong>Essentials</strong> tab in the app to find your $100 grocery voucher and its available offer details.",
+        footer: "Membership benefits, grocery bonus and giveaway entries are subject to applicable terms. The $199 annual membership is non refundable.",
+        giveaway: true,
+      },
+    };
+
+    function getSelectedPlan() {
+      try {
+        return window.localStorage.getItem(storageKey) === "199" ? plans["199"] : plans["99"];
+      } catch (error) {
+        return plans["99"];
+      }
+    }
+
+    function setText(selector, value) {
+      var element = document.querySelector(selector);
+      if (element) element.textContent = value;
+    }
+
+    function setHtml(selector, value) {
+      var element = document.querySelector(selector);
+      if (element) element.innerHTML = value;
+    }
+
+    function applySelectedPlan() {
+      var plan = getSelectedPlan();
+      var giveawayBadge = document.querySelector("[data-lmct-ty-assurance-giveaway]");
+      var receipt = document.querySelector("[data-lmct-ty-receipt] span");
+
+      setHtml("[data-lmct-ty-lead]", plan.lead);
+      setText("[data-lmct-ty-assurance-bonus]", plan.assuranceBonus);
+      setText("[data-lmct-ty-plan-name]", plan.name);
+      setText("[data-lmct-ty-payment]", plan.payment);
+      setText("[data-lmct-ty-bonus]", plan.bonus);
+      setText("[data-lmct-ty-next-copy]", plan.nextCopy);
+      setHtml("[data-lmct-ty-voucher-step]", plan.voucherStep);
+      setText("[data-lmct-ty-footer]", plan.footer);
+
+      if (receipt) receipt.textContent = plan.receipt;
+      if (giveawayBadge) giveawayBadge.hidden = !plan.giveaway;
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", applySelectedPlan, { once: true });
+    } else {
+      applySelectedPlan();
+    }
+  })();
+</script>
