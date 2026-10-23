@@ -1,0 +1,2675 @@
+{
+ "url": "lmct-sa-fuel-million-preview.html",
+ "at": "2026-10-23T03:59:16.673Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 7,
+   "filled": [
+    1,
+    1,
+    1,
+    0.49,
+    1,
+    0.54,
+    0.86
+   ],
+   "motion": {
+    "elements": 19,
+    "css": 2,
+    "transitions": 17,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 6138,
+     "screens": 6.8,
+     "words": 475,
+     "img": 6,
+     "video": 0,
+     "canvas": 0,
+     "svg": 7,
+     "sections": 8,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "edwardstown-station.png",
+      "edwardstown-station.png",
+      "edwardstown-station.png",
+      "imgi_8_phone.d557c9c5b0bd5530581d.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "$1M",
+     "words": 1,
+     "chars": 3,
+     "lines": 1,
+     "size": 118.1,
+     "vw": 8.2,
+     "font": "Barlow Semi Condensed",
+     "weight": 800,
+     "tracking": -0.03,
+     "leading": 0.72,
+     "upper": true,
+     "italic": true,
+     "mono": false,
+     "align": "left",
+     "position": "right",
+     "widthRatio": 0.26,
+     "top": 263,
+     "tag": "p",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "FUEL ACCESS. $1M CHANCE.",
+     "words": 4,
+     "lines": 2,
+     "size": 96,
+     "font": "Barlow Semi Condensed"
+    },
+    "headings": [
+     {
+      "text": "FUEL ACCESS. $1M CHANCE.",
+      "words": 4,
+      "chars": 24,
+      "lines": 2,
+      "size": 96,
+      "vw": 6.7,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.9,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.35,
+      "top": 235,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "$1M",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 118.1,
+      "vw": 8.2,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.72,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.26,
+      "top": 263,
+      "tag": "p",
+      "kind": "heading"
+     },
+     {
+      "text": "$199",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 100.8,
+      "vw": 7,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.78,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.14,
+      "top": 522,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "ONE PLAN. CLEAR VALUE.",
+      "words": 4,
+      "chars": 22,
+      "lines": 2,
+      "size": 72,
+      "vw": 5,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.35,
+      "top": 1015,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "$199",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 137.6,
+      "vw": 9.6,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.45,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.23,
+      "top": 1083,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "FILL UP. EARN ENTRIES.",
+      "words": 4,
+      "chars": 22,
+      "lines": 2,
+      "size": 72,
+      "vw": 5,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.35,
+      "top": 1796,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "50L",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 128,
+      "vw": 8.9,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.5,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 2028,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "$20",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 128,
+      "vw": 8.9,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.5,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.34,
+      "top": 2028,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "80 L",
+      "words": 2,
+      "chars": 4,
+      "lines": 1,
+      "size": 40,
+      "vw": 2.8,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.05,
+      "top": 2951,
+      "tag": "output",
+      "kind": "heading"
+     },
+     {
+      "text": "LITRES ADD UP.",
+      "words": 3,
+      "chars": 14,
+      "lines": 1,
+      "size": 72,
+      "vw": 5,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.31,
+      "top": 3009,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "1",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 92.8,
+      "vw": 6.4,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.8,
+      "upper": false,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.03,
+      "top": 3106,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "TRACK FUEL PROGRESS.",
+      "words": 3,
+      "chars": 20,
+      "lines": 2,
+      "size": 72,
+      "vw": 5,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.35,
+      "top": 3605,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "A $1M CHANCE.",
+      "words": 3,
+      "chars": 13,
+      "lines": 2,
+      "size": 129.6,
+      "vw": 9,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.78,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.45,
+      "top": 4355,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "QUESTIONS, ANSWERED.",
+      "words": 2,
+      "chars": 20,
+      "lines": 2,
+      "size": 72,
+      "vw": 5,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.24,
+      "top": 4788,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "12 MONTHS OF FUEL ACCESS.",
+      "words": 5,
+      "chars": 25,
+      "lines": 2,
+      "size": 72,
+      "vw": 5,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.35,
+      "top": 5608,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 15,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 4,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Jost",
+       "share": 0.93,
+       "mono": false
+      },
+      {
+       "family": "Barlow Semi Condensed",
+       "share": 0.07,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      22,
+      27,
+      40,
+      72,
+      93,
+      96,
+      101,
+      118,
+      128,
+      130,
+      138
+     ],
+     "sizeCount": 18,
+     "notLoaded": [],
+     "body": {
+      "font": "Jost",
+      "size": 16,
+      "leading": 1.5,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 5.6
+     },
+     "measureChars": 45,
+     "max": {
+      "size": 137.6,
+      "vw": 9.6,
+      "font": "Barlow Semi Condensed",
+      "text": "$199"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.07,
+     "centerShare": 0.01,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#07142d",
+       "top": 74,
+       "hsl": {
+        "h": 219,
+        "s": 0.73,
+        "l": 0.1
+       }
+      },
+      {
+       "color": "#f7fbff",
+       "top": 900,
+       "hsl": {
+        "h": 210,
+        "s": 1,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#1d8fff",
+       "top": 4240,
+       "hsl": {
+        "h": 210,
+        "s": 1,
+        "l": 0.56
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#0b1220",
+       "share": 0.33
+      },
+      {
+       "color": "#07142d",
+       "share": 0.29
+      },
+      {
+       "color": "#c8d8eb",
+       "share": 0.1
+      },
+      {
+       "color": "#b8cae1",
+       "share": 0.08
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.06
+      }
+     ],
+     "button": {
+      "bg": "#1d5fb8",
+      "hsl": {
+       "h": 214,
+       "s": 0.73,
+       "l": 0.42
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 2,
+     "radius": "pill",
+     "height": 56,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 3,
+     "heroLabels": [
+      "Skip to offer",
+      "SEE THE ANNUAL OFFER"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 8,
+     "boxRadius": 16,
+     "squareMedia": 0,
+     "roundedMedia": 4,
+     "mediaRadius": 16,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.14
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 74,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "barlow semi condensed",
+     "jost"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 6138,
+    "margins": {
+     "left": 130,
+     "right": 130
+    },
+    "sections": [
+     {
+      "sel": "section#lmct-sa-fuel-main.lmct-sa-hero",
+      "tag": "section",
+      "top": 74,
+      "height": 826,
+      "words": 55,
+      "media": 1,
+      "middle": 91,
+      "heading": {
+       "text": "$1M",
+       "size": 118,
+       "tag": "p"
+      },
+      "left": 130,
+      "right": 130,
+      "textLeft": 130,
+      "textRight": 168,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#lmct-sa-fuel-offer.lmct-sa-section.lmct-sa-offer",
+      "tag": "section",
+      "top": 900,
+      "height": 781,
+      "words": 80,
+      "media": 0,
+      "middle": 207,
+      "heading": {
+       "text": "$199",
+       "size": 138,
+       "tag": "p"
+      },
+      "left": 180,
+      "right": 142,
+      "textLeft": 180,
+      "textRight": 142,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-earn",
+      "tag": "section",
+      "top": 1681,
+      "height": 1105,
+      "words": 79,
+      "media": 2,
+      "middle": 18,
+      "heading": {
+       "text": "50",
+       "size": 128,
+       "tag": "span"
+      },
+      "left": 130,
+      "right": 130,
+      "textLeft": 130,
+      "textRight": 160,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section",
+      "tag": "section",
+      "top": 2786,
+      "height": 624,
+      "words": 58,
+      "media": 0,
+      "middle": 164,
+      "heading": {
+       "text": "Litres add up.",
+       "size": 72,
+       "tag": "h2"
+      },
+      "left": 130,
+      "right": 180,
+      "textLeft": 130,
+      "textRight": 180,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-app",
+      "tag": "section",
+      "top": 3410,
+      "height": 830,
+      "words": 58,
+      "media": 1,
+      "middle": 98,
+      "heading": {
+       "text": "Track fuel progress.",
+       "size": 72,
+       "tag": "h2"
+      },
+      "left": 147,
+      "right": 132,
+      "textLeft": 682,
+      "textRight": 132,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-campaign",
+      "tag": "section",
+      "top": 4240,
+      "height": 433,
+      "words": 47,
+      "media": 0,
+      "middle": 382,
+      "heading": {
+       "text": "A $1M chance.",
+       "size": 130,
+       "tag": "h2"
+      },
+      "left": 130,
+      "right": 155,
+      "textLeft": 130,
+      "textRight": 155,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-faq",
+      "tag": "section",
+      "top": 4673,
+      "height": 738,
+      "words": 203,
+      "media": 0,
+      "middle": 168,
+      "heading": {
+       "text": "Questions, answered.",
+       "size": 72,
+       "tag": "h2"
+      },
+      "left": 130,
+      "right": 203,
+      "textLeft": 130,
+      "textRight": 203,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-final",
+      "tag": "section",
+      "top": 5411,
+      "height": 610,
+      "words": 40,
+      "media": 0,
+      "middle": 146,
+      "heading": {
+       "text": "12 months of fuel access.",
+       "size": 72,
+       "tag": "h2"
+      },
+      "left": 202,
+      "right": 263,
+      "textLeft": 202,
+      "textRight": 263,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [
+     {
+      "top": 2672,
+      "height": 272
+     },
+     {
+      "top": 3244,
+      "height": 348
+     }
+    ],
+    "h1s": [
+     {
+      "text": "FUEL ACCESS. $1M CHANCE.",
+      "size": 96,
+      "top": 235,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 130,
+      "n": 7
+     },
+     {
+      "x": 619,
+      "n": 7
+     },
+     {
+      "x": 654,
+      "n": 3
+     },
+     {
+      "x": 176,
+      "n": 2
+     },
+     {
+      "x": 202,
+      "n": 2
+     },
+     {
+      "x": 682,
+      "n": 2
+     },
+     {
+      "x": 775,
+      "n": 2
+     },
+     {
+      "x": 844,
+      "n": 1
+     },
+     {
+      "x": 864,
+      "n": 1
+     },
+     {
+      "x": 936,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 28,
+    "bodySize": 16,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.13,
+    "voidBox": {
+     "x": 0,
+     "y": 780,
+     "w": 1440,
+     "h": 120
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 7,
+   "filled": [
+    1,
+    1,
+    0.89,
+    0.87,
+    1,
+    0.75,
+    0.98
+   ],
+   "motion": {
+    "elements": 19,
+    "css": 2,
+    "transitions": 17,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 6828,
+     "screens": 6.7,
+     "words": 475,
+     "img": 6,
+     "video": 0,
+     "canvas": 0,
+     "svg": 7,
+     "sections": 8,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "edwardstown-station.png",
+      "edwardstown-station.png",
+      "edwardstown-station.png",
+      "imgi_8_phone.d557c9c5b0bd5530581d.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "$199",
+     "words": 1,
+     "chars": 4,
+     "lines": 1,
+     "size": 70.4,
+     "vw": 9.2,
+     "font": "Barlow Semi Condensed",
+     "weight": 800,
+     "tracking": -0.03,
+     "leading": 0.78,
+     "upper": true,
+     "italic": true,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.18,
+     "top": 334,
+     "tag": "p",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "FUEL ACCESS. $1M CHANCE.",
+     "words": 4,
+     "lines": 2,
+     "size": 60,
+     "font": "Barlow Semi Condensed"
+    },
+    "headings": [
+     {
+      "text": "FUEL ACCESS. $1M CHANCE.",
+      "words": 4,
+      "chars": 24,
+      "lines": 2,
+      "size": 60,
+      "vw": 7.8,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.9,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 120,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "$199",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 70.4,
+      "vw": 9.2,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.78,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.18,
+      "top": 334,
+      "tag": "p",
+      "kind": "heading"
+     },
+     {
+      "text": "$1M",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 65.6,
+      "vw": 8.5,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.72,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.71,
+      "top": 562,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "$199",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 86.4,
+      "vw": 11.3,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.45,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.86,
+      "top": 1165,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "ONE PLAN. CLEAR VALUE.",
+      "words": 4,
+      "chars": 22,
+      "lines": 2,
+      "size": 44.8,
+      "vw": 5.8,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 1431,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "FILL UP. EARN ENTRIES.",
+      "words": 4,
+      "chars": 22,
+      "lines": 2,
+      "size": 44.8,
+      "vw": 5.8,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 2065,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "50L",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 75.2,
+      "vw": 9.8,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.5,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.38,
+      "top": 2308,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "$20",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 75.2,
+      "vw": 9.8,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.5,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.38,
+      "top": 2308,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "LITRES ADD UP.",
+      "words": 3,
+      "chars": 14,
+      "lines": 1,
+      "size": 44.8,
+      "vw": 5.8,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 3000,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "80 L",
+      "words": 2,
+      "chars": 4,
+      "lines": 1,
+      "size": 40,
+      "vw": 5.2,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.09,
+      "top": 3190,
+      "tag": "output",
+      "kind": "heading"
+     },
+     {
+      "text": "1",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 56,
+      "vw": 7.3,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.8,
+      "upper": false,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.04,
+      "top": 3360,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "TRACK FUEL PROGRESS.",
+      "words": 3,
+      "chars": 20,
+      "lines": 2,
+      "size": 44.8,
+      "vw": 5.8,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 3663,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "A $1M CHANCE.",
+      "words": 3,
+      "chars": 13,
+      "lines": 2,
+      "size": 69.1,
+      "vw": 9,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.78,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.45,
+      "top": 4862,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "QUESTIONS, ANSWERED.",
+      "words": 2,
+      "chars": 20,
+      "lines": 2,
+      "size": 44.8,
+      "vw": 5.8,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 5304,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "12 MONTHS OF FUEL ACCESS.",
+      "words": 5,
+      "chars": 25,
+      "lines": 2,
+      "size": 44.8,
+      "vw": 5.8,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 6146,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 15,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 4,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Jost",
+       "share": 0.93,
+       "mono": false
+      },
+      {
+       "family": "Barlow Semi Condensed",
+       "share": 0.07,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      22,
+      40,
+      45,
+      56,
+      60,
+      66,
+      69,
+      70,
+      75,
+      86
+     ],
+     "sizeCount": 17,
+     "notLoaded": [],
+     "body": {
+      "font": "Jost",
+      "size": 16,
+      "leading": 1.62,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 18
+     },
+     "measureChars": 87,
+     "max": {
+      "size": 86.4,
+      "vw": 11.3,
+      "font": "Barlow Semi Condensed",
+      "text": "$199"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.07,
+     "centerShare": 0.01,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#07142d",
+       "top": 74,
+       "hsl": {
+        "h": 219,
+        "s": 0.73,
+        "l": 0.1
+       }
+      },
+      {
+       "color": "#1d8fff",
+       "top": 538,
+       "hsl": {
+        "h": 210,
+        "s": 1,
+        "l": 0.56
+       }
+      },
+      {
+       "color": "#f7fbff",
+       "top": 1034,
+       "hsl": {
+        "h": 210,
+        "s": 1,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#1d5fb8",
+       "top": 3159,
+       "hsl": {
+        "h": 214,
+        "s": 0.73,
+        "l": 0.42
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#0b1220",
+       "share": 0.33
+      },
+      {
+       "color": "#07142d",
+       "share": 0.29
+      },
+      {
+       "color": "#c8d8eb",
+       "share": 0.1
+      },
+      {
+       "color": "#b8cae1",
+       "share": 0.08
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.06
+      }
+     ],
+     "button": {
+      "bg": "#1d5fb8",
+      "hsl": {
+       "h": 214,
+       "s": 0.73,
+       "l": 0.42
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 2,
+     "radius": "pill",
+     "height": 56,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 3,
+     "heroLabels": [
+      "Skip to offer",
+      "SEE THE ANNUAL OFFER"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 8,
+     "boxRadius": 16,
+     "squareMedia": 0,
+     "roundedMedia": 4,
+     "mediaRadius": 16,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "img",
+      "ratio": 0.29
+     }
+    ],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 74,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "barlow semi condensed",
+     "jost"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 6828,
+    "margins": {
+     "left": 24,
+     "right": 24
+    },
+    "sections": [
+     {
+      "sel": "section#lmct-sa-fuel-main.lmct-sa-hero",
+      "tag": "section",
+      "top": 74,
+      "height": 960,
+      "words": 55,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "$199",
+       "size": 70,
+       "tag": "p"
+      },
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 48,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#lmct-sa-fuel-offer.lmct-sa-section.lmct-sa-offer",
+      "tag": "section",
+      "top": 1034,
+      "height": 949,
+      "words": 80,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "$199",
+       "size": 86,
+       "tag": "p"
+      },
+      "left": 24,
+      "right": 49,
+      "textLeft": 24,
+      "textRight": 49,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-earn",
+      "tag": "section",
+      "top": 1983,
+      "height": 935,
+      "words": 79,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "50",
+       "size": 75,
+       "tag": "span"
+      },
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 73,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section",
+      "tag": "section",
+      "top": 2918,
+      "height": 663,
+      "words": 58,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Litres add up.",
+       "size": 45,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 55,
+      "textLeft": 24,
+      "textRight": 55,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-app",
+      "tag": "section",
+      "top": 3581,
+      "height": 1199,
+      "words": 58,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Track fuel progress.",
+       "size": 45,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 58,
+      "textLeft": 24,
+      "textRight": 58,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-campaign",
+      "tag": "section",
+      "top": 4780,
+      "height": 442,
+      "words": 47,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "A $1M chance.",
+       "size": 69,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 44,
+      "textLeft": 24,
+      "textRight": 44,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-faq",
+      "tag": "section",
+      "top": 5222,
+      "height": 796,
+      "words": 203,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Questions, answered.",
+       "size": 45,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 104,
+      "textLeft": 24,
+      "textRight": 104,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-final",
+      "tag": "section",
+      "top": 6018,
+      "height": 692,
+      "words": 40,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "12 months of fuel access.",
+       "size": 45,
+       "tag": "h2"
+      },
+      "left": 70,
+      "right": 239,
+      "textLeft": 70,
+      "textRight": 239,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "FUEL ACCESS. $1M CHANCE.",
+      "size": 60,
+      "top": 120,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 24,
+      "n": 14
+     },
+     {
+      "x": 46,
+      "n": 9
+     },
+     {
+      "x": 70,
+      "n": 2
+     },
+     {
+      "x": 424,
+      "n": 2
+     },
+     {
+      "x": 98,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 28,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 9,
+   "filled": [
+    1,
+    1,
+    1,
+    1,
+    0.73,
+    1,
+    0.81,
+    0.94,
+    0.93
+   ],
+   "motion": {
+    "elements": 20,
+    "css": 2,
+    "transitions": 18,
+    "scripted": 0,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 7429,
+     "screens": 8.8,
+     "words": 481,
+     "img": 6,
+     "video": 0,
+     "canvas": 0,
+     "svg": 7,
+     "sections": 8,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 4,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "edwardstown-station.png",
+      "edwardstown-station.png",
+      "edwardstown-station.png",
+      "imgi_8_phone.d557c9c5b0bd5530581d.png"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "$1M",
+     "words": 1,
+     "chars": 3,
+     "lines": 1,
+     "size": 93.6,
+     "vw": 24,
+     "font": "Barlow Semi Condensed",
+     "weight": 800,
+     "tracking": -0.03,
+     "leading": 0.72,
+     "upper": true,
+     "italic": true,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.79,
+     "top": 601,
+     "tag": "p",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "FUEL ACCESS. $1M CHANCE.",
+     "words": 4,
+     "lines": 2,
+     "size": 62.4,
+     "font": "Barlow Semi Condensed"
+    },
+    "headings": [
+     {
+      "text": "FUEL ACCESS. $1M CHANCE.",
+      "words": 4,
+      "chars": 24,
+      "lines": 2,
+      "size": 62.4,
+      "vw": 16,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.88,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.84,
+      "top": 110,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "$199",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 73.6,
+      "vw": 18.9,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.78,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.37,
+      "top": 344,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "$1M",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 93.6,
+      "vw": 24,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.72,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 601,
+      "tag": "p",
+      "kind": "heading"
+     },
+     {
+      "text": "$199",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 86.4,
+      "vw": 22.2,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.45,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.75,
+      "top": 1218,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "ONE PLAN. CLEAR VALUE.",
+      "words": 4,
+      "chars": 22,
+      "lines": 2,
+      "size": 50.7,
+      "vw": 13,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.91,
+      "top": 1483,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "FILL UP. EARN ENTRIES.",
+      "words": 4,
+      "chars": 22,
+      "lines": 2,
+      "size": 50.7,
+      "vw": 13,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.91,
+      "top": 2274,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "50L",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 75.2,
+      "vw": 19.3,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.5,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.77,
+      "top": 2531,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "$20",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 75.2,
+      "vw": 19.3,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 1.5,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.77,
+      "top": 2842,
+      "tag": "p",
+      "kind": "statement"
+     },
+     {
+      "text": "LITRES ADD UP.",
+      "words": 3,
+      "chars": 14,
+      "lines": 1,
+      "size": 50.7,
+      "vw": 13,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.91,
+      "top": 3491,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "80 L",
+      "words": 2,
+      "chars": 4,
+      "lines": 1,
+      "size": 40,
+      "vw": 10.3,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.18,
+      "top": 3708,
+      "tag": "output",
+      "kind": "heading"
+     },
+     {
+      "text": "1",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 56,
+      "vw": 14.4,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.8,
+      "upper": false,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.07,
+      "top": 3863,
+      "tag": "strong",
+      "kind": "heading"
+     },
+     {
+      "text": "TRACK FUEL PROGRESS.",
+      "words": 3,
+      "chars": 20,
+      "lines": 2,
+      "size": 50.7,
+      "vw": 13,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.91,
+      "top": 4194,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "A $1M CHANCE.",
+      "words": 3,
+      "chars": 13,
+      "lines": 2,
+      "size": 101.4,
+      "vw": 26,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.78,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.91,
+      "top": 5251,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "QUESTIONS, ANSWERED.",
+      "words": 2,
+      "chars": 20,
+      "lines": 2,
+      "size": 50.7,
+      "vw": 13,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.91,
+      "top": 5770,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "12 MONTHS OF FUEL ACCESS.",
+      "words": 5,
+      "chars": 25,
+      "lines": 2,
+      "size": 50.7,
+      "vw": 13,
+      "font": "Barlow Semi Condensed",
+      "weight": 800,
+      "tracking": -0.03,
+      "leading": 0.92,
+      "upper": true,
+      "italic": true,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.79,
+      "top": 6559,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 15,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 4,
+     "centered": 0,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Jost",
+       "share": 0.93,
+       "mono": false
+      },
+      {
+       "family": "Barlow Semi Condensed",
+       "share": 0.07,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      22,
+      40,
+      51,
+      56,
+      62,
+      74,
+      75,
+      86,
+      94,
+      101
+     ],
+     "sizeCount": 17,
+     "notLoaded": [],
+     "body": {
+      "font": "Jost",
+      "size": 16,
+      "leading": 1.55,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 14.8
+     },
+     "measureChars": 43,
+     "max": {
+      "size": 101.4,
+      "vw": 26,
+      "font": "Barlow Semi Condensed",
+      "text": "A $1M chance."
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.07,
+     "centerShare": 0.02,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#ffffff",
+       "top": 0,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#07142d",
+       "top": 66,
+       "hsl": {
+        "h": 219,
+        "s": 0.73,
+        "l": 0.1
+       }
+      },
+      {
+       "color": "#1d8fff",
+       "top": 575,
+       "hsl": {
+        "h": 210,
+        "s": 1,
+        "l": 0.56
+       }
+      },
+      {
+       "color": "#0c1831",
+       "top": 768,
+       "hsl": {
+        "h": 221,
+        "s": 0.61,
+        "l": 0.12
+       }
+      },
+      {
+       "color": "#f7fbff",
+       "top": 1102,
+       "hsl": {
+        "h": 210,
+        "s": 1,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#d9ecff",
+       "top": 2816,
+       "hsl": {
+        "h": 210,
+        "s": 1,
+        "l": 0.93
+       }
+      },
+      {
+       "color": "#1d5fb8",
+       "top": 3682,
+       "hsl": {
+        "h": 214,
+        "s": 0.73,
+        "l": 0.42
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#0b1220",
+       "share": 0.33
+      },
+      {
+       "color": "#07142d",
+       "share": 0.29
+      },
+      {
+       "color": "#c8d8eb",
+       "share": 0.1
+      },
+      {
+       "color": "#b8cae1",
+       "share": 0.07
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.07
+      }
+     ],
+     "button": {
+      "bg": "#1d5fb8",
+      "hsl": {
+       "h": 214,
+       "s": 0.73,
+       "l": 0.42
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 5,
+     "inHero": 3,
+     "radius": "pill",
+     "height": 56,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 4,
+     "heroLabels": [
+      "Skip to offer",
+      "SEE THE ANNUAL OFFER",
+      "JOIN"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 8,
+     "boxRadius": 16,
+     "squareMedia": 0,
+     "roundedMedia": 2,
+     "mediaRadius": 16,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 0,
+     "fixed": false,
+     "height": 66,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "barlow semi condensed",
+     "jost"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 7429,
+    "margins": {
+     "left": 18,
+     "right": 18
+    },
+    "sections": [
+     {
+      "sel": "section#lmct-sa-fuel-main.lmct-sa-hero",
+      "tag": "section",
+      "top": 66,
+      "height": 1036,
+      "words": 55,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "$1M",
+       "size": 94,
+       "tag": "p"
+      },
+      "left": 18,
+      "right": 18,
+      "textLeft": 18,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#lmct-sa-fuel-offer.lmct-sa-section.lmct-sa-offer",
+      "tag": "section",
+      "top": 1102,
+      "height": 1104,
+      "words": 80,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "$199",
+       "size": 86,
+       "tag": "p"
+      },
+      "left": 18,
+      "right": 24,
+      "textLeft": 18,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-earn",
+      "tag": "section",
+      "top": 2206,
+      "height": 1217,
+      "words": 79,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "50",
+       "size": 75,
+       "tag": "span"
+      },
+      "left": 18,
+      "right": 18,
+      "textLeft": 18,
+      "textRight": 33,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section",
+      "tag": "section",
+      "top": 3423,
+      "height": 702,
+      "words": 58,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Litres add up.",
+       "size": 51,
+       "tag": "h2"
+      },
+      "left": 18,
+      "right": 26,
+      "textLeft": 18,
+      "textRight": 26,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-app",
+      "tag": "section",
+      "top": 4126,
+      "height": 1057,
+      "words": 58,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Track fuel progress.",
+       "size": 51,
+       "tag": "h2"
+      },
+      "left": 18,
+      "right": 0,
+      "textLeft": 18,
+      "textRight": 21,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-campaign",
+      "tag": "section",
+      "top": 5183,
+      "height": 519,
+      "words": 47,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "A $1M chance.",
+       "size": 101,
+       "tag": "h2"
+      },
+      "left": 18,
+      "right": 23,
+      "textLeft": 18,
+      "textRight": 23,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-faq",
+      "tag": "section",
+      "top": 5702,
+      "height": 759,
+      "words": 164,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Questions, answered.",
+       "size": 51,
+       "tag": "h2"
+      },
+      "left": 18,
+      "right": 37,
+      "textLeft": 18,
+      "textRight": 37,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.lmct-sa-section.lmct-sa-final",
+      "tag": "section",
+      "top": 6461,
+      "height": 690,
+      "words": 40,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "12 months of fuel access.",
+       "size": 51,
+       "tag": "h2"
+      },
+      "left": 40,
+      "right": 42,
+      "textLeft": 40,
+      "textRight": 42,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "footer.lmct-sa-footer",
+      "tag": "footer",
+      "top": 7151,
+      "height": 201,
+      "words": 28,
+      "media": 0,
+      "middle": 0,
+      "heading": null,
+      "left": 18,
+      "right": 20,
+      "textLeft": 18,
+      "textRight": 20,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "FUEL ACCESS. $1M CHANCE.",
+      "size": 62,
+      "top": 110,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 18,
+      "n": 14
+     },
+     {
+      "x": 36,
+      "n": 13
+     },
+     {
+      "x": 68,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 28,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "size-count",
+   "width": 1440,
+   "message": "18 different font sizes (13, 14, 15, 16, 17, 18, 19, 22, 27, 40, 72, 93, 96, 101, 118, 128, 130, 138).",
+   "fix": "A page needs about five: display, heading, lead, body, small.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "grey-body",
+   "width": 1440,
+   "message": "The running text is a soft grey on its ground (5.6:1).",
+   "fix": "Set body copy in the full ink (7:1 or more). Keep the muted ink for secondary notes; pages read thin and unfinished when everything is grey."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "D:\\Youtube Recoreds\\Cold Video Call\\LMCT+\\CustomHtml\\.taste-skill\\final\\desktop-fold.jpg",
+   "pages": [
+    "D:\\Youtube Recoreds\\Cold Video Call\\LMCT+\\CustomHtml\\.taste-skill\\final\\desktop-page-01.jpg",
+    "D:\\Youtube Recoreds\\Cold Video Call\\LMCT+\\CustomHtml\\.taste-skill\\final\\desktop-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "D:\\Youtube Recoreds\\Cold Video Call\\LMCT+\\CustomHtml\\.taste-skill\\final\\tablet-fold.jpg",
+   "pages": [
+    "D:\\Youtube Recoreds\\Cold Video Call\\LMCT+\\CustomHtml\\.taste-skill\\final\\tablet-page-01.jpg",
+    "D:\\Youtube Recoreds\\Cold Video Call\\LMCT+\\CustomHtml\\.taste-skill\\final\\tablet-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "D:\\Youtube Recoreds\\Cold Video Call\\LMCT+\\CustomHtml\\.taste-skill\\final\\mobile-fold.jpg",
+   "pages": [
+    "D:\\Youtube Recoreds\\Cold Video Call\\LMCT+\\CustomHtml\\.taste-skill\\final\\mobile-page-01.jpg",
+    "D:\\Youtube Recoreds\\Cold Video Call\\LMCT+\\CustomHtml\\.taste-skill\\final\\mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

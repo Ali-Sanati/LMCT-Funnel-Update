@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-23T12:15:03.1142307+08:00",
+  "title": "Design System: LMCT+ Petrol South Australia",
+  "extensions": {
+    "colorMeta": {
+      "petrol-navy": { "role": "primary", "displayName": "Petrol Navy", "canonical": "#07142D", "tonalRamp": ["oklch(15% 0.035 255)", "oklch(24% 0.035 255)", "oklch(35% 0.035 255)", "oklch(47% 0.035 255)", "oklch(59% 0.035 255)", "oklch(71% 0.035 255)", "oklch(83% 0.035 255)", "oklch(95% 0.025 255)"] },
+      "petrol-navy-raised": { "role": "primary", "displayName": "Raised Petrol Navy", "canonical": "#0C1831", "tonalRamp": ["oklch(15% 0.035 255)", "oklch(24% 0.035 255)", "oklch(35% 0.035 255)", "oklch(47% 0.035 255)", "oklch(59% 0.035 255)", "oklch(71% 0.035 255)", "oklch(83% 0.035 255)", "oklch(95% 0.025 255)"] },
+      "action-blue": { "role": "primary", "displayName": "Action Blue", "canonical": "#1D5FB8", "tonalRamp": ["oklch(15% 0.12 255)", "oklch(25% 0.14 255)", "oklch(37% 0.16 255)", "oklch(49% 0.17 255)", "oklch(61% 0.16 255)", "oklch(73% 0.13 255)", "oklch(84% 0.08 255)", "oklch(95% 0.025 255)"] },
+      "action-blue-hover": { "role": "primary", "displayName": "Deep Action Blue", "canonical": "#154A90", "tonalRamp": ["oklch(15% 0.11 255)", "oklch(25% 0.13 255)", "oklch(37% 0.15 255)", "oklch(49% 0.16 255)", "oklch(61% 0.15 255)", "oklch(73% 0.12 255)", "oklch(84% 0.07 255)", "oklch(95% 0.02 255)"] },
+      "campaign-blue": { "role": "secondary", "displayName": "Campaign Blue", "canonical": "#1D8FFF", "tonalRamp": ["oklch(15% 0.14 250)", "oklch(25% 0.17 250)", "oklch(37% 0.2 250)", "oklch(49% 0.22 250)", "oklch(61% 0.21 250)", "oklch(73% 0.17 250)", "oklch(84% 0.1 250)", "oklch(95% 0.03 250)"] },
+      "forecourt-sky": { "role": "secondary", "displayName": "Forecourt Sky", "canonical": "#79C8FF", "tonalRamp": ["oklch(15% 0.08 240)", "oklch(25% 0.1 240)", "oklch(37% 0.12 240)", "oklch(49% 0.14 240)", "oklch(61% 0.14 240)", "oklch(73% 0.12 240)", "oklch(84% 0.08 240)", "oklch(95% 0.025 240)"] },
+      "fuel-ice": { "role": "secondary", "displayName": "Fuel Ice", "canonical": "#D9ECFF", "tonalRamp": ["oklch(15% 0.025 245)", "oklch(25% 0.03 245)", "oklch(37% 0.035 245)", "oklch(49% 0.04 245)", "oklch(61% 0.04 245)", "oklch(73% 0.035 245)", "oklch(84% 0.028 245)", "oklch(95% 0.015 245)"] },
+      "blue-white": { "role": "neutral", "displayName": "Blue White", "canonical": "#F7FBFF", "tonalRamp": ["oklch(15% 0.012 245)", "oklch(25% 0.012 245)", "oklch(37% 0.012 245)", "oklch(49% 0.012 245)", "oklch(61% 0.012 245)", "oklch(73% 0.012 245)", "oklch(84% 0.01 245)", "oklch(95% 0.008 245)"] },
+      "white": { "role": "neutral", "displayName": "White", "canonical": "#FFFFFF", "tonalRamp": ["oklch(15% 0 0)", "oklch(25% 0 0)", "oklch(37% 0 0)", "oklch(49% 0 0)", "oklch(61% 0 0)", "oklch(73% 0 0)", "oklch(84% 0 0)", "oklch(100% 0 0)"] },
+      "ink": { "role": "neutral", "displayName": "Full Ink", "canonical": "#0B1220", "tonalRamp": ["oklch(15% 0.018 255)", "oklch(25% 0.018 255)", "oklch(37% 0.018 255)", "oklch(49% 0.018 255)", "oklch(61% 0.018 255)", "oklch(73% 0.016 255)", "oklch(84% 0.012 255)", "oklch(95% 0.006 255)"] },
+      "muted": { "role": "neutral", "displayName": "Billing Muted", "canonical": "#465B76", "tonalRamp": ["oklch(15% 0.03 250)", "oklch(25% 0.035 250)", "oklch(37% 0.04 250)", "oklch(49% 0.045 250)", "oklch(61% 0.045 250)", "oklch(73% 0.035 250)", "oklch(84% 0.025 250)", "oklch(95% 0.01 250)"] },
+      "error": { "role": "tertiary", "displayName": "Validation Red", "canonical": "#A32121", "tonalRamp": ["oklch(15% 0.08 25)", "oklch(25% 0.12 25)", "oklch(37% 0.16 25)", "oklch(49% 0.18 25)", "oklch(61% 0.16 25)", "oklch(73% 0.12 25)", "oklch(84% 0.07 25)", "oklch(95% 0.025 25)"] },
+      "navy-copy": { "role": "neutral", "displayName": "Navy Supporting Copy", "canonical": "#C8D8EB", "tonalRamp": ["oklch(15% 0.025 250)", "oklch(25% 0.03 250)", "oklch(37% 0.035 250)", "oklch(49% 0.04 250)", "oklch(61% 0.04 250)", "oklch(73% 0.035 250)", "oklch(84% 0.025 250)", "oklch(95% 0.01 250)"] },
+      "hero-copy": { "role": "neutral", "displayName": "Hero Copy Tint", "canonical": "#DCE8F8", "tonalRamp": ["oklch(15% 0.02 250)", "oklch(25% 0.025 250)", "oklch(37% 0.03 250)", "oklch(49% 0.03 250)", "oklch(61% 0.03 250)", "oklch(73% 0.025 250)", "oklch(84% 0.018 250)", "oklch(95% 0.008 250)"] },
+      "hero-note": { "role": "neutral", "displayName": "Hero Note Tint", "canonical": "#B8CAE1", "tonalRamp": ["oklch(15% 0.028 250)", "oklch(25% 0.035 250)", "oklch(37% 0.04 250)", "oklch(49% 0.045 250)", "oklch(61% 0.04 250)", "oklch(73% 0.032 250)", "oklch(84% 0.022 250)", "oklch(95% 0.008 250)"] },
+      "action-copy": { "role": "neutral", "displayName": "Action Panel Copy", "canonical": "#EAF3FF", "tonalRamp": ["oklch(15% 0.018 250)", "oklch(25% 0.022 250)", "oklch(37% 0.025 250)", "oklch(49% 0.028 250)", "oklch(61% 0.025 250)", "oklch(73% 0.02 250)", "oklch(84% 0.014 250)", "oklch(95% 0.006 250)"] },
+      "app-caption": { "role": "neutral", "displayName": "App Caption Tint", "canonical": "#9EB6D2", "tonalRamp": ["oklch(15% 0.035 250)", "oklch(25% 0.042 250)", "oklch(37% 0.048 250)", "oklch(49% 0.052 250)", "oklch(61% 0.048 250)", "oklch(73% 0.038 250)", "oklch(84% 0.025 250)", "oklch(95% 0.01 250)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Campaign Display", "purpose": "Two-line hero statements and verified oversized campaign claims only." },
+      "headline": { "displayName": "Editorial Headline", "purpose": "Full-width chapter headings and major proof transitions." },
+      "title": { "displayName": "Proof Title", "purpose": "Plain-language labels inside rate, proof and disclosure patterns." },
+      "body": { "displayName": "Offer Body", "purpose": "Readable offer mechanics, support copy and terms." },
+      "label": { "displayName": "Action Label", "purpose": "Uppercase italic button copy and compact high-emphasis actions." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Short transform feedback, proof cues and the station-image reveal." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "Reserved for deliberate two-state movement when symmetric acceleration is needed." },
+      { "name": "button-press", "value": "140ms cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Two-pixel hover lift and 0.97 active press scale." },
+      { "name": "meter-response", "value": "220ms cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Immediate transform-only fuel progress feedback." },
+      { "name": "proof-cue", "value": "480ms cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Single-run, content-specific proof transforms on intersection." },
+      { "name": "image-reveal", "value": "900ms cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "One shutter reveal and settle for the Edwardstown hero image." },
+      { "name": "reduced-motion", "value": "0.01ms", "purpose": "Near-instant parity for animation and transition when reduced motion is requested." }
+    ],
+    "breakpoints": [
+      { "name": "grid-tighten", "value": "960px" },
+      { "name": "single-column", "value": "820px" },
+      { "name": "mobile-action", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The default 56px action for joining, progressing or revealing the annual offer.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Join for $199/year</a>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;min-height:56px;max-width:100%;padding:15px 26px;border:0;border-radius:999px;color:#fff;background:#1d5fb8;font-family:\"Barlow Semi Condensed\",\"Arial Narrow\",Arial,sans-serif;font-size:1.15rem;font-style:italic;font-weight:800;letter-spacing:.035em;line-height:1.1;text-align:center;text-decoration:none;text-transform:uppercase;cursor:pointer;transition:transform 140ms cubic-bezier(.23,1,.32,1),background-color 180ms ease}.ds-btn-primary:hover{transform:translateY(-2px);background:#154a90}.ds-btn-primary:active{transform:scale(.97)}.ds-btn-primary:focus-visible{outline:3px solid #1d8fff;outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-btn-primary{transition-duration:.01ms}.ds-btn-primary:active{transform:none}}"
+    },
+    {
+      "name": "Light Button",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "An inverse action for use inside navy and campaign-blue offer fields.",
+      "html": "<a class=\"ds-btn-light\" href=\"#\">See the annual offer</a>",
+      "css": ".ds-btn-light{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:15px 26px;border:0;border-radius:999px;color:#07142d;background:#fff;font-family:\"Barlow Semi Condensed\",\"Arial Narrow\",Arial,sans-serif;font-size:1.15rem;font-style:italic;font-weight:800;letter-spacing:.035em;line-height:1.1;text-decoration:none;text-transform:uppercase;cursor:pointer;transition:transform 140ms cubic-bezier(.23,1,.32,1),background-color 180ms ease,color 180ms ease}.ds-btn-light:hover{color:#fff;background:#154a90;transform:translateY(-2px)}.ds-btn-light:active{transform:scale(.97)}.ds-btn-light:focus-visible{outline:3px solid #79c8ff;outline-offset:4px}@media(prefers-reduced-motion:reduce){.ds-btn-light{transition-duration:.01ms}.ds-btn-light:active{transform:none}}"
+    },
+    {
+      "name": "Petrol Header",
+      "kind": "nav",
+      "description": "A compact navy masthead that pairs the approved petrol identity with the location in scope.",
+      "html": "<header class=\"ds-petrol-header\"><strong class=\"ds-petrol-mark\">LMCT+ PETROL</strong><span class=\"ds-petrol-location\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z\"></path><circle cx=\"12\" cy=\"10\" r=\"2.5\"></circle></svg>Edwardstown, South Australia</span></header>",
+      "css": ".ds-petrol-header{display:flex;align-items:center;justify-content:space-between;min-height:74px;gap:24px;padding:0 24px;color:#fff;background:#07142d;font-family:Jost,Arial,sans-serif}.ds-petrol-mark{font-family:\"Barlow Semi Condensed\",\"Arial Narrow\",Arial,sans-serif;font-size:1.5rem;font-style:italic;font-weight:800;letter-spacing:-.02em}.ds-petrol-location{display:inline-flex;align-items:center;gap:9px;font-size:.94rem;font-weight:600}.ds-petrol-location svg{width:20px;height:20px;color:#79c8ff}@media(max-width:640px){.ds-petrol-header{min-height:66px;gap:16px;padding:0 18px}.ds-petrol-mark{font-size:1.25rem}.ds-petrol-location{max-width:158px;font-size:.82rem;line-height:1.25;text-align:right}.ds-petrol-location svg{display:none}}"
+    },
+    {
+      "name": "Annual Offer Ledger",
+      "kind": "card",
+      "refersTo": "offer-ledger",
+      "description": "The single-plan price block; it keeps cost, duration and renewal terms together.",
+      "html": "<section class=\"ds-offer-ledger\"><strong>$199</strong><p>One annual package.<br>12 months of access.</p><small>Automatically renews annually until cancelled. Fuel is purchased separately.</small></section>",
+      "css": ".ds-offer-ledger{display:flex;flex-direction:column;justify-content:space-between;min-height:320px;padding:clamp(30px,4vw,50px);border-radius:16px;color:#fff;background:#1d5fb8;font-family:Jost,Arial,sans-serif}.ds-offer-ledger strong{font-family:\"Barlow Semi Condensed\",\"Arial Narrow\",Arial,sans-serif;font-size:clamp(5.4rem,10vw,8.6rem);font-style:italic;font-weight:800;letter-spacing:-.03em;line-height:.78}.ds-offer-ledger p{margin:18px 0 0;color:#eaf3ff;font-size:1.08rem;line-height:1.45}.ds-offer-ledger small{margin-top:32px;color:#eaf3ff;font-size:.86rem;line-height:1.5}.ds-offer-ledger:focus-within{outline:3px solid #1d8fff;outline-offset:4px}"
+    },
+    {
+      "name": "Entry Rate Panel",
+      "kind": "card",
+      "refersTo": "rate-panel",
+      "description": "A factual rate poster for one confirmed earning mechanic, used in a pair rather than a generic card grid.",
+      "html": "<article class=\"ds-rate-panel\"><strong>50L</strong><h3>Fuel earns 1 bonus entry</h3><p>Qualifying litres accumulate across transactions.</p></article>",
+      "css": ".ds-rate-panel{min-height:245px;padding:clamp(26px,4vw,46px);border-radius:16px;color:#07142d;background:#1d8fff;font-family:Jost,Arial,sans-serif}.ds-rate-panel strong{font-family:\"Barlow Semi Condensed\",\"Arial Narrow\",Arial,sans-serif;font-size:clamp(4.7rem,9vw,8rem);font-style:italic;font-weight:800;letter-spacing:-.03em;line-height:.78}.ds-rate-panel h3{margin:22px 0 8px;font-size:1.35rem;line-height:1.2}.ds-rate-panel p{max-width:34rem;margin:0;line-height:1.5}.ds-rate-panel:focus-within{outline:3px solid #79c8ff;outline-offset:4px}"
+    },
+    {
+      "name": "Fuel Progress Control",
+      "kind": "custom",
+      "description": "A touch- and keyboard-ready worksheet that translates litres into confirmed 50-litre milestones.",
+      "html": "<div class=\"ds-progress\"><label for=\"ds-litres\"><span>Accumulated fuel</span><output>80 L</output></label><input id=\"ds-litres\" type=\"range\" min=\"0\" max=\"250\" step=\"5\" value=\"80\"><div class=\"ds-meter\"><span></span></div><div class=\"ds-result\"><strong>1</strong><span>bonus entry earned, 20 L towards the next</span></div></div>",
+      "css": ".ds-progress{padding:clamp(28px,4vw,50px);border-radius:16px;color:#fff;background:#1d5fb8;font-family:Jost,Arial,sans-serif}.ds-progress label{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:20px;font-weight:600}.ds-progress output,.ds-result strong{font-family:\"Barlow Semi Condensed\",\"Arial Narrow\",Arial,sans-serif;font-style:italic;font-weight:800}.ds-progress output{font-size:2.5rem;line-height:1}.ds-progress input{width:100%;min-height:44px;margin:0;accent-color:#79c8ff;cursor:pointer}.ds-progress input:focus-visible{outline:3px solid #1d8fff;outline-offset:4px}.ds-meter{height:14px;overflow:hidden;border-radius:999px;background:rgba(255,255,255,.24)}.ds-meter span{display:block;width:60%;height:100%;border-radius:inherit;background:#fff;transform-origin:left center;transition:transform 220ms cubic-bezier(.23,1,.32,1)}.ds-result{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-top:26px}.ds-result strong{font-size:clamp(3.5rem,7vw,5.8rem);letter-spacing:-.03em;line-height:.8}.ds-result span{max-width:13ch;font-size:.95rem;font-weight:600;line-height:1.3;text-align:right}@media(prefers-reduced-motion:reduce){.ds-meter span{transition-duration:.01ms}}"
+    },
+    {
+      "name": "Disclosure Row",
+      "kind": "custom",
+      "description": "A compact evidence row for one verified inclusion or app capability.",
+      "html": "<div class=\"ds-disclosure-row\"><span class=\"ds-check\" aria-hidden=\"true\"><svg viewBox=\"0 0 20 20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\"><path d=\"m4 10 4 4 8-9\"></path></svg></span><span>12 months of wholesale fuel access</span></div>",
+      "css": ".ds-disclosure-row{display:flex;align-items:flex-start;gap:12px;min-height:58px;padding:14px 18px;border-radius:12px;color:#07142d;background:#d9ecff;font-family:Jost,Arial,sans-serif;font-weight:600;line-height:1.35}.ds-check{display:inline-grid;flex:0 0 auto;place-items:center;width:24px;height:24px;border-radius:50%;color:#fff;background:#1d5fb8}.ds-check svg{width:14px;height:14px}.ds-disclosure-row:focus-within{outline:3px solid #1d8fff;outline-offset:4px}"
+    },
+    {
+      "name": "FAQ Disclosure",
+      "kind": "custom",
+      "refersTo": "faq-row",
+      "description": "A quiet expandable row for offer details and precise exclusions.",
+      "html": "<details class=\"ds-faq\"><summary>What does the $199 pay for?<span aria-hidden=\"true\">+</span></summary><p>It pays for 12 months of wholesale fuel pricing access. Fuel is purchased separately.</p></details>",
+      "css": ".ds-faq{border:0;border-radius:12px;color:#07142d;background:#f7fbff;font-family:Jost,Arial,sans-serif}.ds-faq[open]{background:#d9ecff}.ds-faq summary{display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:20px;padding:18px 22px;font-weight:700;line-height:1.3;cursor:pointer;list-style:none}.ds-faq summary::-webkit-details-marker{display:none}.ds-faq summary span{font-size:1.5rem;color:#1d5fb8;transition:transform 180ms cubic-bezier(.23,1,.32,1)}.ds-faq[open] summary span{transform:rotate(45deg)}.ds-faq summary:hover{color:#1d5fb8}.ds-faq summary:focus-visible{outline:3px solid #1d8fff;outline-offset:4px}.ds-faq p{max-width:65ch;margin:0;padding:0 22px 22px;color:#0b1220;line-height:1.6}@media(prefers-reduced-motion:reduce){.ds-faq summary span{transition-duration:.01ms}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Forecourt Ledger",
+    "overview": "LMCT+ Petrol South Australia feels like a bold annual-offer campaign printed at forecourt scale and translated into a precise digital ledger. Large condensed type, real Edwardstown imagery and decisive navy, white and electric-blue fields make the practical fuel proposition instantly legible; exact renewal, purchase and promotion terms keep that confidence credible.\n\nThe system is editorial rather than app-dashboard-like. Full-width colour chapters alternate with asymmetric splits, price and entry figures act as typographic anchors, and only the few concepts that benefit from enclosure become panels. It rejects generic card grids, decorative prize collages, unverified countdown theatre and imagery that implies benefits the offer does not include.",
+    "keyCharacteristics": [
+      "Alternating full-width navy, white, blue-white and campaign-blue editorial fields.",
+      "Bold italic uppercase Barlow Semi Condensed headlines paired with highly readable Jost copy.",
+      "One-plan price ledgers, oversized factual numerals and concise Australian-English disclosures.",
+      "Real Edwardstown station and LMCT+ app imagery used as evidence, with captions that limit what each image claims.",
+      "Restrained transform-only motion, visible focus states and reduced-motion parity."
+    ],
+    "rules": [
+      { "name": "The Electric Destination Rule", "body": "Campaign blue marks a small number of high-value destinations or proof points; it does not wash every section.", "section": "colors" },
+      { "name": "The Full-Ink Rule", "body": "Primary body copy uses Ink on light surfaces. Muted and cool-tint copy is limited to notes, captions and disclosures.", "section": "colors" },
+      { "name": "The Two-Line Rule", "body": "Display and headline copy must remain short enough to resolve in no more than two lines at its intended breakpoint.", "section": "typography" },
+      { "name": "The Numeral-as-Evidence Rule", "body": "Price, litres, spend thresholds and prize amounts may become oversized typography only when they state a verified campaign fact.", "section": "typography" },
+      { "name": "The Alternating Field Rule", "body": "Build rhythm through large navy, white, blue-white and campaign-blue chapters; do not turn the page into a procession of same-size cards.", "section": "layout" },
+      { "name": "The One-Plan Rule", "body": "A single annual offer is expressed as one price ledger and one final close, never as a comparison table or invented tier system.", "section": "layout" },
+      { "name": "The No-Shadow Rule", "body": "Do not add floating-card shadows, glows or glass effects. Separate surfaces with colour, whitespace and restrained borders only when a real boundary is needed.", "section": "elevation" },
+      { "name": "The Restrained Radius Rule", "body": "Sixteen pixels is the maximum standard panel radius. Pills belong to actions and meters, not to every container.", "section": "shapes" }
+    ],
+    "dos": [
+      "**Do** use real Edwardstown station and LMCT+ app imagery as evidence, with honest captions that define what the image does and does not prove.",
+      "**Do** keep price, annual renewal, 12-month duration, Edwardstown location and fuel-purchased-separately terms next to the relevant action.",
+      "**Do** alternate full-width editorial fields and preserve asymmetric desktop compositions before collapsing cleanly at 820px.",
+      "**Do** limit motion to short transform feedback, one purposeful image reveal and content-specific proof cues, with a complete reduced-motion fallback.",
+      "**Do** keep campaign facts and integrations in the single campaign configuration object so dates, rates, URLs, selectors and assets remain updateable without rewriting the page.",
+      "**Do** scope every fragment selector and design token under `.lmct-sa-fuel-million`."
+    ],
+    "donts": [
+      "**Don't** invent offer tiers, entry quantities, fuel prices, fixed savings, partner benefits, testimonials or countdown precision that has not been confirmed.",
+      "**Don't** imply that pictured app prices, savings, rewards or unrelated promotions are package inclusions.",
+      "**Don't** use generic giveaway collages, unrelated footage, decorative video or prize imagery in place of real location and product proof.",
+      "**Don't** repeat identical floating cards, add ambient shadows or exceed the restrained 16px standard panel radius.",
+      "**Don't** use blanket fades, delayed reading, layout-property animation or motion that survives `prefers-reduced-motion: reduce`.",
+      "**Don't** let the mobile sticky action cover the slider, FAQ controls, headings, final offer, checkout or footer."
+    ]
+  }
+}

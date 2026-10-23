@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Final 10X Entries — LMCT+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&family=Jost:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      /* Scoped layout: avoids broad CSS selectors that interfere with ClickFunnels. */
+      .lmct10-page {
+        --red: #e40d19;
+        --blue: #1d8fff;
+        --navy: #07142d;
+        --ink: #0b1220;
+        --muted: #52647e;
+        --line: #dde9f4;
+        --soft: #f7fbff;
+        font-family: "Jost", Arial, sans-serif;
+        background: #fff;
+        color: var(--ink);
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .lmct10-page,
+      .lmct10-page *,
+      .lmct10-page *::before,
+      .lmct10-page *::after {
+        box-sizing: border-box;
+      }
+      .lmct10-page .lmct10-container {
+        width: min(1180px, calc(100% - 44px));
+        margin-inline: auto;
+      }
+      .lmct10-page .lmct10-hero {
+        padding: clamp(10px, 5vw, 72px) 0 clamp(32px, 4vw, 56px);
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+      .lmct10-page .lmct10-hero::after {
+        content: "10X";
+        position: absolute;
+        right: -0.045em;
+        top: 0.04em;
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-size: clamp(230px, 36vw, 570px);
+        font-weight: 900;
+        line-height: 1;
+        color: #edf6ff;
+        pointer-events: none;
+        z-index: 0;
+        letter-spacing: 0em;
+      }
+      .lmct10-page .lmct10-hero-layout {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.14fr) minmax(290px, 0.86fr);
+        gap: clamp(30px, 5vw, 84px);
+        align-items: center;
+      }
+      .lmct10-page .lmct10-lead {
+        max-width: 715px;
+      }
+      .lmct10-page .lmct10-private {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        font-weight: 800;
+        color: #bc0d1b;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        margin: 0 0 19px;
+      }
+      .lmct10-page .lmct10-private::before {
+        content: "";
+        width: 25px;
+        height: 3px;
+        background: var(--red);
+      }
+      .lmct10-page .lmct10-headline {
+        font-family: "Barlow Semi Condensed", Impact, sans-serif;
+        font-style: italic;
+        font-weight: 900;
+        font-size: clamp(68px, 8.8vw, 135px);
+        line-height: 0.79;
+        letter-spacing: -0.035em;
+        margin: 0;
+        color: var(--navy);
+        text-transform: uppercase;
+      }
+
+      .lmct10-page .lmct10-headline span {
+        /* display: block; */
+      }
+      .lmct10-page .lmct10-headline .lmct10-context {
+        display: block;
+        margin-top: 14px;
+        font-size: clamp(38px, 4vw, 90px);
+        font-style: normal;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .lmct10-page .lmct10-headline .lmct10-red {
+        color: var(--red);
+        margin-top: 14px;
+      }
+      .lmct10-page .lmct10-intro {
+        color: var(--muted);
+        max-width: 560px;
+        margin: 28px 0 0;
+        line-height: 1.35;
+        text-transform: uppercase;
+      }
+      .lmct10-page .lmct10-intro-copy {
+        display: block;
+        font-size: clamp(14px, 1.35vw, 17px);
+        font-weight: 700;
+        letter-spacing: 0.055em;
+      }
+      .lmct10-page .lmct10-bonus {
+        display: block;
+        margin-top: 9px;
+        color: var(--red);
+        font-family: "Barlow Semi Condensed", Impact, sans-serif;
+        font-size: clamp(38px, 4.4vw, 62px);
+        font-style: italic;
+        font-weight: 900;
+        letter-spacing: -0.025em;
+        line-height: 0.92;
+      }
+      .lmct10-page .lmct10-prize {
+        display: block;
+        margin-top: 12px;
+        color: var(--navy);
+        font-size: clamp(17px, 1.7vw, 21px);
+        font-weight: 800;
+        letter-spacing: 0.015em;
+      }
+      .lmct10-page .lmct10-prize strong {
+        color: var(--red);
+        font-weight: 900;
+      }
+      .lmct10-page .lmct10-confidential {
+        max-width: 540px;
+        margin: 23px 0 0;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        color: #41536c;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.045em;
+        line-height: 1.5;
+        text-transform: uppercase;
+      }
+      .lmct10-page .lmct10-confidential strong {
+        color: var(--navy);
+        font-weight: 900;
+      }
+      .lmct10-page .lmct10-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        border-radius: 12px;
+        text-decoration: none;
+        background: var(--red);
+        color: #fff;
+        padding: 16px 25px;
+        margin-top: 27px;
+        min-height: 54px;
+        font-size: 15px;
+        font-weight: 800;
+        transition:
+          background 0.18s ease,
+          transform 0.18s ease;
+      }
+      .lmct10-page .lmct10-link:hover {
+        background: #bd0b15;
+        transform: translateY(-2px);
+      }
+      .lmct10-page .lmct10-link svg {
+        width: 20px;
+      }
+      .lmct10-page .lmct10-timer-card {
+        background: #fff;
+        border: 1px solid #d6e4f4;
+        border-radius: 22px;
+        padding: clamp(22px, 3vw, 36px);
+        box-shadow: 0 14px 48px rgba(29, 95, 184, 0.09);
+        max-width: 480px;
+        width: 100%;
+        justify-self: end;
+      }
+      .lmct10-page .lmct10-deadline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+        color: var(--red);
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .lmct10-page .lmct10-dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--red);
+      }
+      .lmct10-page .lmct10-timer-title {
+        font-family: "Barlow Semi Condensed", Impact, sans-serif;
+        font-size: clamp(31px, 4vw, 50px);
+        font-style: italic;
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        color: var(--navy);
+        margin: 0 0 8px;
+      }
+      .lmct10-page .lmct10-timer-description {
+        font-size: 14px;
+        color: var(--muted);
+        margin: 0 0 22px;
+      }
+      .lmct10-page .lmct10-timer-numbers {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+      .lmct10-page .lmct10-time-unit {
+        background: #edf6ff;
+        border-radius: 12px;
+        text-align: center;
+        padding: 14px 6px 12px;
+      }
+      .lmct10-page .lmct10-time-unit strong {
+        display: block;
+        color: var(--navy);
+        font-family: "Barlow Semi Condensed", Impact, sans-serif;
+        font-weight: 900;
+        font-size: clamp(42px, 5vw, 68px);
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+      }
+      .lmct10-page .lmct10-time-unit span {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+      .lmct10-page .lmct10-timer-rule {
+        display: flex;
+        gap: 10px;
+        align-items: start;
+        padding-top: 19px;
+        margin-top: 22px;
+        border-top: 1px solid var(--line);
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .lmct10-page .lmct10-timer-rule svg {
+        color: #1d5fb8;
+        width: 19px;
+        height: 19px;
+        flex: none;
+      }
+      .lmct10-page .lmct10-bridge {
+        border-top: 1px solid #dce9f5;
+        border-bottom: 1px solid #dce9f5;
+        background: var(--soft);
+      }
+      .lmct10-page .lmct10-bridge-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(10px, 3vw, 45px);
+        flex-wrap: wrap;
+        padding: 15px 0;
+        color: var(--navy);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.035em;
+      }
+      .lmct10-page .lmct10-divider {
+        width: 1px;
+        height: 19px;
+        background: #b5cfe6;
+      }
+      .lmct10-page .lmct10-bridge-item {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .lmct10-page .lmct10-bridge-item.red {
+        color: var(--red);
+      }
+      .lmct10-page .lmct10-check {
+        color: #1d8fff;
+        font-size: 19px;
+        font-weight: 900;
+      }
+      .lmct10-page .lmct10-check.red {
+        color: var(--red);
+      }
+
+      .lmct10-page .lmct10-video {
+        padding: clamp(36px, 5vw, 68px) 0 0;
+        background: #fff;
+      }
+      .lmct10-page .lmct10-video-frame {
+        width: min(1100px, 100%);
+        aspect-ratio: 16 / 9;
+        margin-inline: auto;
+        overflow: hidden;
+        border-radius: 16px;
+        background: var(--navy);
+        box-shadow: 0 18px 46px rgba(7, 20, 45, 0.15);
+      }
+      .lmct10-page .lmct10-video-frame video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        object-fit: contain;
+      }
+
+      .lmct10-page .lmct10-selection {
+        padding: clamp(43px, 6vw, 78px) 0 0px;
+        background: #fff;
+        scroll-margin-top: 12px;
+      }
+      .lmct10-page .lmct10-section-title {
+        font-family: "Barlow Semi Condensed", Impact, sans-serif;
+        font-weight: 900;
+        font-style: italic;
+        color: var(--navy);
+        font-size: clamp(48px, 6.5vw, 82px);
+        line-height: 0.95;
+        text-transform: uppercase;
+        letter-spacing: -0.025em;
+        text-align: center;
+        margin: 0;
+      }
+      .lmct10-page .lmct10-section-title span {
+        color: var(--red);
+      }
+      .lmct10-page .lmct10-section-intro {
+        text-align: center;
+        font-size: 16px;
+        color: var(--muted);
+        margin: 16px auto 35px;
+        max-width: 610px;
+      }
+      .lmct10-page .lmct10-package-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: clamp(7px, 1vw, 13px);
+        align-items: start;
+      }
+      .lmct10-page .lmct10-package {
+        min-width: 0;
+        transition: transform 0.22s ease;
+      }
+      .lmct10-page .lmct10-package:hover {
+        transform: translateY(-5px);
+      }
+      .lmct10-page .lmct10-package__media {
+        width: 100%;
+      }
+      .lmct10-page .lmct10-package .elButton.elIMG.ximg {
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        outline-offset: 4px;
+        line-height: 0;
+        border-radius: 16px;
+      }
+      .lmct10-page .lmct10-package img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 9px 12px rgba(14, 35, 61, 0.1));
+      }
+      .lmct10-page .lmct10-package .elButton:focus-visible {
+        outline: 3px solid #1d5fb8;
+      }
+      .lmct10-page .lmct10-inclusions {
+        max-width: 1100px;
+        margin: 33px auto 0;
+        border: 1px solid #dce8f3;
+        border-radius: 14px;
+        background: var(--soft);
+        overflow: hidden;
+      }
+      .lmct10-page .lmct10-inclusions summary {
+        padding: 20px 24px;
+        list-style: none;
+        cursor: pointer;
+        color: var(--navy);
+        font-weight: 800;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .lmct10-page .lmct10-inclusions summary::-webkit-details-marker {
+        display: none;
+      }
+      .lmct10-page .lmct10-inclusions summary::after {
+        content: "+";
+        font-size: 25px;
+        line-height: 1;
+        color: #1d5fb8;
+      }
+      .lmct10-page .lmct10-inclusions[open] summary::after {
+        content: "−";
+      }
+      .lmct10-page .lmct10-details-content {
+        border-top: 1px solid #dce8f3;
+        padding: 16px 24px 22px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+      .lmct10-page .lmct10-details-content p {
+        margin: 0 0 10px;
+      }
+      .lmct10-page .lmct10-details-content p:last-child {
+        margin-bottom: 0;
+      }
+      .lmct10-page .lmct10-compliance {
+        text-align: center;
+        max-width: 900px;
+        margin: 19px auto 0;
+        color: #52647e;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+      .lmct10-page .lmct10-footer {
+        background: #071d38;
+        color: #fff;
+        padding: 32px 0 24px;
+      }
+      .lmct10-page .lmct10-footer-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 26px;
+      }
+      .lmct10-page .lmct10-footer-logo {
+        display: block;
+        width: 170px;
+        max-width: 100%;
+        height: auto;
+      }
+      .lmct10-page .lmct10-footer-copy {
+        font-size: 12px;
+        color: #bfd4eb;
+        margin: 8px 0 0;
+      }
+      .lmct10-page .lmct10-footer-legal {
+        text-align: right;
+        font-size: 12px;
+        color: #c0d1e3;
+        line-height: 1.6;
+      }
+      .lmct10-page .lmct10-footer-bottom {
+        border-top: 1px solid #284158;
+        padding-top: 17px;
+        margin-top: 25px;
+        font-size: 11px;
+        color: #91abc5;
+      }
+      .lmct10-page :where(a, summary, [role="button"]):focus-visible {
+        outline: 3px solid #1d8fff;
+        outline-offset: 4px;
+      }
+      /* Existing master banner CSS remains intact; these overrides ensure the supplied full-width white logo fits. */
+      .lmctBannerRoot .lmctLogoWrap {
+        width: clamp(66px, 8vw, 100px);
+        animation: none;
+      }
+      .lmctBannerRoot .lmctBannerInner {
+        max-width: 1100px;
+      }
+      @media (max-width: 980px) {
+        .lmct10-page .lmct10-hero-layout {
+          grid-template-columns: 1fr 1fr;
+          gap: 28px;
+        }
+        .lmct10-page .lmct10-headline {
+          font-size: clamp(68px, 9vw, 106px);
+        }
+        .lmct10-page .lmct10-package-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          max-width: 780px;
+          margin-inline: auto;
+        }
+        .lmct10-page .lmct10-package:nth-child(4) {
+          grid-column: 1/2;
+        }
+      }
+      @media (max-width: 700px) {
+        .lmct10-page .lmct10-hero-layout {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .lmct10-page .lmct10-timer-card {
+          min-width: 0;
+          justify-self: stretch;
+          max-width: none;
+        }
+        .lmct10-page .lmct10-hero::after {
+          font-size: 300px;
+          top: 0;
+          right: -70px;
+        }
+        .lmct10-page .lmct10-headline {
+          font-size: clamp(54px, 14.5vw, 92px);
+        }
+        .lmct10-page .lmct10-private {
+          max-width: 100%;
+          font-size: 11px;
+          letter-spacing: 0.1em;
+        }
+        .lmct10-page .lmct10-timer-title {
+          font-size: clamp(28px, 8vw, 42px);
+        }
+        .lmct10-page .lmct10-section-title {
+          font-size: clamp(42px, 12vw, 64px);
+        }
+        .lmct10-page .lmct10-section-title span {
+          display: block;
+        }
+        .lmct10-page .lmct10-divider {
+          display: none;
+        }
+        .lmct10-page .lmct10-bridge-inner {
+          flex-direction: column;
+          gap: 7px;
+        }
+        .lmct10-page .lmct10-footer-row {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .lmct10-page .lmct10-footer-legal {
+          text-align: left;
+        }
+        .lmct10-page .lmct10-package-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 11px;
+          max-width: 500px;
+        }
+        .lmct10-page .lmct10-package:last-child {
+          grid-column: 1/-1;
+          width: min(55%, 250px);
+          justify-self: center;
+        }
+        .lmctBannerRoot .lmctLogoWrap {
+          width: 52px;
+        }
+        .lmctBannerRoot .lmctBannerInner {
+          gap: 9px;
+          padding: 12px 8px;
+        }
+        .lmctBannerRoot .lmctTextLine1,
+        .lmctBannerRoot .lmctTextLine2 {
+          font-size: clamp(9px, 2.6vw, 13px);
+        }
+      }
+      @media (max-width: 390px) {
+        .lmct10-page .lmct10-container {
+          width: calc(100% - 32px);
+        }
+        .lmct10-page .lmct10-headline {
+          font-size: 54px;
+        }
+        .lmct10-page .lmct10-time-unit strong {
+          font-size: 47px;
+        }
+        .lmctBannerRoot .lmctLogoWrap {
+          width: 44px;
+        }
+        .lmctBannerRoot .lmctTextLine1,
+        .lmctBannerRoot .lmctTextLine2 {
+          font-size: 9px;
+        }
+        .lmctBannerRoot .lmctDigitValue {
+          font-size: 22px;
+        }
+      }
+      @media (hover: none) {
+        .lmct10-page .lmct10-package:hover {
+          transform: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .lmct10-page * {
+          transition: none !important;
+          animation: none !important;
+        }
+        .lmctBannerRoot * {
+          animation: none !important;
+        }
+      }
+
+      /* Updated full inclusions — approved source text, restrained ClickFunnels-scoped presentation */
+      .lmct10-page .lmct10-inclusion-lead {
+        margin: 0 0 22px;
+        color: #52647e;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .lmct10-page .lmct10-inclusion-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .lmct10-page .lmct10-inclusion-card {
+        --tier: #1d8fff;
+        background: white;
+        border: 1px solid #dce8f3;
+        border-top: 4px solid var(--tier);
+        border-radius: 13px;
+        padding: 22px;
+        min-width: 0;
+      }
+      .lmct10-page .lmct10-inclusion-entry {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin: 17px 0 14px;
+      }
+      .lmct10-page .lmct10-inclusion-entry strong {
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-size: 45px;
+        line-height: 1;
+        color: #07142d;
+        font-weight: 900;
+      }
+      .lmct10-page .lmct10-inclusion-entry span {
+        font-weight: 800;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        color: #52647e;
+      }
+      .lmct10-page .lmct10-inclusion-card h3 {
+        font-family: "Barlow Semi Condensed", sans-serif;
+        font-size: 28px;
+        font-style: italic;
+        text-transform: uppercase;
+        font-weight: 900;
+        line-height: 1.1;
+        color: #07142d;
+        margin: 0;
+      }
+      .lmct10-page .lmct10-inclusion-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+      .lmct10-page .lmct10-inclusion-top > span {
+        font-weight: 800;
+        color: #07142d;
+        background: #f1f7ff;
+        font-size: 13px;
+        padding: 6px 11px;
+        border-radius: 6px;
+        white-space: nowrap;
+      }
+      .lmct10-page .lmct10-inclusion-card ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: grid;
+        gap: 9px;
+      }
+      .lmct10-page .lmct10-inclusion-card li {
+        font-size: 13px;
+        color: #44556d;
+        line-height: 1.55;
+        display: flex;
+        gap: 9px;
+      }
+      .lmct10-page .lmct10-inclusion-card li:before {
+        content: "✓";
+        font-weight: 900;
+        color: #1d5fb8;
+        flex: none;
+      }
+      .lmct10-page .lmct10-inclusion-card li strong {
+        color: #07142d;
+      }
+      .lmct10-page .lmct10-inclusion-entry {
+        letter-spacing: normal;
+      }
+      .lmct10-page .lmct10-inclusion-tier-entry {
+        --tier: #1d8fff;
+      }
+      .lmct10-page .lmct10-inclusion-bronze {
+        --tier: #b8793d;
+      }
+      .lmct10-page .lmct10-inclusion-silver {
+        --tier: #999ba2;
+      }
+      .lmct10-page .lmct10-inclusion-gold {
+        --tier: #d5a31e;
+      }
+      .lmct10-page .lmct10-inclusion-platinum {
+        --tier: #8b4bb9;
+        grid-column: 1/-1;
+      }
+      .lmct10-page .lmct10-inclusion-note {
+        margin: 20px 0 0;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #52647e;
+      }
+      @media (max-width: 650px) {
+        .lmct10-page .lmct10-inclusion-grid {
+          grid-template-columns: 1fr;
+        }
+        .lmct10-page .lmct10-inclusion-platinum {
+          grid-column: auto;
+        }
+        .lmct10-page .lmct10-inclusion-card {
+          padding: 18px;
+        }
+        .lmct10-page .lmct10-inclusion-entry strong {
+          font-size: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body style="margin: 0">
+    <!--
+╔══════════════════════════════════════════════════════════════════╗
+║  LMCT+ COUNTDOWN BANNER                                        ║
+║                                                                  ║
+║  SINGLE COUNTDOWN SOURCE                                        ║
+║                                                                  ║
+║  Controls:                                                       ║
+║  - LMCT+ Countdown Banner                                       ║
+║  - LMCT+ 3HR Timer                                              ║
+║                                                                  ║
+║  TO EDIT:                                                        ║
+║  1. Banner text                                                 ║
+║  2. LMCT_TARGET_DATE                                            ║
+║  3. LMCT_TIMEZONE                                               ║
+╚══════════════════════════════════════════════════════════════════╝
+-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      .lmctBannerRoot,
+      .lmctBannerRoot * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .lmctBannerRoot {
+        width: 100%;
+        background: #ff0000;
+        font-family: "Montserrat", sans-serif;
+        overflow: hidden;
+        position: relative;
+      }
+      .lmctBannerInner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px clamp(10px, 5vw, 60px);
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        flex-wrap: nowrap;
+        gap: clamp(10px, 4vw, 48px);
+      }
+      @keyframes lmctBgPulse {
+        0%,
+        100% {
+          background: transparent;
+        }
+        50% {
+          background: rgba(150, 0, 0, 0.12);
+        }
+      }
+      .lmctBannerRoot::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.05) 60%, transparent 100%);
+      }
+      @keyframes lmctShimmer {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 200%;
+        }
+      }
+      .lmctLogoWrap {
+        flex: 0 0 auto;
+        width: clamp(28px, 6vw, 64px);
+        display: flex;
+        align-items: center;
+        animation: lmctLogoGlow 2.5s ease-in-out infinite;
+      }
+      .lmctLogoWrap img {
+        width: 100%;
+        height: auto;
+        display: block;
+        filter: drop-shadow(0 1px 6px rgba(0, 0, 0, 0.18));
+      }
+      @keyframes lmctLogoGlow {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.12));
+        }
+        50% {
+          filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+        }
+      }
+      .lmctTextBlock {
+        flex: 0 0 auto;
+        white-space: nowrap;
+      }
+      .lmctTextLine1,
+      .lmctTextLine2 {
+        font-weight: 800;
+        font-size: clamp(8px, 2.4vw, 20px);
+        color: #fff;
+        letter-spacing: 0.04em;
+        line-height: 1.25;
+        white-space: nowrap;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      }
+      @media (max-width: 520px) {
+        .lmctTextLine1,
+        .lmctTextLine2 {
+          font-size: clamp(11px, 3.6vw, 18px);
+        }
+      }
+      .lmctCountdownWrap {
+        display: flex;
+        align-items: center;
+        gap: clamp(4px, 1.4vw, 16px);
+        flex: 0 0 auto;
+      }
+      .lmctDigitGroup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+      .lmctDigitValue {
+        font-weight: 900;
+        font-size: clamp(20px, 5.8vw, 48px);
+        color: #fff;
+        line-height: 1;
+        letter-spacing: 0.02em;
+        font-variant-numeric: tabular-nums;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+      }
+      .lmctDigitLabel {
+        font-weight: 700;
+        font-size: clamp(5px, 1.1vw, 9px);
+        color: rgba(255, 255, 255, 0.8);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        line-height: 1;
+      }
+      .lmctSeparator {
+        font-weight: 900;
+        font-size: clamp(14px, 4.2vw, 36px);
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1;
+        margin-top: clamp(-3px, -0.8vw, -8px);
+        animation: lmctColonBlink 1s ease-in-out infinite;
+      }
+      @keyframes lmctColonBlink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.25;
+        }
+      }
+      .lmctDigitFlip {
+        animation: lmctFlipIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      @keyframes lmctFlipIn {
+        0% {
+          transform: translateY(-6px) scale(1.06);
+          opacity: 0.35;
+        }
+        100% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+      }
+      .lmctBannerRoot.lmctUrgent .lmctDigitValue {
+        animation: lmctUrgentPulse 0.8s ease-in-out infinite;
+      }
+      @keyframes lmctUrgentPulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.04);
+        }
+      }
+    </style>
+
+    <div class="lmct10-page">
+      <main>
+        <section class="lmct10-hero" aria-labelledby="lmct10-title">
+          <div class="lmct10-container lmct10-hero-layout">
+            <div class="lmct10-lead">
+              <p class="lmct10-private">EXCLUSIVELY FOR SELECTED CUSTOMERS ONLY.</p>
+              <h1 class="lmct10-headline" id="lmct10-title">KEEP THIS<br /><span class="lmct10-red">BETWEEN US.</span></h1>
+              <p class="lmct10-intro">
+                <span class="lmct10-intro-copy">YOU'VE BEEN GIVEN PRIVATE ACCESS TO FREE</span>
+                <strong class="lmct10-bonus">10X BONUS ENTRIES</strong>
+                <span class="lmct10-prize">INTO THE <strong>$1,000,000</strong> GIVEAWAY.</span>
+              </p>
+              <p class="lmct10-confidential"><strong>DO NOT SHARE THIS LINK.</strong><br />THIS INVITATION IS PRIVATE, EXCLUSIVELY FOR SELECTED CUSTOMERS.</p>
+              <a class="lmct10-link" href="#lmct10-packages"
+                >UNLOCK MY 10X ENTRIES! <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7" /></svg
+              ></a>
+            </div>
+            <div class="lmct10-timer-card">
+              <div class="lmct10-deadline"><span class="lmct10-dot"></span> PRIVATE INVITATION</div>
+              <h2 class="lmct10-timer-title">OFFER ENDS TOMORROW</h2>
+              <!-- <p class="lmct10-timer-description">This timer follows the campaign's Sydney deadline.</p> -->
+              <div class="lmct10-timer-numbers" role="timer" aria-label="Time remaining on the 10X offer">
+                <div class="lmct10-time-unit"><strong data-lmct-hours>00</strong><span>HOURS</span></div>
+                <div class="lmct10-time-unit"><strong data-lmct-minutes>00</strong><span>MINUTES</span></div>
+                <div class="lmct10-time-unit"><strong data-lmct-seconds>00</strong><span>SECONDS</span></div>
+              </div>
+              <!-- <div class="lmct10-timer-rule">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 2" /></svg
+                ><span>The offer is subject to the official campaign closing time and terms.</span>
+              </div> -->
+            </div>
+          </div>
+        </section>
+        <div class="lmct10-bridge">
+          <div class="lmct10-container lmct10-bridge-inner">
+            <span class="lmct10-bridge-item"><span class="lmct10-check">✓</span> PRIVATE ACCESS</span><span class="lmct10-divider"></span
+            ><span class="lmct10-bridge-item red"><span class="lmct10-check red">✓</span> 10X BONUS ENTRIES</span><span class="lmct10-divider"></span
+            ><span class="lmct10-bridge-item"><span class="lmct10-check">✓</span> $1,000,000 GIVEAWAY</span>
+          </div>
+        </div>
+
+        <div class="lmct10-video">
+          <div class="lmct10-container">
+            <div class="lmct10-video-frame">
+              <video controls playsinline preload="metadata" aria-label="$1M 10X ending video">
+                <source src="https://lmctplus.accelistudio.com/assets/10x-ends-tonight.mp4" type="video/mp4" />
+                Your browser does not support this video format. <a href="https://lmctplus.accelistudio.com/assets/10x-ends-tonight.mp4">Open the video directly</a>.
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <section class="lmct10-selection" id="lmct10-packages">
+          <div class="lmct10-container">
+            <h2 class="lmct10-section-title">UNLOCK YOUR <span>10X ENTRIES.</span></h2>
+            <p class="lmct10-section-intro">
+              Choose any LMCT+ package to activate your <strong>10X bonus entries</strong> into the <strong>$1,000,000 giveaway</strong>. This private offer ends tomorrow.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

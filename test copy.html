@@ -1,0 +1,280 @@
+<!-- Replace the previous membership-notice snippet with this entire block.
+     Paste into ClickFunnels Footer Tracking Code. Keep the existing form CSS.
+     DRAFT: confirm supportEmail and eligibilityCutoffLabel before publishing.
+     The API reports current activity only; support must verify cutoff eligibility.
+     This adds deadline copy, not automatic expiry or server-side purchase enforcement. -->
+<style>
+  #col-full-180 .lmctOfferNote,
+  #col-full-180 .lmctMemberCheckMessage,
+  #col-full-180 .lmctOfferTerms {
+    font:
+      500 13px/1.5 Montserrat,
+      Arial,
+      sans-serif;
+    color: #214563;
+  }
+  #col-full-180 .lmctOfferNote {
+    margin: 12px 0 0;
+    text-align: center;
+  }
+  #col-full-180 .lmctOfferNote strong {
+    color: #071b3b;
+  }
+  #col-full-180 .lmctOfferExplanation {
+    margin: 20px 0 0;
+    font:
+      500 13px/1.5 Montserrat,
+      Arial,
+      sans-serif;
+    color: #214563;
+  }
+  #col-full-180 .lmctMemberCheckMessage {
+    margin: 18px 0 0;
+    padding: 14px 16px;
+    border: 1px solid #b9dff5;
+    border-left: 4px solid #0877cb;
+    border-radius: 10px;
+    background: #f0f9ff;
+  }
+  #col-full-180 .lmctMemberCheckMessage[hidden] {
+    display: none !important;
+  }
+  #col-full-180 .lmctMemberCheckMessage strong {
+    display: block;
+    color: #071b3b;
+  }
+  #col-full-180 .lmctMemberCheckMessage a {
+    color: #0877cb;
+    text-decoration: underline;
+  }
+  #col-full-180 .lmctOfferTerms {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid #dce9f2;
+  }
+  #col-full-180 .lmctOfferTerms summary {
+    cursor: pointer;
+    font-weight: 800;
+  }
+  #col-full-180 .lmctOfferTerms p {
+    margin: 10px 0 0;
+  }
+  #col-full-180 .lmctNoRefundNotice {
+    display: block;
+    margin-top: 8px;
+    color: #c62828 !important;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.5;
+  }
+</style>
+<script>
+  (function () {
+    "use strict";
+    const CONFIG = {
+      formSelector: "#col-full-180 #tmp_order2step-49594",
+      endpoint: "https://lmctmembers.com/api/check-user-active",
+      supportEmail: "support@lmctplus.com", // REQUIRED: confirmed LMCT+ support email
+      openingLabel: "",
+      timeoutMs: 12000,
+    };
+
+    function init() {
+      const form = document.querySelector(CONFIG.formSelector);
+      if (!form) return false;
+      if (form.dataset.lmctMemberCheckReady === "true") return true;
+      const step = form.querySelector(".o2step_step1");
+      const buttonWrap = step && step.querySelector(".order2stepbutton");
+      const button = buttonWrap && buttonWrap.querySelector('a[href="#submit-form-2step"]');
+      const emailInput = step && step.querySelector('input[name="email"]');
+      if (!button || !emailInput) return false;
+      form.dataset.lmctMemberCheckReady = "true";
+
+      // Replace the earlier static notice with the updated offer logic.
+      form.querySelectorAll(".lmctExistingMemberNotice").forEach((el) => el.remove());
+      const explanation = document.createElement("p");
+      explanation.className = "lmctOfferExplanation";
+      explanation.textContent =
+        "Not an active LMCT+ member? Join LMCT+ Market for A$99/year or A$199/year for access to LMCT+ Market Deer Park.";
+      buttonWrap.before(explanation);
+
+      const message = document.createElement("div");
+      message.className = "lmctMemberCheckMessage";
+      message.setAttribute("role", "status");
+      message.setAttribute("aria-live", "polite");
+      message.tabIndex = -1;
+      message.hidden = true;
+      buttonWrap.before(message);
+
+      form.querySelectorAll(".order2stepbutton, .order2stepbuttonOrder").forEach((wrap) => {
+        const note = document.createElement("p");
+        note.className = "lmctOfferNote";
+        const location = document.createElement("strong");
+        location.textContent = "This membership is for access to LMCT+ Market Deer Park.";
+
+        note.append(
+          location,
+          document.createElement("br"),
+          "Hatchlands Drive, Deer Park VIC 3023.",
+          document.createElement("br"),
+          CONFIG.openingLabel,
+        );
+        wrap.after(note);
+      });
+
+      const terms = document.createElement("details");
+      terms.className = "lmctOfferTerms";
+      const summary = document.createElement("summary");
+      summary.textContent = "Offer terms";
+      terms.append(summary);
+      [
+        "Choose A$99/year or A$199/year.",
+
+        "For customers without an active LMCT+ membership.",
+
+        "Existing LMCT+ members should contact support to confirm whether their current plan includes LMCT+ Market access before purchasing another membership.",
+
+        "Membership is billed annually at A$99 or A$199, depending on your selected plan.",
+
+        "No change of mind refunds. Your rights under Australian Consumer Law remain unaffected.",
+      ].forEach((text) => {
+        const p = document.createElement("p");
+        p.textContent = text;
+        terms.append(p);
+      });
+      form.append(terms);
+
+      let busy = false;
+      let replay = false;
+      let revision = 0;
+      let controller = null;
+      const buttonText = button.querySelector(".elButtonMain");
+      const originalText = buttonText ? buttonText.textContent : "";
+
+      function show(text) {
+        message.replaceChildren();
+        message.textContent = text;
+        message.hidden = false;
+      }
+
+      function showMemberMessage() {
+        message.replaceChildren();
+
+        const title = document.createElement("strong");
+        title.textContent = "Already an active LMCT+ member?";
+        message.append(title);
+
+        if (CONFIG.supportEmail) {
+          const link = document.createElement("a");
+          link.href = "mailto:" + CONFIG.supportEmail;
+          link.textContent = CONFIG.supportEmail;
+
+          message.append(
+            "Before purchasing another membership, email ",
+            link,
+            " with your account details to confirm whether your current plan includes LMCT+ Market access.",
+          );
+        } else {
+          message.append("Before purchasing another membership, contact LMCT+ support to confirm whether your current plan includes LMCT+ Market access.");
+        }
+
+        message.hidden = false;
+        message.focus();
+      }
+
+      emailInput.addEventListener("input", function () {
+        revision++;
+        if (controller) controller.abort();
+        message.hidden = true;
+      });
+
+      // Capture before ClickFunnels receives the click, then replay it only
+      // after a successful inactive-member result for the same email.
+      document.addEventListener(
+        "click",
+        async function (event) {
+          if (!(event.target instanceof Element)) return;
+          if (event.target.closest("a") !== button) return;
+          if (replay) {
+            replay = false;
+            return;
+          }
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          if (busy) return;
+
+          const email = emailInput.value.trim();
+          if (!email || !emailInput.checkValidity()) {
+            show("Please enter a valid email address before continuing.");
+            emailInput.focus();
+            emailInput.reportValidity();
+            return;
+          }
+
+          const requestRevision = revision;
+          busy = true;
+          button.setAttribute("aria-busy", "true");
+          if (buttonText) buttonText.textContent = "CHECKING MEMBERSHIP…";
+          show("Checking your membership…");
+          controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), CONFIG.timeoutMs);
+          let continueCheckout = false;
+          try {
+            const url = new URL(CONFIG.endpoint);
+            url.searchParams.set("email", email);
+            const response = await fetch(url.toString(), {
+              method: "POST",
+              cache: "no-store",
+              credentials: "omit",
+              signal: controller.signal,
+            });
+            if (!response.ok) throw new Error("Membership check failed");
+            const result = await response.json();
+            if (typeof result.is_active !== "boolean") throw new Error("Unexpected response");
+            if (requestRevision !== revision || emailInput.value.trim() !== email) return;
+            if (result.is_active) showMemberMessage();
+            else {
+              message.hidden = true;
+              continueCheckout = true;
+            }
+          } catch (error) {
+            // if (requestRevision === revision) {
+            //   show("We couldn’t check your membership right now. Please press Continue to Checkout to try again.");
+            // }
+            message.hidden = true;
+            continueCheckout = true;
+          } finally {
+            clearTimeout(timer);
+            controller = null;
+            busy = false;
+            button.removeAttribute("aria-busy");
+            if (buttonText) buttonText.textContent = originalText;
+          }
+          if (continueCheckout) {
+            replay = true;
+            try {
+              button.click();
+            } finally {
+              replay = false;
+            }
+          }
+        },
+        true,
+      );
+      return true;
+    }
+
+    function start() {
+      if (init()) return;
+      const observer = new MutationObserver(() => {
+        if (init()) observer.disconnect();
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+      setTimeout(() => observer.disconnect(), 30000);
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", start, { once: true });
+    } else start();
+  })();
+</script>
+<!-- END OF Form Styling -->

@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ff1010" />
+  <title>LMCT+ $1M 10X Final Hour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --lmct-red: #f20d16;
+      --lmct-red-dark: #ce0710;
+      --lmct-black: #050505;
+      --lmct-navy: #061b33;
+      --lmct-blue: #13a9f4;
+      --lmct-paper: #ffffff;
+      --lmct-soft: #f4f4f4;
+      --lmct-ink: #090909;
+      --lmct-muted: #545454;
+      --lmct-line: #dedede;
+      --lmct-focus: #005fcc;
+      --lmct-max: 1180px;
+      --lmct-radius: 14px;
+      --lmct-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      color: var(--lmct-ink);
+      background: var(--lmct-paper);
+      font-family: "Montserrat", Arial, sans-serif;
+      line-height: 1.5;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection {
+      color: #fff;
+      background: var(--lmct-red);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--lmct-focus);
+      outline-offset: 4px;
+    }
+
+    .lmct10x {
+      overflow: hidden;
+      background: var(--lmct-paper);
+    }
+
+    .lmct10x__skip {
+      position: fixed;
+      z-index: 100;
+      top: 12px;
+      left: 12px;
+      padding: 11px 16px;
+      color: #fff;
+      background: var(--lmct-black);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      transform: translateY(-180%);
+      transition: transform 180ms ease-out;
+    }
+
+    .lmct10x__skip:focus {
+      transform: translateY(0);
+    }
+
+    .lmct10x__alert {
+      display: flex;
+      min-height: 68px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      color: #fff;
+      background:
+        repeating-linear-gradient(135deg, rgba(120, 0, 0, 0.16) 0 8px, transparent 8px 18px),
+        var(--lmct-red);
+      border-bottom: 4px solid var(--lmct-black);
+      text-align: center;
+    }
+
+    .lmct10x__alertInner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(12px, 2vw, 24px);
+      font-size: clamp(18px, 2.35vw, 32px);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+
+    .lmct10x__alertIcon {
+      width: clamp(24px, 3vw, 34px);
+      flex: 0 0 auto;
+    }
+
+    .lmct10x__hero {
+      padding: clamp(42px, 6vw, 78px) 20px clamp(44px, 6vw, 72px);
+    }
+
+    .lmct10x__heroInner {
+      width: min(100%, var(--lmct-max));
+      margin: 0 auto;
+    }
+
+    .lmct10x__heroTop {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      align-items: center;
+      gap: clamp(44px, 7vw, 94px);
+    }
+
+    .lmct10x__headline {
+      margin: 0;
+      font-family: "Anton", Impact, sans-serif;
+      font-size: clamp(68px, 8.4vw, 116px);
+      font-weight: 400;
+      letter-spacing: -0.025em;
+      line-height: 0.88;
+      text-transform: uppercase;
+    }
+
+    .lmct10x__headlineBlack,
+    .lmct10x__headlineRed {
+      display: block;
+    }
+
+    .lmct10x__headlineRed {
+      position: relative;
+      width: fit-content;
+      margin-top: 8px;
+      color: var(--lmct-red);
+      white-space: nowrap;
+    }
+
+    .lmct10x__headlineRed::after {
+      position: absolute;
+      right: 2%;
+      bottom: -18px;
+      left: 3%;
+      height: 9px;
+      border-radius: 60% 25% 55% 30%;
+      content: "";
+      background: var(--lmct-red);
+      box-shadow: 58px 12px 0 -3px var(--lmct-red);
+      transform: rotate(-2deg);
+    }
+
+    .lmct10x__copy {
+      max-width: 640px;
+      font-size: clamp(18px, 2vw, 25px);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .lmct10x__copy p {
+      margin: 0;
+    }
+
+    .lmct10x__copy p + p {
+      margin-top: 10px;
+    }
+
+    .lmct10x__copy strong {
+      font-weight: 900;
+    }
+
+    .lmct10x__countdown {
+      width: min(100%, 760px);
+      margin: clamp(52px, 7vw, 76px) auto 0;
+      text-align: center;
+    }
+
+    .lmct10x__countdownTitle {
+      margin: 0 0 16px;
+      font-size: clamp(27px, 3.8vw, 46px);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .lmct10x__timer {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(8px, 2vw, 26px);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .lmct10x__timeUnit {
+      position: relative;
+    }
+
+    .lmct10x__timeUnit:not(:last-child)::after {
+      position: absolute;
+      top: 3px;
+      right: clamp(-17px, -1.25vw, -6px);
+      color: var(--lmct-red);
+      content: ":";
+      font-family: "Anton", Impact, sans-serif;
+      font-size: clamp(46px, 7vw, 80px);
+      line-height: 1;
+    }
+
+    .lmct10x__timeValue {
+      display: block;
+      color: var(--lmct-red);
+      font-family: "Anton", Impact, sans-serif;
+      font-size: clamp(60px, 9vw, 100px);
+      letter-spacing: 0.015em;
+      line-height: 0.95;
+    }
+
+    .lmct10x__timeLabel {
+      display: block;
+      margin-top: 10px;
+      color: #686868;
+      font-size: clamp(11px, 1.2vw, 13px);
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .lmct10x__proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      width: min(100%, 430px);
+      margin: 28px auto 0;
+      color: #1d1d1d;
+    }
+
+    .lmct10x__proofItem {
+      display: grid;
+      min-height: 54px;
+      place-items: center;
+      padding: 0 10px;
+      border-right: 1px solid #cacaca;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .lmct10x__proofItem:last-child {
+      border-right: 0;
+    }
+
+    .lmct10x__proofIcon {
+      width: 26px;
+      height: 26px;
+      margin-bottom: 4px;
+      color: var(--lmct-black);
+    }
+
+    .lmct10x__packages {
+      padding: 0 20px clamp(54px, 7vw, 88px);
+      background: var(--lmct-paper);
+    }
+
+    .lmct10x__packagesBand {
+      margin: 0 -20px;
+      padding: 20px;
+      color: #fff;
+      background: var(--lmct-black);
+      text-align: center;
+    }
+
+    .lmct10x__packagesTitle {
+      margin: 0;
+      color: var(--lmct-red);
+      font-family: "Anton", Impact, sans-serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .lmct10x__packagesInner {
+      width: min(100%, var(--lmct-max));
+      margin: 0 auto;
+    }
+
+    .lmct10x__packageIntro {
+      max-width: 830px;
+      margin: 14px auto 28px;
+      font-size: clamp(15px, 1.8vw, 20px);
+      font-weight: 500;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .lmct10x__packageIntro strong {
+      font-weight: 900;
+    }
+
+    .lmct10x__swipeHint {
+      display: none;
+      margin: 0 0 10px;
+      color: var(--lmct-muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .lmct10x__packageGrid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(10px, 1.35vw, 16px);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .lmct10x__packageItem {
+      min-width: 0;
+    }
+
+    .lmct10x__package {
+      position: relative;
+      display: block;
+      min-width: 0;
+      border-radius: clamp(14px, 1.8vw, 22px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+      text-decoration: none;
+      transition: transform 180ms ease-out, box-shadow 180ms ease-out;
+    }
+
+    .lmct10x__package:hover {
+      box-shadow: var(--lmct-shadow);
+      transform: translateY(-5px);
+    }
+
+    .lmct10x__package:focus-visible {
+      outline-color: var(--lmct-focus);
+    }
+
+    .lmct10x__package img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: inherit;
+    }
+
+    .lmct10x__details {
+      margin-top: clamp(32px, 4vw, 48px);
+      border: 1px solid var(--lmct-line);
+      border-radius: var(--lmct-radius);
+      background: var(--lmct-soft);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .lmct10x__details summary {
+      display: flex;
+      min-height: 64px;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 22px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      list-style: none;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .lmct10x__details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .lmct10x__details summary::after {
+      width: 9px;
+      height: 9px;
+      border-right: 3px solid currentColor;
+      border-bottom: 3px solid currentColor;
+      content: "";
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform 180ms ease-out;
+    }
+
+    .lmct10x__details[open] summary::after {
+      transform: rotate(225deg) translate(-2px, -2px);
+    }
+
+    .lmct10x__detailsBody {
+      padding: 0 clamp(20px, 4vw, 42px) 30px;
+    }
+
+    .lmct10x__detailsBody p {
+      max-width: 72ch;
+      margin: 0 auto;
+      color: #363636;
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .lmct10x__detailsBody p + p {
+      margin-top: 10px;
+    }
+
+    .lmct10x__footer {
+      padding: 30px 20px 24px;
+      color: #fff;
+      background: var(--lmct-navy);
+      box-shadow: inset 0 3px 0 var(--lmct-blue);
+    }
+
+    .lmct10x__footerInner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      width: min(100%, var(--lmct-max));
+      margin: 0 auto;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .lmct10x__footerLogo {
+      display: block;
+      width: 178px;
+      height: auto;
+    }
+
+    .lmct10x__footerTag {
+      margin: 7px 0 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 12px;
+    }
+
+    .lmct10x__footerLegal {
+      text-align: right;
+    }
+
+    .lmct10x__footerAbn {
+      margin: 0 0 8px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .lmct10x__footerLinks {
+      display: flex;
+      justify-content: flex-end;
+      gap: 18px;
+      font-size: 12px;
+    }
+
+    .lmct10x__footerLinks a {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      color: #55c7ff;
+      text-underline-offset: 4px;
+    }
+
+    .lmct10x__copyright {
+      width: min(100%, var(--lmct-max));
+      margin: 22px auto 0;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.11);
+      color: rgba(255, 255, 255, 0.64);
+      font-size: 11px;
+    }
+
+    .lmct10x--closed .lmct10x__package {
+      pointer-events: none;
+      filter: grayscale(1);
+      opacity: 0.58;
+    }
+
+    .lmct10x--closed .lmct10x__alertInner span {
+      font-size: 0;
+    }
+
+    .lmct10x--closed .lmct10x__alertInner span::after {
+      content: "This 10X offer has ended";
+      font-size: clamp(18px, 2.35vw, 32px);
+    }
+
+    @media (max-width: 960px) {
+      .lmct10x__heroTop {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+        gap: 36px;
+      }
+
+      .lmct10x__headline {
+        font-size: clamp(58px, 9vw, 80px);
+      }
+
+      .lmct10x__copy {
+        font-size: clamp(16px, 2.3vw, 20px);
+      }
+
+      .lmct10x__packageGrid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+
+      .lmct10x__packageItem {
+        grid-column: span 2;
+      }
+
+      .lmct10x__packageItem:nth-child(4) {
+        grid-column: 2 / span 2;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .lmct10x__alert {
+        min-height: 58px;
+        padding-inline: 14px;
+        border-bottom-width: 3px;
+      }
+
+      .lmct10x__alertInner {
+        gap: 9px;
+        letter-spacing: 0.025em;
+      }
+
+      .lmct10x__hero {
+        padding: 34px 18px 44px;
+      }
+
+      .lmct10x__heroTop {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      .lmct10x__headline {
+        font-size: clamp(58px, 21vw, 86px);
+        text-align: center;
+      }
+
+      .lmct10x__headlineRed {
+        margin-inline: auto;
+      }
+
+      .lmct10x__copy {
+        max-width: 34ch;
+        margin: 0 auto;
+        font-size: 17px;
+        line-height: 1.52;
+        text-align: center;
+      }
+
+      .lmct10x__countdown {
+        margin-top: 54px;
+      }
+
+      .lmct10x__packages {
+        padding-inline: 16px;
+      }
+
+      .lmct10x__packagesBand {
+        margin-inline: -16px;
+      }
+
+      .lmct10x__packageIntro {
+        max-width: 36ch;
+        margin-bottom: 18px;
+      }
+
+      .lmct10x__swipeHint {
+        display: block;
+      }
+
+      .lmct10x__packageGrid {
+        display: flex;
+        width: calc(100% + 16px);
+        margin-right: -16px;
+        padding: 4px 16vw 24px 2px;
+        gap: 14px;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scroll-padding-left: 2px;
+        scroll-snap-type: x mandatory;
+        scrollbar-color: var(--lmct-red) #e3e3e3;
+        scrollbar-width: thin;
+      }
+
+      .lmct10x__packageItem {
+        width: min(76vw, 292px);
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+      }
+
+      .lmct10x__package {
+        width: 100%;
+      }
+
+      .lmct10x__package:hover {
+        transform: none;
+      }
+
+      .lmct10x__footerInner {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .lmct10x__footerLegal {
+        text-align: center;
+      }
+
+      .lmct10x__footerLinks {
+        justify-content: center;
+      }
+
+      .lmct10x__copyright {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .lmct10x__headline {
+        font-size: clamp(52px, 20vw, 72px);
+      }
+
+      .lmct10x__headlineRed::after {
+        bottom: -13px;
+        height: 7px;
+        box-shadow: 36px 9px 0 -2px var(--lmct-red);
+      }
+
+      .lmct10x__countdownTitle {
+        font-size: 26px;
+      }
+
+      .lmct10x__timeValue {
+        font-size: clamp(54px, 18vw, 72px);
+      }
+
+      .lmct10x__proofItem {
+        padding-inline: 5px;
+        font-size: 11px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .lmct10x__skip,
+      .lmct10x__package,
+      .lmct10x__details summary::after {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="lmct10x" id="lmct10xPage" data-duration-minutes="60" data-deadline="">
+    <a class="lmct10x__skip" href="#lmct10xPackages">Skip to packages</a>
+
+    <header class="lmct10x__alert" aria-label="Limited-time offer">
+      <div class="lmct10x__alertInner">
+        <svg class="lmct10x__alertIcon" viewBox="0 0 32 29" aria-hidden="true">
+          <path d="M16 1.8 30.2 27H1.8L16 1.8Z" fill="#ffd45a" stroke="#050505" stroke-width="1.6" />
+          <path d="M16 9.3v8.2" stroke="#050505" stroke-width="3" stroke-linecap="round" />
+          <circle cx="16" cy="22" r="1.7" fill="#050505" />
+        </svg>
+        <span>Invite only · 1 hour of 10X entries</span>
+        <svg class="lmct10x__alertIcon" viewBox="0 0 32 29" aria-hidden="true">
+          <path d="M16 1.8 30.2 27H1.8L16 1.8Z" fill="#ffd45a" stroke="#050505" stroke-width="1.6" />
+          <path d="M16 9.3v8.2" stroke="#050505" stroke-width="3" stroke-linecap="round" />
+          <circle cx="16" cy="22" r="1.7" fill="#050505" />
+        </svg>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="lmct10x__hero" aria-labelledby="lmct10xTitle">
+        <div class="lmct10x__heroInner">
+          <div class="lmct10x__heroTop">
+            <h1 class="lmct10x__headline" id="lmct10xTitle">
+              <span class="lmct10x__headlineBlack">Adrian's</span>
+              <span class="lmct10x__headlineRed">Gone 10X.</span>
+            </h1>
+
+            <div class="lmct10x__copy">
+              <p>We weren't planning this.</p>
+              <p>But Adrian just decided to <strong>10X every package</strong> for the <strong>$1,000,000 giveaway.</strong></p>
+              <p>You've got one hour.</p>
+              <p>No build-up. No extension.</p>
+            </div>
+          </div>
+
+          <div class="lmct10x__countdown">
+            <h2 class="lmct10x__countdownTitle">Gates closing in:</h2>
+            <div class="lmct10x__timer" role="timer" aria-label="Offer countdown" aria-live="off">
+              <div class="lmct10x__timeUnit">
+                <span class="lmct10x__timeValue" data-hours>01</span>
+                <span class="lmct10x__timeLabel">Hours</span>
+              </div>
+              <div class="lmct10x__timeUnit">
+                <span class="lmct10x__timeValue" data-minutes>00</span>
+                <span class="lmct10x__timeLabel">Minutes</span>
+              </div>
+              <div class="lmct10x__timeUnit">
+                <span class="lmct10x__timeValue" data-seconds>00</span>
+                <span class="lmct10x__timeLabel">Seconds</span>
+              </div>
+            </div>
+
+            <div class="lmct10x__proof" aria-label="Offer details">
+              <div class="lmct10x__proofItem">
+                <svg class="lmct10x__proofIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v11H4zM7 7V4h10v3M8 11h8m-8 3h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                $1M cash draw
+              </div>
+              <div class="lmct10x__proofItem">
+                <svg class="lmct10x__proofIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 20h8m-4-4v4M7 4h10v5a5 5 0 0 1-10 0V4Zm0 2H4v2a4 4 0 0 0 4 4m9-6h3v2a4 4 0 0 1-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                One winner
+              </div>
+              <div class="lmct10x__proofItem">
+                <svg class="lmct10x__proofIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8" /><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+                1 hour only
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="lmct10x__packages" id="lmct10xPackages" aria-labelledby="lmct10xPackagesTitle">
+        <div class="lmct10x__packagesBand">
+          <h2 class="lmct10x__packagesTitle" id="lmct10xPackagesTitle">Select a package</h2>
+        </div>
+
+        <div class="lmct10x__packagesInner">
+          <p class="lmct10x__packageIntro">Buy any LMCT+ package during this hour and receive <strong>10X entries into the $1,000,000 draw.</strong></p>
+          <p class="lmct10x__swipeHint" aria-hidden="true">Swipe to compare packages</p>
+
+          <ul class="lmct10x__packageGrid" aria-label="LMCT+ packages">
+            <li class="lmct10x__packageItem">
+              <a class="lmct10x__package elButton ximg" href="#open-popup" data-title="css-order-basic" data-imagelink="#open-popup" aria-label="Select Entry package">
+                <img src="https://images.clickfunnels.com/e9/728fa080e74804ac5e24e6e16fec5a/Entry.svg" alt="Entry package" width="353" height="586" decoding="async" fetchpriority="high" />
+              </a>
+            </li>
+            <li class="lmct10x__packageItem">
+              <a class="lmct10x__package elButton ximg" href="#open-popup" data-title="css-order-bronze" data-imagelink="#open-popup" aria-label="Select Bronze package">
+                <img src="https://images.clickfunnels.com/40/aa897ecd194a009e99b2fbd94275c1/Bronze.svg" alt="Bronze package" width="353" height="586" decoding="async" fetchpriority="high" />
+              </a>
+            </li>
+            <li class="lmct10x__packageItem">
+              <a class="lmct10x__package elButton ximg" href="#open-popup" data-title="css-order-silver" data-imagelink="#open-popup" aria-label="Select Silver package">
+                <img src="https://images.clickfunnels.com/8e/80b953b12e43988b40fe88f5adac49/Silver.svg" alt="Silver package" width="353" height="586" loading="lazy" decoding="async" />
+              </a>
+            </li>
+            <li class="lmct10x__packageItem">
+              <a class="lmct10x__package elButton ximg" href="#open-popup" data-title="css-order-gold" data-imagelink="#open-popup" aria-label="Select Gold package">
+                <img src="https://images.clickfunnels.com/b5/fb60972cf74e5e8f4fcab3124de1ea/Gold.svg" alt="Gold package" width="353" height="586" loading="lazy" decoding="async" />
+              </a>
+            </li>
+            <li class="lmct10x__packageItem">
+              <a class="lmct10x__package elButton ximg" href="#open-popup" data-title="css-order-platinum" data-imagelink="#open-popup" aria-label="Select Platinum package">
+                <img src="https://images.clickfunnels.com/3c/f6abf04ea044159cc1a609f0820a15/Platinum.svg" alt="Platinum package" width="353" height="586" loading="lazy" decoding="async" />
+              </a>
+            </li>
+          </ul>
+
+          <details class="lmct10x__details">
+            <summary>View package information</summary>
+            <div class="lmct10x__detailsBody">
+              <p>Each package includes the price, bonus-entry amount and in-app inclusions shown on its card. Select a package to review the complete order details before payment.</p>
+              <p>Entries and eligibility are subject to the applicable promotion terms. This offer does not extend the giveaway close time.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="lmct10x__footer">
+      <div class="lmct10x__footerInner">
+        <div>
+          <img class="lmct10x__footerLogo" src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png" alt="LMCT+" width="356" height="96" decoding="async" fetchpriority="high" />
+          <p class="lmct10x__footerTag">Australia's Biggest Rewards Club</p>
+        </div>
+        <div class="lmct10x__footerLegal">
+          <p class="lmct10x__footerAbn">LMCT PLUS · ABN 93 627 297 474</p>
+          <nav class="lmct10x__footerLinks" aria-label="Legal">
+            <a href="https://lmctplus.com/terms-and-conditions" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+            <a href="https://lmctplus.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+          </nav>
+        </div>
+      </div>
+      <p class="lmct10x__copyright">© 2026 LMCT+. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById("lmct10xPage");
+      if (!root) return;
+
+      var timer = root.querySelector("[role='timer']");
+      var hoursEl = root.querySelector("[data-hours]");
+      var minutesEl = root.querySelector("[data-minutes]");
+      var secondsEl = root.querySelector("[data-seconds]");
+      var storageKey = "lmct10xDeadline";
+      var durationMinutes = Math.max(1, Number(root.dataset.durationMinutes) || 60);
+      var configuredDeadline = Date.parse(root.dataset.deadline || "");
+      var storedDeadline = Number(sessionStorage.getItem(storageKey));
+      var deadline = Number.isFinite(configuredDeadline)
+        ? configuredDeadline
+        : storedDeadline > Date.now()
+          ? storedDeadline
+          : Date.now() + durationMinutes * 60 * 1000;
+
+      if (!Number.isFinite(configuredDeadline)) {
+        sessionStorage.setItem(storageKey, String(deadline));
+      }
+
+      function pad(value) {
+        return String(Math.max(0, value)).padStart(2, "0");
+      }
+
+      function closeOffer() {
+        root.classList.add("lmct10x--closed");
+        root.querySelectorAll(".lmct10x__package").forEach(function (link) {
+          link.setAttribute("aria-disabled", "true");
+          link.setAttribute("tabindex", "-1");
+        });
+      }
+
+      function render() {
+        var remaining = Math.max(0, deadline - Date.now());
+        var totalSeconds = Math.ceil(remaining / 1000);
+        var hours = Math.floor(totalSeconds / 3600);
+        var minutes = Math.floor((totalSeconds % 3600) / 60);
+        var seconds = totalSeconds % 60;
+
+        hoursEl.textContent = pad(hours);
+        minutesEl.textContent = pad(minutes);
+        secondsEl.textContent = pad(seconds);
+        timer.setAttribute("aria-label", hours + " hours, " + minutes + " minutes and " + seconds + " seconds remaining");
+
+        if (remaining <= 0) {
+          closeOffer();
+          window.clearInterval(intervalId);
+        }
+      }
+
+      render();
+      var intervalId = window.setInterval(render, 1000);
+    })();
+  </script>
+</body>
+</html>

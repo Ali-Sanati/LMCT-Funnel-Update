@@ -500,13 +500,11 @@
     color: #64748b;
     letter-spacing: -0.2px;
   }
-
   /* ============ BILLING PERIOD CONTROL ============ */
   .lmctBilling__control {
     display: flex;
     justify-content: center;
   }
-
   .lmctBilling__tabs {
     display: inline-grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -517,7 +515,6 @@
     background: #eef3f7;
     box-shadow: inset 0 1px 2px rgba(5, 22, 42, 0.05);
   }
-
   .lmctBilling__tab {
     position: relative;
     min-height: 48px;
@@ -538,22 +535,18 @@
       box-shadow 180ms ease,
       transform 180ms ease;
   }
-
   .lmctBilling__tab:hover {
     color: #05162a;
   }
-
   .lmctBilling__tab[aria-pressed="true"] {
     color: #ffffff;
     background: linear-gradient(135deg, #0c9ffd, #0476c4);
     box-shadow: 0 8px 18px rgba(4, 118, 196, 0.24);
   }
-
   .lmctBilling__tab:focus-visible {
     outline: 3px solid rgba(12, 159, 253, 0.3);
     outline-offset: 3px;
   }
-
   .lmctBilling__save {
     display: inline-flex;
     margin-left: 7px;
@@ -566,23 +559,19 @@
     line-height: 1;
     vertical-align: 1px;
   }
-
   .lmctBilling__tab[aria-pressed="true"] .lmctBilling__save {
     color: #ffffff;
     background: rgba(255, 255, 255, 0.18);
   }
-
   @media (max-width: 520px) {
     .lmctBilling__tabs {
       width: 100%;
     }
-
     .lmctBilling__tab {
       min-height: 52px;
       padding-inline: 10px;
       font-size: 12px;
     }
-
     .lmctBilling__save {
       display: block;
       width: fit-content;
@@ -780,13 +769,11 @@
     letter-spacing: 0.3px;
     color: rgba(255, 255, 255, 0.85);
   }
-
   .lmctPP__deal {
     display: none;
     justify-content: center;
     margin-bottom: 9px;
   }
-
   .lmctPP__deal span {
     display: inline-flex;
     align-items: center;
@@ -801,28 +788,23 @@
     line-height: 1;
     text-transform: uppercase;
   }
-
   .lmctPkg__section[data-billing-mode="yearly"] .lmctPP__deal {
     display: flex;
   }
-
   .lmctPP__priceSub strong,
   .lmctPP__priceSub span {
     display: block;
   }
-
   .lmctPP__priceSub strong {
     color: #ffffff;
     font-weight: 900;
     text-transform: uppercase;
   }
-
   .lmctPP__priceSub span {
     margin-top: 4px;
     font-size: 11px;
     font-weight: 600;
   }
-
   /* ---- body / features ---- */
   .lmctPP__body {
     display: flex;
@@ -1261,7 +1243,6 @@
       <p class="lmctAB__line2" id="lmctBillingDescription">Monthly billing with the flexibility to cancel anytime.</p>
     </div>
   </div>
-
   <div class="lmctBilling__control">
     <div class="lmctBilling__tabs" role="group" aria-label="Choose a membership billing period">
       <button class="lmctBilling__tab" type="button" data-lmct-billing="monthly" aria-controls="lmctBillingPackages" aria-pressed="true">Monthly</button>
@@ -1270,7 +1251,6 @@
       </button>
     </div>
   </div>
-
   <div class="lmctPP__wrap" id="lmctBillingPackages">
     <div class="lmctPP__inner">
       <div class="lmctPP__grid" data-lmct-package-grid>
@@ -1295,17 +1275,15 @@
                     <path d="M6 21V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v15" />
                     <path d="M6 12h6" />
                     <path d="M14 9h2.5a2 2 0 0 1 2 2v6a1.75 1.75 0 0 0 3.5 0V9l-3-3" /></svg></span
-                ><span class="lmctPP__featTxt"><strong>LMCT+</strong> Petrol Discounts</span>
+                ><span class="lmctPP__featTxt"><strong>Access to wholesale fuel</strong></span>
               </li>
               <li class="lmctPP__feat">
                 <span class="lmctPP__featIco"
                   ><svg viewBox="0 0 24 24">
-                    <rect x="3.5" y="9" width="17" height="11.5" rx="1.5" />
-                    <path d="M3.5 13h17" />
-                    <path d="M12 9v11.5" />
-                    <path d="M12 9C12 9 11 4.5 8 5s1 4 4 4Z" />
-                    <path d="M12 9C12 9 13 4.5 16 5s-1 4-4 4Z" /></svg></span
-                ><span class="lmctPP__featTxt">Accumulating Entries to <strong>All Giveaways</strong></span>
+                    <path d="M3 3h2l2.5 12h11l2-8H6" />
+                    <circle cx="9" cy="20" r="1" />
+                    <circle cx="18" cy="20" r="1" /></svg></span
+                ><span class="lmctPP__featTxt"><strong>Access to wholesale groceries</strong></span>
               </li>
               <li class="lmctPP__feat">
                 <span class="lmctPP__featIco"
@@ -1315,7 +1293,7 @@
                     <path d="M12 9.3v.9M12 13.8v.9" />
                     <circle cx="6" cy="12" r=".5" fill="currentColor" stroke="none" />
                     <circle cx="18" cy="12" r=".5" fill="currentColor" stroke="none" /></svg></span
-                ><span class="lmctPP__featTxt">Up to <strong>$50,000</strong> In Savings</span>
+                ><span class="lmctPP__featTxt">Unlock <strong>$50,000 &ndash; $100,000+</strong> in savings with our business partners</span>
               </li>
               <li class="lmctPP__feat">
                 <span class="lmctPP__featIco"
@@ -1340,6 +1318,23 @@
                     <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" />
                     <line x1="10.5" y1="18.5" x2="13.5" y2="18.5" /></svg></span
                 ><span class="lmctPP__featTxt"><strong>Exclusive</strong> App Access</span>
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="16" rx="2" />
+                    <path d="M16 3v4M8 3v4M3 11h18M8 16l2 2 5-5" /></svg></span
+                ><span class="lmctPP__featTxt"><strong>Exclusive invites</strong> to events</span>
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="3.5" y="9" width="17" height="11.5" rx="1.5" />
+                    <path d="M3.5 13h17" />
+                    <path d="M12 9v11.5" />
+                    <path d="M12 9C12 9 11 4.5 8 5s1 4 4 4Z" />
+                    <path d="M12 9C12 9 13 4.5 16 5s-1 4-4 4Z" /></svg></span
+                ><span class="lmctPP__featTxt"><strong>Free accumulating entries</strong> into our famous giveaways</span>
               </li>
             </ul>
             <a href="#open-popup" class="lmctPP__select css-order-bronze" data-lmct-package="entry" data-title="css-order-bronze">Select Entry</a>
@@ -1366,17 +1361,15 @@
                     <path d="M6 21V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v15" />
                     <path d="M6 12h6" />
                     <path d="M14 9h2.5a2 2 0 0 1 2 2v6a1.75 1.75 0 0 0 3.5 0V9l-3-3" /></svg></span
-                ><span class="lmctPP__featTxt"><strong>LMCT+</strong> Petrol Discounts</span>
+                ><span class="lmctPP__featTxt"><strong>Access to wholesale fuel</strong></span>
               </li>
               <li class="lmctPP__feat">
                 <span class="lmctPP__featIco"
                   ><svg viewBox="0 0 24 24">
-                    <rect x="3.5" y="9" width="17" height="11.5" rx="1.5" />
-                    <path d="M3.5 13h17" />
-                    <path d="M12 9v11.5" />
-                    <path d="M12 9C12 9 11 4.5 8 5s1 4 4 4Z" />
-                    <path d="M12 9C12 9 13 4.5 16 5s-1 4-4 4Z" /></svg></span
-                ><span class="lmctPP__featTxt">Accumulating Entries to <strong>All Giveaways</strong></span>
+                    <path d="M3 3h2l2.5 12h11l2-8H6" />
+                    <circle cx="9" cy="20" r="1" />
+                    <circle cx="18" cy="20" r="1" /></svg></span
+                ><span class="lmctPP__featTxt"><strong>Access to wholesale groceries</strong></span>
               </li>
               <li class="lmctPP__feat">
                 <span class="lmctPP__featIco"
@@ -1386,7 +1379,7 @@
                     <path d="M12 9.3v.9M12 13.8v.9" />
                     <circle cx="6" cy="12" r=".5" fill="currentColor" stroke="none" />
                     <circle cx="18" cy="12" r=".5" fill="currentColor" stroke="none" /></svg></span
-                ><span class="lmctPP__featTxt">Up to <strong>$150,000</strong> In Savings</span>
+                ><span class="lmctPP__featTxt">Unlock <strong>$150,000 &ndash; $200,000+</strong> in savings with our business partners</span>
               </li>
               <li class="lmctPP__feat">
                 <span class="lmctPP__featIco"
@@ -1411,6 +1404,23 @@
                     <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" />
                     <line x1="10.5" y1="18.5" x2="13.5" y2="18.5" /></svg></span
                 ><span class="lmctPP__featTxt"><strong>Exclusive</strong> App Access</span>
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="16" rx="2" />
+                    <path d="M16 3v4M8 3v4M3 11h18M8 16l2 2 5-5" /></svg></span
+                ><span class="lmctPP__featTxt"><strong>Exclusive invites</strong> to events</span>
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="3.5" y="9" width="17" height="11.5" rx="1.5" />
+                    <path d="M3.5 13h17" />
+                    <path d="M12 9v11.5" />
+                    <path d="M12 9C12 9 11 4.5 8 5s1 4 4 4Z" />
+                    <path d="M12 9C12 9 13 4.5 16 5s-1 4-4 4Z" /></svg></span
+                ><span class="lmctPP__featTxt"><strong>Free accumulating entries</strong> into our famous giveaways</span>
               </li>
             </ul>
             <a href="#open-popup" class="lmctPP__select css-order-silver" data-lmct-package="premium" data-title="css-order-silver">Select Premium</a>
@@ -1437,17 +1447,15 @@
                     <path d="M6 21V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v15" />
                     <path d="M6 12h6" />
                     <path d="M14 9h2.5a2 2 0 0 1 2 2v6a1.75 1.75 0 0 0 3.5 0V9l-3-3" /></svg></span
-                ><span class="lmctPP__featTxt"><strong>LMCT+</strong> Petrol Discounts</span>
+                ><span class="lmctPP__featTxt"><strong>Access to wholesale fuel</strong></span>
               </li>
               <li class="lmctPP__feat">
                 <span class="lmctPP__featIco"
                   ><svg viewBox="0 0 24 24">
-                    <rect x="3.5" y="9" width="17" height="11.5" rx="1.5" />
-                    <path d="M3.5 13h17" />
-                    <path d="M12 9v11.5" />
-                    <path d="M12 9C12 9 11 4.5 8 5s1 4 4 4Z" />
-                    <path d="M12 9C12 9 13 4.5 16 5s-1 4-4 4Z" /></svg></span
-                ><span class="lmctPP__featTxt">Accumulating Entries to <strong>All Giveaways</strong></span>
+                    <path d="M3 3h2l2.5 12h11l2-8H6" />
+                    <circle cx="9" cy="20" r="1" />
+                    <circle cx="18" cy="20" r="1" /></svg></span
+                ><span class="lmctPP__featTxt"><strong>Access to wholesale groceries</strong></span>
               </li>
               <li class="lmctPP__feat">
                 <span class="lmctPP__featIco"
@@ -1457,7 +1465,7 @@
                     <path d="M12 9.3v.9M12 13.8v.9" />
                     <circle cx="6" cy="12" r=".5" fill="currentColor" stroke="none" />
                     <circle cx="18" cy="12" r=".5" fill="currentColor" stroke="none" /></svg></span
-                ><span class="lmctPP__featTxt">Up to <strong>$250,000</strong> In Savings</span>
+                ><span class="lmctPP__featTxt">Unlock <strong>$250,000 &ndash; $300,000+</strong> in savings with our business partners</span>
               </li>
               <li class="lmctPP__feat">
                 <span class="lmctPP__featIco"
@@ -1483,6 +1491,23 @@
                     <line x1="10.5" y1="18.5" x2="13.5" y2="18.5" /></svg></span
                 ><span class="lmctPP__featTxt"><strong>Exclusive</strong> App Access</span>
               </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="16" rx="2" />
+                    <path d="M16 3v4M8 3v4M3 11h18M8 16l2 2 5-5" /></svg></span
+                ><span class="lmctPP__featTxt"><strong>Exclusive invites</strong> to events</span>
+              </li>
+              <li class="lmctPP__feat">
+                <span class="lmctPP__featIco"
+                  ><svg viewBox="0 0 24 24">
+                    <rect x="3.5" y="9" width="17" height="11.5" rx="1.5" />
+                    <path d="M3.5 13h17" />
+                    <path d="M12 9v11.5" />
+                    <path d="M12 9C12 9 11 4.5 8 5s1 4 4 4Z" />
+                    <path d="M12 9C12 9 13 4.5 16 5s-1 4-4 4Z" /></svg></span
+                ><span class="lmctPP__featTxt"><strong>Free accumulating entries</strong> into our famous giveaways</span>
+              </li>
             </ul>
             <a href="#open-popup" class="lmctPP__select css-order-gold" data-lmct-package="elite" data-title="css-order-gold">Select Elite</a>
           </div>
@@ -1504,10 +1529,10 @@
           </div>
           <ul>
             <li>
-              <span><strong>1 FREE</strong> Accumulating Entry Into EVERY Draw Each Month</span>
+              <span><strong>Access to wholesale fuel</strong></span>
             </li>
             <li>
-              <span><strong>LMCT+ Fuel Saver Discount</strong> Included</span>
+              <span><strong>Access to wholesale groceries</strong></span>
             </li>
             <li>
               <span><strong>5% off</strong> instore products excl. cigarettes and epay</span>
@@ -1515,9 +1540,14 @@
             <li>
               <span><strong>Entry</strong> Discounts at Selected Partners</span>
             </li>
-            <li><span>Invites to LMCT+ Games Across Australia</span></li>
+            <li>
+              <span><strong>Exclusive invites</strong> to events</span>
+            </li>
             <li><span>LMCT+ Early Bird Promotion Emails</span></li>
             <li><span>Exclusive App Access</span></li>
+            <li>
+              <span><strong>1 FREE</strong> Accumulating Entry Into Every Giveaway Each Month</span>
+            </li>
           </ul>
         </div>
         <div class="lmctPkgInclV7_card lmctPkgInclV7_premium">
@@ -1527,10 +1557,10 @@
           </div>
           <ul>
             <li>
-              <span><strong>5 FREE</strong> Accumulating Entries Into EVERY Draw Each Month</span>
+              <span><strong>Access to wholesale fuel</strong></span>
             </li>
             <li>
-              <span><strong>LMCT+ Fuel Saver Discount</strong> Included</span>
+              <span><strong>Access to wholesale groceries</strong></span>
             </li>
             <li>
               <span><strong>7.5% off</strong> instore products excl. cigarettes and epay</span>
@@ -1538,9 +1568,14 @@
             <li>
               <span><strong>Premium</strong> Discounts at Selected Partners</span>
             </li>
-            <li><span>Invites to LMCT+ Games Across Australia</span></li>
+            <li>
+              <span><strong>Exclusive invites</strong> to events</span>
+            </li>
             <li><span>LMCT+ Early Bird Promotion Emails</span></li>
             <li><span>Exclusive App Access</span></li>
+            <li>
+              <span><strong>5 FREE</strong> Accumulating Entries Into Every Giveaway Each Month</span>
+            </li>
           </ul>
         </div>
         <div class="lmctPkgInclV7_card lmctPkgInclV7_elite">
@@ -1550,10 +1585,10 @@
           </div>
           <ul>
             <li>
-              <span><strong>10 FREE</strong> Accumulating Entries Into EVERY Draw Each Month</span>
+              <span><strong>Access to wholesale fuel</strong></span>
             </li>
             <li>
-              <span><strong>LMCT+ Fuel Saver Discount</strong> Included</span>
+              <span><strong>Access to wholesale groceries</strong></span>
             </li>
             <li>
               <span><strong>10% off</strong> instore products excl. cigarettes and epay</span>
@@ -1561,19 +1596,24 @@
             <li>
               <span><strong>Elite</strong> Discounts at Selected Partners</span>
             </li>
-            <li><span>Invites to LMCT+ Games Across Australia</span></li>
+            <li>
+              <span><strong>Exclusive invites</strong> to events</span>
+            </li>
             <li><span>LMCT+ Early Bird Promotion Emails</span></li>
             <li><span>Exclusive App Access</span></li>
+            <li>
+              <span><strong>10 FREE</strong> Accumulating Entries Into Every Giveaway Each Month</span>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <script>
   (function () {
     "use strict";
-
     var packageData = {
       entry: {
         name: "Entry",
@@ -1591,13 +1631,10 @@
         yearly: { integer: "999", equivalent: "$83.25", inclusion: "$999 / year", productId: "4566568" },
       },
     };
-
     var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
     function getCheckoutRadios() {
       return document.querySelectorAll('.o2step_step2 input[name="purchase[product_id]"], [data-de-type="orpo"] input[name="purchase[product_id]"]');
     }
-
     function restoreCheckoutProducts() {
       getCheckoutRadios().forEach(function (radio) {
         if (radio.closest("#cfAR")) return;
@@ -1606,19 +1643,15 @@
         if (row) row.style.display = "";
         if (template) template.style.display = "";
       });
-
       document.body.removeAttribute("data-lmct-yearly-package");
       window.localStorage.setItem("selected_billing", "monthly");
       window.lmctSelectedYearlyPackage = null;
     }
-
     function selectYearlyProduct(packageKey) {
       var plan = packageData[packageKey];
       if (!plan || !plan.yearly.productId) return;
-
       var productId = plan.yearly.productId;
       var targetRadio = null;
-
       getCheckoutRadios().forEach(function (radio) {
         if (radio.closest("#cfAR")) return;
         var isMatch = radio.value === productId;
@@ -1632,16 +1665,12 @@
         radio.checked = isMatch;
         if (isMatch) targetRadio = radio;
       });
-
       if (!targetRadio) return;
-
       targetRadio.dispatchEvent(new Event("change", { bubbles: true }));
       targetRadio.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-
       document.querySelectorAll('#cfAR input[name="purchase[product_ids][]"]').forEach(function (input) {
         input.checked = input.value === productId;
       });
-
       document.body.setAttribute("data-lmct-yearly-package", packageKey);
       window.localStorage.setItem("selected_billing", "yearly");
       window.lmctSelectedYearlyPackage = {
@@ -1650,23 +1679,18 @@
         discount: "15% OFF",
         monthlyEquivalent: Number(plan.yearly.equivalent.replace("$", "")),
       };
-
       if (typeof window.rebuildOrderSummary === "function") window.rebuildOrderSummary();
       if (window.jQuery) window.jQuery(document).trigger("cfpt:cart-updated");
     }
-
     function applyBillingMode(mode) {
       var section = document.getElementById("packages");
       var grid = section && section.querySelector("[data-lmct-package-grid]");
       if (!section || !grid || !packageData.entry[mode]) return;
-
       section.setAttribute("data-billing-mode", mode);
       window.localStorage.setItem("selected_billing", mode);
-
       section.querySelectorAll("[data-lmct-billing]").forEach(function (tab) {
         tab.setAttribute("aria-pressed", String(tab.getAttribute("data-lmct-billing") === mode));
       });
-
       var title = document.getElementById("lmctBillingTitle");
       var description = document.getElementById("lmctBillingDescription");
       if (title && description) {
@@ -1678,24 +1702,20 @@
           description.textContent = "Monthly billing with the flexibility to cancel anytime.";
         }
       }
-
       Object.keys(packageData).forEach(function (packageKey) {
         var plan = packageData[packageKey];
         var card = grid.querySelector('[data-lmct-plan="' + packageKey + '"]');
         if (!card) return;
-
         var integer = card.querySelector(".lmctPP__int");
         var decimal = card.querySelector(".lmctPP__dec");
         var sub = card.querySelector(".lmctPP__priceSub");
         var cycle = card.querySelector(".lmctPP__tier span");
         var select = card.querySelector("[data-lmct-package]");
         var inclusion = section.querySelector('[data-lmct-inclusion-price="' + packageKey + '"]');
-
         integer.textContent = plan[mode].integer;
         decimal.textContent = mode === "monthly" ? plan.monthly.decimal : "";
         decimal.hidden = mode === "yearly";
         cycle.textContent = mode === "yearly" ? "Yearly" : "Membership";
-
         if (mode === "yearly") {
           sub.innerHTML = "<strong>/ Year</strong><span>Only " + plan.yearly.equivalent + "/month equivalent.</span>";
           select.setAttribute("data-lmct-yearly-package", packageKey);
@@ -1707,13 +1727,10 @@
           select.removeAttribute("data-lmct-product-id");
           select.setAttribute("aria-label", "Select LMCT+ " + plan.name + " monthly membership");
         }
-
         if (inclusion) inclusion.textContent = plan[mode].inclusion;
       });
-
       if (mode === "monthly") restoreCheckoutProducts();
     }
-
     window.lmctMembershipPackages = packageData;
     window.lmctYearlyProductIds = {
       entry: packageData.entry.yearly.productId,
@@ -1721,16 +1738,13 @@
       elite: packageData.elite.yearly.productId,
     };
     window.lmctSelectYearlyProduct = selectYearlyProduct;
-
     window.addEventListener("load", function () {
       var section = document.getElementById("packages");
       if (!section) return;
-
       section.querySelectorAll("[data-lmct-billing]").forEach(function (tab) {
         tab.addEventListener("click", function () {
           applyBillingMode(tab.getAttribute("data-lmct-billing"));
         });
-
         tab.addEventListener("keydown", function (event) {
           if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
           event.preventDefault();
@@ -1740,7 +1754,6 @@
           if (nextTab) nextTab.focus();
         });
       });
-
       section.querySelectorAll("[data-lmct-package]").forEach(function (select) {
         select.addEventListener("click", function () {
           if (section.getAttribute("data-billing-mode") !== "yearly") return;
@@ -1752,7 +1765,6 @@
           });
         });
       });
-
       var btn = document.getElementById("lmctPkgInclV7_btn");
       var drawer = document.getElementById("lmctPkgInclV7_drawer");
       if (btn && drawer) {
@@ -1763,12 +1775,10 @@
           btn.setAttribute("aria-expanded", String(!isOpen));
         });
       }
-
       var pkgLinks = document.querySelectorAll('a[href="#packages"]');
       var ease = function (t) {
         return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       };
-
       pkgLinks.forEach(function (link) {
         link.addEventListener("click", function (event) {
           event.preventDefault();
@@ -1778,7 +1788,6 @@
             window.scrollTo(0, endY);
             return;
           }
-
           var distance = endY - startY;
           var startTime = null;
           var duration = 650;
@@ -1791,7 +1800,6 @@
           window.requestAnimationFrame(step);
         });
       });
-
       applyBillingMode("monthly");
     });
   })();

@@ -1,0 +1,1811 @@
+<!--
+  LMCT+ South Australia Fuel + $1M funnel
+  ClickFunnels-ready fragment: scoped HTML, CSS and JavaScript.
+  Update campaign and integration values only in LMCT_SA_FUEL_CONFIG below.
+-->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,700;0,800;1,700;1,800;1,900&family=Jost:wght@400;500;600;700&display=swap");
+
+  .lmct-sa-fuel-million {
+    --lmct-sa-navy: #07142d;
+    --lmct-sa-navy-2: #0c1831;
+    --lmct-sa-action: #1d5fb8;
+    --lmct-sa-action-hover: #154a90;
+    --lmct-sa-blue: #1d8fff;
+    --lmct-sa-sky: #79c8ff;
+    --lmct-sa-ice: #d9ecff;
+    --lmct-sa-soft: #f7fbff;
+    --lmct-sa-white: #ffffff;
+    --lmct-sa-ink: #0b1220;
+    --lmct-sa-muted: #465b76;
+    --lmct-sa-danger: #a32121;
+    --lmct-sa-radius: 16px;
+    --lmct-sa-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --lmct-sa-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    width: 100%;
+    overflow: clip;
+    color: var(--lmct-sa-ink);
+    background: var(--lmct-sa-white);
+    font-family: "Jost", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    isolation: isolate;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .lmct-sa-fuel-million,
+  .lmct-sa-fuel-million *,
+  .lmct-sa-fuel-million *::before,
+  .lmct-sa-fuel-million *::after {
+    box-sizing: border-box;
+  }
+
+  .lmct-sa-fuel-million ::selection {
+    color: var(--lmct-sa-navy);
+    background: var(--lmct-sa-sky);
+  }
+
+  .lmct-sa-fuel-million img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .lmct-sa-fuel-million a,
+  .lmct-sa-fuel-million button,
+  .lmct-sa-fuel-million input,
+  .lmct-sa-fuel-million summary {
+    font: inherit;
+  }
+
+  .lmct-sa-fuel-million a,
+  .lmct-sa-fuel-million button,
+  .lmct-sa-fuel-million summary,
+  .lmct-sa-fuel-million input[type="range"] {
+    touch-action: manipulation;
+  }
+
+  .lmct-sa-fuel-million button,
+  .lmct-sa-fuel-million [role="button"],
+  .lmct-sa-fuel-million summary {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .lmct-sa-fuel-million :where(a, button, input, summary):focus-visible {
+    outline: 3px solid var(--lmct-sa-blue);
+    outline-offset: 4px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-skip {
+    position: absolute;
+    z-index: 30;
+    top: 8px;
+    left: 8px;
+    padding: 10px 14px;
+    color: var(--lmct-sa-navy);
+    background: var(--lmct-sa-white);
+    border-radius: 999px;
+    transform: translateY(-160%);
+    transition: transform 160ms var(--lmct-sa-ease-out);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-skip:focus {
+    transform: translateY(0);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-container {
+    width: min(1180px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-section {
+    padding-block: clamp(72px, 8vw, 124px);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-heading,
+  .lmct-sa-fuel-million .lmct-sa-subheading,
+  .lmct-sa-fuel-million .lmct-sa-price,
+  .lmct-sa-fuel-million .lmct-sa-prize-amount,
+  .lmct-sa-fuel-million .lmct-sa-rate-number {
+    margin: 0;
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-heading {
+    max-width: 11ch;
+    font-size: clamp(3.75rem, 7.4vw, 6rem);
+    line-height: 0.9;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-subheading {
+    max-width: 14ch;
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    line-height: 0.92;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-copy {
+    max-width: 66ch;
+    margin: 0;
+    color: var(--lmct-sa-ink);
+    font-size: clamp(1rem, 1.25vw, 1.16rem);
+    line-height: 1.62;
+    text-wrap: pretty;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-copy strong {
+    color: inherit;
+    font-weight: 700;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    max-width: 100%;
+    padding: 15px 26px;
+    border: 0;
+    border-radius: 999px;
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-action);
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: 0.035em;
+    line-height: 1.1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      transform 140ms var(--lmct-sa-ease-out),
+      background-color 180ms ease;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-btn:active {
+    transform: scale(0.97);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-btn--light {
+    color: var(--lmct-sa-navy);
+    background: var(--lmct-sa-white);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-header {
+    position: relative;
+    z-index: 5;
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-navy);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 74px;
+    gap: 24px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-logo {
+    width: 164px;
+    height: auto;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    color: var(--lmct-sa-white);
+    font-size: 0.94rem;
+    font-weight: 600;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-location svg {
+    flex: 0 0 auto;
+    width: 20px;
+    height: 20px;
+    color: var(--lmct-sa-sky);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-hero {
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-navy);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.94fr) minmax(420px, 1.06fr);
+    align-items: stretch;
+    gap: clamp(34px, 5vw, 76px);
+    min-height: calc(100svh - 74px);
+    padding-block: clamp(44px, 6vw, 84px);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-hero .lmct-sa-heading {
+    max-width: 10.5ch;
+    color: var(--lmct-sa-white);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-hero-lead {
+    max-width: 32rem;
+    margin: 24px 0 0;
+    color: #dce8f8;
+    font-size: clamp(1.05rem, 1.35vw, 1.24rem);
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-hero-price-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    margin-top: 30px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price {
+    color: var(--lmct-sa-white);
+    font-size: clamp(4.4rem, 7vw, 6.6rem);
+    line-height: 0.78;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-term {
+    margin: 0 0 2px;
+    color: var(--lmct-sa-sky);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-hero-action {
+    margin-top: 28px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-hero-note {
+    max-width: 44rem;
+    margin: 14px 0 0;
+    color: #b8cae1;
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-hero-visual {
+    display: grid;
+    grid-template-rows: auto minmax(280px, 1fr);
+    align-self: center;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: var(--lmct-sa-radius);
+    background: var(--lmct-sa-blue);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-prize-panel {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+    padding: clamp(24px, 3vw, 38px);
+    color: var(--lmct-sa-navy);
+    background: var(--lmct-sa-blue);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-prize-amount {
+    font-size: clamp(4.1rem, 8.2vw, 7.8rem);
+    line-height: 0.72;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-prize-copy {
+    margin: 14px 0 0;
+    font-size: clamp(1.2rem, 2vw, 1.7rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-prize-date {
+    max-width: 10ch;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.28;
+    text-align: right;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-station-image {
+    width: 112%;
+    max-width: none;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    object-position: left center;
+    background: var(--lmct-sa-navy-2);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-offer {
+    background: var(--lmct-sa-soft);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-offer-grid {
+    display: grid;
+    grid-template-columns: minmax(290px, 0.8fr) minmax(0, 1.2fr);
+    align-items: stretch;
+    gap: clamp(30px, 6vw, 86px);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-offer-price {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(30px, 4vw, 50px);
+    border-radius: var(--lmct-sa-radius);
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-action);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-offer-price .lmct-sa-price {
+    font-size: clamp(5.4rem, 10vw, 8.6rem);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-offer-price p {
+    margin: 18px 0 0;
+    color: #eaf3ff;
+    font-size: 1.08rem;
+    line-height: 1.45;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-offer-content {
+    align-self: center;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-offer-content .lmct-sa-copy {
+    margin-top: 24px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-inclusions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 30px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-inclusions li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-height: 74px;
+    padding: 16px;
+    border-radius: 12px;
+    color: var(--lmct-sa-navy);
+    background: var(--lmct-sa-ice);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-check {
+    display: inline-grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-action);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-check svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-billing-note {
+    margin: 14px 0 0;
+    color: var(--lmct-sa-muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-earn {
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-navy);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-earn-head {
+    display: grid;
+    grid-template-columns: 1fr 0.7fr;
+    align-items: end;
+    gap: 48px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-earn .lmct-sa-subheading,
+  .lmct-sa-fuel-million .lmct-sa-earn .lmct-sa-copy {
+    color: var(--lmct-sa-white);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-earn .lmct-sa-copy {
+    justify-self: end;
+    color: #c8d8eb;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-rates {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 54px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-station-proof {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin: 18px 0 0;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-station-crop {
+    margin: 0;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-station-crop img {
+    width: 100%;
+    height: clamp(180px, 20vw, 250px);
+    border-radius: var(--lmct-sa-radius);
+    object-fit: cover;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-station-crop:first-child img {
+    object-position: 35% center;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-station-crop:last-child img {
+    object-position: 74% center;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-station-crop figcaption {
+    margin-top: 10px;
+    color: #c8d8eb;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-rate {
+    min-height: 245px;
+    padding: clamp(26px, 4vw, 46px);
+    border-radius: var(--lmct-sa-radius);
+    color: var(--lmct-sa-navy);
+    background: var(--lmct-sa-blue);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-rate:nth-child(2) {
+    background: var(--lmct-sa-ice);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-rate-number {
+    font-size: clamp(4.7rem, 9vw, 8rem);
+    line-height: 0.78;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-rate h3 {
+    margin: 22px 0 8px;
+    font-size: 1.35rem;
+    line-height: 1.2;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-rate p {
+    max-width: 34rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-progress {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(320px, 1.18fr);
+    gap: clamp(40px, 7vw, 100px);
+    align-items: center;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-progress-copy .lmct-sa-copy {
+    margin-top: 24px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-progress-tool {
+    padding: clamp(28px, 4vw, 50px);
+    border-radius: var(--lmct-sa-radius);
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-action);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-progress-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-progress-label output {
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+    font-size: 2.5rem;
+    font-style: italic;
+    font-weight: 800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-range {
+    width: 100%;
+    min-height: 44px;
+    margin: 0;
+    accent-color: var(--lmct-sa-sky);
+    cursor: pointer;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-meter {
+    height: 14px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.24);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-meter-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--lmct-sa-white);
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 220ms var(--lmct-sa-ease-out);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-progress-result {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 26px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-progress-result strong {
+    display: block;
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+    font-size: clamp(3.5rem, 7vw, 5.8rem);
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.8;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-progress-result span {
+    max-width: 13ch;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: right;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-progress-footnote {
+    margin: 24px 0 0;
+    color: #dce9f7;
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-app {
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-navy);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-app-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+    align-items: center;
+    gap: clamp(46px, 8vw, 116px);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-app-media {
+    position: relative;
+    min-height: 600px;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--lmct-sa-radius);
+    background: var(--lmct-sa-blue);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-app-phone {
+    position: absolute;
+    right: -4%;
+    bottom: -3%;
+    width: min(115%, 610px);
+    height: auto;
+    object-fit: contain;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-app-copy .lmct-sa-subheading,
+  .lmct-sa-fuel-million .lmct-sa-app-copy .lmct-sa-copy {
+    color: var(--lmct-sa-white);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-app-copy .lmct-sa-copy {
+    margin-top: 26px;
+    color: #c8d8eb;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-app-list {
+    display: grid;
+    gap: 14px;
+    margin: 30px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-app-list li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 58px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    color: var(--lmct-sa-navy);
+    background: var(--lmct-sa-ice);
+    font-weight: 650;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-app-caption {
+    margin: 22px 0 0;
+    color: #9eb6d2;
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-campaign {
+    color: var(--lmct-sa-navy);
+    background: var(--lmct-sa-blue);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-campaign-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+    align-items: end;
+    gap: clamp(38px, 8vw, 110px);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-campaign .lmct-sa-subheading {
+    max-width: 10ch;
+    font-size: clamp(4rem, 9vw, 8.7rem);
+    line-height: 0.78;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-campaign-copy {
+    padding-bottom: 6px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-close-date {
+    margin: 0 0 24px;
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    font-style: italic;
+    font-weight: 800;
+    line-height: 0.98;
+    text-transform: uppercase;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-campaign-copy p {
+    margin: 0;
+    font-size: 1.04rem;
+    line-height: 1.55;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq {
+    background: var(--lmct-sa-white);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.66fr) minmax(0, 1.34fr);
+    align-items: start;
+    gap: clamp(42px, 8vw, 116px);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-item {
+    border: 0;
+    border-radius: 12px;
+    background: var(--lmct-sa-soft);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-item[open] {
+    background: var(--lmct-sa-ice);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-item summary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    gap: 20px;
+    padding: 18px 22px;
+    color: var(--lmct-sa-navy);
+    font-weight: 700;
+    line-height: 1.3;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-icon {
+    position: relative;
+    flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-icon::before,
+  .lmct-sa-fuel-million .lmct-sa-faq-icon::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 3px;
+    width: 16px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--lmct-sa-action);
+    transition: transform 180ms var(--lmct-sa-ease-out);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-icon::after {
+    transform: rotate(90deg);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-item[open] .lmct-sa-faq-icon::after {
+    transform: rotate(0deg);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-answer {
+    padding: 0 22px 22px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-faq-answer p {
+    max-width: 65ch;
+    margin: 0;
+    color: var(--lmct-sa-ink);
+    line-height: 1.6;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-final {
+    background: var(--lmct-sa-soft);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-final-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+    align-items: center;
+    gap: clamp(34px, 7vw, 90px);
+    padding: clamp(34px, 6vw, 72px);
+    border-radius: var(--lmct-sa-radius);
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-navy);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-final .lmct-sa-subheading,
+  .lmct-sa-fuel-million .lmct-sa-final .lmct-sa-copy {
+    color: var(--lmct-sa-white);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-final .lmct-sa-copy {
+    max-width: 50ch;
+    margin-top: 24px;
+    color: #c8d8eb;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-final-action {
+    padding: 28px;
+    border-radius: 14px;
+    color: var(--lmct-sa-navy);
+    background: var(--lmct-sa-blue);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-final-price {
+    margin: 0;
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+    font-size: clamp(4rem, 8vw, 6.6rem);
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.82;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-final-action > p {
+    margin: 14px 0 22px;
+    font-size: 0.94rem;
+    font-weight: 650;
+    line-height: 1.45;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-final-action .lmct-sa-btn {
+    width: 100%;
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-navy);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-checkout-mount[hidden] {
+    display: none;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-checkout-mount {
+    width: min(760px, calc(100% - 48px));
+    margin: 0 auto clamp(72px, 8vw, 124px);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-footer {
+    padding-block: 38px;
+    color: #b8cae1;
+    background: var(--lmct-sa-navy);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-footer-logo {
+    width: 138px;
+    height: auto;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-footer-copy {
+    max-width: 760px;
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.55;
+    text-align: right;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-footer-copy a {
+    color: var(--lmct-sa-white);
+    text-underline-offset: 3px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-sticky {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lmct-sa-fuel-million .lmct-sa-motion-cue {
+      transition: transform 480ms var(--lmct-sa-ease-out);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-hero-visual {
+      animation: lmct-sa-shutter 900ms var(--lmct-sa-ease-out) both;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-hero-visual .lmct-sa-station-image {
+      animation: lmct-sa-image-settle 900ms var(--lmct-sa-ease-out) both;
+    }
+  }
+
+  @keyframes lmct-sa-shutter {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  @keyframes lmct-sa-image-settle {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lmct-sa-fuel-million .lmct-sa-btn:hover {
+      transform: translateY(-2px);
+      background: var(--lmct-sa-action-hover);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-btn--light:hover {
+      color: var(--lmct-sa-white);
+      background: var(--lmct-sa-action-hover);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-final-action .lmct-sa-btn:hover {
+      background: var(--lmct-sa-action-hover);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-faq-item summary:hover {
+      color: var(--lmct-sa-action);
+    }
+  }
+
+  @media (max-width: 960px) {
+    .lmct-sa-fuel-million .lmct-sa-hero-inner {
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.92fr);
+      gap: 30px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-offer-grid,
+    .lmct-sa-fuel-million .lmct-sa-progress,
+    .lmct-sa-fuel-million .lmct-sa-app-grid,
+    .lmct-sa-fuel-million .lmct-sa-faq-grid,
+    .lmct-sa-fuel-million .lmct-sa-final-card {
+      gap: 42px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-app-media {
+      min-height: 520px;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .lmct-sa-fuel-million .lmct-sa-container {
+      width: min(100% - 40px, 720px);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-section {
+      padding-block: 82px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-hero-inner,
+    .lmct-sa-fuel-million .lmct-sa-offer-grid,
+    .lmct-sa-fuel-million .lmct-sa-progress,
+    .lmct-sa-fuel-million .lmct-sa-app-grid,
+    .lmct-sa-fuel-million .lmct-sa-campaign-grid,
+    .lmct-sa-fuel-million .lmct-sa-faq-grid,
+    .lmct-sa-fuel-million .lmct-sa-final-card {
+      grid-template-columns: 1fr;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-hero-inner {
+      min-height: 0;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-earn-head {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 24px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-earn .lmct-sa-copy {
+      justify-self: start;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-app-media {
+      min-height: 610px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-app-copy {
+      order: -1;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-app-phone {
+      right: 5%;
+      width: min(84%, 580px);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-final-action {
+      max-width: 420px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lmct-sa-fuel-million {
+      padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-container {
+      width: calc(100% - 36px);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-section {
+      padding-block: 68px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-header-inner {
+      min-height: 66px;
+      gap: 16px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-logo {
+      width: 132px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-location {
+      max-width: 158px;
+      font-size: 0.82rem;
+      line-height: 1.25;
+      text-align: right;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-location svg {
+      display: none;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-hero-inner {
+      gap: 34px;
+      padding-block: 44px 54px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-heading {
+      max-width: 9ch;
+      font-size: clamp(3.25rem, 16vw, 4.45rem);
+      line-height: 0.88;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-subheading {
+      font-size: clamp(2.7rem, 13vw, 3.8rem);
+      line-height: 0.92;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-hero-lead {
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-price {
+      font-size: 4.6rem;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-hero-action,
+    .lmct-sa-fuel-million .lmct-sa-btn {
+      width: 100%;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-prize-panel {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 18px;
+      padding: 26px 22px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-prize-amount {
+      font-size: clamp(4.8rem, 24vw, 6.5rem);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-prize-date {
+      max-width: none;
+      text-align: left;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-station-image {
+      min-height: 230px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-inclusions,
+    .lmct-sa-fuel-million .lmct-sa-rates {
+      grid-template-columns: 1fr;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-inclusions li {
+      min-height: 0;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-rates {
+      margin-top: 36px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-station-proof {
+      gap: 10px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-station-crop img {
+      height: 148px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-rate {
+      min-height: 220px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-progress-tool {
+      padding: 26px 22px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-progress-result {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-progress-result span {
+      max-width: none;
+      text-align: left;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-app-media {
+      min-height: 440px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-app-phone {
+      right: -8%;
+      width: 112%;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-campaign .lmct-sa-subheading {
+      max-width: 8ch;
+      font-size: clamp(5rem, 26vw, 7rem);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-faq-grid {
+      gap: 34px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-faq-item summary {
+      min-height: 60px;
+      padding: 17px 18px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-faq-answer {
+      padding: 0 18px 20px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-final-card {
+      padding: 30px 22px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-footer {
+      padding-bottom: calc(38px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-footer-inner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-footer-copy {
+      text-align: left;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-sticky {
+      position: fixed;
+      z-index: 20;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 18px calc(10px + env(safe-area-inset-bottom, 0px));
+      color: var(--lmct-sa-white);
+      background: var(--lmct-sa-navy);
+      transform: translateY(0);
+      transition: transform 220ms var(--lmct-sa-ease-out);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-sticky[hidden] {
+      display: grid;
+      pointer-events: none;
+      transform: translateY(110%);
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-sticky-copy {
+      margin: 0;
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.22;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-sticky-copy strong {
+      display: block;
+      color: var(--lmct-sa-sky);
+      font-size: 1.08rem;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-sticky .lmct-sa-btn {
+      width: auto;
+      min-height: 48px;
+      padding: 12px 18px;
+      font-size: 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmct-sa-fuel-million *,
+    .lmct-sa-fuel-million *::before,
+    .lmct-sa-fuel-million *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-btn:active {
+      transform: none;
+    }
+  }
+</style>
+
+<main class="lmct-sa-fuel-million" data-lmct-sa-root>
+  <a class="lmct-sa-skip" href="#lmct-sa-fuel-main">Skip to offer</a>
+
+  <header class="lmct-sa-header">
+    <div class="lmct-sa-container lmct-sa-header-inner">
+      <img
+        class="lmct-sa-logo"
+        data-lmct-sa-logo
+        src="https://lmctgiveaway.com/hosted/images/9d/e689b69ee84bdba5156761d85e6bf9/LMCT-PETROL-LOGO.svg"
+        alt="LMCT+ Petrol"
+        width="190"
+        height="47"
+        decoding="async" />
+      <p class="lmct-sa-location">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+          <circle cx="12" cy="10" r="2.5"></circle>
+        </svg>
+        <span data-lmct-sa-bind="locationShort">Edwardstown, South Australia</span>
+      </p>
+    </div>
+  </header>
+
+  <section class="lmct-sa-hero" id="lmct-sa-fuel-main" aria-labelledby="lmct-sa-fuel-title">
+    <div class="lmct-sa-container lmct-sa-hero-inner">
+      <div class="lmct-sa-hero-copy">
+        <h1 class="lmct-sa-heading" id="lmct-sa-fuel-title">Fuel access. $1M chance.</h1>
+        <p class="lmct-sa-hero-lead">Join LMCT+ at Edwardstown for 12 months of wholesale fuel access, plus entries in the current $1 million giveaway.</p>
+        <div class="lmct-sa-hero-price-row" aria-label="199 Australian dollars per year">
+          <p class="lmct-sa-price" data-lmct-sa-price>$199</p>
+          <p class="lmct-sa-price-term">AUD<br />per year</p>
+        </div>
+        <a class="lmct-sa-btn lmct-sa-hero-action" href="#lmct-sa-fuel-offer" data-lmct-sa-cta>See the annual offer</a>
+        <p class="lmct-sa-hero-note">Automatically renews annually until cancelled. Fuel is purchased separately. Entries are included when you join.</p>
+      </div>
+
+      <div class="lmct-sa-hero-visual" aria-label="Current LMCT+ one million dollar giveaway and Edwardstown petrol location">
+        <div class="lmct-sa-prize-panel">
+          <div>
+            <p class="lmct-sa-prize-amount" data-lmct-sa-bind="prizeShort">$1M</p>
+            <p class="lmct-sa-prize-copy">Current giveaway</p>
+          </div>
+          <p class="lmct-sa-prize-date">Ends <span data-lmct-sa-bind="campaignEndDate">29 October 2026</span></p>
+        </div>
+        <img
+          class="lmct-sa-station-image"
+          data-lmct-sa-station-image
+          src="https://images.clickfunnels.com/e8/4b749cc5ee491ab5813e4cc21a8c9a/Adelaide-new-Petrol-Staion.png"
+          alt="LMCT+ Petrol Edwardstown, South Australia"
+          width="1200"
+          height="675"
+          fetchpriority="high"
+          decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <section class="lmct-sa-section lmct-sa-offer" id="lmct-sa-fuel-offer" aria-labelledby="lmct-sa-offer-title">
+    <div class="lmct-sa-container lmct-sa-offer-grid">
+      <div class="lmct-sa-offer-price">
+        <div>
+          <p class="lmct-sa-price" data-lmct-sa-price>$199</p>
+          <p>One annual package.<br />12 months of access.</p>
+        </div>
+      </div>
+
+      <div class="lmct-sa-offer-content">
+        <h2 class="lmct-sa-subheading" id="lmct-sa-offer-title">One plan. Clear value.</h2>
+        <p class="lmct-sa-copy">Your annual payment gives you 12 months of wholesale fuel pricing access at LMCT+ Petrol Edwardstown. The fuel you put in your vehicle is paid for separately.</p>
+        <ul class="lmct-sa-inclusions">
+          <li>
+            <span class="lmct-sa-check" aria-hidden="true"
+              ><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="3"><path d="m4 10 4 4 8-9"></path></svg
+            ></span>
+            12 months of wholesale fuel access
+          </li>
+          <li>
+            <span class="lmct-sa-check" aria-hidden="true"
+              ><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="3"><path d="m4 10 4 4 8-9"></path></svg
+            ></span>
+            Entries included when you join
+          </li>
+          <li>
+            <span class="lmct-sa-check" aria-hidden="true"
+              ><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="3"><path d="m4 10 4 4 8-9"></path></svg
+            ></span>
+            Bonus entries from qualifying fuel
+          </li>
+          <li>
+            <span class="lmct-sa-check" aria-hidden="true"
+              ><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="3"><path d="m4 10 4 4 8-9"></path></svg
+            ></span>
+            Bonus entries from station shop spend
+          </li>
+        </ul>
+        <a class="lmct-sa-btn" href="#lmct-sa-fuel-offer" data-lmct-sa-cta>Join for $199/year</a>
+        <p class="lmct-sa-billing-note">AUD $199 charged annually. Automatically renews each year until cancelled. Fuel purchases are additional.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmct-sa-section lmct-sa-earn" aria-labelledby="lmct-sa-earn-title">
+    <div class="lmct-sa-container">
+      <div class="lmct-sa-earn-head">
+        <h2 class="lmct-sa-subheading" id="lmct-sa-earn-title">Fill up. Earn entries.</h2>
+        <p class="lmct-sa-copy">Two simple rates turn qualifying visits to the Edwardstown station into bonus entries for the current promotion.</p>
+      </div>
+
+      <div class="lmct-sa-rates">
+        <article class="lmct-sa-rate">
+          <p class="lmct-sa-rate-number"><span data-lmct-sa-bind="litresPerEntry">50</span>L</p>
+          <h3>Fuel earns 1 bonus entry</h3>
+          <p>Your qualifying litres accumulate across transactions, so you do not need to buy 50 litres in a single visit.</p>
+        </article>
+        <article class="lmct-sa-rate">
+          <p class="lmct-sa-rate-number">$<span data-lmct-sa-bind="shopSpendPerEntry">20</span></p>
+          <h3>Shop spend earns 1 bonus entry</h3>
+          <p>&ldquo;In store&rdquo; means the petrol station shop. Entry allocation remains subject to the official promotion terms.</p>
+        </article>
+      </div>
+
+      <div class="lmct-sa-station-proof" aria-label="Edwardstown fuel and station shop">
+        <figure class="lmct-sa-station-crop">
+          <img
+            src="https://images.clickfunnels.com/e8/4b749cc5ee491ab5813e4cc21a8c9a/Adelaide-new-Petrol-Staion.png"
+            alt="Fuel pumps at LMCT+ Petrol Edwardstown"
+            width="1965"
+            height="800"
+            loading="lazy"
+            decoding="async" />
+          <figcaption>Qualifying fuel purchases</figcaption>
+        </figure>
+        <figure class="lmct-sa-station-crop">
+          <img
+            src="https://images.clickfunnels.com/e8/4b749cc5ee491ab5813e4cc21a8c9a/Adelaide-new-Petrol-Staion.png"
+            alt="Petrol station shop at LMCT+ Petrol Edwardstown"
+            width="1965"
+            height="800"
+            loading="lazy"
+            decoding="async" />
+          <figcaption>Qualifying petrol station shop purchases</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmct-sa-section" aria-labelledby="lmct-sa-progress-title">
+    <div class="lmct-sa-container lmct-sa-progress">
+      <div class="lmct-sa-progress-copy">
+        <h2 class="lmct-sa-subheading" id="lmct-sa-progress-title">Litres add up.</h2>
+        <p class="lmct-sa-copy">Move the control to see how accumulated fuel litres translate into bonus entries. The next entry is never more than 50 qualifying litres away.</p>
+      </div>
+
+      <div class="lmct-sa-progress-tool" data-lmct-sa-progress-tool>
+        <label class="lmct-sa-progress-label" for="lmct-sa-fuel-litres">
+          <span>Accumulated fuel</span>
+          <output for="lmct-sa-fuel-litres" data-lmct-sa-litres-output>80 L</output>
+        </label>
+        <input class="lmct-sa-range" id="lmct-sa-fuel-litres" data-lmct-sa-range type="range" min="0" max="250" step="5" value="80" aria-describedby="lmct-sa-progress-result lmct-sa-progress-note" />
+        <div class="lmct-sa-meter" aria-hidden="true"><span class="lmct-sa-meter-fill" data-lmct-sa-meter-fill></span></div>
+        <div class="lmct-sa-progress-result" id="lmct-sa-progress-result" aria-live="polite">
+          <strong data-lmct-sa-entry-output>1</strong>
+          <span data-lmct-sa-entry-label>bonus entry earned, 20 L towards the next</span>
+        </div>
+        <p class="lmct-sa-progress-footnote" id="lmct-sa-progress-note">Illustrative fuel calculation using the confirmed rate. Official promotion terms govern eligibility and entry allocation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmct-sa-section lmct-sa-app" aria-labelledby="lmct-sa-app-title">
+    <div class="lmct-sa-container lmct-sa-app-grid">
+      <figure class="lmct-sa-app-media">
+        <img
+          class="lmct-sa-app-phone"
+          src="https://images.clickfunnels.com/66/b873641d364f6db46ef380efc9034f/imgi_8_phone.d557c9c5b0bd5530581d.png"
+          alt="Example LMCT+ app screen showing fuel activity and account information"
+          width="553"
+          height="622"
+          loading="lazy"
+          decoding="async" />
+      </figure>
+
+      <div class="lmct-sa-app-copy">
+        <h2 class="lmct-sa-subheading" id="lmct-sa-app-title">Track fuel progress.</h2>
+        <p class="lmct-sa-copy">Use the LMCT+ app to follow relevant fuel activity and promotion progress as the live experience makes it available.</p>
+        <ul class="lmct-sa-app-list">
+          <li>
+            <span class="lmct-sa-check" aria-hidden="true"
+              ><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="3"><path d="m4 10 4 4 8-9"></path></svg></span
+            >Keep your member access with you
+          </li>
+          <li>
+            <span class="lmct-sa-check" aria-hidden="true"
+              ><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="3"><path d="m4 10 4 4 8-9"></path></svg></span
+            >See relevant fuel activity in one place
+          </li>
+        </ul>
+        <p class="lmct-sa-app-caption">App screen shown for illustration. Prices, savings, rewards and other promotions pictured are not inclusions of this South Australian package.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmct-sa-section lmct-sa-campaign" aria-labelledby="lmct-sa-campaign-title">
+    <div class="lmct-sa-container lmct-sa-campaign-grid">
+      <h2 class="lmct-sa-subheading" id="lmct-sa-campaign-title">A $1M chance.</h2>
+      <div class="lmct-sa-campaign-copy">
+        <p class="lmct-sa-close-date">Ends <span data-lmct-sa-bind="campaignEndDate">29 October 2026</span></p>
+        <p>
+          Buying the annual package includes immediate entries in the current giveaway. You can then earn more through qualifying fuel and station shop activity. This promotion has its own closing
+          date; your fuel access continues for the full 12-month period.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmct-sa-section lmct-sa-faq" aria-labelledby="lmct-sa-faq-title">
+    <div class="lmct-sa-container lmct-sa-faq-grid">
+      <div>
+        <h2 class="lmct-sa-subheading" id="lmct-sa-faq-title">Questions, answered.</h2>
+      </div>
+
+      <div class="lmct-sa-faq-list" data-lmct-sa-faq-list>
+        <details class="lmct-sa-faq-item">
+          <summary>What does the $199 pay for?<span class="lmct-sa-faq-icon" aria-hidden="true"></span></summary>
+          <div class="lmct-sa-faq-answer">
+            <p>It pays for 12 months of wholesale fuel pricing access at LMCT+ Petrol Edwardstown and includes entries in the current featured giveaway. Fuel is purchased separately.</p>
+          </div>
+        </details>
+        <details class="lmct-sa-faq-item">
+          <summary>Does the package renew?<span class="lmct-sa-faq-icon" aria-hidden="true"></span></summary>
+          <div class="lmct-sa-faq-answer"><p>Yes. The AUD $199 payment automatically renews annually until cancelled.</p></div>
+        </details>
+        <details class="lmct-sa-faq-item">
+          <summary>Where can I use the fuel access?<span class="lmct-sa-faq-icon" aria-hidden="true"></span></summary>
+          <div class="lmct-sa-faq-answer"><p>This package is for wholesale fuel pricing access at LMCT+ Petrol Edwardstown in South Australia.</p></div>
+        </details>
+        <details class="lmct-sa-faq-item">
+          <summary>How do fuel bonus entries work?<span class="lmct-sa-faq-icon" aria-hidden="true"></span></summary>
+          <div class="lmct-sa-faq-answer"><p>Every 50 qualifying litres earns one bonus entry. Your qualifying litres accumulate across transactions.</p></div>
+        </details>
+        <details class="lmct-sa-faq-item">
+          <summary>How do station shop entries work?<span class="lmct-sa-faq-icon" aria-hidden="true"></span></summary>
+          <div class="lmct-sa-faq-answer"><p>Every $20 spent in the petrol station shop earns one bonus entry. Official promotion terms govern how qualifying spend is counted.</p></div>
+        </details>
+        <details class="lmct-sa-faq-item">
+          <summary>Does fuel access end with this giveaway?<span class="lmct-sa-faq-icon" aria-hidden="true"></span></summary>
+          <div class="lmct-sa-faq-answer"><p>No. Your access runs for 12 months from the annual payment. The current $1,000,000 giveaway ends on 29 October 2026.</p></div>
+        </details>
+        <details class="lmct-sa-faq-item">
+          <summary>What happens after this promotion?<span class="lmct-sa-faq-icon" aria-hidden="true"></span></summary>
+          <div class="lmct-sa-faq-answer">
+            <p>
+              LMCT+ may feature a different future prize, such as cash, a car, a house or another prize selected by the business. Do not assume entries or unfinished earning progress carry into a
+              future promotion; check the applicable terms.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmct-sa-section lmct-sa-final" aria-labelledby="lmct-sa-final-title">
+    <div class="lmct-sa-container lmct-sa-final-card">
+      <div>
+        <h2 class="lmct-sa-subheading" id="lmct-sa-final-title">12 months of fuel access.</h2>
+        <p class="lmct-sa-copy">Join for wholesale fuel access at Edwardstown and receive entries in the current $1 million giveaway.</p>
+      </div>
+      <div class="lmct-sa-final-action">
+        <p class="lmct-sa-final-price" data-lmct-sa-price>$199</p>
+        <p>Per year. Automatically renews annually until cancelled. Fuel purchased separately.</p>
+        <a class="lmct-sa-btn lmct-sa-btn--light" href="#lmct-sa-fuel-offer" data-lmct-sa-cta>Join for $199/year</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="lmct-sa-checkout-mount" id="lmct-sa-fuel-checkout" data-lmct-sa-checkout-mount hidden></div>
+
+  <footer class="lmct-sa-footer" data-lmct-sa-footer>
+    <div class="lmct-sa-container lmct-sa-footer-inner">
+      <img
+        class="lmct-sa-footer-logo"
+        src="https://lmctgiveaway.com/hosted/images/9d/e689b69ee84bdba5156761d85e6bf9/LMCT-PETROL-LOGO.svg"
+        alt=""
+        width="160"
+        height="39"
+        loading="lazy"
+        decoding="async" />
+      <p class="lmct-sa-footer-copy">
+        Promotion eligibility and entry allocation are subject to the official promotion terms. No countdown is shown because the exact closing time and timezone have not been supplied.
+        <a href="#" data-lmct-sa-terms-link hidden>Read promotion terms</a>
+      </p>
+    </div>
+  </footer>
+
+  <aside class="lmct-sa-sticky" data-lmct-sa-sticky aria-label="Annual offer">
+    <p class="lmct-sa-sticky-copy"><strong>$199/year</strong>12 months fuel access</p>
+    <a class="lmct-sa-btn" href="#lmct-sa-fuel-offer" data-lmct-sa-cta>Join</a>
+  </aside>
+</main>
+
+<script>
+  (function () {
+    "use strict";
+
+    /* ==========================
+       SINGLE CAMPAIGN CONFIG AREA
+       Complete the five null/empty launch values before publishing.
+       ========================== */
+    var LMCT_SA_FUEL_CONFIG = {
+      priceAUD: 199,
+      accessMonths: 12,
+      autoRenewsAnnually: true,
+      locationShort: "Edwardstown, South Australia",
+      locationName: "LMCT+ Petrol Edwardstown",
+      litresPerEntry: 50,
+      shopSpendPerEntry: 20,
+      prizeAmountAUD: 1000000,
+      prizeShort: "$1M",
+      campaignEndDate: "29 October 2026",
+      initialPurchaseEntries: null,
+      initialPurchaseEntriesCopy: "Entries included when you join",
+      checkoutUrl: "",
+      nativeCheckoutSelector: "",
+      promotionTermsUrl: "",
+      campaignClosingTimestamp: "",
+      campaignClosingTimezone: "",
+      shopSpendAccumulatesAcrossTransactions: null,
+      petrolLogoUrl: "https://lmctgiveaway.com/hosted/images/9d/e689b69ee84bdba5156761d85e6bf9/LMCT-PETROL-LOGO.svg",
+      stationImageUrl: "https://images.clickfunnels.com/e8/4b749cc5ee491ab5813e4cc21a8c9a/Adelaide-new-Petrol-Staion.png",
+    };
+
+    window.LMCT_SA_FUEL_CONFIG = LMCT_SA_FUEL_CONFIG;
+
+    var root = document.querySelector("[data-lmct-sa-root]");
+    if (!root) return;
+
+    var bindValues = {
+      locationShort: LMCT_SA_FUEL_CONFIG.locationShort,
+      litresPerEntry: LMCT_SA_FUEL_CONFIG.litresPerEntry,
+      shopSpendPerEntry: LMCT_SA_FUEL_CONFIG.shopSpendPerEntry,
+      prizeShort: LMCT_SA_FUEL_CONFIG.prizeShort,
+      campaignEndDate: LMCT_SA_FUEL_CONFIG.campaignEndDate,
+    };
+
+    root.querySelectorAll("[data-lmct-sa-bind]").forEach(function (node) {
+      var key = node.getAttribute("data-lmct-sa-bind");
+      if (Object.prototype.hasOwnProperty.call(bindValues, key)) node.textContent = String(bindValues[key]);
+    });
+
+    root.querySelectorAll("[data-lmct-sa-price]").forEach(function (node) {
+      node.textContent = "$" + String(LMCT_SA_FUEL_CONFIG.priceAUD);
+    });
+
+    root.querySelectorAll("[data-lmct-sa-logo]").forEach(function (node) {
+      node.src = LMCT_SA_FUEL_CONFIG.petrolLogoUrl;
+    });
+
+    var stationImage = root.querySelector("[data-lmct-sa-station-image]");
+    if (stationImage) stationImage.src = LMCT_SA_FUEL_CONFIG.stationImageUrl;
+
+    var termsLink = root.querySelector("[data-lmct-sa-terms-link]");
+    if (termsLink && LMCT_SA_FUEL_CONFIG.promotionTermsUrl) {
+      termsLink.href = LMCT_SA_FUEL_CONFIG.promotionTermsUrl;
+      termsLink.hidden = false;
+    }
+
+    var range = root.querySelector("[data-lmct-sa-range]");
+    var litresOutput = root.querySelector("[data-lmct-sa-litres-output]");
+    var entryOutput = root.querySelector("[data-lmct-sa-entry-output]");
+    var entryLabel = root.querySelector("[data-lmct-sa-entry-label]");
+    var meterFill = root.querySelector("[data-lmct-sa-meter-fill]");
+
+    function updateFuelProgress() {
+      if (!range || !litresOutput || !entryOutput || !entryLabel || !meterFill) return;
+      var litres = Math.max(0, Number(range.value) || 0);
+      var rate = Math.max(1, Number(LMCT_SA_FUEL_CONFIG.litresPerEntry) || 50);
+      var entries = Math.floor(litres / rate);
+      var remainder = litres % rate;
+      var towardNext = remainder === 0 && litres > 0 ? 0 : remainder;
+      var progress = remainder === 0 && litres > 0 ? 1 : remainder / rate;
+
+      litresOutput.textContent = litres + " L";
+      entryOutput.textContent = String(entries);
+      if (entries === 0) {
+        entryLabel.textContent = rate - remainder + " L to your first bonus entry";
+      } else if (towardNext === 0) {
+        entryLabel.textContent = (entries === 1 ? "bonus entry earned" : "bonus entries earned") + ", next milestone started";
+      } else {
+        entryLabel.textContent = (entries === 1 ? "bonus entry earned" : "bonus entries earned") + ", " + towardNext + " L towards the next";
+      }
+      meterFill.style.transform = "scaleX(" + progress.toFixed(3) + ")";
+    }
+
+    if (range) {
+      range.addEventListener("input", updateFuelProgress, { passive: true });
+      updateFuelProgress();
+    }
+
+    var faqItems = root.querySelectorAll(".lmct-sa-faq-item");
+    faqItems.forEach(function (item) {
+      item.addEventListener("toggle", function () {
+        if (!item.open) return;
+        faqItems.forEach(function (other) {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+      var motionCues = [
+        [root.querySelector(".lmct-sa-offer-price"), "scaleX(0.985)"],
+        [root.querySelectorAll(".lmct-sa-rate-number")[0], "translateX(-10px)"],
+        [root.querySelectorAll(".lmct-sa-rate-number")[1], "translateX(10px)"],
+        [root.querySelector(".lmct-sa-progress-tool"), "scale(0.99)"],
+        [root.querySelector(".lmct-sa-app-phone"), "translateY(10px) rotate(-0.75deg)"],
+        [root.querySelector(".lmct-sa-campaign .lmct-sa-subheading"), "translateX(-12px)"],
+        [root.querySelector(".lmct-sa-faq .lmct-sa-subheading"), "translateY(8px)"],
+        [root.querySelector(".lmct-sa-final-action"), "scale(0.985)"],
+      ].filter(function (cue) {
+        return cue[0];
+      });
+
+      var motionCueObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            window.requestAnimationFrame(function () {
+              entry.target.style.transform = "none";
+            });
+            motionCueObserver.unobserve(entry.target);
+          });
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      );
+
+      motionCues.forEach(function (cue) {
+        cue[0].classList.add("lmct-sa-motion-cue");
+        cue[0].style.transform = cue[1];
+        motionCueObserver.observe(cue[0]);
+      });
+    }
+
+    function appendCurrentQuery(targetUrl) {
+      try {
+        var target = new URL(targetUrl, window.location.href);
+        var current = new URLSearchParams(window.location.search);
+        current.forEach(function (value, key) {
+          if (!target.searchParams.has(key)) target.searchParams.set(key, value);
+        });
+        return target.href;
+      } catch (error) {
+        return targetUrl;
+      }
+    }
+
+    function findNativeCheckout() {
+      if (!LMCT_SA_FUEL_CONFIG.nativeCheckoutSelector) return null;
+      try {
+        return document.querySelector(LMCT_SA_FUEL_CONFIG.nativeCheckoutSelector);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function activateCheckout(event) {
+      var nativeCheckout = findNativeCheckout();
+      var mount = root.querySelector("[data-lmct-sa-checkout-mount]");
+
+      if (nativeCheckout && mount && !mount.contains(nativeCheckout) && !nativeCheckout.contains(mount)) {
+        event.preventDefault();
+        mount.hidden = false;
+        mount.appendChild(nativeCheckout);
+        nativeCheckout.style.removeProperty("display");
+        mount.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+        return;
+      }
+
+      if (LMCT_SA_FUEL_CONFIG.checkoutUrl) {
+        event.preventDefault();
+        window.location.assign(appendCurrentQuery(LMCT_SA_FUEL_CONFIG.checkoutUrl));
+        return;
+      }
+
+      var fallbackSelector = event.currentTarget.getAttribute("href");
+      if (fallbackSelector && fallbackSelector.charAt(0) === "#") {
+        var fallbackTarget = root.querySelector(fallbackSelector);
+        if (fallbackTarget) {
+          event.preventDefault();
+          fallbackTarget.scrollIntoView({
+            behavior: event.detail === 0 || window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+            block: "start",
+          });
+        }
+      }
+    }
+
+    root.querySelectorAll("[data-lmct-sa-cta]").forEach(function (cta) {
+      cta.addEventListener("click", activateCheckout);
+    });
+
+    var sticky = root.querySelector("[data-lmct-sa-sticky]");
+    var footer = root.querySelector("[data-lmct-sa-footer]");
+    var offer = root.querySelector("#lmct-sa-fuel-offer");
+    var finalSection = root.querySelector(".lmct-sa-final");
+    var stickyGuardNodes = Array.prototype.filter.call(root.querySelectorAll("h2, summary, input, .lmct-sa-btn, .lmct-sa-final, .lmct-sa-footer"), function (node) {
+      return !node.closest(".lmct-sa-sticky");
+    });
+    if (sticky && "IntersectionObserver" in window) {
+      var visible = { offer: false, final: false, footer: false, guarded: false };
+      var updateSticky = function () {
+        sticky.hidden = visible.offer || visible.final || visible.footer || visible.guarded;
+      };
+      if (offer) {
+        new IntersectionObserver(
+          function (entries) {
+            visible.offer = entries[0].isIntersecting;
+            updateSticky();
+          },
+          { threshold: 0.2 },
+        ).observe(offer);
+      }
+      if (footer) {
+        new IntersectionObserver(
+          function (entries) {
+            visible.footer = entries[0].isIntersecting;
+            updateSticky();
+          },
+          { threshold: 0 },
+        ).observe(footer);
+      }
+      if (finalSection) {
+        new IntersectionObserver(
+          function (entries) {
+            visible.final = entries[0].isIntersecting;
+            updateSticky();
+          },
+          { threshold: 0.05 },
+        ).observe(finalSection);
+      }
+      if (stickyGuardNodes.length && window.innerWidth <= 640) {
+        var guardedNodes = new Set();
+        var guardTop = Math.max(0, window.innerHeight - 104);
+        var guardObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) guardedNodes.add(entry.target);
+              else guardedNodes.delete(entry.target);
+            });
+            visible.guarded = guardedNodes.size > 0;
+            updateSticky();
+          },
+          { rootMargin: "-" + guardTop + "px 0px 0px 0px", threshold: 0 },
+        );
+        stickyGuardNodes.forEach(function (node) {
+          guardObserver.observe(node);
+        });
+      }
+    }
+  })();
+</script>
