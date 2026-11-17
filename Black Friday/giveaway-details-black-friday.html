@@ -1,0 +1,450 @@
+<!--
+LMCT+ GIVEAWAY DETAILS: BLACK FRIDAY EDITION (5 prizes, poster layout)
+Replace the code of the Custom JS / HTML element in "2-Both-GiveawayDetails-Row" with this file.
+The page background (blurry red glow + soft orbs) comes from the Custom CSS file, not from this block.
+EDIT: prize names, cash amounts and image URLs in the HTML; dates, button text and "View prize details" links in CONFIG at the bottom.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<style>
+  .bfGD__wrap {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 1060px !important;
+    margin: 0 auto !important;
+    font-family: "Montserrat", Arial, sans-serif !important;
+    text-align: center !important;
+    color: #fff !important;
+  }
+  .bfGD__wrap * {
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: "Montserrat", Arial, sans-serif !important;
+  }
+  .bfGD__chip {
+    display: inline-block !important;
+    margin-bottom: 16px !important;
+    padding: 9px 18px !important;
+    border-radius: 999px !important;
+    background: #ffd400 !important;
+    color: #000 !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    box-shadow: 0 0 26px rgba(255, 212, 0, 0.4) !important;
+  }
+  .bfGD__head {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+  }
+  .bfGD__head::before,
+  .bfGD__head::after {
+    content: "" !important;
+    flex: 1 1 0 !important;
+    height: 3px !important;
+    background: #ffd400 !important;
+    box-shadow: 0 0 14px rgba(255, 212, 0, 0.6) !important;
+  }
+  .bfGD__title {
+    font-size: clamp(24px, 4.6vw, 46px) !important;
+    font-weight: 900 !important;
+    font-style: italic !important;
+    line-height: 1 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: uppercase !important;
+    color: #fff !important;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.5) !important;
+  }
+  .bfGD__title span {
+    color: #ffd400 !important;
+  }
+  .bfGD__sub {
+    margin: 14px auto 26px !important;
+    max-width: 580px !important;
+    font-size: clamp(14px, 3.6vw, 18px) !important;
+    font-weight: 600 !important;
+    line-height: 1.45 !important;
+    color: #d0d0d0 !important;
+  }
+  .bfGD__sub strong {
+    color: #fff !important;
+    font-weight: 800 !important;
+  }
+  .bfGD__card {
+    position: relative !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    background: #111 !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease !important;
+  }
+  .bfGD__card:hover {
+    transform: translateY(-4px) !important;
+    border-color: rgba(255, 212, 0, 0.65) !important;
+    box-shadow:
+      0 14px 44px rgba(0, 0, 0, 0.6),
+      0 0 30px rgba(255, 212, 0, 0.2) !important;
+  }
+  .bfGD__tag {
+    position: absolute !important;
+    top: 14px !important;
+    left: 14px !important;
+    z-index: 4 !important;
+    padding: 6px 16px !important;
+    border-radius: 3px !important;
+    background: #ffd400 !important;
+    color: #000 !important;
+    font-size: 18px !important;
+    font-weight: 900 !important;
+    font-style: italic !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0.02em !important;
+    transform: skewX(-12deg) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+  }
+  .bfGD__name {
+    font-size: clamp(20px, 2.6vw, 28px) !important;
+    font-weight: 900 !important;
+    font-style: italic !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.01em !important;
+    text-transform: uppercase !important;
+    color: #fff !important;
+  }
+  .bfGD__cash {
+    margin-top: 6px !important;
+    font-size: clamp(13px, 1.7vw, 16px) !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: uppercase !important;
+    color: #ffd400 !important;
+  }
+  .bfGD__link {
+    display: inline-block !important;
+    margin-top: 10px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
+    padding-bottom: 1px !important;
+  }
+  .bfGD__link:hover {
+    color: #ffd400 !important;
+    border-bottom-color: #ffd400 !important;
+  }
+  .bfGD__link.bfGD__off {
+    display: none !important;
+  }
+  .bfGD__hero {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 290px !important;
+    margin-bottom: 16px !important;
+    text-align: left !important;
+  }
+  .bfGD__heroMedia {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 68% !important;
+    background: linear-gradient(135deg, #2b2b2b, #111) !important;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 38%) !important;
+    mask-image: linear-gradient(to right, transparent 0, #000 38%) !important;
+  }
+  .bfGD__heroMedia img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.6s ease !important;
+  }
+  .bfGD__hero:hover .bfGD__heroMedia img {
+    transform: scale(1.04) !important;
+  }
+  .bfGD__heroText {
+    position: relative !important;
+    z-index: 2 !important;
+    max-width: 52% !important;
+    padding: 64px 28px 34px 36px !important;
+  }
+  .bfGD__hero .bfGD__name {
+    font-size: clamp(28px, 4.6vw, 52px) !important;
+    line-height: 0.98 !important;
+  }
+  .bfGD__hero .bfGD__cash {
+    margin-top: 12px !important;
+    font-size: clamp(14px, 2vw, 20px) !important;
+  }
+  .bfGD__grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+    margin-bottom: 16px !important;
+  }
+  .bfGD__tile {
+    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .bfGD__tileMedia {
+    position: relative !important;
+    aspect-ratio: 16/9 !important;
+    background: linear-gradient(135deg, #2b2b2b, #111) !important;
+    overflow: hidden !important;
+  }
+  .bfGD__tileMedia img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    transition: transform 0.6s ease !important;
+  }
+  .bfGD__tile:hover .bfGD__tileMedia img {
+    transform: scale(1.05) !important;
+  }
+  .bfGD__tileText {
+    padding: 14px 18px 16px !important;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0e0e0e 100%) !important;
+    flex: 1 !important;
+  }
+  .bfGD__noImg img {
+    display: none !important;
+  }
+  .bfGD__row {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+  }
+  .bfGD__info {
+    text-align: center !important;
+    padding: 24px 16px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+  .bfGD__pill {
+    display: inline-block !important;
+    background: linear-gradient(to left, #ffb800 51%, #ffe14d 100%) !important;
+    color: #000 !important;
+    font-size: 11px !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    padding: 5px 14px !important;
+    border-radius: 4px !important;
+  }
+  .bfGD__date {
+    margin-top: 14px !important;
+    font-size: clamp(20px, 2.4vw, 24px) !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+    color: #fff !important;
+  }
+  .bfGD__time {
+    margin-top: 2px !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #ffd400 !important;
+  }
+  .bfGD__note {
+    margin-top: 6px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important;
+    color: #9a9a9a !important;
+  }
+  .bfGD__fb {
+    margin-top: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.3px !important;
+    color: #8dbdff !important;
+  }
+  .bfGD__fb svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  @media (max-width: 640px) {
+    .bfGD__head {
+      gap: 10px !important;
+    }
+    .bfGD__hero {
+      display: block !important;
+      min-height: 0 !important;
+    }
+    .bfGD__heroMedia {
+      position: relative !important;
+      width: 100% !important;
+      aspect-ratio: 16/10 !important;
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+    .bfGD__heroText {
+      max-width: none !important;
+      padding: 16px 18px 20px !important;
+    }
+    .bfGD__grid,
+    .bfGD__row {
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
+    }
+  }
+</style>
+
+<div class="bfGD__wrap">
+  <div class="bfGD__chip">Black Friday: November 27th to 30th</div>
+  <div class="bfGD__head">
+    <div class="bfGD__title">Five Prizes. <span>One Big Weekend.</span></div>
+  </div>
+  <p class="bfGD__sub">Choose <strong>one package</strong> and you're in <strong>all five</strong> giveaways.</p>
+
+  <div class="bfGD__card bfGD__hero">
+    <div class="bfGD__heroMedia"><img src="https://images.clickfunnels.com/e9/4e022284b74b2c89c209a3f0f045ad/IMG_7695.png" alt="Gold Coast House" /></div>
+    <span class="bfGD__tag">01</span>
+    <div class="bfGD__heroText">
+      <div class="bfGD__name">Gold Coast House</div>
+      <div class="bfGD__cash">or $2,000,000 cash</div>
+      <!-- <a class="bfGD__link" data-i="1" href="#">View prize details &rsaquo;</a> -->
+    </div>
+  </div>
+  <div class="bfGD__grid">
+    <div class="bfGD__card bfGD__tile">
+      <div class="bfGD__tileMedia"><img src="https://images.clickfunnels.com/94/1438e842d04a56b0ad8e48cdb04f8a/PTW_5902.jpg" alt="Toyota LandCruiser Sahara with Patriot Camper" /></div>
+      <span class="bfGD__tag">02</span>
+      <div class="bfGD__tileText">
+        <div class="bfGD__name">Landcruiser Sahara + Patriot Camper</div>
+        <div class="bfGD__cash">or $150,000 cash</div>
+        <!-- <a class="bfGD__link" data-i="2" href="#">View prize details &rsaquo;</a> -->
+      </div>
+    </div>
+    <div class="bfGD__card bfGD__tile">
+      <div class="bfGD__tileMedia"><img src="https://lmctgiveaway.com/hosted/images/b0/45c4cb94e845fdba1cae474e758fd3/Urus-14-1-.jpg" alt="Lamborghini Urus" /></div>
+      <span class="bfGD__tag">03</span>
+      <div class="bfGD__tileText">
+        <div class="bfGD__name">Lamborghini Urus</div>
+        <div class="bfGD__cash">or $300,000 cash</div>
+        <!-- <a class="bfGD__link" data-i="3" href="#">View prize details &rsaquo;</a> -->
+      </div>
+    </div>
+    <div class="bfGD__card bfGD__tile">
+      <div class="bfGD__tileMedia"><img src="https://images.clickfunnels.com/ec/a593c60b35484cb81f7d3c5d60ff34/camaro-36-optimized.jpg" alt="Chevrolet Camaro" /></div>
+      <span class="bfGD__tag">04</span>
+      <div class="bfGD__tileText">
+        <div class="bfGD__name">Chevrolet Camaro</div>
+        <div class="bfGD__cash">or $130,000 cash</div>
+        <!-- <a class="bfGD__link" data-i="4" href="#">View prize details &rsaquo;</a> -->
+      </div>
+    </div>
+    <div class="bfGD__card bfGD__tile">
+      <div class="bfGD__tileMedia"><img src="https://cdn.dealeraccelerate.com/fusion/1/671/27583/1920x1440/2018-jeep-grand-cherokee-trackhawk-4x4-ltd-avail" alt="Jeep Grand Cherokee" /></div>
+      <span class="bfGD__tag">05</span>
+      <div class="bfGD__tileText">
+        <div class="bfGD__name">Jeep Grand Cherokee</div>
+        <div class="bfGD__cash">or $70,000 cash</div>
+        <!-- <a class="bfGD__link" data-i="5" href="#">View prize details &rsaquo;</a> -->
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="bfGD__row">
+    <div class="bfGD__card bfGD__info">
+      <div class="bfGD__pill">Black Friday Starts</div>
+      <div class="bfGD__date" id="bfGDStartDate">November 27th</div>
+      <div class="bfGD__note" id="bfGDStartNote">Black Friday</div>
+    </div>
+    <div class="bfGD__card bfGD__info">
+      <div class="bfGD__pill">Entries Close</div>
+      <div class="bfGD__date" id="bfGDCloseDate">November 30th</div>
+      <div class="bfGD__time" id="bfGDCloseTime">8PM AEDT*</div>
+      <div class="bfGD__note">*AEDT - Australian Eastern Daylight Time</div>
+    </div>
+    <div class="bfGD__card bfGD__info">
+      <div class="bfGD__pill">Live Draw</div>
+      <div class="bfGD__date" id="bfGDDrawDate">November 30th</div>
+      <div class="bfGD__time" id="bfGDDrawTime">8:30PM AEDT*</div>
+      <div class="bfGD__fb">
+        <svg viewBox="0 0 24 24" fill="#8dbdff"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>Via Facebook Live
+      </div>
+    </div>
+  </div> -->
+</div>
+
+<script>
+  (function () {
+    /* ================= CONFIG ================= */
+    var CONFIG = {
+      buttonText: "CLAIM BLACK FRIDAY OFFER",
+      startDate: "November 27th",
+      startNote: "Black Friday",
+      closeDate: "November 30th",
+      closeTime: "8PM AEDT*",
+      drawDate: "November 30th",
+      drawTime: "8:30PM AEDT*",
+      // "View prize details" link per prize (1 to 5). #prize-N opens that row in the Take a Closer Look accordion. Leave "" to hide a link.
+      links: [
+        "#prize-1", // 1 Gold Coast House
+        "#prize-2", // 2 LandCruiser + Camper
+        "#prize-3", // 3 Lamborghini Urus
+        "#prize-4", // 4 Chevrolet Camaro
+        "#prize-5", // 5 Jeep Grand Cherokee
+      ],
+    };
+    /* ========================================== */
+    function setText(id, v) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = v;
+    }
+    setText("bfGDStartDate", CONFIG.startDate);
+    setText("bfGDStartNote", CONFIG.startNote);
+    setText("bfGDCloseDate", CONFIG.closeDate);
+    setText("bfGDCloseTime", CONFIG.closeTime);
+    setText("bfGDDrawDate", CONFIG.drawDate);
+    setText("bfGDDrawTime", CONFIG.drawTime);
+
+    // Prize links: hide any that have no destination
+    Array.prototype.forEach.call(document.querySelectorAll(".bfGD__link"), function (a) {
+      var url = CONFIG.links[parseInt(a.getAttribute("data-i"), 10) - 1];
+      if (url) a.setAttribute("href", url);
+      else a.classList.add("bfGD__off");
+    });
+
+    // A broken image falls back to the dark gradient panel instead of a broken icon
+    Array.prototype.forEach.call(document.querySelectorAll(".bfGD__card img"), function (img) {
+      var card = img.closest(".bfGD__card");
+      function bad() {
+        card.classList.add("bfGD__noImg");
+      }
+      img.addEventListener("error", bad);
+      if (img.complete && img.naturalWidth === 0) bad();
+    });
+
+    // ClickFunnels renders the button late, so retry briefly
+    var tries = 0;
+    (function wait() {
+      var b = document.querySelector('[data-title="3-GiveawayDetails-Btn"] .elButtonMain');
+      if (b) {
+        b.textContent = CONFIG.buttonText;
+        return;
+      }
+      if (tries++ < 40) setTimeout(wait, 250);
+    })();
+  })();
+</script>

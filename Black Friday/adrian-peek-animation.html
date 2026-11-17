@@ -1,0 +1,518 @@
+<!-- LMCT+ CARTOON ADRIAN PEEK-OUT PROMO (ALI)-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet" />
+
+<style>
+  #lmctAdrian {
+    --ad-img-w: 210px;
+    --ad-hide: 62px; /* how much of Adrian is cropped by the screen edge */
+    --ad-accent: #ff4400;
+    position: fixed;
+    right: 0;
+    bottom: -26px;
+    z-index: 99990;
+    display: flex;
+    align-items: flex-start;
+    pointer-events: none;
+    transform: translateX(115%);
+    transition: transform 0.65s cubic-bezier(0.34, 1.45, 0.64, 1);
+    will-change: transform;
+  }
+
+  #lmctAdrian *,
+  #lmctAdrian *::before,
+  #lmctAdrian *::after {
+    box-sizing: border-box;
+  }
+
+  #lmctAdrian.is-in {
+    transform: translateX(0);
+  }
+
+  /* Character */
+  #lmctAdrian .lmctAdrianImg {
+    display: block;
+    width: var(--ad-img-w);
+    height: auto;
+    margin-right: calc(var(--ad-hide) * -1);
+    transform-origin: 80% 100%;
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35));
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  #lmctAdrian.is-in .lmctAdrianImg {
+    pointer-events: auto;
+    cursor: pointer;
+    animation: lmctAdrianBob 2.4s ease-in-out 0.7s infinite;
+  }
+
+  @keyframes lmctAdrianBob {
+    0%,
+    100% {
+      transform: rotate(-2deg) translateY(0);
+    }
+    50% {
+      transform: rotate(1.5deg) translateY(-5px);
+    }
+  }
+
+  /* Comic speech bubble */
+  #lmctAdrian .lmctAdrianBubble {
+    position: relative;
+    align-self: flex-start;
+    margin: 18px -2px 0 0;
+    width: max-content;
+    max-width: 270px;
+    min-width: 150px;
+    padding: 14px 30px 14px 16px;
+    background: #fff;
+    color: #111;
+    border: 3px solid #111;
+    border-radius: 18px;
+    box-shadow: 4px 4px 0 #111;
+    font-family: "Bangers", "Comic Sans MS", "Comic Neue", cursive;
+    font-size: 19px;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    transform: scale(0);
+    transform-origin: 100% 85%;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+
+  #lmctAdrian .lmctAdrianBubble.is-talk {
+    transform: scale(1);
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  /* Tail pointing to Adrian */
+  #lmctAdrian .lmctAdrianBubble::before,
+  #lmctAdrian .lmctAdrianBubble::after {
+    content: "";
+    position: absolute;
+    top: 62%;
+    border-style: solid;
+  }
+
+  #lmctAdrian .lmctAdrianBubble::before {
+    right: -22px;
+    margin-top: -2px;
+    border-width: 11px 0 11px 22px;
+    border-color: transparent transparent transparent #111;
+  }
+
+  #lmctAdrian .lmctAdrianBubble::after {
+    right: -15px;
+    border-width: 9px 0 9px 17px;
+    border-color: transparent transparent transparent #fff;
+  }
+
+  #lmctAdrian .lmctAdrianText {
+    display: block;
+    min-height: 1.3em;
+  }
+
+  #lmctAdrian .lmctAdrianText b {
+    color: var(--ad-accent);
+    font-weight: 400;
+  }
+
+  /* Close button */
+  #lmctAdrian .lmctAdrianClose {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    background: none;
+    border: 0;
+    color: #777;
+    font:
+      700 18px/22px Arial,
+      sans-serif;
+    cursor: pointer;
+  }
+
+  #lmctAdrian .lmctAdrianClose:hover,
+  #lmctAdrian .lmctAdrianClose:focus-visible {
+    color: #111;
+  }
+
+  @media (max-width: 600px) {
+    #lmctAdrian {
+      --ad-img-w: 128px;
+      --ad-hide: 38px;
+      bottom: -16px;
+    }
+
+    #lmctAdrian .lmctAdrianBubble {
+      max-width: min(210px, calc(100vw - 110px));
+      min-width: 130px;
+      margin-top: 10px;
+      padding: 11px 26px 11px 12px;
+      font-size: 16px;
+      border-width: 2.5px;
+      box-shadow: 3px 3px 0 #111;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #lmctAdrian,
+    #lmctAdrian .lmctAdrianBubble {
+      transition: opacity 0.2s;
+    }
+
+    #lmctAdrian {
+      opacity: 0;
+      transform: none;
+      visibility: hidden;
+    }
+    #lmctAdrian.is-in {
+      opacity: 1;
+      visibility: visible;
+    }
+    #lmctAdrian.is-in .lmctAdrianImg {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    if (window.__lmctAdrianInit) return;
+    window.__lmctAdrianInit = true;
+
+    /* ------------------------------------------------------------------
+     SETTINGS
+  ------------------------------------------------------------------ */
+    var POSES = {
+      thumbs: "https://images.clickfunnels.com/d4/fe26bcff8d40019fb19a41f5ce1631/imgi_3_character.c80fd229bc38fd8e71f8.png",
+      presenting: "https://images.clickfunnels.com/84/bcd7ece8c94818bfe4ad274545da92/Friendly-Adrian-Presenting-an-Offer.png",
+      cash: "https://images.clickfunnels.com/33/a794e51ea049bfa10f01a1ae9817da/Adrian-s-confident-cash-pose.png",
+      pointing: "https://images.clickfunnels.com/60/60a8a4dea7459ead96dc45165b25c5/Adrian-points-with-his-right-hand.png",
+      celebrate: "https://images.clickfunnels.com/71/053614c279494d861a9970c310795b/Adrian-celebrating-with-raised-fists.png",
+    };
+    var SCROLL_TARGET = 'div[data-title="1-Both-Packages-Section"]'; /* where a click on Adrian scrolls to */
+    var VISIBLE_RATIO = 0.3; /* default: how much of a section must be on screen (0.1 = 10%, 0.5 = 50%). Override per section with ratio: */
+    var TYPE_SPEED = 26; /* ms per character */
+    var MIN_HOLD = 2800; /* ms the bubble stays after typing */
+    var HERO_DELAY = 2200; /* ms before the first appearance */
+    var SCROLL_PAUSE = 600; /* default: ms the visitor must stop scrolling before he peeks. Override per section with scrollPause: */
+    var STORAGE_KEY = "lmctAdrianDismissed";
+
+    /* Use <b>word</b> to highlight in orange. Several variants per section = random pick. */
+    var SECTIONS = [
+      {
+        key: "hero",
+        ratio: 0.3, /* how much of this section must be visible */
+        scrollPause: 600, /* ms the visitor must stop scrolling before he peeks here */
+        pose: "thumbs",
+        sel: 'div[data-title="1-Both-Hero-Section"]',
+        delay: HERO_DELAY,
+        lines: [
+          "YO! I'm Adrian, and I'm giving away <b>MY PERSONAL LAMBORGHINI URUS</b>! \uD83C\uDFCE\uFE0F",
+          "Lamborghini Urus <b>OR $300K CASH</b>! Either way, someone is walking away a winner!",
+          "This isn't some random car. It's <b>MY</b> Lambo, and it could be <b>YOURS</b>!",
+        ],
+      },
+      {
+        key: "packages",
+        ratio: 0.3, /* how much of this section must be visible */
+        scrollPause: 5000, /* ms the visitor must stop scrolling before he peeks here */
+        pose: "pointing",
+        sel: 'div[data-title="1-Both-Packages-Section"]',
+        lines: ["Grab your entries right here! <b>Get in the draw</b> before it's too late!", "Pick your package and <b>lock in your entries</b>. Good luck, legend!"],
+      },
+      {
+        key: "giveaway",
+        ratio: 0.3, /* how much of this section must be visible */
+        scrollPause: 2000, /* ms the visitor must stop scrolling before he peeks here */
+        pose: "presenting",
+        sel: 'div[data-title="1-Both-GiveawayDetails-Section"]',
+        lines: ["Super simple: <b>get your entries</b> and you could be the next winner!", "Here's how it works. <b>Get in, get entered</b>, and keep your fingers crossed!"],
+      },
+      {
+        key: "car",
+        ratio: 0.3, /* how much of this section must be visible */
+        scrollPause: 300, /* ms the visitor must stop scrolling before he peeks here */
+        pose: "pointing",
+        sel: 'div[data-title="1-Both-CarDetails-Section"]',
+        lines: [
+          "THIS is my Lambo! Specced by me, driven by me. <b>666 PS</b> and <b>0-100 in 3.3 sec</b>!",
+          "Look at that Lambo! <b>Full matte carbon</b>, 23-inch wheels, <b>Giallo Taurus</b> stitching. I love this car!",
+          "My daily driver in Australia, and it could be <b>YOURS</b>! \uD83D\uDD25",
+        ],
+      },
+      {
+        key: "cash",
+        ratio: 0.3, /* how much of this section must be visible */
+        scrollPause: 600, /* ms the visitor must stop scrolling before he peeks here */
+        pose: "cash",
+        sel: 'div[data-title="1-Both-CashDetails-Section"]',
+        lines: ["Not a car person? There's <b>$300K CASH</b> up for grabs too! \uD83D\uDCB0", "Lambo <b>OR $300K cash</b>. Honestly, you can't lose!"],
+      },
+      {
+        key: "proof",
+        ratio: 0.3, /* how much of this section must be visible */
+        scrollPause: 4000, /* ms the visitor must stop scrolling before he peeks here */
+        pose: "celebrate",
+        sel: 'div[data-title="1-Both-Proof-Section"]',
+        lines: ["Don't just take my word for it! <b>Check it out</b> for yourself.", "Somebody has to win, so why not <b>YOU</b>?"],
+      },
+      {
+        key: "footer",
+        ratio: 0.3, /* how much of this section must be visible */
+        scrollPause: 600, /* ms the visitor must stop scrolling before he peeks here */
+        pose: "thumbs",
+        sel: 'div[data-title="1-Both-Footer-Section"]',
+        lines: ["Still here? Go <b>grab your entries</b> before you miss out! \uD83D\uDC4D", "Good luck, legends! <b>Get in</b> and I'll see you at the finish line!"],
+      },
+    ];
+
+    /* ------------------------------------------------------------------
+     BUILD
+  ------------------------------------------------------------------ */
+    var dismissed = false;
+    try {
+      dismissed = sessionStorage.getItem(STORAGE_KEY) === "1";
+    } catch (e) {}
+    if (dismissed) return;
+
+    var root = document.createElement("div");
+    root.id = "lmctAdrian";
+    root.innerHTML =
+      '<div class="lmctAdrianBubble" role="status" aria-live="polite">' +
+      '<button type="button" class="lmctAdrianClose" aria-label="Close">&times;</button>' +
+      '<span class="lmctAdrianText"></span>' +
+      "</div>" +
+      '<img class="lmctAdrianImg" alt="Cartoon Adrian" src="' +
+      POSES.thumbs +
+      '">';
+    document.body.appendChild(root);
+
+    /* Preload every pose so swapping is instant */
+    for (var p in POSES) {
+      if (POSES.hasOwnProperty(p)) {
+        new Image().src = POSES[p];
+      }
+    }
+
+    var bubble = root.querySelector(".lmctAdrianBubble");
+    var textEl = root.querySelector(".lmctAdrianText");
+    var closeBtn = root.querySelector(".lmctAdrianClose");
+    var imgEl = root.querySelector(".lmctAdrianImg");
+
+    /* ------------------------------------------------------------------
+     STATE
+  ------------------------------------------------------------------ */
+    var inView = {};
+    var shown = {};
+    var queued = {};
+    var queue = [];
+    var busy = false;
+    var runId = 0;
+    var currentKey = null;
+    var lastScroll = 0;
+    var hiding = false;
+    var timers = [];
+
+    function later(fn, ms) {
+      var t = setTimeout(fn, ms);
+      timers.push(t);
+      return t;
+    }
+
+    function clearTimers() {
+      for (var i = 0; i < timers.length; i++) clearTimeout(timers[i]);
+      timers = [];
+    }
+
+    function pick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function typeHtml(html, id, done) {
+      var i = 0;
+      (function step() {
+        if (id !== runId || hiding) return;
+        if (i >= html.length) {
+          done();
+          return;
+        }
+        if (html.charAt(i) === "<") {
+          i = html.indexOf(">", i) + 1;
+        } else {
+          i++;
+        }
+        textEl.innerHTML = html.slice(0, i);
+        later(step, TYPE_SPEED);
+      })();
+    }
+
+    function plain(html) {
+      return html.replace(/<[^>]+>/g, "");
+    }
+
+    function pump() {
+      if (busy || dismissed) return;
+      while (queue.length) {
+        var key = queue.shift();
+        queued[key] = false;
+        if (!inView[key] || shown[key]) continue;
+        show(key);
+        return;
+      }
+    }
+
+    function show(key) {
+      var section = null;
+      for (var i = 0; i < SECTIONS.length; i++) {
+        if (SECTIONS[i].key === key) section = SECTIONS[i];
+      }
+      if (!section) return;
+
+      busy = true;
+      currentKey = key;
+      shown[key] = true;
+      var id = ++runId;
+      var html = pick(section.lines);
+
+      textEl.innerHTML = "";
+      bubble.classList.remove("is-talk");
+      imgEl.src = POSES[section.pose] || POSES.thumbs;
+      root.classList.add("is-in");
+
+      later(function () {
+        if (id !== runId || hiding) return;
+        bubble.classList.add("is-talk");
+        typeHtml(html, id, function () {
+          later(
+            function () {
+              hide(id);
+            },
+            MIN_HOLD + plain(html).length * 30,
+          );
+        });
+      }, 750);
+    }
+
+    function hide(id) {
+      if (id !== runId || hiding) return;
+      hiding = true;
+      bubble.classList.remove("is-talk");
+      later(function () {
+        root.classList.remove("is-in");
+        later(function () {
+          busy = false;
+          hiding = false;
+          currentKey = null;
+          pump();
+        }, 800);
+      }, 350);
+    }
+
+    function enqueue(section) {
+      if (shown[section.key] || queued[section.key]) return;
+      queued[section.key] = true;
+      queue.push(section.key);
+      pump();
+    }
+
+    /* ------------------------------------------------------------------
+     INTERACTION
+  ------------------------------------------------------------------ */
+    function goToOffer() {
+      var el = document.querySelector(SCROLL_TARGET);
+      if (el && el.scrollIntoView) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    imgEl.addEventListener("click", goToOffer);
+
+    bubble.addEventListener("click", function (e) {
+      if (e.target === closeBtn) return;
+      goToOffer();
+    });
+
+    closeBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      dismissed = true;
+      try {
+        sessionStorage.setItem(STORAGE_KEY, "1");
+      } catch (err) {}
+      clearTimers();
+      runId++;
+      bubble.classList.remove("is-talk");
+      root.classList.remove("is-in");
+    });
+
+    /* ------------------------------------------------------------------
+     WATCH SECTIONS
+     Uses simple position checks instead of IntersectionObserver, so very
+     tall sections, per-section ratios and late-rendering ClickFunnels
+     elements all work.
+  ------------------------------------------------------------------ */
+    var els = {};
+    var wasIn = {};
+    var readyAt = {};
+
+    window.addEventListener(
+      "scroll",
+      function () {
+        lastScroll = Date.now();
+      },
+      { passive: true },
+    );
+
+    function isVisible(el, ratio) {
+      var r = el.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      if (r.height <= 0) return false;
+      var overlap = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+      var need = Math.min(r.height, vh) * ratio;
+      return overlap >= need;
+    }
+
+    function tick() {
+      var now = Date.now();
+
+      SECTIONS.forEach(function (section) {
+        var key = section.key;
+        if (!els[key]) {
+          els[key] = document.querySelector(section.sel);
+          if (!els[key]) return;
+        }
+
+        var ratio = typeof section.ratio === "number" ? section.ratio : VISIBLE_RATIO;
+        var visible = isVisible(els[key], ratio);
+        inView[key] = visible;
+
+        if (visible && !wasIn[key]) {
+          readyAt[key] = now + (section.delay || 0);
+        }
+        wasIn[key] = visible;
+
+        if (!visible) {
+          if (currentKey === key && busy) hide(runId); /* scrolled away: tuck him in early */
+          return;
+        }
+
+        var pause = typeof section.scrollPause === "number" ? section.scrollPause : SCROLL_PAUSE;
+
+        if (!shown[key] && !queued[key] && now >= readyAt[key] && now - lastScroll >= pause) {
+          enqueue(section);
+        }
+      });
+    }
+
+    setInterval(tick, 300);
+    tick();
+  })();
+</script>
+<!-- END OF ANIMATED ADRIAN (ALI)-->

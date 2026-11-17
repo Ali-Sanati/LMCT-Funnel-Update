@@ -1,0 +1,2168 @@
+<!--
+  LMCT+ BLACK FRIDAY 2026 — CLICKFUNNELS CLASSIC HTML/CSS COMPONENT
+
+  1. Paste this entire file into a Custom JS / HTML element.
+  2. Upload the bundled files in Assets to ClickFunnels, then replace the
+     relative Assets/... paths below with their hosted ClickFunnels URLs.
+  3. Set CHECKOUT_URL in the script at the bottom to the real order-form URL.
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script>document.documentElement.classList.add("bf26-js");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+
+<style>
+  /* =========================================================
+     00. BLACK FRIDAY: Global Page Background (NEW)
+     Near-black page + soft red glow + blurred orange orbs.
+     Pure CSS, fixed behind the whole page. Delete this block
+     (and undo section 07) to go back to the normal look.
+     NOTE: any section with a transparent background will now
+     show this dark background, so theme those sections too.
+     ========================================================= */
+
+  html {
+    background: #0a0a0a !important;
+  }
+
+  html body {
+    background: transparent !important;
+  }
+
+  html::before {
+    content: '';
+    position: fixed;
+    inset: -10%;
+    z-index: -1;
+    pointer-events: none;
+    filter: blur(14px);
+    background:
+      radial-gradient(circle 18vmax at 94% 6%, rgba(255, 190, 40, .45) 0%, rgba(255, 130, 0, .22) 55%, rgba(255, 110, 0, 0) 100%), /* taste-skill-ignore: supplied background */
+      radial-gradient(circle 16vmax at 4% 96%, rgba(255, 170, 30, .40) 0%, rgba(255, 120, 0, .20) 55%, rgba(255, 110, 0, 0) 100%), /* taste-skill-ignore: supplied background */
+      radial-gradient(circle 6vmax at 8% 24%, rgba(255, 190, 40, .35) 0%, rgba(255, 130, 0, .15) 60%, rgba(255, 110, 0, 0) 100%), /* taste-skill-ignore: supplied background */
+      radial-gradient(circle 8vmax at 90% 62%, rgba(255, 190, 40, .32) 0%, rgba(255, 130, 0, .14) 60%, rgba(255, 110, 0, 0) 100%), /* taste-skill-ignore: supplied background */
+      radial-gradient(circle 5vmax at 18% 70%, rgba(255, 190, 40, .30) 0%, rgba(255, 130, 0, .12) 60%, rgba(255, 110, 0, 0) 100%), /* taste-skill-ignore: supplied background */
+      radial-gradient(circle 7vmax at 70% 12%, rgba(255, 190, 40, .28) 0%, rgba(255, 130, 0, .12) 60%, rgba(255, 110, 0, 0) 100%), /* taste-skill-ignore: supplied background */
+      radial-gradient(circle 30vmax at 50% 48%, rgba(255, 32, 32, .50) 0%, rgba(200, 10, 10, .15) 50%, rgba(150, 0, 0, 0) 100%); /* taste-skill-ignore: supplied background */
+    animation: bfBgDrift 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes bfBgDrift {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(0, -2.5vh, 0) scale(1.04); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html::before { animation: none; }
+  }
+
+  :root {
+    color-scheme: dark;
+    --bf26-bg: #0a0a0a;
+    --bf26-surface: #151515;
+    --bf26-surface-2: #202020;
+    --bf26-ink: #f7f7f2;
+    --bf26-muted: #bebeb7;
+    --bf26-yellow: #ffe600;
+    --bf26-yellow-strong: #ffd000;
+    --bf26-red: #d70b0b;
+    --bf26-black: #050505;
+    --bf26-margin: clamp(16px, 2.5vw, 34px);
+    --bf26-display: "Barlow Condensed", Impact, "Arial Narrow", sans-serif;
+    --bf26-body: "Montserrat", Arial, sans-serif;
+    --bf26-ease-out: cubic-bezier(.22, 1, .36, 1);
+    --bf26-ease-expo: cubic-bezier(.16, 1, .3, 1);
+    --bf26-ease-in-out: cubic-bezier(.76, 0, .24, 1);
+  }
+
+  #bf26-root,
+  #bf26-root * {
+    box-sizing: border-box !important;
+  }
+
+  #bf26-root {
+    position: relative !important;
+    z-index: 0 !important;
+    width: 100% !important;
+    overflow: clip !important;
+    color: var(--bf26-ink) !important;
+    font-family: var(--bf26-body) !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    text-rendering: optimizeLegibility !important;
+  }
+
+  #bf26-root img,
+  .bf26-lightbox img {
+    max-width: 100% !important;
+  }
+
+  #bf26-root a,
+  #bf26-root button {
+    font: inherit !important;
+  }
+
+  #bf26-root a:focus-visible,
+  #bf26-root button:focus-visible,
+  .bf26-lightbox button:focus-visible {
+    outline: 3px solid var(--bf26-yellow) !important;
+    outline-offset: 3px !important;
+  }
+
+  #bf26-root ::selection {
+    color: #000 !important;
+    background: var(--bf26-yellow) !important;
+  }
+
+  .bf26-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  .bf26-shell {
+    width: calc(100% - (2 * var(--bf26-margin))) !important;
+    max-width: 1400px !important;
+    margin-inline: auto !important;
+  }
+
+  .bf26-section {
+    position: relative !important;
+    padding-block: clamp(70px, 8vw, 120px) !important;
+    scroll-margin-top: 20px !important;
+  }
+
+  .bf26-section-heading {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: clamp(14px, 2.5vw, 30px) !important;
+    margin: 0 0 clamp(30px, 5vw, 58px) !important;
+    color: var(--bf26-ink) !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(38px, 5vw, 72px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: .92 !important;
+    letter-spacing: -.025em !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    text-wrap: balance !important;
+  }
+
+  .bf26-section-heading::before,
+  .bf26-section-heading::after {
+    content: "" !important;
+    width: min(14vw, 150px) !important;
+    height: 4px !important;
+    flex: 0 1 150px !important;
+    background: var(--bf26-yellow) !important;
+  }
+
+  .bf26-section-lead {
+    max-width: 720px !important;
+    margin: -32px auto 46px !important;
+    color: var(--bf26-muted) !important;
+    font-size: clamp(16px, 1.6vw, 20px) !important;
+    font-weight: 600 !important;
+    line-height: 1.5 !important;
+    text-align: center !important;
+    text-wrap: pretty !important;
+  }
+
+  .bf26-button {
+    display: inline-flex !important;
+    min-height: 54px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 14px 28px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: var(--bf26-yellow) !important;
+    color: #000 !important;
+    clip-path: polygon(7px 0, 100% 0, calc(100% - 7px) 100%, 0 100%) !important;
+    cursor: pointer !important;
+    font-family: var(--bf26-display) !important;
+    font-size: 20px !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    letter-spacing: .01em !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    transition: background-color 180ms ease, transform 140ms var(--bf26-ease-out) !important;
+  }
+
+  .bf26-button:active { transform: scale(.97) !important; }
+
+  @media (hover: hover) and (pointer: fine) {
+    .bf26-button:hover { background: #fff36a !important; }
+    .bf26-package-choice:hover { transform: translateY(-4px) !important; }
+  }
+
+  /* Hero */
+  .bf26-hero {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: minmax(390px, .86fr) minmax(560px, 1.14fr) !important;
+    min-height: clamp(760px, 100svh, 980px) !important;
+    overflow: clip !important;
+    isolation: isolate !important;
+    background: #090909 !important;
+  }
+
+  .bf26-nav {
+    position: absolute !important;
+    z-index: 5 !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    display: flex !important;
+    min-height: 76px !important;
+    align-items: center !important;
+    gap: 28px !important;
+    padding: 12px var(--bf26-margin) !important;
+    background: rgba(5, 5, 5, .82) !important;
+  }
+
+  .bf26-logo {
+    margin-right: auto !important;
+    color: #fff !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(34px, 3.2vw, 50px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: .8 !important;
+    letter-spacing: -.04em !important;
+    text-decoration: none !important;
+  }
+
+  .bf26-logo span { color: var(--bf26-yellow) !important; }
+
+  .bf26-nav-links {
+    display: flex !important;
+    align-items: center !important;
+    gap: clamp(22px, 2.3vw, 38px) !important;
+  }
+
+  .bf26-nav-links a {
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    text-underline-offset: .25em !important;
+  }
+
+  .bf26-hero-media {
+    position: relative !important;
+    z-index: 0 !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+    min-height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .bf26-hero-media picture,
+  .bf26-hero-media img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .bf26-hero-media img {
+    object-fit: cover !important;
+    object-position: 50% 57% !important;
+    transform: scale(1.02) !important;
+  }
+
+  .bf26-hero-media::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    pointer-events: none !important;
+    background: linear-gradient(90deg, #090909 0%, rgba(9, 9, 9, .84) 13%, rgba(9, 9, 9, 0) 48%) !important; /* taste-skill-ignore: photo scrim */
+  }
+
+  .bf26-hero-copy {
+    position: relative !important;
+    z-index: 2 !important;
+    grid-column: 1 / span 2 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    width: min(810px, 57vw) !important;
+    padding: 126px var(--bf26-margin) 72px !important;
+  }
+
+  .bf26-date-strip {
+    display: inline-block !important;
+    margin: 0 0 28px !important;
+    padding: 8px 20px !important;
+    background: var(--bf26-yellow) !important;
+    color: #000 !important;
+    clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%) !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(16px, 1.7vw, 24px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+  }
+
+  .bf26-hero h1 {
+    max-width: none !important;
+    margin: 0 0 26px -.04em !important;
+    color: #fff !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(92px, 10.1vw, 174px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: .78 !important;
+    letter-spacing: -.055em !important;
+    text-transform: uppercase !important;
+  }
+
+  .bf26-hero h1 span {
+    display: block !important;
+    color: var(--bf26-yellow) !important;
+    white-space: nowrap !important;
+  }
+
+  .bf26-hero-support {
+    max-width: 610px !important;
+    margin: 0 0 18px !important;
+    color: #fff !important;
+    font-size: clamp(17px, 1.5vw, 21px) !important;
+    font-weight: 700 !important;
+    line-height: 1.42 !important;
+    text-wrap: pretty !important;
+  }
+
+  .bf26-countdown {
+    min-height: 26px !important;
+    margin: 0 0 28px !important;
+    color: var(--bf26-yellow) !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    font-variant-numeric: tabular-nums !important;
+    letter-spacing: .02em !important;
+  }
+
+  /* Prize showcase — integrated from giveaway-details-black-friday.html */
+  .bf26-prizes {
+    background: rgba(5, 5, 5, .82) !important;
+  }
+
+  .bfGD__wrap {
+    width: calc(100% - (2 * var(--bf26-margin))) !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    color: #fff !important;
+    font-family: var(--bf26-body) !important;
+  }
+
+  .bfGD__hero,
+  .bfGD__tile {
+    position: relative !important;
+    overflow: hidden !important;
+    background: #151515 !important;
+    border: 2px solid #333 !important;
+    border-radius: 14px !important;
+  }
+
+  .bfGD__hero {
+    display: grid !important;
+    min-height: 400px !important;
+    grid-template-columns: minmax(280px, .72fr) 1.28fr !important;
+    margin-bottom: 16px !important;
+  }
+
+  .bfGD__heroMedia {
+    position: relative !important;
+    grid-column: 2 !important;
+    min-height: 400px !important;
+  }
+
+  .bfGD__heroMedia::before {
+    content: "" !important;
+    position: absolute !important;
+    z-index: 1 !important;
+    inset: 0 !important;
+    background: linear-gradient(90deg, #151515 0%, rgba(21, 21, 21, .25) 38%, rgba(21, 21, 21, 0) 60%) !important; /* taste-skill-ignore: photo scrim */
+  }
+
+  .bfGD__heroMedia img,
+  .bfGD__tileMedia img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .bfGD__heroText {
+    position: relative !important;
+    z-index: 2 !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: end !important;
+    padding: 80px 28px 34px !important;
+  }
+
+  .bfGD__grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .bfGD__tile {
+    display: flex !important;
+    min-width: 0 !important;
+    flex-direction: column !important;
+  }
+
+  .bfGD__tileMedia {
+    position: relative !important;
+    aspect-ratio: 16 / 9 !important;
+    overflow: hidden !important;
+  }
+
+  .bfGD__tileText {
+    display: flex !important;
+    min-height: 148px !important;
+    flex: 1 !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 20px 22px 22px !important;
+    background: #171717 !important;
+  }
+
+  .bfGD__tag {
+    position: absolute !important;
+    z-index: 3 !important;
+    top: 14px !important;
+    left: 14px !important;
+    min-width: 52px !important;
+    padding: 5px 13px !important;
+    background: var(--bf26-yellow) !important;
+    color: #000 !important;
+    clip-path: polygon(7px 0, 100% 0, calc(100% - 7px) 100%, 0 100%) !important;
+    font-family: var(--bf26-display) !important;
+    font-size: 24px !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+  }
+
+  .bfGD__name {
+    color: #fff !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(28px, 3vw, 42px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: .96 !important;
+    letter-spacing: -.02em !important;
+    text-transform: uppercase !important;
+    text-wrap: balance !important;
+  }
+
+  .bfGD__hero .bfGD__name {
+    font-size: clamp(44px, 4.2vw, 60px) !important;
+  }
+
+  .bfGD__cash {
+    margin-top: 10px !important;
+    color: var(--bf26-yellow) !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(20px, 2.2vw, 30px) !important;
+    font-weight: 900 !important;
+    line-height: 1.05 !important;
+    text-transform: uppercase !important;
+  }
+
+  .bfGD__link {
+    margin-top: auto !important;
+    padding-top: 16px !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    text-decoration: underline !important;
+    text-decoration-color: #777 !important;
+    text-underline-offset: .25em !important;
+    text-transform: uppercase !important;
+    transition: color 180ms ease, text-decoration-color 180ms ease !important;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .bfGD__link:hover { color: var(--bf26-yellow) !important; text-decoration-color: currentColor !important; }
+    .bfGD__tileMedia img { transition: transform 900ms var(--bf26-ease-expo) !important; }
+    .bfGD__tile:hover .bfGD__tileMedia img { transform: scale(1.045) !important; }
+  }
+
+  /* Proof */
+  .bf26-proof {
+    padding-block: clamp(54px, 6vw, 84px) !important;
+    background: var(--bf26-yellow) !important;
+    color: #050505 !important;
+  }
+
+  .bf26-proof h2 {
+    margin: 0 0 34px !important;
+    color: #050505 !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(36px, 4vw, 58px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: .95 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+  }
+
+  .lmctDStatsBar {
+    display: grid !important;
+    max-width: 960px !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: clamp(24px, 5vw, 80px) !important;
+    margin: 0 auto !important;
+    padding-inline: var(--bf26-margin) !important;
+  }
+
+  .lmctDStatItem { text-align: center !important; }
+
+  .lmctDStatNum {
+    color: #050505 !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(56px, 8vw, 112px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    font-variant-numeric: tabular-nums !important;
+    letter-spacing: -.045em !important;
+    line-height: .8 !important;
+    white-space: nowrap !important;
+  }
+
+  .lmctDStatLabel {
+    margin-top: 16px !important;
+    color: #050505 !important;
+    font-size: clamp(13px, 1.3vw, 16px) !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase !important;
+  }
+
+  /* Package chooser */
+  .bf26-packages {
+    background: rgba(14, 14, 14, .9) !important;
+  }
+
+  .bf26-package-grid {
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .bf26-package {
+    --package-colour: #fff;
+    display: flex !important;
+    min-width: 0 !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+    border-top: 6px solid var(--package-colour) !important;
+    background: #181818 !important;
+  }
+
+  .bf26-package-choice {
+    display: block !important;
+    height: 100% !important;
+    color: inherit !important;
+    text-decoration: none !important;
+    transition: transform 180ms var(--bf26-ease-out) !important;
+  }
+
+  .bf26-package-choice:active { transform: scale(.985) !important; }
+
+  .bf26-package--entry { --package-colour: #1dd7d2; }
+  .bf26-package--bronze { --package-colour: #c66a2c; }
+  .bf26-package--silver { --package-colour: #d8d8d8; }
+  .bf26-package--gold { --package-colour: #ffe600; }
+  .bf26-package--platinum { --package-colour: #b960df; }
+
+  .bf26-package-art {
+    display: grid !important;
+    aspect-ratio: 353 / 586 !important;
+    place-items: center !important;
+    padding: 8px !important;
+    background: #181818 !important;
+  }
+
+  .bf26-package-art img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .bf26-package-body {
+    display: flex !important;
+    flex: 1 !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 18px 12px 16px !important;
+    text-align: center !important;
+  }
+
+  .bf26-package h3 {
+    margin: 0 0 14px !important;
+    color: #fff !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(27px, 2.5vw, 38px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: .9 !important;
+    text-transform: uppercase !important;
+  }
+
+  .bf26-package-entries {
+    margin: 0 !important;
+    color: var(--package-colour) !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(38px, 3.5vw, 54px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    font-variant-numeric: tabular-nums !important;
+    line-height: .9 !important;
+  }
+
+  .bf26-package-entries span {
+    display: block !important;
+    margin-bottom: 5px !important;
+    color: var(--bf26-muted) !important;
+    font-family: var(--bf26-body) !important;
+    font-size: 13px !important;
+    font-style: normal !important;
+    font-weight: 800 !important;
+    letter-spacing: .04em !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+  }
+
+  .bf26-package-price {
+    margin: 17px 0 !important;
+    color: #fff !important;
+    font-family: var(--bf26-display) !important;
+    font-size: 34px !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+  }
+
+  .bf26-package .bf26-button {
+    width: 100% !important;
+    min-height: 46px !important;
+    margin-top: auto !important;
+    padding: 11px 10px !important;
+    font-size: 18px !important;
+  }
+
+  .bf26-package-note {
+    max-width: 70ch !important;
+    margin: 22px auto 0 !important;
+    color: var(--bf26-muted) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+  }
+
+  /* Package inclusions — integrated from package-inclusions.html */
+  .lmctPkgInclV3_container {
+    margin: 32px 0 0 !important;
+  }
+
+  .lmctPkgInclV3_toggleBtn {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 60px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    padding: 16px 24px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #f1f1eb !important;
+    color: #111 !important;
+    cursor: pointer !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase !important;
+    transition: background-color 180ms ease !important;
+  }
+
+  .lmctPkgInclV3_chevron {
+    display: inline-block !important;
+    font-size: 18px !important;
+    transition: transform 320ms var(--bf26-ease-out) !important;
+  }
+
+  .lmctPkgInclV3_toggleBtn[aria-expanded="true"] .lmctPkgInclV3_chevron {
+    transform: rotate(180deg) !important;
+  }
+
+  .lmctPkgInclV3_drawer {
+    display: grid !important;
+    grid-template-rows: 0fr !important;
+    visibility: hidden !important;
+    transition: grid-template-rows 420ms var(--bf26-ease-out), visibility 0s linear 420ms !important;
+  }
+
+  .lmctPkgInclV3_drawer.lmctPkgInclV3_drawerOpen {
+    grid-template-rows: 1fr !important;
+    visibility: visible !important;
+    transition: grid-template-rows 420ms var(--bf26-ease-out), visibility 0s !important;
+  }
+  .lmctPkgInclV3_drawerInner { min-height: 0 !important; overflow: hidden !important; }
+
+  .lmctPkgInclV3_list {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+    padding-top: 16px !important;
+  }
+
+  .lmctPkgInclV3_card {
+    --package-colour: #fff;
+    padding: 24px !important;
+    border-top: 6px solid var(--package-colour) !important;
+    background: #202020 !important;
+  }
+
+  .lmctPkgInclV3_entry { --package-colour: #1dd7d2; }
+  .lmctPkgInclV3_bronze { --package-colour: #c66a2c; }
+  .lmctPkgInclV3_silver { --package-colour: #d8d8d8; }
+  .lmctPkgInclV3_gold { --package-colour: #ffe600; }
+  .lmctPkgInclV3_platinum { --package-colour: #b960df; grid-column: 1 / -1 !important; }
+
+  .lmctPkgInclV3_header {
+    display: flex !important;
+    align-items: baseline !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .lmctPkgInclV3_badge {
+    color: var(--package-colour) !important;
+    font-family: var(--bf26-display) !important;
+    font-size: 30px !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+  }
+
+  .lmctPkgInclV3_price {
+    color: #fff !important;
+    font-family: var(--bf26-display) !important;
+    font-size: 26px !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+  }
+
+  .lmctPkgInclV3_card ul {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  .lmctPkgInclV3_card li {
+    position: relative !important;
+    margin: 0 0 10px !important;
+    padding-left: 26px !important;
+    color: #f4f4f4 !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.45 !important;
+  }
+
+  .lmctPkgInclV3_card li::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 2px !important;
+    left: 4px !important;
+    width: 7px !important;
+    height: 12px !important;
+    border-right: 3px solid var(--package-colour) !important;
+    border-bottom: 3px solid var(--package-colour) !important;
+    transform: rotate(45deg) !important;
+  }
+
+  .lmctPkgInclV3_platinum ul {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0 30px !important;
+  }
+
+  /* How it works */
+  .bf26-how {
+    background: #080808 !important;
+  }
+
+  .bf26-how-list {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    counter-reset: bf26-steps !important;
+  }
+
+  .bf26-how-list li {
+    position: relative !important;
+    min-height: 230px !important;
+    padding: 30px clamp(24px, 4vw, 58px) !important;
+    background: #151515 !important;
+    counter-increment: bf26-steps !important;
+  }
+
+  .bf26-how-list li:nth-child(2) { background: var(--bf26-yellow) !important; color: #050505 !important; }
+  .bf26-how-list li:nth-child(3) { background: #252525 !important; }
+
+  .bf26-how-list li::before {
+    content: counter(bf26-steps) !important;
+    display: block !important;
+    margin-bottom: 30px !important;
+    color: var(--bf26-yellow) !important;
+    font-family: var(--bf26-display) !important;
+    font-size: 76px !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: .65 !important;
+  }
+
+  .bf26-how-list li:nth-child(2)::before { color: #050505 !important; }
+
+  .bf26-how-list h3 {
+    margin: 0 0 10px !important;
+    color: inherit !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(34px, 3.4vw, 50px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: .9 !important;
+    text-transform: uppercase !important;
+  }
+
+  .bf26-how-list p {
+    max-width: 31ch !important;
+    margin: 0 !important;
+    color: inherit !important;
+    font-size: 15px !important;
+    font-weight: 650 !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Take a closer look — integrated from take-a-closer-look-black-friday.html */
+  .bfCL {
+    background: #171717 !important;
+  }
+
+  .bfCL__item {
+    margin-top: 12px !important;
+    background: #0d0d0d !important;
+    scroll-margin-top: 20px !important;
+  }
+
+  .bfCL__hd {
+    display: grid !important;
+    width: 100% !important;
+    min-height: 66px !important;
+    grid-template-columns: auto 1fr auto auto !important;
+    align-items: center !important;
+    gap: 16px !important;
+    margin: 0 !important;
+    padding: 15px 20px !important;
+    border: 0 !important;
+    background: #262626 !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    text-align: left !important;
+  }
+
+  .bfCL__n {
+    min-width: 36px !important;
+    color: var(--bf26-yellow) !important;
+    font-family: var(--bf26-display) !important;
+    font-size: 24px !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+  }
+
+  .bfCL__nm {
+    color: #fff !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(24px, 2.3vw, 36px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    line-height: .95 !important;
+    text-transform: uppercase !important;
+  }
+
+  .bfCL__cash {
+    color: var(--bf26-yellow) !important;
+    font-size: 14px !important;
+    font-weight: 900 !important;
+    text-align: right !important;
+    text-transform: uppercase !important;
+  }
+
+  .bfCL__ic {
+    position: relative !important;
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .bfCL__ic::before,
+  .bfCL__ic::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 18px !important;
+    height: 3px !important;
+    margin: -1.5px 0 0 -9px !important;
+    background: #fff !important;
+    transition: transform 320ms var(--bf26-ease-out), opacity 320ms ease !important;
+  }
+
+  .bfCL__ic::after { transform: rotate(90deg) !important; }
+  .bfCL__item.is-open .bfCL__ic::after { transform: rotate(0) !important; opacity: 0 !important; }
+
+  .bfCL__panel {
+    display: grid !important;
+    grid-template-rows: 0fr !important;
+    visibility: hidden !important;
+    transition: grid-template-rows 420ms var(--bf26-ease-out), visibility 0s linear 420ms !important;
+  }
+
+  .bfCL__item.is-open .bfCL__panel {
+    grid-template-rows: 1fr !important;
+    visibility: visible !important;
+    transition: grid-template-rows 420ms var(--bf26-ease-out), visibility 0s !important;
+  }
+
+  .bfCL__pin { min-height: 0 !important; overflow: hidden !important; }
+  .bfCL__body { padding: 16px !important; }
+  .bfCL__slider { position: relative !important; }
+
+  .bfCL__track {
+    display: flex !important;
+    gap: 14px !important;
+    overflow-x: auto !important;
+    scroll-behavior: smooth !important;
+    scroll-snap-type: x mandatory !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .bfCL__track::-webkit-scrollbar { display: none !important; }
+
+  .bfCL__slide {
+    position: relative !important;
+    flex: 0 0 calc((100% - 14px) / 2) !important;
+    aspect-ratio: 16 / 10 !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    padding: 0 !important;
+    background: #222 !important;
+    cursor: zoom-in !important;
+    scroll-snap-align: start !important;
+  }
+
+  .bfCL__slide img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .bfCL__cap {
+    position: absolute !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    padding: 38px 14px 12px !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, .82), rgba(0, 0, 0, 0)) !important; /* taste-skill-ignore: photo scrim */
+    color: #fff !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+  }
+
+  .bfCL__arr {
+    position: absolute !important;
+    z-index: 2 !important;
+    top: 50% !important;
+    display: flex !important;
+    width: 46px !important;
+    height: 46px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-top: -23px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: var(--bf26-yellow) !important;
+    color: #000 !important;
+    cursor: pointer !important;
+    font-size: 27px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+  }
+
+  .bfCL__arr--p { left: 10px !important; }
+  .bfCL__arr--n { right: 10px !important; }
+  .bfCL__arr[disabled] { opacity: .35 !important; cursor: default !important; }
+  .bfCL__arr.bfCL__hide { display: none !important; }
+
+  .bfCL__soon {
+    padding: 42px 16px !important;
+    background: #202020 !important;
+    color: var(--bf26-muted) !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+  }
+
+  /* Testimonials — integrated from testimonial.html */
+  .bf26-testimonials { background: rgba(6, 6, 6, .9) !important; }
+
+  .cf-marquee {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .cf-track {
+    display: flex !important;
+    width: max-content !important;
+    align-items: center !important;
+    animation: bf26Marquee 62s linear infinite !important;
+    will-change: transform !important;
+  }
+
+  .cf-marquee:hover .cf-track,
+  .cf-marquee.is-paused .cf-track { animation-play-state: paused !important; }
+
+  .cf-seq {
+    display: flex !important;
+    flex: none !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .cf-slide { display: block !important; flex: none !important; }
+
+  .cf-slide img {
+    display: block !important;
+    width: auto !important;
+    height: clamp(240px, 27vw, 360px) !important;
+  }
+
+  @keyframes bf26Marquee {
+    to { transform: translateX(-50%); }
+  }
+
+  /* FAQ */
+  .bf26-faq { background: #141414 !important; }
+
+  .bf26-faq-list {
+    display: grid !important;
+    gap: 12px !important;
+  }
+
+  .bf26-faq details {
+    background: #232323 !important;
+  }
+
+  .bf26-faq summary {
+    position: relative !important;
+    min-height: 66px !important;
+    padding: 20px 62px 20px 22px !important;
+    color: #fff !important;
+    cursor: pointer !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(23px, 2.2vw, 34px) !important;
+    font-style: italic !important;
+    font-weight: 800 !important;
+    line-height: 1.05 !important;
+    list-style: none !important;
+  }
+
+  .bf26-faq summary::-webkit-details-marker { display: none !important; }
+
+  .bf26-faq summary::before,
+  .bf26-faq summary::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: 24px !important;
+    width: 18px !important;
+    height: 3px !important;
+    background: var(--bf26-yellow) !important;
+  }
+
+  .bf26-faq summary::after { transform: rotate(90deg) !important; }
+  .bf26-faq details[open] summary::after { transform: rotate(0) !important; }
+
+  .bf26-faq-answer {
+    max-width: 78ch !important;
+    padding: 0 24px 24px !important;
+    color: #ddd !important;
+    font-size: 16px !important;
+    font-weight: 550 !important;
+    line-height: 1.6 !important;
+  }
+
+  .bf26-faq-answer p { margin: 0 !important; }
+
+  /* Final CTA and footer */
+  .bf26-final {
+    display: grid !important;
+    min-height: min(82svh, 800px) !important;
+    place-items: center !important;
+    padding: 80px var(--bf26-margin) !important;
+    background: var(--bf26-yellow) !important;
+    color: #050505 !important;
+    text-align: center !important;
+  }
+
+  .bf26-final h2 {
+    max-width: 13ch !important;
+    margin: 0 auto 30px !important;
+    color: #050505 !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(76px, 11vw, 180px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    letter-spacing: -.055em !important;
+    line-height: .78 !important;
+    text-transform: uppercase !important;
+    text-wrap: balance !important;
+  }
+
+  .bf26-final p {
+    max-width: 600px !important;
+    margin: 0 auto 30px !important;
+    color: #050505 !important;
+    font-size: clamp(16px, 1.7vw, 21px) !important;
+    font-weight: 700 !important;
+  }
+
+  .bf26-final .bf26-button {
+    background: #050505 !important;
+    color: #fff !important;
+  }
+
+  .bf26-footer {
+    overflow: hidden !important;
+    padding: 48px var(--bf26-margin) 28px !important;
+    background: #050505 !important;
+  }
+
+  .bf26-footer-mark {
+    margin: 0 0 46px -.035em !important;
+    color: #fff !important;
+    font-family: var(--bf26-display) !important;
+    font-size: clamp(120px, 22vw, 370px) !important;
+    font-style: italic !important;
+    font-weight: 900 !important;
+    letter-spacing: -.06em !important;
+    line-height: .68 !important;
+    white-space: nowrap !important;
+  }
+
+  .bf26-footer-mark span { color: var(--bf26-yellow) !important; }
+
+  .bf26-footer-row {
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    gap: 30px !important;
+    color: var(--bf26-muted) !important;
+    font-size: 13px !important;
+    font-weight: 650 !important;
+  }
+
+  .bf26-footer-links {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+  }
+
+  .bf26-footer-note {
+    max-width: 64ch !important;
+    text-align: right !important;
+  }
+
+  .bf26-footer a { color: #fff !important; text-underline-offset: .25em !important; }
+
+  /* Lightbox */
+  .bf26-lightbox {
+    position: fixed !important;
+    z-index: 2147483000 !important;
+    inset: 0 !important;
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    padding: 70px 64px 28px !important;
+    background: rgba(0, 0, 0, .94) !important;
+    font-family: var(--bf26-body) !important;
+  }
+
+  .bf26-lightbox.is-open { display: flex !important; }
+
+  .bf26-lightbox img {
+    display: block !important;
+    max-width: min(100%, 1300px) !important;
+    max-height: 78vh !important;
+    object-fit: contain !important;
+  }
+
+  .bf26-lightbox-caption {
+    margin-top: 14px !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+  }
+
+  .bf26-lightbox button {
+    position: absolute !important;
+    display: flex !important;
+    width: 48px !important;
+    height: 48px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: var(--bf26-yellow) !important;
+    color: #000 !important;
+    cursor: pointer !important;
+    font-size: 26px !important;
+    font-weight: 900 !important;
+  }
+
+  .bf26-lightbox-close { top: 16px !important; right: 16px !important; }
+  .bf26-lightbox-prev { top: 50% !important; left: 12px !important; }
+  .bf26-lightbox-next { top: 50% !important; right: 12px !important; }
+
+  /* Motion */
+  @media (prefers-reduced-motion: no-preference) {
+    .bf26-js #bf26-root [data-reveal] {
+      opacity: 0 !important;
+      transform: translateY(24px) !important;
+      transition: opacity 700ms var(--bf26-ease-out), transform 900ms var(--bf26-ease-expo) !important;
+    }
+
+    .bf26-js #bf26-root [data-reveal].is-in {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .bf26-hero h1 .bf26-line {
+      overflow: hidden !important;
+    }
+
+    .bf26-hero h1 .bf26-line > span {
+      display: block !important;
+      animation: bf26LineIn 900ms var(--bf26-ease-expo) both !important;
+    }
+
+    .bf26-hero h1 .bf26-line:nth-child(2) > span { animation-delay: 90ms !important; }
+    .bf26-hero-media img { animation: bf26HeroSettle 1300ms var(--bf26-ease-expo) both !important; }
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .bf26-hero { view-timeline-name: --bf26-hero !important; }
+      .bf26-hero-copy {
+        animation: bf26HeroLift linear both !important;
+        animation-timeline: --bf26-hero !important;
+        animation-range: exit 0% exit 70% !important;
+      }
+      .bf26-hero-media img {
+        animation: bf26HeroDrift linear both !important;
+        animation-timeline: --bf26-hero !important;
+        animation-range: exit 0% exit 100% !important;
+      }
+    }
+  }
+
+  @keyframes bf26LineIn { from { transform: translateY(110%); } to { transform: none; } }
+  @keyframes bf26HeroSettle { from { transform: scale(1.09); } to { transform: scale(1.02); } }
+  @keyframes bf26HeroLift { to { transform: translateY(-5%) scale(.96); opacity: .35; } }
+  @keyframes bf26HeroDrift { to { transform: translateY(6%) scale(1.07); } }
+
+  @media (max-width: 980px) {
+    .bf26-hero { grid-template-columns: minmax(330px, .8fr) minmax(440px, 1.2fr) !important; }
+    .bf26-hero-copy { width: min(700px, 67vw) !important; }
+    .bf26-package-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+    .bf26-package:nth-child(4), .bf26-package:nth-child(5) { grid-column: span 1 !important; }
+  }
+
+  @media (max-width: 760px) {
+    .bf26-section { padding-block: 68px !important; }
+    .bf26-section-heading { font-size: clamp(36px, 11vw, 52px) !important; }
+    .bf26-section-heading::before, .bf26-section-heading::after { flex-basis: 44px !important; width: 44px !important; }
+    .bf26-section-lead { margin-top: -18px !important; margin-bottom: 34px !important; }
+
+    .bf26-hero {
+      display: block !important;
+      min-height: max(760px, 100svh) !important;
+    }
+
+    .bf26-nav { min-height: 64px !important; gap: 12px !important; background: rgba(5, 5, 5, .72) !important; }
+    .bf26-logo { font-size: 34px !important; }
+    .bf26-nav-links { display: none !important; }
+    .bf26-nav .bf26-button { min-height: 42px !important; padding: 10px 17px !important; font-size: 17px !important; }
+
+    .bf26-hero-media { position: absolute !important; inset: 0 !important; min-height: 0 !important; }
+    .bf26-hero-media img { object-position: 50% 55% !important; }
+    .bf26-hero-media::after {
+      background: linear-gradient(180deg, rgba(5, 5, 5, .02) 30%, rgba(5, 5, 5, .42) 55%, #070707 91%) !important; /* taste-skill-ignore: photo scrim */
+    }
+
+    .bf26-hero-copy {
+      position: absolute !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      padding: 120px var(--bf26-margin) 38px !important;
+    }
+
+    .bf26-date-strip { margin-bottom: 16px !important; font-size: 16px !important; }
+    .bf26-hero h1 { max-width: none !important; margin-bottom: 20px !important; font-size: clamp(70px, 21vw, 90px) !important; }
+    .bf26-hero-support { max-width: 34ch !important; font-size: 16px !important; }
+    .bf26-countdown { margin-bottom: 20px !important; font-size: 14px !important; }
+
+    .bfGD__hero { display: block !important; min-height: 0 !important; }
+    .bfGD__heroMedia { min-height: 0 !important; aspect-ratio: 16 / 10 !important; }
+    .bfGD__heroMedia::before { display: none !important; }
+    .bfGD__heroText { padding: 22px !important; }
+    .bfGD__hero .bfGD__name { font-size: 44px !important; }
+    .bfGD__grid { grid-template-columns: 1fr !important; }
+    .bfGD__tileText { min-height: 0 !important; }
+
+    .lmctDStatsBar { grid-template-columns: 1fr !important; gap: 34px !important; }
+    .lmctDStatNum { font-size: 78px !important; }
+
+    .bf26-package-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .bf26-package:last-child { grid-column: 1 / -1 !important; width: calc(50% - 7px) !important; justify-self: center !important; }
+    .lmctPkgInclV3_list { grid-template-columns: 1fr !important; }
+    .lmctPkgInclV3_platinum { grid-column: auto !important; }
+    .lmctPkgInclV3_platinum ul { grid-template-columns: 1fr !important; }
+
+    .bf26-how-list { grid-template-columns: 1fr !important; }
+    .bf26-how-list li { min-height: 0 !important; }
+
+    .bfCL__hd { grid-template-columns: auto 1fr auto !important; gap: 10px !important; padding: 14px !important; }
+    .bfCL__cash { grid-column: 2 !important; grid-row: 2 !important; text-align: left !important; }
+    .bfCL__ic { grid-column: 3 !important; grid-row: 1 / span 2 !important; }
+    .bfCL__slide { flex-basis: 100% !important; }
+    .bfCL__arr { width: 40px !important; height: 40px !important; margin-top: -20px !important; }
+    .cf-slide img { height: 220px !important; }
+
+    .bf26-final { min-height: 72svh !important; }
+    .bf26-final h2 { font-size: clamp(58px, 16vw, 86px) !important; }
+    .bf26-footer-row { align-items: flex-start !important; flex-direction: column !important; }
+    .bf26-footer-note { text-align: left !important; }
+  }
+
+  @media (max-width: 480px) {
+    .bf26-button { width: 100% !important; }
+    .bf26-package-grid { grid-template-columns: 1fr !important; }
+    .bf26-package:last-child { grid-column: auto !important; width: 100% !important; }
+    .bf26-package { width: min(100%, 353px) !important; justify-self: center !important; }
+    .bf26-lightbox { padding-inline: 14px !important; }
+    .bf26-lightbox-prev { left: 6px !important; }
+    .bf26-lightbox-next { right: 6px !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #bf26-root *,
+    #bf26-root *::before,
+    #bf26-root *::after,
+    .bf26-lightbox * {
+      scroll-behavior: auto !important;
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+
+    .cf-track { animation: none !important; }
+    .cf-marquee { overflow-x: auto !important; }
+  }
+</style>
+
+<div id="bf26-root">
+  <header class="bf26-hero" id="top">
+    <nav class="bf26-nav" aria-label="Black Friday navigation">
+      <a class="bf26-logo" href="#top" aria-label="LMCT Plus Black Friday">LMCT<span>+</span></a>
+      <div class="bf26-nav-links">
+        <a href="#prizes">Prizes</a>
+        <a href="#packages">Packages</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a class="bf26-button" href="#packages">Choose a package</a>
+    </nav>
+
+    <div class="bf26-hero-media" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 760px)" srcset="Assets/Gold Coast luxury driveway lineup.png" />
+        <img src="Assets/Gold Coast luxury driveway lineup.png" width="1086" height="1448" alt="" fetchpriority="high" />
+      </picture>
+    </div>
+
+    <div class="bf26-hero-copy">
+      <p class="bf26-date-strip">Black Friday · 27–30 November 2026</p>
+      <h1>
+        <span class="bf26-line"><span>1 Package.</span></span>
+        <span class="bf26-line"><span>5 Giveaways.</span></span>
+      </h1>
+      <p class="bf26-hero-support">One package purchase puts you into all five featured giveaway draws.</p>
+      <p class="bf26-countdown" id="bf26-countdown">Offer runs 27–30 November 2026 (AEDT).</p>
+      <a class="bf26-button" href="#packages">Choose your package</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="bf26-section bf26-prizes" id="prizes" aria-labelledby="bf26-prizes-title">
+      <div class="bfGD__wrap">
+        <h2 class="bf26-section-heading" id="bf26-prizes-title">Five prizes. One big weekend.</h2>
+        <p class="bf26-section-lead">Buy one Black Friday package and enter every prize draw below.</p>
+
+        <article class="bfGD__hero" data-reveal>
+          <div class="bfGD__heroMedia">
+            <img src="Assets/prize-house.png" alt="Gold Coast waterfront house" width="1400" height="900" />
+          </div>
+          <span class="bfGD__tag">1</span>
+          <div class="bfGD__heroText">
+            <h3 class="bfGD__name">Gold Coast House</h3>
+            <p class="bfGD__cash">or $2,000,000 cash</p>
+            <a class="bfGD__link" href="#prize-1">View prize details</a>
+          </div>
+        </article>
+
+        <div class="bfGD__grid">
+          <article class="bfGD__tile" data-reveal>
+            <div class="bfGD__tileMedia"><img src="Assets/prize-landcruiser.jpg" alt="Toyota LandCruiser Sahara with Patriot Camper" width="1200" height="675" loading="lazy" /></div>
+            <span class="bfGD__tag">2</span>
+            <div class="bfGD__tileText">
+              <h3 class="bfGD__name">LandCruiser Sahara + Patriot Camper</h3>
+              <p class="bfGD__cash">or $150,000 cash</p>
+              <a class="bfGD__link" href="#prize-2">View prize details</a>
+            </div>
+          </article>
+
+          <article class="bfGD__tile" data-reveal>
+            <div class="bfGD__tileMedia"><img src="Assets/prize-urus.jpg" alt="Lamborghini Urus" width="1200" height="675" loading="lazy" /></div>
+            <span class="bfGD__tag">3</span>
+            <div class="bfGD__tileText">
+              <h3 class="bfGD__name">Lamborghini Urus</h3>
+              <p class="bfGD__cash">or $300,000 cash</p>
+              <a class="bfGD__link" href="#prize-3">View prize details</a>
+            </div>
+          </article>
+
+          <article class="bfGD__tile" data-reveal>
+            <div class="bfGD__tileMedia"><img src="Assets/prize-camaro.jpg" alt="Chevrolet Camaro" width="1200" height="675" loading="lazy" /></div>
+            <span class="bfGD__tag">4</span>
+            <div class="bfGD__tileText">
+              <h3 class="bfGD__name">Chevrolet Camaro</h3>
+              <p class="bfGD__cash">or $130,000 cash</p>
+              <a class="bfGD__link" href="#prize-4">View prize details</a>
+            </div>
+          </article>
+
+          <article class="bfGD__tile" data-reveal>
+            <div class="bfGD__tileMedia"><img src="https://cdn.dealeraccelerate.com/fusion/1/671/27583/1920x1440/2018-jeep-grand-cherokee-trackhawk-4x4-ltd-avail" alt="Jeep Grand Cherokee" width="1200" height="675" loading="lazy" /></div>
+            <span class="bfGD__tag">5</span>
+            <div class="bfGD__tileText">
+              <h3 class="bfGD__name">Jeep Grand Cherokee</h3>
+              <p class="bfGD__cash">or $70,000 cash</p>
+              <a class="bfGD__link" href="#prize-5">View prize details</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bf26-proof" aria-labelledby="bf26-proof-title">
+      <h2 id="bf26-proof-title">A track record of real wins</h2>
+      <div class="lmctDStatsBar" id="lmctDStatsBar">
+        <div class="lmctDStatItem">
+          <div class="lmctDStatNum" data-target="1000" data-prefix="" data-suffix="+">1,000+</div>
+          <div class="lmctDStatLabel">Giveaway winners</div>
+        </div>
+        <div class="lmctDStatItem">
+          <div class="lmctDStatNum" data-target="160" data-prefix="$" data-suffix="M+">$160M+</div>
+          <div class="lmctDStatLabel">Given away</div>
+        </div>
+        <div class="lmctDStatItem">
+          <div class="lmctDStatNum" data-target="47" data-prefix="" data-suffix="">47</div>
+          <div class="lmctDStatLabel">Millionaires made</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bf26-section bf26-packages" id="packages" aria-labelledby="bf26-packages-title">
+      <div class="bf26-shell">
+        <h2 class="bf26-section-heading" id="bf26-packages-title">Choose your package</h2>
+        <p class="bf26-section-lead">Every Black Friday package enters all five featured giveaways. Pick the entry allocation that suits you.</p>
+
+        <div class="bf26-package-grid">
+          <article class="bf26-package bf26-package--entry" data-reveal>
+            <a class="bf26-package-choice" data-package="entry" href="#checkout" aria-label="Select the Entry package: 10 entries for 10 dollars">
+              <div class="bf26-package-art"><img src="Assets/package-entry.svg" alt="Entry package: 10 free bonus entries for 10 dollars" width="353" height="586" loading="lazy" /></div>
+            </a>
+          </article>
+
+          <article class="bf26-package bf26-package--bronze" data-reveal>
+            <a class="bf26-package-choice" data-package="bronze" href="#checkout" aria-label="Select the Bronze package: 50 entries for 30 dollars">
+              <div class="bf26-package-art"><img src="Assets/package-bronze.svg" alt="Bronze package: 50 free bonus entries for 30 dollars" width="353" height="586" loading="lazy" /></div>
+            </a>
+          </article>
+
+          <article class="bf26-package bf26-package--silver" data-reveal>
+            <a class="bf26-package-choice" data-package="silver" href="#checkout" aria-label="Select the Silver package: 250 entries for 100 dollars">
+              <div class="bf26-package-art"><img src="Assets/package-silver.svg" alt="Silver package: 250 free bonus entries for 100 dollars" width="353" height="586" loading="lazy" /></div>
+            </a>
+          </article>
+
+          <article class="bf26-package bf26-package--gold" data-reveal>
+            <a class="bf26-package-choice" data-package="gold" href="#checkout" aria-label="Select the Gold package: 1,000 entries for 200 dollars">
+              <div class="bf26-package-art"><img src="Assets/package-gold.svg" alt="Gold package: 1,000 free bonus entries for 200 dollars" width="353" height="586" loading="lazy" /></div>
+            </a>
+          </article>
+
+          <article class="bf26-package bf26-package--platinum" data-reveal>
+            <a class="bf26-package-choice" data-package="platinum" href="#checkout" aria-label="Select the Platinum package: 5,000 entries for 500 dollars">
+              <div class="bf26-package-art"><img src="Assets/package-platinum.svg" alt="Platinum package: 5,000 free bonus entries for 500 dollars" width="353" height="586" loading="lazy" /></div>
+            </a>
+          </article>
+        </div>
+
+        <p class="bf26-package-note">Entry figures include the Black Friday 10× allocation. Confirm final allocations and eligibility in the official offer terms before launch.</p>
+
+        <div class="lmctPkgInclV3_container">
+          <button class="lmctPkgInclV3_toggleBtn" id="lmctPkgInclV3_btn" type="button" aria-expanded="false" aria-controls="lmctPkgInclV3_drawer">
+            View full package inclusions <span class="lmctPkgInclV3_chevron" aria-hidden="true">⌄</span>
+          </button>
+          <div class="lmctPkgInclV3_drawer" id="lmctPkgInclV3_drawer" aria-hidden="true">
+            <div class="lmctPkgInclV3_drawerInner">
+              <div class="lmctPkgInclV3_list">
+                <article class="lmctPkgInclV3_card lmctPkgInclV3_entry">
+                  <div class="lmctPkgInclV3_header"><span class="lmctPkgInclV3_badge">Entry</span><span class="lmctPkgInclV3_price">$10</span></div>
+                  <ul>
+                    <li><strong>10 free entries</strong> into the giveaways</li>
+                    <li><strong>2 days</strong> access to LMCT+ Markets</li>
+                    <li><strong>2 days</strong> access to LMCT+ Petrol Stations</li>
+                    <li><strong>2 days</strong> access to 2,000+ partner discounts</li>
+                    <li><strong>VIP</strong> invitation to all events</li>
+                  </ul>
+                </article>
+
+                <article class="lmctPkgInclV3_card lmctPkgInclV3_bronze">
+                  <div class="lmctPkgInclV3_header"><span class="lmctPkgInclV3_badge">Bronze</span><span class="lmctPkgInclV3_price">$30</span></div>
+                  <ul>
+                    <li><strong>50 free entries</strong> into the giveaways</li>
+                    <li><strong>1 week</strong> access to LMCT+ Markets</li>
+                    <li><strong>1 week</strong> access to LMCT+ Petrol Stations</li>
+                    <li><strong>1 week</strong> access to 2,000+ partner discounts</li>
+                    <li><strong>VIP</strong> invitation to all events</li>
+                    <li><strong>500 XP</strong> in-app and <strong>500 LMCT+ Coins</strong></li>
+                  </ul>
+                </article>
+
+                <article class="lmctPkgInclV3_card lmctPkgInclV3_silver">
+                  <div class="lmctPkgInclV3_header"><span class="lmctPkgInclV3_badge">Silver</span><span class="lmctPkgInclV3_price">$100</span></div>
+                  <ul>
+                    <li><strong>250 free entries</strong> into the giveaways</li>
+                    <li><strong>1 month</strong> access to LMCT+ Markets</li>
+                    <li><strong>1 month</strong> access to LMCT+ Petrol Stations</li>
+                    <li><strong>1 month</strong> access to 2,000+ partner discounts</li>
+                    <li><strong>VIP</strong> invitation to all events</li>
+                    <li><strong>1,000 XP</strong> in-app and <strong>1,000 LMCT+ Coins</strong></li>
+                  </ul>
+                </article>
+
+                <article class="lmctPkgInclV3_card lmctPkgInclV3_gold">
+                  <div class="lmctPkgInclV3_header"><span class="lmctPkgInclV3_badge">Gold</span><span class="lmctPkgInclV3_price">$200</span></div>
+                  <ul>
+                    <li><strong>1,000 free entries</strong> into the giveaways</li>
+                    <li><strong>6 months</strong> access to LMCT+ Markets</li>
+                    <li><strong>6 months</strong> access to LMCT+ Petrol Stations</li>
+                    <li><strong>6 months</strong> access to 2,000+ partner discounts</li>
+                    <li><strong>VIP</strong> invitation to all events</li>
+                    <li><strong>2,500 XP</strong> in-app and <strong>2,500 LMCT+ Coins</strong></li>
+                  </ul>
+                </article>
+
+                <article class="lmctPkgInclV3_card lmctPkgInclV3_platinum">
+                  <div class="lmctPkgInclV3_header"><span class="lmctPkgInclV3_badge">Platinum</span><span class="lmctPkgInclV3_price">$500</span></div>
+                  <ul>
+                    <li><strong>5,000 free entries</strong> into the giveaways</li>
+                    <li><strong>12 months</strong> access to LMCT+ Markets</li>
+                    <li><strong>12 months</strong> access to LMCT+ Petrol Stations</li>
+                    <li><strong>12 months</strong> access to 2,000+ partner discounts</li>
+                    <li><strong>VIP</strong> invitation to all events</li>
+                    <li><strong>5,000 XP</strong> in-app and <strong>5,000 LMCT+ Coins</strong></li>
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bf26-section bf26-how" aria-labelledby="bf26-how-title">
+      <div class="bf26-shell">
+        <h2 class="bf26-section-heading" id="bf26-how-title">How it works</h2>
+        <ol class="bf26-how-list" data-reveal>
+          <li><h3>Choose</h3><p>Pick any Black Friday package and complete your purchase.</p></li>
+          <li><h3>Enter all five</h3><p>Your package puts you into every featured giveaway draw.</p></li>
+          <li><h3>Follow the draws</h3><p>Check the official draw announcements and winner updates.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="bf26-section bfCL" id="closer-look" aria-labelledby="bfCL-title">
+      <div class="bf26-shell">
+        <h2 class="bf26-section-heading" id="bfCL-title">Take a closer look</h2>
+        <div id="bfCL-items"></div>
+      </div>
+    </section>
+
+    <section class="bf26-section bf26-testimonials" aria-labelledby="bf26-testimonials-title">
+      <h2 class="bf26-section-heading" id="bf26-testimonials-title">Real people. Real wins.</h2>
+      <div class="cf-marquee" id="cfMarquee" aria-label="LMCT Plus winner stories">
+        <div class="cf-track" id="cfTrack">
+          <div class="cf-seq" id="cfSeq">
+            <span class="cf-slide"><img src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7pDSr4aPZgv1kJD30T9NQePfUAGWSMclO4H6Y" alt="LMCT Plus winner story" loading="lazy" /></span>
+            <span class="cf-slide"><img src="https://images.clickfunnels.com/db/bc9a3c646744dbab4dd939052967ff/blue4.png" alt="LMCT Plus winner story" loading="lazy" /></span>
+            <span class="cf-slide"><img src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7xGfqRjkBzYjZmc57PK8w21URG4Ch0XToDJeS" alt="LMCT Plus winner story" loading="lazy" /></span>
+            <span class="cf-slide"><img src="https://images.clickfunnels.com/41/d97975da9b489d93b9777dd6811248/blue2.png" alt="LMCT Plus winner story" loading="lazy" /></span>
+            <span class="cf-slide"><img src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7PvBOPTUmW1RDn5t4coJuQizbKhg8I6LUqCl0" alt="LMCT Plus winner story" loading="lazy" /></span>
+            <span class="cf-slide"><img src="https://images.clickfunnels.com/5e/141045b046417aa4ac8a483facd4fa/blue3.png" alt="LMCT Plus winner story" loading="lazy" /></span>
+            <span class="cf-slide"><img src="https://images.clickfunnels.com/3d/eeaa1276464f378565e54258287dfe/blue7.png" alt="LMCT Plus winner story" loading="lazy" /></span>
+            <span class="cf-slide"><img src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7qMVBqJFU76cpQJVvWnijGFBACl8K5RuDNOhb" alt="LMCT Plus winner story" loading="lazy" /></span>
+            <span class="cf-slide"><img src="https://images.clickfunnels.com/07/a0c713e21b4cdcafbf8ebac09fd761/blue5.png" alt="LMCT Plus winner story" loading="lazy" /></span>
+            <span class="cf-slide"><img src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7NgIMZuWJiy5ROjDXnvZI2Y9LfsExCk1eTFuU" alt="LMCT Plus winner story" loading="lazy" /></span>
+            <span class="cf-slide"><img src="https://images.clickfunnels.com/01/5981348342400ab25a747671df37e3/blue6.png" alt="LMCT Plus winner story" loading="lazy" /></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bf26-section bf26-faq" id="faq" aria-labelledby="bf26-faq-title">
+      <div class="bf26-shell">
+        <h2 class="bf26-section-heading" id="bf26-faq-title">Good questions</h2>
+        <div class="bf26-faq-list">
+          <details open>
+            <summary>Does one package enter me into all five giveaways?</summary>
+            <div class="bf26-faq-answer"><p>Yes. One eligible Black Friday package purchase enters you into each of the five featured giveaway draws.</p></div>
+          </details>
+          <details>
+            <summary>How many entries come with each package?</summary>
+            <div class="bf26-faq-answer"><p>The Entry, Bronze, Silver, Gold and Platinum packages show 10, 50, 250, 1,000 and 5,000 Black Friday entries respectively. Confirm the final allocation in the live checkout and official terms.</p></div>
+          </details>
+          <details>
+            <summary>When does the Black Friday offer close?</summary>
+            <div class="bf26-faq-answer"><p>The offer is scheduled to close on 30 November 2026 at 8:00 PM AEDT, unless the official terms state otherwise.</p></div>
+          </details>
+          <details>
+            <summary>When are the winners drawn?</summary>
+            <div class="bf26-faq-answer"><p>The supplied campaign schedule lists a live draw for 30 November 2026 at 8:30 PM AEDT. Follow the official LMCT+ announcement channels for confirmed draw information.</p></div>
+          </details>
+          <details>
+            <summary>Where can I check eligibility and the full rules?</summary>
+            <div class="bf26-faq-answer"><p>Review the official promotion terms linked from the live ClickFunnels checkout before purchasing. Those terms govern eligibility, entry allocation, draw timing and prize conditions.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="bf26-final" aria-labelledby="bf26-final-title">
+      <div>
+        <h2 id="bf26-final-title">One package. Five chances.</h2>
+        <p>Choose your Black Friday package before entries close on 30 November 2026.</p>
+        <a class="bf26-button" href="#packages">Choose your package</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bf26-footer">
+    <div class="bf26-footer-mark" aria-hidden="true">LMCT<span>+</span></div>
+    <div class="bf26-footer-row">
+      <div class="bf26-footer-links"><a href="#prizes">Prizes</a><a href="#packages">Packages</a><a href="#faq">FAQ</a></div>
+      <div class="bf26-footer-note">Individual giveaway terms and eligibility conditions apply. Confirm all campaign details before publishing.</div>
+    </div>
+  </footer>
+</div>
+
+<div class="bf26-lightbox" id="bf26-lightbox" role="dialog" aria-modal="true" aria-label="Prize photo viewer" aria-hidden="true">
+  <button class="bf26-lightbox-close" type="button" aria-label="Close photo viewer">×</button>
+  <button class="bf26-lightbox-prev" type="button" aria-label="Previous photo">‹</button>
+  <img src="" alt="" />
+  <div class="bf26-lightbox-caption"></div>
+  <button class="bf26-lightbox-next" type="button" aria-label="Next photo">›</button>
+</div>
+
+<script>
+  (function () {
+    "use strict";
+
+    /* =========================================================
+       CLICKFUNNELS CONFIG
+
+       Replace #checkout with the live order-form URL. If the URL
+       contains {package}, it will be replaced with entry, bronze,
+       silver, gold or platinum for each package button.
+       ========================================================= */
+    var CHECKOUT_URL = "#checkout";
+    var CAMPAIGN_START_UTC = "2026-11-26T13:00:00Z"; /* 27 Nov, 12:00 AM AEDT */
+    var CAMPAIGN_END_UTC = "2026-11-30T09:00:00Z";   /* 30 Nov, 8:00 PM AEDT */
+
+    var root = document.getElementById("bf26-root");
+    if (!root) return;
+
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var smoothBehavior = reduceMotion ? "auto" : "smooth";
+
+    /* Checkout links */
+    Array.prototype.forEach.call(root.querySelectorAll("[data-package]"), function (link) {
+      var packageName = link.getAttribute("data-package");
+      link.setAttribute("href", CHECKOUT_URL.replace("{package}", encodeURIComponent(packageName)));
+    });
+
+    /* Live campaign countdown */
+    var countdown = document.getElementById("bf26-countdown");
+    var campaignStart = Date.parse(CAMPAIGN_START_UTC);
+    var campaignEnd = Date.parse(CAMPAIGN_END_UTC);
+
+    function countdownText(milliseconds) {
+      var totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
+      var days = Math.floor(totalSeconds / 86400);
+      var hours = Math.floor((totalSeconds % 86400) / 3600);
+      var minutes = Math.floor((totalSeconds % 3600) / 60);
+      var seconds = totalSeconds % 60;
+      return days + "d " + String(hours).padStart(2, "0") + "h " + String(minutes).padStart(2, "0") + "m " + String(seconds).padStart(2, "0") + "s";
+    }
+
+    function updateCountdown() {
+      if (!countdown || isNaN(campaignStart) || isNaN(campaignEnd)) return;
+      var now = Date.now();
+      if (now < campaignStart) {
+        countdown.textContent = "Black Friday starts in " + countdownText(campaignStart - now) + " (AEDT)";
+      } else if (now <= campaignEnd) {
+        countdown.textContent = "The offer is live · closes in " + countdownText(campaignEnd - now) + " (AEDT)";
+      } else {
+        countdown.textContent = "This Black Friday offer has closed.";
+      }
+    }
+
+    updateCountdown();
+    window.setInterval(updateCountdown, 1000);
+
+    /* Once-only section reveals with a no-observer fallback */
+    var revealItems = root.querySelectorAll("[data-reveal]");
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      Array.prototype.forEach.call(revealItems, function (item) { item.classList.add("is-in"); });
+    } else {
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-in");
+          revealObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
+      Array.prototype.forEach.call(revealItems, function (item) { revealObserver.observe(item); });
+    }
+
+    /* Proof counters — preserves the final numbers if JavaScript is interrupted */
+    var statsBar = document.getElementById("lmctDStatsBar");
+    var statsRan = false;
+
+    function animateStat(el) {
+      var target = parseInt(el.getAttribute("data-target"), 10);
+      var prefix = el.getAttribute("data-prefix") || "";
+      var suffix = el.getAttribute("data-suffix") || "";
+      if (isNaN(target) || reduceMotion) {
+        el.textContent = prefix + target.toLocaleString("en-US") + suffix;
+        return;
+      }
+      var start = null;
+      var duration = 1350;
+      function frame(timestamp) {
+        if (start === null) start = timestamp;
+        var progress = Math.min(1, (timestamp - start) / duration);
+        var eased = 1 - Math.pow(1 - progress, 4);
+        el.textContent = prefix + Math.floor(eased * target).toLocaleString("en-US") + suffix;
+        if (progress < 1) window.requestAnimationFrame(frame);
+        else el.textContent = prefix + target.toLocaleString("en-US") + suffix;
+      }
+      el.textContent = prefix + "0" + suffix;
+      window.requestAnimationFrame(frame);
+    }
+
+    function runStats() {
+      if (statsRan || !statsBar) return;
+      statsRan = true;
+      Array.prototype.forEach.call(statsBar.querySelectorAll(".lmctDStatNum"), function (item) {
+        var target = parseInt(item.getAttribute("data-target"), 10);
+        var prefix = item.getAttribute("data-prefix") || "";
+        var suffix = item.getAttribute("data-suffix") || "";
+        item.textContent = prefix + target.toLocaleString("en-US") + suffix;
+      });
+    }
+
+    if (statsBar && "IntersectionObserver" in window) {
+      var statsObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            runStats();
+            statsObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.25 });
+      statsObserver.observe(statsBar);
+    } else {
+      runStats();
+    }
+
+    /* Package inclusion drawer */
+    var inclusionButton = document.getElementById("lmctPkgInclV3_btn");
+    var inclusionDrawer = document.getElementById("lmctPkgInclV3_drawer");
+    if (inclusionButton && inclusionDrawer) {
+      inclusionButton.addEventListener("click", function () {
+        var open = inclusionDrawer.classList.toggle("lmctPkgInclV3_drawerOpen");
+        inclusionButton.setAttribute("aria-expanded", open ? "true" : "false");
+        inclusionDrawer.setAttribute("aria-hidden", open ? "false" : "true");
+      });
+    }
+
+    /* Prize gallery data from take-a-closer-look-black-friday.html */
+    var PRIZES = [
+      {
+        n: "1",
+        name: "Gold Coast House",
+        cash: "or $2,000,000 cash alternative",
+        imgs: [
+          ["Assets/prize-house.png", "Gold Coast waterfront estate"],
+          ["Assets/closer-house-living.jpg", "Modern waterfront living"],
+          ["Assets/closer-house-interior.jpg", "Generous light-filled interiors"],
+          ["Assets/closer-house-kitchen.jpg", "Kitchen made for entertaining"],
+          ["Assets/closer-house-floorplan.png", "Architectural floorplan"]
+        ]
+      },
+      {
+        n: "2",
+        name: "LandCruiser Sahara + Patriot Camper",
+        cash: "or $150,000 cash alternative",
+        imgs: [
+          ["https://images.clickfunnels.com/fe/a66dcabb1b4c80b08badb7ed16995a/PTW_5942.jpg", "LandCruiser and Patriot Camper"],
+          ["https://images.clickfunnels.com/90/9b7f5741844cc2a7f0ca1750fe5d66/PTW_5965-copy-1-.jpg", "LandCruiser front three-quarter view"],
+          ["https://images.clickfunnels.com/30/55edf8471548758f5c1e9db8e0e6fa/PTW_5951.jpg", "LandCruiser and camper profile"],
+          ["https://images.clickfunnels.com/ed/e8abb082ee432fb158f70af2fabb8d/PTW_5918.jpg", "Patriot Camper setup"],
+          ["https://images.clickfunnels.com/94/1438e842d04a56b0ad8e48cdb04f8a/PTW_5902.jpg", "LandCruiser with Patriot Camper"],
+          ["https://images.clickfunnels.com/fe/fbf4c0fc4a495fac313f981eb65302/PTW_5949.jpg", "LandCruiser side view"],
+          ["https://images.clickfunnels.com/6e/5c20fab2f24773864318fa2a73296f/PTW_5913.jpg", "Patriot Camper exterior"],
+          ["https://images.clickfunnels.com/ab/2d68a2e5fe4cf3a6f686a51204be1c/PTW_5931.jpg", "LandCruiser touring setup"],
+          ["https://images.clickfunnels.com/1d/b3b75e3764489984be673d8fd6b591/PTW_5934.jpg", "LandCruiser rear three-quarter view"],
+          ["https://images.clickfunnels.com/ac/05ceba66424e598d39696945c47b0d/PTW_5935.jpg", "Patriot Camper detail"]
+        ]
+      },
+      {
+        n: "3",
+        name: "Lamborghini Urus",
+        cash: "or $300,000 cash alternative",
+        imgs: [
+          ["https://images.clickfunnels.com/b0/45c4cb94e845fdba1cae474e758fd3/Urus-14-1-.jpg", "Lamborghini Urus"],
+          ["https://images.clickfunnels.com/91/929daf9ccd4bf49b2458ee7c22a717/Urus-16-1-.jpg", "Lamborghini Urus profile"],
+          ["https://images.clickfunnels.com/ae/6e3e7d0c1842a8a42255a902ffcac5/Full-Matt-CARBON-FIBRE-PACKAGE-Carbon-bonnet-roof-and-exterior-.jpg", "Full matte carbon fibre package"],
+          ["https://images.clickfunnels.com/f6/42d0f4a82b4960b6a844c59bd75cde/Adrian-s-Personal-Lambo-PERSONALLY-OWNED-BY-ADRIAN-.jpg", "Lamborghini Urus exterior"],
+          ["https://images.clickfunnels.com/03/851884f39240c1a3a81f6215e056b4/Urus-34-1-.jpg", "Lamborghini Urus rear view"],
+          ["https://images.clickfunnels.com/bc/f7fc1f1bf44df790881898b3d8a2a8/Alcantara-Performance-Steering-Wheel-FULL-ALCANTARA-WHEEL-WITH-RED-MARKER-.jpg", "Alcantara performance steering wheel"],
+          ["https://images.clickfunnels.com/db/2b3d57081a425bbcfbf7382d60f40b/4-Seats-EXCLUSIVE-LUXURY-INTERIOR-Alcantara-massage-seats-and-B-O-audio-.jpg", "Exclusive four-seat luxury interior"],
+          ["https://images.clickfunnels.com/8d/03b8fc3cdc4a43b1c383b925b479e9/Urus-26-1-.jpg", "Lamborghini Urus cabin"],
+          ["https://images.clickfunnels.com/f5/de2a61f4c94e55a518999a0adee438/Urus-27-1-.jpg", "Lamborghini Urus interior detail"],
+          ["https://images.clickfunnels.com/c4/42d745e13e403b84549682843e1d4e/490kW-4.0L-TWIN-TURBO-V8-666-PS-850Nm-torque-.jpg", "490kW 4.0L twin-turbo V8"]
+        ]
+      },
+      {
+        n: "4",
+        name: "Chevrolet Camaro",
+        cash: "or $130,000 cash alternative",
+        imgs: [
+          ["https://images.clickfunnels.com/e6/ab0585a3c1420dbbb08bdd47a20b16/1-optimized.jpg", "Chevrolet Camaro"],
+          ["https://images.clickfunnels.com/b6/6b328d94874859a87d706c59ab3ef1/2-optimized.jpg", "Chevrolet Camaro front view"],
+          ["https://images.clickfunnels.com/f1/f63c7da20c4a3297567f9ca86e5947/3-optimized.jpg", "Chevrolet Camaro front three-quarter view"],
+          ["https://images.clickfunnels.com/05/f8da9b69a948feb5d95a57996b43d4/4-optimized.jpg", "Chevrolet Camaro profile"],
+          ["https://images.clickfunnels.com/2a/6ee59f4b3240c1a20366f7a679202e/5-optimized.jpg", "Chevrolet Camaro rear three-quarter view"],
+          ["https://images.clickfunnels.com/31/75a22196794352b09faea507fb2f05/6-optimized.jpg", "Chevrolet Camaro rear view"],
+          ["https://images.clickfunnels.com/a3/55bac29951428c9afbbd3313532341/7-optimized.jpg", "Chevrolet Camaro wheel detail"],
+          ["https://images.clickfunnels.com/7b/d88930d4c849aa8a68f569b5f4740c/8-optimized.jpg", "Chevrolet Camaro interior"],
+          ["https://images.clickfunnels.com/64/f20d96c7ed484baea426f47d47168c/9-optimized.jpg", "Chevrolet Camaro cabin detail"],
+          ["https://images.clickfunnels.com/27/c2926379c6433b8b734a8398dacca5/10-optimized.jpg", "Chevrolet Camaro dashboard"],
+          ["https://images.clickfunnels.com/f0/6b46cf226a4003b0bcc15973bb3b23/11-optimized.jpg", "Chevrolet Camaro performance detail"]
+        ]
+      },
+      {
+        n: "5",
+        name: "Jeep Grand Cherokee",
+        cash: "or $70,000 cash alternative",
+        imgs: []
+      }
+    ];
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, function (character) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[character];
+      });
+    }
+
+    var closerRoot = document.getElementById("bfCL-items");
+    var prizeItems = [];
+
+    if (closerRoot) {
+      var closerMarkup = "";
+      PRIZES.forEach(function (prize, prizeIndex) {
+        var bodyMarkup;
+        if (prize.imgs.length) {
+          bodyMarkup = '<div class="bfCL__slider">' +
+            '<button class="bfCL__arr bfCL__arr--p" type="button" aria-label="Previous photos">‹</button>' +
+            '<div class="bfCL__track">' +
+            prize.imgs.map(function (image, imageIndex) {
+              return '<button class="bfCL__slide" type="button" data-photo="' + imageIndex + '" aria-label="Open photo ' + (imageIndex + 1) + ' of ' + prize.imgs.length + '">' +
+                '<img data-src="' + escapeHtml(image[0]) + '" alt="' + escapeHtml(image[1] || (prize.name + " photo " + (imageIndex + 1))) + '" loading="lazy" decoding="async" />' +
+                (image[1] ? '<span class="bfCL__cap">' + escapeHtml(image[1]) + '</span>' : '') +
+              '</button>';
+            }).join("") +
+            '</div>' +
+            '<button class="bfCL__arr bfCL__arr--n" type="button" aria-label="Next photos">›</button>' +
+          '</div>';
+        } else {
+          bodyMarkup = '<div class="bfCL__soon">More photos coming soon.</div>';
+        }
+
+        closerMarkup += '<article class="bfCL__item" id="prize-' + (prizeIndex + 1) + '" data-prize="' + prizeIndex + '">' +
+          '<button class="bfCL__hd" id="bfCL-heading-' + prizeIndex + '" type="button" aria-expanded="false" aria-controls="bfCL-panel-' + prizeIndex + '">' +
+            '<span class="bfCL__n">' + escapeHtml(prize.n) + '</span>' +
+            '<span class="bfCL__nm">' + escapeHtml(prize.name) + '</span>' +
+            '<span class="bfCL__cash">' + escapeHtml(prize.cash) + '</span>' +
+            '<span class="bfCL__ic" aria-hidden="true"></span>' +
+          '</button>' +
+          '<div class="bfCL__panel" id="bfCL-panel-' + prizeIndex + '" role="region" aria-labelledby="bfCL-heading-' + prizeIndex + '">' +
+            '<div class="bfCL__pin"><div class="bfCL__body">' + bodyMarkup + '</div></div>' +
+          '</div>' +
+        '</article>';
+      });
+
+      closerRoot.innerHTML = closerMarkup;
+      prizeItems = Array.prototype.slice.call(closerRoot.querySelectorAll(".bfCL__item"));
+
+      closerRoot.addEventListener("error", function (event) {
+        var image = event.target;
+        if (!image || image.tagName !== "IMG" || image.getAttribute("data-fallback-used") === "true") return;
+        image.setAttribute("data-fallback-used", "true");
+        image.src = "Assets/Gold Coast House and Luxury Fleet.png";
+      }, true);
+    }
+
+    function loadPrizeImages(item) {
+      Array.prototype.forEach.call(item.querySelectorAll("img[data-src]"), function (image) {
+        image.setAttribute("src", image.getAttribute("data-src"));
+        image.removeAttribute("data-src");
+      });
+    }
+
+    function updateSliderArrows(item) {
+      var track = item.querySelector(".bfCL__track");
+      if (!track) return;
+      var previous = item.querySelector(".bfCL__arr--p");
+      var next = item.querySelector(".bfCL__arr--n");
+      var maximum = Math.max(0, track.scrollWidth - track.clientWidth);
+      var hidden = maximum <= 2;
+      previous.classList.toggle("bfCL__hide", hidden);
+      next.classList.toggle("bfCL__hide", hidden);
+      previous.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= maximum - 2;
+    }
+
+    function setPrizeOpen(item, open) {
+      var button = item.querySelector(".bfCL__hd");
+      item.classList.toggle("is-open", open);
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) {
+        loadPrizeImages(item);
+        window.setTimeout(function () { updateSliderArrows(item); }, 460);
+      }
+    }
+
+    function openOnlyPrize(index) {
+      prizeItems.forEach(function (item, itemIndex) { setPrizeOpen(item, itemIndex === index); });
+    }
+
+    prizeItems.forEach(function (item, index) {
+      var button = item.querySelector(".bfCL__hd");
+      button.addEventListener("click", function () {
+        if (item.classList.contains("is-open")) setPrizeOpen(item, false);
+        else openOnlyPrize(index);
+      });
+
+      var track = item.querySelector(".bfCL__track");
+      if (track) {
+        var previous = item.querySelector(".bfCL__arr--p");
+        var next = item.querySelector(".bfCL__arr--n");
+        function moveSlider(direction) {
+          var slide = track.querySelector(".bfCL__slide");
+          if (!slide) return;
+          track.scrollBy({ left: direction * (slide.getBoundingClientRect().width + 14), behavior: smoothBehavior });
+        }
+        previous.addEventListener("click", function () { moveSlider(-1); });
+        next.addEventListener("click", function () { moveSlider(1); });
+        track.addEventListener("scroll", function () { updateSliderArrows(item); }, { passive: true });
+      }
+    });
+
+    if (prizeItems.length) openOnlyPrize(0);
+
+    window.addEventListener("resize", function () {
+      prizeItems.forEach(updateSliderArrows);
+    });
+
+    document.addEventListener("click", function (event) {
+      var anchor = event.target.closest && event.target.closest('a[href^="#prize-"]');
+      if (!anchor) return;
+      var prizeNumber = parseInt(anchor.getAttribute("href").replace("#prize-", ""), 10);
+      if (!prizeNumber || !prizeItems[prizeNumber - 1]) return;
+      event.preventDefault();
+      openOnlyPrize(prizeNumber - 1);
+      window.setTimeout(function () {
+        prizeItems[prizeNumber - 1].scrollIntoView({ behavior: smoothBehavior, block: "start" });
+      }, 50);
+    });
+
+    /* Prize photo lightbox */
+    var lightbox = document.getElementById("bf26-lightbox");
+    var lightboxImage = lightbox ? lightbox.querySelector("img") : null;
+    var lightboxCaption = lightbox ? lightbox.querySelector(".bf26-lightbox-caption") : null;
+    var lightboxClose = lightbox ? lightbox.querySelector(".bf26-lightbox-close") : null;
+    var currentPrize = 0;
+    var currentPhoto = 0;
+    var lastFocus = null;
+
+    function showLightboxPhoto() {
+      var list = PRIZES[currentPrize].imgs;
+      var image = list[currentPhoto];
+      if (!image || !lightboxImage) return;
+      lightboxImage.src = image[0];
+      lightboxImage.alt = image[1] || PRIZES[currentPrize].name;
+      lightboxCaption.textContent = (image[1] ? image[1] + " · " : "") + (currentPhoto + 1) + " / " + list.length;
+    }
+
+    function openLightbox(prizeIndex, photoIndex) {
+      if (!lightbox) return;
+      currentPrize = prizeIndex;
+      currentPhoto = photoIndex;
+      lastFocus = document.activeElement;
+      showLightboxPhoto();
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.documentElement.style.overflow = "hidden";
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.documentElement.style.overflow = "";
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    function moveLightbox(direction) {
+      var count = PRIZES[currentPrize].imgs.length;
+      if (!count) return;
+      currentPhoto = (currentPhoto + direction + count) % count;
+      showLightboxPhoto();
+    }
+
+    if (closerRoot && lightbox) {
+      closerRoot.addEventListener("click", function (event) {
+        var slide = event.target.closest && event.target.closest(".bfCL__slide");
+        if (!slide) return;
+        var item = slide.closest(".bfCL__item");
+        openLightbox(parseInt(item.getAttribute("data-prize"), 10), parseInt(slide.getAttribute("data-photo"), 10));
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightbox.querySelector(".bf26-lightbox-prev").addEventListener("click", function () { moveLightbox(-1); });
+      lightbox.querySelector(".bf26-lightbox-next").addEventListener("click", function () { moveLightbox(1); });
+      lightbox.addEventListener("mousedown", function (event) { if (event.target === lightbox) closeLightbox(); });
+      document.addEventListener("keydown", function (event) {
+        if (!lightbox.classList.contains("is-open")) return;
+        if (event.key === "Escape") closeLightbox();
+        else if (event.key === "ArrowLeft") moveLightbox(-1);
+        else if (event.key === "ArrowRight") moveLightbox(1);
+      });
+    }
+
+    /* Testimonials marquee — clone once, pause off-screen and in hidden tabs */
+    var marquee = document.getElementById("cfMarquee");
+    if (marquee && !reduceMotion) {
+      marquee.addEventListener("error", function (event) {
+        var slide = event.target.closest && event.target.closest(".cf-slide");
+        if (slide) slide.remove();
+      }, true);
+
+      Array.prototype.forEach.call(marquee.querySelectorAll("img"), function (image) {
+        if (image.complete && image.naturalWidth === 0) {
+          var slide = image.closest(".cf-slide");
+          if (slide) slide.remove();
+        }
+      });
+
+      var sequence = marquee.querySelector(".cf-seq");
+      if (sequence) {
+        var sequenceClone = sequence.cloneNode(true);
+        sequenceClone.setAttribute("aria-hidden", "true");
+        marquee.querySelector(".cf-track").appendChild(sequenceClone);
+      }
+
+      if ("IntersectionObserver" in window) {
+        var marqueeObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            marquee.classList.toggle("is-paused", !entry.isIntersecting || document.hidden);
+          });
+        }, { threshold: 0.01 });
+        marqueeObserver.observe(marquee);
+      }
+
+      document.addEventListener("visibilitychange", function () {
+        marquee.classList.toggle("is-paused", document.hidden);
+      });
+    }
+  })();
+</script>

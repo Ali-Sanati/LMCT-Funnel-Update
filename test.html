@@ -1,232 +1,844 @@
-<!-- Replace the previous membership-notice snippet with this entire block.
-     Paste into ClickFunnels Footer Tracking Code. Keep the existing form CSS.
-     DRAFT: confirm supportEmail and eligibilityCutoffLabel before publishing.
-     The API reports current activity only; support must verify cutoff eligibility.
-     This adds deadline copy, not automatic expiry or server-side purchase enforcement. -->
+<!--
+  LMCT+ Adelaide Fuel Membership + GC House or $2M giveaway thank-you page.
+  Standalone ClickFunnels custom HTML section for successful $199 annual membership orders.
+-->
 <style>
-#col-full-180 .lmctOfferNote,
-#col-full-180 .lmctMemberCheckMessage,
-#col-full-180 .lmctOfferTerms {
-  font: 500 13px/1.5 Montserrat, Arial, sans-serif;
-  color: #214563;
-}
-#col-full-180 .lmctOfferNote {
-  margin: 12px 0 0;
-  text-align: center;
-}
-#col-full-180 .lmctOfferNote strong { color: #071b3b; }
-#col-full-180 .lmctOfferExplanation {
-  margin: 20px 0 0;
-  font: 500 13px/1.5 Montserrat, Arial, sans-serif;
-  color: #214563;
-}
-#col-full-180 .lmctMemberCheckMessage {
-  margin: 18px 0 0;
-  padding: 14px 16px;
-  border: 1px solid #b9dff5;
-  border-left: 4px solid #0877cb;
-  border-radius: 10px;
-  background: #f0f9ff;
-}
-#col-full-180 .lmctMemberCheckMessage[hidden] { display: none !important; }
-#col-full-180 .lmctMemberCheckMessage strong { display: block; color: #071b3b; }
-#col-full-180 .lmctMemberCheckMessage a { color: #0877cb; text-decoration: underline; }
-#col-full-180 .lmctOfferTerms {
-  margin-top: 22px;
-  padding-top: 16px;
-  border-top: 1px solid #dce9f2;
-}
-#col-full-180 .lmctOfferTerms summary { cursor: pointer; font-weight: 800; }
-#col-full-180 .lmctOfferTerms p { margin: 10px 0 0; }
-#col-full-180 .lmctNoRefundNotice {
-  display: block;
-  margin-top: 8px;
-  color: #c62828 !important;
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.5;
-}
+  @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap");
+  .lmctATY {
+    --lmctATY-ink: #061b3a;
+    --lmctATY-blue-900: #063b78;
+    --lmctATY-blue-700: #087cc9;
+    --lmctATY-blue-500: #16a8ed;
+    --lmctATY-blue-100: #dff5ff;
+    --lmctATY-white: #ffffff;
+    --lmctATY-lime: #dfff00;
+    --lmctATY-lime-bright: #efff32;
+    --lmctATY-muted: #587494;
+    --lmctATY-line: rgba(6, 27, 58, 0.1);
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--lmctATY-ink);
+    font-family: "Inter", Arial, sans-serif;
+    background:
+      radial-gradient(circle at 81% 17%, rgba(63, 190, 255, 0.29), transparent 34%), radial-gradient(circle at 10% 71%, rgba(47, 123, 230, 0.13), transparent 31%),
+      linear-gradient(135deg, #f8fcff 0%, #e4f6ff 47%, #a9e1ff 100%);
+    -webkit-font-smoothing: antialiased;
+  }
+  .lmctATY,
+  .lmctATY * {
+    box-sizing: border-box;
+  }
+  .lmctATY::before {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    background-image: linear-gradient(90deg, var(--lmctATY-line) 1px, transparent 1px), linear-gradient(var(--lmctATY-line) 1px, transparent 1px);
+    background-size:
+      min(8.333vw, 120px) 100%,
+      100% 120px;
+    opacity: 0.42;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 76%, transparent 98%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 76%, transparent 98%);
+  }
+  .lmctATY__shell {
+    width: min(1380px, calc(100% - 80px));
+    margin: 0 auto;
+  }
+  .lmctATY__header {
+    position: relative;
+    z-index: 5;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    align-items: center;
+    min-height: 92px;
+    border-bottom: 1px solid var(--lmctATY-line);
+  }
+  .lmctATY__brand {
+    display: flex;
+    grid-column: 1 / span 3;
+    align-items: center;
+    width: max-content;
+    color: var(--lmctATY-ink);
+    text-decoration: none;
+  }
+  .lmctATY__brand img {
+    display: block;
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+  }
+  .lmctATY__edition {
+    grid-column: 5 / span 2;
+    margin: 0;
+    color: var(--lmctATY-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+  .lmctATY__location {
+    display: flex;
+    grid-column: 8 / span 5;
+    align-items: center;
+    justify-self: end;
+    gap: 11px;
+    color: var(--lmctATY-muted);
+    font-size: 10px;
+    line-height: 1.4;
+  }
+  .lmctATY__locationIcon {
+    display: grid;
+    flex: 0 0 35px;
+    width: 35px;
+    height: 35px;
+    place-items: center;
+    border: 1px solid rgba(6, 59, 120, 0.2);
+    border-radius: 50%;
+    color: var(--lmctATY-blue-700);
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .lmctATY__locationIcon svg {
+    width: 15px;
+    height: 15px;
+  }
+  .lmctATY__location address {
+    margin: 0;
+    font-style: normal;
+  }
+  .lmctATY__location strong {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--lmctATY-ink);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.035em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmctATY__hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    align-items: center;
+    min-height: 690px;
+    padding: 78px 0 90px;
+  }
+  .lmctATY__hero::after {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    right: 3%;
+    width: min(48vw, 650px);
+    aspect-ratio: 1;
+    content: "";
+    border: 1px solid rgba(6, 59, 120, 0.12);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 62px rgba(255, 255, 255, 0.11),
+      0 0 0 124px rgba(6, 59, 120, 0.025);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  .lmctATY__copy {
+    position: relative;
+    z-index: 2;
+    grid-column: 1 / span 7;
+    min-width: 0;
+  }
+  .lmctATY__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 28px;
+    color: var(--lmctATY-blue-900);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.19em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmctATY__eyebrow::before {
+    width: 38px;
+    height: 1px;
+    content: "";
+    background: var(--lmctATY-blue-700);
+  }
+  .lmctATY__successMark {
+    display: grid;
+    width: 62px;
+    height: 62px;
+    margin-bottom: 24px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctATY-ink);
+    background: linear-gradient(135deg, var(--lmctATY-lime-bright), var(--lmctATY-lime));
+    box-shadow: 0 18px 38px rgba(105, 139, 0, 0.2);
+    animation: lmctATY__markIn 600ms cubic-bezier(0.2, 0.78, 0.28, 1) both;
+  }
+  .lmctATY__successMark svg {
+    width: 30px;
+    height: 30px;
+  }
+  .lmctATY__title {
+    width: 100%;
+    max-width: 780px;
+    margin: 0;
+    color: var(--lmctATY-ink);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(72px, 7.6vw, 118px);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 0.79;
+    text-transform: uppercase;
+  }
+  .lmctATY__title span {
+    display: block;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--lmctATY-ink);
+  }
+  .lmctATY__lead {
+    max-width: 610px;
+    margin: 34px 0 0;
+    color: var(--lmctATY-muted);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  .lmctATY__lead strong {
+    color: var(--lmctATY-ink);
+    font-weight: 700;
+  }
+  .lmctATY__assurance {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+  .lmctATY__assurance span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 35px;
+    padding: 0 14px;
+    border: 1px solid rgba(6, 59, 120, 0.16);
+    border-radius: 999px;
+    color: var(--lmctATY-blue-900);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.48);
+  }
+  .lmctATY__summary {
+    position: relative;
+    z-index: 3;
+    grid-column: 8 / span 5;
+    width: 100%;
+    min-width: 0;
+    max-width: 500px;
+    justify-self: end;
+    overflow: hidden;
+    border: 1px solid rgba(6, 59, 120, 0.16);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 30px 70px rgba(6, 59, 120, 0.16);
+    backdrop-filter: blur(14px);
+    animation: lmctATY__cardIn 720ms 100ms cubic-bezier(0.2, 0.78, 0.28, 1) both;
+  }
+  .lmctATY__summaryHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 25px 28px;
+    border-bottom: 1px solid rgba(6, 27, 58, 0.09);
+  }
+  .lmctATY__summaryHead > div {
+    min-width: 0;
+  }
+  .lmctATY__summaryHead p,
+  .lmctATY__summaryHead h2 {
+    margin: 0;
+  }
+  .lmctATY__summaryHead p {
+    margin-bottom: 5px;
+    color: var(--lmctATY-blue-700);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .lmctATY__summaryHead h2 {
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmctATY__confirmed {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 12px;
+    border-radius: 999px;
+    color: var(--lmctATY-ink);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--lmctATY-lime);
+  }
+  .lmctATY__summaryBody {
+    padding: 12px 28px 28px;
+  }
+  .lmctATY__summaryRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 70px;
+    border-bottom: 1px solid rgba(6, 27, 58, 0.08);
+  }
+  .lmctATY__summaryRow span {
+    min-width: 0;
+    color: var(--lmctATY-muted);
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .lmctATY__summaryRow strong {
+    min-width: 0;
+    color: var(--lmctATY-ink);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1;
+    text-align: right;
+    text-transform: uppercase;
+  }
+  .lmctATY__summaryRow--bonus strong {
+    color: var(--lmctATY-blue-900);
+    font-size: 32px;
+  }
+  .lmctATY__receipt {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin: 22px 0 0;
+    padding: 16px;
+    border-radius: 14px;
+    color: var(--lmctATY-blue-900);
+    font-size: 11px;
+    line-height: 1.55;
+    background: var(--lmctATY-blue-100);
+  }
+  .lmctATY__receipt svg {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+  }
+  .lmctATY__next {
+    position: relative;
+    z-index: 2;
+    padding: 90px 0 94px;
+    color: var(--lmctATY-white);
+    background: var(--lmctATY-ink);
+  }
+  .lmctATY__nextHead {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+    align-items: end;
+  }
+  .lmctATY__nextHead .lmctATY__eyebrow {
+    grid-column: 1 / span 3;
+    align-self: start;
+    color: var(--lmctATY-blue-300, #78d4ff);
+  }
+  .lmctATY__nextHead .lmctATY__eyebrow::before {
+    background: var(--lmctATY-lime);
+  }
+  .lmctATY__nextTitle {
+    grid-column: 4 / span 6;
+    margin: 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: clamp(52px, 5.8vw, 84px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.88;
+    text-transform: uppercase;
+  }
+  .lmctATY__nextCopy {
+    grid-column: 10 / span 3;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 12px;
+    line-height: 1.65;
+  }
+  .lmctATY__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .lmctATY__step {
+    min-height: 250px;
+    padding: 32px;
+    background: var(--lmctATY-ink);
+  }
+  .lmctATY__stepNumber {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctATY-ink);
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    background: var(--lmctATY-lime);
+  }
+  .lmctATY__step h3 {
+    margin: 30px 0 0;
+    font-family: "Barlow Condensed", Impact, sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .lmctATY__step p {
+    margin: 16px 0 0;
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 12px;
+    line-height: 1.65;
+  }
+  .lmctATY__step p strong {
+    color: var(--lmctATY-white);
+    font-weight: 700;
+  }
+  .lmctATY__notice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 28px;
+    padding: 24px 28px;
+    border: 1px solid rgba(223, 255, 0, 0.24);
+    border-radius: 16px;
+    background: rgba(223, 255, 0, 0.06);
+  }
+  .lmctATY__notice p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .lmctATY__notice strong {
+    color: var(--lmctATY-white);
+  }
+  .lmctATY__supportLink {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-width: 210px;
+    min-height: 54px;
+    padding: 0 11px 0 19px;
+    border-radius: 999px;
+    color: var(--lmctATY-ink) !important;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-decoration: none !important;
+    text-transform: uppercase;
+    background: var(--lmctATY-lime);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
+  .lmctATY__supportLink span:last-child {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--lmctATY-lime);
+    font-size: 17px;
+    background: var(--lmctATY-ink);
+  }
+  .lmctATY__supportLink:hover {
+    box-shadow: 0 14px 34px rgba(223, 255, 0, 0.16);
+    transform: translateY(-2px);
+  }
+  .lmctATY__supportLink:focus-visible,
+  .lmctATY__footer a:focus-visible {
+    outline: 3px solid var(--lmctATY-lime-bright);
+    outline-offset: 3px;
+  }
+  .lmctATY__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 104px;
+    color: var(--lmctATY-muted);
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    line-height: 1.55;
+    text-transform: uppercase;
+  }
+  .lmctATY__footer p {
+    margin: 0;
+  }
+  .lmctATY__footerLinks {
+    display: flex;
+    gap: 26px;
+  }
+  .lmctATY__footerLinks a {
+    color: var(--lmctATY-blue-900);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  @keyframes lmctATY__markIn {
+    from {
+      opacity: 0;
+      transform: scale(0.68) rotate(-10deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotate(0);
+    }
+  }
+  @keyframes lmctATY__cardIn {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (max-width: 1040px) {
+    .lmctATY__hero {
+      min-height: 650px;
+    }
+    .lmctATY__copy {
+      grid-column: 1 / span 6;
+    }
+    .lmctATY__summary {
+      grid-column: 7 / span 6;
+    }
+    .lmctATY__title {
+      font-size: clamp(67px, 8vw, 94px);
+    }
+  }
+  @media (max-width: 820px) {
+    .lmctATY__shell {
+      width: min(100% - 48px, 720px);
+    }
+    .lmctATY__header {
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      padding: 19px 0;
+    }
+    .lmctATY__brand {
+      grid-column: 1;
+    }
+    .lmctATY__edition {
+      display: none;
+    }
+    .lmctATY__location {
+      grid-column: 2;
+    }
+    .lmctATY__hero {
+      grid-template-columns: 1fr;
+      min-height: 0;
+      padding: 64px 0 76px;
+    }
+    .lmctATY__hero::after {
+      top: 72%;
+      right: -25%;
+      width: 80vw;
+    }
+    .lmctATY__copy,
+    .lmctATY__summary {
+      grid-column: 1;
+      width: 100%;
+      min-width: 0;
+    }
+    .lmctATY__summary {
+      max-width: none;
+      margin-top: 48px;
+    }
+    .lmctATY__nextHead {
+      display: block;
+    }
+    .lmctATY__nextTitle {
+      max-width: 580px;
+    }
+    .lmctATY__nextCopy {
+      max-width: 520px;
+      margin-top: 23px;
+    }
+    .lmctATY__steps {
+      grid-template-columns: 1fr;
+    }
+    .lmctATY__step {
+      min-height: 0;
+    }
+  }
+  @media (max-width: 620px) {
+    .lmctATY::before {
+      background-size:
+        25% 100%,
+        100% 100px;
+    }
+    .lmctATY__shell {
+      width: min(100% - 36px, 560px);
+    }
+    .lmctATY__header {
+      grid-template-columns: 1fr;
+    }
+    .lmctATY__brand,
+    .lmctATY__location {
+      grid-column: 1;
+    }
+    .lmctATY__brand img {
+      width: 190px;
+    }
+    .lmctATY__location {
+      justify-self: start;
+    }
+    .lmctATY__hero {
+      padding: 48px 0 62px;
+    }
+    .lmctATY__eyebrow {
+      margin-bottom: 25px;
+      font-size: 9px;
+    }
+    .lmctATY__successMark {
+      width: 54px;
+      height: 54px;
+    }
+    .lmctATY__title {
+      max-width: 100%;
+      font-size: clamp(53px, 15.5vw, 72px);
+      line-height: 0.82;
+      overflow-wrap: anywhere;
+    }
+    .lmctATY__lead {
+      width: 100%;
+      max-width: 100%;
+      margin-top: 26px;
+      font-size: 15px;
+      overflow-wrap: anywhere;
+    }
+    .lmctATY__assurance {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    .lmctATY__assurance span {
+      width: fit-content;
+    }
+    .lmctATY__summary {
+      margin-top: 38px;
+      border-radius: 19px;
+    }
+    .lmctATY__summaryHead {
+      flex-wrap: wrap;
+      align-items: flex-start;
+      padding: 22px 20px;
+    }
+    .lmctATY__summaryHead h2 {
+      font-size: 27px;
+    }
+    .lmctATY__summaryBody {
+      padding: 8px 20px 22px;
+    }
+    .lmctATY__summaryRow {
+      min-height: 66px;
+    }
+    .lmctATY__summaryRow span,
+    .lmctATY__summaryRow strong {
+      overflow-wrap: anywhere;
+    }
+    .lmctATY__summaryRow strong {
+      font-size: 21px;
+    }
+    .lmctATY__summaryRow--bonus strong {
+      font-size: 27px;
+    }
+    .lmctATY__next {
+      padding: 66px 0 70px;
+    }
+    .lmctATY__nextTitle {
+      font-size: clamp(49px, 14.5vw, 66px);
+    }
+    .lmctATY__steps {
+      margin-top: 40px;
+    }
+    .lmctATY__step {
+      padding: 27px 24px 30px;
+    }
+    .lmctATY__notice {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 22px;
+    }
+    .lmctATY__supportLink {
+      width: 100%;
+    }
+    .lmctATY__footer {
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 0;
+      padding: 32px 0 36px;
+    }
+    .lmctATY__footerLinks {
+      flex-wrap: wrap;
+      gap: 18px 24px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lmctATY *,
+    .lmctATY *::before,
+    .lmctATY *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 </style>
-<script>
-(function () {
-  'use strict';
-  const CONFIG = {
-    formSelector: '#col-full-180 #tmp_order2step-49594',
-    endpoint: 'https://lmctmembers.com/api/check-user-active',
-    supportEmail: 'support@lmctplus.com', // REQUIRED: confirmed LMCT+ support email
-    eligibilityCutoffLabel: '1 SEPTEMBER 2026',
-    deadlineLabel: 'Monday 5 October 2026',
-    timeoutMs: 12000
-  };
-
-  function init() {
-    const form = document.querySelector(CONFIG.formSelector);
-    if (!form) return false;
-    if (form.dataset.lmctMemberCheckReady === 'true') return true;
-    const step = form.querySelector('.o2step_step1');
-    const buttonWrap = step && step.querySelector('.order2stepbutton');
-    const button = buttonWrap && buttonWrap.querySelector('a[href="#submit-form-2step"]');
-    const emailInput = step && step.querySelector('input[name="email"]');
-    if (!button || !emailInput) return false;
-    form.dataset.lmctMemberCheckReady = 'true';
-
-    // Replace the earlier static notice with the updated offer logic.
-    form.querySelectorAll('.lmctExistingMemberNotice').forEach(el => el.remove());
-    const explanation = document.createElement('p');
-    explanation.className = 'lmctOfferExplanation';
-    explanation.textContent = 'Not an active LMCT+ member? Join Fuel Saver for A$99 per year to receive the $50 fuel coupon. Other new LMCT+ membership purchases do not qualify for this offer.';
-    buttonWrap.before(explanation);
-
-    const message = document.createElement('div');
-    message.className = 'lmctMemberCheckMessage';
-    message.setAttribute('role', 'status');
-    message.setAttribute('aria-live', 'polite');
-    message.tabIndex = -1;
-    message.hidden = true;
-    buttonWrap.before(message);
-
-    form.querySelectorAll('.order2stepbutton, .order2stepbuttonOrder').forEach(wrap => {
-      const note = document.createElement('p');
-      note.className = 'lmctOfferNote';
-      const location = document.createElement('strong');
-      location.textContent = 'This offer is only valid at LMCT+ Edwardstown, South Australia.';
-      note.append(location, document.createElement('br'),
-        'Fuel Saver purchases and existing member claims end ' + CONFIG.deadlineLabel + '.');
-      wrap.after(note);
-    });
-
-    const terms = document.createElement('details');
-    terms.className = 'lmctOfferTerms';
-    const summary = document.createElement('summary');
-    summary.textContent = 'Offer terms';
-    terms.append(summary);
-    [
-      'This offer is only valid at LMCT+ Edwardstown, South Australia.',
-      'For customers without an active LMCT+ membership, the $50 fuel coupon is included only with the A$99/year Fuel Saver membership purchased through this offer. Other new LMCT+ memberships do not qualify.',
-      'Existing member claims are available only to members who were active before ' + CONFIG.eligibilityCutoffLabel + '. Support will verify eligibility using your account details.',
-      'Both qualifying Fuel Saver purchases and existing member claims must be completed by ' + CONFIG.deadlineLabel + '. Existing member claim emails received after this date will not be honoured.',
-      'Fuel Saver is an annual subscription billed at A$99 per year.'
-    ].forEach(text => {
-      const p = document.createElement('p');
-      p.textContent = text;
-      terms.append(p);
-    });
-    form.append(terms);
-
-    let busy = false;
-    let replay = false;
-    let revision = 0;
-    let controller = null;
-    const buttonText = button.querySelector('.elButtonMain');
-    const originalText = buttonText ? buttonText.textContent : '';
-
-    function show(text) {
-      message.replaceChildren();
-      message.textContent = text;
-      message.hidden = false;
-    }
-
-    function showMemberMessage() {
-      message.replaceChildren();
-      const title = document.createElement('strong');
-      title.textContent = 'Already an active LMCT+ member?';
-      message.append(title);
-      if (CONFIG.supportEmail) {
-        const link = document.createElement('a');
-        link.href = 'mailto:' + CONFIG.supportEmail;
-        link.textContent = CONFIG.supportEmail;
-        message.append('Email ', link, ' with your account details and we’ll credit your $50 fuel coupon if you meet the offer eligibility criteria.');
-      } else {
-        message.append('Contact LMCT+ support with your account details to claim your $50 fuel coupon, subject to eligibility.');
-      }
-      message.append(document.createElement('br'),
-        'You don’t need to purchase Fuel Saver separately. Email your claim by ' + CONFIG.deadlineLabel + '.');
-      message.hidden = false;
-      message.focus();
-    }
-
-    emailInput.addEventListener('input', function () {
-      revision++;
-      if (controller) controller.abort();
-      message.hidden = true;
-    });
-
-    // Capture before ClickFunnels receives the click, then replay it only
-    // after a successful inactive-member result for the same email.
-    document.addEventListener('click', async function (event) {
-      if (!(event.target instanceof Element)) return;
-      if (event.target.closest('a') !== button) return;
-      if (replay) {
-        replay = false;
-        return;
-      }
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      if (busy) return;
-
-      const email = emailInput.value.trim();
-      if (!email || !emailInput.checkValidity()) {
-        show('Please enter a valid email address before continuing.');
-        emailInput.focus();
-        emailInput.reportValidity();
-        return;
-      }
-
-      const requestRevision = revision;
-      busy = true;
-      button.setAttribute('aria-busy', 'true');
-      if (buttonText) buttonText.textContent = 'CHECKING MEMBERSHIP…';
-      show('Checking your membership…');
-      controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), CONFIG.timeoutMs);
-      let continueCheckout = false;
-      try {
-        const url = new URL(CONFIG.endpoint);
-        url.searchParams.set('email', email);
-        const response = await fetch(url.toString(), {
-          method: 'POST',
-          cache: 'no-store',
-          credentials: 'omit',
-          signal: controller.signal
-        });
-        if (!response.ok) throw new Error('Membership check failed');
-        const result = await response.json();
-        if (typeof result.is_active !== 'boolean') throw new Error('Unexpected response');
-        if (requestRevision !== revision || emailInput.value.trim() !== email) return;
-        if (result.is_active) showMemberMessage();
-        else {
-          message.hidden = true;
-          continueCheckout = true;
-        }
-      } catch (error) {
-        if (requestRevision === revision) {
-          show('We couldn’t check your membership right now. Please press Continue to Checkout to try again.');
-        }
-      } finally {
-        clearTimeout(timer);
-        controller = null;
-        busy = false;
-        button.removeAttribute('aria-busy');
-        if (buttonText) buttonText.textContent = originalText;
-      }
-      if (continueCheckout) {
-        replay = true;
-        try { button.click(); } finally { replay = false; }
-      }
-    }, true);
-    return true;
-  }
-
-  function start() {
-    if (init()) return;
-    const observer = new MutationObserver(() => {
-      if (init()) observer.disconnect();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    setTimeout(() => observer.disconnect(), 30000);
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start, { once: true });
-  } else start();
-})();
-</script>
+<div class="lmctATY">
+  <div class="lmctATY__shell">
+    <header class="lmctATY__header">
+      <a class="lmctATY__brand" href="https://lmctplus.com/" aria-label="LMCT+ Petrol home">
+        <img src="https://images.clickfunnels.com/3e/1a9d477f8c4bc1968073d95da3e44e/LMCT-PETROL-Logo.png" alt="LMCT+ Petrol" />
+      </a>
+      <p class="lmctATY__edition">Membership confirmed<br />Adelaide 2026</p>
+      <div class="lmctATY__location">
+        <span class="lmctATY__locationIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+            <circle cx="12" cy="10" r="2.5" />
+          </svg>
+        </span>
+        <address>
+          <strong>Adelaide Petrol</strong>
+          1112 South Rd &amp; Daws Rd, Edwardstown SA
+        </address>
+      </div>
+    </header>
+    <main>
+      <section class="lmctATY__hero" aria-labelledby="lmctATY-title">
+        <div class="lmctATY__copy">
+          <p class="lmctATY__eyebrow">Payment successful / Membership 01</p>
+          <span class="lmctATY__successMark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m5 12.5 4.2 4.2L19 7" />
+            </svg>
+          </span>
+          <h1 class="lmctATY__title" id="lmctATY-title">
+            Thank you.
+            <span>You&rsquo;re a member.</span>
+          </h1>
+          <p class="lmctATY__lead">
+            Your <strong>$199 annual membership is confirmed</strong>, with <strong>entries in the GC House or $2M giveaway included</strong>. You now have 12 months of wholesale fuel pricing access at Edwardstown.
+          </p>
+          <div class="lmctATY__assurance" aria-label="Order status">
+            <span>Payment confirmed</span>
+            <span>12 months secured</span>
+            <span>GC House or $2M giveaway entries included</span>
+          </div>
+        </div>
+        <aside class="lmctATY__summary" aria-labelledby="lmctATY-summary-title">
+          <div class="lmctATY__summaryHead">
+            <div>
+              <p>Order summary</p>
+              <h2 id="lmctATY-summary-title">Annual Fuel Membership</h2>
+            </div>
+            <span class="lmctATY__confirmed">Confirmed</span>
+          </div>
+          <div class="lmctATY__summaryBody">
+            <div class="lmctATY__summaryRow">
+              <span>Membership term</span>
+              <strong>12 months</strong>
+            </div>
+            <div class="lmctATY__summaryRow">
+              <span>Membership payment</span>
+              <strong>$199 paid</strong>
+            </div>
+            <div class="lmctATY__summaryRow lmctATY__summaryRow--bonus">
+              <span>GC House or $2M giveaway entries</span> <strong>Included</strong>
+            </div>
+            <p class="lmctATY__receipt">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 4h16v16H4z" />
+                <path d="m4 7 8 6 8-6" />
+              </svg>
+              Your receipt will be sent to the email address used at checkout. Follow the steps below to see your giveaway entries in the LMCT+ app.
+            </p>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <section class="lmctATY__next" aria-labelledby="lmctATY-next-title">
+    <div class="lmctATY__shell">
+      <div class="lmctATY__nextHead">
+        <p class="lmctATY__eyebrow">What happens next / 02</p>
+        <h2 class="lmctATY__nextTitle" id="lmctATY-next-title">Three simple next steps.</h2>
+        <p class="lmctATY__nextCopy">Your GC House or $2M giveaway entries and progress are tracked in the LMCT+ app. Follow these three steps to find them.</p>
+      </div>
+      <div class="lmctATY__steps">
+        <article class="lmctATY__step">
+          <span class="lmctATY__stepNumber" aria-hidden="true">1</span>
+          <h3>Download the LMCT+ app</h3>
+          <p>Search for LMCT+ in the Apple App Store or Google Play, then download the official LMCT+ app to your phone.</p>
+        </article>
+        <article class="lmctATY__step">
+          <span class="lmctATY__stepNumber" aria-hidden="true">2</span>
+          <h3>Log in to your account</h3>
+          <p>Open the app and log in using the same email address connected to your membership. Follow the account setup prompts if this is your first login.</p>
+        </article>
+        <article class="lmctATY__step">
+          <span class="lmctATY__stepNumber" aria-hidden="true">3</span>
+          <h3>Open Fill &amp; Win</h3>
+          <p>Find the <strong>Fill &amp; Win</strong> section in the app to see the current GC House or $2M prize, your entries and your progress towards the next bonus entry.</p>
+        </article>
+      </div>
+      <div class="lmctATY__notice">
+        <p><strong>Cannot see your entries?</strong> Make sure you are logged in with the same email address used at checkout. If they are still missing, our support team can help.</p>
+        <a class="lmctATY__supportLink" href="https://lmctplus.com/contact-support">
+          <span>Contact support</span>
+          <span aria-hidden="true">&#8599;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <div class="lmctATY__shell">
+    <footer class="lmctATY__footer">
+      <p>Membership benefits and giveaway entries are subject to the applicable terms and conditions.</p>
+      <nav class="lmctATY__footerLinks" aria-label="Legal and support">
+        <a href="https://lmctgiveaway.com/fuel-termssg606ubh">Terms</a>
+        <a href="https://lmctplus.com/privacy-policy">Privacy</a>
+        <a href="https://lmctplus.com/contact-support">Contact</a>
+      </nav>
+    </footer>
+  </div>
+</div>

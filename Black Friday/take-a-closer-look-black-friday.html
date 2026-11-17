@@ -1,0 +1,263 @@
+<!--
+LMCT+ TAKE A CLOSER LOOK: BLACK FRIDAY ACCORDION (5 prizes)
+Paste into a Custom JS / HTML element (e.g. replace the content of your Car Details section).
+It draws its own slightly lighter full-width band, so it reads as a new section against the near-black page.
+Rows open one at a time. Photos load only when a row is opened. Click a photo to enlarge it.
+Links like href="#prize-3" anywhere on the page open that row (the Giveaway Details "View prize details" links use this).
+EDIT: titles, cash lines and image URLs in the PRIZES list at the bottom. Jeep has no photos yet, so it shows "Photos coming soon".
+-->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+html body{overflow-x:clip !important;}
+.bfCL{position:relative !important;width:100vw !important;max-width:100vw !important;margin-left:calc(50% - 50vw) !important;padding:44px 16px 54px !important;background:linear-gradient(180deg,#191919 0%,#121212 100%) !important;border-top:1px solid rgba(255,255,255,.1) !important;border-bottom:1px solid rgba(255,255,255,.1) !important;font-family:'Montserrat',Arial,sans-serif !important;color:#fff !important;text-align:left !important;}
+.bfCL *{box-sizing:border-box !important;font-family:'Montserrat',Arial,sans-serif !important;}
+.bfCL__in{max-width:1170px !important;margin:0 auto !important;}
+.bfCL__head{display:flex !important;align-items:center !important;gap:18px !important;margin:0 0 26px !important;}
+.bfCL__head::before, .bfCL__head::after{content:"" !important;flex:1 1 0 !important;height:3px !important;background:#FFD400 !important;box-shadow:0 0 14px rgba(255,212,0,.6) !important;}
+.bfCL__title{margin:0 !important;font-size:clamp(24px,4.6vw,46px) !important;font-weight:900 !important;font-style:italic !important;line-height:1 !important;letter-spacing:-.01em !important;text-transform:uppercase !important;color:#fff !important;text-align:center !important;}
+.bfCL__item{margin:12px 0 0 !important;border:1px solid rgba(255,255,255,.2) !important;border-radius:14px !important;background:rgba(0,0,0,.38) !important;scroll-margin-top:100px !important;transition:border-color .25s ease,box-shadow .25s ease !important;}
+.bfCL__item:hover{border-color:rgba(255,212,0,.45) !important;}
+.bfCL__item.is-open{border-color:rgba(255,212,0,.65) !important;box-shadow:0 0 30px rgba(255,212,0,.12) !important;}
+.bfCL__hd{display:grid !important;grid-template-columns:auto 1fr auto auto !important;align-items:center !important;column-gap:16px !important;width:100% !important;margin:0 !important;padding:15px 20px !important;background:none !important;border:0 !important;border-radius:14px !important;color:#fff !important;text-align:left !important;cursor:pointer !important;}
+.bfCL__hd:focus-visible{outline:3px solid #FFD400 !important;outline-offset:2px !important;}
+.bfCL__n{min-width:34px !important;font-size:clamp(18px,2.4vw,24px) !important;font-weight:900 !important;font-style:italic !important;color:#FFD400 !important;}
+.bfCL__nm{font-size:clamp(14px,2vw,22px) !important;font-weight:800 !important;letter-spacing:.01em !important;text-transform:uppercase !important;color:#fff !important;}
+.bfCL__cash{font-size:clamp(11px,1.4vw,15px) !important;font-weight:900 !important;letter-spacing:.02em !important;text-transform:uppercase !important;color:#FFD400 !important;white-space:nowrap !important;}
+.bfCL__ic{position:relative !important;width:22px !important;height:22px !important;}
+.bfCL__ic::before, .bfCL__ic::after{content:"" !important;position:absolute !important;left:50% !important;top:50% !important;width:18px !important;height:3px !important;margin:-1.5px 0 0 -9px !important;border-radius:2px !important;background:#fff !important;transition:transform .3s ease,opacity .3s ease !important;}
+.bfCL__ic::after{transform:rotate(90deg) !important;}
+.bfCL__item.is-open .bfCL__ic::after{transform:rotate(0deg) !important;opacity:0 !important;}
+.bfCL__panel{display:grid !important;grid-template-rows:0fr !important;visibility:hidden !important;transition:grid-template-rows .4s ease,visibility 0s linear .4s !important;}
+.bfCL__item.is-open .bfCL__panel{grid-template-rows:1fr !important;visibility:visible !important;transition:grid-template-rows .4s ease,visibility 0s !important;}
+.bfCL__pin{min-height:0 !important;overflow:hidden !important;}
+.bfCL__body{padding:4px 20px 20px !important;}
+.bfCL__slider{position:relative !important;}
+.bfCL__track{display:flex !important;gap:14px !important;overflow-x:auto !important;scroll-snap-type:x mandatory !important;scrollbar-width:none !important;-webkit-overflow-scrolling:touch !important;}
+.bfCL__track::-webkit-scrollbar{display:none !important;}
+.bfCL__slide{position:relative !important;flex:0 0 calc((100% - 14px) / 2) !important;aspect-ratio:16/10 !important;margin:0 !important;padding:0 !important;border:0 !important;border-radius:10px !important;overflow:hidden !important;background:#222 !important;scroll-snap-align:start !important;cursor:zoom-in !important;}
+.bfCL__slide:focus-visible{outline:3px solid #FFD400 !important;outline-offset:2px !important;}
+.bfCL__slide img{position:absolute !important;inset:0 !important;width:100% !important;height:100% !important;object-fit:cover !important;display:block !important;transition:transform .5s ease !important;}
+.bfCL__slide:hover img{transform:scale(1.04) !important;}
+.bfCL__cap{position:absolute !important;left:0 !important;right:0 !important;bottom:0 !important;padding:26px 14px 10px !important;background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,0)) !important;font-size:12px !important;font-weight:700 !important;text-align:left !important;color:#fff !important;}
+.bfCL__arr{position:absolute !important;top:50% !important;z-index:3 !important;width:42px !important;height:42px !important;margin-top:-21px !important;padding:0 !important;border:0 !important;border-radius:50% !important;background:#FFD400 !important;color:#000 !important;font-size:22px !important;font-weight:900 !important;line-height:1 !important;cursor:pointer !important;display:flex !important;align-items:center !important;justify-content:center !important;box-shadow:0 6px 18px rgba(0,0,0,.55) !important;}
+.bfCL__arr--p{left:8px !important;}
+.bfCL__arr--n{right:8px !important;}
+.bfCL__arr[disabled]{opacity:.3 !important;cursor:default !important;}
+.bfCL__arr.bfCL__hide{display:none !important;}
+.bfCL__soon{padding:34px 16px !important;border:1px dashed rgba(255,255,255,.28) !important;border-radius:10px !important;text-align:center !important;font-size:14px !important;font-weight:700 !important;color:#bdbdbd !important;}
+.bfCLlb{position:fixed !important;inset:0 !important;z-index:2147482900 !important;display:none !important;align-items:center !important;justify-content:center !important;flex-direction:column !important;padding:20px !important;background:rgba(0,0,0,.92) !important;}
+.bfCLlb.is-open{display:flex !important;}
+.bfCLlb img{max-width:min(96vw,1200px) !important;max-height:78vh !important;object-fit:contain !important;border-radius:8px !important;}
+.bfCLlb__cap{margin-top:12px !important;max-width:90vw !important;font:700 14px/1.4 'Montserrat',Arial,sans-serif !important;color:#fff !important;text-align:center !important;}
+.bfCLlb__btn{position:absolute !important;width:46px !important;height:46px !important;padding:0 !important;border:0 !important;border-radius:50% !important;background:#FFD400 !important;color:#000 !important;font-size:24px !important;font-weight:900 !important;line-height:1 !important;cursor:pointer !important;display:flex !important;align-items:center !important;justify-content:center !important;}
+.bfCLlb__x{top:16px !important;right:16px !important;}
+.bfCLlb__p{left:14px !important;top:50% !important;margin-top:-23px !important;}
+.bfCLlb__n{right:14px !important;top:50% !important;margin-top:-23px !important;}
+@media (max-width:640px){
+  .bfCL{padding:34px 12px 42px !important;}
+.bfCL__head{gap:10px !important;}
+.bfCL__hd{grid-template-columns:auto 1fr auto !important;padding:13px 14px !important;column-gap:12px !important;}
+.bfCL__cash{grid-column:2 !important;grid-row:2 !important;white-space:normal !important;margin-top:3px !important;}
+.bfCL__ic{grid-column:3 !important;grid-row:1 / span 2 !important;}
+.bfCL__body{padding:2px 12px 14px !important;}
+.bfCL__slide{flex:0 0 100% !important;}
+.bfCL__arr{width:36px !important;height:36px !important;margin-top:-18px !important;font-size:18px !important;}
+}
+@media (prefers-reduced-motion:reduce){
+  .bfCL__panel, .bfCL__item, .bfCL__ic::before, .bfCL__ic::after, .bfCL__slide img{transition:none !important;}
+}
+</style>
+
+<section class="bfCL" id="bfCL" aria-label="Take a closer look at the prizes"></section>
+
+<script>
+(function(){
+  /* ================= CONFIG ================= */
+  var CONFIG = {
+    title: "Take a Closer Look",
+    openFirst: true,
+    soonText: "Photos coming soon",
+    prizes: [
+    { n: "01", name: "Gold Coast House", cash: "or $2,000,000 cash alternative",
+      // [image URL, optional caption]
+      imgs: [
+        ["https://images.clickfunnels.com/e9/4e022284b74b2c89c209a3f0f045ad/IMG_7695.png", "Gold Coast waterfront estate"],
+        ["https://images.clickfunnels.com/7e/72068fb4b5440ebe19fb80f626beca/Modern-waterfront-living.jpg", "Modern waterfront living"],
+        ["https://images.clickfunnels.com/d6/9da6b425d848bd8134f860c622e177/Generous-light-filled-interiors.jpg", "Generous light-filled interiors"],
+        ["https://images.clickfunnels.com/12/ba849fd03d42e7a620bfc85451fdb9/kitchen-made-for-entertaining.jpg", "Kitchen made for entertaining"],
+        ["https://images.clickfunnels.com/a8/09526f91eb40909ae76d44c13d84bd/Polished-architectural-floorplan-rendering.png", "Architectural floorplan"]
+      ] },
+    { n: "02", name: "Landcruiser Sahara + Patriot Camper", cash: "or $150,000 cash alternative",
+      // [image URL, optional caption]
+      imgs: [
+        ["https://images.clickfunnels.com/fe/a66dcabb1b4c80b08badb7ed16995a/PTW_5942.jpg", ""],
+        ["https://images.clickfunnels.com/90/9b7f5741844cc2a7f0ca1750fe5d66/PTW_5965-copy-1-.jpg", ""],
+        ["https://images.clickfunnels.com/30/55edf8471548758f5c1e9db8e0e6fa/PTW_5951.jpg", ""],
+        ["https://images.clickfunnels.com/ed/e8abb082ee432fb158f70af2fabb8d/PTW_5918.jpg", ""],
+        ["https://images.clickfunnels.com/94/1438e842d04a56b0ad8e48cdb04f8a/PTW_5902.jpg", ""],
+        ["https://images.clickfunnels.com/fe/fbf4c0fc4a495fac313f981eb65302/PTW_5949.jpg", ""],
+        ["https://images.clickfunnels.com/6e/5c20fab2f24773864318fa2a73296f/PTW_5913.jpg", ""],
+        ["https://images.clickfunnels.com/ab/2d68a2e5fe4cf3a6f686a51204be1c/PTW_5931.jpg", ""],
+        ["https://images.clickfunnels.com/1d/b3b75e3764489984be673d8fd6b591/PTW_5934.jpg", ""],
+        ["https://images.clickfunnels.com/ac/05ceba66424e598d39696945c47b0d/PTW_5935.jpg", ""]
+      ] },
+    { n: "03", name: "Lamborghini Urus", cash: "or $300,000 cash alternative",
+      // [image URL, optional caption]
+      imgs: [
+        ["https://images.clickfunnels.com/b0/45c4cb94e845fdba1cae474e758fd3/Urus-14-1-.jpg", ""],
+        ["https://images.clickfunnels.com/91/929daf9ccd4bf49b2458ee7c22a717/Urus-16-1-.jpg", ""],
+        ["https://images.clickfunnels.com/ae/6e3e7d0c1842a8a42255a902ffcac5/Full-Matt-CARBON-FIBRE-PACKAGE-Carbon-bonnet-roof-and-exterior-.jpg", "Full matte carbon fibre package"],
+        ["https://images.clickfunnels.com/f6/42d0f4a82b4960b6a844c59bd75cde/Adrian-s-Personal-Lambo-PERSONALLY-OWNED-BY-ADRIAN-.jpg", ""],
+        ["https://images.clickfunnels.com/03/851884f39240c1a3a81f6215e056b4/Urus-34-1-.jpg", ""],
+        ["https://images.clickfunnels.com/bc/f7fc1f1bf44df790881898b3d8a2a8/Alcantara-Performance-Steering-Wheel-FULL-ALCANTARA-WHEEL-WITH-RED-MARKER-.jpg", "Alcantara performance steering wheel"],
+        ["https://images.clickfunnels.com/db/2b3d57081a425bbcfbf7382d60f40b/4-Seats-EXCLUSIVE-LUXURY-INTERIOR-Alcantara-massage-seats-and-B-O-audio-.jpg", "Exclusive 4-seat luxury interior"],
+        ["https://images.clickfunnels.com/8d/03b8fc3cdc4a43b1c383b925b479e9/Urus-26-1-.jpg", ""],
+        ["https://images.clickfunnels.com/f5/de2a61f4c94e55a518999a0adee438/Urus-27-1-.jpg", ""],
+        ["https://images.clickfunnels.com/c4/42d745e13e403b84549682843e1d4e/490kW-4.0L-TWIN-TURBO-V8-666-PS-850Nm-torque-.jpg", "490kW 4.0L twin-turbo V8"]
+      ] },
+    { n: "04", name: "Chevrolet Camaro", cash: "or $130,000 cash alternative",
+      // [image URL, optional caption]
+      imgs: [
+        ["https://images.clickfunnels.com/e6/ab0585a3c1420dbbb08bdd47a20b16/1-optimized.jpg", ""],
+        ["https://images.clickfunnels.com/b6/6b328d94874859a87d706c59ab3ef1/2-optimized.jpg", ""],
+        ["https://images.clickfunnels.com/f1/f63c7da20c4a3297567f9ca86e5947/3-optimized.jpg", ""],
+        ["https://images.clickfunnels.com/05/f8da9b69a948feb5d95a57996b43d4/4-optimized.jpg", ""],
+        ["https://images.clickfunnels.com/2a/6ee59f4b3240c1a20366f7a679202e/5-optimized.jpg", ""],
+        ["https://images.clickfunnels.com/31/75a22196794352b09faea507fb2f05/6-optimized.jpg", ""],
+        ["https://images.clickfunnels.com/a3/55bac29951428c9afbbd3313532341/7-optimized.jpg", ""],
+        ["https://images.clickfunnels.com/7b/d88930d4c849aa8a68f569b5f4740c/8-optimized.jpg", ""],
+        ["https://images.clickfunnels.com/64/f20d96c7ed484baea426f47d47168c/9-optimized.jpg", ""],
+        ["https://images.clickfunnels.com/27/c2926379c6433b8b734a8398dacca5/10-optimized.jpg", ""],
+        ["https://images.clickfunnels.com/f0/6b46cf226a4003b0bcc15973bb3b23/11-optimized.jpg", ""]
+      ] },
+    { n: "05", name: "Jeep Grand Cherokee", cash: "or $70,000 cash alternative",
+      // [image URL, optional caption]
+      imgs: [] }
+    ]
+  };
+  /* ========================================== */
+
+  var root = document.getElementById('bfCL');
+  if(!root) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var behavior = reduce ? 'auto' : 'smooth';
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  /* ---------- Build ---------- */
+  var h = '<div class="bfCL__in"><div class="bfCL__head"><h2 class="bfCL__title">'+esc(CONFIG.title)+'</h2></div>';
+  CONFIG.prizes.forEach(function(p,i){
+    var body;
+    if(p.imgs && p.imgs.length){
+      body = '<div class="bfCL__slider"><button type="button" class="bfCL__arr bfCL__arr--p" aria-label="Previous photos">&#8249;</button>'+
+             '<div class="bfCL__track">'+
+             p.imgs.map(function(im,k){
+               return '<button type="button" class="bfCL__slide" data-k="'+k+'" aria-label="Enlarge photo '+(k+1)+' of '+p.imgs.length+'">'+
+                      '<img data-src="'+esc(im[0])+'" alt="'+esc(im[1]||p.name+' photo '+(k+1))+'" loading="lazy" decoding="async">'+
+                      (im[1]?'<span class="bfCL__cap">'+esc(im[1])+'</span>':'')+'</button>';
+             }).join('')+
+             '</div><button type="button" class="bfCL__arr bfCL__arr--n" aria-label="Next photos">&#8250;</button></div>';
+    } else {
+      body = '<div class="bfCL__soon">'+esc(CONFIG.soonText)+'</div>';
+    }
+    h += '<div class="bfCL__item" id="prize-'+(i+1)+'" data-i="'+i+'">'+
+         '<button type="button" class="bfCL__hd" id="bfCLh'+i+'" aria-expanded="false" aria-controls="bfCLp'+i+'">'+
+         '<span class="bfCL__n">'+esc(p.n)+'</span><span class="bfCL__nm">'+esc(p.name)+'</span>'+
+         '<span class="bfCL__cash">'+esc(p.cash)+'</span><span class="bfCL__ic" aria-hidden="true"></span></button>'+
+         '<div class="bfCL__panel" id="bfCLp'+i+'" role="region" aria-labelledby="bfCLh'+i+'"><div class="bfCL__pin"><div class="bfCL__body">'+body+'</div></div></div></div>';
+  });
+  root.innerHTML = h + '</div>';
+
+  var items = root.querySelectorAll('.bfCL__item');
+
+  /* ---------- Slider arrows ---------- */
+  function updateArrows(item){
+    var track = item.querySelector('.bfCL__track'); if(!track) return;
+    var p = item.querySelector('.bfCL__arr--p'), n = item.querySelector('.bfCL__arr--n');
+    var max = track.scrollWidth - track.clientWidth;
+    var none = max <= 2;
+    p.classList.toggle('bfCL__hide', none); n.classList.toggle('bfCL__hide', none);
+    p.disabled = track.scrollLeft <= 2; n.disabled = track.scrollLeft >= max - 2;
+  }
+  Array.prototype.forEach.call(items, function(item){
+    var track = item.querySelector('.bfCL__track'); if(!track) return;
+    function step(dir){
+      var s = track.querySelector('.bfCL__slide');
+      track.scrollBy({ left: dir * (s.getBoundingClientRect().width + 14), behavior: behavior });
+    }
+    item.querySelector('.bfCL__arr--p').addEventListener('click', function(){ step(-1); });
+    item.querySelector('.bfCL__arr--n').addEventListener('click', function(){ step(1); });
+    track.addEventListener('scroll', function(){ updateArrows(item); }, {passive:true});
+  });
+  window.addEventListener('resize', function(){ Array.prototype.forEach.call(items, updateArrows); });
+
+  /* ---------- Accordion ---------- */
+  function setOpen(item, open){
+    var btn = item.querySelector('.bfCL__hd');
+    item.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if(open){
+      Array.prototype.forEach.call(item.querySelectorAll('img[data-src]'), function(img){
+        img.src = img.getAttribute('data-src'); img.removeAttribute('data-src');
+      });
+      setTimeout(function(){ updateArrows(item); }, 450);
+    }
+  }
+  function openOnly(i){
+    Array.prototype.forEach.call(items, function(it,k){ setOpen(it, k === i); });
+  }
+  Array.prototype.forEach.call(items, function(item,i){
+    item.querySelector('.bfCL__hd').addEventListener('click', function(){
+      if(item.classList.contains('is-open')) setOpen(item,false); else openOnly(i);
+    });
+  });
+
+  // Any link to #prize-N opens that row
+  function goTo(n, scroll){
+    var i = n - 1; if(!items[i]) return;
+    openOnly(i);
+    if(scroll) setTimeout(function(){ items[i].scrollIntoView({ behavior: behavior, block: 'start' }); }, 60);
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href^="#prize-"]');
+    if(!a) return;
+    var n = parseInt(a.getAttribute('href').replace('#prize-',''),10);
+    if(n){ e.preventDefault(); goTo(n, true); }
+  });
+  var m = /^#prize-(\d+)$/.exec(location.hash || '');
+  if(m) goTo(parseInt(m[1],10), true); else if(CONFIG.openFirst) openOnly(0);
+
+  /* ---------- Lightbox ---------- */
+  var lb = document.createElement('div');
+  lb.className = 'bfCLlb'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true'); lb.setAttribute('aria-label','Photo viewer');
+  lb.innerHTML = '<button type="button" class="bfCLlb__btn bfCLlb__x" aria-label="Close">&times;</button>'+
+                 '<button type="button" class="bfCLlb__btn bfCLlb__p" aria-label="Previous photo">&#8249;</button>'+
+                 '<img alt=""><div class="bfCLlb__cap"></div>'+
+                 '<button type="button" class="bfCLlb__btn bfCLlb__n" aria-label="Next photo">&#8250;</button>';
+  document.body.appendChild(lb);
+  var lbImg = lb.querySelector('img'), lbCap = lb.querySelector('.bfCLlb__cap'), lbX = lb.querySelector('.bfCLlb__x');
+  var cur = { p: 0, k: 0 }, lastFocus = null;
+  function show(){
+    var list = CONFIG.prizes[cur.p].imgs, im = list[cur.k];
+    lbImg.src = im[0]; lbImg.alt = im[1] || CONFIG.prizes[cur.p].name;
+    lbCap.textContent = (im[1] ? im[1] + '  ·  ' : '') + (cur.k + 1) + ' / ' + list.length;
+  }
+  function openLb(p,k){ cur.p=p; cur.k=k; lastFocus=document.activeElement; show(); lb.classList.add('is-open'); document.documentElement.style.overflow='hidden'; lbX.focus(); }
+  function closeLb(){ lb.classList.remove('is-open'); document.documentElement.style.overflow=''; if(lastFocus&&lastFocus.focus) lastFocus.focus(); }
+  function move(d){ var n = CONFIG.prizes[cur.p].imgs.length; cur.k = (cur.k + d + n) % n; show(); }
+  root.addEventListener('click', function(e){
+    var s = e.target.closest && e.target.closest('.bfCL__slide'); if(!s) return;
+    openLb(parseInt(s.closest('.bfCL__item').getAttribute('data-i'),10), parseInt(s.getAttribute('data-k'),10));
+  });
+  lbX.addEventListener('click', closeLb);
+  lb.querySelector('.bfCLlb__p').addEventListener('click', function(){ move(-1); });
+  lb.querySelector('.bfCLlb__n').addEventListener('click', function(){ move(1); });
+  lb.addEventListener('mousedown', function(e){ if(e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e){
+    if(!lb.classList.contains('is-open')) return;
+    if(e.key === 'Escape') closeLb();
+    else if(e.key === 'ArrowLeft') move(-1);
+    else if(e.key === 'ArrowRight') move(1);
+  });
+})();
+</script>

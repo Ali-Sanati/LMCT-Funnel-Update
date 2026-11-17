@@ -1,0 +1,382 @@
+<!-- LMCT PACKAGE INCLUSIONS v3 CF1-HARDENED -->
+<style>
+  .lmctPkgInclV3_container,
+  .lmctPkgInclV3_container * {
+    box-sizing: border-box !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  }
+  .lmctPkgInclV3_container {
+    padding: 20px !important;
+    background: transparent !important;
+    margin: 0 auto !important;
+    max-width: 1170px !important;
+  }
+  .lmctPkgInclV3_toggleBtn {
+    background: #f0f0f0 !important;
+    color: #1a1a1a !important;
+    font-size: 17px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    width: 100% !important;
+    padding: 22px 36px !important;
+    border: none !important;
+    border-radius: 14px !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    margin: 0 0 10px !important;
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    outline: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    text-shadow: none !important;
+    background-image: none !important;
+    line-height: 1.2 !important;
+  }
+  .lmctPkgInclV3_toggleBtn:hover {
+    background: #e4e4e4 !important;
+    transform: translateY(-1px) !important;
+  }
+  .lmctPkgInclV3_toggleBtn:active {
+    transform: translateY(0) !important;
+  }
+  .lmctPkgInclV3_chevron {
+    display: inline-block !important;
+    margin-left: 10px !important;
+    font-size: 14px !important;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  .lmctPkgInclV3_toggleBtn.lmctPkgInclV3_open .lmctPkgInclV3_chevron {
+    transform: rotate(180deg) !important;
+  }
+  .lmctPkgInclV3_drawer {
+    overflow: hidden !important;
+    max-height: 0 !important;
+    opacity: 0 !important;
+    transition:
+      max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.4s ease !important;
+  }
+  .lmctPkgInclV3_drawer.lmctPkgInclV3_drawerOpen {
+    max-height: 3000px !important;
+    opacity: 1 !important;
+  }
+  .lmctPkgInclV3_list {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+    padding: 12px 0 0 !important;
+    margin: 0 !important;
+  }
+  .lmctPkgInclV3_list .lmctPkgInclV3_platinum {
+    grid-column: 1 / -1 !important;
+  }
+  .lmctPkgInclV3_card {
+    position: relative !important;
+    padding: 22px 24px 24px !important;
+    border-radius: 16px !important;
+    color: #fff !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14) !important;
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease,
+      box-shadow 0.3s ease !important;
+    margin: 0 !important;
+  }
+  .lmctPkgInclV3_drawer.lmctPkgInclV3_drawerOpen .lmctPkgInclV3_card {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .lmctPkgInclV3_card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2) !important;
+  }
+  .lmctPkgInclV3_drawer.lmctPkgInclV3_drawerOpen .lmctPkgInclV3_card:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+  .lmctPkgInclV3_drawer.lmctPkgInclV3_drawerOpen .lmctPkgInclV3_card:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+  .lmctPkgInclV3_drawer.lmctPkgInclV3_drawerOpen .lmctPkgInclV3_card:nth-child(3) {
+    transition-delay: 0.18s;
+  }
+  .lmctPkgInclV3_drawer.lmctPkgInclV3_drawerOpen .lmctPkgInclV3_card:nth-child(4) {
+    transition-delay: 0.25s;
+  }
+  .lmctPkgInclV3_drawer.lmctPkgInclV3_drawerOpen .lmctPkgInclV3_card:nth-child(5) {
+    transition-delay: 0.32s;
+  }
+  .lmctPkgInclV3_drawer:not(.lmctPkgInclV3_drawerOpen) .lmctPkgInclV3_card {
+    transition-delay: 0s !important;
+  }
+  .lmctPkgInclV3_card::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 50% !important;
+    height: 100% !important;
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%) !important;
+    transition: left 0.55s ease !important;
+    pointer-events: none !important;
+  }
+  .lmctPkgInclV3_card:hover::after {
+    left: 130% !important;
+  }
+  .lmctPkgInclV3_entry {
+    background: linear-gradient(140deg, #6db3f0 0%, #8aa8db 40%, #a89ec8 75%, #b89fcf 100%) !important;
+  }
+  .lmctPkgInclV3_bronze {
+    background: linear-gradient(140deg, #c49a5c 0%, #a87d42 40%, #8b6530 75%, #7a5628 100%) !important;
+  }
+  .lmctPkgInclV3_silver {
+    background: linear-gradient(140deg, #b0aca6 0%, #928e88 40%, #7d7972 75%, #8a8680 100%) !important;
+  }
+  .lmctPkgInclV3_gold {
+    background: linear-gradient(140deg, #f0c832 0%, #e0b420 35%, #cca010 65%, #ba8e08 100%) !important;
+  }
+  .lmctPkgInclV3_platinum {
+    background: linear-gradient(140deg, #e04aaf 0%, #c040b8 25%, #9535c4 55%, #7028c8 85%, #5a1ebd 100%) !important;
+  }
+  .lmctPkgInclV3_header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 0 16px !important;
+    padding: 0 !important;
+    flex-wrap: wrap !important;
+  }
+  .lmctPkgInclV3_badge {
+    display: inline-block !important;
+    background: rgba(255, 255, 255, 0.25) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    padding: 5px 16px !important;
+    border-radius: 20px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    color: #fff !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+  }
+  .lmctPkgInclV3_price {
+    display: inline-block !important;
+    background: rgba(0, 0, 0, 0.18) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    padding: 5px 16px !important;
+    border-radius: 20px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+    color: #fff !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+  }
+  .lmctPkgInclV3_card ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .lmctPkgInclV3_card li {
+    margin: 0 0 8px !important;
+    padding: 0 0 0 30px !important;
+    position: relative !important;
+    display: block !important;
+    font-size: 14.5px !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+    list-style: none !important;
+    background: none !important;
+  }
+  .lmctPkgInclV3_card li::before {
+    content: "✓" !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 1px !important;
+    width: 20px !important;
+    height: 20px !important;
+    background: rgba(255, 255, 255, 0.22) !important;
+    border-radius: 50% !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    color: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .lmctPkgInclV3_card li:last-child {
+    margin-bottom: 0 !important;
+  }
+  .lmctPkgInclV3_card strong {
+    font-weight: 700 !important;
+    color: #fff !important;
+  }
+  .lmctPkgInclV3_platinum ul {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px 28px !important;
+  }
+  @media (max-width: 767px) {
+    .lmctPkgInclV3_container {
+      padding: 10px !important;
+    }
+    .lmctPkgInclV3_toggleBtn {
+      font-size: 14px !important;
+      padding: 20px !important;
+    }
+    .lmctPkgInclV3_list {
+      grid-template-columns: 1fr !important;
+    }
+    .lmctPkgInclV3_card {
+      padding: 18px 18px 20px !important;
+    }
+    .lmctPkgInclV3_card li {
+      font-size: 13.5px !important;
+    }
+    .lmctPkgInclV3_badge {
+      font-size: 12px !important;
+      padding: 4px 13px !important;
+    }
+    .lmctPkgInclV3_price {
+      font-size: 12px !important;
+      padding: 4px 13px !important;
+    }
+    .lmctPkgInclV3_platinum ul {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+<div class="lmctPkgInclV3_container">
+  <button class="lmctPkgInclV3_toggleBtn" id="lmctPkgInclV3_btn" type="button">Click To View Full Inclusions <span class="lmctPkgInclV3_chevron">▼</span></button>
+  <div class="lmctPkgInclV3_drawer" id="lmctPkgInclV3_drawer">
+    <div class="lmctPkgInclV3_list">
+      <div class="lmctPkgInclV3_card lmctPkgInclV3_entry">
+        <div class="lmctPkgInclV3_header">
+          <span class="lmctPkgInclV3_badge">Entry</span>
+          <span class="lmctPkgInclV3_price">$10</span>
+        </div>
+        <ul>
+          <!-- Entry -->
+          <li>
+            <strong><span class="lmctPkgInclV3_entries" data-base="1">10 free entries</span></strong> into the giveaway
+          </li>
+          <li><strong>2 Days</strong> access to the LMCT+ Markets</li>
+          <li><strong>2 Days</strong> access to the LMCT+ Petrol Stations</li>
+          <li><strong>2 Days</strong> access to 2,000+ Partner Discounts</li>
+          <li><strong>VIP</strong> invitation to all events</li>
+        </ul>
+      </div>
+      <div class="lmctPkgInclV3_card lmctPkgInclV3_bronze">
+        <div class="lmctPkgInclV3_header">
+          <span class="lmctPkgInclV3_badge">Bronze</span>
+          <span class="lmctPkgInclV3_price">$30</span>
+        </div>
+        <ul>
+          <!-- Bronze -->
+          <li>
+            <strong><span class="lmctPkgInclV3_entries" data-base="5">50 free entries</span></strong> into the giveaway
+          </li>
+          <li><strong>1 Week</strong> access to the LMCT+ Markets</li>
+          <li><strong>1 Week</strong> access to the LMCT+ Petrol Stations</li>
+          <li><strong>1 Week</strong> access to 2,000+ Partner Discounts</li>
+          <li><strong>VIP</strong> invitation to all events</li>
+          <li><strong>500 XP</strong> in-app and <strong>500 LMCT+ Coins</strong></li>
+        </ul>
+      </div>
+      <div class="lmctPkgInclV3_card lmctPkgInclV3_silver">
+        <div class="lmctPkgInclV3_header">
+          <span class="lmctPkgInclV3_badge">Silver</span>
+          <span class="lmctPkgInclV3_price">$100</span>
+        </div>
+        <ul>
+          <!-- Silver -->
+          <li>
+            <strong><span class="lmctPkgInclV3_entries" data-base="25">250 free entries</span></strong> into the giveaway
+          </li>
+          <li><strong>1 Month</strong> access to the LMCT+ Markets</li>
+          <li><strong>1 Month</strong> access to the LMCT+ Petrol Stations</li>
+          <li><strong>1 Month</strong> access to 2,000+ Partner Discounts</li>
+          <li><strong>VIP</strong> invitation to all events</li>
+          <li><strong>1,000 XP</strong> in-app and <strong>1,000 LMCT+ Coins</strong></li>
+        </ul>
+      </div>
+      <div class="lmctPkgInclV3_card lmctPkgInclV3_gold">
+        <div class="lmctPkgInclV3_header">
+          <span class="lmctPkgInclV3_badge">Gold</span>
+          <span class="lmctPkgInclV3_price">$200</span>
+        </div>
+        <ul>
+          <!-- Gold -->
+          <li>
+            <strong><span class="lmctPkgInclV3_entries" data-base="100">1000 free entries</span></strong> into the giveaway
+          </li>
+          <li><strong>6 Months</strong> access to the LMCT+ Markets</li>
+          <li><strong>6 Months</strong> access to the LMCT+ Petrol Stations</li>
+          <li><strong>6 Months</strong> access to 2,000+ Partner Discounts</li>
+          <li><strong>VIP</strong> invitation to all events</li>
+          <li><strong>2,500 XP</strong> in-app and <strong>2,500 LMCT+ Coins</strong></li>
+        </ul>
+      </div>
+      <div class="lmctPkgInclV3_card lmctPkgInclV3_platinum">
+        <div class="lmctPkgInclV3_header">
+          <span class="lmctPkgInclV3_badge">Platinum</span>
+          <span class="lmctPkgInclV3_price">$500</span>
+        </div>
+        <ul>
+          <!-- Platinum -->
+          <li>
+            <strong><span class="lmctPkgInclV3_entries" data-base="500">5000 free entries</span></strong> into the giveaway
+          </li>
+          <li><strong>12 Months</strong> access to the LMCT+ Markets</li>
+          <li><strong>12 Months</strong> access to the LMCT+ Petrol Stations</li>
+          <li><strong>12 Months</strong> access to 2,000+ Partner Discounts</li>
+          <li><strong>VIP</strong> invitation to all events</li>
+          <li><strong>5,000 XP</strong> in-app and <strong>5,000 LMCT+ Coins</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  window.addEventListener("load", function () {
+    // ===== SET THE MULTIPLIER HERE =====
+    var LMCT_ENTRY_MULTIPLIER = 10;
+    // ===================================
+    // Apply multiplier + singular/plural wording
+    var lmctPkgInclV3_nums = document.querySelectorAll(".lmctPkgInclV3_entries");
+    for (var i = 0; i < lmctPkgInclV3_nums.length; i++) {
+      var base = parseFloat(lmctPkgInclV3_nums[i].getAttribute("data-base"));
+      if (!isNaN(base)) {
+        var total = base * LMCT_ENTRY_MULTIPLIER;
+        var word = total === 1 ? "entry" : "entries";
+        lmctPkgInclV3_nums[i].textContent = total.toLocaleString("en-US") + " free " + word;
+      }
+    }
+    // Toggle drawer
+    var lmctPkgInclV3_btn = document.getElementById("lmctPkgInclV3_btn");
+    var lmctPkgInclV3_drawer = document.getElementById("lmctPkgInclV3_drawer");
+    if (!lmctPkgInclV3_btn || !lmctPkgInclV3_drawer) return;
+    lmctPkgInclV3_btn.addEventListener("click", function () {
+      var isOpen = lmctPkgInclV3_drawer.classList.contains("lmctPkgInclV3_drawerOpen");
+      if (isOpen) {
+        lmctPkgInclV3_drawer.classList.remove("lmctPkgInclV3_drawerOpen");
+        lmctPkgInclV3_btn.classList.remove("lmctPkgInclV3_open");
+      } else {
+        lmctPkgInclV3_drawer.classList.add("lmctPkgInclV3_drawerOpen");
+        lmctPkgInclV3_btn.classList.add("lmctPkgInclV3_open");
+      }
+    });
+  });
+</script>

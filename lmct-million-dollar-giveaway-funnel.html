@@ -1,0 +1,1020 @@
+<!--
+  LMCT+ $1 Million Giveaway funnel — ClickFunnels-ready fragment.
+  Three content sections only: campaign hero, cash-prize details/checkout, previous winners.
+  Update campaign and checkout settings in LMCT_MILLION_CONFIG near the bottom of this file.
+-->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,700;0,800;1,700;1,800;1,900&family=Jost:wght@400;500;600;700&display=swap");
+
+  .lmct-million-funnel {
+    --lmct-million-navy: #07142d;
+    --lmct-million-navy-raised: #0c1831;
+    --lmct-million-action: #1d5fb8;
+    --lmct-million-action-hover: #154a90;
+    --lmct-million-blue: #1d8fff;
+    --lmct-million-sky: #79c8ff;
+    --lmct-million-ice: #d9ecff;
+    --lmct-million-soft: #f7fbff;
+    --lmct-million-white: #ffffff;
+    --lmct-million-ink: #0b1220;
+    --lmct-million-muted: #465b76;
+    --lmct-million-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    width: 100%;
+    overflow: clip;
+    color: var(--lmct-million-ink);
+    background: var(--lmct-million-white);
+    font-family: "Jost", Arial, sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.55;
+    isolation: isolate;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .lmct-million-funnel,
+  .lmct-million-funnel *,
+  .lmct-million-funnel *::before,
+  .lmct-million-funnel *::after {
+    box-sizing: border-box;
+  }
+
+  .lmct-million-funnel ::selection {
+    color: var(--lmct-million-navy);
+    background: var(--lmct-million-sky);
+  }
+
+  .lmct-million-funnel img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .lmct-million-funnel :where(p, li, h1, h2, h3, button, a, span, strong) {
+    font-family: inherit !important;
+  }
+
+  .lmct-million-funnel :where(a, button, input):focus-visible {
+    outline: 3px solid var(--lmct-million-sky);
+    outline-offset: 4px;
+  }
+
+  .lmct-million-funnel .lmct-million-container {
+    width: min(1180px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+
+  .lmct-million-funnel .lmct-million-header {
+    color: var(--lmct-million-white);
+    background: var(--lmct-million-navy);
+  }
+
+  .lmct-million-funnel .lmct-million-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 76px;
+    gap: 24px;
+  }
+
+  .lmct-million-funnel .lmct-million-logo {
+    width: 164px;
+    height: auto;
+  }
+
+  .lmct-million-funnel .lmct-million-close {
+    margin: 0;
+    color: var(--lmct-million-white);
+    font-size: 14px !important;
+    font-weight: 650;
+    line-height: 1.3;
+    text-align: right;
+  }
+
+  .lmct-million-funnel .lmct-million-close strong {
+    display: block;
+    color: var(--lmct-million-sky);
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif !important;
+    font-size: 17px !important;
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+  }
+
+  .lmct-million-funnel .lmct-million-heading,
+  .lmct-million-funnel .lmct-million-section-heading,
+  .lmct-million-funnel .lmct-million-price {
+    margin: 0;
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif !important;
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .lmct-million-funnel .lmct-million-heading {
+    max-width: 13ch;
+    color: var(--lmct-million-white);
+    font-size: clamp(46px, 5vw, 76px) !important;
+  }
+
+  .lmct-million-funnel .lmct-million-section-heading {
+    color: var(--lmct-million-navy);
+    font-size: clamp(44px, 5vw, 72px) !important;
+  }
+
+  .lmct-million-funnel .lmct-million-hero {
+    color: var(--lmct-million-white);
+    background: var(--lmct-million-navy);
+  }
+
+  .lmct-million-funnel .lmct-million-hero-media {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    background: var(--lmct-million-navy-raised);
+  }
+
+  .lmct-million-funnel .lmct-million-hero-media img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1672 / 941;
+    object-fit: cover;
+  }
+
+  .lmct-million-funnel .lmct-million-hero-offer {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) auto minmax(250px, 0.72fr);
+    align-items: center;
+    gap: clamp(24px, 4vw, 58px);
+    padding-block: clamp(32px, 4vw, 54px);
+  }
+
+  .lmct-million-funnel .lmct-million-hero-copy {
+    min-width: 0;
+  }
+
+  .lmct-million-funnel .lmct-million-lead {
+    max-width: 650px;
+    margin: 18px 0 0;
+    color: #dce8f8;
+    font-size: clamp(17px, 1.4vw, 20px) !important;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  .lmct-million-funnel .lmct-million-price-block {
+    min-width: 150px;
+  }
+
+  .lmct-million-funnel .lmct-million-price {
+    color: var(--lmct-million-white);
+    font-size: clamp(66px, 7vw, 104px) !important;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lmct-million-funnel .lmct-million-price-term {
+    margin: 6px 0 0;
+    color: var(--lmct-million-sky);
+    font-size: 15px !important;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .lmct-million-funnel .lmct-million-action {
+    min-width: 0;
+  }
+
+  .lmct-million-funnel .lmct-million-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    min-height: 58px;
+    padding: 15px 24px;
+    border: 0;
+    border-radius: 999px;
+    color: var(--lmct-million-white);
+    background: var(--lmct-million-action);
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif !important;
+    font-size: 19px !important;
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: 0.035em;
+    line-height: 1.1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 180ms ease, transform 140ms var(--lmct-million-ease-out);
+  }
+
+  .lmct-million-funnel .lmct-million-button:active {
+    transform: scale(0.97);
+  }
+
+  .lmct-million-funnel .lmct-million-action-note {
+    margin: 12px 0 0;
+    color: #b8cae1;
+    font-size: 13px !important;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  .lmct-million-funnel .lmct-million-details {
+    padding-block: clamp(70px, 8vw, 118px);
+    background: var(--lmct-million-soft);
+  }
+
+  .lmct-million-funnel .lmct-million-prize-picture {
+    display: block;
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--lmct-million-navy-raised);
+  }
+
+  .lmct-million-funnel .lmct-million-prize-picture img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2172 / 724;
+    object-fit: cover;
+  }
+
+  .lmct-million-funnel .lmct-million-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  .lmct-million-funnel .lmct-million-details-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(420px, 1.12fr);
+    align-items: start;
+    gap: clamp(36px, 7vw, 90px);
+    padding-top: clamp(42px, 6vw, 74px);
+  }
+
+  .lmct-million-funnel .lmct-million-details-copy > p {
+    max-width: 61ch;
+    margin: 22px 0 0;
+    color: var(--lmct-million-muted);
+    font-size: clamp(16px, 1.25vw, 19px) !important;
+    line-height: 1.65;
+  }
+
+  .lmct-million-funnel .lmct-million-entry-ledger {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(29, 95, 184, 0.2);
+  }
+
+  .lmct-million-funnel .lmct-million-entry-ledger li {
+    display: grid;
+    grid-template-columns: minmax(118px, auto) minmax(0, 1fr);
+    align-items: center;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(29, 95, 184, 0.2);
+  }
+
+  .lmct-million-funnel .lmct-million-entry-ledger strong {
+    color: var(--lmct-million-action);
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif !important;
+    font-size: clamp(29px, 3vw, 40px) !important;
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmct-million-funnel .lmct-million-entry-ledger span {
+    color: var(--lmct-million-ink);
+    font-size: 16px !important;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .lmct-million-funnel .lmct-million-checkout {
+    margin-top: 38px;
+    padding: clamp(26px, 4vw, 42px);
+    border-radius: 16px;
+    color: var(--lmct-million-white);
+    background: var(--lmct-million-navy);
+  }
+
+  .lmct-million-funnel .lmct-million-checkout h3 {
+    margin: 0;
+    color: var(--lmct-million-white);
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif !important;
+    font-size: clamp(34px, 4vw, 48px) !important;
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .lmct-million-funnel .lmct-million-checkout > p {
+    margin: 14px 0 0;
+    color: #c8d8eb;
+    font-size: 15px !important;
+    line-height: 1.55;
+  }
+
+  .lmct-million-funnel .lmct-million-checkout-mount {
+    min-height: 260px;
+    margin-top: 24px;
+    scroll-margin-top: 24px;
+  }
+
+  .lmct-million-funnel .lmct-million-checkout-mount[data-lmct-million-mounted="true"] {
+    min-height: 0;
+  }
+
+  .lmct-million-funnel .lmct-million-checkout-loading {
+    display: grid;
+    min-height: 240px;
+    place-items: center;
+    padding: 28px;
+    border-radius: 12px;
+    color: #c8d8eb;
+    background: var(--lmct-million-navy-raised);
+    font-size: 15px !important;
+    font-weight: 650;
+    text-align: center;
+  }
+
+  .lmct-million-funnel .lmct-million-checkout-mount #row--93963,
+  .lmct-million-funnel .lmct-million-checkout-mount > .row {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .lmct-million-funnel .lmct-million-checkout-mount #row--93963 > .innerContent,
+  .lmct-million-funnel .lmct-million-checkout-mount #row--93963 .col-inner,
+  .lmct-million-funnel .lmct-million-checkout-mount > .row > .innerContent,
+  .lmct-million-funnel .lmct-million-checkout-mount > .row .col-inner,
+  .lmct-million-funnel .lmct-million-checkout-mount [data-de-type="order2step"],
+  .lmct-million-funnel .lmct-million-checkout-mount [id^="tmp_order2step-"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+  }
+
+  .lmct-million-funnel .lmct-million-checkout-mount .elInput {
+    min-height: 52px !important;
+    border: 1px solid #a9c2de !important;
+    border-radius: 10px !important;
+    color: var(--lmct-million-navy) !important;
+    background: var(--lmct-million-white) !important;
+    font-family: "Jost", Arial, sans-serif !important;
+    font-size: 16px !important;
+    box-shadow: none !important;
+  }
+
+  .lmct-million-funnel .lmct-million-checkout-mount .elInput:focus {
+    border-color: var(--lmct-million-blue) !important;
+    outline: 3px solid rgba(121, 200, 255, 0.34) !important;
+    outline-offset: 1px !important;
+  }
+
+  .lmct-million-funnel .lmct-million-checkout-mount .order2stepbutton .elButton,
+  .lmct-million-funnel .lmct-million-checkout-mount .order2stepbuttonOrder .elButton {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-height: 58px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    color: var(--lmct-million-white) !important;
+    background: var(--lmct-million-action) !important;
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif !important;
+    font-size: 20px !important;
+    font-style: italic !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.035em !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
+  }
+
+  .lmct-million-funnel .lmct-million-winners {
+    padding-block: clamp(72px, 8vw, 116px);
+    color: var(--lmct-million-white);
+    background: var(--lmct-million-navy);
+  }
+
+  .lmct-million-funnel .lmct-million-winners-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 28px;
+    margin-bottom: 38px;
+  }
+
+  .lmct-million-funnel .lmct-million-winners .lmct-million-section-heading {
+    max-width: 12ch;
+    color: var(--lmct-million-white);
+  }
+
+  .lmct-million-funnel .lmct-million-winners-copy {
+    max-width: 42ch;
+    margin: 0;
+    color: #c8d8eb;
+    font-size: 16px !important;
+    line-height: 1.55;
+  }
+
+  .lmct-million-funnel .lmct-million-marquee-control {
+    flex: 0 0 auto;
+    min-width: 92px;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    border-radius: 999px;
+    color: var(--lmct-million-white);
+    background: transparent;
+    font-size: 14px !important;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .lmct-million-funnel .lmct-million-marquee {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .lmct-million-funnel .lmct-million-track {
+    display: flex;
+    align-items: stretch;
+    width: max-content;
+    gap: 16px;
+    animation: lmct-million-scroll 24s linear infinite;
+    will-change: transform;
+  }
+
+  .lmct-million-funnel .lmct-million-sequence {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .lmct-million-funnel .lmct-million-slide {
+    display: block;
+    overflow: hidden;
+    width: min(30vw, 430px);
+    min-width: 300px;
+    border-radius: 16px;
+    background: var(--lmct-million-navy-raised);
+  }
+
+  .lmct-million-funnel .lmct-million-slide img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 569 / 807;
+    object-fit: cover;
+  }
+
+  .lmct-million-funnel .lmct-million-marquee:hover .lmct-million-track,
+  .lmct-million-funnel .lmct-million-marquee:focus-within .lmct-million-track,
+  .lmct-million-funnel .lmct-million-marquee[data-paused="true"] .lmct-million-track {
+    animation-play-state: paused;
+  }
+
+  .lmct-million-funnel .lmct-million-winner-note {
+    margin: 24px 0 0;
+    color: #9eb6d2;
+    font-size: 13px !important;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .lmct-million-funnel .lmct-million-footer {
+    padding-block: 32px;
+    color: #b8cae1;
+    background: var(--lmct-million-navy-raised);
+  }
+
+  .lmct-million-funnel .lmct-million-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .lmct-million-funnel .lmct-million-footer-logo {
+    width: 126px;
+    height: auto;
+  }
+
+  .lmct-million-funnel .lmct-million-footer p {
+    max-width: 780px;
+    margin: 0;
+    font-size: 13px !important;
+    line-height: 1.5;
+    text-align: right;
+  }
+
+  .lmct-million-funnel .lmct-million-footer a {
+    color: var(--lmct-million-sky);
+  }
+
+  @keyframes lmct-million-scroll {
+    to {
+      transform: translate3d(calc(-50% - 8px), 0, 0);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lmct-million-funnel .lmct-million-button:hover {
+      background: var(--lmct-million-action-hover);
+      transform: translate3d(0, -2px, 0);
+    }
+
+    .lmct-million-funnel .lmct-million-marquee-control:hover {
+      border-color: var(--lmct-million-sky);
+      background: rgba(121, 200, 255, 0.1);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .lmct-million-funnel .lmct-million-hero-offer {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .lmct-million-funnel .lmct-million-action {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(220px, 360px) minmax(0, 1fr);
+      align-items: center;
+      gap: 18px;
+    }
+
+    .lmct-million-funnel .lmct-million-action-note {
+      margin: 0;
+      text-align: left;
+    }
+
+    .lmct-million-funnel .lmct-million-details-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lmct-million-funnel .lmct-million-container {
+      width: calc(100% - 36px);
+    }
+
+    .lmct-million-funnel .lmct-million-header-inner {
+      min-height: 68px;
+      gap: 16px;
+    }
+
+    .lmct-million-funnel .lmct-million-logo {
+      width: 132px;
+    }
+
+    .lmct-million-funnel .lmct-million-close {
+      font-size: 12px !important;
+    }
+
+    .lmct-million-funnel .lmct-million-close strong {
+      font-size: 14px !important;
+    }
+
+    .lmct-million-funnel .lmct-million-hero-media img {
+      aspect-ratio: 941 / 1672;
+    }
+
+    .lmct-million-funnel .lmct-million-hero-offer {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding-block: 34px 42px;
+    }
+
+    .lmct-million-funnel .lmct-million-heading {
+      font-size: clamp(42px, 13vw, 58px) !important;
+    }
+
+    .lmct-million-funnel .lmct-million-price-block {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .lmct-million-funnel .lmct-million-price-term {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .lmct-million-funnel .lmct-million-action {
+      grid-column: auto;
+      grid-template-columns: 1fr;
+    }
+
+    .lmct-million-funnel .lmct-million-action-note {
+      text-align: center;
+    }
+
+    .lmct-million-funnel .lmct-million-prize-picture img {
+      aspect-ratio: 1086 / 1448;
+    }
+
+    .lmct-million-funnel .lmct-million-entry-ledger li {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding-block: 20px;
+    }
+
+    .lmct-million-funnel .lmct-million-checkout {
+      margin-inline: -4px;
+      padding: 24px 20px;
+    }
+
+    .lmct-million-funnel .lmct-million-winners-head {
+      display: grid;
+      align-items: start;
+      gap: 20px;
+    }
+
+    .lmct-million-funnel .lmct-million-marquee-control {
+      justify-self: start;
+    }
+
+    .lmct-million-funnel .lmct-million-slide {
+      width: min(86vw, 340px);
+      min-width: min(86vw, 340px);
+    }
+
+    .lmct-million-funnel .lmct-million-slide img {
+      width: 100%;
+      height: auto;
+    }
+
+    .lmct-million-funnel .lmct-million-footer-inner {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .lmct-million-funnel .lmct-million-footer p {
+      text-align: left;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lmct-million-funnel .lmct-million-button {
+      transition-duration: 0.01ms;
+    }
+
+    .lmct-million-funnel .lmct-million-button:hover,
+    .lmct-million-funnel .lmct-million-button:active {
+      transform: none;
+    }
+
+    .lmct-million-funnel .lmct-million-marquee {
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .lmct-million-funnel .lmct-million-track {
+      animation: none;
+      transform: none;
+      will-change: auto;
+    }
+
+    .lmct-million-funnel .lmct-million-slide {
+      scroll-snap-align: start;
+    }
+
+    .lmct-million-funnel .lmct-million-marquee-control {
+      display: none;
+    }
+  }
+</style>
+
+<main class="lmct-million-funnel" data-lmct-million-root>
+  <header class="lmct-million-header">
+    <div class="lmct-million-container lmct-million-header-inner">
+      <img
+        class="lmct-million-logo"
+        src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png"
+        alt="LMCT+"
+        width="180"
+        height="55"
+        decoding="async" />
+      <p class="lmct-million-close">
+        Current $1 million giveaway
+        <strong>Ends <span data-lmct-million-bind="campaignEndDate">29 October 2026</span> at <span data-lmct-million-bind="campaignEndTime">8:00 pm AEDT</span></strong>
+      </p>
+    </div>
+  </header>
+
+  <section class="lmct-million-hero" aria-labelledby="lmct-million-title">
+    <picture class="lmct-million-hero-media">
+      <source media="(max-width: 640px)" srcset="https://images.clickfunnels.com/c0/d62730ffa14e189bf90ca5354743d8/LMCT-mobile-million-dollar-giveaway-hero.png" />
+      <img
+        src="https://images.clickfunnels.com/32/7e346440a94612b5c5e3327d6a9656/Million-Dollar-Win-Under-Blue-Skies.png"
+        alt="LMCT+ one million dollar cash giveaway campaign"
+        width="1672"
+        height="941"
+        fetchpriority="high"
+        decoding="async" />
+    </picture>
+    <div class="lmct-million-container lmct-million-hero-offer">
+      <div class="lmct-million-hero-copy">
+        <h1 class="lmct-million-heading" id="lmct-million-title">Your chance to win $1 million cash.</h1>
+        <p class="lmct-million-lead">Join LMCT+ for 12 months of wholesale fuel pricing access at Edwardstown and receive entries in the current $1 million giveaway.</p>
+      </div>
+      <div class="lmct-million-price-block" aria-label="199 Australian dollars per year">
+        <p class="lmct-million-price"><span data-lmct-million-price>$199</span></p>
+        <p class="lmct-million-price-term">AUD per year</p>
+      </div>
+      <div class="lmct-million-action">
+        <a class="lmct-million-button" href="#lmct-million-checkout" data-lmct-million-cta>Join for $199/year</a>
+        <p class="lmct-million-action-note">Automatically renews annually until cancelled. Fuel is purchased separately. Entries are included when you join.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmct-million-details" id="lmct-million-details" aria-labelledby="lmct-million-details-title">
+    <div class="lmct-million-container">
+      <picture class="lmct-million-prize-picture">
+        <source media="(max-width: 640px)" srcset="https://images.clickfunnels.com/40/e8f1655067485893bd0b817e942c56/The-Big-Prize-Million-Dollar-Cash-Draw-2.png" />
+        <img
+          src="https://images.clickfunnels.com/bf/c6ae843d1e459ebe5c0783d3fe7db7/Emerald-Million-Dollar-Prize-Banner-1.png"
+          alt="Details of the LMCT+ one million dollar cash prize"
+          width="2172"
+          height="724"
+          loading="eager"
+          decoding="async" />
+      </picture>
+      <p class="lmct-million-sr-only">Entries close 29 October 2026 at 8:00 pm AEDT. The live draw begins 29 October 2026 at 8:30 pm AEDT.</p>
+
+      <div class="lmct-million-details-grid">
+        <div class="lmct-million-details-copy">
+          <h2 class="lmct-million-section-heading" id="lmct-million-details-title">Fuel access with a $1M chance.</h2>
+          <p>Your $199 annual package provides 12 months of wholesale fuel pricing access at LMCT+ Petrol Edwardstown. The fuel you put in your vehicle is purchased separately.</p>
+          <div class="lmct-million-checkout" aria-labelledby="lmct-million-checkout-title">
+            <h3 id="lmct-million-checkout-title">Complete your membership.</h3>
+            <p>Entries are included when you join. Your package automatically renews annually until cancelled.</p>
+            <div class="lmct-million-checkout-mount" id="lmct-million-checkout" data-lmct-million-checkout-mount>
+              <div class="lmct-million-checkout-loading" data-lmct-million-checkout-loading role="status" aria-live="polite">Loading secure checkout&hellip;</div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="lmct-million-entry-ledger" aria-label="How bonus entries are earned">
+          <li>
+            <strong>Included</strong>
+            <span>Immediate entries are included when you purchase the annual package. The exact allocation remains subject to the official promotion terms.</span>
+          </li>
+          <li>
+            <strong><span data-lmct-million-bind="litresPerEntry">50</span>L = 1</strong>
+            <span>Every 50 qualifying litres earns one bonus entry. Your qualifying litres accumulate across transactions.</span>
+          </li>
+          <li>
+            <strong>$<span data-lmct-million-bind="shopSpendPerEntry">20</span> = 1</strong>
+            <span>Every $20 spent in the Edwardstown petrol station shop earns one bonus entry. Official terms govern how qualifying shop spend is counted.</span>
+          </li>
+          <li>
+            <strong>29 Oct</strong>
+            <span>The current giveaway ends 29 October 2026 at 8:00 pm AEDT. Your fuel access continues for the full 12-month period.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="lmct-million-winners" aria-labelledby="lmct-million-winners-title">
+    <div class="lmct-million-container lmct-million-winners-head">
+      <div>
+        <h2 class="lmct-million-section-heading" id="lmct-million-winners-title">Meet previous LMCT+ winners.</h2>
+        <p class="lmct-million-winners-copy">Real winner stories from the LMCT+ community. Your purchase gives you a chance in the current promotion; winning is not guaranteed.</p>
+      </div>
+      <button class="lmct-million-marquee-control" type="button" data-lmct-million-marquee-toggle aria-pressed="false">Pause</button>
+    </div>
+
+    <div class="lmct-million-marquee" data-lmct-million-marquee>
+      <div class="lmct-million-track" data-lmct-million-track>
+        <div class="lmct-million-sequence" data-lmct-million-sequence>
+          <span class="lmct-million-slide">
+            <img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TA6kdAgcaIv2k5np4qDKYZRiQ3XA7xtEulsVhU" alt="" width="569" height="807" loading="lazy" decoding="async" />
+            <span class="lmct-million-sr-only">Holly W from Victoria, $8 million winner: “I still can’t believe it... winning $8 million through LMCT+ has completely changed my life. Not long ago, I had to sell my car and was struggling just to make ends meet, doing everything I could to hold onto my home. I never thought something life changing like this could happen to me!”</span>
+          </span>
+          <span class="lmct-million-slide">
+            <img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAYAO9GvmX9vdIc2JhYlBWyVOwRs807NSH6tzM" alt="" width="569" height="806" loading="lazy" decoding="async" />
+            <span class="lmct-million-sr-only">Paul A from Victoria, $1 million winner: “After winning the $1M draw, I couldn’t sleep—kept checking my bank account in disbelief! I paid off my home loan and invested the rest. I still watch every LMCT+ draw, love seeing others win and their reactions. Truly grateful to Adrian and the LMCT+ family!”</span>
+          </span>
+          <span class="lmct-million-slide">
+            <img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAjXpEzWIxBA0baz4isnQuMo2FJpOlXDr5NHhy" alt="" width="569" height="806" loading="lazy" decoding="async" />
+            <span class="lmct-million-sr-only">Nige B from Queensland, $1 million winner: “I can’t believe I won! The whole experience has been surreal. Winning $1.8 million has completely changed my life. Thank you Adrian and the whole team!”</span>
+          </span>
+          <span class="lmct-million-slide">
+            <img src="https://kd4rudu06g.ufs.sh/f/FL3CpKW0k9TAbTZrYpeRIeHSTPMi2vhqgmajyJ98YnDBKuZG" alt="" width="569" height="806" loading="lazy" decoding="async" />
+            <span class="lmct-million-sr-only">Josh R from Western Australia, $1 million winner: “A huge thank you to Adrian and the LMCT+ team. I don’t think I’ve stopped smiling since receiving the call. It all feels so surreal; the money has helped me and my family so much. Changed our lives forever.”</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <p class="lmct-million-container lmct-million-winner-note">Previous winner results do not guarantee a future outcome.</p>
+  </section>
+
+  <footer class="lmct-million-footer">
+    <div class="lmct-million-container lmct-million-footer-inner">
+      <img class="lmct-million-footer-logo" src="https://images.clickfunnels.com/60/10ea7283bd40a9a28802d1432f5ebc/lmct-white-logo.png" alt="" width="150" height="46" loading="lazy" decoding="async" />
+      <p>
+        The current $1 million giveaway ends on 29 October 2026 at 8:00 pm AEDT. Promotion eligibility and entry allocation are subject to the official terms.
+        <a href="#" data-lmct-million-terms hidden>Read the promotion terms</a>
+      </p>
+    </div>
+  </footer>
+</main>
+
+<script>
+  (function () {
+    "use strict";
+
+    var LMCT_MILLION_CONFIG = {
+      priceAUD: 199,
+      litresPerEntry: 50,
+      shopSpendPerEntry: 20,
+      campaignEndDate: "29 October 2026",
+      campaignEndTime: "8:00 pm AEDT",
+      checkoutUrl: "",
+      nativeCheckoutSourceRowSelector: "#row--93963",
+      nativeCheckoutFormSelector: "#tmp_order2step-49594",
+      promotionTermsUrl: "",
+    };
+
+    window.LMCT_MILLION_CONFIG = LMCT_MILLION_CONFIG;
+
+    var root = document.querySelector("[data-lmct-million-root]");
+    if (!root) return;
+
+    var bindValues = {
+      litresPerEntry: LMCT_MILLION_CONFIG.litresPerEntry,
+      shopSpendPerEntry: LMCT_MILLION_CONFIG.shopSpendPerEntry,
+      campaignEndDate: LMCT_MILLION_CONFIG.campaignEndDate,
+      campaignEndTime: LMCT_MILLION_CONFIG.campaignEndTime,
+    };
+
+    root.querySelectorAll("[data-lmct-million-bind]").forEach(function (node) {
+      var key = node.getAttribute("data-lmct-million-bind");
+      if (Object.prototype.hasOwnProperty.call(bindValues, key)) node.textContent = String(bindValues[key]);
+    });
+
+    root.querySelectorAll("[data-lmct-million-price]").forEach(function (node) {
+      node.textContent = "$" + String(LMCT_MILLION_CONFIG.priceAUD);
+    });
+
+    var termsLink = root.querySelector("[data-lmct-million-terms]");
+    if (termsLink && LMCT_MILLION_CONFIG.promotionTermsUrl) {
+      termsLink.href = LMCT_MILLION_CONFIG.promotionTermsUrl;
+      termsLink.hidden = false;
+    }
+
+    var marquee = root.querySelector("[data-lmct-million-marquee]");
+    var track = root.querySelector("[data-lmct-million-track]");
+    var sequence = root.querySelector("[data-lmct-million-sequence]");
+    var marqueeToggle = root.querySelector("[data-lmct-million-marquee-toggle]");
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (track && sequence && !reduceMotion && track.children.length < 2) {
+      var clone = sequence.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      clone.querySelectorAll("img").forEach(function (image) {
+        image.alt = "";
+      });
+      track.appendChild(clone);
+    }
+
+    if (marquee && marqueeToggle) {
+      marqueeToggle.addEventListener("click", function () {
+        var paused = marquee.getAttribute("data-paused") === "true";
+        marquee.setAttribute("data-paused", paused ? "false" : "true");
+        marqueeToggle.setAttribute("aria-pressed", paused ? "false" : "true");
+        marqueeToggle.textContent = paused ? "Pause" : "Play";
+      });
+    }
+
+    function appendCurrentQuery(targetUrl) {
+      try {
+        var target = new URL(targetUrl, window.location.href);
+        var current = new URLSearchParams(window.location.search);
+        current.forEach(function (value, key) {
+          if (!target.searchParams.has(key)) target.searchParams.set(key, value);
+        });
+        return target.href;
+      } catch (error) {
+        return targetUrl;
+      }
+    }
+
+    function findNode(selector, context) {
+      if (!selector) return null;
+      try {
+        return (context || document).querySelector(selector);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    var checkoutObserver = null;
+    var checkoutRetryTimer = null;
+    var checkoutStopTimer = null;
+
+    function clearCheckoutWatcher() {
+      if (checkoutObserver) checkoutObserver.disconnect();
+      if (checkoutRetryTimer) window.clearInterval(checkoutRetryTimer);
+      if (checkoutStopTimer) window.clearTimeout(checkoutStopTimer);
+      checkoutObserver = null;
+      checkoutRetryTimer = null;
+      checkoutStopTimer = null;
+    }
+
+    function mountCheckout() {
+      var mount = root.querySelector("[data-lmct-million-checkout-mount]");
+      if (!mount) return false;
+
+      var rowSelector = LMCT_MILLION_CONFIG.nativeCheckoutSourceRowSelector;
+      var formSelector = LMCT_MILLION_CONFIG.nativeCheckoutFormSelector;
+      if (findNode(rowSelector, mount) || findNode(formSelector, mount)) return true;
+
+      var form = findNode(formSelector);
+      var source = findNode(rowSelector) || (form && form.closest(".row")) || form;
+      if (!source || source === mount || source.contains(mount) || mount.contains(source)) return false;
+
+      source.removeAttribute("data-animate");
+      source.removeAttribute("data-delay");
+      source.classList.remove("hide");
+      source.style.setProperty("display", "block", "important");
+      source.style.setProperty("visibility", "visible", "important");
+      source.style.setProperty("opacity", "1", "important");
+
+      var loader = mount.querySelector("[data-lmct-million-checkout-loading]");
+      if (loader) loader.remove();
+      mount.appendChild(source);
+      mount.setAttribute("data-lmct-million-mounted", "true");
+      window.requestAnimationFrame(function () {
+        window.dispatchEvent(new Event("resize"));
+      });
+      return true;
+    }
+
+    function startCheckoutWatcher() {
+      if (mountCheckout()) return;
+      if (window.MutationObserver) {
+        checkoutObserver = new MutationObserver(function () {
+          if (mountCheckout()) clearCheckoutWatcher();
+        });
+        checkoutObserver.observe(document.documentElement, { childList: true, subtree: true });
+      }
+      checkoutRetryTimer = window.setInterval(function () {
+        if (mountCheckout()) clearCheckoutWatcher();
+      }, 250);
+      checkoutStopTimer = window.setTimeout(function () {
+        clearCheckoutWatcher();
+        var loader = root.querySelector("[data-lmct-million-checkout-loading]");
+        if (loader) loader.textContent = "Secure checkout is still loading. Please refresh the page.";
+      }, 20000);
+    }
+
+    root.querySelectorAll("[data-lmct-million-cta]").forEach(function (cta) {
+      cta.addEventListener("click", function (event) {
+        if (LMCT_MILLION_CONFIG.checkoutUrl) {
+          event.preventDefault();
+          window.location.assign(appendCurrentQuery(LMCT_MILLION_CONFIG.checkoutUrl));
+          return;
+        }
+        var mount = root.querySelector("[data-lmct-million-checkout-mount]");
+        if (!mount) return;
+        event.preventDefault();
+        mountCheckout();
+        mount.scrollIntoView({
+          behavior: event.detail === 0 || reduceMotion ? "auto" : "smooth",
+          block: "start",
+        });
+      });
+    });
+
+    startCheckoutWatcher();
+  })();
+</script>

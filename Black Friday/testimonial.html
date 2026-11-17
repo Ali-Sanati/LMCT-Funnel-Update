@@ -1,0 +1,156 @@
+<style>
+  .cf-marquee {
+    width: 100%;
+    overflow: hidden;
+    background: transparent;
+  }
+  .cf-track {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transform: translateX(0);
+    will-change: transform;
+  }
+  .cf-seq {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .cf-slide img {
+    display: block;
+    height: auto;
+    width: clamp(200px, 30vw, 430px);
+    max-width: 430px;
+  }
+  .cf-marquee:hover .cf-track {
+    animation-play-state: paused;
+  }
+  .cf-slide img {
+    height: clamp(200px, 25vh, 350px) !important;
+    width: auto !important;
+  }
+</style>
+<div class="cf-marquee js-marquee" data-speed="80" id="cfMarquee">
+  <div class="cf-track" id="cfTrack">
+    <div class="cf-seq" id="cfSeq">
+      <span class="cf-slide"><img src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7pDSr4aPZgv1kJD30T9NQePfUAGWSMclO4H6Y" alt="" /></span
+      ><span class="cf-slide"><img src="https://images.clickfunnels.com/db/bc9a3c646744dbab4dd939052967ff/blue4.png" alt="" /></span
+      ><span class="cf-slide"><img src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7xGfqRjkBzYjZmc57PK8w21URG4Ch0XToDJeS" alt="" /></span
+      ><span class="cf-slide"><img src="https://images.clickfunnels.com/41/d97975da9b489d93b9777dd6811248/blue2.png" alt="" /></span
+      ><span class="cf-slide"><img src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7PvBOPTUmW1RDn5t4coJuQizbKhg8I6LUqCl0" alt="" /></span
+      ><span class="cf-slide"><img src="https://images.clickfunnels.com/5e/141045b046417aa4ac8a483facd4fa/blue3.png" alt="" /></span
+      ><span class="cf-slide"><img src="https://images.clickfunnels.com/3d/eeaa1276464f378565e54258287dfe/blue7.png" alt="" /></span
+      ><span class="cf-slide"><img src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7qMVBqJFU76cpQJVvWnijGFBACl8K5RuDNOhb" alt="" /></span
+      ><span class="cf-slide"><img src="https://images.clickfunnels.com/07/a0c713e21b4cdcafbf8ebac09fd761/blue5.png" alt="" /></span
+      ><span class="cf-slide"><img src="https://2cmo9hk6p6.ufs.sh/f/J4bl3lD7Uzj7NgIMZuWJiy5ROjDXnvZI2Y9LfsExCk1eTFuU" alt="" /></span
+      ><span class="cf-slide"><img src="https://images.clickfunnels.com/01/5981348342400ab25a747671df37e3/blue6.png" alt="" /></span>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var SPEED_DEFAULT = 80;
+    function imgsReady(el, cb) {
+      var imgs = el.querySelectorAll("img"),
+        left = imgs.length;
+      if (!left) return cb();
+      imgs.forEach(function (i) {
+        if (i.complete) {
+          if (--left === 0) cb();
+        } else {
+          var done = function () {
+            if (--left === 0) cb();
+          };
+          i.addEventListener("load", done);
+          i.addEventListener("error", done);
+        }
+      });
+    }
+    function init(container) {
+      var speed = Number(container.getAttribute("data-speed")) || SPEED_DEFAULT;
+      var track = container.querySelector(".cf-track");
+      var seqA = container.querySelector(".cf-seq");
+      var offset = 0,
+        lastTs = null,
+        raf;
+      function gapPx() {
+        var g = getComputedStyle(track).gap || "0";
+        return parseFloat(g) || 0;
+      }
+      function ensureFilled() {
+        if (track.children.length < 2) track.appendChild(seqA.cloneNode(true));
+        var multiplier = window.innerWidth <= 768 ? 1.5 : 2;
+        var need = container.clientWidth * multiplier;
+        var safety = 0;
+        while (track.scrollWidth < need && safety < 50) {
+          track.appendChild(seqA.cloneNode(true));
+          safety++;
+        }
+      }
+      function tick(ts) {
+        if (lastTs == null) lastTs = ts;
+        var dt = (ts - lastTs) / 1000;
+        lastTs = ts;
+        var adjustedSpeed = window.innerWidth <= 768 ? speed * 0.8 : speed;
+        offset -= adjustedSpeed * dt;
+        var first = track.children[0];
+        if (first) {
+          var w = first.getBoundingClientRect().width + gapPx();
+          if (w > 1 && -offset >= w) {
+            offset += w;
+            track.appendChild(first);
+          }
+        }
+        track.style.transform = "translateX(" + offset + "px)";
+        raf = requestAnimationFrame(tick);
+      }
+      function start() {
+        if (container.clientWidth < 1) {
+          setTimeout(start, 100);
+          return;
+        }
+        ensureFilled();
+        cancelAnimationFrame(raf);
+        offset = 0;
+        lastTs = null;
+        track.style.transform = "translateX(0px)";
+        raf = requestAnimationFrame(tick);
+      }
+      imgsReady(container, start);
+      window.addEventListener("resize", function () {
+        cancelAnimationFrame(raf);
+        start();
+      });
+      if ("ontouchstart" in window) {
+        container.addEventListener("touchstart", function () {
+          cancelAnimationFrame(raf);
+        });
+        container.addEventListener("touchend", function () {
+          start();
+        });
+      }
+    }
+    var marquee = document.getElementById("cfMarquee");
+    if (marquee) init(marquee);
+    document.querySelectorAll(".js-marquee").forEach(init);
+  })();
+</script>
+<style>
+  @media (max-width: 768px) {
+    .cf-slide img {
+      height: 250px !important;
+      width: auto !important;
+    }
+    @media (max-width: 480px) {
+      .cf-slide img {
+        height: 200px !important;
+      }
+    }
+  }
+  @media (min-width: 769px) {
+    .cf-slide img {
+      width: 430px !important;
+      height: auto !important;
+    }
+  }
+</style>

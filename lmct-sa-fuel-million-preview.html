@@ -36,6 +36,7 @@
     --lmct-sa-danger: #a32121;
     --lmct-sa-radius: 16px;
     --lmct-sa-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --lmct-sa-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --lmct-sa-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     width: 100%;
     overflow: clip;
@@ -229,11 +230,50 @@
   }
 
   .lmct-sa-fuel-million .lmct-sa-hero {
+    position: relative;
+    overflow: hidden;
     color: var(--lmct-sa-white);
     background: var(--lmct-sa-navy);
+    isolation: isolate;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-forecourt-lines {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-forecourt-lines span {
+    position: absolute;
+    right: -10vw;
+    width: min(74vw, 980px);
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(29, 143, 255, 0.13);
+    transform: rotate(-7deg);
+    transform-origin: right center;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-forecourt-lines span:nth-child(1) {
+    top: 24%;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-forecourt-lines span:nth-child(2) {
+    top: 54%;
+    width: min(62vw, 820px);
+    background: rgba(121, 200, 255, 0.1);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-forecourt-lines span:nth-child(3) {
+    top: 78%;
+    width: min(84vw, 1120px);
   }
 
   .lmct-sa-fuel-million .lmct-sa-hero-inner {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: minmax(0, 0.94fr) minmax(420px, 1.06fr);
     align-items: stretch;
@@ -341,12 +381,11 @@
   }
 
   .lmct-sa-fuel-million .lmct-sa-station-image {
-    width: 112%;
-    max-width: none;
+    width: 100%;
     height: 100%;
     min-height: 320px;
     object-fit: cover;
-    object-position: left center;
+    object-position: center 58%;
     background: var(--lmct-sa-navy-2);
   }
 
@@ -433,6 +472,179 @@
     color: var(--lmct-sa-muted);
     font-size: 0.92rem;
     line-height: 1.5;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-member-prices {
+    position: relative;
+    overflow: hidden;
+    color: var(--lmct-sa-navy);
+    background: var(--lmct-sa-blue);
+    isolation: isolate;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-member-prices::before {
+    position: absolute;
+    z-index: -1;
+    top: -80px;
+    right: -70px;
+    width: 290px;
+    height: 290px;
+    border: 42px solid rgba(7, 20, 45, 0.08);
+    border-radius: 50%;
+    content: "";
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-member-prices-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(380px, 1.22fr);
+    gap: clamp(34px, 6vw, 82px);
+    align-items: center;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-member-prices-copy .lmct-sa-copy {
+    margin-top: 24px;
+    color: var(--lmct-sa-navy);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-status {
+    min-height: 1.5em;
+    margin: 20px 0 0;
+    color: #10264a;
+    font-size: 0.86rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-board {
+    min-height: 378px;
+    padding: clamp(22px, 3vw, 32px);
+    border-radius: var(--lmct-sa-radius);
+    color: var(--lmct-sa-white);
+    background: var(--lmct-sa-navy);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-board-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-board-title {
+    margin: 0;
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+    font-size: 1.18rem;
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-board-code {
+    margin: 0;
+    color: var(--lmct-sa-sky);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-loading {
+    display: grid;
+    place-items: center;
+    min-height: 250px;
+    margin: 0;
+    color: #b8cae1;
+    text-align: center;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-fuel-row {
+    display: grid;
+    grid-template-columns: 12px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    min-height: 62px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.065);
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-fuel-swatch {
+    width: 8px;
+    height: 32px;
+    border-radius: 999px;
+    background: var(--lmct-sa-fuel-color, var(--lmct-sa-blue));
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-fuel-name,
+  .lmct-sa-fuel-million .lmct-sa-fuel-short,
+  .lmct-sa-fuel-million .lmct-sa-fuel-value,
+  .lmct-sa-fuel-million .lmct-sa-fuel-unit {
+    margin: 0;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-fuel-name {
+    color: var(--lmct-sa-white);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-fuel-short {
+    margin-top: 2px;
+    color: #9eb8d7;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-fuel-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+    gap: 3px;
+    min-width: 104px;
+    color: var(--lmct-sa-sky);
+    text-align: right;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-fuel-value {
+    font-family: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif;
+    font-size: clamp(1.72rem, 2.6vw, 2.25rem);
+    font-style: italic;
+    font-weight: 800;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-fuel-unit {
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-photo {
+    grid-column: 1 / -1;
+    margin: 4px 0 0;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-photo img {
+    width: 100%;
+    height: clamp(250px, 31vw, 430px);
+    border-radius: var(--lmct-sa-radius);
+    object-fit: cover;
+    object-position: center 25%;
+  }
+
+  .lmct-sa-fuel-million .lmct-sa-price-photo figcaption {
+    margin-top: 10px;
+    color: #10264a;
+    font-size: 0.82rem;
+    line-height: 1.45;
   }
 
   .lmct-sa-fuel-million .lmct-sa-earn {
@@ -919,6 +1131,18 @@
       transition: transform 480ms var(--lmct-sa-ease-out);
     }
 
+    .lmct-sa-fuel-million .lmct-sa-forecourt-lines span {
+      animation: lmct-sa-lane-settle 1050ms var(--lmct-sa-ease-expo) both;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-forecourt-lines span:nth-child(2) {
+      animation-delay: 70ms;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-forecourt-lines span:nth-child(3) {
+      animation-delay: 130ms;
+    }
+
     .lmct-sa-fuel-million .lmct-sa-hero-visual {
       animation: lmct-sa-shutter 900ms var(--lmct-sa-ease-out) both;
     }
@@ -927,6 +1151,21 @@
       animation: lmct-sa-image-settle 900ms var(--lmct-sa-ease-out) both;
     }
 
+    .lmct-sa-fuel-million .lmct-sa-fuel-row {
+      animation: lmct-sa-price-settle 430ms var(--lmct-sa-ease-expo) both;
+      animation-delay: calc(var(--lmct-sa-price-index, 0) * 65ms);
+    }
+  }
+
+  @keyframes lmct-sa-lane-settle {
+    from {
+      opacity: 0;
+      transform: translate3d(22%, 0, 0) rotate(-7deg) scaleX(0.72);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) rotate(-7deg) scaleX(1);
+    }
   }
 
   @keyframes lmct-sa-shutter {
@@ -937,6 +1176,17 @@
   @keyframes lmct-sa-image-settle {
     from { transform: scale(1.06); }
     to { transform: scale(1); }
+  }
+
+  @keyframes lmct-sa-price-settle {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 10px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -966,6 +1216,7 @@
     }
 
     .lmct-sa-fuel-million .lmct-sa-offer-grid,
+    .lmct-sa-fuel-million .lmct-sa-member-prices-grid,
     .lmct-sa-fuel-million .lmct-sa-progress,
     .lmct-sa-fuel-million .lmct-sa-app-grid,
     .lmct-sa-fuel-million .lmct-sa-faq-grid,
@@ -989,6 +1240,7 @@
 
     .lmct-sa-fuel-million .lmct-sa-hero-inner,
     .lmct-sa-fuel-million .lmct-sa-offer-grid,
+    .lmct-sa-fuel-million .lmct-sa-member-prices-grid,
     .lmct-sa-fuel-million .lmct-sa-progress,
     .lmct-sa-fuel-million .lmct-sa-app-grid,
     .lmct-sa-fuel-million .lmct-sa-campaign-grid,
@@ -998,6 +1250,10 @@
     }
 
     .lmct-sa-fuel-million .lmct-sa-hero-inner {
+      min-height: 0;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-price-board {
       min-height: 0;
     }
 
@@ -1110,6 +1366,24 @@
 
     .lmct-sa-fuel-million .lmct-sa-station-image {
       min-height: 230px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-member-prices-grid {
+      gap: 34px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-price-photo img {
+      height: 250px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-fuel-row {
+      grid-template-columns: 9px minmax(0, 1fr) auto;
+      gap: 10px;
+      padding-inline: 11px;
+    }
+
+    .lmct-sa-fuel-million .lmct-sa-fuel-price {
+      min-width: 86px;
     }
 
     .lmct-sa-fuel-million .lmct-sa-inclusions,
@@ -1280,6 +1554,7 @@
   </header>
 
   <section class="lmct-sa-hero" id="lmct-sa-fuel-main" aria-labelledby="lmct-sa-fuel-title">
+    <div class="lmct-sa-forecourt-lines" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="lmct-sa-container lmct-sa-hero-inner">
       <div class="lmct-sa-hero-copy">
         <h1 class="lmct-sa-heading" id="lmct-sa-fuel-title">Fuel access. $1M chance.</h1>
@@ -1303,10 +1578,10 @@
         <img
           class="lmct-sa-station-image"
           data-lmct-sa-station-image
-          src="assets/lmct-sa-fuel/edwardstown-station.png"
-          alt="LMCT+ Petrol Edwardstown, South Australia"
-          width="1200"
-          height="675"
+          src="assets/lmct-sa-fuel/sunny-lmct-gas-station-forecourt.png"
+          alt="LMCT+ Petrol forecourt in South Australia"
+          width="1536"
+          height="1024"
           fetchpriority="high"
           decoding="async"
         />
@@ -1350,6 +1625,39 @@
     </div>
   </section>
 
+  <section class="lmct-sa-section lmct-sa-member-prices" aria-labelledby="lmct-sa-member-prices-title">
+    <div class="lmct-sa-container lmct-sa-member-prices-grid">
+      <div class="lmct-sa-member-prices-copy">
+        <h2 class="lmct-sa-subheading" id="lmct-sa-member-prices-title">Member prices. Edwardstown.</h2>
+        <p class="lmct-sa-copy">See the latest published member fuel prices from LMCT+ Petrol Edwardstown. Your $199 annual package unlocks access; every fill is purchased separately.</p>
+        <p class="lmct-sa-price-status" data-lmct-sa-price-status role="status" aria-live="polite">Loading the latest Edwardstown member prices&hellip;</p>
+      </div>
+
+      <div class="lmct-sa-price-board" data-lmct-sa-price-board data-ui aria-label="Latest Edwardstown member fuel prices">
+        <div class="lmct-sa-price-board-head">
+          <p class="lmct-sa-price-board-title">Member fuel board</p>
+          <p class="lmct-sa-price-board-code">EDW · cents per litre</p>
+        </div>
+        <div class="lmct-sa-price-list" data-lmct-sa-price-list>
+          <p class="lmct-sa-price-loading">Fetching the latest published prices&hellip;</p>
+        </div>
+        <noscript>View current member fuel prices in the LMCT+ app or at the Edwardstown station.</noscript>
+      </div>
+
+      <figure class="lmct-sa-price-photo">
+        <img
+          data-lmct-sa-price-image
+          src="assets/lmct-sa-fuel/lmct-petrol-canopy-blue-skies.png"
+          alt="LMCT+ Petrol canopy under blue South Australian skies"
+          width="1536"
+          height="1024"
+          loading="lazy"
+          decoding="async" />
+        <figcaption>Member fuel prices can change. Check the published price before you fill.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="lmct-sa-section lmct-sa-earn" aria-labelledby="lmct-sa-earn-title">
     <div class="lmct-sa-container">
       <div class="lmct-sa-earn-head">
@@ -1372,11 +1680,11 @@
 
       <div class="lmct-sa-station-proof" aria-label="Edwardstown fuel and station shop">
         <figure class="lmct-sa-station-crop">
-          <img src="assets/lmct-sa-fuel/edwardstown-station.png" alt="Fuel pumps at LMCT+ Petrol Edwardstown" width="1965" height="800" loading="lazy" decoding="async" />
+          <img data-lmct-sa-fuel-proof-image src="assets/lmct-sa-fuel/lmct-petrol-sa-15.jpg" alt="LMCT+ Petrol fuel pump in South Australia" width="3000" height="2000" loading="lazy" decoding="async" />
           <figcaption>Qualifying fuel purchases</figcaption>
         </figure>
         <figure class="lmct-sa-station-crop">
-          <img src="assets/lmct-sa-fuel/edwardstown-station.png" alt="Petrol station shop at LMCT+ Petrol Edwardstown" width="1965" height="800" loading="lazy" decoding="async" />
+          <img data-lmct-sa-shop-proof-image src="assets/lmct-sa-fuel/lmct-petrol-sa-7.jpg" alt="Inside the LMCT+ Petrol shop in South Australia" width="3000" height="2000" loading="lazy" decoding="async" />
           <figcaption>Qualifying petrol station shop purchases</figcaption>
         </figure>
       </div>
@@ -1545,8 +1853,14 @@
       campaignClosingTimestamp: "",
       campaignClosingTimezone: "",
       shopSpendAccumulatesAcrossTransactions: null,
+      memberPricesEndpoint: "https://api.lmctplus.com/api/v1/gas-stations/prices?station=EDW",
+      memberPricesStation: "EDW",
+      memberPricesTimezone: "Australia/Adelaide",
       petrolLogoUrl: "Petrol/assets/lmct-petrol-logo.png",
-      stationImageUrl: "assets/lmct-sa-fuel/edwardstown-station.png"
+      stationImageUrl: "assets/lmct-sa-fuel/sunny-lmct-gas-station-forecourt.png",
+      memberPricesImageUrl: "assets/lmct-sa-fuel/lmct-petrol-canopy-blue-skies.png",
+      fuelProofImageUrl: "assets/lmct-sa-fuel/lmct-petrol-sa-15.jpg",
+      shopProofImageUrl: "assets/lmct-sa-fuel/lmct-petrol-sa-7.jpg"
     };
 
     window.LMCT_SA_FUEL_CONFIG = LMCT_SA_FUEL_CONFIG;
@@ -1577,6 +1891,122 @@
 
     var stationImage = root.querySelector("[data-lmct-sa-station-image]");
     if (stationImage) stationImage.src = LMCT_SA_FUEL_CONFIG.stationImageUrl;
+
+    [
+      ["[data-lmct-sa-price-image]", LMCT_SA_FUEL_CONFIG.memberPricesImageUrl],
+      ["[data-lmct-sa-fuel-proof-image]", LMCT_SA_FUEL_CONFIG.fuelProofImageUrl],
+      ["[data-lmct-sa-shop-proof-image]", LMCT_SA_FUEL_CONFIG.shopProofImageUrl]
+    ].forEach(function (imageConfig) {
+      var image = root.querySelector(imageConfig[0]);
+      if (image && imageConfig[1]) image.src = imageConfig[1];
+    });
+
+    var priceList = root.querySelector("[data-lmct-sa-price-list]");
+    var priceStatus = root.querySelector("[data-lmct-sa-price-status]");
+
+    function createFuelPriceRow(fuel, index) {
+      var row = document.createElement("div");
+      var swatch = document.createElement("span");
+      var identity = document.createElement("div");
+      var name = document.createElement("p");
+      var shortName = document.createElement("p");
+      var price = document.createElement("div");
+      var value = document.createElement("p");
+      var unit = document.createElement("p");
+      var rawColour = String(fuel.color || "").replace(/^#/, "");
+      var colour = /^[0-9a-fA-F]{6}$/.test(rawColour) ? "#" + rawColour : "#1D8FFF";
+
+      row.className = "lmct-sa-fuel-row";
+      row.style.setProperty("--lmct-sa-price-index", String(index));
+      row.style.setProperty("--lmct-sa-fuel-color", colour);
+      swatch.className = "lmct-sa-fuel-swatch";
+      swatch.setAttribute("aria-hidden", "true");
+      name.className = "lmct-sa-fuel-name";
+      name.textContent = String(fuel.name);
+      shortName.className = "lmct-sa-fuel-short";
+      shortName.textContent = String(fuel.short);
+      price.className = "lmct-sa-fuel-price";
+      value.className = "lmct-sa-fuel-value";
+      value.textContent = Number(fuel.price).toFixed(1) + "¢";
+      unit.className = "lmct-sa-fuel-unit";
+      unit.textContent = "/L";
+
+      identity.appendChild(name);
+      identity.appendChild(shortName);
+      price.appendChild(value);
+      price.appendChild(unit);
+      row.appendChild(swatch);
+      row.appendChild(identity);
+      row.appendChild(price);
+      return row;
+    }
+
+    function formatLatestPriceTime(records) {
+      var latest = records.reduce(function (latestTime, record) {
+        var parsed = Date.parse(record.updatedAt);
+        return Number.isFinite(parsed) && parsed > latestTime ? parsed : latestTime;
+      }, 0);
+      if (!latest) return "Latest published member prices";
+      try {
+        return (
+          "Latest published prices · Updated " +
+          new Intl.DateTimeFormat("en-AU", {
+            timeZone: LMCT_SA_FUEL_CONFIG.memberPricesTimezone,
+            day: "numeric",
+            month: "short",
+            hour: "numeric",
+            minute: "2-digit",
+            timeZoneName: "short"
+          }).format(new Date(latest))
+        );
+      } catch (error) {
+        return "Latest published member prices";
+      }
+    }
+
+    function loadMemberPrices() {
+      if (!priceList || !priceStatus || !LMCT_SA_FUEL_CONFIG.memberPricesEndpoint || !("fetch" in window)) return;
+      fetch(LMCT_SA_FUEL_CONFIG.memberPricesEndpoint, { headers: { Accept: "application/json" } })
+        .then(function (response) {
+          if (!response.ok) throw new Error("Member price request failed");
+          return response.json();
+        })
+        .then(function (payload) {
+          var records = payload && Array.isArray(payload.data) ? payload.data : [];
+          records = records.filter(function (record) {
+            return (
+              record &&
+              String(record.station).toUpperCase() === String(LMCT_SA_FUEL_CONFIG.memberPricesStation).toUpperCase() &&
+              record.name &&
+              record.short &&
+              Number.isFinite(Number(record.price))
+            );
+          });
+          if (!records.length) throw new Error("No Edwardstown member prices returned");
+
+          var order = { U91: 0, P95: 1, P98: 2, DSL: 3 };
+          records.sort(function (a, b) {
+            return (order[a.short] == null ? 99 : order[a.short]) - (order[b.short] == null ? 99 : order[b.short]);
+          });
+
+          var fragment = document.createDocumentFragment();
+          records.forEach(function (fuel, index) {
+            fragment.appendChild(createFuelPriceRow(fuel, index));
+          });
+          priceList.replaceChildren(fragment);
+          priceStatus.textContent = formatLatestPriceTime(records);
+        })
+        .catch(function () {
+          priceList.replaceChildren();
+          var unavailable = document.createElement("p");
+          unavailable.className = "lmct-sa-price-loading";
+          unavailable.textContent = "Latest prices are temporarily unavailable. Check the LMCT+ app or Edwardstown station.";
+          priceList.appendChild(unavailable);
+          priceStatus.textContent = "Edwardstown member price feed unavailable";
+        });
+    }
+
+    loadMemberPrices();
 
     var termsLink = root.querySelector("[data-lmct-sa-terms-link]");
     if (termsLink && LMCT_SA_FUEL_CONFIG.promotionTermsUrl) {
